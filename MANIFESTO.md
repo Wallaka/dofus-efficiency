@@ -23,7 +23,21 @@ is best *right now*:
   it three weeks later.
 
 We keep this knowledge in our heads and in scattered messages. That doesn't
-scale, and it doesn't let us compare options side by side.
+scale, and it doesn't let us compare options side by side. And keeping prices
+up to date by hand is tedious — so we don't, and the numbers go stale.
+
+## The big idea
+
+Get the data **straight from the game** instead of typing it. We already take
+screenshots while playing (via Medal), so:
+
+1. Point the app at the folder where Medal saves screenshots.
+2. The app reads those images and uses **OCR** to pull out the data that matters
+   — mainly **HDV prices**.
+3. That feeds the calculations automatically. **More screenshots = more data.**
+
+No manual price entry once it's rolling. The screenshots we already take become
+the fuel.
 
 ## What we want it to do
 
@@ -54,21 +68,27 @@ The app should let us:
 
 ## Out of scope (for now)
 
-- Automated scraping of live HDV prices (we enter prices by hand at first).
-- Accounts for the general public, monetization, or fancy branding.
+- A backend, user accounts, or live data sync between us. Each of us runs the
+  app locally on our own data; no server to maintain.
+- Live price scraping from the game's servers. Our data comes from the
+  screenshots we take, nothing else.
+- Monetization, public launch, or fancy branding.
 - Bots, automation, or anything that plays the game for us.
 
-## Rough starting point
+## The shape of it
 
-A web app where we can:
+A **100% client-side React web app** — free, local, no backend, no API keys:
 
-- Add / edit / list **money-making ideas**.
-- For crafting ideas, compute **profit per craft** from ingredient and sell
-  prices.
-- See ideas **ranked** by estimated profit or kamas-per-hour.
+- Point it at the **Medal screenshot folder**; it reads the images itself.
+- **OCR** the images (mainly for HDV prices).
+- Combine those prices with known **recipes / item data** to compute
+  **profit per craft** and other money-making math.
+- **Rank and compare** ideas by estimated profit or kamas-per-hour.
+- Store everything in the browser; more screenshots just means more data.
 
-Tech choices are deliberately left open here — this manifesto is about *what and
-why*, not *how*. We'll pick the stack when we start building.
+The concrete tech decisions and the reasoning behind them live in
+[`TECH_NOTES.md`](./TECH_NOTES.md). This manifesto stays focused on *what and
+why*.
 
 ## Success looks like
 
