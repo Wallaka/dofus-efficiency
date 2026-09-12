@@ -162,17 +162,24 @@ function firstNumberAfter(text: string, label: RegExp): number | null {
 const PRICE = "\\d{1,3}(?:[ .\\u00a0]\\d{3})*";
 
 export function parseAveragePrice(text: string): number | null {
-  return firstNumberAfter(text, new RegExp(`prix\\s*moyen[\\s:]*(${PRICE})`, "i"));
+  return firstNumberAfter(
+    normalize(text),
+    new RegExp(`prix\\s*moyen[\\s:]*(${PRICE})`, "i"),
+  );
 }
 
 export function parseMedianPrice(text: string): number | null {
-  return firstNumberAfter(text, new RegExp(`prix\\s*median[\\s:]*(${PRICE})`, "i"));
+  // normalize() strips the accent so "médian" matches "median".
+  return firstNumberAfter(
+    normalize(text),
+    new RegExp(`prix\\s*median[\\s:]*(${PRICE})`, "i"),
+  );
 }
 
 /** "1 387 925 articles vendus" → total sold over the graph's period. */
 export function parseArticlesSold(text: string): number | null {
   return firstNumberAfter(
-    text,
+    normalize(text),
     new RegExp(`(${PRICE})\\s*articles?\\s*vendus?`, "i"),
   );
 }
@@ -193,10 +200,10 @@ function findTypeLine(lines: string[]): TypeLine | null {
   const allTypes = [...WEAPON_TYPES, ...EQUIPMENT_TYPES, ...RESOURCE_TYPES];
   for (let i = 0; i < lines.length; i++) {
     const norm = normalize(lines[i]);
-    // Tolerate OCR dropping the "v" ("Niv." → "Ni."); a type word must also be
-    // on the line (checked below), so the looser prefix stays safe.
-    if (!/\bniv?\.?\s*\d/.test(norm)) continue;
-    const level = Number(/\bniv?\.?\s*(\d{1,3})/.exec(norm)?.[1] ?? NaN);
+    // Match "Niveau", "Niv." and the OCR slip "Ni." (v optional, "eau" optional);
+    // a type word must also be on the line (checked below), so it stays safe.
+    if (!/\bniv?(?:eau)?\.?\s*\d/.test(norm)) continue;
+    const level = Number(/\bniv?(?:eau)?\.?\s*(\d{1,3})/.exec(norm)?.[1] ?? NaN);
     const type = allTypes.find((t) => new RegExp(`\\b${t}\\b`).test(norm));
     if (type)
       return { index: i, level: Number.isFinite(level) ? level : null, itemType: type };
