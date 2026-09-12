@@ -6,6 +6,7 @@ import {
   chestCriminalKey,
   monsterCriminalKey,
   questCriminalKey,
+  questCriminalName,
 } from "../lib/avis";
 
 /**
@@ -159,32 +160,125 @@ function normalizeAvis(quest: RawQuest): AvisReward | null {
 
 interface RawMonster {
   id: number;
-  name?: Translated;
   img?: string;
-  isBounty?: boolean;
+}
+
+interface RawFollower {
+  name?: Translated;
+  dropMonsterIds?: number[];
 }
 
 /** DofusDB type id for "Coffre" (chest) items. */
 const CHEST_TYPE_ID = 172;
 const CHEST_NAME_PREFIX = "coffre de ";
+/** DofusDB type id for "Personnage suiveur" (follower) items — the criminals. */
+const FOLLOWER_TYPE_ID = 32;
+/** DofusDB super-type id for "Ressource" — used to pick the chest's resource. */
+const RESOURCE_SUPER_TYPE_ID = 9;
 
-/** Criminal name key → bounty monster image, for the avis picture. */
-async function fetchBountyMonsterImages(
+interface RawItemTyped extends RawItem {
+  type?: { superTypeId?: number };
+}
+
+/** Run `fn` over `items` with limited concurrency (avoids a request burst). */
+async function mapLimit<T, R>(
+  items: T[],
+  limit: number,
+  fn: (item: T) => Promise<R>,
+): Promise<R[]> {
+  const results = new Array<R>(items.length);
+  let next = 0;
+  async function worker() {
+    while (next < items.length) {
+      const i = next++;
+      results[i] = await fn(items[i]);
+    }
+  }
+  await Promise.all(
+    Array.from({ length: Math.min(limit, items.length) }, worker),
+  );
+  return results;
+}
+
+/**
+ * The resource inside an avis's chest, e.g. "Fleur de <criminal>". It shares no
+ * id with the avis/chest — only the criminal name — and each criminal's resource
+ * is a different item type, so we search by the criminal name and keep the
+ * result that is a Ressource whose name contains the criminal.
+ */
+async function fetchAvisResource(
+  criminalDisplay: string,
+  criminalKey: string,
+  signal?: AbortSignal,
+): Promise<Item | null> {
+  if (!criminalDisplay) return null;
+  try {
+    const url =
+      `${DOFUSDB_BASE_URL}/items?name.fr[$search]=` +
+      `${encodeURIComponent(criminalDisplay)}&$limit=15&lang=fr`;
+    const res = await getJson<FeathersPage<RawItemTyped>>(url, signal);
+    const resources = (res.data ?? []).filter(
+      (it) => it.type?.superTypeId === RESOURCE_SUPER_TYPE_ID,
+    );
+    const match =
+      resources.find((it) =>
+        monsterCriminalKey(pickName(it.name, "")).includes(criminalKey),
+      ) ?? resources[0];
+    return match ? toItem(match) : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Criminal name key → monster image, for the avis picture.
+ *
+ * The `isBounty` filter on /monsters doesn't work, so we go via the follower
+ * items (type 32): each names the criminal and points to its monster through
+ * `dropMonsterIds`. We then fetch just those monsters' images by id.
+ */
+async function fetchAvisMonsterImages(
   signal?: AbortSignal,
 ): Promise<Map<string, string>> {
   const byKey = new Map<string, string>();
   try {
-    // maxPages bounds the fetch hard in case the isBounty filter is ignored.
-    const raw = await fetchAllPages<RawMonster>(
-      "/monsters",
-      "isBounty=true&lang=fr",
+    const followers = await fetchAllPages<RawFollower>(
+      "/items",
+      `typeId=${FOLLOWER_TYPE_ID}&lang=fr`,
       signal,
-      6,
+      20,
     );
-    for (const m of raw) {
-      if (!m.img || !m.name) continue;
-      const key = monsterCriminalKey(pickName(m.name, ""));
-      if (key && !byKey.has(key)) byKey.set(key, m.img);
+
+    const keyToMonster = new Map<string, number>();
+    const monsterIds = new Set<number>();
+    for (const f of followers) {
+      const name = pickName(f.name, "");
+      const monsterId = f.dropMonsterIds?.[0];
+      if (!name || monsterId == null) continue;
+      const key = monsterCriminalKey(name);
+      if (key && !keyToMonster.has(key)) {
+        keyToMonster.set(key, monsterId);
+        monsterIds.add(monsterId);
+      }
+    }
+
+    const imgByMonster = new Map<number, string>();
+    const ids = [...monsterIds];
+    for (let i = 0; i < ids.length; i += ID_BATCH_SIZE) {
+      const batch = ids.slice(i, i + ID_BATCH_SIZE);
+      const query = batch.map((id) => `id[$in][]=${id}`).join("&");
+      const monsters = await fetchAllPages<RawMonster>(
+        "/monsters",
+        query,
+        signal,
+        3,
+      );
+      for (const m of monsters) if (m.img) imgByMonster.set(m.id, m.img);
+    }
+
+    for (const [key, monsterId] of keyToMonster) {
+      const img = imgByMonster.get(monsterId);
+      if (img) byKey.set(key, img);
     }
   } catch {
     // Non-fatal: avis just fall back to the aviton icon.
@@ -226,7 +320,7 @@ export async function fetchAvisDeRecherche(
       `categoryId=${AVIS_CATEGORY_ID}&lang=fr`,
       signal,
     ),
-    fetchBountyMonsterImages(signal),
+    fetchAvisMonsterImages(signal),
     fetchAvisChests(signal),
   ]);
 
@@ -245,6 +339,24 @@ export async function fetchAvisDeRecherche(
         chestImg: chest?.img,
       };
     });
+
+  // Resolve each chest's resource by searching the criminal name (bounded
+  // concurrency to avoid an 80+ request burst).
+  const resources = await mapLimit(list, 6, (avis) =>
+    fetchAvisResource(
+      questCriminalName(avis.name),
+      questCriminalKey(avis.name),
+      signal,
+    ),
+  );
+  list.forEach((avis, i) => {
+    const resource = resources[i];
+    if (resource) {
+      avis.resourceItemId = resource.id;
+      avis.resourceName = resource.name;
+      avis.resourceImg = resource.img;
+    }
+  });
 
   list.sort((a, b) => b.avitons - a.avitons);
   return list;

@@ -3,12 +3,12 @@ import { formatKamas } from "../lib/format";
 
 interface Props {
   avis: AvisReward;
-  /** Tracked HDV price of the chest (resource), if known. */
-  chestPrice?: number;
+  /** Tracked HDV price of the resource inside the chest, if known. */
+  resourcePrice?: number;
 }
 
-/** One avis de recherche: picture, name, level, avitons, chest resource. */
-export function AvisCard({ avis, chestPrice }: Props) {
+/** One avis de recherche: picture, name, level, avitons, chest + resource. */
+export function AvisCard({ avis, resourcePrice }: Props) {
   return (
     <li className="avis-card">
       <div className="avis-thumb">
@@ -31,13 +31,21 @@ export function AvisCard({ avis, chestPrice }: Props) {
           <span className="avis-avitons">{avis.avitons} avitons</span>
         </div>
         {avis.chestName && (
-          <div className="avis-resource" title={avis.chestName}>
+          <div className="avis-chest" title={avis.chestName}>
             {avis.chestImg && (
               <img src={avis.chestImg} alt="" className="avis-resource-icon" />
             )}
             <span className="avis-resource-name">{avis.chestName}</span>
+          </div>
+        )}
+        {avis.resourceName && (
+          <div className="avis-resource" title={avis.resourceName}>
+            {avis.resourceImg && (
+              <img src={avis.resourceImg} alt="" className="avis-resource-icon" />
+            )}
+            <span className="avis-resource-name">{avis.resourceName}</span>
             <span className="avis-resource-price">
-              {chestPrice != null ? formatKamas(chestPrice) : "—"}
+              {resourcePrice != null ? formatKamas(resourcePrice) : "—"}
             </span>
           </div>
         )}

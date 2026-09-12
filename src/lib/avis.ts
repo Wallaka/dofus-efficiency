@@ -25,10 +25,14 @@ export interface AvisReward {
   avitons: number;
   /** Picture: the bounty monster's image when matched, else the aviton coin. */
   img?: string;
-  /** The "Coffre de …" chest item — the tradeable resource reward. */
+  /** The "Coffre de …" chest item. */
   chestItemId?: string;
   chestName?: string;
   chestImg?: string;
+  /** The resource inside the chest ("<Type> de …") — the valuable, priceable drop. */
+  resourceItemId?: string;
+  resourceName?: string;
+  resourceImg?: string;
 }
 
 /**
@@ -48,6 +52,11 @@ function normalizeKey(s: string): string {
 
 export function questCriminalKey(name: string): string {
   return normalizeKey(name).replace(/^on recherche\s+/, "").trim();
+}
+
+/** The criminal's display name from a quest name ("On recherche X" → "X"). */
+export function questCriminalName(name: string): string {
+  return name.replace(/^On recherche\s+/i, "").trim();
 }
 
 export function monsterCriminalKey(name: string): string {
