@@ -22,7 +22,10 @@ type State =
   | { phase: "error"; message: string };
 
 const KIND_LABEL: Record<ScreenshotKind, string> = {
-  "hdv-listing": "Fenêtre HDV",
+  "item-tooltip": "Infobulle d'objet",
+  "hdv-lots": "Fenêtre HDV",
+  inventory: "Inventaire",
+  "character-sheet": "Fiche perso",
   other: "Autre écran",
   unknown: "Indéterminé",
 };
@@ -154,11 +157,28 @@ function AnalysisView({
 
       {analysis.itemName && (
         <p className="analysis-name">
-          Objet&nbsp;: <strong>{analysis.itemName}</strong>
+          <strong>{analysis.itemName}</strong>
+          {(analysis.level != null || analysis.itemType) && (
+            <span className="analysis-sub">
+              {" "}
+              {analysis.itemType}
+              {analysis.level != null ? ` · Niv. ${analysis.level}` : ""}
+            </span>
+          )}
         </p>
       )}
 
-      {analysis.category === "resource" && analysis.lots.length > 0 && (
+      {analysis.set && (
+        <p className="analysis-sub">Panoplie&nbsp;: {analysis.set}</p>
+      )}
+
+      {analysis.averagePrice != null && (
+        <p className="analysis-price">
+          Prix moyen&nbsp;: <strong>{formatKamas(analysis.averagePrice)}</strong>
+        </p>
+      )}
+
+      {analysis.kind === "hdv-lots" && analysis.lots.length > 0 && (
         <table className="lots">
           <thead>
             <tr>

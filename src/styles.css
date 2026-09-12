@@ -359,8 +359,24 @@ body {
 }
 
 .analysis-name {
+  margin: 0 0 6px;
+  font-size: 0.95rem;
+}
+
+.analysis-sub {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin: 0 0 6px;
+}
+
+.analysis-price {
   margin: 0 0 10px;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
+}
+
+.analysis-price strong {
+  color: var(--positive);
+  font-variant-numeric: tabular-nums;
 }
 
 table.lots {
