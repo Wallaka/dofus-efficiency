@@ -177,6 +177,9 @@ const FOLLOWER_TYPE_ID = 32;
 const RESOURCE_SUPER_TYPE_ID = 9;
 
 interface RawItemTyped extends RawItem {
+  /** Top-level type id (present in list responses, unlike the nested `type`). */
+  typeId?: number;
+  /** Nested type — only populated on single-item GETs, not list/search. */
   type?: { superTypeId?: number };
 }
 
@@ -215,15 +218,28 @@ async function fetchAvisResource(
   try {
     const url =
       `${DOFUSDB_BASE_URL}/items?name.fr[$search]=` +
-      `${encodeURIComponent(criminalDisplay)}&$limit=15&lang=fr`;
+      `${encodeURIComponent(criminalDisplay)}&$limit=20&lang=fr`;
     const res = await getJson<FeathersPage<RawItemTyped>>(url, signal);
-    const resources = (res.data ?? []).filter(
-      (it) => it.type?.superTypeId === RESOURCE_SUPER_TYPE_ID,
-    );
+
+    // The list endpoint doesn't populate the nested `type`, so pick by name:
+    // among items mentioning the criminal, drop the bare-name follower and the
+    // "Coffre de …" chest — what remains ("Fleur de …", etc.) is the resource.
+    const candidates = (res.data ?? []).filter((it) => {
+      const name = pickName(it.name, "");
+      const key = monsterCriminalKey(name);
+      if (!key.includes(criminalKey)) return false; // must mention the criminal
+      if (key === criminalKey) return false; // the follower (bare name)
+      if (name.toLowerCase().startsWith(CHEST_NAME_PREFIX)) return false; // the chest
+      if (it.typeId === CHEST_TYPE_ID || it.typeId === FOLLOWER_TYPE_ID)
+        return false;
+      return true;
+    });
+
+    // Prefer a Ressource when the type happens to be populated, else first match.
     const match =
-      resources.find((it) =>
-        monsterCriminalKey(pickName(it.name, "")).includes(criminalKey),
-      ) ?? resources[0];
+      candidates.find(
+        (it) => it.type?.superTypeId === RESOURCE_SUPER_TYPE_ID,
+      ) ?? candidates[0];
     return match ? toItem(match) : null;
   } catch {
     return null;
