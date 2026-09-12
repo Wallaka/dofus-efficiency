@@ -183,8 +183,10 @@ function findTypeLine(lines: string[]): TypeLine | null {
   const allTypes = [...WEAPON_TYPES, ...EQUIPMENT_TYPES, ...RESOURCE_TYPES];
   for (let i = 0; i < lines.length; i++) {
     const norm = normalize(lines[i]);
-    if (!/niv(?:eau)?\.?\s*\d/.test(norm)) continue;
-    const level = Number(/niv(?:eau)?\.?\s*(\d{1,3})/.exec(norm)?.[1] ?? NaN);
+    // Tolerate OCR dropping the "v" ("Niv." → "Ni."); a type word must also be
+    // on the line (checked below), so the looser prefix stays safe.
+    if (!/\bniv?\.?\s*\d/.test(norm)) continue;
+    const level = Number(/\bniv?\.?\s*(\d{1,3})/.exec(norm)?.[1] ?? NaN);
     const type = allTypes.find((t) => new RegExp(`\\b${t}\\b`).test(norm));
     if (type)
       return { index: i, level: Number.isFinite(level) ? level : null, itemType: type };

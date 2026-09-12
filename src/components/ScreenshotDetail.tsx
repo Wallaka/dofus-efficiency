@@ -134,17 +134,7 @@ export function ScreenshotDetail({ file, imageUrl, onClose, onApplyPrice }: Prop
         onProgress: (p) => onProgress(p * 0.5),
       });
       const a1 = analyzeScreenshot(pass1.text);
-
-      // For the price graph, read the 7-day series (dates + prices) from the
-      // full image's pixels + axis labels — the curve isn't in any text crop.
-      let history: PricePoint[] = [];
-      if (a1.kind === "market-trend") {
-        try {
-          history = extractMarketHistory(await getPixels(full), pass1.words);
-        } catch {
-          history = [];
-        }
-      }
+      const isMarket = a1.kind === "market-trend";
 
       const rect = computeAutoCrop(
         pass1.words,
@@ -153,14 +143,29 @@ export function ScreenshotDetail({ file, imageUrl, onClose, onApplyPrice }: Prop
         a1.category,
       );
       if (!rect) {
-        setState({ phase: "done", analysis: a1, history }); // couldn't localise
+        setState({ phase: "done", analysis: a1, history: [] }); // couldn't localise
         return;
       }
       setAutoRect(rect);
-      const pass2 = await recognizeImage(await cropSafe(full, rect), {
+
+      // Pass 2 reads the (upscaled) crop. For the price graph we also ask for
+      // word boxes and read the 7-day series from the same upscaled crop — small
+      // axis text (dates, y-axis ticks) is only reliable once enlarged.
+      const cropBlob = await cropSafe(full, rect);
+      const pass2 = await recognizeImage(cropBlob, {
+        boxes: isMarket,
         onProgress: (p) => onProgress(0.5 + p * 0.5),
       });
       const a2 = analyzeScreenshot(pass2.text);
+
+      let history: PricePoint[] = [];
+      if (isMarket) {
+        try {
+          history = extractMarketHistory(await getPixels(cropBlob), pass2.words);
+        } catch {
+          history = [];
+        }
+      }
       setState({ phase: "done", analysis: mergeAnalyses(a1, a2), history });
     } catch (err) {
       setState({
@@ -339,27 +344,12 @@ function AnalysisView({
       )}
 
       {history.length > 0 && (
-        <>
-          <p className="analysis-sub">
-            Historique {history.length} jours (estimé depuis le graphe)&nbsp;:
-          </p>
-          <table className="lots history-table">
-          <thead>
-            <tr>
-              <th>Jour</th>
-              <th className="num">Prix (≈)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {history.map((p) => (
-              <tr key={p.date}>
-                <td>{p.date}</td>
-                <td className="num">{formatKamas(p.price)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        </>
+        <p className="analysis-sub">
+          Historique lu&nbsp;: {history.length} jours ({history[0].date} →{" "}
+          {history[history.length - 1].date}). Le prix fiable est le prix
+          médian/moyen ci-dessus — le prix jour par jour n'est pas lisible de
+          façon fiable sur le graphe.
+        </p>
       )}
 
       <p className="analysis-note">{analysis.note}</p>

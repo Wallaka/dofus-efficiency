@@ -42,11 +42,10 @@ const ANCHORS: Partial<Record<ScreenshotKind, string[]>> = {
 // Padding as a fraction of image width/height. HDV gets a big bottom margin so
 // the lot list is included; every type gets extra on top for the item name.
 const PADDING: Partial<Record<ScreenshotKind, Padding>> = {
-  // The "Cours du marché" stats line (prix médian / moyen) sits below and right
-  // of the title; pass 1 may only anchor the title, so pad down/right to keep the
-  // name + stats band even then (a little graph noise is harmless — prices are
-  // matched by their labels).
-  "market-trend": { left: 0.03, right: 0.14, top: 0.06, bottom: 0.15 },
+  // The "Cours du marché" window holds the title, stats line AND the graph. Pad
+  // generously down (to include the graph + its date axis for the 7-day history)
+  // and right, anchored on the title/stats even when only the title is read.
+  "market-trend": { left: 0.03, right: 0.14, top: 0.06, bottom: 0.42 },
   hdv: { left: 0.03, right: 0.04, top: 0.05, bottom: 0.16 },
   "item-tooltip": { left: 0.04, right: 0.04, top: 0.05, bottom: 0.04 },
 };
