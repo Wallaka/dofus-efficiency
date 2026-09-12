@@ -9,6 +9,7 @@ import { rankRecipes } from "./lib/craft";
 import { loadPrices, savePrices } from "./lib/storage";
 import { PriceEditor } from "./components/PriceEditor";
 import { CraftTable } from "./components/CraftTable";
+import { MedalFolderPicker } from "./components/MedalFolderPicker";
 
 export function App() {
   // Static data — bundled sample for Phase 0; DofusDB later (see data/dofusApi.ts).
@@ -53,6 +54,7 @@ export function App() {
       <main className="layout">
         <CraftTable evaluations={evaluations} itemsById={itemsById} />
         <div>
+          <MedalFolderPicker />
           <PriceEditor items={items} prices={prices} onChange={setPrice} />
           <button type="button" className="reset" onClick={resetToSample}>
             Réinitialiser les prix d'exemple

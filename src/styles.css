@@ -84,6 +84,95 @@ body {
   font-size: 0.85rem;
 }
 
+/* Stack panels in the sidebar column with breathing room. */
+.panel + .panel {
+  margin-top: 20px;
+}
+
+/* Medal folder picker */
+.folder-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.folder-pick {
+  padding: 8px 14px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.folder-pick:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.folder-secondary {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.folder-secondary:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.folder-error {
+  margin: 0 0 12px;
+  color: var(--negative);
+  font-size: 0.85rem;
+}
+
+.folder-status {
+  margin-top: 4px;
+}
+
+.folder-name {
+  margin: 0;
+  font-weight: 600;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.folder-count {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.82rem;
+}
+
+.screenshot-preview {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.screenshot-preview li {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.screenshot-preview .more {
+  font-style: italic;
+}
+
 /* Price editor */
 .price-list {
   list-style: none;
