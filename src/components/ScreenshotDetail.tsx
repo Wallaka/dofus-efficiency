@@ -10,6 +10,11 @@ import {
 } from "../lib/screenshotAnalysis";
 import { cropImageToBlob, type CropRect } from "../lib/cropImage";
 import { computeAutoCrop } from "../lib/autoCrop";
+import {
+  extractMarketHistory,
+  type PricePoint,
+  type PixelImage,
+} from "../lib/chartExtract";
 import { priceToRecord } from "../lib/priceStore";
 import type { Item } from "../types";
 import { CropSelector } from "./CropSelector";
@@ -24,6 +29,20 @@ async function imageSize(blob: Blob): Promise<{ width: number; height: number }>
   } finally {
     bmp.close?.();
   }
+}
+
+/** Decode an image blob to raw RGBA pixels (for reading the price graph). */
+async function getPixels(blob: Blob): Promise<PixelImage> {
+  const bmp = await createImageBitmap(blob);
+  const canvas = document.createElement("canvas");
+  canvas.width = bmp.width;
+  canvas.height = bmp.height;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) throw new Error("Canvas indisponible.");
+  ctx.drawImage(bmp, 0, 0);
+  bmp.close?.();
+  const d = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  return { data: d.data, width: d.width, height: d.height };
 }
 
 async function cropSafe(full: Blob, rect: CropRect): Promise<Blob> {
@@ -45,7 +64,7 @@ interface Props {
 type State =
   | { phase: "idle" }
   | { phase: "running"; progress: number }
-  | { phase: "done"; analysis: ScreenshotAnalysis }
+  | { phase: "done"; analysis: ScreenshotAnalysis; history: PricePoint[] }
   | { phase: "error"; message: string };
 
 const KIND_LABEL: Record<ScreenshotKind, string> = {
@@ -97,14 +116,14 @@ export function ScreenshotDetail({ file, imageUrl, onClose, onApplyPrice }: Prop
       // 1) Manual selection wins: OCR exactly what the user drew.
       if (crop) {
         const ocr = await recognizeImage(await cropSafe(full, crop), { onProgress });
-        setState({ phase: "done", analysis: analyzeScreenshot(ocr.text) });
+        setState({ phase: "done", analysis: analyzeScreenshot(ocr.text), history: [] });
         return;
       }
 
       // 2) No auto-crop: single pass on the whole image.
       if (!autoCropOn) {
         const ocr = await recognizeImage(full, { onProgress });
-        setState({ phase: "done", analysis: analyzeScreenshot(ocr.text) });
+        setState({ phase: "done", analysis: analyzeScreenshot(ocr.text), history: [] });
         return;
       }
 
@@ -115,6 +134,18 @@ export function ScreenshotDetail({ file, imageUrl, onClose, onApplyPrice }: Prop
         onProgress: (p) => onProgress(p * 0.5),
       });
       const a1 = analyzeScreenshot(pass1.text);
+
+      // For the price graph, read the 7-day series (dates + prices) from the
+      // full image's pixels + axis labels — the curve isn't in any text crop.
+      let history: PricePoint[] = [];
+      if (a1.kind === "market-trend") {
+        try {
+          history = extractMarketHistory(await getPixels(full), pass1.words);
+        } catch {
+          history = [];
+        }
+      }
+
       const rect = computeAutoCrop(
         pass1.words,
         await imageSize(full),
@@ -122,7 +153,7 @@ export function ScreenshotDetail({ file, imageUrl, onClose, onApplyPrice }: Prop
         a1.category,
       );
       if (!rect) {
-        setState({ phase: "done", analysis: a1 }); // couldn't localise → keep pass 1
+        setState({ phase: "done", analysis: a1, history }); // couldn't localise
         return;
       }
       setAutoRect(rect);
@@ -130,7 +161,7 @@ export function ScreenshotDetail({ file, imageUrl, onClose, onApplyPrice }: Prop
         onProgress: (p) => onProgress(0.5 + p * 0.5),
       });
       const a2 = analyzeScreenshot(pass2.text);
-      setState({ phase: "done", analysis: mergeAnalyses(a1, a2) });
+      setState({ phase: "done", analysis: mergeAnalyses(a1, a2), history });
     } catch (err) {
       setState({
         phase: "error",
@@ -222,6 +253,7 @@ export function ScreenshotDetail({ file, imageUrl, onClose, onApplyPrice }: Prop
             {state.phase === "done" && (
               <AnalysisView
                 analysis={state.analysis}
+                history={state.history}
                 onReanalyze={analyze}
                 reanalyzeLabel={analyzeLabel}
                 onApplyPrice={onApplyPrice}
@@ -236,11 +268,13 @@ export function ScreenshotDetail({ file, imageUrl, onClose, onApplyPrice }: Prop
 
 function AnalysisView({
   analysis,
+  history,
   onReanalyze,
   reanalyzeLabel,
   onApplyPrice,
 }: {
   analysis: ScreenshotAnalysis;
+  history: PricePoint[];
   onReanalyze: () => void;
   reanalyzeLabel: string;
   onApplyPrice?: (item: Item, price: number, detail: string) => void;
@@ -302,6 +336,30 @@ function AnalysisView({
             ))}
           </tbody>
         </table>
+      )}
+
+      {history.length > 0 && (
+        <>
+          <p className="analysis-sub">
+            Historique {history.length} jours (estimé depuis le graphe)&nbsp;:
+          </p>
+          <table className="lots history-table">
+          <thead>
+            <tr>
+              <th>Jour</th>
+              <th className="num">Prix (≈)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {history.map((p) => (
+              <tr key={p.date}>
+                <td>{p.date}</td>
+                <td className="num">{formatKamas(p.price)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        </>
       )}
 
       <p className="analysis-note">{analysis.note}</p>
