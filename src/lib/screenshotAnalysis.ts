@@ -311,11 +311,14 @@ export function mergeAnalyses(
   const category = full.category !== "unknown" ? full.category : cropped.category;
   const pick = <T>(a: T | null, b: T | null): T | null => (a != null ? a : b);
   // The crop pass usually loses the "Hôtel de vente" marker, so it classifies as
-  // a tooltip and skips lot parsing. Re-parse lots from the crop text under the
-  // final (merged) kind so HDV-resource lots survive.
+  // a tooltip and skips lot parsing. For an HDV resource, re-parse lots from the
+  // clean, upscaled crop text and prefer it whenever it found at least as many
+  // rows as the noisy full-image pass — the crop is exactly what should read the
+  // small lot list best, so it must not be overridden by a partial full read.
   let lots = cropped.lots.length > 0 ? cropped.lots : full.lots;
-  if (kind === "hdv" && category === "resource" && lots.length === 0) {
-    lots = parseLots(cropped.rawText);
+  if (kind === "hdv" && category === "resource") {
+    const cropLots = parseLots(cropped.rawText);
+    if (cropLots.length >= lots.length) lots = cropLots;
   }
   const merged: Omit<ScreenshotAnalysis, "note"> = {
     kind,
