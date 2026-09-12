@@ -298,6 +298,43 @@ export function analyzeScreenshot(rawText: string): ScreenshotAnalysis {
   };
 }
 
+/**
+ * Merge a full-image analysis (which sees every window marker, so it decides the
+ * screen type and category) with a cropped-panel analysis (cleaner, so it wins
+ * on the actual fields). Used for the two-pass auto-crop flow.
+ */
+export function mergeAnalyses(
+  full: ScreenshotAnalysis,
+  cropped: ScreenshotAnalysis,
+): ScreenshotAnalysis {
+  const kind = full.kind;
+  const category = full.category !== "unknown" ? full.category : cropped.category;
+  const pick = <T>(a: T | null, b: T | null): T | null => (a != null ? a : b);
+  // The crop pass usually loses the "Hôtel de vente" marker, so it classifies as
+  // a tooltip and skips lot parsing. Re-parse lots from the crop text under the
+  // final (merged) kind so HDV-resource lots survive.
+  let lots = cropped.lots.length > 0 ? cropped.lots : full.lots;
+  if (kind === "hdv" && category === "resource" && lots.length === 0) {
+    lots = parseLots(cropped.rawText);
+  }
+  const merged: Omit<ScreenshotAnalysis, "note"> = {
+    kind,
+    category,
+    itemName: pick(cropped.itemName, full.itemName),
+    level: pick(cropped.level, full.level),
+    itemType: pick(cropped.itemType, full.itemType),
+    set: pick(cropped.set, full.set),
+    averagePrice: pick(cropped.averagePrice, full.averagePrice),
+    medianPrice: pick(cropped.medianPrice, full.medianPrice),
+    lots,
+    rawText: cropped.rawText,
+  };
+  return {
+    ...merged,
+    note: buildNote({ kind, category, averagePrice: merged.averagePrice, medianPrice: merged.medianPrice, lots }),
+  };
+}
+
 function capitalize(s: string): string {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }

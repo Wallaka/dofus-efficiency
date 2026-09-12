@@ -14,6 +14,13 @@
 /** Anything Tesseract accepts as an image (a File/Blob works). */
 export type OcrImage = Blob;
 
+/** One recognized word and where it sits in the image (natural pixels). */
+export interface OcrWord {
+  text: string;
+  bbox: { x0: number; y0: number; x1: number; y1: number };
+  confidence: number | null;
+}
+
 export interface OcrResult {
   /** Full recognized text. */
   text: string;
@@ -21,11 +28,15 @@ export interface OcrResult {
   lines: string[];
   /** Mean confidence 0–100, when available. */
   confidence: number | null;
+  /** Word boxes, when requested (see OcrOptions.boxes). */
+  words: OcrWord[];
 }
 
 export interface OcrOptions {
   /** 0–1 progress for the "recognizing text" phase, for a progress bar. */
   onProgress?: (fraction: number) => void;
+  /** Also return per-word bounding boxes (used to auto-locate the panel). */
+  boxes?: boolean;
 }
 
 // Test seam: a page can set window.__mockOcr to bypass the real engine.
@@ -35,12 +46,43 @@ function getMock(): MockOcr | undefined {
 }
 
 function toResult(value: string | OcrResult): OcrResult {
-  if (typeof value !== "string") return value;
+  if (typeof value !== "string") return { ...value, words: value.words ?? [] };
   return {
     text: value,
     lines: splitLines(value),
     confidence: null,
+    words: [],
   };
+}
+
+/** Flatten Tesseract's block/paragraph/line/word tree (v7) into a word list. */
+function collectWords(data: unknown): OcrWord[] {
+  const d = data as {
+    words?: unknown[];
+    blocks?: Array<{
+      paragraphs?: Array<{ lines?: Array<{ words?: unknown[] }> }>;
+    }>;
+  };
+  const raw: unknown[] = Array.isArray(d.words)
+    ? d.words
+    : (d.blocks ?? []).flatMap((b) =>
+        (b.paragraphs ?? []).flatMap((p) => (p.lines ?? []).flatMap((l) => l.words ?? [])),
+      );
+  const out: OcrWord[] = [];
+  for (const w of raw) {
+    const word = w as {
+      text?: string;
+      confidence?: number;
+      bbox?: { x0: number; y0: number; x1: number; y1: number };
+    };
+    if (!word?.bbox || !word.text) continue;
+    out.push({
+      text: word.text,
+      bbox: word.bbox,
+      confidence: typeof word.confidence === "number" ? word.confidence : null,
+    });
+  }
+  return out;
 }
 
 function splitLines(text: string): string[] {
@@ -77,11 +119,14 @@ export async function recognizeImage(
   }
 
   const worker = await getWorker(options.onProgress);
-  const { data } = await worker.recognize(image);
+  const { data } = options.boxes
+    ? await worker.recognize(image, {}, { text: true, blocks: true })
+    : await worker.recognize(image);
   return {
     text: data.text,
     lines: splitLines(data.text),
     confidence: typeof data.confidence === "number" ? data.confidence : null,
+    words: options.boxes ? collectWords(data) : [],
   };
 }
 

@@ -377,6 +377,23 @@ body {
   box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.35);
 }
 
+/* Auto-detected region: dashed, no dimming (it's a suggestion, not a commit). */
+.crop-box-auto {
+  border-style: dashed;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  box-shadow: none;
+}
+
+.auto-crop-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  cursor: pointer;
+}
+
 .crop-hint {
   margin: 8px 0 0;
 }

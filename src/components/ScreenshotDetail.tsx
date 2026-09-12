@@ -3,13 +3,33 @@ import type { ScreenshotInfo } from "../lib/screenshotMeta";
 import { recognizeImage } from "../lib/ocr";
 import {
   analyzeScreenshot,
+  mergeAnalyses,
   type ScreenshotAnalysis,
   type ScreenshotKind,
   type ItemCategory,
 } from "../lib/screenshotAnalysis";
 import { cropImageToBlob, type CropRect } from "../lib/cropImage";
+import { computeAutoCrop } from "../lib/autoCrop";
 import { CropSelector } from "./CropSelector";
 import { formatKamas, formatDateTime, formatBytes } from "../lib/format";
+
+/** Natural pixel size of an image blob. */
+async function imageSize(blob: Blob): Promise<{ width: number; height: number }> {
+  const bmp = await createImageBitmap(blob);
+  try {
+    return { width: bmp.width, height: bmp.height };
+  } finally {
+    bmp.close?.();
+  }
+}
+
+async function cropSafe(full: Blob, rect: CropRect): Promise<Blob> {
+  try {
+    return await cropImageToBlob(full, rect);
+  } catch {
+    return full; // bad/tiny rect → use the whole image
+  }
+}
 
 interface Props {
   file: ScreenshotInfo;
@@ -47,8 +67,11 @@ const CATEGORY_LABEL: Record<ItemCategory, string> = {
  */
 export function ScreenshotDetail({ file, imageUrl, onClose }: Props) {
   const [state, setState] = useState<State>({ phase: "idle" });
-  // Region to OCR, in natural pixels; null = whole image.
+  // Manual region to OCR, in natural pixels; null = none drawn.
   const [crop, setCrop] = useState<CropRect | null>(null);
+  // Auto-crop on by default; the box it chose (for display).
+  const [autoCropOn, setAutoCropOn] = useState(true);
+  const [autoRect, setAutoRect] = useState<CropRect | null>(null);
 
   // Close on Escape.
   useEffect(() => {
@@ -61,21 +84,43 @@ export function ScreenshotDetail({ file, imageUrl, onClose }: Props) {
 
   async function analyze() {
     setState({ phase: "running", progress: 0 });
+    setAutoRect(null);
+    const onProgress = (p: number) => setState({ phase: "running", progress: p });
     try {
       const full = await file.handle.getFile();
-      // OCR just the selected region when there is one — far less noise.
-      let target: Blob = full;
+
+      // 1) Manual selection wins: OCR exactly what the user drew.
       if (crop) {
-        try {
-          target = await cropImageToBlob(full, crop);
-        } catch {
-          target = full; // bad/tiny selection → fall back to full image
-        }
+        const ocr = await recognizeImage(await cropSafe(full, crop), { onProgress });
+        setState({ phase: "done", analysis: analyzeScreenshot(ocr.text) });
+        return;
       }
-      const ocr = await recognizeImage(target, {
-        onProgress: (p) => setState({ phase: "running", progress: p }),
+
+      // 2) No auto-crop: single pass on the whole image.
+      if (!autoCropOn) {
+        const ocr = await recognizeImage(full, { onProgress });
+        setState({ phase: "done", analysis: analyzeScreenshot(ocr.text) });
+        return;
+      }
+
+      // 3) Auto-crop: pass 1 reads the whole image + word boxes to classify the
+      //    screen and locate the panel; pass 2 re-reads just that panel.
+      const pass1 = await recognizeImage(full, {
+        boxes: true,
+        onProgress: (p) => onProgress(p * 0.5),
       });
-      setState({ phase: "done", analysis: analyzeScreenshot(ocr.text) });
+      const a1 = analyzeScreenshot(pass1.text);
+      const rect = computeAutoCrop(pass1.words, await imageSize(full), a1.kind);
+      if (!rect) {
+        setState({ phase: "done", analysis: a1 }); // couldn't localise → keep pass 1
+        return;
+      }
+      setAutoRect(rect);
+      const pass2 = await recognizeImage(await cropSafe(full, rect), {
+        onProgress: (p) => onProgress(0.5 + p * 0.5),
+      });
+      const a2 = analyzeScreenshot(pass2.text);
+      setState({ phase: "done", analysis: mergeAnalyses(a1, a2) });
     } catch (err) {
       setState({
         phase: "error",
@@ -84,7 +129,11 @@ export function ScreenshotDetail({ file, imageUrl, onClose }: Props) {
     }
   }
 
-  const analyzeLabel = crop ? "Analyser la sélection" : "Analyser (OCR)";
+  const analyzeLabel = crop
+    ? "Analyser la sélection"
+    : autoCropOn
+      ? "Analyser (recadrage auto)"
+      : "Analyser (OCR)";
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -107,6 +156,7 @@ export function ScreenshotDetail({ file, imageUrl, onClose }: Props) {
               <CropSelector
                 src={imageUrl}
                 alt={file.name}
+                autoRect={autoRect}
                 onSelectionChange={setCrop}
               />
             ) : (
@@ -115,6 +165,14 @@ export function ScreenshotDetail({ file, imageUrl, onClose }: Props) {
             <p className="screenshot-sub">
               {formatDateTime(file.capturedAt)} · {formatBytes(file.size)}
             </p>
+            <label className="auto-crop-toggle">
+              <input
+                type="checkbox"
+                checked={autoCropOn}
+                onChange={(e) => setAutoCropOn(e.target.checked)}
+              />
+              Recadrage automatique (zone du prix)
+            </label>
           </div>
 
           <div className="modal-analysis">
