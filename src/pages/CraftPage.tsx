@@ -15,7 +15,12 @@ import {
   savePrices,
   saveLastSource,
 } from "../lib/storage";
-import { recordPriceEntry, deletePriceEntry } from "../lib/priceStore";
+import {
+  recordPriceEntry,
+  deletePriceEntry,
+  loadPriceEntries,
+  type PriceEntry,
+} from "../lib/priceStore";
 import { useFavourites } from "../lib/useFavourites";
 import { PriceEditor } from "../components/PriceEditor";
 import { CraftTable } from "../components/CraftTable";
@@ -75,6 +80,18 @@ export function CraftPage() {
     [dataset, prices],
   );
 
+  // Price entries (with dates/source) kept in state so the table's age hints
+  // update live as prices are applied or edited.
+  const [priceEntries, setPriceEntries] =
+    useState<Record<string, PriceEntry>>(loadPriceEntries);
+
+  // Item id → when its price was last recorded, for the craft table hints.
+  const priceUpdatedAt = useMemo(() => {
+    const m = new Map<string, number>();
+    for (const e of Object.values(priceEntries)) m.set(e.itemId, e.updatedAt);
+    return m;
+  }, [priceEntries]);
+
   // Low-level: update just the number the calc reads.
   const setPriceNumber = useCallback((itemId: string, price: number | undefined) => {
     setPrices((prev) => ({ ...prev, [itemId]: price }));
@@ -86,10 +103,15 @@ export function CraftPage() {
     setPriceNumber(itemId, price);
     if (price == null) {
       deletePriceEntry(itemId);
+      setPriceEntries((prev) => {
+        const next = { ...prev };
+        delete next[itemId];
+        return next;
+      });
       return;
     }
     const item = priceItemsById.get(itemId);
-    recordPriceEntry({
+    const entry: PriceEntry = {
       itemId,
       name: item?.name ?? itemId,
       level: item?.level,
@@ -97,14 +119,16 @@ export function CraftPage() {
       price,
       updatedAt: Date.now(),
       source: "manual",
-    });
+    };
+    recordPriceEntry(entry);
+    setPriceEntries((prev) => ({ ...prev, [itemId]: entry }));
   }
 
   // OCR feedback loop: store a screenshot-read price for the chosen item.
   const applyOcrPrice = useCallback(
     (item: Item, price: number, detail: string) => {
       setPriceNumber(item.id, price);
-      recordPriceEntry({
+      const entry: PriceEntry = {
         itemId: item.id,
         name: item.name,
         level: item.level,
@@ -113,7 +137,9 @@ export function CraftPage() {
         updatedAt: Date.now(),
         source: "ocr",
         detail,
-      });
+      };
+      recordPriceEntry(entry);
+      setPriceEntries((prev) => ({ ...prev, [item.id]: entry }));
     },
     [setPriceNumber],
   );
@@ -156,7 +182,11 @@ export function CraftPage() {
   return (
     <>
       <main className="layout">
-        <CraftTable evaluations={evaluations} itemsById={itemsById} />
+        <CraftTable
+          evaluations={evaluations}
+          itemsById={itemsById}
+          priceUpdatedAt={priceUpdatedAt}
+        />
         <div>
           <DataSourcePanel
             active={dataset.kind}

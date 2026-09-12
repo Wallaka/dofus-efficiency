@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import type { CraftEvaluation, Item } from "../types";
 import { formatKamas, formatPercent } from "../lib/format";
+import { isStale, relativeAge } from "../lib/priceStore";
 import { Pagination, PAGE_SIZE } from "./Pagination";
 
 interface Props {
   evaluations: CraftEvaluation[];
   itemsById: Map<string, Item>;
+  /** Item id → when its price was last recorded, for freshness hints. */
+  priceUpdatedAt?: Map<string, number>;
 }
 
 function marginClass(margin: number | undefined): string {
@@ -15,8 +18,33 @@ function marginClass(margin: number | undefined): string {
   return "";
 }
 
+/** A small "il y a N j" hint, red when the price is stale. null = no hint. */
+function AgeHint({ updatedAt }: { updatedAt: number | undefined }) {
+  if (updatedAt == null) return null;
+  const stale = isStale(updatedAt);
+  return (
+    <span
+      className={`price-age${stale ? " stale" : ""}`}
+      title={stale ? "Prix à mettre à jour" : "Prix récent"}
+    >
+      {relativeAge(updatedAt)}
+    </span>
+  );
+}
+
 /** Ranked table of recipes by profit per craft, paginated for large datasets. */
-export function CraftTable({ evaluations, itemsById }: Props) {
+export function CraftTable({ evaluations, itemsById, priceUpdatedAt }: Props) {
+  /** Oldest price age among a recipe's ingredients (the cost's weakest link). */
+  function oldestIngredientAge(ev: CraftEvaluation): number | undefined {
+    if (!priceUpdatedAt) return undefined;
+    let oldest: number | undefined;
+    for (const ing of ev.recipe.ingredients) {
+      const t = priceUpdatedAt.get(ing.itemId);
+      if (t != null) oldest = oldest == null ? t : Math.min(oldest, t);
+    }
+    return oldest;
+  }
+
   const [page, setPage] = useState(1);
 
   const pageCount = Math.max(1, Math.ceil(evaluations.length / PAGE_SIZE));
@@ -73,8 +101,18 @@ export function CraftTable({ evaluations, itemsById }: Props) {
                   )}
                 </td>
                 <td>{ev.recipe.job ?? "—"}</td>
-                <td className="num">{formatKamas(ev.craftCost)}</td>
-                <td className="num">{formatKamas(ev.sellPrice)}</td>
+                <td className="num">
+                  {formatKamas(ev.craftCost)}
+                  {ev.craftCost != null && (
+                    <AgeHint updatedAt={oldestIngredientAge(ev)} />
+                  )}
+                </td>
+                <td className="num">
+                  {formatKamas(ev.sellPrice)}
+                  {ev.sellPrice != null && (
+                    <AgeHint updatedAt={priceUpdatedAt?.get(ev.resultItem.id)} />
+                  )}
+                </td>
                 <td className={`num ${marginClass(ev.margin)}`}>
                   {formatKamas(ev.margin)}
                 </td>

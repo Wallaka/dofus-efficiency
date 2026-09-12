@@ -44,7 +44,8 @@ export function PricesPage() {
       <h2>Prix enregistrés</h2>
       <p className="hint">
         Les prix connus, avec leur date et leur origine. Un prix de plus de{" "}
-        {STALE_DAYS} jours est marqué «&nbsp;à mettre à jour&nbsp;».
+        {STALE_DAYS} jour{STALE_DAYS > 1 ? "s" : ""} est marqué «&nbsp;à mettre à
+        jour&nbsp;».
       </p>
 
       {entries.length === 0 ? (

@@ -12,8 +12,8 @@ import type { ScreenshotAnalysis } from "./screenshotAnalysis";
 
 const ENTRIES_KEY = "dofus-efficiency:priceEntries:v1";
 
-/** Prices older than this are flagged "à mettre à jour" (the HDV moves). */
-export const STALE_AFTER_MS = 7 * 24 * 60 * 60 * 1000;
+/** Prices older than this are flagged "à mettre à jour" (the HDV moves fast). */
+export const STALE_AFTER_MS = 24 * 60 * 60 * 1000;
 
 export type PriceSource = "ocr" | "manual";
 

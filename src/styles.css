@@ -587,6 +587,18 @@ table.lots td.num {
   gap: 8px;
 }
 
+/* Price freshness hint in the craft table (under a price number). */
+.price-age {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.price-age.stale {
+  color: var(--negative);
+}
+
 .price-del {
   padding: 2px 8px;
 }
