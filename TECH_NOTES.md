@@ -136,7 +136,10 @@ build the value first.
   `lib/eleveur.ts`) rather than hard-coded breeding mechanics. The user lists
   raising costs (acquisition, food, enclos) + a sale price + days; it outputs
   net profit, margin, and profit/day so it's comparable to crafting. Inputs
-  persist in localStorage. (Breeding planner / enclos tracker could come later.)
+  persist in localStorage. Cost lines can be **item-linked**: reference a
+  tracked item and the cost becomes unit price × quantity, priced from the same
+  shared price map as the craft page (edits sync both ways via localStorage).
+  (Breeding planner / enclos tracker could come later.)
 - **Later / maybe.** JSON export-import to share data; only then consider a
   backend if we ever truly need sync.
 
