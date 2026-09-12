@@ -1,6 +1,7 @@
 import { NavLink, Route, Routes } from "react-router-dom";
 import { CraftPage } from "./pages/CraftPage";
 import { EleveurPage } from "./pages/EleveurPage";
+import { AvisPage } from "./pages/AvisPage";
 import { PricesPage } from "./pages/PricesPage";
 
 export function App() {
@@ -13,6 +14,7 @@ export function App() {
             Craft & kamas
           </NavLink>
           <NavLink to="/eleveur">Éleveur</NavLink>
+          <NavLink to="/avis">Avis de recherche</NavLink>
           <NavLink to="/prix">Prix</NavLink>
         </nav>
       </header>
@@ -20,6 +22,7 @@ export function App() {
       <Routes>
         <Route path="/" element={<CraftPage />} />
         <Route path="/eleveur" element={<EleveurPage />} />
+        <Route path="/avis" element={<AvisPage />} />
         <Route path="/prix" element={<PricesPage />} />
       </Routes>
 

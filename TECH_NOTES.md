@@ -140,6 +140,13 @@ build the value first.
   tracked item and the cost becomes unit price × quantity, priced from the same
   shared price map as the craft page (edits sync both ways via localStorage).
   (Breeding planner / enclos tracker could come later.)
+- **Avis de recherche.** Dedicated `/avis` page for legendary-hunt notices.
+  Each notice (`AvisDeRecherche` in `lib/avis.ts`) rewards avitons + a chest
+  resource, costs a carte, and can sell paid spots; `computeAvis` gives
+  benefit = resource value + spot income − carte cost, with avitons tracked
+  separately (and an optional aviton→kamas value to fold in). Resource/carte
+  prices come from the shared price map (favourites/OCR/manual), so it's a
+  user-maintained list that prices itself. Persisted in localStorage.
 - **Later / maybe.** JSON export-import to share data; only then consider a
   backend if we ever truly need sync.
 
