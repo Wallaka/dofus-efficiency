@@ -1,63 +1,73 @@
 /**
  * Heuristic analysis of a Medal screenshot's OCR text.
  *
- * Calibrated against real screenshots, which turned out to be *full-screen* game
- * captures (lots of noise: chat, quests, menus), most often showing an item
- * tooltip. So we key off distinctive tooltip markers rather than generic words:
+ * Calibrated against real, full-screen captures (several windows open at once,
+ * plus chat/quest/menu noise). We recognize the screen type from *distinctive*
+ * window markers, in priority order (the focused overlay wins), never from
+ * generic words that also appear in chat:
  *
- *   - "PRIX MOYEN <n>"  → the item's average HDV price (the main signal)
- *   - "Niveau <n> · <Type>" + "Panoplie de <Set>" + "EFFETS" → an item tooltip
- *   - x1 / x10 / x100 rows → the HDV buy window for a resource (kept for later)
+ *   - "Cours du marché" + "articles vendus" / "Prix médian" → price-history graph
+ *   - "Hôtel de vente" (ACHAT/VENTE, ACHETER, category panels)               → HDV
+ *       · "Catégories d'armes"  / weapon type word     → weapon
+ *       · "Catégories de ressources" / resource type   → resource (lots 1/10/100/1000)
+ *   - "Panoplie de X" / "EFFETS" / "Niveau N · Type" + "PRIX MOYEN" → item tooltip
+ *   - character-sheet stats / "Inventaire"                          → those screens
  *
- * Everything is deliberately simple and easy to retune. Because captures are
- * full-screen, robust extraction ultimately wants a crop/region step (see the
- * roadmap) — these text heuristics are the first, no-crop pass.
+ * Prices we pull out: "Prix moyen" (main), "Prix médian" (market graph), and
+ * resource lot prices when we're in the HDV on a resource.
  */
 
-/** What the screenshot appears to show. */
 export type ScreenshotKind =
+  | "market-trend"
+  | "hdv"
   | "item-tooltip"
-  | "hdv-lots"
   | "inventory"
   | "character-sheet"
   | "other"
   | "unknown";
 
-/** Rough item family, as far as we can tell from the text. */
-export type ItemCategory = "resource" | "equipment" | "unknown";
+export type ItemCategory = "resource" | "weapon" | "equipment" | "unknown";
 
 /** One HDV lot row: a lot size and its (cheapest) price in kamas. */
 export interface Lot {
   quantity: number;
   price: number | null;
-  /** price / quantity, so different lot sizes can be compared. */
   unitPrice: number | null;
 }
 
 export interface ScreenshotAnalysis {
   kind: ScreenshotKind;
   category: ItemCategory;
-  /** Best guess at the item's name (the tooltip title line). */
   itemName: string | null;
-  /** Item level, from "Niveau N". */
   level: number | null;
-  /** Item type, e.g. "Chapeau", "Cape", "Amulette". */
   itemType: string | null;
-  /** Set name, from "Panoplie de X". */
   set: string | null;
-  /** Average HDV price, from "PRIX MOYEN". This is the main price signal. */
+  /** "Prix moyen" — the main price signal. */
   averagePrice: number | null;
-  /** HDV lot prices (x1/x10/x100), for resource buy windows. Usually empty. */
+  /** "Prix médian" — shown on the market-trend graph. */
+  medianPrice: number | null;
+  /** Resource lot prices (x1/x10/x100/x1000), when in the HDV on a resource. */
   lots: Lot[];
-  /** Short human note about the guess. */
   note: string;
-  /** The raw OCR text, kept for debugging and manual correction. */
   rawText: string;
 }
 
-const LOT_SIZES = [1, 10, 100] as const;
+const LOT_SIZES = [1, 10, 100, 1000] as const;
 
-// Equipment/resource type words as they appear after "Niveau N ·".
+const WEAPON_TYPES = [
+  "arc",
+  "epee",
+  "dague",
+  "dagues",
+  "lance",
+  "marteau",
+  "baguette",
+  "baton",
+  "hache",
+  "pelle",
+  "faux",
+  "pioche",
+];
 const EQUIPMENT_TYPES = [
   "chapeau",
   "cape",
@@ -72,26 +82,15 @@ const EQUIPMENT_TYPES = [
   "montilier",
   "dofus",
   "trophee",
-  "epee",
-  "dague",
-  "dagues",
-  "marteau",
-  "hache",
-  "pelle",
-  "arc",
-  "baguette",
-  "baton",
-  "faux",
-  "pioche",
 ];
 const RESOURCE_TYPES = [
+  "bois",
   "ressource",
   "ressources",
   "poudre",
   "plante",
   "fleur",
   "minerai",
-  "bois",
   "cereale",
   "cereales",
   "poisson",
@@ -106,8 +105,11 @@ const RESOURCE_TYPES = [
   "huile",
   "fragment",
   "rune",
+  "carapace",
+  "coquille",
+  "ecorce",
+  "galet",
 ];
-// Distinctive of the character sheet, unlikely to appear in chat noise.
 const CHARACTER_SHEET_MARKERS = [
   "prospection",
   "initiative",
@@ -118,7 +120,6 @@ const CHARACTER_SHEET_MARKERS = [
   "esquive pm",
   "pods",
 ];
-// Item-tooltip stat lines (used only as a weak equipment hint).
 const STAT_KEYWORDS = [
   "vitalite",
   "force",
@@ -130,7 +131,6 @@ const STAT_KEYWORDS = [
   "dommages",
 ];
 
-/** Lowercase + strip accents so keyword matching survives OCR/diacritics. */
 function normalize(text: string): string {
   return text
     .toLowerCase()
@@ -138,8 +138,7 @@ function normalize(text: string): string {
     .replace(/[̀-ͯ]/g, "");
 }
 
-/** Turn an OCR number token ("4 538 401", "12.000") into a number. */
-function parsePrice(token: string): number | null {
+function parseNumber(token: string): number | null {
   const digits = token.replace(/[^\d]/g, "");
   if (!digits) return null;
   const n = Number(digits);
@@ -150,13 +149,24 @@ function countMatches(haystack: string, needles: string[]): number {
   return needles.reduce((n, kw) => (haystack.includes(kw) ? n + 1 : n), 0);
 }
 
-/** Extract the "PRIX MOYEN" value, the average HDV price shown in tooltips. */
-export function parseAveragePrice(text: string): number | null {
-  const m = /prix\s*moyen[\s:]*(\d[\d\s., ]*\d|\d)/i.exec(text);
-  return m ? parsePrice(m[1]) : null;
+function firstNumberAfter(text: string, label: RegExp): number | null {
+  const m = label.exec(text);
+  return m ? parseNumber(m[1]) : null;
 }
 
-/** Set name from "Panoplie de X". */
+// A kamas amount: 1–3 digits, then groups of 3 after a single space/dot. This
+// deliberately does NOT bridge a double-space column gap, so "… 104  1 387 925 …"
+// reads as 104, not 1041387925.
+const PRICE = "\\d{1,3}(?:[ .\\u00a0]\\d{3})*";
+
+export function parseAveragePrice(text: string): number | null {
+  return firstNumberAfter(text, new RegExp(`prix\\s*moyen[\\s:]*(${PRICE})`, "i"));
+}
+
+export function parseMedianPrice(text: string): number | null {
+  return firstNumberAfter(text, new RegExp(`prix\\s*median[\\s:]*(${PRICE})`, "i"));
+}
+
 function parseSet(text: string): string | null {
   const m = /panoplie\s+d[eu']\s*([^\n]+)/i.exec(text);
   return m ? m[1].trim().replace(/\s{2,}/g, " ") : null;
@@ -168,26 +178,20 @@ interface TypeLine {
   itemType: string | null;
 }
 
-/**
- * Find the tooltip's "Niveau N · Type" line and read the level and type from it.
- * We anchor on a line that both says "Niveau N" and contains a known item type,
- * so we don't pick up a stray "Niveau 200" from the map header or chat.
- */
+/** Find the "Niveau N · Type" (or "Niv. N · Type") line and read level + type. */
 function findTypeLine(lines: string[]): TypeLine | null {
-  const allTypes = [...EQUIPMENT_TYPES, ...RESOURCE_TYPES];
+  const allTypes = [...WEAPON_TYPES, ...EQUIPMENT_TYPES, ...RESOURCE_TYPES];
   for (let i = 0; i < lines.length; i++) {
     const norm = normalize(lines[i]);
-    if (!/niveau\s*\d/.test(norm)) continue;
-    const level = Number(/niveau\s*(\d{1,3})/.exec(norm)?.[1] ?? NaN);
+    if (!/niv(?:eau)?\.?\s*\d/.test(norm)) continue;
+    const level = Number(/niv(?:eau)?\.?\s*(\d{1,3})/.exec(norm)?.[1] ?? NaN);
     const type = allTypes.find((t) => new RegExp(`\\b${t}\\b`).test(norm));
-    if (type) {
+    if (type)
       return { index: i, level: Number.isFinite(level) ? level : null, itemType: type };
-    }
   }
   return null;
 }
 
-/** The item name: the non-empty line just above the "Niveau N · Type" line. */
 function nameBefore(lines: string[], typeIndex: number): string | null {
   for (let i = typeIndex - 1; i >= 0; i--) {
     const line = lines[i].trim();
@@ -199,22 +203,21 @@ function nameBefore(lines: string[], typeIndex: number): string | null {
 }
 
 /**
- * Parse HDV lot prices (x1 / x10 / x100), one line at a time. An explicit lot
- * marker ("x10" or "Lot de 100") is REQUIRED — full-screen captures are full of
- * bare numbers (stat ranges like "[101 à 150]", flavor text like "10 000
- * exemplaires") that would otherwise be mistaken for lots. Once we have a real
- * HDV resource screenshot we can widen this to the exact layout it shows.
+ * Parse resource lot rows (x1 / x10 / x100 / x1000). The lot size must start the
+ * line (that's how the HDV lays them out: "1  93", "1 000  119 000"), so item
+ * rows elsewhere on screen ("Bois de Frêne … 1 113") aren't mistaken for lots.
+ * Longest quantity is tried first so "1 000" isn't read as "1".
  */
 export function parseLots(text: string): Lot[] {
   const found = new Map<number, number>();
   for (const line of text.split(/\r?\n/)) {
-    const m = /(?:^|[^a-z0-9])(?:x\s*|lots?\s*de\s+)(1|10|100)\b[^\d\n]*(\d[\d.,  ]*\d|\d)/i.exec(
+    const m = /^\s*(?:x\s*|lots?\s*de\s+)?(1\s?000|100|10|1)\b[^\d\n]*?(\d[\d.,  ]*\d|\d)/i.exec(
       line,
     );
     if (!m) continue;
-    const qty = Number(m[1]);
-    const price = parsePrice(m[2]);
-    if (price != null && !found.has(qty)) found.set(qty, price);
+    const qty = parseNumber(m[1]);
+    const price = parseNumber(m[2]);
+    if (qty != null && price != null && !found.has(qty)) found.set(qty, price);
   }
   return [...found.entries()]
     .map(([quantity, price]) => ({
@@ -225,43 +228,60 @@ export function parseLots(text: string): Lot[] {
     .sort((a, b) => a.quantity - b.quantity);
 }
 
-/** Run all heuristics over the OCR text and return a structured analysis. */
 export function analyzeScreenshot(rawText: string): ScreenshotAnalysis {
   const norm = normalize(rawText);
   const lines = rawText.split(/\r?\n/);
 
-  const lots = parseLots(rawText);
   const averagePrice = parseAveragePrice(rawText);
+  const medianPrice = parseMedianPrice(rawText);
   const set = parseSet(rawText);
   const typeLine = findTypeLine(lines);
   const itemType = typeLine?.itemType ?? null;
   const level = typeLine?.level ?? null;
   const itemName = typeLine ? nameBefore(lines, typeLine.index) : null;
-
-  const hasLots = lots.length >= 2;
   const hasEffets = norm.includes("effets");
-  const looksLikeTooltip =
-    averagePrice != null || (typeLine != null && (set != null || hasEffets));
-  const sheetHits = countMatches(norm, CHARACTER_SHEET_MARKERS);
+
+  // --- Screen type, most-specific overlay first ---
+  const isMarketTrend =
+    norm.includes("cours du marche") ||
+    (norm.includes("articles vendus") && norm.includes("prix median"));
+  const isHdv =
+    norm.includes("hotel de vente") || norm.includes("reinitialiser les filtres");
+  const looksTooltip =
+    norm.includes("panoplie") ||
+    (hasEffets && typeLine != null) ||
+    (averagePrice != null && typeLine != null);
   const isInventory =
     norm.includes("inventaire") &&
     /(toutes categories|recettes|equiper un ensemble)/.test(norm);
+  const sheetHits = countMatches(norm, CHARACTER_SHEET_MARKERS);
 
   let kind: ScreenshotKind;
-  if (hasLots) kind = "hdv-lots";
-  else if (looksLikeTooltip) kind = "item-tooltip";
+  if (isMarketTrend) kind = "market-trend";
+  else if (isHdv) kind = "hdv";
+  else if (looksTooltip) kind = "item-tooltip";
   else if (sheetHits >= 3) kind = "character-sheet";
   else if (isInventory) kind = "inventory";
   else if (norm.trim().length === 0) kind = "unknown";
   else kind = "other";
 
+  // --- Item category ---
+  const weaponHdv = /categories\s*d.{0,2}armes/.test(norm);
+  const resourceHdv = /categories\s*de\s*ressour/.test(norm);
+  const typeIsWeapon = itemType != null && WEAPON_TYPES.includes(itemType);
+  const typeIsResource = itemType != null && RESOURCE_TYPES.includes(itemType);
+  const typeIsEquip = itemType != null && EQUIPMENT_TYPES.includes(itemType);
+
   let category: ItemCategory;
-  if (itemType && EQUIPMENT_TYPES.includes(itemType)) category = "equipment";
-  else if (hasLots || (itemType && RESOURCE_TYPES.includes(itemType)))
-    category = "resource";
-  else if (countMatches(norm, STAT_KEYWORDS) >= 2 && hasEffets)
+  if (weaponHdv || typeIsWeapon) category = "weapon";
+  else if (resourceHdv || typeIsResource) category = "resource";
+  else if (typeIsEquip || (hasEffets && countMatches(norm, STAT_KEYWORDS) >= 2))
     category = "equipment";
   else category = "unknown";
+
+  // Resource lots only make sense in the HDV on a resource.
+  const lots =
+    kind === "hdv" && category === "resource" ? parseLots(rawText) : [];
 
   return {
     kind,
@@ -271,8 +291,9 @@ export function analyzeScreenshot(rawText: string): ScreenshotAnalysis {
     itemType: itemType ? capitalize(itemType) : null,
     set,
     averagePrice,
+    medianPrice,
     lots,
-    note: buildNote({ kind, category, averagePrice, lots }),
+    note: buildNote({ kind, category, averagePrice, medianPrice, lots }),
     rawText,
   };
 }
@@ -285,28 +306,42 @@ function buildNote(a: {
   kind: ScreenshotKind;
   category: ItemCategory;
   averagePrice: number | null;
+  medianPrice: number | null;
   lots: Lot[];
 }): string {
   switch (a.kind) {
+    case "market-trend":
+      return a.medianPrice != null || a.averagePrice != null
+        ? "Cours du marché : prix médian / moyen détectés."
+        : "Cours du marché — prix non lus, à vérifier.";
+    case "hdv": {
+      const cat =
+        a.category === "weapon"
+          ? "arme"
+          : a.category === "resource"
+            ? "ressource"
+            : "objet";
+      if (a.category === "resource") {
+        const missing = LOT_SIZES.filter(
+          (q) => !a.lots.some((l) => l.quantity === q && l.price != null),
+        );
+        return missing.length === 0
+          ? "HDV ressource : lots x1, x10, x100, x1000 détectés."
+          : `HDV ressource : lots manquants (${missing.map((q) => "x" + q).join(", ")}).`;
+      }
+      return `HDV ${cat}${a.averagePrice != null ? " : prix moyen détecté." : "."}`;
+    }
     case "item-tooltip":
       return a.averagePrice != null
         ? "Infobulle d'objet : prix moyen détecté."
-        : "Infobulle d'objet, mais prix moyen non lu — à vérifier.";
-    case "hdv-lots": {
-      const missing = LOT_SIZES.filter(
-        (q) => !a.lots.some((l) => l.quantity === q && l.price != null),
-      );
-      return missing.length === 0
-        ? "Fenêtre HDV : prix des lots x1, x10 et x100 détectés."
-        : `Fenêtre HDV : lots manquants (${missing.map((q) => "x" + q).join(", ")}).`;
-    }
+        : "Infobulle d'objet, prix moyen non lu — à vérifier.";
     case "character-sheet":
       return "Fiche de personnage — pas de prix ici.";
     case "inventory":
-      return "Inventaire — ouvrez une infobulle d'objet pour lire un prix.";
+      return "Inventaire — ouvrez une infobulle ou l'HDV pour lire un prix.";
     case "unknown":
       return "Aucun texte lisible dans cette capture.";
     default:
-      return "Type incertain — aucun marqueur de prix reconnu.";
+      return "Type incertain — aucun marqueur reconnu.";
   }
 }

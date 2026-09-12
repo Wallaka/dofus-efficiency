@@ -24,8 +24,9 @@ type State =
   | { phase: "error"; message: string };
 
 const KIND_LABEL: Record<ScreenshotKind, string> = {
+  "market-trend": "Cours du marché",
+  hdv: "Hôtel de vente",
   "item-tooltip": "Infobulle d'objet",
-  "hdv-lots": "Fenêtre HDV",
   inventory: "Inventaire",
   "character-sheet": "Fiche perso",
   other: "Autre écran",
@@ -34,6 +35,7 @@ const KIND_LABEL: Record<ScreenshotKind, string> = {
 
 const CATEGORY_LABEL: Record<ItemCategory, string> = {
   resource: "Ressource",
+  weapon: "Arme",
   equipment: "Équipement",
   unknown: "Type inconnu",
 };
@@ -203,7 +205,13 @@ function AnalysisView({
         </p>
       )}
 
-      {analysis.kind === "hdv-lots" && analysis.lots.length > 0 && (
+      {analysis.medianPrice != null && (
+        <p className="analysis-sub">
+          Prix médian&nbsp;: {formatKamas(analysis.medianPrice)}
+        </p>
+      )}
+
+      {analysis.lots.length > 0 && (
         <table className="lots">
           <thead>
             <tr>
