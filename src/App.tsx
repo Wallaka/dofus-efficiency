@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { Item, PriceMap, Recipe } from "./types";
 import type { CraftDataset } from "./data/dofusApi";
+import type { ScreenshotFile } from "./lib/medalFolder";
 import {
   SAMPLE_ITEMS,
   SAMPLE_PRICES,
@@ -20,6 +21,8 @@ import {
   DataSourcePanel,
   type SourceKind,
 } from "./components/DataSourcePanel";
+import { MedalFolderPicker } from "./components/MedalFolderPicker";
+import { ScreenshotList } from "./components/ScreenshotList";
 
 interface Dataset {
   kind: SourceKind;
@@ -82,6 +85,13 @@ export function App() {
     saveLastSource(key);
   }
 
+  // Screenshots read from the Medal folder — the raw material for OCR later.
+  const [screenshots, setScreenshots] = useState<ScreenshotFile[]>([]);
+  const handleScreenshots = useCallback(
+    (files: ScreenshotFile[]) => setScreenshots(files),
+    [],
+  );
+
   return (
     <div className="app">
       <header className="app-header">
@@ -91,7 +101,7 @@ export function App() {
 
       <main className="layout">
         <CraftTable evaluations={evaluations} itemsById={itemsById} />
-        <div className="side">
+        <div>
           <DataSourcePanel
             active={dataset.kind}
             itemCount={dataset.items.length}
@@ -99,6 +109,7 @@ export function App() {
             onUseSample={useSample}
             onLoaded={useDofusDb}
           />
+          <MedalFolderPicker onScreenshots={handleScreenshots} />
           <PriceEditor
             items={dataset.items}
             prices={prices}
@@ -106,6 +117,8 @@ export function App() {
           />
         </div>
       </main>
+
+      <ScreenshotList files={screenshots} />
 
       <footer className="app-footer">
         <p>
