@@ -13,3 +13,26 @@ export function formatPercent(ratio: number | undefined): string {
   const sign = pct > 0 ? "+" : "";
   return `${sign}${pct} %`;
 }
+
+/** Format a byte count, e.g. 1536 -> "1,5 Ko", 2_500_000 -> "2,4 Mo". */
+export function formatBytes(bytes: number): string {
+  if (!Number.isFinite(bytes) || bytes < 0) return "—";
+  if (bytes < 1024) return `${bytes} o`;
+  const units = ["Ko", "Mo", "Go"];
+  let value = bytes / 1024;
+  let unit = 0;
+  while (value >= 1024 && unit < units.length - 1) {
+    value /= 1024;
+    unit++;
+  }
+  return `${value.toLocaleString("fr-FR", { maximumFractionDigits: 1 })} ${units[unit]}`;
+}
+
+/** Format a timestamp (ms since epoch) as a French date + time, e.g. "12 sept. 2026, 18:14". */
+export function formatDateTime(ms: number | undefined): string {
+  if (ms == null || !Number.isFinite(ms)) return "—";
+  return new Date(ms).toLocaleString("fr-FR", {
+    dateStyle: "medium",
+    timeStyle: "short",
+  });
+}
