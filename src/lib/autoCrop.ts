@@ -12,7 +12,7 @@
  * return null and the caller just uses the whole image.
  */
 import type { CropRect } from "./cropImage";
-import type { ScreenshotKind } from "./screenshotAnalysis";
+import type { ScreenshotKind, ItemCategory } from "./screenshotAnalysis";
 
 /** Minimal shape we need from an OCR word (compatible with OcrWord). */
 export interface WordBox {
@@ -48,6 +48,12 @@ const PADDING: Partial<Record<ScreenshotKind, Padding>> = {
 };
 
 const DEFAULT_PADDING: Padding = { left: 0.04, right: 0.04, top: 0.05, bottom: 0.05 };
+
+// A resource's lot list (x1/x10/x100/x1000) sits directly under the detail
+// header, and the lot *prices* sit to the right of the label words we anchor on.
+// Full-res pass 1 often misses that small text, so extend both down (to keep
+// every lot row) and right (to keep the price column) around the top anchors.
+const RESOURCE_HDV_PAD = { right: 0.1, bottom: 0.4 };
 // Keep only markers whose left edge is within this fraction of the image width
 // from the primary (leftmost) marker — drops matches from other windows.
 const CLUSTER_WIDTH_FRACTION = 0.4;
@@ -71,6 +77,7 @@ export function computeAutoCrop(
   words: WordBox[],
   size: ImageSize,
   kind: ScreenshotKind,
+  category?: ItemCategory,
 ): CropRect | null {
   const anchors = ANCHORS[kind];
   if (!anchors || words.length === 0) return null;
@@ -93,7 +100,10 @@ export function computeAutoCrop(
   const x1 = Math.max(...clustered.map((h) => h.bbox.x1));
   const y1 = Math.max(...clustered.map((h) => h.bbox.y1));
 
-  const pad = PADDING[kind] ?? DEFAULT_PADDING;
+  let pad = PADDING[kind] ?? DEFAULT_PADDING;
+  if (kind === "hdv" && category === "resource") {
+    pad = { ...pad, ...RESOURCE_HDV_PAD };
+  }
   const px = size.width;
   const py = size.height;
   const left = clamp(x0 - pad.left * px, 0, px);

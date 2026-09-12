@@ -115,7 +115,12 @@ export function ScreenshotDetail({ file, imageUrl, onClose, onApplyPrice }: Prop
         onProgress: (p) => onProgress(p * 0.5),
       });
       const a1 = analyzeScreenshot(pass1.text);
-      const rect = computeAutoCrop(pass1.words, await imageSize(full), a1.kind);
+      const rect = computeAutoCrop(
+        pass1.words,
+        await imageSize(full),
+        a1.kind,
+        a1.category,
+      );
       if (!rect) {
         setState({ phase: "done", analysis: a1 }); // couldn't localise → keep pass 1
         return;
