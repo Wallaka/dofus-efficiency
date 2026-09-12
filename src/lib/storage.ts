@@ -1,5 +1,6 @@
 import type { CraftDataset } from "../data/dofusApi";
 import type { RaisingInput } from "./eleveur";
+import type { AvisState } from "./avis";
 import type { Item, PriceMap } from "../types";
 
 /**
@@ -15,6 +16,7 @@ const DATASET_PREFIX = "dofus-efficiency:dataset:v1:";
 const LAST_SOURCE_KEY = "dofus-efficiency:lastSource:v1";
 const FAVOURITES_KEY = "dofus-efficiency:favourites:v1";
 const ELEVEUR_KEY = "dofus-efficiency:eleveur:v1";
+const AVIS_KEY = "dofus-efficiency:avis:v1";
 
 export function loadPrices(): PriceMap | null {
   try {
@@ -126,6 +128,27 @@ export function loadEleveur(): RaisingInput | null {
 export function saveEleveur(input: RaisingInput): void {
   try {
     localStorage.setItem(ELEVEUR_KEY, JSON.stringify(input));
+  } catch {
+    // non-fatal
+  }
+}
+
+/** Avis de recherche list + aviton value, persisted between sessions. */
+export function loadAvis(): AvisState | null {
+  try {
+    const raw = localStorage.getItem(AVIS_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (parsed && Array.isArray(parsed.list)) return parsed as AvisState;
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+export function saveAvis(state: AvisState): void {
+  try {
+    localStorage.setItem(AVIS_KEY, JSON.stringify(state));
   } catch {
     // non-fatal
   }
