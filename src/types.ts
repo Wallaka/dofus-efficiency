@@ -4,6 +4,8 @@ export interface Item {
   name: string;
   /** Profession level of the item, if known. Purely informational for now. */
   level?: number;
+  /** Icon URL (from DofusDB), when known. Used by search/favourites UI. */
+  img?: string;
 }
 
 /** One ingredient line inside a recipe. */

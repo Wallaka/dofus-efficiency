@@ -1,5 +1,5 @@
 import type { CraftDataset } from "../data/dofusApi";
-import type { PriceMap } from "../types";
+import type { Item, PriceMap } from "../types";
 
 /**
  * Tiny persistence layer.
@@ -12,6 +12,7 @@ import type { PriceMap } from "../types";
 const PRICES_KEY = "dofus-efficiency:prices:v1";
 const DATASET_PREFIX = "dofus-efficiency:dataset:v1:";
 const LAST_SOURCE_KEY = "dofus-efficiency:lastSource:v1";
+const FAVOURITES_KEY = "dofus-efficiency:favourites:v1";
 
 export function loadPrices(): PriceMap | null {
   try {
@@ -73,6 +74,35 @@ export function loadLastSource(): string | null {
 export function saveLastSource(value: string): void {
   try {
     localStorage.setItem(LAST_SOURCE_KEY, value);
+  } catch {
+    // non-fatal
+  }
+}
+
+/**
+ * Favourites — the "lite DB": items the user chose to keep an eye on. We store
+ * the full Item (a small cached catalog) so they render without a dataset load.
+ */
+export function loadFavourites(): Item[] {
+  try {
+    const raw = localStorage.getItem(FAVOURITES_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed)) {
+      return parsed.filter(
+        (x): x is Item =>
+          x && typeof x.id === "string" && typeof x.name === "string",
+      );
+    }
+    return [];
+  } catch {
+    return [];
+  }
+}
+
+export function saveFavourites(items: Item[]): void {
+  try {
+    localStorage.setItem(FAVOURITES_KEY, JSON.stringify(items));
   } catch {
     // non-fatal
   }
