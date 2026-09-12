@@ -211,7 +211,11 @@ function nameBefore(lines: string[], typeIndex: number): string | null {
 export function parseLots(text: string): Lot[] {
   const found = new Map<number, number>();
   for (const line of text.split(/\r?\n/)) {
-    const m = /^\s*(?:x\s*|lots?\s*de\s+)?(1\s?000|100|10|1)\b[^\d\n]*?(\d[\d.,  ]*\d|\d)/i.exec(
+    // Allow leading non-letter junk (a lot row starts with a star/coin icon that
+    // OCR renders as a stray glyph or punctuation) before the quantity — but not
+    // leading letters, so item-list rows like "Bois de Frêne … 1 113" are still
+    // rejected. Then an optional x/"Lot de" marker, the quantity, and the price.
+    const m = /^[^\dA-Za-zÀ-ÿ\n]*(?:x\s*|lots?\s*de\s+)?(1\s?000|100|10|1)\b[^\d\n]*?(\d[\d.,  ]*\d|\d)/i.exec(
       line,
     );
     if (!m) continue;
