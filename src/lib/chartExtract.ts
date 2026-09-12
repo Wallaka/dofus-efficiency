@@ -37,21 +37,29 @@ interface Labelled {
   y: number;
 }
 
-/** X-axis date labels (e.g. "05/09"), left→right. */
+/**
+ * X-axis date labels (e.g. "05/09"), de-duplicated and left→right. OCR often
+ * emits the same date more than once (block + line levels, or a faint repeat),
+ * which would double the series — so we collapse repeats of the same day and
+ * average their positions.
+ */
 export function parseDateLabels(
   words: WordBoxLike[],
 ): { date: string; x: number; y: number }[] {
-  const out: { date: string; x: number; y: number }[] = [];
+  const byDate = new Map<string, { xs: number[]; ys: number[] }>();
   for (const w of words) {
     const m = DATE_RE.exec(w.text);
     if (!m) continue;
-    out.push({
-      date: `${m[1]}/${m[2]}`,
-      x: (w.bbox.x0 + w.bbox.x1) / 2,
-      y: (w.bbox.y0 + w.bbox.y1) / 2,
-    });
+    const date = `${m[1]}/${m[2]}`;
+    const entry = byDate.get(date) ?? { xs: [], ys: [] };
+    entry.xs.push((w.bbox.x0 + w.bbox.x1) / 2);
+    entry.ys.push((w.bbox.y0 + w.bbox.y1) / 2);
+    byDate.set(date, entry);
   }
-  return out.sort((a, b) => a.x - b.x);
+  const avg = (a: number[]) => a.reduce((s, v) => s + v, 0) / a.length;
+  return [...byDate.entries()]
+    .map(([date, e]) => ({ date, x: avg(e.xs), y: avg(e.ys) }))
+    .sort((a, b) => a.x - b.x);
 }
 
 function asPlainNumber(text: string): number | null {
