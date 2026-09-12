@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import type { PriceMap } from "./types";
+import type { Item, PriceMap, Recipe } from "./types";
+import type { CraftDataset } from "./data/dofusApi";
 import type { ScreenshotFile } from "./lib/medalFolder";
 import {
   SAMPLE_ITEMS,
@@ -7,22 +8,56 @@ import {
   SAMPLE_RECIPES,
 } from "./data/sampleData";
 import { rankRecipes } from "./lib/craft";
-import { loadPrices, savePrices } from "./lib/storage";
+import {
+  loadDataset,
+  loadLastSource,
+  loadPrices,
+  savePrices,
+  saveLastSource,
+} from "./lib/storage";
 import { PriceEditor } from "./components/PriceEditor";
 import { CraftTable } from "./components/CraftTable";
+import {
+  DataSourcePanel,
+  type SourceKind,
+} from "./components/DataSourcePanel";
 import { MedalFolderPicker } from "./components/MedalFolderPicker";
 import { ScreenshotList } from "./components/ScreenshotList";
 
+interface Dataset {
+  kind: SourceKind;
+  items: Item[];
+  recipes: Recipe[];
+}
+
+const SAMPLE_DATASET: Dataset = {
+  kind: "sample",
+  items: SAMPLE_ITEMS,
+  recipes: SAMPLE_RECIPES,
+};
+
+/** Restore the last-used dataset (a cached DofusDB one) if there is one. */
+function initialDataset(): Dataset {
+  const last = loadLastSource();
+  if (last && last.startsWith("dofusdb:")) {
+    const cached = loadDataset(last);
+    if (cached) {
+      return { kind: "dofusdb", items: cached.items, recipes: cached.recipes };
+    }
+  }
+  return SAMPLE_DATASET;
+}
+
 export function App() {
-  // Static data — bundled sample for Phase 0; DofusDB later (see data/dofusApi.ts).
-  const items = SAMPLE_ITEMS;
-  const recipes = SAMPLE_RECIPES;
+  const [dataset, setDataset] = useState<Dataset>(initialDataset);
+
   const itemsById = useMemo(
-    () => new Map(items.map((i) => [i.id, i])),
-    [items],
+    () => new Map(dataset.items.map((i) => [i.id, i])),
+    [dataset],
   );
 
-  // Dynamic data — the prices, persisted locally between sessions.
+  // Prices persist across sessions and across data sources (item ids don't
+  // collide: sample ids are words, DofusDB ids are numeric).
   const [prices, setPrices] = useState<PriceMap>(
     () => loadPrices() ?? { ...SAMPLE_PRICES },
   );
@@ -32,16 +67,22 @@ export function App() {
   }, [prices]);
 
   const evaluations = useMemo(
-    () => rankRecipes(recipes, items, prices),
-    [recipes, items, prices],
+    () => rankRecipes(dataset.recipes, dataset.items, prices),
+    [dataset, prices],
   );
 
   function setPrice(itemId: string, price: number | undefined) {
     setPrices((prev) => ({ ...prev, [itemId]: price }));
   }
 
-  function resetToSample() {
-    setPrices({ ...SAMPLE_PRICES });
+  function useSample() {
+    setDataset(SAMPLE_DATASET);
+    saveLastSource("sample");
+  }
+
+  function useDofusDb(key: string, data: CraftDataset) {
+    setDataset({ kind: "dofusdb", items: data.items, recipes: data.recipes });
+    saveLastSource(key);
   }
 
   // Screenshots read from the Medal folder — the raw material for OCR later.
@@ -55,19 +96,25 @@ export function App() {
     <div className="app">
       <header className="app-header">
         <h1>Dofus Efficiency</h1>
-        <p className="tagline">
-          Quel craft rapporte le plus, maintenant ? — Phase 0 (données d'exemple)
-        </p>
+        <p className="tagline">Quel craft rapporte le plus, maintenant ?</p>
       </header>
 
       <main className="layout">
         <CraftTable evaluations={evaluations} itemsById={itemsById} />
         <div>
+          <DataSourcePanel
+            active={dataset.kind}
+            itemCount={dataset.items.length}
+            recipeCount={dataset.recipes.length}
+            onUseSample={useSample}
+            onLoaded={useDofusDb}
+          />
           <MedalFolderPicker onScreenshots={handleScreenshots} />
-          <PriceEditor items={items} prices={prices} onChange={setPrice} />
-          <button type="button" className="reset" onClick={resetToSample}>
-            Réinitialiser les prix d'exemple
-          </button>
+          <PriceEditor
+            items={dataset.items}
+            prices={prices}
+            onChange={setPrice}
+          />
         </div>
       </main>
 
@@ -75,8 +122,8 @@ export function App() {
 
       <footer className="app-footer">
         <p>
-          Données d'objets/recettes : exemples intégrés pour l'instant. La vraie
-          liste viendra de l'API DofusDB, et les prix des captures Medal (OCR).
+          Données d'objets/recettes : exemples intégrés ou API DofusDB. Les prix
+          viendront un jour des captures Medal (OCR).
         </p>
       </footer>
     </div>
