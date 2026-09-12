@@ -1,5 +1,6 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Item, PriceMap } from "../types";
+import { Pagination, PAGE_SIZE } from "./Pagination";
 
 interface Props {
   items: Item[];
@@ -10,11 +11,12 @@ interface Props {
 /**
  * The editable list of HDV unit prices — the "dynamic data" a user keeps
  * current. In Phase 1 these same values get auto-filled from OCR'd screenshots
- * instead of typed here. A filter keeps it usable when a DofusDB dataset brings
- * in many items.
+ * instead of typed here. A filter + pagination keep it usable when a DofusDB
+ * dataset brings in many items.
  */
 export function PriceEditor({ items, prices, onChange }: Props) {
   const [filter, setFilter] = useState("");
+  const [page, setPage] = useState(1);
 
   const sorted = useMemo(
     () => [...items].sort((a, b) => a.name.localeCompare(b.name, "fr")),
@@ -27,6 +29,20 @@ export function PriceEditor({ items, prices, onChange }: Props) {
     return sorted.filter((i) => i.name.toLowerCase().includes(q));
   }, [sorted, filter]);
 
+  // Back to page 1 whenever the filter changes.
+  useEffect(() => {
+    setPage(1);
+  }, [filter]);
+
+  const pageCount = Math.max(1, Math.ceil(visible.length / PAGE_SIZE));
+
+  // Keep the current page in range when the list shrinks (filter / data change).
+  useEffect(() => {
+    setPage((p) => Math.min(p, pageCount));
+  }, [pageCount]);
+
+  const pageItems = visible.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
   return (
     <section className="panel">
       <h2>Prix HDV (kamas / unité)</h2>
@@ -35,7 +51,7 @@ export function PriceEditor({ items, prices, onChange }: Props) {
         automatiquement depuis vos captures Medal.
       </p>
 
-      {items.length > 12 && (
+      {items.length > PAGE_SIZE && (
         <input
           type="search"
           className="price-filter"
@@ -46,7 +62,7 @@ export function PriceEditor({ items, prices, onChange }: Props) {
       )}
 
       <ul className="price-list">
-        {visible.map((item) => (
+        {pageItems.map((item) => (
           <li key={item.id} className="price-row">
             <label htmlFor={`price-${item.id}`}>{item.name}</label>
             <input
@@ -67,6 +83,8 @@ export function PriceEditor({ items, prices, onChange }: Props) {
           <li className="hint">Aucun objet ne correspond à « {filter} ».</li>
         )}
       </ul>
+
+      <Pagination page={page} pageCount={pageCount} onPage={setPage} />
     </section>
   );
 }

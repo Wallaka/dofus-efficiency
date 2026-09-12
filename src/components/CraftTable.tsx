@@ -1,5 +1,7 @@
+import { useEffect, useState } from "react";
 import type { CraftEvaluation, Item } from "../types";
 import { formatKamas, formatPercent } from "../lib/format";
+import { Pagination, PAGE_SIZE } from "./Pagination";
 
 interface Props {
   evaluations: CraftEvaluation[];
@@ -13,14 +15,27 @@ function marginClass(margin: number | undefined): string {
   return "";
 }
 
-/** Ranked table of recipes by profit per craft. */
+/** Ranked table of recipes by profit per craft, paginated for large datasets. */
 export function CraftTable({ evaluations, itemsById }: Props) {
+  const [page, setPage] = useState(1);
+
+  const pageCount = Math.max(1, Math.ceil(evaluations.length / PAGE_SIZE));
+
+  // Keep the page in range when the dataset changes (e.g. switching source).
+  useEffect(() => {
+    setPage((p) => Math.min(p, pageCount));
+  }, [pageCount]);
+
+  const start = (page - 1) * PAGE_SIZE;
+  const pageRows = evaluations.slice(start, start + PAGE_SIZE);
+
   return (
     <section className="panel">
       <h2>Rentabilité par craft</h2>
       <p className="hint">
-        Trié par marge décroissante. La marge n'est calculée que si tous les
-        prix nécessaires sont connus.
+        Trié par marge décroissante ({evaluations.length} craft
+        {evaluations.length > 1 ? "s" : ""}). La marge n'est calculée que si tous
+        les prix nécessaires sont connus.
       </p>
       <div className="table-scroll">
         <table>
@@ -35,7 +50,7 @@ export function CraftTable({ evaluations, itemsById }: Props) {
             </tr>
           </thead>
           <tbody>
-            {evaluations.map((ev) => (
+            {pageRows.map((ev) => (
               <tr key={ev.recipe.id}>
                 <td>
                   <span className="item-name">{ev.resultItem.name}</span>
@@ -71,6 +86,8 @@ export function CraftTable({ evaluations, itemsById }: Props) {
           </tbody>
         </table>
       </div>
+
+      <Pagination page={page} pageCount={pageCount} onPage={setPage} />
     </section>
   );
 }
