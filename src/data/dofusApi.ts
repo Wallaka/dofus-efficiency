@@ -159,32 +159,69 @@ function normalizeAvis(quest: RawQuest): AvisReward | null {
 
 interface RawMonster {
   id: number;
-  name?: Translated;
   img?: string;
-  isBounty?: boolean;
+}
+
+interface RawFollower {
+  name?: Translated;
+  dropMonsterIds?: number[];
 }
 
 /** DofusDB type id for "Coffre" (chest) items. */
 const CHEST_TYPE_ID = 172;
 const CHEST_NAME_PREFIX = "coffre de ";
+/** DofusDB type id for "Personnage suiveur" (follower) items — the criminals. */
+const FOLLOWER_TYPE_ID = 32;
 
-/** Criminal name key → bounty monster image, for the avis picture. */
-async function fetchBountyMonsterImages(
+/**
+ * Criminal name key → monster image, for the avis picture.
+ *
+ * The `isBounty` filter on /monsters doesn't work, so we go via the follower
+ * items (type 32): each names the criminal and points to its monster through
+ * `dropMonsterIds`. We then fetch just those monsters' images by id.
+ */
+async function fetchAvisMonsterImages(
   signal?: AbortSignal,
 ): Promise<Map<string, string>> {
   const byKey = new Map<string, string>();
   try {
-    // maxPages bounds the fetch hard in case the isBounty filter is ignored.
-    const raw = await fetchAllPages<RawMonster>(
-      "/monsters",
-      "isBounty=true&lang=fr",
+    const followers = await fetchAllPages<RawFollower>(
+      "/items",
+      `typeId=${FOLLOWER_TYPE_ID}&lang=fr`,
       signal,
-      6,
+      20,
     );
-    for (const m of raw) {
-      if (!m.img || !m.name) continue;
-      const key = monsterCriminalKey(pickName(m.name, ""));
-      if (key && !byKey.has(key)) byKey.set(key, m.img);
+
+    const keyToMonster = new Map<string, number>();
+    const monsterIds = new Set<number>();
+    for (const f of followers) {
+      const name = pickName(f.name, "");
+      const monsterId = f.dropMonsterIds?.[0];
+      if (!name || monsterId == null) continue;
+      const key = monsterCriminalKey(name);
+      if (key && !keyToMonster.has(key)) {
+        keyToMonster.set(key, monsterId);
+        monsterIds.add(monsterId);
+      }
+    }
+
+    const imgByMonster = new Map<number, string>();
+    const ids = [...monsterIds];
+    for (let i = 0; i < ids.length; i += ID_BATCH_SIZE) {
+      const batch = ids.slice(i, i + ID_BATCH_SIZE);
+      const query = batch.map((id) => `id[$in][]=${id}`).join("&");
+      const monsters = await fetchAllPages<RawMonster>(
+        "/monsters",
+        query,
+        signal,
+        3,
+      );
+      for (const m of monsters) if (m.img) imgByMonster.set(m.id, m.img);
+    }
+
+    for (const [key, monsterId] of keyToMonster) {
+      const img = imgByMonster.get(monsterId);
+      if (img) byKey.set(key, img);
     }
   } catch {
     // Non-fatal: avis just fall back to the aviton icon.
@@ -226,7 +263,7 @@ export async function fetchAvisDeRecherche(
       `categoryId=${AVIS_CATEGORY_ID}&lang=fr`,
       signal,
     ),
-    fetchBountyMonsterImages(signal),
+    fetchAvisMonsterImages(signal),
     fetchAvisChests(signal),
   ]);
 
