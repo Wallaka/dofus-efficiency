@@ -37,6 +37,7 @@ interface RawItem {
   id: number;
   name?: Translated;
   level?: number;
+  img?: string;
 }
 
 interface RawRecipe {
@@ -66,6 +67,38 @@ export interface CraftDataset {
 /** Prefer the French name, fall back to English, then to a stable placeholder. */
 function pickName(name: Translated | undefined, fallback: string): string {
   return name?.fr?.trim() || name?.en?.trim() || fallback;
+}
+
+/** Normalize a raw DofusDB item into our Item shape. */
+function toItem(raw: RawItem): Item {
+  return {
+    id: String(raw.id),
+    name: pickName(raw.name, `#${raw.id}`),
+    level: raw.level,
+    img: raw.img,
+  };
+}
+
+/**
+ * Search items by (French) name for the autocomplete. DofusDB is Feathers-based
+ * and exposes a fuzzy `$search` operator. If the field/operator ever changes,
+ * only these two constants need updating.
+ */
+const SEARCH_FIELD = "name.fr";
+const SEARCH_OP = "$search";
+
+export async function searchItems(
+  query: string,
+  signal?: AbortSignal,
+  limit = 15,
+): Promise<Item[]> {
+  const q = query.trim();
+  if (q.length < 2) return [];
+  const url =
+    `${DOFUSDB_BASE_URL}/items?${SEARCH_FIELD}[${SEARCH_OP}]=` +
+    `${encodeURIComponent(q)}&$limit=${limit}&lang=fr`;
+  const res = await getJson<FeathersPage<RawItem>>(url, signal);
+  return (res.data ?? []).map(toItem);
 }
 
 async function getJson<T>(url: string, signal?: AbortSignal): Promise<T> {
@@ -120,11 +153,7 @@ async function fetchItemsByIds(
     const query = batch.map((id) => `id[$in][]=${id}`).join("&");
     const raw = await fetchAllPages<RawItem>("/items", query, signal, 3);
     for (const it of raw) {
-      byId.set(it.id, {
-        id: String(it.id),
-        name: pickName(it.name, `#${it.id}`),
-        level: it.level,
-      });
+      byId.set(it.id, toItem(it));
     }
   }
 

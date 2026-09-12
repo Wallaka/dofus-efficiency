@@ -556,6 +556,138 @@ table.lots td.num {
   border-color: var(--accent);
 }
 
+/* Item autocomplete */
+.autocomplete {
+  position: relative;
+}
+
+.autocomplete-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+  color: var(--text);
+}
+
+.autocomplete-panel {
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  right: 0;
+  margin-top: 4px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.autocomplete-msg {
+  margin: 0;
+  padding: 10px 12px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.autocomplete-list {
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+}
+
+.autocomplete-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 8px;
+  border: none;
+  border-radius: 6px;
+  background: none;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+}
+
+.autocomplete-option:hover,
+.autocomplete-option:focus-visible {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+.autocomplete-icon,
+.fav-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+.autocomplete-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.autocomplete-level,
+.fav-level {
+  color: var(--muted);
+  font-size: 0.78rem;
+  flex: 0 0 auto;
+}
+
+.autocomplete-check {
+  color: var(--positive);
+  flex: 0 0 auto;
+}
+
+/* Favourites list */
+.fav-empty {
+  margin-top: 12px;
+}
+
+.fav-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.fav-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fav-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+
+.fav-remove {
+  border: none;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 6px;
+  flex: 0 0 auto;
+}
+
+.fav-remove:hover {
+  color: var(--negative);
+}
+
 /* Data source panel */
 .side {
   display: flex;

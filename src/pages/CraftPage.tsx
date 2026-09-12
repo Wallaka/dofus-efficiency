@@ -15,12 +15,14 @@ import {
   savePrices,
   saveLastSource,
 } from "../lib/storage";
+import { useFavourites } from "../lib/useFavourites";
 import { PriceEditor } from "../components/PriceEditor";
 import { CraftTable } from "../components/CraftTable";
 import {
   DataSourcePanel,
   type SourceKind,
 } from "../components/DataSourcePanel";
+import { FavouritesPanel } from "../components/FavouritesPanel";
 import { MedalFolderPicker } from "../components/MedalFolderPicker";
 import { ScreenshotList } from "../components/ScreenshotList";
 
@@ -93,6 +95,18 @@ export function CraftPage() {
     [],
   );
 
+  // Favourites (the "lite DB") also flow into the price editor so their prices
+  // are trackable even when they aren't part of the current dataset.
+  const { favourites, isFavourite, add, remove } = useFavourites();
+
+  const priceItems = useMemo(() => {
+    const byId = new Map(dataset.items.map((i) => [i.id, i]));
+    for (const fav of favourites) {
+      if (!byId.has(fav.id)) byId.set(fav.id, fav);
+    }
+    return [...byId.values()];
+  }, [dataset.items, favourites]);
+
   return (
     <>
       <main className="layout">
@@ -105,12 +119,14 @@ export function CraftPage() {
             onUseSample={useSample}
             onLoaded={useDofusDb}
           />
-          <MedalFolderPicker onScreenshots={handleScreenshots} />
-          <PriceEditor
-            items={dataset.items}
-            prices={prices}
-            onChange={setPrice}
+          <FavouritesPanel
+            favourites={favourites}
+            onAdd={add}
+            onRemove={remove}
+            isFavourite={isFavourite}
           />
+          <MedalFolderPicker onScreenshots={handleScreenshots} />
+          <PriceEditor items={priceItems} prices={prices} onChange={setPrice} />
         </div>
       </main>
 

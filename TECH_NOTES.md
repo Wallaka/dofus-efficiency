@@ -101,6 +101,22 @@ before we add any backend.
   as static files.
 - Styling / component choices: TBD, keep it light.
 
+### 6. Routing — react-router `HashRouter`
+
+Multi-page (craft page, éleveur page). We use **HashRouter** (URLs like
+`/#/eleveur`) rather than BrowserRouter because GitHub Pages has no SPA
+fallback — a real path like `/eleveur` would 404 on refresh. Hash routing needs
+zero server config and survives refreshes/deep links.
+
+### 7. Favourites — the "lite DB"
+
+Items the user pins to track. Stored in localStorage (`useFavourites` hook +
+`storage.ts`) as the **full Item** (a small cached catalog), so favourites
+render and their prices are trackable without loading a full dataset. Search is
+`searchItems()` in `dofusApi.ts`, hitting DofusDB's Feathers `$search` on
+`name.fr` (field/operator isolated to two constants for easy tweaking), surfaced
+through a debounced `ItemAutocomplete`.
+
 ## Roadmap (phased)
 
 The calculations are the value; OCR is just a nicer way to input prices. So we
@@ -113,6 +129,10 @@ build the value first.
   Tesseract.js to auto-fill prices instead of typing them.
 - **Phase 2 — more money-making math.** Farming/gathering ideas, kamas-per-hour,
   richer comparison and ranking.
+- **Navigation + favourites.** Routing (HashRouter), item search/autocomplete,
+  and a favourites "lite DB" for tracking specific items.
+- **Éleveur (breeder) calculator.** Dedicated `/eleveur` page. Scope TBD
+  (breeding/reproduction planner vs. raising profitability vs. enclos tracker).
 - **Later / maybe.** JSON export-import to share data; only then consider a
   backend if we ever truly need sync.
 
