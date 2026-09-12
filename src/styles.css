@@ -888,6 +888,82 @@ table.lots td.num {
   color: var(--negative);
 }
 
+/* Item-linked cost rows */
+.cost-row.item {
+  gap: 6px;
+}
+
+.cost-item-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.9rem;
+}
+
+.cost-qty,
+.cost-unit {
+  width: 72px;
+  flex: 0 0 auto;
+  padding: 7px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+  color: var(--text);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.cost-x {
+  color: var(--muted);
+  flex: 0 0 auto;
+}
+
+.cost-line-total {
+  width: 90px;
+  flex: 0 0 auto;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+}
+
+.cost-line-total.missing {
+  color: var(--negative);
+}
+
+.cost-items {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+
+.fav-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.fav-chip {
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.82rem;
+}
+
+.fav-chip:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.fav-chip:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
 .cost-actions {
   display: flex;
   gap: 8px;

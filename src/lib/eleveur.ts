@@ -8,12 +8,26 @@
  * profit per day (so it's comparable to crafting/farming).
  */
 
-/** One cost line in the raising budget (e.g. "Achat dragodinde", "Nourriture"). */
+import type { Item, PriceMap } from "../types";
+
+/**
+ * One cost line in the raising budget.
+ *
+ * Two flavours:
+ *  - manual: just a `label` + `amount` in kamas.
+ *  - item-linked: references a tracked item (`itemId`); its cost is the item's
+ *    unit price (from the shared price map) × `quantity`, so it stays in sync
+ *    with the prices tracked on the craft page.
+ */
 export interface CostLine {
   id: string;
   label: string;
-  /** Kamas. undefined = not filled in yet. */
+  /** Manual kamas amount. Used only when `itemId` is not set. */
   amount?: number;
+  /** When set, this line is item-linked and its cost is priced × quantity. */
+  itemId?: string;
+  /** Quantity for an item-linked line. */
+  quantity?: number;
 }
 
 export interface RaisingInput {
@@ -35,8 +49,31 @@ export interface RaisingResult {
   profitPerDay?: number;
 }
 
-export function computeRaising(input: RaisingInput): RaisingResult {
-  const totalCost = input.costs.reduce((sum, c) => sum + (c.amount ?? 0), 0);
+/**
+ * The kamas cost of a single line. Item-linked lines are priced from the shared
+ * price map (unit price × quantity); an unknown price contributes 0.
+ */
+export function lineCost(line: CostLine, prices: PriceMap): number {
+  if (line.itemId != null) {
+    const unit = prices[line.itemId];
+    return unit == null ? 0 : unit * (line.quantity ?? 0);
+  }
+  return line.amount ?? 0;
+}
+
+/** True when the line is priced from an item but that item has no known price. */
+export function isMissingPrice(line: CostLine, prices: PriceMap): boolean {
+  return line.itemId != null && prices[line.itemId] == null;
+}
+
+export function computeRaising(
+  input: RaisingInput,
+  prices: PriceMap,
+): RaisingResult {
+  const totalCost = input.costs.reduce(
+    (sum, c) => sum + lineCost(c, prices),
+    0,
+  );
 
   let profit: number | undefined;
   let marginRatio: number | undefined;
@@ -51,13 +88,20 @@ export function computeRaising(input: RaisingInput): RaisingResult {
   return { totalCost, profit, marginRatio, profitPerDay };
 }
 
-/** A fresh cost line with a unique id. */
+function makeId(): string {
+  return typeof crypto !== "undefined" && "randomUUID" in crypto
+    ? crypto.randomUUID()
+    : `c-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+}
+
+/** A fresh manual cost line with a unique id. */
 export function newCostLine(label = ""): CostLine {
-  const id =
-    typeof crypto !== "undefined" && "randomUUID" in crypto
-      ? crypto.randomUUID()
-      : `c-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
-  return { id, label };
+  return { id: makeId(), label };
+}
+
+/** A cost line linked to a tracked item, priced × quantity. */
+export function newItemCostLine(item: Item, quantity = 1): CostLine {
+  return { id: makeId(), label: item.name, itemId: item.id, quantity };
 }
 
 /** Default budget lines to guide a first-time user. */
