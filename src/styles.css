@@ -321,6 +321,42 @@ body {
   display: block;
 }
 
+/* Crop selector */
+.crop-area {
+  position: relative;
+  display: block;
+  cursor: crosshair;
+  touch-action: none; /* let pointer drags draw instead of scrolling */
+  user-select: none;
+  line-height: 0;
+  overflow: hidden; /* clip the crop-box's dim-outside shadow to the image */
+  border-radius: 8px;
+}
+
+.crop-area img {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  display: block;
+  -webkit-user-drag: none;
+}
+
+.crop-box {
+  position: absolute;
+  border: 2px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  pointer-events: none;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.35);
+}
+
+.crop-hint {
+  margin: 8px 0 0;
+}
+
+.crop-clear {
+  margin-top: 8px;
+}
+
 .modal-image .screenshot-sub {
   margin-top: 6px;
   display: block;

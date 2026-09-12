@@ -7,6 +7,8 @@ import {
   type ScreenshotKind,
   type ItemCategory,
 } from "../lib/screenshotAnalysis";
+import { cropImageToBlob, type CropRect } from "../lib/cropImage";
+import { CropSelector } from "./CropSelector";
 import { formatKamas, formatDateTime, formatBytes } from "../lib/format";
 
 interface Props {
@@ -43,6 +45,8 @@ const CATEGORY_LABEL: Record<ItemCategory, string> = {
  */
 export function ScreenshotDetail({ file, imageUrl, onClose }: Props) {
   const [state, setState] = useState<State>({ phase: "idle" });
+  // Region to OCR, in natural pixels; null = whole image.
+  const [crop, setCrop] = useState<CropRect | null>(null);
 
   // Close on Escape.
   useEffect(() => {
@@ -56,8 +60,17 @@ export function ScreenshotDetail({ file, imageUrl, onClose }: Props) {
   async function analyze() {
     setState({ phase: "running", progress: 0 });
     try {
-      const blob = await file.handle.getFile();
-      const ocr = await recognizeImage(blob, {
+      const full = await file.handle.getFile();
+      // OCR just the selected region when there is one — far less noise.
+      let target: Blob = full;
+      if (crop) {
+        try {
+          target = await cropImageToBlob(full, crop);
+        } catch {
+          target = full; // bad/tiny selection → fall back to full image
+        }
+      }
+      const ocr = await recognizeImage(target, {
         onProgress: (p) => setState({ phase: "running", progress: p }),
       });
       setState({ phase: "done", analysis: analyzeScreenshot(ocr.text) });
@@ -68,6 +81,8 @@ export function ScreenshotDetail({ file, imageUrl, onClose }: Props) {
       });
     }
   }
+
+  const analyzeLabel = crop ? "Analyser la sélection" : "Analyser (OCR)";
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -87,7 +102,11 @@ export function ScreenshotDetail({ file, imageUrl, onClose }: Props) {
         <div className="modal-body">
           <div className="modal-image">
             {imageUrl ? (
-              <img src={imageUrl} alt={file.name} />
+              <CropSelector
+                src={imageUrl}
+                alt={file.name}
+                onSelectionChange={setCrop}
+              />
             ) : (
               <span className="thumb-placeholder">🖼️</span>
             )}
@@ -104,7 +123,7 @@ export function ScreenshotDetail({ file, imageUrl, onClose }: Props) {
                   prix. Le premier passage télécharge le moteur OCR (~quelques Mo).
                 </p>
                 <button type="button" className="folder-pick" onClick={analyze}>
-                  Analyser (OCR)
+                  {analyzeLabel}
                 </button>
               </>
             )}
@@ -131,7 +150,11 @@ export function ScreenshotDetail({ file, imageUrl, onClose }: Props) {
             )}
 
             {state.phase === "done" && (
-              <AnalysisView analysis={state.analysis} onReanalyze={analyze} />
+              <AnalysisView
+                analysis={state.analysis}
+                onReanalyze={analyze}
+                reanalyzeLabel={analyzeLabel}
+              />
             )}
           </div>
         </div>
@@ -143,9 +166,11 @@ export function ScreenshotDetail({ file, imageUrl, onClose }: Props) {
 function AnalysisView({
   analysis,
   onReanalyze,
+  reanalyzeLabel,
 }: {
   analysis: ScreenshotAnalysis;
   onReanalyze: () => void;
+  reanalyzeLabel: string;
 }) {
   const [showRaw, setShowRaw] = useState(false);
   return (
@@ -203,7 +228,7 @@ function AnalysisView({
 
       <div className="folder-actions">
         <button type="button" className="folder-secondary" onClick={onReanalyze}>
-          Relancer
+          {reanalyzeLabel}
         </button>
         <button
           type="button"
