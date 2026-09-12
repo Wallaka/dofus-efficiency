@@ -131,8 +131,12 @@ build the value first.
   richer comparison and ranking.
 - **Navigation + favourites.** Routing (HashRouter), item search/autocomplete,
   and a favourites "lite DB" for tracking specific items.
-- **Éleveur (breeder) calculator.** Dedicated `/eleveur` page. Scope TBD
-  (breeding/reproduction planner vs. raising profitability vs. enclos tracker).
+- **Éleveur (breeder) calculator.** Dedicated `/eleveur` page. Scope: **raising
+  profitability** — a generic cost/revenue model (`computeRaising` in
+  `lib/eleveur.ts`) rather than hard-coded breeding mechanics. The user lists
+  raising costs (acquisition, food, enclos) + a sale price + days; it outputs
+  net profit, margin, and profit/day so it's comparable to crafting. Inputs
+  persist in localStorage. (Breeding planner / enclos tracker could come later.)
 - **Later / maybe.** JSON export-import to share data; only then consider a
   backend if we ever truly need sync.
 
