@@ -46,6 +46,8 @@ export interface ScreenshotAnalysis {
   averagePrice: number | null;
   /** "Prix médian" — shown on the market-trend graph. */
   medianPrice: number | null;
+  /** "N articles vendus" over the graph's period, when shown. */
+  articlesSold: number | null;
   /** Resource lot prices (x1/x10/x100/x1000), when in the HDV on a resource. */
   lots: Lot[];
   note: string;
@@ -167,6 +169,14 @@ export function parseMedianPrice(text: string): number | null {
   return firstNumberAfter(text, new RegExp(`prix\\s*median[\\s:]*(${PRICE})`, "i"));
 }
 
+/** "1 387 925 articles vendus" → total sold over the graph's period. */
+export function parseArticlesSold(text: string): number | null {
+  return firstNumberAfter(
+    text,
+    new RegExp(`(${PRICE})\\s*articles?\\s*vendus?`, "i"),
+  );
+}
+
 function parseSet(text: string): string | null {
   const m = /panoplie\s+d[eu']\s*([^\n]+)/i.exec(text);
   return m ? m[1].trim().replace(/\s{2,}/g, " ") : null;
@@ -240,6 +250,7 @@ export function analyzeScreenshot(rawText: string): ScreenshotAnalysis {
 
   const averagePrice = parseAveragePrice(rawText);
   const medianPrice = parseMedianPrice(rawText);
+  const articlesSold = parseArticlesSold(rawText);
   const set = parseSet(rawText);
   const typeLine = findTypeLine(lines);
   const itemType = typeLine?.itemType ?? null;
@@ -298,6 +309,7 @@ export function analyzeScreenshot(rawText: string): ScreenshotAnalysis {
     set,
     averagePrice,
     medianPrice,
+    articlesSold,
     lots,
     note: buildNote({ kind, category, averagePrice, medianPrice, lots }),
     rawText,
@@ -335,6 +347,7 @@ export function mergeAnalyses(
     set: pick(cropped.set, full.set),
     averagePrice: pick(cropped.averagePrice, full.averagePrice),
     medianPrice: pick(cropped.medianPrice, full.medianPrice),
+    articlesSold: pick(cropped.articlesSold, full.articlesSold),
     lots,
     rawText: cropped.rawText,
   };

@@ -297,6 +297,12 @@ function AnalysisView({
         </p>
       )}
 
+      {analysis.articlesSold != null && (
+        <p className="analysis-sub">
+          Articles vendus&nbsp;: {analysis.articlesSold.toLocaleString("fr-FR")}
+        </p>
+      )}
+
       {analysis.lots.length > 0 && (
         <table className="lots">
           <thead>
