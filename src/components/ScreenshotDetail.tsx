@@ -10,7 +10,10 @@ import {
 } from "../lib/screenshotAnalysis";
 import { cropImageToBlob, type CropRect } from "../lib/cropImage";
 import { computeAutoCrop } from "../lib/autoCrop";
+import { priceToRecord } from "../lib/priceStore";
+import type { Item } from "../types";
 import { CropSelector } from "./CropSelector";
+import { PriceApplyPanel } from "./PriceApplyPanel";
 import { formatKamas, formatDateTime, formatBytes } from "../lib/format";
 
 /** Natural pixel size of an image blob. */
@@ -35,6 +38,8 @@ interface Props {
   file: ScreenshotInfo;
   imageUrl?: string;
   onClose: () => void;
+  /** Persist an OCR'd price for a chosen item (the feedback loop). */
+  onApplyPrice?: (item: Item, price: number, detail: string) => void;
 }
 
 type State =
@@ -65,7 +70,7 @@ const CATEGORY_LABEL: Record<ItemCategory, string> = {
  * displays what we could guess — screen type, item category, and (for resources)
  * the x1 / x10 / x100 lot prices.
  */
-export function ScreenshotDetail({ file, imageUrl, onClose }: Props) {
+export function ScreenshotDetail({ file, imageUrl, onClose, onApplyPrice }: Props) {
   const [state, setState] = useState<State>({ phase: "idle" });
   // Manual region to OCR, in natural pixels; null = none drawn.
   const [crop, setCrop] = useState<CropRect | null>(null);
@@ -214,6 +219,7 @@ export function ScreenshotDetail({ file, imageUrl, onClose }: Props) {
                 analysis={state.analysis}
                 onReanalyze={analyze}
                 reanalyzeLabel={analyzeLabel}
+                onApplyPrice={onApplyPrice}
               />
             )}
           </div>
@@ -227,12 +233,15 @@ function AnalysisView({
   analysis,
   onReanalyze,
   reanalyzeLabel,
+  onApplyPrice,
 }: {
   analysis: ScreenshotAnalysis;
   onReanalyze: () => void;
   reanalyzeLabel: string;
+  onApplyPrice?: (item: Item, price: number, detail: string) => void;
 }) {
   const [showRaw, setShowRaw] = useState(false);
+  const recordable = priceToRecord(analysis);
   return (
     <div className="analysis">
       <div className="analysis-tags">
@@ -291,6 +300,15 @@ function AnalysisView({
       )}
 
       <p className="analysis-note">{analysis.note}</p>
+
+      {onApplyPrice && recordable && (
+        <PriceApplyPanel
+          itemName={analysis.itemName}
+          price={recordable.price}
+          detail={recordable.detail}
+          onApply={onApplyPrice}
+        />
+      )}
 
       <div className="folder-actions">
         <button type="button" className="folder-secondary" onClick={onReanalyze}>

@@ -3,9 +3,12 @@ import type { ScreenshotFile } from "../lib/medalFolder";
 import { describeScreenshot, type ScreenshotInfo } from "../lib/screenshotMeta";
 import { formatBytes, formatDateTime } from "../lib/format";
 import { ScreenshotDetail } from "./ScreenshotDetail";
+import type { Item } from "../types";
 
 interface Props {
   files: ScreenshotFile[];
+  /** Persist an OCR'd price for a chosen item (the feedback loop). */
+  onApplyPrice?: (item: Item, price: number, detail: string) => void;
 }
 
 /**
@@ -13,7 +16,7 @@ interface Props {
  * folder, each with its capture time (parsed from the Medal filename when
  * possible) and size. Phase 1 will hang OCR'd prices off these same entries.
  */
-export function ScreenshotList({ files }: Props) {
+export function ScreenshotList({ files, onApplyPrice }: Props) {
   const items = useMemo(
     () =>
       files
@@ -106,6 +109,7 @@ export function ScreenshotList({ files }: Props) {
           file={selected}
           imageUrl={urls[selected.name]}
           onClose={() => setSelected(null)}
+          onApplyPrice={onApplyPrice}
         />
       )}
     </section>

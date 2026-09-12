@@ -15,6 +15,7 @@ import {
   savePrices,
   saveLastSource,
 } from "../lib/storage";
+import { recordPriceEntry, deletePriceEntry } from "../lib/priceStore";
 import { useFavourites } from "../lib/useFavourites";
 import { PriceEditor } from "../components/PriceEditor";
 import { CraftTable } from "../components/CraftTable";
@@ -74,9 +75,48 @@ export function CraftPage() {
     [dataset, prices],
   );
 
-  function setPrice(itemId: string, price: number | undefined) {
+  // Low-level: update just the number the calc reads.
+  const setPriceNumber = useCallback((itemId: string, price: number | undefined) => {
     setPrices((prev) => ({ ...prev, [itemId]: price }));
+  }, []);
+
+  // Manual edit from the price editor: update the number and stamp a "manuel"
+  // entry (or forget it when cleared) so the Prix page shows its date/source.
+  function setPrice(itemId: string, price: number | undefined) {
+    setPriceNumber(itemId, price);
+    if (price == null) {
+      deletePriceEntry(itemId);
+      return;
+    }
+    const item = priceItemsById.get(itemId);
+    recordPriceEntry({
+      itemId,
+      name: item?.name ?? itemId,
+      level: item?.level,
+      img: item?.img,
+      price,
+      updatedAt: Date.now(),
+      source: "manual",
+    });
   }
+
+  // OCR feedback loop: store a screenshot-read price for the chosen item.
+  const applyOcrPrice = useCallback(
+    (item: Item, price: number, detail: string) => {
+      setPriceNumber(item.id, price);
+      recordPriceEntry({
+        itemId: item.id,
+        name: item.name,
+        level: item.level,
+        img: item.img,
+        price,
+        updatedAt: Date.now(),
+        source: "ocr",
+        detail,
+      });
+    },
+    [setPriceNumber],
+  );
 
   function useSample() {
     setDataset(SAMPLE_DATASET);
@@ -107,6 +147,12 @@ export function CraftPage() {
     return [...byId.values()];
   }, [dataset.items, favourites]);
 
+  // Lookup used when stamping a manual price entry with the item's name/icon.
+  const priceItemsById = useMemo(
+    () => new Map(priceItems.map((i) => [i.id, i])),
+    [priceItems],
+  );
+
   return (
     <>
       <main className="layout">
@@ -130,7 +176,7 @@ export function CraftPage() {
         </div>
       </main>
 
-      <ScreenshotList files={screenshots} />
+      <ScreenshotList files={screenshots} onApplyPrice={applyOcrPrice} />
     </>
   );
 }

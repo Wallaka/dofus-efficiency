@@ -486,6 +486,111 @@ table.lots td.num {
   font-size: 0.85rem;
 }
 
+/* Price feedback loop (in the screenshot modal) */
+.apply-panel {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+}
+
+.apply-title {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+}
+
+.apply-candidates {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.apply-candidate {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  text-align: left;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.apply-candidate:hover {
+  border-color: var(--accent);
+}
+
+.apply-manual-hint {
+  margin: 8px 0 4px;
+}
+
+.apply-done p {
+  margin: 0 0 8px;
+  color: var(--positive);
+  font-size: 0.88rem;
+}
+
+/* Status badges (Prix page + apply summary) */
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  border: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.badge-fresh {
+  color: var(--positive);
+  border-color: color-mix(in srgb, var(--positive) 50%, var(--border));
+}
+
+.badge-stale {
+  color: var(--negative);
+  border-color: color-mix(in srgb, var(--negative) 50%, var(--border));
+}
+
+/* Prix page */
+.prices-page {
+  margin-top: 24px;
+}
+
+.prices-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.prices-filter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.price-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.price-del {
+  padding: 2px 8px;
+}
+
 .raw-ocr {
   margin: 10px 0 0;
   padding: 10px;

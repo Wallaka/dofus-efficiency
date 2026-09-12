@@ -1,6 +1,7 @@
 import { NavLink, Route, Routes } from "react-router-dom";
 import { CraftPage } from "./pages/CraftPage";
 import { EleveurPage } from "./pages/EleveurPage";
+import { PricesPage } from "./pages/PricesPage";
 
 export function App() {
   return (
@@ -12,12 +13,14 @@ export function App() {
             Craft & kamas
           </NavLink>
           <NavLink to="/eleveur">Éleveur</NavLink>
+          <NavLink to="/prix">Prix</NavLink>
         </nav>
       </header>
 
       <Routes>
         <Route path="/" element={<CraftPage />} />
         <Route path="/eleveur" element={<EleveurPage />} />
+        <Route path="/prix" element={<PricesPage />} />
       </Routes>
 
       <footer className="app-footer">
