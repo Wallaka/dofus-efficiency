@@ -23,8 +23,39 @@ export interface AvisReward {
   level?: number;
   /** Aviton reward quantity. */
   avitons: number;
-  /** Icon URL (the aviton coin, until the monster image is wired in). */
+  /** Picture: the bounty monster's image when matched, else the aviton coin. */
   img?: string;
+  /** The "Coffre de …" chest item — the tradeable resource reward. */
+  chestItemId?: string;
+  chestName?: string;
+  chestImg?: string;
+}
+
+/**
+ * Avis, monster and chest carry no shared id — only the criminal's name links
+ * them. These helpers derive a normalized key (accent/case-insensitive) so we
+ * can match a quest ("On recherche X") to its bounty monster ("X") and its
+ * chest ("Coffre de X").
+ */
+function normalizeKey(s: string): string {
+  return s
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+export function questCriminalKey(name: string): string {
+  return normalizeKey(name).replace(/^on recherche\s+/, "").trim();
+}
+
+export function monsterCriminalKey(name: string): string {
+  return normalizeKey(name);
+}
+
+export function chestCriminalKey(name: string): string {
+  return normalizeKey(name).replace(/^coffre de\s+/, "").trim();
 }
 
 /** The fetched catalog, cached with a timestamp. */

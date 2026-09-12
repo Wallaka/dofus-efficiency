@@ -1,7 +1,14 @@
 import type { AvisReward } from "../lib/avis";
+import { formatKamas } from "../lib/format";
 
-/** One avis de recherche as a card: picture, name, level, aviton reward. */
-export function AvisCard({ avis }: { avis: AvisReward }) {
+interface Props {
+  avis: AvisReward;
+  /** Tracked HDV price of the chest (resource), if known. */
+  chestPrice?: number;
+}
+
+/** One avis de recherche: picture, name, level, avitons, chest resource. */
+export function AvisCard({ avis, chestPrice }: Props) {
   return (
     <li className="avis-card">
       <div className="avis-thumb">
@@ -23,6 +30,17 @@ export function AvisCard({ avis }: { avis: AvisReward }) {
           )}
           <span className="avis-avitons">{avis.avitons} avitons</span>
         </div>
+        {avis.chestName && (
+          <div className="avis-resource" title={avis.chestName}>
+            {avis.chestImg && (
+              <img src={avis.chestImg} alt="" className="avis-resource-icon" />
+            )}
+            <span className="avis-resource-name">{avis.chestName}</span>
+            <span className="avis-resource-price">
+              {chestPrice != null ? formatKamas(chestPrice) : "—"}
+            </span>
+          </div>
+        )}
       </div>
     </li>
   );

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { AvisReward } from "../lib/avis";
 import { fetchAvisDeRecherche } from "../data/dofusApi";
-import { loadAvisCatalog, saveAvisCatalog } from "../lib/storage";
+import { loadAvisCatalog, loadPrices, saveAvisCatalog } from "../lib/storage";
 import { formatDateTime } from "../lib/format";
 import { AvisCard } from "../components/AvisCard";
 
@@ -16,6 +16,8 @@ export function AvisPage() {
   );
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string>();
+  // Shared price map (from the craft/prix pages) → chest resource prices.
+  const prices = useRef(loadPrices() ?? {}).current;
 
   async function load() {
     setStatus("loading");
@@ -73,7 +75,11 @@ export function AvisPage() {
 
       <ul className="avis-grid">
         {list.map((avis) => (
-          <AvisCard key={avis.id} avis={avis} />
+          <AvisCard
+            key={avis.id}
+            avis={avis}
+            chestPrice={avis.chestItemId ? prices[avis.chestItemId] : undefined}
+          />
         ))}
       </ul>
     </main>
