@@ -1,4 +1,12 @@
 import type { Item, Recipe } from "../types";
+import type { AvisReward } from "../lib/avis";
+import {
+  AVIS_CATEGORY_ID,
+  AVITON_ITEM_ID,
+  chestCriminalKey,
+  monsterCriminalKey,
+  questCriminalKey,
+} from "../lib/avis";
 
 /**
  * Adapter for the live DofusDB API (https://api.dofusdb.fr) — a Feathers-style
@@ -99,6 +107,147 @@ export async function searchItems(
     `${encodeURIComponent(q)}&$limit=${limit}&lang=fr`;
   const res = await getJson<FeathersPage<RawItem>>(url, signal);
   return (res.data ?? []).map(toItem);
+}
+
+// --- Avis de recherche (legendary-hunt notices) ---------------------------
+
+interface RawQuestRewardItem {
+  id: number;
+  img?: string;
+}
+interface RawQuestReward {
+  /** Pairs of [itemId, quantity]. */
+  itemsReward?: number[][];
+  /** Populated reward items (carry img). */
+  items?: RawQuestRewardItem[];
+}
+interface RawQuestStep {
+  rewards?: RawQuestReward[];
+}
+interface RawQuest {
+  id: number;
+  name?: Translated;
+  levelMin?: number;
+  steps?: RawQuestStep[];
+}
+
+/** Pull the aviton reward (quantity + coin icon) out of a quest's steps. */
+function normalizeAvis(quest: RawQuest): AvisReward | null {
+  let avitons = 0;
+  let img: string | undefined;
+
+  for (const step of quest.steps ?? []) {
+    for (const reward of step.rewards ?? []) {
+      for (const [itemId, qty] of reward.itemsReward ?? []) {
+        if (itemId === AVITON_ITEM_ID) avitons += qty ?? 0;
+      }
+      if (img == null) {
+        img = (reward.items ?? []).find((it) => it.id === AVITON_ITEM_ID)?.img;
+      }
+    }
+  }
+
+  if (avitons <= 0) return null;
+  return {
+    id: quest.id,
+    name: pickName(quest.name, `#${quest.id}`),
+    level: quest.levelMin,
+    avitons,
+    img,
+  };
+}
+
+interface RawMonster {
+  id: number;
+  name?: Translated;
+  img?: string;
+  isBounty?: boolean;
+}
+
+/** DofusDB type id for "Coffre" (chest) items. */
+const CHEST_TYPE_ID = 172;
+const CHEST_NAME_PREFIX = "coffre de ";
+
+/** Criminal name key → bounty monster image, for the avis picture. */
+async function fetchBountyMonsterImages(
+  signal?: AbortSignal,
+): Promise<Map<string, string>> {
+  const byKey = new Map<string, string>();
+  try {
+    // maxPages bounds the fetch hard in case the isBounty filter is ignored.
+    const raw = await fetchAllPages<RawMonster>(
+      "/monsters",
+      "isBounty=true&lang=fr",
+      signal,
+      6,
+    );
+    for (const m of raw) {
+      if (!m.img || !m.name) continue;
+      const key = monsterCriminalKey(pickName(m.name, ""));
+      if (key && !byKey.has(key)) byKey.set(key, m.img);
+    }
+  } catch {
+    // Non-fatal: avis just fall back to the aviton icon.
+  }
+  return byKey;
+}
+
+/** Criminal name key → "Coffre de …" chest item, the tradeable resource. */
+async function fetchAvisChests(
+  signal?: AbortSignal,
+): Promise<Map<string, Item>> {
+  const byKey = new Map<string, Item>();
+  try {
+    const raw = await fetchAllPages<RawItem>(
+      "/items",
+      `typeId=${CHEST_TYPE_ID}&lang=fr`,
+      signal,
+      20,
+    );
+    for (const it of raw) {
+      const name = pickName(it.name, "");
+      if (!name.toLowerCase().startsWith(CHEST_NAME_PREFIX)) continue;
+      const key = chestCriminalKey(name);
+      if (key && !byKey.has(key)) byKey.set(key, toItem(it));
+    }
+  } catch {
+    // Non-fatal: avis just show no resource.
+  }
+  return byKey;
+}
+
+/** Fetch all aviton-rewarding avis de recherche, enriched and most avitons first. */
+export async function fetchAvisDeRecherche(
+  signal?: AbortSignal,
+): Promise<AvisReward[]> {
+  const [raw, monsterImgs, chests] = await Promise.all([
+    fetchAllPages<RawQuest>(
+      "/quests",
+      `categoryId=${AVIS_CATEGORY_ID}&lang=fr`,
+      signal,
+    ),
+    fetchBountyMonsterImages(signal),
+    fetchAvisChests(signal),
+  ]);
+
+  const list = raw
+    .map(normalizeAvis)
+    .filter((a): a is AvisReward => a != null)
+    .map((avis) => {
+      const key = questCriminalKey(avis.name);
+      const monsterImg = monsterImgs.get(key);
+      const chest = chests.get(key);
+      return {
+        ...avis,
+        img: monsterImg ?? avis.img, // prefer the criminal's picture
+        chestItemId: chest?.id,
+        chestName: chest?.name,
+        chestImg: chest?.img,
+      };
+    });
+
+  list.sort((a, b) => b.avitons - a.avitons);
+  return list;
 }
 
 async function getJson<T>(url: string, signal?: AbortSignal): Promise<T> {

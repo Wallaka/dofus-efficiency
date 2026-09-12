@@ -1,147 +1,87 @@
-import { useEffect, useMemo, useState } from "react";
-import {
-  computeAvisTotals,
-  newAvis,
-  type AvisDeRecherche,
-  type AvisState,
-} from "../lib/avis";
-import type { Item, PriceMap } from "../types";
-import { loadAvis, loadPrices, saveAvis, savePrices } from "../lib/storage";
-import {
-  deletePriceEntry,
-  recordPriceEntry,
-  type PriceEntry,
-} from "../lib/priceStore";
-import { formatKamas } from "../lib/format";
+import { useEffect, useRef, useState } from "react";
+import type { AvisReward } from "../lib/avis";
+import { fetchAvisDeRecherche } from "../data/dofusApi";
+import { loadAvisCatalog, loadPrices, saveAvisCatalog } from "../lib/storage";
+import { formatDateTime } from "../lib/format";
 import { AvisCard } from "../components/AvisCard";
 
-/** Avis de recherche: list legendary-hunt notices and compute each one's benefit. */
+type Status = "idle" | "loading" | "error";
+
+/** Catalog of aviton-rewarding avis de recherche, sourced from DofusDB. */
 export function AvisPage() {
-  const [state, setState] = useState<AvisState>(
-    () => loadAvis() ?? { list: [newAvis()] },
+  const cached = useRef(loadAvisCatalog()).current;
+  const [list, setList] = useState<AvisReward[]>(cached?.list ?? []);
+  const [fetchedAt, setFetchedAt] = useState<number | undefined>(
+    cached?.fetchedAt,
   );
-  // Shared with the craft & prix pages via localStorage.
-  const [prices, setPrices] = useState<PriceMap>(() => loadPrices() ?? {});
+  const [status, setStatus] = useState<Status>("idle");
+  const [error, setError] = useState<string>();
+  // Shared price map (from the craft/prix pages) → chest resource prices.
+  const prices = useRef(loadPrices() ?? {}).current;
 
-  useEffect(() => {
-    saveAvis(state);
-  }, [state]);
-
-  useEffect(() => {
-    savePrices(prices);
-  }, [prices]);
-
-  const totals = useMemo(
-    () => computeAvisTotals(state.list, prices, state.avitonValue),
-    [state, prices],
-  );
-
-  function updateAvis(id: string, patch: Partial<AvisDeRecherche>) {
-    setState((s) => ({
-      ...s,
-      list: s.list.map((a) => (a.id === id ? { ...a, ...patch } : a)),
-    }));
-  }
-
-  function addAvis() {
-    setState((s) => ({ ...s, list: [...s.list, newAvis()] }));
-  }
-
-  function removeAvis(id: string) {
-    setState((s) => ({ ...s, list: s.list.filter((a) => a.id !== id) }));
-  }
-
-  function setAvitonValue(v: string) {
-    setState((s) => ({ ...s, avitonValue: v === "" ? undefined : Number(v) }));
-  }
-
-  // Update a picked item's shared price and stamp a "manuel" entry (or forget
-  // it when cleared), so the Prix page shows its date/source too.
-  function setItemPrice(item: Item, price: number | undefined) {
-    setPrices((prev) => ({ ...prev, [item.id]: price }));
-    if (price == null) {
-      deletePriceEntry(item.id);
-      return;
+  async function load() {
+    setStatus("loading");
+    setError(undefined);
+    try {
+      const data = await fetchAvisDeRecherche();
+      setList(data);
+      saveAvisCatalog(data);
+      setFetchedAt(Date.now());
+      setStatus("idle");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
+      setStatus("error");
     }
-    const entry: PriceEntry = {
-      itemId: item.id,
-      name: item.name,
-      level: item.level,
-      img: item.img,
-      price,
-      updatedAt: Date.now(),
-      source: "manual",
-    };
-    recordPriceEntry(entry);
   }
+
+  // Auto-load on first visit when we have nothing cached yet.
+  useEffect(() => {
+    if (list.length === 0) load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <main className="avis-page">
       <section className="panel">
         <h2>Avis de recherche</h2>
         <p className="hint">
-          Les avis qui rapportent des avitons. Bénéfice = ressource du coffre +
-          places vendues − carte de la chasse. Les prix viennent des prix suivis
-          (et de l'OCR).
+          Tous les avis de recherche qui rapportent des avitons (source DofusDB).
         </p>
-
-        <div className="avis-summary">
-          <div className="avis-total">
-            <span>Bénéfice total</span>
-            <strong className={totals.kamasBenefit >= 0 ? "positive" : "negative"}>
-              {formatKamas(totals.kamasBenefit)}
-            </strong>
-          </div>
-          <div className="avis-total">
-            <span>Avitons</span>
-            <strong>{totals.avitons}</strong>
-          </div>
-          {totals.benefitWithAvitons != null && (
-            <div className="avis-total">
-              <span>Total avec avitons</span>
-              <strong
-                className={
-                  totals.benefitWithAvitons >= 0 ? "positive" : "negative"
-                }
-              >
-                {formatKamas(totals.benefitWithAvitons)}
-              </strong>
-            </div>
-          )}
-          <label className="avis-aviton-value">
-            <span>Valeur d'un aviton (kamas, option.)</span>
-            <input
-              type="number"
-              min={0}
-              inputMode="numeric"
-              placeholder="—"
-              value={state.avitonValue ?? ""}
-              onChange={(e) => setAvitonValue(e.target.value)}
-            />
-          </label>
+        <div className="avis-toolbar">
+          <button type="button" onClick={load} disabled={status === "loading"}>
+            {status === "loading"
+              ? "Chargement…"
+              : list.length
+                ? "Rafraîchir"
+                : "Charger"}
+          </button>
+          <span className="hint avis-meta">
+            {status === "error" && (
+              <span className="error-text">Erreur : {error}</span>
+            )}
+            {status !== "error" && list.length > 0 && (
+              <>
+                {list.length} avis
+                {fetchedAt != null && ` · maj ${formatDateTime(fetchedAt)}`}
+              </>
+            )}
+          </span>
         </div>
       </section>
 
-      <ul className="avis-list">
-        {state.list.map((avis) => (
+      {list.length === 0 && status === "loading" && (
+        <p className="hint">Récupération des avis de recherche…</p>
+      )}
+
+      <ul className="avis-grid">
+        {list.map((avis) => (
           <AvisCard
             key={avis.id}
             avis={avis}
-            prices={prices}
-            avitonValue={state.avitonValue}
-            onChange={(patch) => updateAvis(avis.id, patch)}
-            onRemove={() => removeAvis(avis.id)}
-            onSetItemPrice={setItemPrice}
+            chestPrice={avis.chestItemId ? prices[avis.chestItemId] : undefined}
           />
         ))}
-        {state.list.length === 0 && (
-          <li className="hint">Aucun avis pour l'instant.</li>
-        )}
       </ul>
-
-      <button type="button" className="avis-add" onClick={addAvis}>
-        + Ajouter un avis
-      </button>
     </main>
   );
 }
