@@ -1131,263 +1131,15 @@ table.lots td.num {
   gap: 16px;
 }
 
-.avis-summary {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  align-items: flex-end;
-}
-
-.avis-total {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.avis-total span {
-  color: var(--muted);
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-}
-
-.avis-total strong {
-  font-size: 1.3rem;
-  font-variant-numeric: tabular-nums;
-}
-
-.avis-total strong.positive {
-  color: var(--positive);
-}
-
-.avis-total strong.negative {
-  color: var(--negative);
-}
-
-.avis-aviton-value {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  font-size: 0.78rem;
-  color: var(--muted);
-  margin-left: auto;
-}
-
-.avis-aviton-value input {
-  width: 160px;
-  padding: 6px 8px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--num-bg);
-  color: var(--text);
-  text-align: right;
-}
-
-.avis-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.avis-card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 14px 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.avis-head {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.avis-name {
-  flex: 1;
-  min-width: 0;
-  padding: 8px 10px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--num-bg);
-  color: var(--text);
-  font-weight: 600;
-}
-
-.avis-avitons {
+.avis-toolbar {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.8rem;
-  color: var(--muted);
-  flex: 0 0 auto;
-}
-
-.avis-avitons input {
-  width: 72px;
-  padding: 7px 8px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--num-bg);
-  color: var(--text);
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-.avis-remove {
-  flex: 0 0 auto;
-  border: none;
-  background: none;
-  color: var(--muted);
-  cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 6px;
-}
-
-.avis-remove:hover {
-  color: var(--negative);
-}
-
-.avis-line {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.avis-line-label {
-  flex: 0 0 76px;
-  color: var(--muted);
-  font-size: 0.82rem;
-}
-
-.avis-line .autocomplete {
-  flex: 1;
-}
-
-.avis-item,
-.avis-spots {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 0;
-}
-
-.avis-icon {
-  width: 26px;
-  height: 26px;
-  object-fit: contain;
-  flex: 0 0 auto;
-}
-
-.avis-item-name {
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 0.9rem;
-}
-
-.avis-clear {
-  flex: 0 0 auto;
-  border: none;
-  background: none;
-  color: var(--muted);
-  cursor: pointer;
-  padding: 2px 6px;
-  border-radius: 6px;
-}
-
-.avis-clear:hover {
-  color: var(--negative);
-}
-
-.avis-qty,
-.avis-price {
-  flex: 0 0 auto;
-  padding: 7px 8px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--num-bg);
-  color: var(--text);
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-.avis-qty {
-  width: 66px;
-}
-
-.avis-price {
-  width: 92px;
-}
-
-.avis-x {
-  color: var(--muted);
-  flex: 0 0 auto;
-}
-
-.avis-value {
-  flex: 0 0 auto;
-  min-width: 84px;
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-  font-size: 0.85rem;
-}
-
-.avis-value.missing {
-  color: var(--negative);
-}
-
-.avis-benefit {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  border-top: 1px solid var(--border);
-  padding-top: 10px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
-.avis-benefit > span {
-  color: var(--muted);
-  font-size: 0.82rem;
-}
-
-.avis-benefit strong {
-  font-size: 1.2rem;
-  font-variant-numeric: tabular-nums;
-}
-
-.avis-benefit strong.positive {
-  color: var(--positive);
-}
-
-.avis-benefit strong.negative {
-  color: var(--negative);
-}
-
-.avis-aviton-tag {
-  font-size: 0.8rem;
-  padding: 2px 8px;
-  border-radius: 999px;
-  border: 1px solid var(--accent);
-  background: color-mix(in srgb, var(--accent) 16%, transparent);
-}
-
-.avis-with-avitons {
-  color: var(--muted);
-  font-size: 0.82rem;
-}
-
-.avis-add {
-  align-self: flex-start;
-  padding: 9px 14px;
+.avis-toolbar button {
+  padding: 8px 14px;
   border: 1px solid var(--accent);
   border-radius: 8px;
   background: var(--accent);
@@ -1395,14 +1147,92 @@ table.lots td.num {
   cursor: pointer;
 }
 
-@media (max-width: 640px) {
-  .avis-line {
-    flex-wrap: wrap;
-  }
-  .avis-item,
-  .avis-spots {
-    flex-wrap: wrap;
-  }
+.avis-toolbar button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.avis-meta {
+  margin: 0;
+}
+
+.avis-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.avis-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+  padding: 12px 14px;
+}
+
+.avis-thumb {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: var(--num-bg);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.avis-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.avis-thumb-placeholder {
+  font-size: 1.3rem;
+  opacity: 0.6;
+}
+
+.avis-info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.avis-name {
+  font-weight: 600;
+  font-size: 0.92rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.avis-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.avis-level {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.avis-avitons {
+  font-size: 0.78rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  font-variant-numeric: tabular-nums;
 }
 
 /* Craft table */

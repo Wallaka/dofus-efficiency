@@ -1,4 +1,6 @@
 import type { Item, Recipe } from "../types";
+import type { AvisReward } from "../lib/avis";
+import { AVIS_CATEGORY_ID, AVITON_ITEM_ID } from "../lib/avis";
 
 /**
  * Adapter for the live DofusDB API (https://api.dofusdb.fr) — a Feathers-style
@@ -99,6 +101,70 @@ export async function searchItems(
     `${encodeURIComponent(q)}&$limit=${limit}&lang=fr`;
   const res = await getJson<FeathersPage<RawItem>>(url, signal);
   return (res.data ?? []).map(toItem);
+}
+
+// --- Avis de recherche (legendary-hunt notices) ---------------------------
+
+interface RawQuestRewardItem {
+  id: number;
+  img?: string;
+}
+interface RawQuestReward {
+  /** Pairs of [itemId, quantity]. */
+  itemsReward?: number[][];
+  /** Populated reward items (carry img). */
+  items?: RawQuestRewardItem[];
+}
+interface RawQuestStep {
+  rewards?: RawQuestReward[];
+}
+interface RawQuest {
+  id: number;
+  name?: Translated;
+  levelMin?: number;
+  steps?: RawQuestStep[];
+}
+
+/** Pull the aviton reward (quantity + coin icon) out of a quest's steps. */
+function normalizeAvis(quest: RawQuest): AvisReward | null {
+  let avitons = 0;
+  let img: string | undefined;
+
+  for (const step of quest.steps ?? []) {
+    for (const reward of step.rewards ?? []) {
+      for (const [itemId, qty] of reward.itemsReward ?? []) {
+        if (itemId === AVITON_ITEM_ID) avitons += qty ?? 0;
+      }
+      if (img == null) {
+        img = (reward.items ?? []).find((it) => it.id === AVITON_ITEM_ID)?.img;
+      }
+    }
+  }
+
+  if (avitons <= 0) return null;
+  return {
+    id: quest.id,
+    name: pickName(quest.name, `#${quest.id}`),
+    level: quest.levelMin,
+    avitons,
+    img,
+  };
+}
+
+/** Fetch all aviton-rewarding avis de recherche, most avitons first. */
+export async function fetchAvisDeRecherche(
+  signal?: AbortSignal,
+): Promise<AvisReward[]> {
+  const raw = await fetchAllPages<RawQuest>(
+    "/quests",
+    `categoryId=${AVIS_CATEGORY_ID}&lang=fr`,
+    signal,
+  );
+  const list = raw
+    .map(normalizeAvis)
+    .filter((a): a is AvisReward => a != null);
+  list.sort((a, b) => b.avitons - a.avitons);
+  return list;
 }
 
 async function getJson<T>(url: string, signal?: AbortSignal): Promise<T> {

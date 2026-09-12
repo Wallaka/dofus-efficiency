@@ -1,6 +1,6 @@
 import type { CraftDataset } from "../data/dofusApi";
 import type { RaisingInput } from "./eleveur";
-import type { AvisState } from "./avis";
+import type { AvisCatalog, AvisReward } from "./avis";
 import type { Item, PriceMap } from "../types";
 
 /**
@@ -16,7 +16,7 @@ const DATASET_PREFIX = "dofus-efficiency:dataset:v1:";
 const LAST_SOURCE_KEY = "dofus-efficiency:lastSource:v1";
 const FAVOURITES_KEY = "dofus-efficiency:favourites:v1";
 const ELEVEUR_KEY = "dofus-efficiency:eleveur:v1";
-const AVIS_KEY = "dofus-efficiency:avis:v1";
+const AVIS_KEY = "dofus-efficiency:avisCatalog:v1";
 
 export function loadPrices(): PriceMap | null {
   try {
@@ -133,22 +133,23 @@ export function saveEleveur(input: RaisingInput): void {
   }
 }
 
-/** Avis de recherche list + aviton value, persisted between sessions. */
-export function loadAvis(): AvisState | null {
+/** Cached DofusDB avis-de-recherche catalog, so the page loads instantly. */
+export function loadAvisCatalog(): AvisCatalog | null {
   try {
     const raw = localStorage.getItem(AVIS_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw);
-    if (parsed && Array.isArray(parsed.list)) return parsed as AvisState;
+    if (parsed && Array.isArray(parsed.list)) return parsed as AvisCatalog;
     return null;
   } catch {
     return null;
   }
 }
 
-export function saveAvis(state: AvisState): void {
+export function saveAvisCatalog(list: AvisReward[]): void {
   try {
-    localStorage.setItem(AVIS_KEY, JSON.stringify(state));
+    const payload: AvisCatalog = { list, fetchedAt: Date.now() };
+    localStorage.setItem(AVIS_KEY, JSON.stringify(payload));
   } catch {
     // non-fatal
   }
