@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { PriceMap } from "./types";
+import type { ScreenshotFile } from "./lib/medalFolder";
 import {
   SAMPLE_ITEMS,
   SAMPLE_PRICES,
@@ -10,6 +11,7 @@ import { loadPrices, savePrices } from "./lib/storage";
 import { PriceEditor } from "./components/PriceEditor";
 import { CraftTable } from "./components/CraftTable";
 import { MedalFolderPicker } from "./components/MedalFolderPicker";
+import { ScreenshotList } from "./components/ScreenshotList";
 
 export function App() {
   // Static data — bundled sample for Phase 0; DofusDB later (see data/dofusApi.ts).
@@ -42,6 +44,13 @@ export function App() {
     setPrices({ ...SAMPLE_PRICES });
   }
 
+  // Screenshots read from the Medal folder — the raw material for OCR later.
+  const [screenshots, setScreenshots] = useState<ScreenshotFile[]>([]);
+  const handleScreenshots = useCallback(
+    (files: ScreenshotFile[]) => setScreenshots(files),
+    [],
+  );
+
   return (
     <div className="app">
       <header className="app-header">
@@ -54,13 +63,15 @@ export function App() {
       <main className="layout">
         <CraftTable evaluations={evaluations} itemsById={itemsById} />
         <div>
-          <MedalFolderPicker />
+          <MedalFolderPicker onScreenshots={handleScreenshots} />
           <PriceEditor items={items} prices={prices} onChange={setPrice} />
           <button type="button" className="reset" onClick={resetToSample}>
             Réinitialiser les prix d'exemple
           </button>
         </div>
       </main>
+
+      <ScreenshotList files={screenshots} />
 
       <footer className="app-footer">
         <p>

@@ -106,7 +106,9 @@ function idbDelete(key: string): Promise<void> {
 export async function pickMedalFolder(): Promise<FileSystemDirectoryHandle | null> {
   try {
     const handle = await window.showDirectoryPicker({ id: "medal-screenshots" });
-    await idbSet(MEDAL_FOLDER_KEY, handle);
+    // Persistence is best-effort: if IndexedDB is unavailable (private mode,
+    // quota), we can still use the folder for this session.
+    await idbSet(MEDAL_FOLDER_KEY, handle).catch(() => {});
     return handle;
   } catch (err) {
     // AbortError = user dismissed the picker; treat as "no selection".
