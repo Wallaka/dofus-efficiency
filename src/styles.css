@@ -1235,6 +1235,7 @@ table.lots td.num {
   font-variant-numeric: tabular-nums;
 }
 
+.avis-chest,
 .avis-resource {
   display: flex;
   align-items: center;

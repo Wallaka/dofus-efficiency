@@ -6,6 +6,7 @@ import {
   chestCriminalKey,
   monsterCriminalKey,
   questCriminalKey,
+  questCriminalName,
 } from "../lib/avis";
 
 /**
@@ -172,6 +173,62 @@ const CHEST_TYPE_ID = 172;
 const CHEST_NAME_PREFIX = "coffre de ";
 /** DofusDB type id for "Personnage suiveur" (follower) items — the criminals. */
 const FOLLOWER_TYPE_ID = 32;
+/** DofusDB super-type id for "Ressource" — used to pick the chest's resource. */
+const RESOURCE_SUPER_TYPE_ID = 9;
+
+interface RawItemTyped extends RawItem {
+  type?: { superTypeId?: number };
+}
+
+/** Run `fn` over `items` with limited concurrency (avoids a request burst). */
+async function mapLimit<T, R>(
+  items: T[],
+  limit: number,
+  fn: (item: T) => Promise<R>,
+): Promise<R[]> {
+  const results = new Array<R>(items.length);
+  let next = 0;
+  async function worker() {
+    while (next < items.length) {
+      const i = next++;
+      results[i] = await fn(items[i]);
+    }
+  }
+  await Promise.all(
+    Array.from({ length: Math.min(limit, items.length) }, worker),
+  );
+  return results;
+}
+
+/**
+ * The resource inside an avis's chest, e.g. "Fleur de <criminal>". It shares no
+ * id with the avis/chest — only the criminal name — and each criminal's resource
+ * is a different item type, so we search by the criminal name and keep the
+ * result that is a Ressource whose name contains the criminal.
+ */
+async function fetchAvisResource(
+  criminalDisplay: string,
+  criminalKey: string,
+  signal?: AbortSignal,
+): Promise<Item | null> {
+  if (!criminalDisplay) return null;
+  try {
+    const url =
+      `${DOFUSDB_BASE_URL}/items?name.fr[$search]=` +
+      `${encodeURIComponent(criminalDisplay)}&$limit=15&lang=fr`;
+    const res = await getJson<FeathersPage<RawItemTyped>>(url, signal);
+    const resources = (res.data ?? []).filter(
+      (it) => it.type?.superTypeId === RESOURCE_SUPER_TYPE_ID,
+    );
+    const match =
+      resources.find((it) =>
+        monsterCriminalKey(pickName(it.name, "")).includes(criminalKey),
+      ) ?? resources[0];
+    return match ? toItem(match) : null;
+  } catch {
+    return null;
+  }
+}
 
 /**
  * Criminal name key → monster image, for the avis picture.
@@ -282,6 +339,24 @@ export async function fetchAvisDeRecherche(
         chestImg: chest?.img,
       };
     });
+
+  // Resolve each chest's resource by searching the criminal name (bounded
+  // concurrency to avoid an 80+ request burst).
+  const resources = await mapLimit(list, 6, (avis) =>
+    fetchAvisResource(
+      questCriminalName(avis.name),
+      questCriminalKey(avis.name),
+      signal,
+    ),
+  );
+  list.forEach((avis, i) => {
+    const resource = resources[i];
+    if (resource) {
+      avis.resourceItemId = resource.id;
+      avis.resourceName = resource.name;
+      avis.resourceImg = resource.img;
+    }
+  });
 
   list.sort((a, b) => b.avitons - a.avitons);
   return list;
