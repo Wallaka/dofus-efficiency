@@ -1,14 +1,17 @@
+import type { CraftDataset } from "../data/dofusApi";
 import type { PriceMap } from "../types";
 
 /**
- * Tiny persistence layer for the price map.
+ * Tiny persistence layer.
  *
- * Phase 0 uses localStorage: prices are a small string-keyed map, so this is
- * plenty. When we add screenshots/images and larger datasets (Phase 1+), this
- * is the single place to swap in IndexedDB — the rest of the app only sees
- * loadPrices/savePrices.
+ * Uses localStorage for now: prices are a small string-keyed map, and cached
+ * datasets are modest JSON. When we add screenshots/images and larger data
+ * (Phase 1+), this is the single place to swap in IndexedDB — the rest of the
+ * app only sees these load/save helpers.
  */
 const PRICES_KEY = "dofus-efficiency:prices:v1";
+const DATASET_PREFIX = "dofus-efficiency:dataset:v1:";
+const LAST_SOURCE_KEY = "dofus-efficiency:lastSource:v1";
 
 export function loadPrices(): PriceMap | null {
   try {
@@ -26,6 +29,51 @@ export function savePrices(prices: PriceMap): void {
   try {
     localStorage.setItem(PRICES_KEY, JSON.stringify(prices));
   } catch {
-    // Storage full or unavailable (private mode) — non-fatal for Phase 0.
+    // Storage full or unavailable (private mode) — non-fatal.
+  }
+}
+
+/** A DofusDB dataset cached under a key (e.g. a level range), with a timestamp. */
+export interface CachedDataset extends CraftDataset {
+  fetchedAt: number;
+}
+
+export function loadDataset(key: string): CachedDataset | null {
+  try {
+    const raw = localStorage.getItem(DATASET_PREFIX + key);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (parsed && Array.isArray(parsed.items) && Array.isArray(parsed.recipes)) {
+      return parsed as CachedDataset;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+export function saveDataset(key: string, dataset: CraftDataset): void {
+  try {
+    const payload: CachedDataset = { ...dataset, fetchedAt: Date.now() };
+    localStorage.setItem(DATASET_PREFIX + key, JSON.stringify(payload));
+  } catch {
+    // Cache is a nice-to-have; ignore quota/availability failures.
+  }
+}
+
+/** Remember which data source (and dataset key) was last active, to restore it. */
+export function loadLastSource(): string | null {
+  try {
+    return localStorage.getItem(LAST_SOURCE_KEY);
+  } catch {
+    return null;
+  }
+}
+
+export function saveLastSource(value: string): void {
+  try {
+    localStorage.setItem(LAST_SOURCE_KEY, value);
+  } catch {
+    // non-fatal
   }
 }

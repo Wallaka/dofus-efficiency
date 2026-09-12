@@ -41,9 +41,23 @@ Storage:      IndexedDB (per device)
 This shrinks OCR from "read entire recipes" to "read some numbers" — a much
 easier, more reliable job.
 
-> TODO: confirm which Dofus data API is currently live and complete enough
-> (candidates: DofusDB, DofAPI-style community APIs). Verify before Phase 0
-> build. Cache the response locally so we don't hammer it / depend on uptime.
+**Chosen API: DofusDB** (`https://api.dofusdb.fr`), a Feathers-style JSON API.
+Implemented in `src/data/dofusApi.ts`:
+
+- `GET /recipes` → `{ resultId, ingredientIds[], quantities[], jobId, resultLevel }`
+- `GET /items` → `{ id, name: {fr,en,…}, level }`
+- `GET /jobs` → job names (best-effort)
+
+Strategy: fetch recipes within a **result-item level range** (this bounds the
+number of requests), collect every referenced item id, fetch just those items
+to resolve names, normalize into our `Item`/`Recipe` types, and **cache each
+level range in localStorage** so repeat loads are instant.
+
+> ⚠️ Unverified from the dev sandbox (egress is blocked here), so it's built
+> defensively and validated live in the browser. The one thing to watch on
+> first real use: **CORS** — the browser fetch from the GitHub Pages origin
+> only works if DofusDB sends permissive CORS headers. If it doesn't, we'd need
+> a tiny proxy (which we'd rather avoid) or a different data source.
 
 ### 2. Reading the Medal folder — File System Access API
 

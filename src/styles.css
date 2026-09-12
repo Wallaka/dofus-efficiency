@@ -103,10 +103,37 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-.reset {
-  margin-top: 12px;
+.price-filter {
   width: 100%;
-  padding: 8px 12px;
+  padding: 7px 10px;
+  margin-bottom: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+  color: var(--text);
+}
+
+.price-list {
+  max-height: 460px;
+  overflow-y: auto;
+}
+
+/* Data source panel */
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.source-toggle {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.seg {
+  flex: 1;
+  padding: 8px 10px;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: transparent;
@@ -114,9 +141,64 @@ body {
   cursor: pointer;
 }
 
-.reset:hover {
-  color: var(--text);
+.seg.active {
+  background: var(--accent);
   border-color: var(--accent);
+  color: #fff;
+}
+
+.level-range {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.level-range label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  flex: 1;
+}
+
+.level-range input {
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+  color: var(--text);
+}
+
+.source-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.source-actions button {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+
+.source-actions button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.source-actions button.ghost {
+  background: transparent;
+  color: var(--muted);
+  border-color: var(--border);
+  flex: 0 0 auto;
+}
+
+.error-text {
+  color: var(--negative);
 }
 
 /* Craft table */
