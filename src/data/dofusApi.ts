@@ -183,6 +183,9 @@ const CHEST_NAME_PREFIX = "coffre de ";
 const FOLLOWER_TYPE_ID = 32;
 /** DofusDB super-type id for "Ressource" — used to pick the chest's resource. */
 const RESOURCE_SUPER_TYPE_ID = 9;
+/** The "Carte de …" map is also a Ressource; exclude it so we pick the drop. */
+const CARTE_TYPE_ID = 174;
+const CARTE_NAME_PREFIX = "carte de ";
 
 interface RawItemTyped extends RawItem {
   /** Top-level type id (present in list responses, unlike the nested `type`). */
@@ -237,8 +240,14 @@ async function fetchAvisResource(
       const key = monsterCriminalKey(name);
       if (!key.includes(criminalKey)) return false; // must mention the criminal
       if (key === criminalKey) return false; // the follower (bare name)
-      if (name.toLowerCase().startsWith(CHEST_NAME_PREFIX)) return false; // the chest
-      if (it.typeId === CHEST_TYPE_ID || it.typeId === FOLLOWER_TYPE_ID)
+      const lname = name.toLowerCase();
+      if (lname.startsWith(CHEST_NAME_PREFIX)) return false; // the chest
+      if (lname.startsWith(CARTE_NAME_PREFIX)) return false; // the hunt map
+      if (
+        it.typeId === CHEST_TYPE_ID ||
+        it.typeId === FOLLOWER_TYPE_ID ||
+        it.typeId === CARTE_TYPE_ID
+      )
         return false;
       return true;
     });
