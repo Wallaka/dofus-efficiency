@@ -3,6 +3,7 @@ import { CraftPage } from "./pages/CraftPage";
 import { EleveurPage } from "./pages/EleveurPage";
 import { AvisPage } from "./pages/AvisPage";
 import { PricesPage } from "./pages/PricesPage";
+import { TrackedItemsPage } from "./pages/TrackedItemsPage";
 
 export function App() {
   return (
@@ -15,6 +16,7 @@ export function App() {
           </NavLink>
           <NavLink to="/eleveur">Éleveur</NavLink>
           <NavLink to="/avis">Avis de recherche</NavLink>
+          <NavLink to="/suivis">Objets suivis</NavLink>
           <NavLink to="/prix">Prix</NavLink>
         </nav>
       </header>
@@ -23,6 +25,7 @@ export function App() {
         <Route path="/" element={<CraftPage />} />
         <Route path="/eleveur" element={<EleveurPage />} />
         <Route path="/avis" element={<AvisPage />} />
+        <Route path="/suivis" element={<TrackedItemsPage />} />
         <Route path="/prix" element={<PricesPage />} />
       </Routes>
 
