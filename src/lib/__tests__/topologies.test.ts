@@ -59,6 +59,24 @@ describe("topology classification", () => {
   });
 });
 
+describe("HDV category (from the title icon's filter/footer text)", () => {
+  it.each([
+    ["market", "resource"],
+    ["hdv-buy-resource", "resource"],
+    ["hdv-buy-1", "resource"],
+    ["hdv-buy-5", "resource"],
+    ["hdv-sell-1", "rune"],
+    ["hdv-sell-3", "rune"],
+    ["hdv-sell-4", "rune"],
+    ["hdv-sell-5", "rune"],
+    ["hdvtype-equip", "equipment"],
+    ["hdvtype-rune", "rune"],
+    ["hdvtype-resource", "resource"],
+  ])("%s → %s", (id, category) => {
+    expect(run(id).a.category).toBe(category);
+  });
+});
+
 describe("Cours du marché (market)", () => {
   const { a, dates } = run("market");
   it("reads the focused resource name (not an inventory item)", () => {

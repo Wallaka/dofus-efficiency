@@ -27,7 +27,12 @@ export type ScreenshotKind =
   | "other"
   | "unknown";
 
-export type ItemCategory = "resource" | "weapon" | "equipment" | "unknown";
+export type ItemCategory =
+  | "resource"
+  | "rune"
+  | "weapon"
+  | "equipment"
+  | "unknown";
 
 /** One HDV lot row: a lot size and its (cheapest) price in kamas. */
 export interface Lot {
@@ -408,16 +413,33 @@ export function analyzeScreenshot(rawText: string): ScreenshotAnalysis {
   else kind = "other";
 
   // --- Item category ---
+  // Each HDV building sells one category, shown by the icon left of "Hôtel de
+  // vente" AND by its category-filter / footer text (which OCR *can* read):
+  //   · "Catégories de ressources" / "…les ressources en vente"      → resources
+  //   · "forgemagie" / "Rune astrale" / "Rune de transcendance"      → runes
+  //   · "…les équipements en vente" / "Catégories d'armes"           → equipment
+  // These are the reliable signal; item-type words refine it when present.
+  const runeHdv = /forgemagie|transcendance|rune\s*astrale/.test(norm);
   const weaponHdv = /categories\s*d.{0,2}armes/.test(norm);
-  const resourceHdv = /categories\s*de\s*ressour/.test(norm);
+  const resourceHdv =
+    /categories\s*de\s*ressour/.test(norm) || /uniquement\s*les\s*ressources/.test(norm);
+  const equipHdv = /uniquement\s*les\s*equipements/.test(norm);
   const typeIsWeapon = itemType != null && WEAPON_TYPES.includes(itemType);
   const typeIsResource = itemType != null && RESOURCE_TYPES.includes(itemType);
   const typeIsEquip = itemType != null && EQUIPMENT_TYPES.includes(itemType);
+  // Runes' names all begin with "Rune " — covers the sell tab, which shows no
+  // category filter to read.
+  const nameIsRune = itemName != null && /^\s*rune\b/.test(normalize(itemName));
 
   let category: ItemCategory;
-  if (weaponHdv || typeIsWeapon) category = "weapon";
+  if (runeHdv || nameIsRune) category = "rune";
   else if (resourceHdv || typeIsResource) category = "resource";
-  else if (typeIsEquip || (hasEffets && countMatches(norm, STAT_KEYWORDS) >= 2))
+  else if (weaponHdv || typeIsWeapon) category = "weapon";
+  else if (
+    equipHdv ||
+    typeIsEquip ||
+    (hasEffets && countMatches(norm, STAT_KEYWORDS) >= 2)
+  )
     category = "equipment";
   else category = "unknown";
 
