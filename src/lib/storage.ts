@@ -16,7 +16,9 @@ const DATASET_PREFIX = "dofus-efficiency:dataset:v1:";
 const LAST_SOURCE_KEY = "dofus-efficiency:lastSource:v1";
 const FAVOURITES_KEY = "dofus-efficiency:favourites:v1";
 const ELEVEUR_KEY = "dofus-efficiency:eleveur:v1";
-const AVIS_KEY = "dofus-efficiency:avisCatalog:v1";
+// v2: catalog now carries the chest resource — invalidate v1 caches so the
+// page refetches automatically instead of showing resource-less cards.
+const AVIS_KEY = "dofus-efficiency:avisCatalog:v2";
 
 export function loadPrices(): PriceMap | null {
   try {
