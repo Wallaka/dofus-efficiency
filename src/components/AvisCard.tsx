@@ -310,9 +310,9 @@ export function AvisCard({
           />
         )}
         <AvisLine
-          variant="cost"
+          variant="reward"
           label="Participation (spot)"
-          name="Frais pour ce spot"
+          name="Reçu du groupe"
           placeholder="🎟️"
           priceInput={
             <span className="avis-line-price avis-line-price-edit">
@@ -340,8 +340,8 @@ export function AvisCard({
         className={`avis-benefit ${benefitClass}`}
         title={
           benefit.partial
-            ? "Bénéfice = ressource + avitons − carte − participation. Estimation : un prix manque (compté à 0)."
-            : "Bénéfice = ressource + avitons − carte − participation."
+            ? "Bénéfice = ressource + avitons + participation − carte. Estimation : un prix manque (compté à 0)."
+            : "Bénéfice = ressource + avitons + participation − carte."
         }
       >
         <span className="avis-benefit-label">
