@@ -39,7 +39,12 @@ const ANCHORS: Partial<Record<ScreenshotKind, string[]>> = {
   // crop cluster onto the wrong panel. "médian/articles/vendus" are unique to the
   // "Cours du marché" window.
   "market-trend": ["median", "articles", "vendus"],
-  hdv: ["quantite", "moyen", "lot", "acheter"],
+  // The buy detail's unique marker "Quantité en inventaire" — one line, present in
+  // both the inline and floating-popup layouts. Anchoring here (not on
+  // moyen/lot/acheter, which also appear in the listing, category filter and the
+  // inventory tooltip) keeps the crop on the item detail. Name is above, lot table
+  // below, prices to the right (see PADDING/HDV_LOT_PAD).
+  hdv: ["quantite", "inventaire"],
   // The sell panel's left column only — these words don't appear in the listing
   // to its right, so the crop stays on the name + prix moyen + lot table.
   "hdv-sell": ["actuellement", "quantite", "restant", "retirer", "modifier"],
@@ -58,7 +63,7 @@ const PADDING: Partial<Record<ScreenshotKind, Padding>> = {
   // of and below the item's header. Pad well left + up to reach the item name and
   // level, and far down to include the graph + its 7-day date axis.
   "market-trend": { left: 55, right: 12, top: 19, bottom: 52 },
-  hdv: { left: 2.3, right: 2, top: 2.2, bottom: 8 },
+  hdv: { left: 2.3, right: 2, top: 6, bottom: 8 },
   // Narrow left column: pad up to the item name, down to the lot table, and only a
   // little right (the listing sits just past the price column).
   "hdv-sell": { left: 7, right: 16, top: 17, bottom: 25 },

@@ -18,6 +18,7 @@ export const KIND_LABEL: Record<ScreenshotKind, string> = {
 
 export const CATEGORY_LABEL: Record<ItemCategory, string> = {
   resource: "Ressource",
+  rune: "Rune",
   weapon: "Arme",
   equipment: "Équipement",
   unknown: "Type inconnu",
