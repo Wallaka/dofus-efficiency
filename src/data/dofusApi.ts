@@ -119,6 +119,92 @@ export async function searchItems(
   return (res.data ?? []).map(toItem);
 }
 
+// --- Single-item recipe lookup (the Craft page) ---------------------------
+
+/** One resolved crafting recipe: the crafted item, its job, and priced-in ingredients. */
+export interface ResolvedRecipe {
+  /** Stable id, disambiguating an item that has more than one recipe. */
+  recipeId: string;
+  resultItem: Item;
+  job?: string;
+  ingredients: { item: Item; quantity: number }[];
+}
+
+/** Best-effort jobId → name map for just the ids we need (leaner than /jobs in full). */
+async function fetchJobNamesByIds(
+  ids: number[],
+  signal?: AbortSignal,
+): Promise<Map<number, string>> {
+  const map = new Map<number, string>();
+  if (ids.length === 0) return map;
+  try {
+    const query = ids.map((id) => `id[$in][]=${id}`).join("&");
+    const raw = await fetchAllPages<RawJob>("/jobs", query, signal, 2);
+    for (const job of raw) map.set(job.id, pickName(job.name, `Métier ${job.id}`));
+  } catch {
+    // Non-fatal: the recipe just shows no profession name.
+  }
+  return map;
+}
+
+/**
+ * Fetch the crafting recipe(s) that produce `resultItemId`, with every item
+ * (result + ingredients) resolved to names/icons. Most items have exactly one
+ * recipe; the rare multi-recipe item returns several, most-ingredients first.
+ * Returns an empty array when the item isn't craftable.
+ */
+export async function fetchRecipesFor(
+  resultItemId: string,
+  signal?: AbortSignal,
+): Promise<ResolvedRecipe[]> {
+  const rawRecipes = await fetchAllPages<RawRecipe>(
+    "/recipes",
+    `resultId=${encodeURIComponent(resultItemId)}`,
+    signal,
+    3,
+  );
+  if (rawRecipes.length === 0) return [];
+
+  const idSet = new Set<number>();
+  const jobIds = new Set<number>();
+  const numericResult = Number(resultItemId);
+  if (Number.isFinite(numericResult)) idSet.add(numericResult);
+  for (const r of rawRecipes) {
+    if (r.resultId != null) idSet.add(r.resultId);
+    for (const ing of r.ingredientIds ?? []) idSet.add(ing);
+    if (r.jobId != null) jobIds.add(r.jobId);
+  }
+
+  const [itemsById, jobNames] = await Promise.all([
+    fetchItemsByIds([...idSet], signal),
+    fetchJobNamesByIds([...jobIds], signal),
+  ]);
+
+  const resolveItem = (id: number): Item =>
+    itemsById.get(id) ?? { id: String(id), name: `#${id}` };
+
+  const recipes: ResolvedRecipe[] = [];
+  let seen = 0;
+  for (const r of rawRecipes) {
+    if (r.resultId == null || !Array.isArray(r.ingredientIds)) continue;
+    const recipeId = seen === 0 ? `r-${r.resultId}` : `r-${r.resultId}-${seen}`;
+    seen++;
+    recipes.push({
+      recipeId,
+      resultItem: resolveItem(r.resultId),
+      job: r.jobId != null ? jobNames.get(r.jobId) : undefined,
+      ingredients: r.ingredientIds.map((id, idx) => ({
+        item: resolveItem(id),
+        quantity: r.quantities?.[idx] ?? 1,
+      })),
+    });
+  }
+
+  // Richest recipe first (a proxy for "the real craft" when there are several).
+  recipes.sort((a, b) => b.ingredients.length - a.ingredients.length);
+  return recipes;
+}
+
 // --- Avis de recherche (legendary-hunt notices) ---------------------------
 
 interface RawQuestRewardItem {

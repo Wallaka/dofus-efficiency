@@ -1,5 +1,6 @@
 import { NavLink, Route, Routes } from "react-router-dom";
 import { CraftPage } from "./pages/CraftPage";
+import { CraftListPage } from "./pages/CraftListPage";
 import { EleveurPage } from "./pages/EleveurPage";
 import { AvisPage } from "./pages/AvisPage";
 import { PricesPage } from "./pages/PricesPage";
@@ -14,6 +15,7 @@ export function App() {
           <NavLink to="/" end>
             Craft & kamas
           </NavLink>
+          <NavLink to="/craft">Craft</NavLink>
           <NavLink to="/eleveur">Éleveur</NavLink>
           <NavLink to="/avis">Avis de recherche</NavLink>
           <NavLink to="/suivis">Objets suivis</NavLink>
@@ -23,6 +25,7 @@ export function App() {
 
       <Routes>
         <Route path="/" element={<CraftPage />} />
+        <Route path="/craft" element={<CraftListPage />} />
         <Route path="/eleveur" element={<EleveurPage />} />
         <Route path="/avis" element={<AvisPage />} />
         <Route path="/suivis" element={<TrackedItemsPage />} />
