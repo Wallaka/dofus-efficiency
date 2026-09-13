@@ -1,33 +1,36 @@
 import { useState, type ReactNode } from "react";
 import type { AvisReward } from "../lib/avis";
 import { computeAvisBenefit } from "../lib/avis";
+import type { Item } from "../types";
 import type { PriceSource } from "../lib/priceStore";
 import { formatKamas, formatKamasSigned } from "../lib/format";
+import { ItemAutocomplete } from "./ItemAutocomplete";
+
+/** Everything a carte/resource line needs: the resolved item, its price, and edit hooks. */
+export interface AvisSlot {
+  /** Effective item (manual override, else auto-detected); undefined if neither. */
+  item?: Item;
+  price?: number;
+  source?: PriceSource;
+  /** True when the item was pinned by hand rather than auto-detected. */
+  overridden: boolean;
+  /** Pin a searched item as the correct one for this avis. */
+  onPick: (item: Item) => void;
+  /** Drop the manual override, back to auto-detection. */
+  onRevert: () => void;
+  /** Set/clear this item's price by hand (null clears). */
+  onPriceChange: (value: number | null) => void;
+}
 
 interface Props {
   avis: AvisReward;
-  /** Tracked price + source of the "Carte de …" you must buy. */
-  cartePrice?: number;
-  carteSource?: PriceSource;
-  /** Set/clear the carte price by hand (null clears); absent when unresolved. */
-  onCartePriceChange?: (value: number | null) => void;
-  /** Tracked price + source of the resource inside the chest. */
-  resourcePrice?: number;
-  resourceSource?: PriceSource;
-  onResourcePriceChange?: (value: number | null) => void;
+  carte: AvisSlot;
+  resource: AvisSlot;
   /** Value of this avis's avitons (avitons × per-aviton rate); 0 when unset. */
   avitonValue?: number;
   /** Flat fee paid to join this hunt's "spot" (per avis). */
   participationCost?: number;
   onParticipationChange?: (value: number) => void;
-}
-
-/** A small source badge: OCR / manuel / à saisir. */
-function sourceTag(price: number | undefined, source: PriceSource | undefined) {
-  if (price == null) return { label: "à saisir", cls: "avis-src--todo" };
-  if (source === "ocr") return { label: "OCR", cls: "avis-src--ocr" };
-  if (source === "manual") return { label: "manuel", cls: "" };
-  return null;
 }
 
 /**
@@ -57,7 +60,7 @@ function PriceInput({
     const cleaned = draft.trim().replace(/[  ]/g, "");
     setDraft(null);
     if (cleaned === "") {
-      if (value != null) onCommit(null); // clear an existing price
+      if (value != null) onCommit(null);
       return;
     }
     const n = Number(cleaned);
@@ -87,22 +90,128 @@ function PriceInput({
   );
 }
 
-/** One line: icon, label (+ optional source tag) + item name, and a price or input. */
+/**
+ * A carte/resource line whose icon is a button: clicking it opens an item search
+ * so a wrong or missing auto-detection can be corrected by hand.
+ */
+function EditableItemLine({
+  variant,
+  label,
+  avisName,
+  slot,
+}: {
+  variant: "cost" | "reward";
+  label: string;
+  avisName: string;
+  slot: AvisSlot;
+}) {
+  const [editing, setEditing] = useState(false);
+
+  const tag = slot.overridden
+    ? { label: "corrigé", cls: "avis-src--fix" }
+    : !slot.item
+      ? { label: "introuvable", cls: "avis-src--todo" }
+      : slot.price == null
+        ? { label: "à saisir", cls: "avis-src--todo" }
+        : slot.source === "ocr"
+          ? { label: "OCR", cls: "avis-src--ocr" }
+          : slot.source === "manual"
+            ? { label: "manuel", cls: "" }
+            : null;
+
+  const iconInner = slot.item?.img ? (
+    <img src={slot.item.img} alt="" />
+  ) : (
+    <span aria-hidden>—</span>
+  );
+
+  if (editing) {
+    return (
+      <div className={`avis-line avis-line--${variant} avis-line--editing`}>
+        <button
+          type="button"
+          className="avis-line-icon avis-icon-btn active"
+          onClick={() => setEditing(false)}
+          aria-label="Fermer la recherche"
+        >
+          {iconInner}
+        </button>
+        <div className="avis-line-edit">
+          <ItemAutocomplete
+            placeholder={`Rechercher : ${label.toLowerCase()}…`}
+            onPick={(item) => {
+              slot.onPick(item);
+              setEditing(false);
+            }}
+          />
+        </div>
+        <button
+          type="button"
+          className="avis-edit-cancel"
+          onClick={() => setEditing(false)}
+        >
+          Annuler
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className={`avis-line avis-line--${variant}`}>
+      <button
+        type="button"
+        className="avis-line-icon avis-icon-btn"
+        onClick={() => setEditing(true)}
+        aria-label={`Corriger l'objet (${label})`}
+        title="Corriger l'objet"
+      >
+        {iconInner}
+        <span className="avis-icon-pen" aria-hidden>
+          ✎
+        </span>
+      </button>
+      <div className="avis-line-body">
+        <span className="avis-line-label-row">
+          <span className="avis-line-label">{label}</span>
+          {tag && <span className={`avis-src ${tag.cls}`}>{tag.label}</span>}
+          {slot.overridden && (
+            <button
+              type="button"
+              className="avis-revert"
+              onClick={slot.onRevert}
+              title="Revenir à la détection automatique"
+            >
+              ↺ auto
+            </button>
+          )}
+        </span>
+        <span className="avis-line-name" title={slot.item?.name}>
+          {slot.item?.name ?? "Inconnu"}
+        </span>
+      </div>
+      <PriceInput
+        value={slot.price}
+        needs={slot.price == null}
+        disabled={!slot.item}
+        ariaLabel={`Prix (${label}) pour ${avisName}`}
+        onCommit={slot.onPriceChange}
+      />
+    </div>
+  );
+}
+
+/** One line: icon, label + item name, and a static price (for the aviton/participation rows). */
 function AvisLine({
   variant,
   label,
-  tag,
   name,
-  img,
   placeholder = "—",
   price,
   priceInput,
 }: {
   variant: "cost" | "reward";
   label: string;
-  tag?: { label: string; cls: string } | null;
   name?: string;
-  img?: string;
   placeholder?: string;
   price?: number;
   priceInput?: ReactNode;
@@ -110,15 +219,12 @@ function AvisLine({
   return (
     <div className={`avis-line avis-line--${variant}`}>
       <div className="avis-line-icon">
-        {img ? <img src={img} alt="" /> : <span aria-hidden>{placeholder}</span>}
+        <span aria-hidden>{placeholder}</span>
       </div>
       <div className="avis-line-body">
-        <span className="avis-line-label-row">
-          <span className="avis-line-label">{label}</span>
-          {tag && <span className={`avis-src ${tag.cls}`}>{tag.label}</span>}
-        </span>
+        <span className="avis-line-label">{label}</span>
         <span className="avis-line-name" title={name}>
-          {name ?? "Inconnu"}
+          {name}
         </span>
       </div>
       {priceInput ?? (
@@ -133,19 +239,15 @@ function AvisLine({
 /** One avis de recherche: picture, name, level, avitons + carte cost / resource + aviton reward / benefit. */
 export function AvisCard({
   avis,
-  cartePrice,
-  carteSource,
-  onCartePriceChange,
-  resourcePrice,
-  resourceSource,
-  onResourcePriceChange,
+  carte,
+  resource,
   avitonValue = 0,
   participationCost = 0,
   onParticipationChange,
 }: Props) {
   const benefit = computeAvisBenefit({
-    cartePrice,
-    resourcePrice,
+    cartePrice: carte.price,
+    resourcePrice: resource.price,
     avitonValue,
     participationCost,
   });
@@ -184,37 +286,17 @@ export function AvisCard({
       </header>
 
       <div className="avis-lines">
-        <AvisLine
+        <EditableItemLine
           variant="cost"
           label="Carte requise"
-          tag={sourceTag(cartePrice, carteSource)}
-          name={avis.carteName}
-          img={avis.carteImg}
-          priceInput={
-            <PriceInput
-              value={cartePrice}
-              needs={cartePrice == null}
-              disabled={!onCartePriceChange}
-              ariaLabel={`Prix de la carte pour ${avis.name}`}
-              onCommit={(v) => onCartePriceChange?.(v)}
-            />
-          }
+          avisName={avis.name}
+          slot={carte}
         />
-        <AvisLine
+        <EditableItemLine
           variant="reward"
           label="Ressource obtenue"
-          tag={sourceTag(resourcePrice, resourceSource)}
-          name={avis.resourceName}
-          img={avis.resourceImg}
-          priceInput={
-            <PriceInput
-              value={resourcePrice}
-              needs={resourcePrice == null}
-              disabled={!onResourcePriceChange}
-              ariaLabel={`Prix de la ressource pour ${avis.name}`}
-              onCommit={(v) => onResourcePriceChange?.(v)}
-            />
-          }
+          avisName={avis.name}
+          slot={resource}
         />
         {avitonValue > 0 && (
           <AvisLine

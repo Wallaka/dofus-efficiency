@@ -6,16 +6,19 @@ import { fetchAvisDeRecherche } from "../data/dofusApi";
 import {
   loadAvisAviton,
   loadAvisCatalog,
+  loadAvisOverrides,
   loadAvisParticipation,
   loadPrices,
   saveAvisAviton,
   saveAvisCatalog,
+  saveAvisOverrides,
   saveAvisParticipation,
+  type AvisOverrides,
 } from "../lib/storage";
 import { loadPriceEntries, type PriceEntryMap } from "../lib/priceStore";
 import { setManualPrice, clearPrice } from "../lib/trackedPrices";
 import { formatDateTime, formatKamas } from "../lib/format";
-import { AvisCard } from "../components/AvisCard";
+import { AvisCard, type AvisSlot } from "../components/AvisCard";
 
 type Status = "idle" | "loading" | "error";
 
@@ -52,6 +55,45 @@ export function AvisPage() {
     const entry = setManualPrice(item, value);
     setPrices((p) => ({ ...p, [item.id]: value }));
     setEntries((e) => ({ ...e, [item.id]: entry }));
+  }
+
+  // Per-avis manual item corrections (wrong/missing auto-detection).
+  const [overrides, setOverrides] = useState<AvisOverrides>(loadAvisOverrides);
+
+  function setOverride(
+    avisId: string,
+    slot: "carte" | "resource",
+    item: Item | null,
+  ) {
+    setOverrides((prev) => {
+      const cur = { ...(prev[avisId] ?? {}) };
+      if (item) cur[slot] = item;
+      else delete cur[slot];
+      const next = { ...prev };
+      if (cur.carte || cur.resource) next[avisId] = cur;
+      else delete next[avisId];
+      saveAvisOverrides(next);
+      return next;
+    });
+  }
+
+  /** Build a carte/resource slot: effective item (override ?? auto), price, hooks. */
+  function buildSlot(
+    avisId: string,
+    kind: "carte" | "resource",
+    auto: Item | undefined,
+    override: Item | undefined,
+  ): AvisSlot {
+    const item = override ?? auto;
+    return {
+      item,
+      price: item ? prices[item.id] : undefined,
+      source: item ? entries[item.id]?.source : undefined,
+      overridden: override != null,
+      onPick: (picked) => setOverride(avisId, kind, picked),
+      onRevert: () => setOverride(avisId, kind, null),
+      onPriceChange: (value) => item && onPriceChange(item, value),
+    };
   }
 
   // Per-avis "spot" fee (avis id → kamas), persisted.
@@ -110,6 +152,8 @@ export function AvisPage() {
           Tous les avis de recherche qui rapportent des avitons (source DofusDB).
           Les prix carte et ressource sont remplis par l'OCR ou saisissables à la
           main&nbsp;; ils alimentent aussi les pages Objets suivis et Prix.
+          Détection carte/ressource incorrecte&nbsp;? Cliquez l'icône de la ligne
+          pour chercher et fixer le bon objet.
         </p>
         <div className="avis-toolbar">
           <button type="button" onClick={load} disabled={status === "loading"}>
@@ -166,57 +210,35 @@ export function AvisPage() {
       )}
 
       <ul className="avis-grid">
-        {list.map((avis) => (
-          <AvisCard
-            key={avis.id}
-            avis={avis}
-            cartePrice={
-              avis.carteItemId ? prices[avis.carteItemId] : undefined
-            }
-            carteSource={
-              avis.carteItemId ? entries[avis.carteItemId]?.source : undefined
-            }
-            onCartePriceChange={
-              avis.carteItemId
-                ? (value) =>
-                    onPriceChange(
-                      {
-                        id: avis.carteItemId!,
-                        name: avis.carteName ?? "Carte",
-                        img: avis.carteImg,
-                      },
-                      value,
-                    )
-                : undefined
-            }
-            resourcePrice={
-              avis.resourceItemId ? prices[avis.resourceItemId] : undefined
-            }
-            resourceSource={
-              avis.resourceItemId
-                ? entries[avis.resourceItemId]?.source
-                : undefined
-            }
-            onResourcePriceChange={
-              avis.resourceItemId
-                ? (value) =>
-                    onPriceChange(
-                      {
-                        id: avis.resourceItemId!,
-                        name: avis.resourceName ?? "Ressource",
-                        img: avis.resourceImg,
-                      },
-                      value,
-                    )
-                : undefined
-            }
-            avitonValue={avitonUnit * avis.avitons}
-            participationCost={participation[avis.id] ?? 0}
-            onParticipationChange={(value) =>
-              setParticipationFor(String(avis.id), value)
-            }
-          />
-        ))}
+        {list.map((avis) => {
+          const id = String(avis.id);
+          const ov = overrides[id] ?? {};
+          const carteAuto: Item | undefined = avis.carteItemId
+            ? {
+                id: avis.carteItemId,
+                name: avis.carteName ?? "Carte",
+                img: avis.carteImg,
+              }
+            : undefined;
+          const resourceAuto: Item | undefined = avis.resourceItemId
+            ? {
+                id: avis.resourceItemId,
+                name: avis.resourceName ?? "Ressource",
+                img: avis.resourceImg,
+              }
+            : undefined;
+          return (
+            <AvisCard
+              key={avis.id}
+              avis={avis}
+              carte={buildSlot(id, "carte", carteAuto, ov.carte)}
+              resource={buildSlot(id, "resource", resourceAuto, ov.resource)}
+              avitonValue={avitonUnit * avis.avitons}
+              participationCost={participation[avis.id] ?? 0}
+              onParticipationChange={(value) => setParticipationFor(id, value)}
+            />
+          );
+        })}
       </ul>
     </main>
   );

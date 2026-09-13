@@ -1513,6 +1513,68 @@ table.lots td.num {
   border-color: color-mix(in srgb, var(--negative) 45%, transparent);
 }
 
+.avis-src--fix {
+  color: #e0b24d;
+  border-color: color-mix(in srgb, #e0b24d 55%, transparent);
+}
+
+/* Clickable line icon: opens item search to correct a wrong/missing detection. */
+.avis-icon-btn {
+  cursor: pointer;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  position: relative;
+  overflow: visible; /* let the ✎ badge show past the icon's rounded corner */
+}
+
+.avis-icon-btn:hover,
+.avis-icon-btn:focus-visible,
+.avis-icon-btn.active {
+  outline: 2px solid var(--accent);
+  outline-offset: -1px;
+}
+
+.avis-icon-pen {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  font-size: 0.6rem;
+  line-height: 1;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  padding: 1px 2px;
+}
+
+/* The line while its item is being searched/corrected. */
+.avis-line--editing {
+  align-items: center;
+}
+
+.avis-line-edit {
+  flex: 1;
+  min-width: 0;
+}
+
+.avis-edit-cancel,
+.avis-revert {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  border-radius: 7px;
+  padding: 2px 8px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.avis-edit-cancel:hover,
+.avis-revert:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
 /* Inline editable price/participation input on a line. */
 .avis-line-price-edit {
   display: inline-flex;
