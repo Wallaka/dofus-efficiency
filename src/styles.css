@@ -1469,6 +1469,12 @@ table.lots td.num {
   color: var(--muted);
 }
 
+.avis-benefit-partial {
+  font-weight: 400;
+  font-style: italic;
+  opacity: 0.8;
+}
+
 .avis-benefit-value {
   font-variant-numeric: tabular-nums;
   font-weight: 700;

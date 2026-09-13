@@ -98,16 +98,19 @@ export interface AvisBenefitInput {
 }
 
 export interface AvisBenefit {
-  /** Net benefit in kamas, or undefined when a required price is missing. */
+  /** Net benefit in kamas, or undefined when nothing at all is known yet. */
   value?: number;
-  /** True when every price needed for a real number is known. */
-  complete: boolean;
+  /** True as soon as any input is known (so we can show a number). */
+  known: boolean;
+  /** True when a price is missing and counted as 0 — the number is an estimate. */
+  partial: boolean;
 }
 
 /**
- * Net benefit of doing one avis. Needs both the carte cost and the resource
- * price to be a real number; the participation fee defaults to 0, and the
- * aviton value is not counted yet.
+ * Net benefit of doing one avis:
+ *   value = resource + avitons − carte − participation
+ * Computed as soon as anything is known; a missing price counts as 0 (and flags
+ * the result `partial`). Only when nothing at all is known do we return no value.
  */
 export function computeAvisBenefit(input: AvisBenefitInput): AvisBenefit {
   const {
@@ -116,12 +119,18 @@ export function computeAvisBenefit(input: AvisBenefitInput): AvisBenefit {
     participationCost = 0,
     avitonValue = 0,
   } = input;
-  if (cartePrice == null || resourcePrice == null) {
-    return { complete: false };
-  }
-  const gain = resourcePrice + avitonValue;
-  const cost = cartePrice + participationCost;
-  return { value: gain - cost, complete: true };
+
+  const known =
+    cartePrice != null ||
+    resourcePrice != null ||
+    avitonValue > 0 ||
+    participationCost > 0;
+  if (!known) return { known: false, partial: false };
+
+  const gain = (resourcePrice ?? 0) + avitonValue;
+  const cost = (cartePrice ?? 0) + participationCost;
+  const partial = cartePrice == null || resourcePrice == null;
+  return { value: gain - cost, known: true, partial };
 }
 
 /** Per-aviton value from a "qty avitons = price kamas" batch (0 when unset). */

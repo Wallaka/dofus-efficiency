@@ -338,11 +338,20 @@ export function AvisCard({
 
       <footer
         className={`avis-benefit ${benefitClass}`}
-        title="Bénéfice = ressource + avitons − carte − participation."
+        title={
+          benefit.partial
+            ? "Bénéfice = ressource + avitons − carte − participation. Estimation : un prix manque (compté à 0)."
+            : "Bénéfice = ressource + avitons − carte − participation."
+        }
       >
-        <span className="avis-benefit-label">Bénéfice</span>
+        <span className="avis-benefit-label">
+          Bénéfice
+          {benefit.partial && <span className="avis-benefit-partial"> · estimé</span>}
+        </span>
         <span className="avis-benefit-value">
-          {benefit.complete ? formatKamasSigned(benefit.value) : "—"}
+          {benefit.known
+            ? `${benefit.partial ? "≈ " : ""}${formatKamasSigned(benefit.value)}`
+            : "—"}
         </span>
       </footer>
     </li>
