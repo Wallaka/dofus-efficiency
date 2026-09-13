@@ -31,6 +31,8 @@ export function AvisPage() {
   );
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string>();
+  // Free-text name filter, so a given avis is one keystroke away.
+  const [filter, setFilter] = useState("");
   // Shared price store (carte + resource prices). Held in state so hand-typed
   // prices re-render and recompute benefits; `entries` carries each price's
   // source (OCR vs manual) for the badge.
@@ -144,6 +146,17 @@ export function AvisPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Accent/case-insensitive name filter (so "fouduglan" finds "Fouduglan").
+  const norm = (s: string) =>
+    s
+      .normalize("NFD")
+      .replace(/[̀-ͯ]/g, "")
+      .toLowerCase();
+  const query = norm(filter.trim());
+  const visible = query
+    ? list.filter((a) => norm(a.name).includes(query))
+    : list;
+
   return (
     <main className="avis-page">
       <section className="panel">
@@ -209,8 +222,30 @@ export function AvisPage() {
         <p className="hint">Récupération des avis de recherche…</p>
       )}
 
+      {list.length > 0 && (
+        <div className="avis-filter">
+          <input
+            type="search"
+            className="avis-filter-input"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)}
+            placeholder="Filtrer par nom… (ex. Fouduglan)"
+            aria-label="Filtrer les avis par nom"
+          />
+          {filter.trim() !== "" && (
+            <span className="hint">
+              {visible.length} / {list.length}
+            </span>
+          )}
+        </div>
+      )}
+
+      {list.length > 0 && visible.length === 0 && (
+        <p className="hint">Aucun avis ne correspond à « {filter.trim()} ».</p>
+      )}
+
       <ul className="avis-grid">
-        {list.map((avis) => {
+        {visible.map((avis) => {
           const id = String(avis.id);
           const ov = overrides[id] ?? {};
           const carteAuto: Item | undefined = avis.carteItemId
