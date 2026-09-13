@@ -266,6 +266,9 @@ const NAME_STOP_WORDS = new Set([
   "prix",
   "achat",
   "vente",
+  "aux",
+  "materiaux",
+  "niveaux",
 ]);
 
 function cleanItemName(line: string): string | null {
@@ -380,7 +383,11 @@ export function analyzeScreenshot(rawText: string): ScreenshotAnalysis {
   const isHdvSell =
     /actuellement\s+en\s+vente/.test(norm) || norm.includes("prix du lot");
   const isHdv =
-    norm.includes("hotel de vente") || norm.includes("reinitialiser les filtres");
+    norm.includes("hotel de vente") ||
+    norm.includes("reinitialiser les filtres") ||
+    // The buy detail popup's own markers, in case the window title didn't OCR.
+    norm.includes("quantite en inventaire") ||
+    (norm.includes("acheter") && /\blot\b/.test(norm));
   const looksTooltip =
     norm.includes("panoplie") ||
     (hasEffets && typeLine != null) ||

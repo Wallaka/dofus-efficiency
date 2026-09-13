@@ -16,6 +16,11 @@ const here = dirname(fileURLToPath(import.meta.url));
 const IDS = [
   "market",
   "hdv-buy-resource",
+  "hdv-buy-1",
+  "hdv-buy-2",
+  "hdv-buy-3",
+  "hdv-buy-4",
+  "hdv-buy-5",
   "hdv-sell-1",
   "hdv-sell-2",
   "hdv-sell-3",

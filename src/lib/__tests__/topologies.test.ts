@@ -44,6 +44,11 @@ describe("topology classification", () => {
   it.each([
     ["market", "market-trend"],
     ["hdv-buy-resource", "hdv"],
+    ["hdv-buy-1", "hdv"],
+    ["hdv-buy-2", "hdv"],
+    ["hdv-buy-3", "hdv"],
+    ["hdv-buy-4", "hdv"],
+    ["hdv-buy-5", "hdv"],
     ["hdv-sell-1", "hdv-sell"],
     ["hdv-sell-2", "hdv-sell"],
     ["hdv-sell-3", "hdv-sell"],
@@ -82,6 +87,31 @@ describe("Achat matériaux (HDV buy, resource)", () => {
     expect(lot(a, 10)).toBe(963);
     expect(lot(a, 100)).toBe(9780);
     expect(lot(a, 1000)).toBe(119000);
+  });
+});
+
+describe("Achat matériaux (HDV buy, item detail popup)", () => {
+  it("names the item (multi-word, non-resource types)", () => {
+    expect(run("hdv-buy-1").a.itemName).toBe("Fragment de carte de Frakacia");
+    expect(run("hdv-buy-4").a.itemName).toBe("Carte de Frakacia");
+    expect(run("hdv-buy-5").a.itemName).toBe("Culotte de Frakacia");
+  });
+
+  it("reads prix moyen from the detail popup, not the listing/categories", () => {
+    expect(run("hdv-buy-1").a.averagePrice).toBe(20143);
+    expect(run("hdv-buy-2").a.averagePrice).toBe(1419);
+    expect(run("hdv-buy-3").a.averagePrice).toBe(3270);
+    expect(run("hdv-buy-4").a.averagePrice).toBe(123871);
+    expect(run("hdv-buy-5").a.averagePrice).toBe(9280);
+  });
+
+  it("reads the buy lot table", () => {
+    const b1 = run("hdv-buy-1").a;
+    expect(lot(b1, 1)).toBe(16397);
+    expect(lot(b1, 10)).toBe(139999);
+    const b2 = run("hdv-buy-2").a;
+    expect(lot(b2, 1)).toBe(1327);
+    expect(lot(b2, 10)).toBe(18993);
   });
 });
 
