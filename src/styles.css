@@ -1179,25 +1179,31 @@ table.lots td.num {
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
 }
 
 .avis-card {
   display: flex;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 14px;
   background: var(--panel);
-  padding: 12px 14px;
+  padding: 16px 18px;
+}
+
+/* Header: picture on the left, name/level/avitons on the right. */
+.avis-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
 }
 
 .avis-thumb {
   flex: 0 0 auto;
-  width: 44px;
-  height: 44px;
-  border-radius: 8px;
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
   background: var(--num-bg);
   border: 1px solid var(--border);
   display: flex;
@@ -1213,75 +1219,116 @@ table.lots td.num {
 }
 
 .avis-thumb-placeholder {
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   opacity: 0.6;
 }
 
 .avis-info {
   min-width: 0;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
 }
 
 .avis-name {
   font-weight: 600;
-  font-size: 0.92rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  font-size: 1.05rem;
+  line-height: 1.25;
 }
 
 .avis-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
   align-items: center;
 }
 
 .avis-level {
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   color: var(--muted);
 }
 
 .avis-avitons {
-  font-size: 0.78rem;
-  padding: 2px 8px;
+  font-size: 0.82rem;
+  padding: 3px 10px;
   border-radius: 999px;
   border: 1px solid var(--accent);
   background: color-mix(in srgb, var(--accent) 16%, transparent);
   font-variant-numeric: tabular-nums;
 }
 
-.avis-chest,
-.avis-resource {
+/* Separation, then the priceable lines. */
+.avis-lines {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.avis-line {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-top: 2px;
-  font-size: 0.8rem;
+  gap: 10px;
+}
+
+.avis-line-icon {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--num-bg);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
   color: var(--muted);
 }
 
-.avis-resource-icon {
-  width: 20px;
-  height: 20px;
+.avis-line-icon img {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  flex: 0 0 auto;
 }
 
-.avis-resource-name {
+.avis-line-body {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.avis-line-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.avis-line--cost .avis-line-label {
+  color: var(--negative);
+}
+
+.avis-line--reward .avis-line-label {
+  color: var(--positive);
+}
+
+.avis-line-name {
+  font-size: 0.9rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.avis-resource-price {
+.avis-line-price {
   flex: 0 0 auto;
   font-variant-numeric: tabular-nums;
-  color: var(--text);
+  font-weight: 600;
+  font-size: 0.9rem;
 }
 
 /* Craft table */

@@ -3,6 +3,7 @@ import type { AvisReward } from "../lib/avis";
 import {
   AVIS_CATEGORY_ID,
   AVITON_ITEM_ID,
+  carteCriminalKey,
   chestCriminalKey,
   monsterCriminalKey,
   questCriminalKey,
@@ -343,11 +344,35 @@ async function fetchAvisChests(
   return byKey;
 }
 
+/** Criminal name key → "Carte de …" hunt map, the item you buy to do the avis. */
+async function fetchAvisCartes(
+  signal?: AbortSignal,
+): Promise<Map<string, Item>> {
+  const byKey = new Map<string, Item>();
+  try {
+    const raw = await fetchAllPages<RawItem>(
+      "/items",
+      `typeId=${CARTE_TYPE_ID}&lang=fr`,
+      signal,
+      20,
+    );
+    for (const it of raw) {
+      const name = pickName(it.name, "");
+      if (!name.toLowerCase().startsWith(CARTE_NAME_PREFIX)) continue;
+      const key = carteCriminalKey(name);
+      if (key && !byKey.has(key)) byKey.set(key, toItem(it));
+    }
+  } catch {
+    // Non-fatal: avis just show no carte.
+  }
+  return byKey;
+}
+
 /** Fetch all aviton-rewarding avis de recherche, enriched and most avitons first. */
 export async function fetchAvisDeRecherche(
   signal?: AbortSignal,
 ): Promise<AvisReward[]> {
-  const [raw, monsterImgs, chests] = await Promise.all([
+  const [raw, monsterImgs, chests, cartes] = await Promise.all([
     fetchAllPages<RawQuest>(
       "/quests",
       `categoryId=${AVIS_CATEGORY_ID}&lang=fr`,
@@ -355,6 +380,7 @@ export async function fetchAvisDeRecherche(
     ),
     fetchAvisMonsterImages(signal),
     fetchAvisChests(signal),
+    fetchAvisCartes(signal),
   ]);
 
   const list = raw
@@ -364,12 +390,16 @@ export async function fetchAvisDeRecherche(
       const key = questCriminalKey(avis.name);
       const monsterImg = monsterImgs.get(key);
       const chest = chests.get(key);
+      const carte = cartes.get(key);
       return {
         ...avis,
         img: monsterImg ?? avis.img, // prefer the criminal's picture
         chestItemId: chest?.id,
         chestName: chest?.name,
         chestImg: chest?.img,
+        carteItemId: carte?.id,
+        carteName: carte?.name,
+        carteImg: carte?.img,
       };
     });
 

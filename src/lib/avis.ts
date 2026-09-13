@@ -29,6 +29,10 @@ export interface AvisReward {
   chestItemId?: string;
   chestName?: string;
   chestImg?: string;
+  /** The "Carte de …" hunt map — the item you buy/consume to do the avis (a cost). */
+  carteItemId?: string;
+  carteName?: string;
+  carteImg?: string;
   /** The resource inside the chest ("<Type> de …") — the valuable, priceable drop. */
   resourceItemId?: string;
   resourceName?: string;
@@ -65,6 +69,10 @@ export function monsterCriminalKey(name: string): string {
 
 export function chestCriminalKey(name: string): string {
   return normalizeKey(name).replace(/^coffre de\s+/, "").trim();
+}
+
+export function carteCriminalKey(name: string): string {
+  return normalizeKey(name).replace(/^carte de\s+/, "").trim();
 }
 
 /** The fetched catalog, cached with a timestamp. */

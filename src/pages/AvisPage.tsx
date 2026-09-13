@@ -78,6 +78,9 @@ export function AvisPage() {
           <AvisCard
             key={avis.id}
             avis={avis}
+            cartePrice={
+              avis.carteItemId ? prices[avis.carteItemId] : undefined
+            }
             resourcePrice={
               avis.resourceItemId ? prices[avis.resourceItemId] : undefined
             }
