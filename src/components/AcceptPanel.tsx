@@ -75,7 +75,8 @@ export function AcceptPanel({
     return (
       <div className="accept-panel accept-done">
         <p>
-          ✓ Enregistré pour <strong>{savedItem.name}</strong> — {formatKamas(price)}
+          ✓ Enregistré pour <strong title={savedItem.name}>{savedItem.name}</strong> —{" "}
+          {formatKamas(price)}
         </p>
         <button
           type="button"
@@ -115,6 +116,7 @@ export function AcceptPanel({
                 type="button"
                 className={`apply-candidate${i === 0 ? " accept-best" : ""}`}
                 onClick={() => onAccept(item)}
+                title={item.level != null ? `${item.name} (Niv. ${item.level})` : item.name}
               >
                 {item.img && (
                   <img src={item.img} alt="" className="autocomplete-icon" />

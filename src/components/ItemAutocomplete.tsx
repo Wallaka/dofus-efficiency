@@ -109,6 +109,7 @@ export function ItemAutocomplete({
                     type="button"
                     className="autocomplete-option"
                     onClick={() => pick(item)}
+                    title={item.level != null ? `${item.name} (Niv. ${item.level})` : item.name}
                   >
                     {item.img && (
                       <img src={item.img} alt="" className="autocomplete-icon" />
