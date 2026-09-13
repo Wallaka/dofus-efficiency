@@ -12,7 +12,7 @@
  * return null and the caller just uses the whole image.
  */
 import type { CropRect } from "./cropImage";
-import type { ScreenshotKind, ItemCategory } from "./screenshotAnalysis";
+import type { ScreenshotKind } from "./screenshotAnalysis";
 
 /** Minimal shape we need from an OCR word (compatible with OcrWord). */
 export interface WordBox {
@@ -34,7 +34,11 @@ interface Padding {
 
 /** Marker words (accent-stripped substrings) that sit inside each type's panel. */
 const ANCHORS: Partial<Record<ScreenshotKind, string[]>> = {
-  "market-trend": ["cours", "marche", "median", "moyen", "articles", "vendus"],
+  // Only the market stats line's *distinctive* words — "cours"/"marche"/"moyen"
+  // also appear in the chat ("en cours") and other windows, and would drag the
+  // crop cluster onto the wrong panel. "médian/articles/vendus" are unique to the
+  // "Cours du marché" window.
+  "market-trend": ["median", "articles", "vendus"],
   hdv: ["quantite", "moyen", "lot", "acheter"],
   "item-tooltip": ["panoplie", "effets", "moyen", "poids", "niveau", "niv"],
 };
@@ -42,21 +46,23 @@ const ANCHORS: Partial<Record<ScreenshotKind, string[]>> = {
 // Padding as a fraction of image width/height. HDV gets a big bottom margin so
 // the lot list is included; every type gets extra on top for the item name.
 const PADDING: Partial<Record<ScreenshotKind, Padding>> = {
-  // The "Cours du marché" window holds the title, stats line AND the graph. Pad
-  // generously down (to include the graph + its date axis for the 7-day history)
-  // and right, anchored on the title/stats even when only the title is read.
-  "market-trend": { left: 0.03, right: 0.14, top: 0.06, bottom: 0.42 },
+  // Anchored on the stats line (médian/articles/vendus), which sits to the right
+  // of and below the item's header. Pad well left + up to reach the item name and
+  // level, and far down to include the graph + its 7-day date axis.
+  "market-trend": { left: 0.24, right: 0.05, top: 0.15, bottom: 0.42 },
   hdv: { left: 0.03, right: 0.04, top: 0.05, bottom: 0.16 },
   "item-tooltip": { left: 0.04, right: 0.04, top: 0.05, bottom: 0.04 },
 };
 
 const DEFAULT_PADDING: Padding = { left: 0.04, right: 0.04, top: 0.05, bottom: 0.05 };
 
-// A resource's lot list (x1/x10/x100/x1000) sits directly under the detail
-// header, and the lot *prices* sit to the right of the label words we anchor on.
-// Full-res pass 1 often misses that small text, so extend both down (to keep
-// every lot row) and right (to keep the price column) around the top anchors.
-const RESOURCE_HDV_PAD = { right: 0.1, bottom: 0.4 };
+// The HDV lot list (x1/x10/x100/x1000) sits below the detail header, and the lot
+// *prices* sit to the right of the quantities. The anchor cluster only reliably
+// covers the labels (the "ACHETER" buttons on the far right aren't always read),
+// so pad generously down and right to keep every row and the whole price column —
+// regardless of how wide the detected cluster happens to be. Applied to all HDV
+// (category is often still "unknown" at the locate pass).
+const HDV_LOT_PAD = { right: 0.22, bottom: 0.42 };
 // Keep only markers whose left edge is within this fraction of the image width
 // from the primary (leftmost) marker — drops matches from other windows.
 const CLUSTER_WIDTH_FRACTION = 0.4;
@@ -80,7 +86,6 @@ export function computeAutoCrop(
   words: WordBox[],
   size: ImageSize,
   kind: ScreenshotKind,
-  category?: ItemCategory,
 ): CropRect | null {
   const anchors = ANCHORS[kind];
   if (!anchors || words.length === 0) return null;
@@ -104,8 +109,8 @@ export function computeAutoCrop(
   const y1 = Math.max(...clustered.map((h) => h.bbox.y1));
 
   let pad = PADDING[kind] ?? DEFAULT_PADDING;
-  if (kind === "hdv" && category === "resource") {
-    pad = { ...pad, ...RESOURCE_HDV_PAD };
+  if (kind === "hdv") {
+    pad = { ...pad, ...HDV_LOT_PAD };
   }
   const px = size.width;
   const py = size.height;

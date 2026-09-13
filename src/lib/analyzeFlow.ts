@@ -35,14 +35,28 @@ async function imageSize(blob: Blob): Promise<{ width: number; height: number }>
   }
 }
 
-/** Crop, falling back to the whole image if the rect is bad/tiny. */
-export async function cropSafe(full: Blob, rect: CropRect): Promise<Blob> {
+/** Crop (optionally scaled), falling back to the whole image if the rect is bad/tiny. */
+export async function cropSafe(
+  full: Blob,
+  rect: CropRect,
+  scale = 2,
+): Promise<Blob> {
   try {
-    return await cropImageToBlob(full, rect);
+    return await cropImageToBlob(full, rect, scale);
   } catch {
     return full;
   }
 }
+
+/**
+ * Full-screen Dofus captures are busy — the game world shows through the
+ * translucent panels — and at native size pass 1 often can't read a window's
+ * title/markers (e.g. "Cours du marché", "articles vendus"), so it misclassifies
+ * the screen and can't locate the panel. Upscaling the classify/locate pass makes
+ * those markers legible. Word boxes come back in upscaled coordinates, so we
+ * divide them back to native before cropping the original.
+ */
+const PASS1_SCALE: number = 1.5;
 
 /**
  * Analyse a full-image blob with the two-pass auto-crop flow. `onProgress` runs
@@ -52,19 +66,35 @@ export async function analyzeImageBlob(
   full: Blob,
   onProgress?: (fraction: number) => void,
 ): Promise<FlowResult> {
-  const pass1 = await recognizeImage(full, {
+  const size = await imageSize(full);
+  // Pass 1 (classify + locate) on an upscaled copy for legibility.
+  const pass1Image = await cropSafe(
+    full,
+    { x: 0, y: 0, width: size.width, height: size.height },
+    PASS1_SCALE,
+  );
+  const pass1 = await recognizeImage(pass1Image, {
     boxes: true,
     onProgress: (p) => onProgress?.(p * 0.5),
   });
   const a1 = analyzeScreenshot(pass1.text);
   const isMarket = a1.kind === "market-trend";
 
-  const rect = computeAutoCrop(
-    pass1.words,
-    await imageSize(full),
-    a1.kind,
-    a1.category,
-  );
+  // Bring word boxes back to native pixels so the crop lands on the original.
+  const words =
+    PASS1_SCALE === 1
+      ? pass1.words
+      : pass1.words.map((w) => ({
+          ...w,
+          bbox: {
+            x0: w.bbox.x0 / PASS1_SCALE,
+            y0: w.bbox.y0 / PASS1_SCALE,
+            x1: w.bbox.x1 / PASS1_SCALE,
+            y1: w.bbox.y1 / PASS1_SCALE,
+          },
+        }));
+
+  const rect = computeAutoCrop(words, size, a1.kind);
   if (!rect) {
     onProgress?.(1);
     return { analysis: a1, dates: [], autoRect: null }; // couldn't localise
