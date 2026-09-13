@@ -603,6 +603,24 @@ table.lots td.num {
   padding: 2px 8px;
 }
 
+/* Inline manual-price field on the Objets suivis page. */
+.tracked-price-input {
+  width: 8rem;
+  max-width: 100%;
+  padding: 4px 8px;
+  text-align: right;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--num-bg);
+  color: inherit;
+  font: inherit;
+}
+
+.tracked-price-input:focus {
+  outline: none;
+  border-color: color-mix(in srgb, var(--positive) 50%, var(--border));
+}
+
 .raw-ocr {
   margin: 10px 0 0;
   padding: 10px;
