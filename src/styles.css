@@ -608,35 +608,75 @@ table.lots td.num {
   font-size: 0.78rem;
 }
 
-/* Per-card analysis status. */
+/* Per-card analysis status line (when there's nothing to show yet). */
 .ss-status {
   display: block;
-  margin-top: 4px;
-  font-size: 0.72rem;
-  font-weight: 600;
+  margin: 8px 0 0;
+  font-size: 0.75rem;
 }
 
-.ss-status-detail {
-  font-weight: 400;
-  color: var(--muted);
-}
-
-.ss-status-saved {
-  color: var(--positive);
-}
-
-.ss-status-unmatched {
-  color: #e6b45a;
-}
-
-.ss-status-no-price,
 .ss-status-pending {
   color: var(--muted);
-  font-weight: 400;
 }
 
 .ss-status-error {
   color: var(--negative);
+}
+
+/* Wider cards so the inline reading fits; reading sits under the thumbnail. */
+.screenshot-grid-wide {
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.screenshot-analysis-inline {
+  padding: 10px 12px 12px;
+  border-top: 1px solid var(--border);
+}
+
+.screenshot-analysis-inline .analysis {
+  font-size: 0.82rem;
+}
+
+.screenshot-analysis-inline .lots {
+  margin-top: 8px;
+}
+
+/* Accept step under a reading. */
+.accept-panel {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+}
+
+.accept-title {
+  margin: 0 0 8px;
+  font-size: 0.82rem;
+}
+
+.accept-suggested {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.accept-check {
+  margin-left: auto;
+  color: var(--positive);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.accept-done p {
+  margin: 0 0 8px;
+  color: var(--positive);
+  font-size: 0.85rem;
+}
+
+/* Per-quantity lot prices on the Prix page. */
+.price-lots {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--muted);
 }
 
 /* Prix page */

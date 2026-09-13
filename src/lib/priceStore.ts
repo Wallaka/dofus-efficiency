@@ -1,4 +1,16 @@
-import type { ScreenshotAnalysis } from "./screenshotAnalysis";
+import type { Item } from "../types";
+import type { Lot, ScreenshotAnalysis } from "./screenshotAnalysis";
+
+/**
+ * Persist an OCR'd price for a chosen item (the feedback loop). `extra` carries
+ * richer readings kept for reference (e.g. a resource's per-quantity lot prices).
+ */
+export type ApplyPrice = (
+  item: Item,
+  price: number,
+  detail: string,
+  extra?: { lots?: Lot[] },
+) => void;
 
 /**
  * The stored price "database": for each item we keep not just the price (which
@@ -30,6 +42,8 @@ export interface PriceEntry {
   source: PriceSource;
   /** Short human note on where the price came from (e.g. "Cours du marché"). */
   detail?: string;
+  /** Per-quantity lot prices (x1/x10/x100/x1000), kept for resources. */
+  lots?: Lot[];
 }
 
 export type PriceEntryMap = Record<string, PriceEntry>;

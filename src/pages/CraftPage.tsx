@@ -20,6 +20,7 @@ import {
   deletePriceEntry,
   loadPriceEntries,
   type PriceEntry,
+  type ApplyPrice,
 } from "../lib/priceStore";
 import { useFavourites } from "../lib/useFavourites";
 import { PriceEditor } from "../components/PriceEditor";
@@ -124,9 +125,10 @@ export function CraftPage() {
     setPriceEntries((prev) => ({ ...prev, [itemId]: entry }));
   }
 
-  // OCR feedback loop: store a screenshot-read price for the chosen item.
-  const applyOcrPrice = useCallback(
-    (item: Item, price: number, detail: string) => {
+  // OCR feedback loop: store a screenshot-read price for the chosen item, along
+  // with any per-quantity lot prices read from the same screen.
+  const applyOcrPrice = useCallback<ApplyPrice>(
+    (item, price, detail, extra) => {
       setPriceNumber(item.id, price);
       const entry: PriceEntry = {
         itemId: item.id,
@@ -137,6 +139,7 @@ export function CraftPage() {
         updatedAt: Date.now(),
         source: "ocr",
         detail,
+        lots: extra?.lots,
       };
       recordPriceEntry(entry);
       setPriceEntries((prev) => ({ ...prev, [item.id]: entry }));
