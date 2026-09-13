@@ -21,15 +21,23 @@ export function PricesPage() {
     Object.values(loadPriceEntries()),
   );
   const [staleOnly, setStaleOnly] = useState(false);
+  const [filter, setFilter] = useState("");
   const now = Date.now();
 
   const sorted = useMemo(
     () => [...entries].sort((a, b) => b.updatedAt - a.updatedAt),
     [entries],
   );
-  const shown = staleOnly
-    ? sorted.filter((e) => isStale(e.updatedAt, now))
-    : sorted;
+  // Accent/case-insensitive name filter (so "fleur" finds "Fleur de …").
+  const norm = (s: string) =>
+    s
+      .normalize("NFD")
+      .replace(/[̀-ͯ]/g, "")
+      .toLowerCase();
+  const query = norm(filter.trim());
+  const shown = sorted
+    .filter((e) => !staleOnly || isStale(e.updatedAt, now))
+    .filter((e) => !query || norm(e.name).includes(query));
 
   const staleCount = entries.filter((e) => isStale(e.updatedAt, now)).length;
   const freshCount = entries.length - staleCount;
@@ -69,6 +77,25 @@ export function PricesPage() {
             </label>
           </div>
 
+          <div className="prices-search">
+            <input
+              type="search"
+              className="prices-search-input"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+              placeholder="Filtrer par nom…"
+              aria-label="Filtrer les prix par nom"
+            />
+            {filter.trim() !== "" && (
+              <span className="hint">
+                {shown.length} / {entries.length}
+              </span>
+            )}
+          </div>
+
+          {shown.length === 0 ? (
+            <p className="hint">Aucun objet ne correspond à la recherche.</p>
+          ) : (
           <div className="table-scroll">
             <table>
               <thead>
@@ -142,6 +169,7 @@ export function PricesPage() {
               </tbody>
             </table>
           </div>
+          )}
         </>
       )}
     </section>

@@ -702,6 +702,29 @@ table.lots td.num {
   margin-left: auto;
 }
 
+.prices-search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.prices-search-input {
+  flex: 1;
+  max-width: 360px;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.prices-search .hint {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
 .price-item {
   display: flex;
   align-items: center;
