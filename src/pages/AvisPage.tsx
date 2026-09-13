@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { AvisReward } from "../lib/avis";
 import { avitonUnitValue } from "../lib/avis";
+import type { Item, PriceMap } from "../types";
 import { fetchAvisDeRecherche } from "../data/dofusApi";
 import {
   loadAvisAviton,
@@ -11,6 +12,8 @@ import {
   saveAvisCatalog,
   saveAvisParticipation,
 } from "../lib/storage";
+import { loadPriceEntries, type PriceEntryMap } from "../lib/priceStore";
+import { setManualPrice, clearPrice } from "../lib/trackedPrices";
 import { formatDateTime, formatKamas } from "../lib/format";
 import { AvisCard } from "../components/AvisCard";
 
@@ -25,8 +28,32 @@ export function AvisPage() {
   );
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string>();
-  // Shared price map (from the craft/prix pages) → carte + resource prices.
-  const prices = useRef(loadPrices() ?? {}).current;
+  // Shared price store (carte + resource prices). Held in state so hand-typed
+  // prices re-render and recompute benefits; `entries` carries each price's
+  // source (OCR vs manual) for the badge.
+  const [prices, setPrices] = useState<PriceMap>(() => loadPrices() ?? {});
+  const [entries, setEntries] = useState<PriceEntryMap>(loadPriceEntries);
+
+  function onPriceChange(item: Item, value: number | null) {
+    if (value == null) {
+      clearPrice(item.id);
+      setPrices((p) => {
+        const next = { ...p };
+        delete next[item.id];
+        return next;
+      });
+      setEntries((e) => {
+        const next = { ...e };
+        delete next[item.id];
+        return next;
+      });
+      return;
+    }
+    const entry = setManualPrice(item, value);
+    setPrices((p) => ({ ...p, [item.id]: value }));
+    setEntries((e) => ({ ...e, [item.id]: entry }));
+  }
+
   // Per-avis "spot" fee (avis id → kamas), persisted.
   const [participation, setParticipation] = useState<Record<string, number>>(
     loadAvisParticipation,
@@ -81,6 +108,8 @@ export function AvisPage() {
         <h2>Avis de recherche</h2>
         <p className="hint">
           Tous les avis de recherche qui rapportent des avitons (source DofusDB).
+          Les prix carte et ressource sont remplis par l'OCR ou saisissables à la
+          main&nbsp;; ils alimentent aussi les pages Objets suivis et Prix.
         </p>
         <div className="avis-toolbar">
           <button type="button" onClick={load} disabled={status === "loading"}>
@@ -144,8 +173,42 @@ export function AvisPage() {
             cartePrice={
               avis.carteItemId ? prices[avis.carteItemId] : undefined
             }
+            carteSource={
+              avis.carteItemId ? entries[avis.carteItemId]?.source : undefined
+            }
+            onCartePriceChange={
+              avis.carteItemId
+                ? (value) =>
+                    onPriceChange(
+                      {
+                        id: avis.carteItemId!,
+                        name: avis.carteName ?? "Carte",
+                        img: avis.carteImg,
+                      },
+                      value,
+                    )
+                : undefined
+            }
             resourcePrice={
               avis.resourceItemId ? prices[avis.resourceItemId] : undefined
+            }
+            resourceSource={
+              avis.resourceItemId
+                ? entries[avis.resourceItemId]?.source
+                : undefined
+            }
+            onResourcePriceChange={
+              avis.resourceItemId
+                ? (value) =>
+                    onPriceChange(
+                      {
+                        id: avis.resourceItemId!,
+                        name: avis.resourceName ?? "Ressource",
+                        img: avis.resourceImg,
+                      },
+                      value,
+                    )
+                : undefined
             }
             avitonValue={avitonUnit * avis.avitons}
             participationCost={participation[avis.id] ?? 0}
