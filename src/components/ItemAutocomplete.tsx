@@ -7,6 +7,10 @@ interface Props {
   /** Marks results already tracked, so the list can show a checkmark. */
   isPicked?: (id: string) => boolean;
   placeholder?: string;
+  /** Seed the search box (and auto-run the search) with this text. */
+  initialQuery?: string;
+  /** Focus the input on mount. */
+  autoFocus?: boolean;
 }
 
 type State =
@@ -19,8 +23,14 @@ const DEBOUNCE_MS = 300;
 const MIN_CHARS = 2;
 
 /** Type-ahead search over DofusDB items; picking one calls `onPick`. */
-export function ItemAutocomplete({ onPick, isPicked, placeholder }: Props) {
-  const [query, setQuery] = useState("");
+export function ItemAutocomplete({
+  onPick,
+  isPicked,
+  placeholder,
+  initialQuery,
+  autoFocus,
+}: Props) {
+  const [query, setQuery] = useState(initialQuery ?? "");
   const [state, setState] = useState<State>({ status: "idle" });
   const [open, setOpen] = useState(false);
 
@@ -71,6 +81,8 @@ export function ItemAutocomplete({ onPick, isPicked, placeholder }: Props) {
         className="autocomplete-input"
         placeholder={placeholder ?? "Rechercher un objet…"}
         value={query}
+        // eslint-disable-next-line jsx-a11y/no-autofocus
+        autoFocus={autoFocus}
         onChange={(e) => setQuery(e.target.value)}
         onFocus={() => setOpen(true)}
         aria-label="Rechercher un objet"

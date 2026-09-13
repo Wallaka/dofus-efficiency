@@ -22,6 +22,7 @@ const AVIS_KEY = "dofus-efficiency:avisCatalog:v3";
 // v2: participation is now per-avis (a map keyed by avis id), not a single fee.
 const AVIS_PARTICIPATION_KEY = "dofus-efficiency:avisParticipation:v2";
 const AVIS_AVITON_KEY = "dofus-efficiency:avisAviton:v1";
+const AVIS_OVERRIDES_KEY = "dofus-efficiency:avisOverrides:v1";
 
 export function loadPrices(): PriceMap | null {
   try {
@@ -223,6 +224,55 @@ export function loadAvisAviton(): AvisAvitonRate {
 export function saveAvisAviton(rate: AvisAvitonRate): void {
   try {
     localStorage.setItem(AVIS_AVITON_KEY, JSON.stringify(rate));
+  } catch {
+    // non-fatal
+  }
+}
+
+/**
+ * Manual corrections when the auto-fetch mismatches an avis: per avis, the user
+ * can pin the right "Carte de …" and/or resource item. Keyed by avis id; each
+ * slot is the chosen Item. Survives a catalog refresh.
+ */
+export interface AvisSlotOverride {
+  carte?: Item;
+  resource?: Item;
+}
+export type AvisOverrides = Record<string, AvisSlotOverride>;
+
+function isItem(x: unknown): x is Item {
+  return (
+    !!x &&
+    typeof x === "object" &&
+    typeof (x as Item).id === "string" &&
+    typeof (x as Item).name === "string"
+  );
+}
+
+export function loadAvisOverrides(): AvisOverrides {
+  try {
+    const raw = localStorage.getItem(AVIS_OVERRIDES_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object") return {};
+    const out: AvisOverrides = {};
+    for (const [id, slot] of Object.entries(parsed as Record<string, unknown>)) {
+      if (!slot || typeof slot !== "object") continue;
+      const s = slot as AvisSlotOverride;
+      const clean: AvisSlotOverride = {};
+      if (isItem(s.carte)) clean.carte = s.carte;
+      if (isItem(s.resource)) clean.resource = s.resource;
+      if (clean.carte || clean.resource) out[id] = clean;
+    }
+    return out;
+  } catch {
+    return {};
+  }
+}
+
+export function saveAvisOverrides(map: AvisOverrides): void {
+  try {
+    localStorage.setItem(AVIS_OVERRIDES_KEY, JSON.stringify(map));
   } catch {
     // non-fatal
   }
