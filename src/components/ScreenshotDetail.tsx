@@ -3,37 +3,17 @@ import type { ScreenshotInfo } from "../lib/screenshotMeta";
 import { recognizeImage } from "../lib/ocr";
 import {
   analyzeScreenshot,
-  mergeAnalyses,
   type ScreenshotAnalysis,
   type ScreenshotKind,
   type ItemCategory,
 } from "../lib/screenshotAnalysis";
-import { cropImageToBlob, type CropRect } from "../lib/cropImage";
-import { computeAutoCrop } from "../lib/autoCrop";
-import { extractMarketDates } from "../lib/chartExtract";
+import { type CropRect } from "../lib/cropImage";
+import { analyzeImageBlob, cropSafe } from "../lib/analyzeFlow";
 import { priceToRecord } from "../lib/priceStore";
 import type { Item } from "../types";
 import { CropSelector } from "./CropSelector";
 import { PriceApplyPanel } from "./PriceApplyPanel";
 import { formatKamas, formatDateTime, formatBytes } from "../lib/format";
-
-/** Natural pixel size of an image blob. */
-async function imageSize(blob: Blob): Promise<{ width: number; height: number }> {
-  const bmp = await createImageBitmap(blob);
-  try {
-    return { width: bmp.width, height: bmp.height };
-  } finally {
-    bmp.close?.();
-  }
-}
-
-async function cropSafe(full: Blob, rect: CropRect): Promise<Blob> {
-  try {
-    return await cropImageToBlob(full, rect);
-  } catch {
-    return full; // bad/tiny rect → use the whole image
-  }
-}
 
 interface Props {
   file: ScreenshotInfo;
@@ -109,39 +89,14 @@ export function ScreenshotDetail({ file, imageUrl, onClose, onApplyPrice }: Prop
         return;
       }
 
-      // 3) Auto-crop: pass 1 reads the whole image + word boxes to classify the
-      //    screen and locate the panel; pass 2 re-reads just that panel.
-      const pass1 = await recognizeImage(full, {
-        boxes: true,
-        onProgress: (p) => onProgress(p * 0.5),
-      });
-      const a1 = analyzeScreenshot(pass1.text);
-      const isMarket = a1.kind === "market-trend";
-
-      const rect = computeAutoCrop(
-        pass1.words,
-        await imageSize(full),
-        a1.kind,
-        a1.category,
+      // 3) Auto-crop two-pass (shared with the automatic batch analyser): pass 1
+      //    classifies + locates the panel, pass 2 re-reads the upscaled crop.
+      const { analysis, dates, autoRect: rect } = await analyzeImageBlob(
+        full,
+        onProgress,
       );
-      if (!rect) {
-        setState({ phase: "done", analysis: a1, dates: [] }); // couldn't localise
-        return;
-      }
-      setAutoRect(rect);
-
-      // Pass 2 reads the (upscaled) crop. For the price graph we also ask for word
-      // boxes and read the x-axis date range from the same upscaled crop — small
-      // axis text is only legible once enlarged. (We rely on the médian/moyen text
-      // for the actual price, not the curve.)
-      const cropBlob = await cropSafe(full, rect);
-      const pass2 = await recognizeImage(cropBlob, {
-        boxes: isMarket,
-        onProgress: (p) => onProgress(0.5 + p * 0.5),
-      });
-      const a2 = analyzeScreenshot(pass2.text);
-      const dates = isMarket ? extractMarketDates(pass2.words) : [];
-      setState({ phase: "done", analysis: mergeAnalyses(a1, a2), dates });
+      if (rect) setAutoRect(rect);
+      setState({ phase: "done", analysis, dates });
     } catch (err) {
       setState({
         phase: "error",
