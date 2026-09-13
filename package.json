@@ -4,7 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "prepare:tesseract": "node scripts/prepare-tesseract.mjs",
+    "predev": "npm run prepare:tesseract",
     "dev": "vite",
+    "prebuild": "npm run prepare:tesseract",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "typecheck": "tsc -b --noEmit"

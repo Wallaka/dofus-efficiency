@@ -95,10 +95,25 @@ function splitLines(text: string): string[] {
 // One worker, reused across analyses. Created on first real recognition.
 let workerPromise: Promise<import("tesseract.js").Worker> | null = null;
 
+/** Absolute URL of a vendored asset, resolved against the app's base (works on
+ *  the GitHub Pages subpath and locally). */
+function vendorUrl(path: string): string {
+  return new URL(
+    import.meta.env.BASE_URL + path,
+    window.location.href,
+  ).toString();
+}
+
 async function getWorker(onProgress?: (fraction: number) => void) {
   if (!workerPromise) {
     const { createWorker } = await import("tesseract.js");
-    workerPromise = createWorker("fra", undefined, {
+    // Everything is self-hosted (see scripts/prepare-tesseract.mjs) so OCR runs
+    // fully offline — no CDN at runtime.
+    workerPromise = createWorker("fra", 1, {
+      workerPath: vendorUrl("vendor/tesseract/worker.min.js"),
+      corePath: vendorUrl("vendor/tesseract/"),
+      langPath: vendorUrl("vendor/tessdata"),
+      gzip: true,
       logger: (m: { status: string; progress: number }) => {
         if (m.status === "recognizing text") onProgress?.(m.progress);
       },
