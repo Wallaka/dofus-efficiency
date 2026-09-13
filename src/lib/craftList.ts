@@ -14,6 +14,20 @@ export interface CraftEntry extends ResolvedRecipe {
 }
 
 const CRAFT_LIST_KEY = "dofus-efficiency:craftList:v1";
+const CRAFT_TAX_KEY = "dofus-efficiency:craftTax:v1";
+
+/** Default HDV sell tax, as a percentage of the sale price. */
+export const DEFAULT_TAX_PERCENT = 2;
+
+/** Evaluation of a craft, with the HDV sell tax folded into a net benefit. */
+export interface CraftBenefit extends CraftEvaluation {
+  /** Tax paid to sell at the HDV: sellPrice × rate, in kamas. undefined if no sell price. */
+  tax?: number;
+  /** Net margin after tax: sellPrice − tax − craftCost. undefined if not computable. */
+  netMargin?: number;
+  /** netMargin / craftCost, as a ratio. undefined if not computable. */
+  netMarginRatio?: number;
+}
 
 function isItem(x: unknown): x is Item {
   return (
@@ -56,11 +70,36 @@ export function saveCraftList(entries: CraftEntry[]): void {
   }
 }
 
-/** Turn a stored entry into the Recipe/itemsById shape evaluateRecipe expects. */
+/** The HDV sell-tax percentage, persisted; falls back to the default. */
+export function loadCraftTaxPercent(): number {
+  try {
+    const raw = localStorage.getItem(CRAFT_TAX_KEY);
+    if (raw == null) return DEFAULT_TAX_PERCENT;
+    const n = Number(raw);
+    return Number.isFinite(n) && n >= 0 ? n : DEFAULT_TAX_PERCENT;
+  } catch {
+    return DEFAULT_TAX_PERCENT;
+  }
+}
+
+export function saveCraftTaxPercent(percent: number): void {
+  try {
+    localStorage.setItem(CRAFT_TAX_KEY, String(percent));
+  } catch {
+    // non-fatal
+  }
+}
+
+/**
+ * Evaluate a stored entry against the current prices, then fold in the HDV sell
+ * tax (a fraction, e.g. 0.02 for 2 %). The tax is charged on the sale price, so
+ * the net benefit is sellPrice − tax − craftCost — only when both are known.
+ */
 export function evaluateEntry(
   entry: CraftEntry,
   prices: PriceMap,
-): CraftEvaluation {
+  taxRate = 0,
+): CraftBenefit {
   const recipe: Recipe = {
     id: entry.recipeId,
     resultItemId: entry.resultItem.id,
@@ -73,5 +112,17 @@ export function evaluateEntry(
   const itemsById = new Map<string, Item>();
   itemsById.set(entry.resultItem.id, entry.resultItem);
   for (const i of entry.ingredients) itemsById.set(i.item.id, i.item);
-  return evaluateRecipe(recipe, itemsById, prices);
+  const base = evaluateRecipe(recipe, itemsById, prices);
+
+  const { craftCost, sellPrice } = base;
+  const tax = sellPrice != null ? Math.round(sellPrice * taxRate) : undefined;
+
+  let netMargin: number | undefined;
+  let netMarginRatio: number | undefined;
+  if (craftCost != null && sellPrice != null) {
+    netMargin = sellPrice - (tax ?? 0) - craftCost;
+    netMarginRatio = craftCost > 0 ? netMargin / craftCost : undefined;
+  }
+
+  return { ...base, tax, netMargin, netMarginRatio };
 }

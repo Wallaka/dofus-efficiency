@@ -1782,6 +1782,39 @@ td.negative {
   color: var(--muted);
 }
 
+/* HDV sell-tax control (top of the Craft page). */
+.craft-tax {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.craft-tax-label {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.craft-tax input {
+  width: 72px;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.craft-tax .hint {
+  margin: 0;
+}
+
 .craft-filter {
   display: flex;
   align-items: center;
@@ -2150,6 +2183,66 @@ td.negative {
   font-style: italic;
 }
 
+/* Breakdown under the ingredients: vente − taxe − coût = bénéfice net. */
+.craft-recap {
+  margin: 6px 0 0;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.82rem;
+}
+
+.craft-recap-row {
+  display: grid;
+  grid-template-columns: 30px minmax(150px, 1.6fr) 88px 104px 104px 58px 26px;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.craft-recap-row dt {
+  grid-column: 2 / 5;
+  margin: 0;
+  color: var(--muted);
+}
+
+.craft-recap-row dd {
+  grid-column: 5;
+  margin: 0;
+  justify-self: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.craft-recap-row dd.neg {
+  color: var(--muted);
+}
+
+.craft-recap-total {
+  margin-top: 2px;
+  padding-top: 6px;
+  border-top: 1px dashed var(--border);
+}
+
+.craft-recap-total dt {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.craft-recap-total dd {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.craft-recap-total dd.pos {
+  color: var(--positive);
+}
+
+.craft-recap-total dd.neg {
+  color: var(--negative);
+}
+
 /* Responsive: below ~640px the summary row and ingredients stack. */
 @media (max-width: 640px) {
   .craft-list-head {
@@ -2223,5 +2316,14 @@ td.negative {
   .craft-ing-total {
     order: 3;
     min-width: 68px;
+  }
+  .craft-recap-row {
+    grid-template-columns: 1fr auto;
+  }
+  .craft-recap-row dt {
+    grid-column: 1;
+  }
+  .craft-recap-row dd {
+    grid-column: 2;
   }
 }
