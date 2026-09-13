@@ -1363,7 +1363,36 @@ table.lots td.num {
   color: var(--negative);
 }
 
-/* Inline participation input on the participation line. */
+/* Label row: the line label plus an optional source badge. */
+.avis-line-label-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.avis-src {
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.avis-src--ocr {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+
+.avis-src--todo {
+  color: var(--negative);
+  border-color: color-mix(in srgb, var(--negative) 45%, transparent);
+}
+
+/* Inline editable price/participation input on a line. */
 .avis-line-price-edit {
   display: inline-flex;
   align-items: center;
@@ -1371,7 +1400,7 @@ table.lots td.num {
 }
 
 .avis-line-price-edit input {
-  width: 72px;
+  width: 88px;
   padding: 4px 6px;
   border: 1px solid var(--border);
   border-radius: 7px;
@@ -1380,6 +1409,14 @@ table.lots td.num {
   font-variant-numeric: tabular-nums;
   font-size: 0.85rem;
   text-align: right;
+}
+
+.avis-line-price-edit input.needs {
+  border-color: color-mix(in srgb, var(--negative) 55%, var(--border));
+}
+
+.avis-line-price-edit input:disabled {
+  opacity: 0.5;
 }
 
 .avis-line-unit {
