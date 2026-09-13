@@ -280,8 +280,13 @@ function CardAnalysis({
         <AcceptPanel
           price={recordable.price}
           detail={recordable.detail}
-          suggested={rec.match}
-          savedItem={rec.status === "saved" ? rec.match : null}
+          itemName={rec.analysis.itemName}
+          candidates={rec.candidates}
+          savedItem={
+            rec.status === "saved" && rec.savedItemId
+              ? { id: rec.savedItemId, name: rec.savedItemName ?? "" }
+              : null
+          }
           onAccept={onAccept}
         />
       )}

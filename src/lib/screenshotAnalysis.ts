@@ -215,10 +215,31 @@ function nameBefore(lines: string[], typeIndex: number): string | null {
   for (let i = typeIndex - 1; i >= 0; i--) {
     const line = lines[i].trim();
     if (line.length >= 3 && /[a-zA-ZÀ-ÿ]/.test(line)) {
-      return line.replace(/\s{2,}/g, " ");
+      return cleanItemName(line);
     }
   }
   return null;
+}
+
+/**
+ * An item-name line read off a busy screen often has leading/trailing OCR junk
+ * ("3, 3 4 5, Bois de Frêne CL: 4 e ."). Drop everything before the first letter,
+ * then keep the leading run of real words (letters, apostrophes, hyphens),
+ * stopping at the first token with a digit or punctuation — that's where the name
+ * ends and noise begins.
+ */
+function cleanItemName(line: string): string | null {
+  const stripped = line.replace(/^[^A-Za-zÀ-ÿ]+/, "");
+  const kept: string[] = [];
+  for (const tok of stripped.split(/\s+/)) {
+    if (/^[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ'’-]*$/.test(tok)) kept.push(tok);
+    else break;
+  }
+  // Drop stray single-letter tokens at either end (OCR speckle like a lone "L").
+  while (kept.length > 1 && kept[kept.length - 1].length === 1) kept.pop();
+  while (kept.length > 1 && kept[0].length === 1) kept.shift();
+  const name = kept.join(" ").trim();
+  return name.length >= 2 ? name : null;
 }
 
 /**
@@ -345,12 +366,16 @@ export function mergeAnalyses(
     const cropLots = parseLots(cropped.rawText);
     if (cropLots.length >= lots.length) lots = cropLots;
   }
+  // For the market graph, the full image is dominated by the inventory/other
+  // windows, so its item name is noise — only the cropped panel names the focused
+  // resource. Don't fall back to the full-image name/level/type there.
+  const cropOnlyName = kind === "market-trend";
   const merged: Omit<ScreenshotAnalysis, "note"> = {
     kind,
     category,
-    itemName: pick(cropped.itemName, full.itemName),
-    level: pick(cropped.level, full.level),
-    itemType: pick(cropped.itemType, full.itemType),
+    itemName: cropOnlyName ? cropped.itemName : pick(cropped.itemName, full.itemName),
+    level: cropOnlyName ? cropped.level : pick(cropped.level, full.level),
+    itemType: cropOnlyName ? cropped.itemType : pick(cropped.itemType, full.itemType),
     set: pick(cropped.set, full.set),
     averagePrice: pick(cropped.averagePrice, full.averagePrice),
     medianPrice: pick(cropped.medianPrice, full.medianPrice),

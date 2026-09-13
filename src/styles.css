@@ -653,9 +653,9 @@ table.lots td.num {
   font-size: 0.82rem;
 }
 
-.accept-suggested {
-  width: 100%;
-  justify-content: flex-start;
+/* The top-ranked candidate stands out as the likely accept. */
+.accept-best {
+  border-color: color-mix(in srgb, var(--positive) 55%, var(--border));
 }
 
 .accept-check {
