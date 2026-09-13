@@ -16,9 +16,10 @@ const DATASET_PREFIX = "dofus-efficiency:dataset:v1:";
 const LAST_SOURCE_KEY = "dofus-efficiency:lastSource:v1";
 const FAVOURITES_KEY = "dofus-efficiency:favourites:v1";
 const ELEVEUR_KEY = "dofus-efficiency:eleveur:v1";
-// v2: catalog now carries the chest resource — invalidate v1 caches so the
-// page refetches automatically instead of showing resource-less cards.
-const AVIS_KEY = "dofus-efficiency:avisCatalog:v2";
+// v3: catalog now carries the "Carte de …" hunt map too — invalidate older
+// caches so the page refetches automatically instead of showing carte-less cards.
+const AVIS_KEY = "dofus-efficiency:avisCatalog:v3";
+const AVIS_PARTICIPATION_KEY = "dofus-efficiency:avisParticipation:v1";
 
 export function loadPrices(): PriceMap | null {
   try {
@@ -152,6 +153,29 @@ export function saveAvisCatalog(list: AvisReward[]): void {
   try {
     const payload: AvisCatalog = { list, fetchedAt: Date.now() };
     localStorage.setItem(AVIS_KEY, JSON.stringify(payload));
+  } catch {
+    // non-fatal
+  }
+}
+
+/**
+ * Optional "spot" fee paid to participate in a hunt — a flat cost applied to
+ * every avis's benefit. 0 (or unset) means no participation cost.
+ */
+export function loadAvisParticipation(): number {
+  try {
+    const raw = localStorage.getItem(AVIS_PARTICIPATION_KEY);
+    if (!raw) return 0;
+    const n = Number(raw);
+    return Number.isFinite(n) && n > 0 ? n : 0;
+  } catch {
+    return 0;
+  }
+}
+
+export function saveAvisParticipation(value: number): void {
+  try {
+    localStorage.setItem(AVIS_PARTICIPATION_KEY, String(value));
   } catch {
     // non-fatal
   }

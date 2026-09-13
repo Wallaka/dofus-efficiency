@@ -1,7 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import type { AvisReward } from "../lib/avis";
 import { fetchAvisDeRecherche } from "../data/dofusApi";
-import { loadAvisCatalog, loadPrices, saveAvisCatalog } from "../lib/storage";
+import {
+  loadAvisCatalog,
+  loadAvisParticipation,
+  loadPrices,
+  saveAvisCatalog,
+  saveAvisParticipation,
+} from "../lib/storage";
 import { formatDateTime } from "../lib/format";
 import { AvisCard } from "../components/AvisCard";
 
@@ -16,8 +22,18 @@ export function AvisPage() {
   );
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string>();
-  // Shared price map (from the craft/prix pages) → chest resource prices.
+  // Shared price map (from the craft/prix pages) → carte + resource prices.
   const prices = useRef(loadPrices() ?? {}).current;
+  // Optional flat "spot" fee, applied to every avis's benefit.
+  const [participation, setParticipation] = useState<number>(
+    loadAvisParticipation,
+  );
+
+  function onParticipationChange(value: string) {
+    const n = Math.max(0, Math.round(Number(value) || 0));
+    setParticipation(n);
+    saveAvisParticipation(n);
+  }
 
   async function load() {
     setStatus("loading");
@@ -55,6 +71,19 @@ export function AvisPage() {
                 ? "Rafraîchir"
                 : "Charger"}
           </button>
+          <label className="avis-participation">
+            <span>Participation (spot)</span>
+            <input
+              type="number"
+              min={0}
+              step={100}
+              inputMode="numeric"
+              value={participation || ""}
+              placeholder="0"
+              onChange={(e) => onParticipationChange(e.target.value)}
+            />
+            <span className="avis-participation-unit">k</span>
+          </label>
           <span className="hint avis-meta">
             {status === "error" && (
               <span className="error-text">Erreur : {error}</span>
@@ -84,6 +113,7 @@ export function AvisPage() {
             resourcePrice={
               avis.resourceItemId ? prices[avis.resourceItemId] : undefined
             }
+            participationCost={participation}
           />
         ))}
       </ul>

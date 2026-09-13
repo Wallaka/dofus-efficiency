@@ -1,5 +1,6 @@
 import type { AvisReward } from "../lib/avis";
-import { formatKamas } from "../lib/format";
+import { computeAvisBenefit } from "../lib/avis";
+import { formatKamas, formatKamasSigned } from "../lib/format";
 
 interface Props {
   avis: AvisReward;
@@ -7,6 +8,8 @@ interface Props {
   cartePrice?: number;
   /** Tracked HDV price of the resource inside the chest, if known. */
   resourcePrice?: number;
+  /** Optional flat fee paid to join a hunt "spot", applied to every avis. */
+  participationCost?: number;
 }
 
 /** One priceable line: icon, label + item name, and price (or "—"). */
@@ -15,18 +18,20 @@ function AvisLine({
   label,
   name,
   img,
+  placeholder = "—",
   price,
 }: {
   variant: "cost" | "reward";
   label: string;
   name?: string;
   img?: string;
+  placeholder?: string;
   price?: number;
 }) {
   return (
     <div className={`avis-line avis-line--${variant}`}>
       <div className="avis-line-icon">
-        {img ? <img src={img} alt="" /> : <span aria-hidden>—</span>}
+        {img ? <img src={img} alt="" /> : <span aria-hidden>{placeholder}</span>}
       </div>
       <div className="avis-line-body">
         <span className="avis-line-label">{label}</span>
@@ -41,8 +46,27 @@ function AvisLine({
   );
 }
 
-/** One avis de recherche: picture, name, level, avitons + carte cost / resource reward. */
-export function AvisCard({ avis, cartePrice, resourcePrice }: Props) {
+/** One avis de recherche: picture, name, level, avitons + carte cost / resource reward / benefit. */
+export function AvisCard({
+  avis,
+  cartePrice,
+  resourcePrice,
+  participationCost = 0,
+}: Props) {
+  const benefit = computeAvisBenefit({
+    cartePrice,
+    resourcePrice,
+    participationCost,
+  });
+  const benefitClass =
+    benefit.value == null
+      ? ""
+      : benefit.value > 0
+        ? "avis-benefit--positive"
+        : benefit.value < 0
+          ? "avis-benefit--negative"
+          : "";
+
   return (
     <li className="avis-card">
       <header className="avis-head">
@@ -83,7 +107,26 @@ export function AvisCard({ avis, cartePrice, resourcePrice }: Props) {
           img={avis.resourceImg}
           price={resourcePrice}
         />
+        {participationCost > 0 && (
+          <AvisLine
+            variant="cost"
+            label="Participation (spot)"
+            name="Frais de participation"
+            placeholder="🎟️"
+            price={participationCost}
+          />
+        )}
       </div>
+
+      <footer
+        className={`avis-benefit ${benefitClass}`}
+        title="Bénéfice = ressource vendue − carte − participation. Les avitons ne sont pas encore comptés."
+      >
+        <span className="avis-benefit-label">Bénéfice</span>
+        <span className="avis-benefit-value">
+          {benefit.complete ? formatKamasSigned(benefit.value) : "—"}
+        </span>
+      </footer>
     </li>
   );
 }

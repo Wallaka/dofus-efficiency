@@ -1331,6 +1331,62 @@ table.lots td.num {
   font-size: 0.9rem;
 }
 
+/* Bottom line: the computed benefit. */
+.avis-benefit {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.avis-benefit-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.avis-benefit-value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--muted);
+}
+
+.avis-benefit--positive .avis-benefit-value {
+  color: var(--positive);
+}
+
+.avis-benefit--negative .avis-benefit-value {
+  color: var(--negative);
+}
+
+/* Participation-fee input in the toolbar. */
+.avis-participation {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.avis-participation input {
+  width: 90px;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.avis-participation-unit {
+  color: var(--muted);
+}
+
 /* Craft table */
 .table-scroll {
   overflow-x: auto;
