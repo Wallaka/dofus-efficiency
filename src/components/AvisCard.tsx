@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from "react";
 import type { AvisReward } from "../lib/avis";
-import { computeAvisBenefit } from "../lib/avis";
+import { computeAvisBenefit, questCriminalName } from "../lib/avis";
 import type { Item } from "../types";
 import type { PriceSource } from "../lib/priceStore";
 import { formatKamas, formatKamasSigned } from "../lib/format";
@@ -139,6 +139,8 @@ function EditableItemLine({
         <div className="avis-line-edit">
           <ItemAutocomplete
             placeholder={`Rechercher : ${label.toLowerCase()}…`}
+            initialQuery={questCriminalName(avisName)}
+            autoFocus
             onPick={(item) => {
               slot.onPick(item);
               setEditing(false);
