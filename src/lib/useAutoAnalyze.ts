@@ -112,7 +112,6 @@ export function useAutoAnalyze(files: ScreenshotFile[], onApplyPrice?: ApplyPric
     const updated: AnalyzedRecord = {
       ...rec,
       status: "saved",
-      match: item,
       savedItemId: item.id,
       savedItemName: item.name,
       savedAt: Date.now(),

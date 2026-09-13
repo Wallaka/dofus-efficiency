@@ -12,7 +12,7 @@ import type { Item } from "../types";
  * click. Nothing reaches the price store until the user accepts.
  */
 
-const KEY = "dofus-efficiency:analyzed:v2";
+const KEY = "dofus-efficiency:analyzed:v3";
 
 export type AnalyzedStatus =
   /** Read, with a price ready to accept into the store. */
@@ -34,8 +34,11 @@ export interface AnalyzedRecord {
   analysis: ScreenshotAnalysis;
   /** Market-graph dates, when the screen is a price history. */
   dates: string[];
-  /** Best-guess DofusDB item (from the OCR'd name), pre-filled for Accept. */
-  match?: Item | null;
+  /**
+   * Ranked DofusDB matches for the OCR'd name (best first), found during
+   * analysis so the accept step needs no typing or extra search.
+   */
+  candidates?: Item[];
   /** Set once accepted: the item the price was saved to. */
   savedItemId?: string;
   savedItemName?: string;

@@ -345,12 +345,16 @@ export function mergeAnalyses(
     const cropLots = parseLots(cropped.rawText);
     if (cropLots.length >= lots.length) lots = cropLots;
   }
+  // For the market graph, the full image is dominated by the inventory/other
+  // windows, so its item name is noise — only the cropped panel names the focused
+  // resource. Don't fall back to the full-image name/level/type there.
+  const cropOnlyName = kind === "market-trend";
   const merged: Omit<ScreenshotAnalysis, "note"> = {
     kind,
     category,
-    itemName: pick(cropped.itemName, full.itemName),
-    level: pick(cropped.level, full.level),
-    itemType: pick(cropped.itemType, full.itemType),
+    itemName: cropOnlyName ? cropped.itemName : pick(cropped.itemName, full.itemName),
+    level: cropOnlyName ? cropped.level : pick(cropped.level, full.level),
+    itemType: cropOnlyName ? cropped.itemType : pick(cropped.itemType, full.itemType),
     set: pick(cropped.set, full.set),
     averagePrice: pick(cropped.averagePrice, full.averagePrice),
     medianPrice: pick(cropped.medianPrice, full.medianPrice),
