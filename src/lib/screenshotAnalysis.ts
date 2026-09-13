@@ -165,19 +165,40 @@ const PRICE = "\\d{1,3}(?:[ .\\u00a0]\\d{3})*";
 // Between the "Prix moyen"/"médian" label and its value there's often a small
 // graph icon that OCR reads as junk ("Fr", "[A", "#"), and the value may sit on
 // the next line — so allow a short run of non-digits (incl. one line break).
+// A real price value: a thousand-grouped number, or 2+ plain digits. Excludes a
+// lone single digit — the small graph icon next to "Prix moyen/médian" is often
+// OCR'd as a stray "7"/"4", and the true value follows (sometimes on the next line).
+const VALUE_RE = /\d{1,3}(?:[ . ]\d{3})+|\d{2,}/;
+
+/**
+ * Read the number for a labeled price ("Prix moyen", "Prix médian"). Line-based:
+ * find the label, then take the first real value on that line (after the label) or
+ * the next two lines — robust to an icon glyph between the label and its value, and
+ * to the value sitting on the following line, without scanning the whole screen.
+ */
+function parseLabeledPrice(text: string, label: RegExp): number | null {
+  const lines = normalize(text).split(/\r?\n/);
+  for (let i = 0; i < lines.length; i++) {
+    const m = label.exec(lines[i]);
+    if (!m) continue;
+    const end = Math.min(i + 2, lines.length - 1);
+    for (let j = i; j <= end; j++) {
+      const hay = j === i ? lines[j].slice(m.index + m[0].length) : lines[j];
+      const v = VALUE_RE.exec(hay);
+      if (v) return parseNumber(v[0]);
+    }
+    return null; // label found but no value nearby
+  }
+  return null;
+}
+
 export function parseAveragePrice(text: string): number | null {
-  return firstNumberAfter(
-    normalize(text),
-    new RegExp(`prix\\s*moyen[^\\d]{0,15}(${PRICE})`, "i"),
-  );
+  return parseLabeledPrice(text, /prix\s*moyen/);
 }
 
 export function parseMedianPrice(text: string): number | null {
   // normalize() strips the accent so "médian" matches "median".
-  return firstNumberAfter(
-    normalize(text),
-    new RegExp(`prix\\s*median[^\\d]{0,15}(${PRICE})`, "i"),
-  );
+  return parseLabeledPrice(text, /prix\s*median/);
 }
 
 /** "1 387 925 articles vendus" → total sold over the graph's period. */
@@ -444,20 +465,21 @@ export function mergeAnalyses(
         : parseLots(cropped.rawText);
     if (cropLots.length >= lots.length) lots = cropLots;
   }
-  // For the market graph, the full image is dominated by the inventory/other
-  // windows, so its item name is noise — only the cropped panel names the focused
-  // resource. Don't fall back to the full-image name/level/type there.
-  const cropOnlyName = kind === "market-trend" || kind === "hdv-sell";
+  // For the market graph and the sell panel, the full image is dominated by the
+  // inventory/listing/other windows, so its name AND prices are noise — trust only
+  // the cropped panel there (a null field beats a wrong full-image number). Don't
+  // fall back to the full-image reads for those.
+  const cropOnly = kind === "market-trend" || kind === "hdv-sell";
   const merged: Omit<ScreenshotAnalysis, "note"> = {
     kind,
     category,
-    itemName: cropOnlyName ? cropped.itemName : pick(cropped.itemName, full.itemName),
-    level: cropOnlyName ? cropped.level : pick(cropped.level, full.level),
-    itemType: cropOnlyName ? cropped.itemType : pick(cropped.itemType, full.itemType),
+    itemName: cropOnly ? cropped.itemName : pick(cropped.itemName, full.itemName),
+    level: cropOnly ? cropped.level : pick(cropped.level, full.level),
+    itemType: cropOnly ? cropped.itemType : pick(cropped.itemType, full.itemType),
     set: pick(cropped.set, full.set),
-    averagePrice: pick(cropped.averagePrice, full.averagePrice),
-    medianPrice: pick(cropped.medianPrice, full.medianPrice),
-    articlesSold: pick(cropped.articlesSold, full.articlesSold),
+    averagePrice: cropOnly ? cropped.averagePrice : pick(cropped.averagePrice, full.averagePrice),
+    medianPrice: cropOnly ? cropped.medianPrice : pick(cropped.medianPrice, full.medianPrice),
+    articlesSold: cropOnly ? cropped.articlesSold : pick(cropped.articlesSold, full.articlesSold),
     lots,
     rawText: cropped.rawText,
   };
