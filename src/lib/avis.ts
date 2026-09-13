@@ -29,6 +29,10 @@ export interface AvisReward {
   chestItemId?: string;
   chestName?: string;
   chestImg?: string;
+  /** The "Carte de …" hunt map — the item you buy/consume to do the avis (a cost). */
+  carteItemId?: string;
+  carteName?: string;
+  carteImg?: string;
   /** The resource inside the chest ("<Type> de …") — the valuable, priceable drop. */
   resourceItemId?: string;
   resourceName?: string;
@@ -65,6 +69,64 @@ export function monsterCriminalKey(name: string): string {
 
 export function chestCriminalKey(name: string): string {
   return normalizeKey(name).replace(/^coffre de\s+/, "").trim();
+}
+
+export function carteCriminalKey(name: string): string {
+  return normalizeKey(name).replace(/^carte de\s+/, "").trim();
+}
+
+/**
+ * Inputs to an avis's benefit.
+ *
+ * Benefit = what you get back − what you spend:
+ *   gain  = resource sale  (+ aviton conversion — not handled yet, see below)
+ *   cost  = the "Carte de …" you buy + an optional spot participation fee
+ *
+ * Avitons are a real part of the gain, but their value depends on a conversion
+ * we don't model yet; `avitonValue` is reserved so it can be folded in later
+ * without changing callers.
+ */
+export interface AvisBenefitInput {
+  /** HDV price of the "Carte de …" you must buy (a cost). */
+  cartePrice?: number;
+  /** HDV price of the resource you sell (a gain). */
+  resourcePrice?: number;
+  /** Optional flat fee paid to join a hunt "spot" (a cost). */
+  participationCost?: number;
+  /** Reserved: value of the avitons once conversion is handled (a gain). */
+  avitonValue?: number;
+}
+
+export interface AvisBenefit {
+  /** Net benefit in kamas, or undefined when a required price is missing. */
+  value?: number;
+  /** True when every price needed for a real number is known. */
+  complete: boolean;
+}
+
+/**
+ * Net benefit of doing one avis. Needs both the carte cost and the resource
+ * price to be a real number; the participation fee defaults to 0, and the
+ * aviton value is not counted yet.
+ */
+export function computeAvisBenefit(input: AvisBenefitInput): AvisBenefit {
+  const {
+    cartePrice,
+    resourcePrice,
+    participationCost = 0,
+    avitonValue = 0,
+  } = input;
+  if (cartePrice == null || resourcePrice == null) {
+    return { complete: false };
+  }
+  const gain = resourcePrice + avitonValue;
+  const cost = cartePrice + participationCost;
+  return { value: gain - cost, complete: true };
+}
+
+/** Per-aviton value from a "qty avitons = price kamas" batch (0 when unset). */
+export function avitonUnitValue(qty: number, price: number): number {
+  return qty > 0 && price > 0 ? price / qty : 0;
 }
 
 /** The fetched catalog, cached with a timestamp. */

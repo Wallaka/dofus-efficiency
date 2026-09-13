@@ -6,6 +6,15 @@ export function formatKamas(value: number | undefined): string {
   return `${withSep} k`;
 }
 
+/** Like formatKamas but always signed, e.g. 1200 -> "+1 200 k", -500 -> "−500 k". */
+export function formatKamasSigned(value: number | undefined): string {
+  if (value == null || Number.isNaN(value)) return "—";
+  const body = formatKamas(Math.abs(value));
+  if (value > 0) return `+${body}`;
+  if (value < 0) return `−${body}`;
+  return body;
+}
+
 /** Format a ratio as a signed percentage, e.g. 0.25 -> "+25 %". */
 export function formatPercent(ratio: number | undefined): string {
   if (ratio == null || Number.isNaN(ratio)) return "—";
