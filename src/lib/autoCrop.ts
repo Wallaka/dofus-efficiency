@@ -40,6 +40,9 @@ const ANCHORS: Partial<Record<ScreenshotKind, string[]>> = {
   // "Cours du marché" window.
   "market-trend": ["median", "articles", "vendus"],
   hdv: ["quantite", "moyen", "lot", "acheter"],
+  // The sell panel's left column only — these words don't appear in the listing
+  // to its right, so the crop stays on the name + prix moyen + lot table.
+  "hdv-sell": ["actuellement", "quantite", "restant", "retirer", "modifier"],
   "item-tooltip": ["panoplie", "effets", "moyen", "poids", "niveau", "niv"],
 };
 
@@ -51,6 +54,9 @@ const PADDING: Partial<Record<ScreenshotKind, Padding>> = {
   // level, and far down to include the graph + its 7-day date axis.
   "market-trend": { left: 0.24, right: 0.05, top: 0.15, bottom: 0.42 },
   hdv: { left: 0.03, right: 0.04, top: 0.05, bottom: 0.16 },
+  // Narrow left column: pad up to the item name, down to the lot table, and only a
+  // hair right (the listing sits just past the price column).
+  "hdv-sell": { left: 0.03, right: 0.07, top: 0.14, bottom: 0.2 },
   "item-tooltip": { left: 0.04, right: 0.04, top: 0.05, bottom: 0.04 },
 };
 
