@@ -79,21 +79,17 @@ export function carteCriminalKey(name: string): string {
  * Inputs to an avis's benefit.
  *
  * Benefit = what you get back − what you spend:
- *   gain  = resource sale  (+ aviton conversion — not handled yet, see below)
- *   cost  = the "Carte de …" you buy + an optional spot participation fee
- *
- * Avitons are a real part of the gain, but their value depends on a conversion
- * we don't model yet; `avitonValue` is reserved so it can be folded in later
- * without changing callers.
+ *   gain  = resource sale + avitons + spot fee the group pays you
+ *   cost  = the "Carte de …" you buy
  */
 export interface AvisBenefitInput {
   /** HDV price of the "Carte de …" you must buy (a cost). */
   cartePrice?: number;
   /** HDV price of the resource you sell (a gain). */
   resourcePrice?: number;
-  /** Optional flat fee paid to join a hunt "spot" (a cost). */
+  /** Optional flat fee the group pays you to run the "spot" (a gain). */
   participationCost?: number;
-  /** Reserved: value of the avitons once conversion is handled (a gain). */
+  /** Value of the avitons (a gain). */
   avitonValue?: number;
 }
 
@@ -108,7 +104,7 @@ export interface AvisBenefit {
 
 /**
  * Net benefit of doing one avis:
- *   value = resource + avitons − carte − participation
+ *   value = resource + avitons + participation − carte
  * Computed as soon as anything is known; a missing price counts as 0 (and flags
  * the result `partial`). Only when nothing at all is known do we return no value.
  */
@@ -127,8 +123,8 @@ export function computeAvisBenefit(input: AvisBenefitInput): AvisBenefit {
     participationCost > 0;
   if (!known) return { known: false, partial: false };
 
-  const gain = (resourcePrice ?? 0) + avitonValue;
-  const cost = (cartePrice ?? 0) + participationCost;
+  const gain = (resourcePrice ?? 0) + avitonValue + participationCost;
+  const cost = cartePrice ?? 0;
   const partial = cartePrice == null || resourcePrice == null;
   return { value: gain - cost, known: true, partial };
 }
