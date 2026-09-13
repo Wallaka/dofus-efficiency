@@ -558,6 +558,87 @@ table.lots td.num {
   border-color: color-mix(in srgb, var(--negative) 50%, var(--border));
 }
 
+.badge-warn {
+  color: #e6b45a;
+  border-color: color-mix(in srgb, #e6b45a 50%, var(--border));
+}
+
+/* Auto-analysis control + status bar on the Captures panel. */
+.auto-analyze-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 4px 0 8px;
+}
+
+.auto-analyze-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.auto-analyze-status {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.auto-analyze-current {
+  color: var(--text);
+}
+
+.auto-analyze-progress {
+  flex: 1 1 140px;
+  max-width: 240px;
+}
+
+.auto-analyze-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.auto-analyze-reset {
+  margin-left: auto;
+  padding: 2px 10px;
+  font-size: 0.78rem;
+}
+
+/* Per-card analysis status. */
+.ss-status {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.ss-status-detail {
+  font-weight: 400;
+  color: var(--muted);
+}
+
+.ss-status-saved {
+  color: var(--positive);
+}
+
+.ss-status-unmatched {
+  color: #e6b45a;
+}
+
+.ss-status-no-price,
+.ss-status-pending {
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.ss-status-error {
+  color: var(--negative);
+}
+
 /* Prix page */
 .prices-page {
   margin-top: 24px;
