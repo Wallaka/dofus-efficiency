@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { Item } from "../types";
+import type { Lot } from "../lib/screenshotAnalysis";
+import type { ApplyPrice } from "../lib/priceStore";
 import { searchItems } from "../data/dofusApi";
 import { rankItemMatches } from "../lib/matchItem";
 import { formatKamas } from "../lib/format";
@@ -12,8 +14,10 @@ interface Props {
   price: number;
   /** Short label of where the price came from (shown to the user). */
   detail: string;
+  /** Per-quantity lot prices to keep alongside the unit price, when any. */
+  lots?: Lot[];
   /** Persist the price for the chosen item. */
-  onApply: (item: Item, price: number, detail: string) => void;
+  onApply: ApplyPrice;
 }
 
 type Search =
@@ -27,7 +31,7 @@ type Search =
  * and store the price for it. Pre-searches the OCR'd name, ranks the candidates,
  * and lets the user confirm (or correct via a manual search).
  */
-export function PriceApplyPanel({ itemName, price, detail, onApply }: Props) {
+export function PriceApplyPanel({ itemName, price, detail, lots, onApply }: Props) {
   const [search, setSearch] = useState<Search>({ status: "idle" });
   const [applied, setApplied] = useState<Item | null>(null);
 
@@ -56,7 +60,7 @@ export function PriceApplyPanel({ itemName, price, detail, onApply }: Props) {
   onApplyRef.current = onApply;
 
   function apply(item: Item) {
-    onApplyRef.current(item, price, detail);
+    onApplyRef.current(item, price, detail, { lots });
     setApplied(item);
   }
 

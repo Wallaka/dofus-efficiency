@@ -4,23 +4,21 @@ import { recognizeImage } from "../lib/ocr";
 import {
   analyzeScreenshot,
   type ScreenshotAnalysis,
-  type ScreenshotKind,
-  type ItemCategory,
 } from "../lib/screenshotAnalysis";
 import { type CropRect } from "../lib/cropImage";
 import { analyzeImageBlob, cropSafe } from "../lib/analyzeFlow";
-import { priceToRecord } from "../lib/priceStore";
-import type { Item } from "../types";
+import { priceToRecord, type ApplyPrice } from "../lib/priceStore";
 import { CropSelector } from "./CropSelector";
 import { PriceApplyPanel } from "./PriceApplyPanel";
-import { formatKamas, formatDateTime, formatBytes } from "../lib/format";
+import { AnalysisView } from "./AnalysisView";
+import { formatDateTime, formatBytes } from "../lib/format";
 
 interface Props {
   file: ScreenshotInfo;
   imageUrl?: string;
   onClose: () => void;
   /** Persist an OCR'd price for a chosen item (the feedback loop). */
-  onApplyPrice?: (item: Item, price: number, detail: string) => void;
+  onApplyPrice?: ApplyPrice;
 }
 
 type State =
@@ -28,23 +26,6 @@ type State =
   | { phase: "running"; progress: number }
   | { phase: "done"; analysis: ScreenshotAnalysis; dates: string[] }
   | { phase: "error"; message: string };
-
-const KIND_LABEL: Record<ScreenshotKind, string> = {
-  "market-trend": "Cours du marché",
-  hdv: "Hôtel de vente",
-  "item-tooltip": "Infobulle d'objet",
-  inventory: "Inventaire",
-  "character-sheet": "Fiche perso",
-  other: "Autre écran",
-  unknown: "Indéterminé",
-};
-
-const CATEGORY_LABEL: Record<ItemCategory, string> = {
-  resource: "Ressource",
-  weapon: "Arme",
-  equipment: "Équipement",
-  unknown: "Type inconnu",
-};
 
 /**
  * Detail view for one screenshot: shows the image and, on demand, runs OCR and
@@ -186,7 +167,7 @@ export function ScreenshotDetail({ file, imageUrl, onClose, onApplyPrice }: Prop
             )}
 
             {state.phase === "done" && (
-              <AnalysisView
+              <AnalysisResult
                 analysis={state.analysis}
                 dates={state.dates}
                 onReanalyze={analyze}
@@ -201,7 +182,7 @@ export function ScreenshotDetail({ file, imageUrl, onClose, onApplyPrice }: Prop
   );
 }
 
-function AnalysisView({
+function AnalysisResult({
   analysis,
   dates,
   onReanalyze,
@@ -212,88 +193,18 @@ function AnalysisView({
   dates: string[];
   onReanalyze: () => void;
   reanalyzeLabel: string;
-  onApplyPrice?: (item: Item, price: number, detail: string) => void;
+  onApplyPrice?: ApplyPrice;
 }) {
   const [showRaw, setShowRaw] = useState(false);
   const recordable = priceToRecord(analysis);
   return (
-    <div className="analysis">
-      <div className="analysis-tags">
-        <span className="tag tag-kind">{KIND_LABEL[analysis.kind]}</span>
-        <span className="tag tag-cat">{CATEGORY_LABEL[analysis.category]}</span>
-      </div>
-
-      {analysis.itemName && (
-        <p className="analysis-name">
-          <strong>{analysis.itemName}</strong>
-          {(analysis.level != null || analysis.itemType) && (
-            <span className="analysis-sub">
-              {" "}
-              {analysis.itemType}
-              {analysis.level != null ? ` · Niv. ${analysis.level}` : ""}
-            </span>
-          )}
-        </p>
-      )}
-
-      {analysis.set && (
-        <p className="analysis-sub">Panoplie&nbsp;: {analysis.set}</p>
-      )}
-
-      {analysis.averagePrice != null && (
-        <p className="analysis-price">
-          Prix moyen&nbsp;: <strong>{formatKamas(analysis.averagePrice)}</strong>
-        </p>
-      )}
-
-      {analysis.medianPrice != null && (
-        <p className="analysis-sub">
-          Prix médian&nbsp;: {formatKamas(analysis.medianPrice)}
-        </p>
-      )}
-
-      {analysis.articlesSold != null && (
-        <p className="analysis-sub">
-          Articles vendus&nbsp;: {analysis.articlesSold.toLocaleString("fr-FR")}
-        </p>
-      )}
-
-      {analysis.lots.length > 0 && (
-        <table className="lots">
-          <thead>
-            <tr>
-              <th>Lot</th>
-              <th className="num">Prix</th>
-              <th className="num">Prix / unité</th>
-            </tr>
-          </thead>
-          <tbody>
-            {analysis.lots.map((lot) => (
-              <tr key={lot.quantity}>
-                <td>×{lot.quantity}</td>
-                <td className="num">{formatKamas(lot.price ?? undefined)}</td>
-                <td className="num">{formatKamas(lot.unitPrice ?? undefined)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-
-      {dates.length > 0 && (
-        <p className="analysis-sub">
-          Période lue&nbsp;: {dates.length} jours ({dates[0]} →{" "}
-          {dates[dates.length - 1]}). Le prix retenu est le prix médian/moyen
-          ci-dessus.
-        </p>
-      )}
-
-      <p className="analysis-note">{analysis.note}</p>
-
+    <AnalysisView analysis={analysis} dates={dates}>
       {onApplyPrice && recordable && (
         <PriceApplyPanel
           itemName={analysis.itemName}
           price={recordable.price}
           detail={recordable.detail}
+          lots={analysis.lots}
           onApply={onApplyPrice}
         />
       )}
@@ -312,6 +223,6 @@ function AnalysisView({
       </div>
 
       {showRaw && <pre className="raw-ocr">{analysis.rawText || "(vide)"}</pre>}
-    </div>
+    </AnalysisView>
   );
 }

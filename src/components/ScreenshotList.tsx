@@ -1,30 +1,31 @@
 import { useEffect, useMemo, useState } from "react";
+import type { Item } from "../types";
 import type { ScreenshotFile } from "../lib/medalFolder";
 import { describeScreenshot, type ScreenshotInfo } from "../lib/screenshotMeta";
-import { formatBytes, formatDateTime, formatKamas } from "../lib/format";
-import { screenshotKey, type AnalyzedRecord } from "../lib/analyzedStore";
+import { formatBytes, formatDateTime } from "../lib/format";
+import { priceToRecord, type ApplyPrice } from "../lib/priceStore";
+import {
+  screenshotKey,
+  type AnalyzedRecord,
+} from "../lib/analyzedStore";
 import { useAutoAnalyze } from "../lib/useAutoAnalyze";
 import { ScreenshotDetail } from "./ScreenshotDetail";
-import type { Item } from "../types";
+import { AnalysisView } from "./AnalysisView";
+import { AcceptPanel } from "./AcceptPanel";
 
 interface Props {
   files: ScreenshotFile[];
   /** Persist an OCR'd price for a chosen item (the feedback loop). */
-  onApplyPrice?: (item: Item, price: number, detail: string) => void;
+  onApplyPrice?: ApplyPrice;
 }
-
-const STATUS_LABEL: Record<AnalyzedRecord["status"], string> = {
-  saved: "Enregistré",
-  unmatched: "À confirmer",
-  "no-price": "Aucun prix",
-  error: "Échec",
-};
 
 /**
  * The screenshots listing: a thumbnail grid of the images found in the Medal
- * folder. New captures are analysed automatically (OCR → price → save) unless
- * the user turns that off; each card shows what the analysis found, and clicking
- * one opens the detailed view to re-run or confirm by hand.
+ * folder. The whole folder is read automatically (unless the user turns that
+ * off); under each capture we show the full OCR reading — screen type, item, the
+ * moyen/médian prices, articles sold and every lot price per quantity — with an
+ * Accept button to commit it to the price store (where it appears on the Prix
+ * page). Clicking the thumbnail opens the detailed view to re-crop by hand.
  */
 export function ScreenshotList({ files, onApplyPrice }: Props) {
   const items = useMemo(
@@ -35,12 +36,22 @@ export function ScreenshotList({ files, onApplyPrice }: Props) {
     [files],
   );
 
-  const { records, pending, running, progress, auto, setAuto, runAll, stop, resetAll } =
-    useAutoAnalyze(files, onApplyPrice);
+  const {
+    records,
+    pending,
+    running,
+    progress,
+    auto,
+    setAuto,
+    runAll,
+    stop,
+    resetAll,
+    accept,
+  } = useAutoAnalyze(files, onApplyPrice);
 
   // Tally outcomes across the captures currently in the folder.
   const counts = useMemo(() => {
-    const c = { saved: 0, unmatched: 0, "no-price": 0, error: 0, total: 0 };
+    const c = { pending: 0, saved: 0, "no-price": 0, error: 0, total: 0 };
     for (const it of items) {
       const rec = records[screenshotKey(it)];
       if (rec) {
@@ -98,9 +109,9 @@ export function ScreenshotList({ files, onApplyPrice }: Props) {
     <section className="panel screenshots">
       <h2>Captures ({items.length})</h2>
       <p className="hint">
-        Les captures de votre dossier Medal, les plus récentes d'abord. Les
-        nouvelles captures sont analysées automatiquement&nbsp;; cliquez une
-        capture pour la revoir ou confirmer un objet.
+        Tout le dossier est analysé automatiquement. Sous chaque capture&nbsp;:
+        ce que l'OCR a lu, à accepter pour l'enregistrer (visible ensuite sur la
+        page Prix). Cliquez la vignette pour recadrer à la main.
       </p>
 
       <div className="auto-analyze-bar">
@@ -146,20 +157,24 @@ export function ScreenshotList({ files, onApplyPrice }: Props) {
         )}
       </div>
 
-      <div className="auto-analyze-summary">
-        {counts.saved > 0 && (
-          <span className="badge badge-fresh">{counts.saved} enregistré{counts.saved > 1 ? "s" : ""}</span>
-        )}
-        {counts.unmatched > 0 && (
-          <span className="badge badge-warn">{counts.unmatched} à confirmer</span>
-        )}
-        {counts["no-price"] > 0 && (
-          <span className="badge">{counts["no-price"]} sans prix</span>
-        )}
-        {counts.error > 0 && (
-          <span className="badge badge-stale">{counts.error} échec{counts.error > 1 ? "s" : ""}</span>
-        )}
-        {counts.total > 0 && (
+      {counts.total > 0 && (
+        <div className="auto-analyze-summary">
+          {counts.saved > 0 && (
+            <span className="badge badge-fresh">
+              {counts.saved} enregistré{counts.saved > 1 ? "s" : ""}
+            </span>
+          )}
+          {counts.pending > 0 && (
+            <span className="badge badge-warn">{counts.pending} à accepter</span>
+          )}
+          {counts["no-price"] > 0 && (
+            <span className="badge">{counts["no-price"]} sans prix</span>
+          )}
+          {counts.error > 0 && (
+            <span className="badge badge-stale">
+              {counts.error} échec{counts.error > 1 ? "s" : ""}
+            </span>
+          )}
           <button
             type="button"
             className="folder-secondary auto-analyze-reset"
@@ -167,10 +182,10 @@ export function ScreenshotList({ files, onApplyPrice }: Props) {
           >
             Réinitialiser l'analyse
           </button>
-        )}
-      </div>
+        </div>
+      )}
 
-      <ul className="screenshot-grid">
+      <ul className="screenshot-grid screenshot-grid-wide">
         {items.map((item) => {
           const rec = records[screenshotKey(item)];
           return (
@@ -179,7 +194,7 @@ export function ScreenshotList({ files, onApplyPrice }: Props) {
                 type="button"
                 className="screenshot-open"
                 onClick={() => setSelected(item)}
-                title={`Analyser ${item.name}`}
+                title={`Recadrer / ré-analyser ${item.name}`}
               >
                 <div className="thumb">
                   {urls[item.name] ? (
@@ -203,30 +218,19 @@ export function ScreenshotList({ files, onApplyPrice }: Props) {
                         ~
                       </span>
                     )}
+                    {" · "}
+                    {formatBytes(item.size)}
                   </span>
-                  <span className="screenshot-sub">{formatBytes(item.size)}</span>
-                  {rec ? (
-                    <span className={`ss-status ss-status-${rec.status}`}>
-                      {STATUS_LABEL[rec.status]}
-                      {rec.status === "saved" && rec.savedItemName && (
-                        <span className="ss-status-detail">
-                          {" "}
-                          {rec.savedItemName} · {formatKamas(rec.price ?? undefined)}
-                        </span>
-                      )}
-                      {rec.status === "unmatched" && rec.price != null && (
-                        <span className="ss-status-detail">
-                          {" "}
-                          {formatKamas(rec.price)}
-                          {rec.itemName ? ` · ${rec.itemName}` : ""}
-                        </span>
-                      )}
-                    </span>
-                  ) : (
-                    <span className="ss-status ss-status-pending">Non analysé</span>
-                  )}
                 </div>
               </button>
+
+              <div className="screenshot-analysis-inline">
+                <CardAnalysis
+                  rec={rec}
+                  running={running}
+                  onAccept={(recordItem) => accept(screenshotKey(item), recordItem)}
+                />
+              </div>
             </li>
           );
         })}
@@ -241,5 +245,46 @@ export function ScreenshotList({ files, onApplyPrice }: Props) {
         />
       )}
     </section>
+  );
+}
+
+/** The inline reading + accept controls shown under one capture. */
+function CardAnalysis({
+  rec,
+  running,
+  onAccept,
+}: {
+  rec: AnalyzedRecord | undefined;
+  running: boolean;
+  onAccept: (item: Item) => void;
+}) {
+  if (!rec) {
+    return (
+      <p className="ss-status ss-status-pending">
+        {running ? "En attente d'analyse…" : "Non analysé"}
+      </p>
+    );
+  }
+
+  if (rec.status === "error") {
+    return <p className="ss-status ss-status-error">Échec : {rec.message}</p>;
+  }
+
+  const recordable = priceToRecord(rec.analysis);
+
+  return (
+    <AnalysisView analysis={rec.analysis} dates={rec.dates}>
+      {rec.status === "no-price" || !recordable ? (
+        <p className="hint">Aucun prix à enregistrer sur cet écran.</p>
+      ) : (
+        <AcceptPanel
+          price={recordable.price}
+          detail={recordable.detail}
+          suggested={rec.match}
+          savedItem={rec.status === "saved" ? rec.match : null}
+          onAccept={onAccept}
+        />
+      )}
+    </AnalysisView>
   );
 }

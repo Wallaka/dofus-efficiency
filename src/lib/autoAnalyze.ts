@@ -1,86 +1,57 @@
 import type { ScreenshotFile } from "./medalFolder";
-import type { Item } from "../types";
 import { analyzeImageBlob } from "./analyzeFlow";
 import { priceToRecord } from "./priceStore";
+import { analyzeScreenshot } from "./screenshotAnalysis";
 import { searchItems } from "../data/dofusApi";
 import { rankItemMatches } from "./matchItem";
 import { screenshotKey, type AnalyzedRecord } from "./analyzedStore";
 
 /**
- * Analyse one screenshot end-to-end and, when confident, save its price — the
- * per-file unit the automatic batch analyser runs over each un-analysed capture.
- *
- * The risky step is matching the OCR'd name to a real DofusDB item: a wrong
- * match would poison the price DB. So we only save automatically when the best
- * name match clears AUTO_MATCH_THRESHOLD; otherwise we record the price as
- * "unmatched" for the user to confirm in one click (no re-OCR needed).
+ * Read one screenshot end-to-end: OCR the whole thing, then look up the best
+ * DofusDB item match for the name it read. Nothing is saved here — the reading
+ * (and its suggested match) is returned so the UI can show it and let the user
+ * Accept it into the price store. This is the per-file unit the batch analyser
+ * runs over every un-analysed capture in the folder.
  */
 
-/** Minimum name-match confidence (0–1) to auto-save without confirmation. */
-export const AUTO_MATCH_THRESHOLD = 0.58;
-
-export type ApplyPrice = (item: Item, price: number, detail: string) => void;
+/**
+ * Only suggest a pre-filled match confident enough to accept in one click. Below
+ * this the reading still shows, but the user picks the item manually.
+ */
+export const MATCH_SUGGEST_THRESHOLD = 0.5;
 
 export async function processScreenshot(
   file: ScreenshotFile,
-  onApplyPrice?: ApplyPrice,
 ): Promise<AnalyzedRecord> {
   const base = { key: screenshotKey(file), name: file.name, analyzedAt: Date.now() };
   try {
     const full = await file.handle.getFile();
-    const { analysis } = await analyzeImageBlob(full);
+    const { analysis, dates } = await analyzeImageBlob(full);
     const recordable = priceToRecord(analysis);
 
     if (!recordable) {
-      return {
-        ...base,
-        status: "no-price",
-        kind: analysis.kind,
-        itemName: analysis.itemName,
-        price: null,
-        detail: null,
-      };
+      return { ...base, status: "no-price", analysis, dates };
     }
 
-    // Confident match → save; else keep the price for a one-click confirm.
-    if (analysis.itemName && onApplyPrice) {
+    // Suggest an item match from the OCR'd name (best-effort; needs the network).
+    let match: AnalyzedRecord["match"] = null;
+    if (analysis.itemName) {
       try {
         const items = await searchItems(analysis.itemName);
         const best = rankItemMatches(analysis.itemName, items)[0];
-        if (best && best.score >= AUTO_MATCH_THRESHOLD) {
-          onApplyPrice(best.item, recordable.price, recordable.detail);
-          return {
-            ...base,
-            status: "saved",
-            kind: analysis.kind,
-            itemName: analysis.itemName,
-            price: recordable.price,
-            detail: recordable.detail,
-            savedItemId: best.item.id,
-            savedItemName: best.item.name,
-          };
-        }
+        if (best && best.score >= MATCH_SUGGEST_THRESHOLD) match = best.item;
       } catch {
-        // Search unavailable (offline / blocked) — fall through to "unmatched".
+        // Search unavailable (offline / blocked) — leave match null.
       }
     }
 
-    return {
-      ...base,
-      status: "unmatched",
-      kind: analysis.kind,
-      itemName: analysis.itemName,
-      price: recordable.price,
-      detail: recordable.detail,
-    };
+    return { ...base, status: "pending", analysis, dates, match };
   } catch (err) {
     return {
       ...base,
       status: "error",
-      kind: "unknown",
-      itemName: null,
-      price: null,
-      detail: null,
+      analysis: analyzeScreenshot(""),
+      dates: [],
       message: err instanceof Error ? err.message : String(err),
     };
   }

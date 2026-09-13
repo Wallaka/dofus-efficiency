@@ -1,13 +1,16 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { ScreenshotFile } from "./medalFolder";
+import type { Item } from "../types";
+import { priceToRecord, type ApplyPrice } from "./priceStore";
 import {
   loadAnalyzed,
   recordAnalyzed,
   clearAnalyzed,
   screenshotKey,
   type AnalyzedMap,
+  type AnalyzedRecord,
 } from "./analyzedStore";
-import { processScreenshot, type ApplyPrice } from "./autoAnalyze";
+import { processScreenshot } from "./autoAnalyze";
 
 const AUTO_KEY = "dofus-efficiency:autoAnalyze:v1";
 
@@ -28,11 +31,10 @@ export interface AutoAnalyzeProgress {
 }
 
 /**
- * Drives automatic OCR over the Medal folder: any screenshot not yet in the
- * analysed store is read (one at a time, so the single OCR worker isn't
- * contended), its price saved when a confident item match is found, and the
- * outcome recorded so it's never re-processed. Exposes state for a small status
- * bar and manual run/stop/reset controls.
+ * Drives automatic OCR over the whole Medal folder: any screenshot not yet in
+ * the analysed store is read (one at a time, so the single OCR worker isn't
+ * contended) and its full reading recorded — but nothing reaches the price store
+ * until the user accepts it. `accept` commits one reading to a chosen item.
  */
 export function useAutoAnalyze(files: ScreenshotFile[], onApplyPrice?: ApplyPrice) {
   const [records, setRecords] = useState<AnalyzedMap>(loadAnalyzed);
@@ -69,7 +71,7 @@ export function useAutoAnalyze(files: ScreenshotFile[], onApplyPrice?: ApplyPric
       if (cancelRef.current) break;
       const file = queue[i];
       setProgress({ done: i, total: queue.length, current: file.name });
-      const record = await processScreenshot(file, applyRef.current);
+      const record = await processScreenshot(file);
       if (cancelRef.current) break; // discard a result the user cancelled past
       recordAnalyzed(record);
       setRecords((prev) => ({ ...prev, [record.key]: record }));
@@ -98,6 +100,27 @@ export function useAutoAnalyze(files: ScreenshotFile[], onApplyPrice?: ApplyPric
     setRecords({});
   }, []);
 
+  /** Accept a reading into the price store, saving its price to `item`. */
+  const accept = useCallback((key: string, item: Item) => {
+    const rec = loadAnalyzed()[key];
+    if (!rec) return;
+    const recordable = priceToRecord(rec.analysis);
+    if (!recordable) return;
+    applyRef.current?.(item, recordable.price, recordable.detail, {
+      lots: rec.analysis.lots,
+    });
+    const updated: AnalyzedRecord = {
+      ...rec,
+      status: "saved",
+      match: item,
+      savedItemId: item.id,
+      savedItemName: item.name,
+      savedAt: Date.now(),
+    };
+    recordAnalyzed(updated);
+    setRecords((prev) => ({ ...prev, [key]: updated }));
+  }, []);
+
   // Auto mode: process new captures as they appear.
   useEffect(() => {
     if (auto && !runningRef.current && pending.length > 0) {
@@ -120,5 +143,6 @@ export function useAutoAnalyze(files: ScreenshotFile[], onApplyPrice?: ApplyPric
     runAll,
     stop,
     resetAll,
+    accept,
   };
 }

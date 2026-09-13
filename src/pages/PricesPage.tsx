@@ -97,7 +97,19 @@ export function PricesPage() {
                           )}
                         </span>
                       </td>
-                      <td className="num">{formatKamas(e.price)}</td>
+                      <td className="num">
+                        {formatKamas(e.price)}
+                        {e.lots && e.lots.length > 0 && (
+                          <span className="price-lots">
+                            {e.lots
+                              .map(
+                                (l) =>
+                                  `×${l.quantity} ${formatKamas(l.price ?? undefined)}`,
+                              )
+                              .join(" · ")}
+                          </span>
+                        )}
+                      </td>
                       <td>
                         {e.source === "ocr" ? "OCR" : "Manuel"}
                         {e.detail && (

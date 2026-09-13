@@ -1,24 +1,25 @@
 import type { ScreenshotFile } from "./medalFolder";
-import type { ScreenshotKind } from "./screenshotAnalysis";
+import type { ScreenshotAnalysis } from "./screenshotAnalysis";
+import type { Item } from "../types";
 
 /**
- * A record of which screenshots the automatic analyser has already processed, so
- * a screenshot is never OCR'd twice. Keyed by a stable identity (name + size +
- * mtime) — if a file is replaced its key changes and it gets re-analysed.
+ * A record of every screenshot the analyser has read, so a capture is never
+ * OCR'd twice. Keyed by a stable identity (name + size + mtime) — if a file is
+ * replaced its key changes and it gets re-analysed.
  *
- * We keep the outcome (price read, whether it was saved to an item) alongside,
- * so the listing can show a status per capture and let the user confirm an
- * uncertain match without re-running OCR.
+ * We keep the full reading alongside so the listing can show what the OCR found
+ * without re-running it, and let the user Accept it into the price store in one
+ * click. Nothing reaches the price store until the user accepts.
  */
 
-const KEY = "dofus-efficiency:analyzed:v1";
+const KEY = "dofus-efficiency:analyzed:v2";
 
 export type AnalyzedStatus =
-  /** Price read and saved to a confidently-matched item. */
+  /** Read, with a price ready to accept into the store. */
+  | "pending"
+  /** Accepted — its price is saved to a chosen item. */
   | "saved"
-  /** Price read but no confident item match — needs the user to confirm. */
-  | "unmatched"
-  /** Analysed, but no price could be read from this screen. */
+  /** Read, but no price could be extracted from this screen. */
   | "no-price"
   /** OCR or read failed. */
   | "error";
@@ -29,17 +30,17 @@ export interface AnalyzedRecord {
   name: string;
   analyzedAt: number;
   status: AnalyzedStatus;
-  kind: ScreenshotKind;
-  /** Item name read from the screen, when any. */
-  itemName: string | null;
-  /** Unit price read, when any. */
-  price: number | null;
-  /** Where the price came from, e.g. "Prix moyen" / "Cours du marché". */
-  detail: string | null;
-  /** The DofusDB item the price was saved to (status "saved"). */
+  /** The full OCR reading, so the card renders without re-analysing. */
+  analysis: ScreenshotAnalysis;
+  /** Market-graph dates, when the screen is a price history. */
+  dates: string[];
+  /** Best-guess DofusDB item (from the OCR'd name), pre-filled for Accept. */
+  match?: Item | null;
+  /** Set once accepted: the item the price was saved to. */
   savedItemId?: string;
   savedItemName?: string;
-  /** Short error/skip reason, for the "error" status. */
+  savedAt?: number;
+  /** Short error reason, for the "error" status. */
   message?: string;
 }
 
