@@ -1,14 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import type { AvisReward } from "../lib/avis";
+import { avitonUnitValue } from "../lib/avis";
 import { fetchAvisDeRecherche } from "../data/dofusApi";
 import {
+  loadAvisAviton,
   loadAvisCatalog,
   loadAvisParticipation,
   loadPrices,
+  saveAvisAviton,
   saveAvisCatalog,
   saveAvisParticipation,
 } from "../lib/storage";
-import { formatDateTime } from "../lib/format";
+import { formatDateTime, formatKamas } from "../lib/format";
 import { AvisCard } from "../components/AvisCard";
 
 type Status = "idle" | "loading" | "error";
@@ -24,15 +27,31 @@ export function AvisPage() {
   const [error, setError] = useState<string>();
   // Shared price map (from the craft/prix pages) → carte + resource prices.
   const prices = useRef(loadPrices() ?? {}).current;
-  // Optional flat "spot" fee, applied to every avis's benefit.
-  const [participation, setParticipation] = useState<number>(
+  // Per-avis "spot" fee (avis id → kamas), persisted.
+  const [participation, setParticipation] = useState<Record<string, number>>(
     loadAvisParticipation,
   );
+  // Aviton resale rate: `qty` avitons sell for `price` kamas.
+  const [aviton, setAviton] = useState(loadAvisAviton);
+  const avitonUnit = avitonUnitValue(aviton.qty, aviton.price);
 
-  function onParticipationChange(value: string) {
-    const n = Math.max(0, Math.round(Number(value) || 0));
-    setParticipation(n);
-    saveAvisParticipation(n);
+  function setParticipationFor(id: string, value: number) {
+    setParticipation((prev) => {
+      const next = { ...prev };
+      if (value > 0) next[id] = value;
+      else delete next[id];
+      saveAvisParticipation(next);
+      return next;
+    });
+  }
+
+  function setAvitonField(field: "qty" | "price", value: string) {
+    setAviton((prev) => {
+      const n = Math.max(0, Math.round(Number(value) || 0));
+      const next = { ...prev, [field]: n };
+      saveAvisAviton(next);
+      return next;
+    });
   }
 
   async function load() {
@@ -71,19 +90,6 @@ export function AvisPage() {
                 ? "Rafraîchir"
                 : "Charger"}
           </button>
-          <label className="avis-participation">
-            <span>Participation (spot)</span>
-            <input
-              type="number"
-              min={0}
-              step={100}
-              inputMode="numeric"
-              value={participation || ""}
-              placeholder="0"
-              onChange={(e) => onParticipationChange(e.target.value)}
-            />
-            <span className="avis-participation-unit">k</span>
-          </label>
           <span className="hint avis-meta">
             {status === "error" && (
               <span className="error-text">Erreur : {error}</span>
@@ -95,6 +101,34 @@ export function AvisPage() {
               </>
             )}
           </span>
+        </div>
+        <div className="avis-aviton">
+          <span className="avis-aviton-label">Valeur des avitons</span>
+          <input
+            type="number"
+            min={0}
+            step={10}
+            inputMode="numeric"
+            aria-label="Quantité d'avitons"
+            value={aviton.qty || ""}
+            placeholder="100"
+            onChange={(e) => setAvitonField("qty", e.target.value)}
+          />
+          <span className="avis-aviton-eq">avitons =</span>
+          <input
+            type="number"
+            min={0}
+            step={1000}
+            inputMode="numeric"
+            aria-label="Prix de vente des avitons"
+            value={aviton.price || ""}
+            placeholder="0"
+            onChange={(e) => setAvitonField("price", e.target.value)}
+          />
+          <span className="avis-aviton-unit">k</span>
+          {avitonUnit > 0 && (
+            <span className="hint">≈ {formatKamas(avitonUnit)} / aviton</span>
+          )}
         </div>
       </section>
 
@@ -113,7 +147,11 @@ export function AvisPage() {
             resourcePrice={
               avis.resourceItemId ? prices[avis.resourceItemId] : undefined
             }
-            participationCost={participation}
+            avitonValue={avitonUnit * avis.avitons}
+            participationCost={participation[avis.id] ?? 0}
+            onParticipationChange={(value) =>
+              setParticipationFor(String(avis.id), value)
+            }
           />
         ))}
       </ul>

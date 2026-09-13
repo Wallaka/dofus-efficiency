@@ -19,7 +19,9 @@ const ELEVEUR_KEY = "dofus-efficiency:eleveur:v1";
 // v3: catalog now carries the "Carte de …" hunt map too — invalidate older
 // caches so the page refetches automatically instead of showing carte-less cards.
 const AVIS_KEY = "dofus-efficiency:avisCatalog:v3";
-const AVIS_PARTICIPATION_KEY = "dofus-efficiency:avisParticipation:v1";
+// v2: participation is now per-avis (a map keyed by avis id), not a single fee.
+const AVIS_PARTICIPATION_KEY = "dofus-efficiency:avisParticipation:v2";
+const AVIS_AVITON_KEY = "dofus-efficiency:avisAviton:v1";
 
 export function loadPrices(): PriceMap | null {
   try {
@@ -159,23 +161,68 @@ export function saveAvisCatalog(list: AvisReward[]): void {
 }
 
 /**
- * Optional "spot" fee paid to participate in a hunt — a flat cost applied to
- * every avis's benefit. 0 (or unset) means no participation cost.
+ * Optional "spot" fee paid to participate in each hunt — a per-avis cost map
+ * (avis id → kamas) folded into that avis's benefit. Missing means no fee.
  */
-export function loadAvisParticipation(): number {
+export function loadAvisParticipation(): Record<string, number> {
   try {
     const raw = localStorage.getItem(AVIS_PARTICIPATION_KEY);
-    if (!raw) return 0;
-    const n = Number(raw);
-    return Number.isFinite(n) && n > 0 ? n : 0;
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+      const out: Record<string, number> = {};
+      for (const [k, v] of Object.entries(parsed)) {
+        const n = Number(v);
+        if (Number.isFinite(n) && n > 0) out[k] = n;
+      }
+      return out;
+    }
+    return {};
   } catch {
-    return 0;
+    return {};
   }
 }
 
-export function saveAvisParticipation(value: number): void {
+export function saveAvisParticipation(map: Record<string, number>): void {
   try {
-    localStorage.setItem(AVIS_PARTICIPATION_KEY, String(value));
+    localStorage.setItem(AVIS_PARTICIPATION_KEY, JSON.stringify(map));
+  } catch {
+    // non-fatal
+  }
+}
+
+/**
+ * How much a batch of avitons sells for: `qty` avitons for `price` kamas. The
+ * per-aviton value derives from these; 0/0 means avitons aren't valued yet.
+ */
+export interface AvisAvitonRate {
+  qty: number;
+  price: number;
+}
+
+export function loadAvisAviton(): AvisAvitonRate {
+  const empty: AvisAvitonRate = { qty: 0, price: 0 };
+  try {
+    const raw = localStorage.getItem(AVIS_AVITON_KEY);
+    if (!raw) return empty;
+    const parsed = JSON.parse(raw);
+    if (parsed && typeof parsed === "object") {
+      const qty = Number(parsed.qty);
+      const price = Number(parsed.price);
+      return {
+        qty: Number.isFinite(qty) && qty > 0 ? qty : 0,
+        price: Number.isFinite(price) && price > 0 ? price : 0,
+      };
+    }
+    return empty;
+  } catch {
+    return empty;
+  }
+}
+
+export function saveAvisAviton(rate: AvisAvitonRate): void {
+  try {
+    localStorage.setItem(AVIS_AVITON_KEY, JSON.stringify(rate));
   } catch {
     // non-fatal
   }

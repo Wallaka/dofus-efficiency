@@ -1363,17 +1363,50 @@ table.lots td.num {
   color: var(--negative);
 }
 
-/* Participation-fee input in the toolbar. */
-.avis-participation {
+/* Inline participation input on the participation line. */
+.avis-line-price-edit {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
+}
+
+.avis-line-price-edit input {
+  width: 72px;
+  padding: 4px 6px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--num-bg);
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+  text-align: right;
+}
+
+.avis-line-unit {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+/* Aviton resale-rate control (top of page). */
+.avis-aviton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
   font-size: 0.85rem;
   color: var(--muted);
 }
 
-.avis-participation input {
-  width: 90px;
+.avis-aviton-label {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.avis-aviton input {
+  width: 96px;
   padding: 6px 8px;
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -1381,10 +1414,6 @@ table.lots td.num {
   color: var(--text);
   font-variant-numeric: tabular-nums;
   text-align: right;
-}
-
-.avis-participation-unit {
-  color: var(--muted);
 }
 
 /* Craft table */

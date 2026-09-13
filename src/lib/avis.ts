@@ -124,6 +124,11 @@ export function computeAvisBenefit(input: AvisBenefitInput): AvisBenefit {
   return { value: gain - cost, complete: true };
 }
 
+/** Per-aviton value from a "qty avitons = price kamas" batch (0 when unset). */
+export function avitonUnitValue(qty: number, price: number): number {
+  return qty > 0 && price > 0 ? price / qty : 0;
+}
+
 /** The fetched catalog, cached with a timestamp. */
 export interface AvisCatalog {
   list: AvisReward[];

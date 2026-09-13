@@ -8,8 +8,12 @@ interface Props {
   cartePrice?: number;
   /** Tracked HDV price of the resource inside the chest, if known. */
   resourcePrice?: number;
-  /** Optional flat fee paid to join a hunt "spot", applied to every avis. */
+  /** Value of this avis's avitons (avitons × per-aviton rate); 0 when unset. */
+  avitonValue?: number;
+  /** Flat fee paid to join this hunt's "spot" (per avis). */
   participationCost?: number;
+  /** Update this avis's participation fee. */
+  onParticipationChange?: (value: number) => void;
 }
 
 /** One priceable line: icon, label + item name, and price (or "—"). */
@@ -46,16 +50,19 @@ function AvisLine({
   );
 }
 
-/** One avis de recherche: picture, name, level, avitons + carte cost / resource reward / benefit. */
+/** One avis de recherche: picture, name, level, avitons + carte cost / resource + aviton reward / benefit. */
 export function AvisCard({
   avis,
   cartePrice,
   resourcePrice,
+  avitonValue = 0,
   participationCost = 0,
+  onParticipationChange,
 }: Props) {
   const benefit = computeAvisBenefit({
     cartePrice,
     resourcePrice,
+    avitonValue,
     participationCost,
   });
   const benefitClass =
@@ -107,20 +114,46 @@ export function AvisCard({
           img={avis.resourceImg}
           price={resourcePrice}
         />
-        {participationCost > 0 && (
+        {avitonValue > 0 && (
           <AvisLine
-            variant="cost"
-            label="Participation (spot)"
-            name="Frais de participation"
-            placeholder="🎟️"
-            price={participationCost}
+            variant="reward"
+            label="Avitons"
+            name={`${avis.avitons} avitons`}
+            placeholder="🪙"
+            price={avitonValue}
           />
         )}
+        <div className="avis-line avis-line--cost">
+          <div className="avis-line-icon">
+            <span aria-hidden>🎟️</span>
+          </div>
+          <div className="avis-line-body">
+            <span className="avis-line-label">Participation (spot)</span>
+            <span className="avis-line-name">Frais pour ce spot</span>
+          </div>
+          <span className="avis-line-price avis-line-price-edit">
+            <input
+              type="number"
+              min={0}
+              step={100}
+              inputMode="numeric"
+              aria-label={`Participation pour ${avis.name}`}
+              value={participationCost || ""}
+              placeholder="0"
+              onChange={(e) =>
+                onParticipationChange?.(
+                  Math.max(0, Math.round(Number(e.target.value) || 0)),
+                )
+              }
+            />
+            <span className="avis-line-unit">k</span>
+          </span>
+        </div>
       </div>
 
       <footer
         className={`avis-benefit ${benefitClass}`}
-        title="Bénéfice = ressource vendue − carte − participation. Les avitons ne sont pas encore comptés."
+        title="Bénéfice = ressource + avitons − carte − participation."
       >
         <span className="avis-benefit-label">Bénéfice</span>
         <span className="avis-benefit-value">
