@@ -1,13 +1,15 @@
 import { useState } from "react";
-import type { CraftEntry } from "../lib/craftList";
-import type { CraftEvaluation, Item } from "../types";
+import type { CraftEntry, CraftBenefit } from "../lib/craftList";
+import type { Item } from "../types";
 import type { PriceEntryMap } from "../lib/priceStore";
 import { isStale, relativeAge } from "../lib/priceStore";
 import { formatKamas, formatKamasSigned, formatPercent } from "../lib/format";
 
 interface Props {
   entry: CraftEntry;
-  evaluation: CraftEvaluation;
+  evaluation: CraftBenefit;
+  /** HDV sell-tax percentage, for the breakdown label. */
+  taxPercent: number;
   /** Shared price map (item id → unit price), read for ingredient/sell prices. */
   prices: Record<string, number | undefined>;
   /** Price entries, for the OCR/manuel source badge on each ingredient. */
@@ -117,13 +119,14 @@ function IngredientSub({
 export function CraftRow({
   entry,
   evaluation,
+  taxPercent,
   prices,
   entries,
   onPriceChange,
   onRemove,
 }: Props) {
   const [open, setOpen] = useState(false);
-  const { craftCost, sellPrice, margin, marginRatio } = evaluation;
+  const { craftCost, sellPrice, tax, netMargin, netMarginRatio } = evaluation;
 
   const toggle = () => setOpen((o) => !o);
 
@@ -186,14 +189,17 @@ export function CraftRow({
         </span>
 
         <span className="col-num">
-          <span className={`craft-benefit-value ${benefitClass(margin)}`}>
-            {margin != null ? formatKamasSigned(margin) : "—"}
+          <span
+            className={`craft-benefit-value ${benefitClass(netMargin)}`}
+            title="Bénéfice net = prix de vente − taxe HDV − coût de craft"
+          >
+            {netMargin != null ? formatKamasSigned(netMargin) : "—"}
           </span>
         </span>
 
         <span className="col-num m-hide-margin">
-          <span className={`craft-margin ${benefitClass(margin)}`}>
-            {marginRatio != null ? formatPercent(marginRatio) : "—"}
+          <span className={`craft-margin ${benefitClass(netMargin)}`}>
+            {netMarginRatio != null ? formatPercent(netMarginRatio) : "—"}
           </span>
         </span>
 
@@ -258,6 +264,31 @@ export function CraftRow({
               </div>
             );
           })}
+
+          <dl className="craft-recap">
+            <div className="craft-recap-row">
+              <dt>Prix de vente</dt>
+              <dd>{formatKamas(sellPrice)}</dd>
+            </div>
+            <div className="craft-recap-row">
+              <dt>Taxe HDV ({taxPercent} %)</dt>
+              <dd className="neg">
+                {tax != null && tax > 0 ? `− ${formatKamas(tax)}` : "—"}
+              </dd>
+            </div>
+            <div className="craft-recap-row">
+              <dt>Coût de craft</dt>
+              <dd className="neg">
+                {craftCost != null ? `− ${formatKamas(craftCost)}` : "prix manquant"}
+              </dd>
+            </div>
+            <div className="craft-recap-row craft-recap-total">
+              <dt>Bénéfice net</dt>
+              <dd className={benefitClass(netMargin)}>
+                {netMargin != null ? formatKamasSigned(netMargin) : "—"}
+              </dd>
+            </div>
+          </dl>
         </div>
       )}
     </li>
