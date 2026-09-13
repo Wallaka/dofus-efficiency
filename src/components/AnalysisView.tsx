@@ -8,6 +8,7 @@ import { formatKamas } from "../lib/format";
 export const KIND_LABEL: Record<ScreenshotKind, string> = {
   "market-trend": "Cours du marché",
   hdv: "Hôtel de vente",
+  "hdv-sell": "HDV (vente)",
   "item-tooltip": "Infobulle d'objet",
   inventory: "Inventaire",
   "character-sheet": "Fiche perso",

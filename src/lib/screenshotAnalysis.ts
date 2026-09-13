@@ -20,6 +20,7 @@
 export type ScreenshotKind =
   | "market-trend"
   | "hdv"
+  | "hdv-sell"
   | "item-tooltip"
   | "inventory"
   | "character-sheet"
@@ -161,19 +162,43 @@ function firstNumberAfter(text: string, label: RegExp): number | null {
 // reads as 104, not 1041387925.
 const PRICE = "\\d{1,3}(?:[ .\\u00a0]\\d{3})*";
 
+// Between the "Prix moyen"/"médian" label and its value there's often a small
+// graph icon that OCR reads as junk ("Fr", "[A", "#"), and the value may sit on
+// the next line — so allow a short run of non-digits (incl. one line break).
+// A real price value: a thousand-grouped number, or 2+ plain digits. Excludes a
+// lone single digit — the small graph icon next to "Prix moyen/médian" is often
+// OCR'd as a stray "7"/"4", and the true value follows (sometimes on the next line).
+const VALUE_RE = /\d{1,3}(?:[ . ]\d{3})+|\d{2,}/;
+
+/**
+ * Read the number for a labeled price ("Prix moyen", "Prix médian"). Line-based:
+ * find the label, then take the first real value on that line (after the label) or
+ * the next two lines — robust to an icon glyph between the label and its value, and
+ * to the value sitting on the following line, without scanning the whole screen.
+ */
+function parseLabeledPrice(text: string, label: RegExp): number | null {
+  const lines = normalize(text).split(/\r?\n/);
+  for (let i = 0; i < lines.length; i++) {
+    const m = label.exec(lines[i]);
+    if (!m) continue;
+    const end = Math.min(i + 2, lines.length - 1);
+    for (let j = i; j <= end; j++) {
+      const hay = j === i ? lines[j].slice(m.index + m[0].length) : lines[j];
+      const v = VALUE_RE.exec(hay);
+      if (v) return parseNumber(v[0]);
+    }
+    return null; // label found but no value nearby
+  }
+  return null;
+}
+
 export function parseAveragePrice(text: string): number | null {
-  return firstNumberAfter(
-    normalize(text),
-    new RegExp(`prix\\s*moyen[\\s:]*(${PRICE})`, "i"),
-  );
+  return parseLabeledPrice(text, /prix\s*moyen/);
 }
 
 export function parseMedianPrice(text: string): number | null {
   // normalize() strips the accent so "médian" matches "median".
-  return firstNumberAfter(
-    normalize(text),
-    new RegExp(`prix\\s*median[\\s:]*(${PRICE})`, "i"),
-  );
+  return parseLabeledPrice(text, /prix\s*median/);
 }
 
 /** "1 387 925 articles vendus" → total sold over the graph's period. */
@@ -195,18 +220,21 @@ interface TypeLine {
   itemType: string | null;
 }
 
-/** Find the "Niveau N · Type" (or "Niv. N · Type") line and read level + type. */
+/**
+ * Find the item header's level line — "Niveau N · Type", "Niv. N · Type", or just
+ * "NIV. N" with no type word (the HDV sell panel shows the name + "NIV. 40" and no
+ * type). Returns the first such line; `itemType` is null when no type word is on
+ * it. The name is the line just above (see nameBefore).
+ */
 function findTypeLine(lines: string[]): TypeLine | null {
   const allTypes = [...WEAPON_TYPES, ...EQUIPMENT_TYPES, ...RESOURCE_TYPES];
   for (let i = 0; i < lines.length; i++) {
     const norm = normalize(lines[i]);
-    // Match "Niveau", "Niv." and the OCR slip "Ni." (v optional, "eau" optional);
-    // a type word must also be on the line (checked below), so it stays safe.
+    // Match "Niveau", "Niv." and the OCR slip "Ni." (v optional, "eau" optional).
     if (!/\bniv?(?:eau)?\.?\s*\d/.test(norm)) continue;
     const level = Number(/\bniv?(?:eau)?\.?\s*(\d{1,3})/.exec(norm)?.[1] ?? NaN);
-    const type = allTypes.find((t) => new RegExp(`\\b${t}\\b`).test(norm));
-    if (type)
-      return { index: i, level: Number.isFinite(level) ? level : null, itemType: type };
+    const type = allTypes.find((t) => new RegExp(`\\b${t}\\b`).test(norm)) ?? null;
+    return { index: i, level: Number.isFinite(level) ? level : null, itemType: type };
   }
   return null;
 }
@@ -228,10 +256,24 @@ function nameBefore(lines: string[], typeIndex: number): string | null {
  * stopping at the first token with a digit or punctuation — that's where the name
  * ends and noise begins.
  */
+/** UI words that can bleed onto the item-name line and must not be kept as name. */
+const NAME_STOP_WORDS = new Set([
+  "q",
+  "rechercher",
+  "filtrer",
+  "nom",
+  "lot",
+  "prix",
+  "achat",
+  "vente",
+]);
+
 function cleanItemName(line: string): string | null {
   const stripped = line.replace(/^[^A-Za-zÀ-ÿ]+/, "");
   const kept: string[] = [];
   for (const tok of stripped.split(/\s+/)) {
+    // Stop at UI chrome that bleeds onto the name row (search box, table headers).
+    if (NAME_STOP_WORDS.has(normalize(tok))) break;
     if (/^[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ'’-]*$/.test(tok)) kept.push(tok);
     else break;
   }
@@ -272,6 +314,49 @@ export function parseLots(text: string): Lot[] {
     .sort((a, b) => a.quantity - b.quantity);
 }
 
+/**
+ * Lot prices from the HDV sell panel's "Actuellement en vente" table only. The
+ * panel also shows "Prix du lot" and "Prix moyen" numbers that plain parseLots
+ * would mistake for a x1 lot, so we start parsing after the section header.
+ */
+export function parseSellLots(text: string): Lot[] {
+  const lines = text.split(/\r?\n/);
+  const start = lines.findIndex((l) => /actuellement/.test(normalize(l)));
+  const region = start >= 0 ? lines.slice(start + 1) : lines;
+
+  const rows: { quantity: number; price: number }[] = [];
+  for (const raw of region) {
+    // Each row starts with the item icon (OCR renders it as stray glyphs), then
+    // the quantity, then the price. Drop everything up to the first digit.
+    const line = raw.replace(/^[^0-9\n]*/, "");
+    const m = /^(1\s?000|100|10|1)\s+(\d[\d . ]*\d|\d)/.exec(line);
+    if (!m) continue;
+    const quantity = parseNumber(m[1]);
+    const price = parseNumber(m[2]);
+    if (quantity != null && price != null && !rows.some((r) => r.quantity === quantity)) {
+      rows.push({ quantity, price });
+    }
+    if (rows.length === LOT_SIZES.length) break;
+  }
+
+  // A row whose per-unit price is a wild outlier means OCR dropped the quantity
+  // digit and mis-split the price (e.g. "1 328" read as qty 1 / price 328). Drop
+  // it rather than store a wrong lot — better a missing row than a bad one.
+  const units = rows.map((r) => r.price / r.quantity).sort((a, b) => a - b);
+  const median = units.length ? units[Math.floor(units.length / 2)] : 0;
+  const kept =
+    rows.length >= 3 && median > 0
+      ? rows.filter((r) => {
+          const u = r.price / r.quantity;
+          return u >= median / 3 && u <= median * 3;
+        })
+      : rows;
+
+  return kept
+    .map((r) => ({ quantity: r.quantity, price: r.price, unitPrice: r.price / r.quantity }))
+    .sort((a, b) => a.quantity - b.quantity);
+}
+
 export function analyzeScreenshot(rawText: string): ScreenshotAnalysis {
   const norm = normalize(rawText);
   const lines = rawText.split(/\r?\n/);
@@ -290,6 +375,10 @@ export function analyzeScreenshot(rawText: string): ScreenshotAnalysis {
   const isMarketTrend =
     norm.includes("cours du marche") ||
     (norm.includes("articles vendus") && norm.includes("prix median"));
+  // The HDV "Vente" (sell) panel: distinctive left column with the current lot
+  // prices ("Actuellement en vente") and the sale form ("Prix du lot").
+  const isHdvSell =
+    /actuellement\s+en\s+vente/.test(norm) || norm.includes("prix du lot");
   const isHdv =
     norm.includes("hotel de vente") || norm.includes("reinitialiser les filtres");
   const looksTooltip =
@@ -303,6 +392,7 @@ export function analyzeScreenshot(rawText: string): ScreenshotAnalysis {
 
   let kind: ScreenshotKind;
   if (isMarketTrend) kind = "market-trend";
+  else if (isHdvSell) kind = "hdv-sell";
   else if (isHdv) kind = "hdv";
   else if (looksTooltip) kind = "item-tooltip";
   else if (sheetHits >= 3) kind = "character-sheet";
@@ -324,9 +414,15 @@ export function analyzeScreenshot(rawText: string): ScreenshotAnalysis {
     category = "equipment";
   else category = "unknown";
 
-  // Resource lots only make sense in the HDV on a resource.
+  // Lot tables appear in the HDV buy view (a resource's x1/x10/x100/x1000) and in
+  // the sell panel's "Actuellement en vente" — the sell panel needs the header-
+  // scoped parser so its "Prix du lot"/"Prix moyen" numbers aren't read as lots.
   const lots =
-    kind === "hdv" && category === "resource" ? parseLots(rawText) : [];
+    kind === "hdv-sell"
+      ? parseSellLots(rawText)
+      : kind === "hdv"
+        ? parseLots(rawText)
+        : [];
 
   return {
     kind,
@@ -362,24 +458,28 @@ export function mergeAnalyses(
   // rows as the noisy full-image pass — the crop is exactly what should read the
   // small lot list best, so it must not be overridden by a partial full read.
   let lots = cropped.lots.length > 0 ? cropped.lots : full.lots;
-  if (kind === "hdv" && category === "resource") {
-    const cropLots = parseLots(cropped.rawText);
+  if (kind === "hdv" || kind === "hdv-sell") {
+    const cropLots =
+      kind === "hdv-sell"
+        ? parseSellLots(cropped.rawText)
+        : parseLots(cropped.rawText);
     if (cropLots.length >= lots.length) lots = cropLots;
   }
-  // For the market graph, the full image is dominated by the inventory/other
-  // windows, so its item name is noise — only the cropped panel names the focused
-  // resource. Don't fall back to the full-image name/level/type there.
-  const cropOnlyName = kind === "market-trend";
+  // For the market graph and the sell panel, the full image is dominated by the
+  // inventory/listing/other windows, so its name AND prices are noise — trust only
+  // the cropped panel there (a null field beats a wrong full-image number). Don't
+  // fall back to the full-image reads for those.
+  const cropOnly = kind === "market-trend" || kind === "hdv-sell";
   const merged: Omit<ScreenshotAnalysis, "note"> = {
     kind,
     category,
-    itemName: cropOnlyName ? cropped.itemName : pick(cropped.itemName, full.itemName),
-    level: cropOnlyName ? cropped.level : pick(cropped.level, full.level),
-    itemType: cropOnlyName ? cropped.itemType : pick(cropped.itemType, full.itemType),
+    itemName: cropOnly ? cropped.itemName : pick(cropped.itemName, full.itemName),
+    level: cropOnly ? cropped.level : pick(cropped.level, full.level),
+    itemType: cropOnly ? cropped.itemType : pick(cropped.itemType, full.itemType),
     set: pick(cropped.set, full.set),
-    averagePrice: pick(cropped.averagePrice, full.averagePrice),
-    medianPrice: pick(cropped.medianPrice, full.medianPrice),
-    articlesSold: pick(cropped.articlesSold, full.articlesSold),
+    averagePrice: cropOnly ? cropped.averagePrice : pick(cropped.averagePrice, full.averagePrice),
+    medianPrice: cropOnly ? cropped.medianPrice : pick(cropped.medianPrice, full.medianPrice),
+    articlesSold: cropOnly ? cropped.articlesSold : pick(cropped.articlesSold, full.articlesSold),
     lots,
     rawText: cropped.rawText,
   };
@@ -421,6 +521,18 @@ function buildNote(a: {
           : `HDV ressource : lots manquants (${missing.map((q) => "x" + q).join(", ")}).`;
       }
       return `HDV ${cat}${a.averagePrice != null ? " : prix moyen détecté." : "."}`;
+    }
+    case "hdv-sell": {
+      const missing = LOT_SIZES.filter(
+        (q) => !a.lots.some((l) => l.quantity === q && l.price != null),
+      );
+      return missing.length === 0
+        ? "HDV (vente) : prix moyen + lots x1/x10/x100/x1000 détectés."
+        : `HDV (vente)${a.averagePrice != null ? " : prix moyen détecté" : ""}${
+            missing.length < LOT_SIZES.length
+              ? ` (lots manquants : ${missing.map((q) => "x" + q).join(", ")})`
+              : ""
+          }.`;
     }
     case "item-tooltip":
       return a.averagePrice != null

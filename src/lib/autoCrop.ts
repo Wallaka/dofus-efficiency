@@ -40,21 +40,32 @@ const ANCHORS: Partial<Record<ScreenshotKind, string[]>> = {
   // "Cours du marché" window.
   "market-trend": ["median", "articles", "vendus"],
   hdv: ["quantite", "moyen", "lot", "acheter"],
+  // The sell panel's left column only — these words don't appear in the listing
+  // to its right, so the crop stays on the name + prix moyen + lot table.
+  "hdv-sell": ["actuellement", "quantite", "restant", "retirer", "modifier"],
   "item-tooltip": ["panoplie", "effets", "moyen", "poids", "niveau", "niv"],
 };
 
-// Padding as a fraction of image width/height. HDV gets a big bottom margin so
-// the lot list is included; every type gets extra on top for the item name.
+// Padding is expressed in *text heights* (ems) — multiples of the panel's OCR'd
+// line height — NOT a fraction of the image. Dofus' UI is a fixed pixel size for a
+// given UI scale, independent of screen resolution, and the OCR word boxes measure
+// that size directly. So the crop follows the panel wherever it sits AND whatever
+// the resolution/UI scale (the whole point: it must work on someone else's setup,
+// not just the layout it was tuned on). The values below were calibrated at ~21px
+// line height; see textHeightEm().
 const PADDING: Partial<Record<ScreenshotKind, Padding>> = {
   // Anchored on the stats line (médian/articles/vendus), which sits to the right
   // of and below the item's header. Pad well left + up to reach the item name and
   // level, and far down to include the graph + its 7-day date axis.
-  "market-trend": { left: 0.24, right: 0.05, top: 0.15, bottom: 0.42 },
-  hdv: { left: 0.03, right: 0.04, top: 0.05, bottom: 0.16 },
-  "item-tooltip": { left: 0.04, right: 0.04, top: 0.05, bottom: 0.04 },
+  "market-trend": { left: 55, right: 12, top: 19, bottom: 52 },
+  hdv: { left: 2.3, right: 2, top: 2.2, bottom: 8 },
+  // Narrow left column: pad up to the item name, down to the lot table, and only a
+  // little right (the listing sits just past the price column).
+  "hdv-sell": { left: 7, right: 16, top: 17, bottom: 25 },
+  "item-tooltip": { left: 9, right: 9, top: 6, bottom: 5 },
 };
 
-const DEFAULT_PADDING: Padding = { left: 0.04, right: 0.04, top: 0.05, bottom: 0.05 };
+const DEFAULT_PADDING: Padding = { left: 9, right: 9, top: 6, bottom: 6 };
 
 // The HDV lot list (x1/x10/x100/x1000) sits below the detail header, and the lot
 // *prices* sit to the right of the quantities. The anchor cluster only reliably
@@ -62,7 +73,7 @@ const DEFAULT_PADDING: Padding = { left: 0.04, right: 0.04, top: 0.05, bottom: 0
 // so pad generously down and right to keep every row and the whole price column —
 // regardless of how wide the detected cluster happens to be. Applied to all HDV
 // (category is often still "unknown" at the locate pass).
-const HDV_LOT_PAD = { right: 0.22, bottom: 0.42 };
+const HDV_LOT_PAD = { right: 19, bottom: 20 };
 // Keep only markers whose left edge is within this fraction of the image width
 // from the primary (leftmost) marker — drops matches from other windows.
 const CLUSTER_WIDTH_FRACTION = 0.4;
@@ -76,6 +87,23 @@ function normalize(text: string): string {
 
 function clamp(v: number, min: number, max: number): number {
   return Math.min(Math.max(v, min), max);
+}
+
+/**
+ * The panel's line height in pixels — the unit padding is measured in. Uses the
+ * median height of the anchor word boxes (so it tracks the actual UI scale), with
+ * a fallback and clamp so a stray giant/tiny OCR box can't blow up the crop.
+ */
+function textHeightEm(words: WordBox[], size: ImageSize): number {
+  // Median over ALL detected words (a large, stable sample) — the UI text is one
+  // size, so this tracks the UI scale far more reliably than a few anchor boxes.
+  const heights = words
+    .map((w) => w.bbox.y1 - w.bbox.y0)
+    .filter((h) => h > 0)
+    .sort((a, b) => a - b);
+  const median = heights.length ? heights[heights.length >> 1] : 0;
+  const em = median > 0 ? median : size.height * 0.02;
+  return clamp(em, size.height * 0.005, size.height * 0.06);
 }
 
 /**
@@ -114,10 +142,12 @@ export function computeAutoCrop(
   }
   const px = size.width;
   const py = size.height;
-  const left = clamp(x0 - pad.left * px, 0, px);
-  const top = clamp(y0 - pad.top * py, 0, py);
-  const right = clamp(x1 + pad.right * px, 0, px);
-  const bottom = clamp(y1 + pad.bottom * py, 0, py);
+  // Padding in text-heights (resolution-independent), measured from the whole page.
+  const em = textHeightEm(words, size);
+  const left = clamp(x0 - pad.left * em, 0, px);
+  const top = clamp(y0 - pad.top * em, 0, py);
+  const right = clamp(x1 + pad.right * em, 0, px);
+  const bottom = clamp(y1 + pad.bottom * em, 0, py);
 
   const width = right - left;
   const height = bottom - top;
