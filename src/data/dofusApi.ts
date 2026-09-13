@@ -6,7 +6,6 @@ import {
   chestCriminalKey,
   monsterCriminalKey,
   questCriminalKey,
-  questCriminalName,
 } from "../lib/avis";
 
 /**
@@ -89,19 +88,28 @@ function toItem(raw: RawItem): Item {
 }
 
 /**
- * Search items by (French) name for the autocomplete. DofusDB is Feathers-based
- * and exposes a fuzzy `$search` operator. If the field/operator ever changes,
- * only these two constants need updating.
+ * DofusDB's fuzzy `$search` works on `slug` (accent/case-insensitive), not on
+ * `name.fr`. If the field/operator ever changes, only these two constants and
+ * `toSlugQuery` need updating.
  */
-const SEARCH_FIELD = "name.fr";
+const SEARCH_FIELD = "slug.fr";
 const SEARCH_OP = "$search";
+
+/** Normalize a query to slug form (lowercase, accents stripped) for $search. */
+export function toSlugQuery(query: string): string {
+  return query
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .trim();
+}
 
 export async function searchItems(
   query: string,
   signal?: AbortSignal,
   limit = 15,
 ): Promise<Item[]> {
-  const q = query.trim();
+  const q = toSlugQuery(query);
   if (q.length < 2) return [];
   const url =
     `${DOFUSDB_BASE_URL}/items?${SEARCH_FIELD}[${SEARCH_OP}]=` +
@@ -210,15 +218,15 @@ async function mapLimit<T, R>(
  * result that is a Ressource whose name contains the criminal.
  */
 async function fetchAvisResource(
-  criminalDisplay: string,
   criminalKey: string,
   signal?: AbortSignal,
 ): Promise<Item | null> {
-  if (!criminalDisplay) return null;
+  if (!criminalKey) return null;
   try {
+    // DofusDB's $search works on slug; the criminal key is already slug-shaped.
     const url =
-      `${DOFUSDB_BASE_URL}/items?name.fr[$search]=` +
-      `${encodeURIComponent(criminalDisplay)}&$limit=20&lang=fr`;
+      `${DOFUSDB_BASE_URL}/items?${SEARCH_FIELD}[${SEARCH_OP}]=` +
+      `${encodeURIComponent(criminalKey)}&$limit=20&lang=fr`;
     const res = await getJson<FeathersPage<RawItemTyped>>(url, signal);
 
     // The list endpoint doesn't populate the nested `type`, so pick by name:
@@ -359,11 +367,7 @@ export async function fetchAvisDeRecherche(
   // Resolve each chest's resource by searching the criminal name (bounded
   // concurrency to avoid an 80+ request burst).
   const resources = await mapLimit(list, 6, (avis) =>
-    fetchAvisResource(
-      questCriminalName(avis.name),
-      questCriminalKey(avis.name),
-      signal,
-    ),
+    fetchAvisResource(questCriminalKey(avis.name), signal),
   );
   list.forEach((avis, i) => {
     const resource = resources[i];
