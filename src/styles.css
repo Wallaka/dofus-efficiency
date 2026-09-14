@@ -3098,3 +3098,35 @@ td.negative {
     justify-self: end;
   }
 }
+
+/* Métiers loader */
+.metier-loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  padding: 8px 2px;
+}
+.metier-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: metier-spin 0.7s linear infinite;
+  flex: 0 0 auto;
+}
+.metier-h3-sub {
+  margin: -4px 4px 10px;
+}
+@keyframes metier-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .metier-spinner {
+    animation: none;
+  }
+}

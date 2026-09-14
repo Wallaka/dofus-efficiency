@@ -593,24 +593,30 @@ export async function fetchJobXpCurve(signal?: AbortSignal): Promise<number[]> {
   const rows = await fetchAllPages<RawExperience>("/experiences", "", signal, 6);
   if (rows.length === 0) return [];
 
-  // Detect which field carries job XP, using the row with the most numeric data.
-  let field: string | undefined;
-  for (const key of JOB_XP_FIELDS) {
-    if (rows.some((r) => Number.isFinite(Number(r[key])) && Number(r[key]) > 0)) {
-      field = key;
-      break;
-    }
-  }
+  const hasPositive = (key: string) =>
+    rows.some((r) => Number.isFinite(Number(r[key])) && Number(r[key]) > 0);
+
+  // Detect the job-XP field. Prefer any key that *looks* like one (contains
+  // "job" and "xp"/"exp", case-insensitive) so we're robust to the exact
+  // spelling; fall back to the explicit candidate list.
+  const keys = Object.keys(rows[0] ?? {});
+  let field = keys.find(
+    (k) => /job/i.test(k) && /(xp|exp)/i.test(k) && hasPositive(k),
+  );
+  if (!field) field = JOB_XP_FIELDS.find(hasPositive);
   if (!field) return [];
 
+  // The level column is usually `level`; fall back to row order if it's absent.
+  const hasLevel = rows.some((r) => Number.isFinite(Number(r.level)));
+
   const curve: number[] = [];
-  for (const r of rows) {
-    const level = Number(r.level);
-    const xp = Number(r[field]);
+  rows.forEach((r, i) => {
+    const level = hasLevel ? Number(r.level) : i + 1;
+    const xp = Number(r[field as string]);
     if (Number.isFinite(level) && level >= 1 && Number.isFinite(xp)) {
       curve[level] = xp;
     }
-  }
+  });
   // Fill any gaps so consecutive-level diffs never read `undefined`.
   let last = 0;
   for (let l = 1; l < curve.length; l++) {
