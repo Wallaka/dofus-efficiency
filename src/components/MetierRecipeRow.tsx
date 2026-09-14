@@ -25,7 +25,14 @@ export function MetierRecipeRow({
   onPriceChange,
 }: Props) {
   const [open, setOpen] = useState(false);
-  const { recipe, xpPerCraft, crafts, cost, costPerXp, locked, priced } = plan;
+  const { recipe, xpPerCraft, crafts, netCost, netCostPerXp, locked, priced, sellPrice } =
+    plan;
+  const netStr =
+    netCost == null
+      ? "—"
+      : netCost >= 0
+        ? formatKamas(netCost)
+        : `+${formatKamas(-netCost)}`;
 
   return (
     <li className={open ? "metier-ritem open" : "metier-ritem"}>
@@ -65,12 +72,15 @@ export function MetierRecipeRow({
           {xpPerCraft}
         </span>
         <span className="num metier-crafts">{crafts.toLocaleString("fr-FR")}</span>
-        <span className="num metier-cost">
-          {cost != null ? formatKamas(cost) : "—"}
+        <span
+          className={`num metier-cost${netCost != null && netCost < 0 ? " metier-profit" : ""}`}
+          title="Coût net = ingrédients − revente"
+        >
+          {netStr}
         </span>
         <span className="num metier-kxp-cell">
           <span className="metier-kxp">
-            {costPerXp != null ? `${formatKamas(costPerXp)}/xp` : "—"}
+            {netCostPerXp != null ? `${formatKamas(netCostPerXp)}/xp` : "—"}
           </span>
         </span>
       </button>
@@ -109,6 +119,32 @@ export function MetierRecipeRow({
               </div>
             );
           })}
+
+          <div className="metier-pcap">Revente de l'objet crafté (par unité)</div>
+          <div className="metier-ing metier-ing--revenue">
+            <span className="metier-ing-id">
+              <span className="metier-ing-icon">
+                {recipe.result.img ? (
+                  <img src={recipe.result.img} alt="" />
+                ) : (
+                  <span aria-hidden>⚒️</span>
+                )}
+              </span>
+              <span className="metier-ing-name" title={recipe.result.name}>
+                {recipe.result.name}
+              </span>
+            </span>
+            <span className="metier-ing-qty">vente</span>
+            <PriceInput
+              value={sellPrice}
+              needs={sellPrice == null}
+              ariaLabel={`Prix de revente de ${recipe.result.name}`}
+              onCommit={(v) => onPriceChange(recipe.result, v)}
+            />
+            <span className={`metier-ing-total${sellPrice == null ? " missing" : ""}`}>
+              {sellPrice != null ? formatKamas(sellPrice) : "à saisir"}
+            </span>
+          </div>
         </div>
       )}
     </li>
