@@ -60,7 +60,7 @@ export function loadPriceEntries(): PriceEntryMap {
   }
 }
 
-function savePriceEntries(map: PriceEntryMap): void {
+export function savePriceEntries(map: PriceEntryMap): void {
   try {
     localStorage.setItem(ENTRIES_KEY, JSON.stringify(map));
   } catch {
