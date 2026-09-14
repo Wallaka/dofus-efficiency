@@ -142,4 +142,26 @@ describe("buildOptimalPlan", () => {
     const fixedA = planRecipeToTarget(recipes[0], prices, 1, 20, 1);
     expect(optimal.totalCost!).toBeLessThanOrEqual(fixedA.cost!);
   });
+
+  it("keeps the same path when a resale price is entered (resale is display-only)", () => {
+    // "cheap" clears each level in 1 craft @ cost 1; "spam" needs many crafts of
+    // a low-XP recipe. Pricing a fat resale on "spam" must NOT hijack the path
+    // into it just because reselling looks profitable — the path stays cheapest
+    // to *level* (gross cost), and resale only lowers the reported net cost.
+    const rs = [
+      recipe("cheap", 10, [["a", 1]]), // level 10, best XP → fewest crafts
+      recipe("spam", 1, [["b", 1]]), // level 1, tiny XP → many crafts, cheap unit
+    ];
+    const base = buildOptimalPlan(rs, prices, 10, 15, 1);
+    const withResale = buildOptimalPlan(rs, { ...prices, "res-spam": 1000 }, 10, 15, 1, 0.02);
+
+    // Same recipes, same craft counts before and after pricing the resale.
+    expect(withResale.steps.map((s) => s.recipe.recipeId)).toEqual(
+      base.steps.map((s) => s.recipe.recipeId),
+    );
+    expect(withResale.totalCrafts).toBe(base.totalCrafts);
+    expect(withResale.totalCost).toBe(base.totalCost); // gross cost unchanged
+    // Resale still shows up as revenue in the display totals.
+    expect(withResale.totalRevenue).toBe(0); // "spam" isn't in the path, so nothing to resell
+  });
 });
