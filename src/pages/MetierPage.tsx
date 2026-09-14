@@ -6,6 +6,7 @@ import {
   buildOptimalPlan,
   xpBetween,
   type MetierRecipe,
+  type PlanIngredient,
 } from "../lib/metierXp";
 import {
   loadMetierInput,
@@ -158,6 +159,46 @@ export function MetierPage() {
         : null;
 
   const pct = (lvl: number) => `${Math.min(100, (lvl / MAX_LEVEL) * 100)}%`;
+
+  /** One editable ingredient line (shared by every shopping list). */
+  const ingRow = (ing: PlanIngredient) => (
+    <div className="metier-ing" key={ing.item.id}>
+      <span className="metier-ing-id">
+        <span className="metier-ing-icon">
+          {ing.item.img ? <img src={ing.item.img} alt="" /> : <span aria-hidden>▪</span>}
+        </span>
+        <span className="metier-ing-name" title={ing.item.name}>
+          {ing.item.name}
+        </span>
+      </span>
+      <span className="metier-ing-qty">{ing.quantity.toLocaleString("fr-FR")}</span>
+      <PriceInput
+        value={ing.unitPrice}
+        needs={ing.unitPrice == null}
+        ariaLabel={`Prix unitaire de ${ing.item.name}`}
+        onCommit={(v) => onPriceChange(ing.item, v)}
+      />
+      <span className={`metier-ing-total${ing.subtotal == null ? " missing" : ""}`}>
+        {ing.subtotal != null ? formatKamas(ing.subtotal) : "prix ?"}
+      </span>
+    </div>
+  );
+
+  /** A palier's ingredients scaled to its craft count (for the grouped list). */
+  const stepShopping = (step: {
+    recipe: MetierRecipe;
+    crafts: number;
+  }): PlanIngredient[] =>
+    step.recipe.ingredients.map((ing) => {
+      const quantity = ing.quantity * step.crafts;
+      const unit = prices[ing.item.id];
+      return {
+        item: ing.item,
+        quantity,
+        unitPrice: unit,
+        subtotal: unit != null ? unit * quantity : undefined,
+      };
+    });
 
   return (
     <main className="metier-page">
@@ -382,6 +423,13 @@ export function MetierPage() {
                           </strong>
                         </span>
                         <span className="metier-pname" title={step.recipe.result.name}>
+                          <span className="metier-picon">
+                            {step.recipe.result.img ? (
+                              <img src={step.recipe.result.img} alt="" />
+                            ) : (
+                              <span aria-hidden>⚒️</span>
+                            )}
+                          </span>
                           <span className="metier-slots">Niv {step.recipe.resultLevel}</span>
                           {step.recipe.result.name}
                           {i > 0 && (
@@ -412,41 +460,42 @@ export function MetierPage() {
           <section className="panel">
             <h3 className="metier-h3">Liste de courses</h3>
             <p className="hint">
-              Pour le {view.label} — {count(view.crafts)} crafts — ce qu'il faut
-              acheter/farmer.
+              {isOptimal
+                ? "Une section par étape du chemin — vérifiez chaque objet et ajustez les prix (partagés avec les autres pages)."
+                : `Pour le ${view.label} — ${count(view.crafts)} crafts — ce qu'il faut acheter/farmer.`}
             </p>
-            <div className="metier-shopping">
-              {view.shopping.map((ing) => (
-                <div className="metier-ing" key={ing.item.id}>
-                  <span className="metier-ing-id">
+
+            {isOptimal ? (
+              optimal.steps.map((step) => (
+                <div
+                  className="metier-shop-group"
+                  key={`${step.fromLevel}-${step.recipe.recipeId}`}
+                >
+                  <div className="metier-shop-head">
                     <span className="metier-ing-icon">
-                      {ing.item.img ? (
-                        <img src={ing.item.img} alt="" />
+                      {step.recipe.result.img ? (
+                        <img src={step.recipe.result.img} alt="" />
                       ) : (
-                        <span aria-hidden>▪</span>
+                        <span aria-hidden>⚒️</span>
                       )}
                     </span>
-                    <span className="metier-ing-name" title={ing.item.name}>
-                      {ing.item.name}
+                    <span className="metier-shop-title" title={step.recipe.result.name}>
+                      {step.recipe.result.name}
                     </span>
-                  </span>
-                  <span className="metier-ing-qty">
-                    {ing.quantity.toLocaleString("fr-FR")}
-                  </span>
-                  <PriceInput
-                    value={ing.unitPrice}
-                    needs={ing.unitPrice == null}
-                    ariaLabel={`Prix unitaire de ${ing.item.name}`}
-                    onCommit={(v) => onPriceChange(ing.item, v)}
-                  />
-                  <span
-                    className={`metier-ing-total${ing.subtotal == null ? " missing" : ""}`}
-                  >
-                    {ing.subtotal != null ? formatKamas(ing.subtotal) : "prix ?"}
-                  </span>
+                    <span className="metier-shop-meta">
+                      Niv {step.fromLevel}–{step.toLevel} ·{" "}
+                      {step.crafts.toLocaleString("fr-FR")} crafts
+                      {step.cost != null ? ` · ${formatKamas(step.cost)}` : ""}
+                    </span>
+                  </div>
+                  <div className="metier-shopping">
+                    {stepShopping(step).map(ingRow)}
+                  </div>
                 </div>
-              ))}
-            </div>
+              ))
+            ) : (
+              <div className="metier-shopping">{view.shopping.map(ingRow)}</div>
+            )}
           </section>
         </>
       )}
