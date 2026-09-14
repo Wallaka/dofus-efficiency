@@ -6,16 +6,17 @@ import type { Item, PriceMap } from "../types";
  * Two well-established facts drive everything:
  *  1. The XP to go from job level L to L+1 is `20 × L`, so the cumulative XP to
  *     reach level N is `10 · N · (N−1)` (e.g. level 100 = 10·100·99 = 99 000).
- *  2. A successful craft grants `floor(20 × recipeLevel × ratio)`, where `ratio`
- *     drops with the gap between your job level and the recipe's level — so
- *     crafting an item *at* your level gives one level's worth of XP
- *     ("1 craft ≈ 1 level"), and out-levelled recipes give steadily less.
+ *  2. A successful craft grants `floor(recipeLevel × ratio)`, where `ratio`
+ *     drops with the gap between your job level and the recipe's level. So
+ *     crafting an item *at* your level grants `recipeLevel` XP — about 1/20th of
+ *     a level (you need `20 × level` to level up, i.e. ~20 crafts per level at
+ *     gap 0) — and out-levelled recipes give steadily less.
  *
  * `ratio` is Ankama's closed form `1 / (1 + 0.1 · gap^1.1)` (see `craftPenalty`).
- * Matched against DofusDB, a level-1 recipe from 1→20 gives ~528 crafts vs their
- * 523 (~1 %); the residual is the per-recipe base XP, which we approximate as
- * `20 × recipeLevel` rather than reading each recipe's exact value. The cost side
- * (from your prices) is exact, so kamas/XP is trustworthy either way.
+ * The base XP is the recipe's own level, confirmed in-game against DofusDB: a
+ * level-5 recipe from 5→10 needs exactly 199 crafts, and its per-craft XP reads
+ * 5, 4, 4, 3, 3 … as you out-level it; a level-21 recipe reads 21, 19, 17, 15.
+ * The cost side (from your prices) is exact, so kamas/XP is trustworthy.
  */
 
 /**
@@ -43,8 +44,9 @@ export function cumulativeXp(level: number): number {
 
 /**
  * XP from one successful craft of a recipe of `recipeLevel`, by a crafter at
- * `jobLevel`, scaled by an XP coefficient (1 = none, 1.2 = +20 %). Floored like
- * the game (min 1 for a craftable recipe); 0 for a recipe above your level.
+ * `jobLevel`, scaled by an XP coefficient (1 = none, 1.2 = +20 %). The base XP is
+ * the recipe's own level; the gap penalty and a floor (min 1 for a craftable
+ * recipe) match the game exactly. Returns 0 for a recipe above your level.
  */
 export function xpPerCraft(
   jobLevel: number,
@@ -52,7 +54,7 @@ export function xpPerCraft(
   coef = 1,
 ): number {
   if (recipeLevel > jobLevel || recipeLevel <= 0) return 0;
-  const xp = Math.floor(20 * recipeLevel * craftPenalty(jobLevel - recipeLevel) * coef);
+  const xp = Math.floor(recipeLevel * craftPenalty(jobLevel - recipeLevel) * coef);
   return Math.max(1, xp);
 }
 
