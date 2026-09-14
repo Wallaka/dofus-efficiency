@@ -21,13 +21,9 @@ import { PriceInput } from "../components/PriceInput";
 type Load = "idle" | "loading" | "error";
 const MAX_LEVEL = 200;
 
-/** Compact kamas for the big tiles, e.g. 5 430 000 -> "5,4 M". */
-function short(value: number | undefined): string {
+/** A plain count/XP with thousands separators, e.g. 3800 -> "3 800". */
+function count(value: number | undefined): string {
   if (value == null) return "—";
-  if (value >= 1_000_000)
-    return `${(value / 1_000_000).toLocaleString("fr-FR", { maximumFractionDigits: 1 })} M`;
-  if (value >= 1_000)
-    return `${(value / 1_000).toLocaleString("fr-FR", { maximumFractionDigits: 0 })} k`;
   return Math.round(value).toLocaleString("fr-FR");
 }
 
@@ -259,12 +255,12 @@ export function MetierPage() {
           <div className="metier-tiles">
             <div className="metier-tile">
               <span className="metier-tile-label">Crafts</span>
-              <span className="metier-tile-value">{short(plan.totalCrafts)}</span>
+              <span className="metier-tile-value">{count(plan.totalCrafts)}</span>
               <span className="metier-tile-sub">réussis, au total</span>
             </div>
             <div className="metier-tile">
               <span className="metier-tile-label">XP à gagner</span>
-              <span className="metier-tile-value">{short(plan.totalXp)}</span>
+              <span className="metier-tile-value">{count(plan.totalXp)}</span>
               <span className="metier-tile-sub">
                 {input.current} → {input.target}
               </span>
@@ -272,7 +268,7 @@ export function MetierPage() {
             <div className="metier-tile accent">
               <span className="metier-tile-label">Coût total</span>
               <span className="metier-tile-value">
-                {plan.totalCost != null ? `${short(plan.totalCost)} k` : "—"}
+                {formatKamas(plan.totalCost)}
               </span>
               <span className="metier-tile-sub">
                 {plan.incomplete ? "partiel (prix manquants)" : "aux prix actuels"}
@@ -281,7 +277,7 @@ export function MetierPage() {
             <div className="metier-tile">
               <span className="metier-tile-label">Coût moyen</span>
               <span className="metier-tile-value">
-                {plan.avgCostPerXp != null ? short(plan.avgCostPerXp) : "—"}
+                {plan.avgCostPerXp != null ? formatKamas(plan.avgCostPerXp) : "—"}
               </span>
               <span className="metier-tile-sub">kamas / XP</span>
             </div>
