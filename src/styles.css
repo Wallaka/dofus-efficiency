@@ -2371,6 +2371,7 @@ td.negative {
 
 /* Quêtes (daily/weekly routine) page */
 .quests-page {
+  margin-top: 24px;
   display: flex;
   flex-direction: column;
   gap: 20px;
