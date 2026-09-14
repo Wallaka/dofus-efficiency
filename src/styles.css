@@ -2369,6 +2369,23 @@ td.negative {
   align-items: center;
 }
 
+.quests-sort {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.quests-sort select {
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+  color: inherit;
+  font: inherit;
+}
+
 .quests-section-head {
   display: flex;
   align-items: baseline;

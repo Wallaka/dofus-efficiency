@@ -1,5 +1,11 @@
 import { describe, it, expect } from "vitest";
-import { questValue, periodTotal, importCatalog, type Quest } from "../quests";
+import {
+  questValue,
+  periodTotal,
+  sortQuests,
+  importCatalog,
+  type Quest,
+} from "../quests";
 import type { PriceMap } from "../../types";
 
 const mk = (over: Partial<Quest> = {}): Quest => ({
@@ -65,6 +71,41 @@ describe("periodTotal", () => {
       { id: "d", name: "D", period: "daily", kamas: 400, rewards: [], variantGroup: "g2" },
     ];
     expect(periodTotal(quests, {})).toBe(1000 + 800);
+  });
+});
+
+describe("sortQuests", () => {
+  const a: Quest = { id: "a", name: "A", period: "daily", kamas: 1000, rewards: [] };
+  const b: Quest = { id: "b", name: "B", period: "daily", kamas: 3000, rewards: [] };
+  const c: Quest = {
+    id: "c",
+    name: "C",
+    period: "daily",
+    kamas: 0,
+    rewards: [{ item: { id: "10", name: "Res" }, quantity: 4 }],
+  };
+
+  it("keeps the original order in manual mode (same reference)", () => {
+    const list = [a, b, c];
+    expect(sortQuests(list, {}, "manual")).toBe(list);
+  });
+
+  it("ranks by total value, most profitable first", () => {
+    const prices = { "10": 500 }; // c = 2000
+    const sorted = sortQuests([a, b, c], prices, "value");
+    expect(sorted.map((q) => q.id)).toEqual(["b", "c", "a"]); // 3000, 2000, 1000
+  });
+
+  it("ranks unpriced rewards on their known value so far", () => {
+    // c has no price, so its total is 0 and it sorts last.
+    const sorted = sortQuests([a, b, c], {}, "value");
+    expect(sorted.map((q) => q.id)).toEqual(["b", "a", "c"]); // 3000, 1000, 0
+  });
+
+  it("does not mutate the input array", () => {
+    const list = [a, b, c];
+    sortQuests(list, { "10": 500 }, "value");
+    expect(list.map((q) => q.id)).toEqual(["a", "b", "c"]);
   });
 });
 
