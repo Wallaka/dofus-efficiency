@@ -10,13 +10,12 @@ import {
   type PriceEntryMap,
 } from "../lib/priceStore";
 import { parseFrenchNumber } from "../lib/voiceParse";
-import { formatKamas } from "../lib/format";
 
 /**
- * The in-app HDV: the bundled catalog laid out like the game's marketplace
- * (tab → category → items). You never type a name — you find the item in its
- * category and punch the price. Enter saves and jumps to the next field, so a
- * whole category is a quick numpad run. Prices go straight to the price store.
+ * The in-app HDV: a game-like marketplace. The left rail lists categories
+ * (grouped by tab); picking one shows its items on the right, where you punch
+ * prices. You never type a name — you find the item and fill the price. Enter
+ * saves and jumps to the next field. Prices go straight to the price store.
  */
 
 const norm = (s: string) =>
@@ -25,15 +24,28 @@ const norm = (s: string) =>
     .replace(/[̀-ͯ]/g, "")
     .toLowerCase();
 
+const keyOf = (tab: string, category: string) => `${tab}::${category}`;
+
 export function HdvPage() {
   const catalog = useMemo(() => loadCatalog(), []);
   const [entries, setEntries] = useState<PriceEntryMap>(loadPriceEntries);
-  const [tabName, setTabName] = useState(catalog[0]?.tab ?? "");
+  const [selected, setSelected] = useState(() =>
+    catalog[0] ? keyOf(catalog[0].tab, catalog[0].categories[0]?.category ?? "") : "",
+  );
   const [filter, setFilter] = useState("");
-  const gridRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
 
-  const activeTab = catalog.find((t) => t.tab === tabName) ?? catalog[0];
-  const query = norm(filter.trim());
+  // Flat lookup of the active category's items.
+  const active = useMemo(() => {
+    for (const tab of catalog) {
+      for (const cat of tab.categories) {
+        if (keyOf(tab.tab, cat.category) === selected) {
+          return { tab: tab.tab, category: cat.category, items: cat.items };
+        }
+      }
+    }
+    return null;
+  }, [catalog, selected]);
 
   function commit(item: CatalogItem, raw: string) {
     const text = raw.trim();
@@ -66,7 +78,7 @@ export function HdvPage() {
 
   function focusNext(current: HTMLInputElement) {
     const inputs = Array.from(
-      gridRef.current?.querySelectorAll<HTMLInputElement>("input.hdv-price") ?? [],
+      listRef.current?.querySelectorAll<HTMLInputElement>("input.hdv-price") ?? [],
     );
     const i = inputs.indexOf(current);
     inputs[i + 1]?.focus();
@@ -77,119 +89,114 @@ export function HdvPage() {
       <section className="panel hdv-page">
         <h2>HDV</h2>
         <p className="hint">
-          Le catalogue est vide. Colle des catégories DofusDB dans{" "}
-          <code>catalog-src/&lt;Onglet&gt;/&lt;Catégorie&gt;.json</code> puis lance{" "}
-          <code>npm run build:catalog</code> — voir <code>catalog-src/README.md</code>.
+          Le catalogue est vide. Lance <code>npm run fetch:catalog</code> en local
+          (DofusDB n'est pas joignable depuis le sandbox) — voir{" "}
+          <code>catalog-src/README.md</code>.
         </p>
       </section>
     );
   }
 
   const now = Date.now();
-  const shownCategories = activeTab.categories
-    .map((cat) => ({
-      ...cat,
-      items: query
-        ? cat.items.filter((it) => norm(it.name).includes(query))
-        : cat.items,
-    }))
-    .filter((cat) => cat.items.length > 0);
-
-  // Progress for the active tab.
-  const tabItems = activeTab.categories.flatMap((c) => c.items);
-  const pricedCount = tabItems.filter((it) => entries[it.id] != null).length;
+  const query = norm(filter.trim());
+  const shownItems =
+    active && query
+      ? active.items.filter((it) => norm(it.name).includes(query))
+      : (active?.items ?? []);
+  const pricedCount = active
+    ? active.items.filter((it) => entries[it.id] != null).length
+    : 0;
 
   return (
     <section className="panel hdv-page">
       <h2>HDV</h2>
       <p className="hint">
-        Trouve l'objet dans sa catégorie et tape son prix — <kbd>Entrée</kbd>{" "}
-        enregistre et passe au suivant. «&nbsp;3k&nbsp;» = 3000. Les prix vont
-        directement dans la page Prix.
+        Choisis la catégorie à gauche, remplis les prix à droite —{" "}
+        <kbd>Entrée</kbd> enregistre et passe au suivant. «&nbsp;3k&nbsp;» = 3000.
       </p>
 
-      <div className="hdv-toolbar">
-        <div className="hdv-tabs">
-          {catalog.map((t) => (
-            <button
-              key={t.tab}
-              className={t.tab === activeTab.tab ? "hdv-tab active" : "hdv-tab"}
-              onClick={() => setTabName(t.tab)}
-            >
-              {t.tab}
-            </button>
-          ))}
-        </div>
-        <input
-          className="hdv-filter"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-          placeholder="Filtrer dans cet onglet…"
-        />
-        <span className="hdv-progress">
-          {pricedCount}/{tabItems.length} avec prix
-        </span>
-      </div>
-
-      <div className="hdv-grid" ref={gridRef}>
-        {shownCategories.length === 0 && (
-          <p className="hint">Aucun objet ne correspond.</p>
-        )}
-        {shownCategories.map((cat) => (
-          <div key={cat.category} className="hdv-cat">
-            <h3 className="hdv-cat-title">
-              {cat.category} <span className="hdv-cat-count">{cat.items.length}</span>
-            </h3>
-            <div className="hdv-rows">
-              {cat.items.map((item) => {
-                const entry = entries[item.id];
-                const stale = entry ? isStale(entry.updatedAt, now) : false;
+      <div className="hdv-layout">
+        <nav className="hdv-rail">
+          {catalog.map((tab) => (
+            <div key={tab.tab} className="hdv-rail-group">
+              <div className="hdv-rail-tab">{tab.tab}</div>
+              {tab.categories.map((cat) => {
+                const k = keyOf(tab.tab, cat.category);
                 return (
-                  <label key={item.id} className="hdv-row">
-                    {item.img ? (
-                      <img src={item.img} alt="" className="hdv-ic" />
-                    ) : (
-                      <span className="hdv-ic hdv-ic-empty" />
-                    )}
-                    <span className="hdv-name">
-                      {item.name}
-                      {item.level ? <em className="hdv-lvl"> niv. {item.level}</em> : null}
-                    </span>
-                    <input
-                      className="hdv-price"
-                      type="text"
-                      inputMode="numeric"
-                      defaultValue={entry ? String(entry.price) : ""}
-                      placeholder="prix"
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                          e.preventDefault();
-                          commit(item, e.currentTarget.value);
-                          focusNext(e.currentTarget);
-                        }
-                      }}
-                      onBlur={(e) => commit(item, e.currentTarget.value)}
-                    />
-                    <span className="hdv-age">
-                      {entry ? (
-                        <span className={stale ? "hdv-stale" : "hdv-fresh"}>
-                          {formatKamas(entry.price)} · {relativeAge(entry.updatedAt, now)}
-                        </span>
-                      ) : (
-                        ""
-                      )}
-                    </span>
-                  </label>
+                  <button
+                    key={k}
+                    className={k === selected ? "hdv-cat-btn active" : "hdv-cat-btn"}
+                    onClick={() => {
+                      setSelected(k);
+                      setFilter("");
+                    }}
+                  >
+                    {cat.category}
+                  </button>
                 );
               })}
             </div>
+          ))}
+        </nav>
+
+        <div className="hdv-detail">
+          <div className="hdv-detail-head">
+            <h3>{active?.category}</h3>
+            <input
+              className="hdv-filter"
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+              placeholder="Filtrer…"
+            />
+            <span className="hdv-progress">
+              {pricedCount}/{active?.items.length ?? 0} prix
+            </span>
           </div>
-        ))}
+
+          <div className="hdv-rows" ref={listRef}>
+            {shownItems.length === 0 && (
+              <p className="hint">Aucun objet ne correspond.</p>
+            )}
+            {shownItems.map((item) => {
+              const entry = entries[item.id];
+              const stale = entry ? isStale(entry.updatedAt, now) : false;
+              return (
+                <label key={item.id} className="hdv-row">
+                  {item.img ? (
+                    <img src={item.img} alt="" className="hdv-ic" />
+                  ) : (
+                    <span className="hdv-ic hdv-ic-empty" />
+                  )}
+                  <span className="hdv-name">{item.name}</span>
+                  {item.level ? <span className="hdv-lvl">niv. {item.level}</span> : <span />}
+                  <input
+                    className="hdv-price"
+                    type="text"
+                    inputMode="numeric"
+                    defaultValue={entry ? String(entry.price) : ""}
+                    placeholder="prix"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        commit(item, e.currentTarget.value);
+                        focusNext(e.currentTarget);
+                      }
+                    }}
+                    onBlur={(e) => commit(item, e.currentTarget.value)}
+                  />
+                  <span className={stale ? "hdv-age hdv-stale" : "hdv-age"}>
+                    {entry ? relativeAge(entry.updatedAt, now) : ""}
+                  </span>
+                </label>
+              );
+            })}
+          </div>
+        </div>
       </div>
 
       {catalogGeneratedAt && (
         <p className="hdv-footer hint">
-          Catalogue mis à jour le {new Date(catalogGeneratedAt).toLocaleDateString("fr")}.
+          Catalogue : {new Date(catalogGeneratedAt).toLocaleDateString("fr")}.
         </p>
       )}
     </section>
