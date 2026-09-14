@@ -1,7 +1,7 @@
 import type { CraftDataset } from "../data/dofusApi";
 import type { RaisingInput } from "./eleveur";
 import type { AvisCatalog, AvisReward } from "./avis";
-import type { Item, PriceMap } from "../types";
+import type { Item } from "../types";
 
 /**
  * Tiny persistence layer.
@@ -11,7 +11,6 @@ import type { Item, PriceMap } from "../types";
  * (Phase 1+), this is the single place to swap in IndexedDB — the rest of the
  * app only sees these load/save helpers.
  */
-const PRICES_KEY = "dofus-efficiency:prices:v1";
 const DATASET_PREFIX = "dofus-efficiency:dataset:v1:";
 const LAST_SOURCE_KEY = "dofus-efficiency:lastSource:v1";
 const FAVOURITES_KEY = "dofus-efficiency:favourites:v1";
@@ -24,26 +23,6 @@ const AVIS_PARTICIPATION_KEY = "dofus-efficiency:avisParticipation:v2";
 const AVIS_AVITON_KEY = "dofus-efficiency:avisAviton:v1";
 const AVIS_CHASSE_ONLY_KEY = "dofus-efficiency:avisChasseOnly:v1";
 const AVIS_OVERRIDES_KEY = "dofus-efficiency:avisOverrides:v1";
-
-export function loadPrices(): PriceMap | null {
-  try {
-    const raw = localStorage.getItem(PRICES_KEY);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw);
-    if (parsed && typeof parsed === "object") return parsed as PriceMap;
-    return null;
-  } catch {
-    return null;
-  }
-}
-
-export function savePrices(prices: PriceMap): void {
-  try {
-    localStorage.setItem(PRICES_KEY, JSON.stringify(prices));
-  } catch {
-    // Storage full or unavailable (private mode) — non-fatal.
-  }
-}
 
 /** A DofusDB dataset cached under a key (e.g. a level range), with a timestamp. */
 export interface CachedDataset extends CraftDataset {

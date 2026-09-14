@@ -2,7 +2,11 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { HashRouter } from "react-router-dom";
 import { App } from "./App";
+import { migrateLegacyPriceMap } from "./lib/priceStore";
 import "./styles.css";
+
+// Fold any pre-single-store price map into the entries, once, before render.
+migrateLegacyPriceMap();
 
 const rootEl = document.getElementById("root");
 if (!rootEl) throw new Error("Root element #root not found");

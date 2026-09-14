@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import type { Item, PriceMap } from "../types";
+import type { Item } from "../types";
 import { fetchRecipesFor } from "../data/dofusApi";
 import {
   loadCraftList,
@@ -9,9 +9,7 @@ import {
   evaluateEntry,
   type CraftEntry,
 } from "../lib/craftList";
-import { loadPrices } from "../lib/storage";
-import { loadPriceEntries, type PriceEntryMap } from "../lib/priceStore";
-import { setManualPrice, clearPrice } from "../lib/trackedPrices";
+import { usePrices } from "../lib/usePrices";
 import { ItemAutocomplete } from "../components/ItemAutocomplete";
 import { CraftRow } from "../components/CraftRow";
 
@@ -25,9 +23,7 @@ type Status = "idle" | "loading" | "error";
  */
 export function CraftListPage() {
   const [entries, setEntries] = useState<CraftEntry[]>(loadCraftList);
-  const [prices, setPrices] = useState<PriceMap>(() => loadPrices() ?? {});
-  const [priceEntries, setPriceEntries] =
-    useState<PriceEntryMap>(loadPriceEntries);
+  const { prices, entries: priceEntries, setPrice, clearPrice } = usePrices();
 
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string>();
@@ -84,23 +80,8 @@ export function CraftListPage() {
   // Manual price edit → write both shared stores, then mirror into local state
   // so the affected rows recompute immediately. (Same path as the Avis page.)
   function onPriceChange(item: Item, value: number | null) {
-    if (value == null) {
-      clearPrice(item.id);
-      setPrices((p) => {
-        const next = { ...p };
-        delete next[item.id];
-        return next;
-      });
-      setPriceEntries((e) => {
-        const next = { ...e };
-        delete next[item.id];
-        return next;
-      });
-      return;
-    }
-    const entry = setManualPrice(item, value);
-    setPrices((p) => ({ ...p, [item.id]: value }));
-    setPriceEntries((e) => ({ ...e, [item.id]: entry }));
+    if (value == null) clearPrice(item.id);
+    else setPrice(item, value);
   }
 
   // Evaluate every entry, then rank by margin (best first, unknown last) and
