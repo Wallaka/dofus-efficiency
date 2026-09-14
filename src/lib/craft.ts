@@ -16,6 +16,8 @@ export function evaluateRecipe(
   recipe: Recipe,
   itemsById: Map<string, Item>,
   prices: PriceMap,
+  /** Item id → quantity already owned; those units aren't priced (cost 0). */
+  stock?: Record<string, number>,
 ): CraftEvaluation {
   const resultItem = itemsById.get(recipe.resultItemId) ?? {
     id: recipe.resultItemId,
@@ -26,12 +28,15 @@ export function evaluateRecipe(
   let craftCost: number | undefined = 0;
 
   for (const ing of recipe.ingredients) {
+    // Only the units you don't already own need buying.
+    const need = Math.max(0, ing.quantity - (stock?.[ing.itemId] ?? 0));
+    if (need === 0) continue; // fully covered by stock → no cost, no price needed
     const unit = prices[ing.itemId];
     if (unit == null) {
       missingPriceItemIds.push(ing.itemId);
       craftCost = undefined; // can't trust a partial total
     } else if (craftCost !== undefined) {
-      craftCost += unit * ing.quantity;
+      craftCost += unit * need;
     }
   }
 
@@ -64,9 +69,12 @@ export function rankRecipes(
   recipes: Recipe[],
   items: Item[],
   prices: PriceMap,
+  stock?: Record<string, number>,
 ): CraftEvaluation[] {
   const itemsById = new Map(items.map((i) => [i.id, i]));
-  const evaluated = recipes.map((r) => evaluateRecipe(r, itemsById, prices));
+  const evaluated = recipes.map((r) =>
+    evaluateRecipe(r, itemsById, prices, stock),
+  );
 
   return evaluated.sort((a, b) => {
     const am = a.margin;

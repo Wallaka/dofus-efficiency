@@ -10,6 +10,12 @@ import {
   type CraftEntry,
 } from "../lib/craftList";
 import { usePrices } from "../lib/usePrices";
+import {
+  loadResources,
+  stockQuantities,
+  loadUseMaterials,
+  saveUseMaterials,
+} from "../lib/resources";
 import { ItemAutocomplete } from "../components/ItemAutocomplete";
 import { CraftRow } from "../components/CraftRow";
 
@@ -24,6 +30,18 @@ type Status = "idle" | "loading" | "error";
 export function CraftListPage() {
   const [entries, setEntries] = useState<CraftEntry[]>(loadCraftList);
   const { prices, entries: priceEntries, setPrice, clearPrice } = usePrices();
+  // "Mes ressources": loaded once; deducted from costs when the toggle is on.
+  const [resources] = useState(loadResources);
+  const [useMaterials, setUseMaterials] = useState(loadUseMaterials);
+  const stock = useMemo(
+    () => (useMaterials ? stockQuantities(resources) : undefined),
+    [useMaterials, resources],
+  );
+
+  function toggleMaterials(on: boolean) {
+    setUseMaterials(on);
+    saveUseMaterials(on);
+  }
 
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string>();
@@ -97,7 +115,7 @@ export function CraftListPage() {
     const taxRate = taxPercent / 100;
     const evaluated = entries.map((entry) => ({
       entry,
-      evaluation: evaluateEntry(entry, prices, taxRate),
+      evaluation: evaluateEntry(entry, prices, taxRate, stock),
     }));
     evaluated.sort((a, b) => {
       const am = a.evaluation.netMargin;
@@ -111,7 +129,7 @@ export function CraftListPage() {
       ? evaluated.filter((r) => norm(r.entry.resultItem.name).includes(query))
       : evaluated;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [entries, prices, query, taxPercent]);
+  }, [entries, prices, query, taxPercent, stock]);
 
   return (
     <main className="craft-page">
@@ -157,6 +175,20 @@ export function CraftListPage() {
             prélevée sur le prix de vente et déduite du bénéfice.
           </span>
         </div>
+        <label className="use-materials">
+          <input
+            type="checkbox"
+            checked={useMaterials}
+            onChange={(e) => toggleMaterials(e.target.checked)}
+          />
+          <span>
+            <b>Utiliser mes ressources</b>
+            <span className="hint">
+              Déduit ton stock (page « Mes ressources ») des quantités à
+              acheter&nbsp;; le coût affiché = ce qu'il reste à payer.
+            </span>
+          </span>
+        </label>
       </section>
 
       {entries.length === 0 ? (
@@ -201,6 +233,7 @@ export function CraftListPage() {
                   taxPercent={taxPercent}
                   prices={prices}
                   entries={priceEntries}
+                  stock={stock}
                   onPriceChange={onPriceChange}
                   onRemove={() => removeCraft(entry.recipeId)}
                 />

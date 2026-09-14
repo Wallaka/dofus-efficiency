@@ -99,6 +99,8 @@ export function evaluateEntry(
   entry: CraftEntry,
   prices: PriceMap,
   taxRate = 0,
+  /** Item id → quantity owned; deducted from ingredient costs when provided. */
+  stock?: Record<string, number>,
 ): CraftBenefit {
   const recipe: Recipe = {
     id: entry.recipeId,
@@ -112,7 +114,7 @@ export function evaluateEntry(
   const itemsById = new Map<string, Item>();
   itemsById.set(entry.resultItem.id, entry.resultItem);
   for (const i of entry.ingredients) itemsById.set(i.item.id, i.item);
-  const base = evaluateRecipe(recipe, itemsById, prices);
+  const base = evaluateRecipe(recipe, itemsById, prices, stock);
 
   const { craftCost, sellPrice } = base;
   const tax = sellPrice != null ? Math.round(sellPrice * taxRate) : undefined;

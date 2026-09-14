@@ -17,6 +17,7 @@ import {
   type PriceEntryMap,
 } from "./priceStore";
 import { loadCraftList, saveCraftList, type CraftEntry } from "./craftList";
+import { loadResources, saveResources, type ResourceMap } from "./resources";
 import {
   loadFavourites,
   saveFavourites,
@@ -132,6 +133,17 @@ export const SECTIONS: PortableSection[] = [
     valid: (v) => Array.isArray(v),
     size: (v) => (Array.isArray(v) ? v.length : 0),
     present: (v) => Array.isArray(v) && v.length > 0,
+  },
+  {
+    id: "resources",
+    label: "Mes ressources",
+    load: () => loadResources(),
+    save: (value) =>
+      saveResources(isObject(value) ? (value as ResourceMap) : {}),
+    merge: (current, incoming) => mergeMap(current, incoming),
+    valid: (v) => isObject(v),
+    size: (v) => (isObject(v) ? Object.keys(v).length : 0),
+    present: (v) => isObject(v) && Object.keys(v).length > 0,
   },
   {
     id: "eleveur",
