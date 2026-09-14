@@ -134,14 +134,21 @@ export function MetierPage() {
   // Default selection is "optimal"; a fixed pick wins only if still in the list.
   const fixedSelected = plans.find((p) => p.recipe.recipeId === selectedId);
   const isOptimal = !fixedSelected;
-  const totalXp = validRange ? xpBetween(input.current, input.target) : 0;
+
+  // Price coverage: how many in-range recipes can actually be costed. "Le moins
+  // cher" is only truly cheapest among priced recipes, so this is surfaced.
+  const inRange = plans.length;
+  const pricedCount = plans.filter((p) => p.priced).length;
+  const unpricedCount = inRange - pricedCount;
 
   // Unified view driving the tiles + shopping list, from whichever is selected.
   const view =
     isOptimal && optimal
       ? {
-          label: "chemin optimal",
+          label: "chemin le moins cher",
+          fromLevel: input.current,
           crafts: optimal.totalCrafts,
+          xp: optimal.totalXp,
           cost: optimal.totalCost,
           costPerXp: optimal.avgCostPerXp,
           incomplete: optimal.incomplete,
@@ -149,8 +156,12 @@ export function MetierPage() {
         }
       : fixedSelected
         ? {
-            label: `« ${fixedSelected.recipe.result.name} »`,
+            label: fixedSelected.locked
+              ? `« ${fixedSelected.recipe.result.name} » (dès niv ${fixedSelected.startLevel})`
+              : `« ${fixedSelected.recipe.result.name} »`,
+            fromLevel: fixedSelected.startLevel,
             crafts: fixedSelected.crafts,
+            xp: xpBetween(fixedSelected.startLevel, input.target),
             cost: fixedSelected.cost,
             costPerXp: fixedSelected.costPerXp,
             incomplete: fixedSelected.incomplete,
@@ -336,9 +347,9 @@ export function MetierPage() {
             </div>
             <div className="metier-tile">
               <span className="metier-tile-label">XP à gagner</span>
-              <span className="metier-tile-value">{count(totalXp)}</span>
+              <span className="metier-tile-value">{count(view.xp)}</span>
               <span className="metier-tile-sub">
-                {input.current} → {input.target}
+                {view.fromLevel} → {input.target}
               </span>
             </div>
             <div className="metier-tile accent">
@@ -360,9 +371,10 @@ export function MetierPage() {
           <section>
             <h3 className="metier-h3">Choisir une recette</h3>
             <p className="hint metier-h3-sub">
-              « Optimal » enchaîne les recettes les moins chères et change quand une
-              meilleure se débloque. Ou fixez une seule recette (façon DofusDB).
-              Triées de la moins chère à la plus chère.
+              « Le moins cher » enchaîne les recettes et change quand une meilleure
+              se débloque. Ou fixez une recette (façon DofusDB) — y compris celles
+              qui se débloquent plus haut, pour renseigner leur prix. Sélectionnez
+              une recette pour voir/éditer ses prix dans la liste de courses.
             </p>
             <ul className="metier-path">
               <li className="metier-head metier-head-rrow" aria-hidden>
@@ -388,7 +400,7 @@ export function MetierPage() {
                   <span className="metier-recipe">
                     <span className="metier-thumb">🏆</span>
                     <span className="metier-recipe-text">
-                      <span className="metier-recipe-name">Optimal (auto)</span>
+                      <span className="metier-recipe-name">Le moins cher</span>
                       <span className="metier-recipe-meta">
                         change de recette au fil des niveaux
                         {optimal.recipeCount > 1 && (
@@ -396,6 +408,11 @@ export function MetierPage() {
                             {optimal.recipeCount} recettes
                           </span>
                         )}
+                        <span
+                          className={`metier-slots${unpricedCount > 0 ? " metier-unpriced" : ""}`}
+                        >
+                          {pricedCount}/{inRange} chiffrées
+                        </span>
                       </span>
                     </span>
                   </span>
@@ -442,6 +459,14 @@ export function MetierPage() {
                         </span>
                       </div>
                     ))}
+                    {unpricedCount > 0 && (
+                      <div className="metier-warn">
+                        ⚠ {unpricedCount} recette{unpricedCount > 1 ? "s" : ""} sans
+                        prix, non comparée{unpricedCount > 1 ? "s" : ""} — l'une
+                        pourrait être moins chère. Renseignez leur prix (marquées «
+                        prix ? » ci-dessous) pour en être sûr.
+                      </div>
+                    )}
                   </div>
                 )}
               </li>

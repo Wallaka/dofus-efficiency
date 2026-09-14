@@ -3377,3 +3377,34 @@ td.negative {
   color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
+
+/* Métiers — locked (unlocks later) + unpriced flags, and the coverage warning. */
+.metier-lock,
+.metier-unpriced {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 6px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 0.62rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.metier-unpriced {
+  color: var(--negative);
+  border-color: color-mix(in srgb, var(--negative) 45%, transparent);
+}
+.metier-rrow--locked .metier-thumb,
+.metier-rrow--locked .metier-recipe-name {
+  opacity: 0.7;
+}
+.metier-warn {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, #e0b24d 45%, var(--border));
+  background: color-mix(in srgb, #e0b24d 10%, transparent);
+  color: #e0b24d;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}

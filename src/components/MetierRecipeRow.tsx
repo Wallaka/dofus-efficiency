@@ -7,14 +7,14 @@ interface Props {
   onSelect: () => void;
 }
 
-/** One craftable recipe with its crafts-to-target / cost, selectable as the plan. */
+/** One recipe with its crafts-to-target / cost, selectable to plan or price it. */
 export function MetierRecipeRow({ plan, selected, onSelect }: Props) {
-  const { recipe, xpPerCraft, crafts, cost, costPerXp } = plan;
+  const { recipe, xpPerCraft, crafts, cost, costPerXp, locked, priced } = plan;
   return (
     <li>
       <button
         type="button"
-        className={`metier-rrow${selected ? " selected" : ""}`}
+        className={`metier-rrow${selected ? " selected" : ""}${locked ? " metier-rrow--locked" : ""}`}
         aria-pressed={selected}
         onClick={onSelect}
       >
@@ -36,10 +36,12 @@ export function MetierRecipeRow({ plan, selected, onSelect }: Props) {
             <span className="metier-recipe-meta">
               Niv. {recipe.resultLevel}
               <span className="metier-slots">{recipe.slots} cases</span>
+              {locked && <span className="metier-lock">🔒 dès niv {recipe.resultLevel}</span>}
+              {!priced && <span className="metier-unpriced">prix ?</span>}
             </span>
           </span>
         </span>
-        <span className="num metier-xpcraft" title="XP par craft à votre niveau actuel">
+        <span className="num metier-xpcraft" title="XP par craft au niveau de départ">
           {xpPerCraft}
         </span>
         <span className="num metier-crafts">{crafts.toLocaleString("fr-FR")}</span>
