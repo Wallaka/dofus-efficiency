@@ -1676,6 +1676,21 @@ table.lots td.num {
   color: var(--text);
 }
 
+.avis-chasse-only {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  cursor: pointer;
+}
+.avis-chasse-only input {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
 .avis-aviton input {
   width: 96px;
   padding: 6px 8px;

@@ -1,16 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import type { AvisReward } from "../lib/avis";
-import { avitonUnitValue } from "../lib/avis";
+import { avitonUnitValue, effectiveAvitons } from "../lib/avis";
 import type { Item, PriceMap } from "../types";
 import { fetchAvisDeRecherche } from "../data/dofusApi";
 import {
   loadAvisAviton,
   loadAvisCatalog,
+  loadAvisChasseOnly,
   loadAvisOverrides,
   loadAvisParticipation,
   loadPrices,
   saveAvisAviton,
   saveAvisCatalog,
+  saveAvisChasseOnly,
   saveAvisOverrides,
   saveAvisParticipation,
   type AvisOverrides,
@@ -105,6 +107,12 @@ export function AvisPage() {
   // Aviton resale rate: `qty` avitons sell for `price` kamas.
   const [aviton, setAviton] = useState(loadAvisAviton);
   const avitonUnit = avitonUnitValue(aviton.qty, aviton.price);
+  // Done via the legendary hunt alone (no quest) → avitons are halved.
+  const [chasseOnly, setChasseOnly] = useState(loadAvisChasseOnly);
+  function toggleChasseOnly(on: boolean) {
+    setChasseOnly(on);
+    saveAvisChasseOnly(on);
+  }
 
   function setParticipationFor(id: string, value: number) {
     setParticipation((prev) => {
@@ -216,6 +224,16 @@ export function AvisPage() {
             <span className="hint">≈ {formatKamas(avitonUnit)} / aviton</span>
           )}
         </div>
+        <label className="avis-chasse-only">
+          <input
+            type="checkbox"
+            checked={chasseOnly}
+            onChange={(e) => toggleChasseOnly(e.target.checked)}
+          />
+          <span>
+            Chasse légendaire seule (sans la quête)&nbsp;: avitons divisés par 2
+          </span>
+        </label>
       </section>
 
       {list.length === 0 && status === "loading" && (
@@ -262,13 +280,15 @@ export function AvisPage() {
                 img: avis.resourceImg,
               }
             : undefined;
+          const avitons = effectiveAvitons(avis.avitons, chasseOnly);
           return (
             <AvisCard
               key={avis.id}
               avis={avis}
               carte={buildSlot(id, "carte", carteAuto, ov.carte)}
               resource={buildSlot(id, "resource", resourceAuto, ov.resource)}
-              avitonValue={avitonUnit * avis.avitons}
+              avitons={avitons}
+              avitonValue={avitonUnit * avitons}
               participationCost={participation[avis.id] ?? 0}
               onParticipationChange={(value) => setParticipationFor(id, value)}
             />

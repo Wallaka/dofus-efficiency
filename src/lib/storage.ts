@@ -22,6 +22,7 @@ const AVIS_KEY = "dofus-efficiency:avisCatalog:v3";
 // v2: participation is now per-avis (a map keyed by avis id), not a single fee.
 const AVIS_PARTICIPATION_KEY = "dofus-efficiency:avisParticipation:v2";
 const AVIS_AVITON_KEY = "dofus-efficiency:avisAviton:v1";
+const AVIS_CHASSE_ONLY_KEY = "dofus-efficiency:avisChasseOnly:v1";
 const AVIS_OVERRIDES_KEY = "dofus-efficiency:avisOverrides:v1";
 
 export function loadPrices(): PriceMap | null {
@@ -224,6 +225,26 @@ export function loadAvisAviton(): AvisAvitonRate {
 export function saveAvisAviton(rate: AvisAvitonRate): void {
   try {
     localStorage.setItem(AVIS_AVITON_KEY, JSON.stringify(rate));
+  } catch {
+    // non-fatal
+  }
+}
+
+/**
+ * Whether avis are done through the legendary hunt alone (no quest), which halves
+ * the aviton reward. Defaults to false (quest active → full avitons).
+ */
+export function loadAvisChasseOnly(): boolean {
+  try {
+    return localStorage.getItem(AVIS_CHASSE_ONLY_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+
+export function saveAvisChasseOnly(on: boolean): void {
+  try {
+    localStorage.setItem(AVIS_CHASSE_ONLY_KEY, on ? "1" : "0");
   } catch {
     // non-fatal
   }

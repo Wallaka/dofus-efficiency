@@ -134,6 +134,15 @@ export function avitonUnitValue(qty: number, price: number): number {
   return qty > 0 && price > 0 ? price / qty : 0;
 }
 
+/**
+ * Effective aviton reward for an avis. Completing it through the legendary hunt
+ * alone — i.e. the "chasse" without the associated quest active — pays only half
+ * the listed avitons (rounded down). With the quest, you get the full amount.
+ */
+export function effectiveAvitons(base: number, chasseOnly: boolean): number {
+  return chasseOnly ? Math.floor(base / 2) : base;
+}
+
 /** The fetched catalog, cached with a timestamp. */
 export interface AvisCatalog {
   list: AvisReward[];
