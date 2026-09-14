@@ -189,3 +189,128 @@ export function planRecipesToTarget(
   });
   return plans;
 }
+
+/** One palier of the optimal path: a band of levels crafted with one recipe. */
+export interface OptimalStep {
+  fromLevel: number;
+  toLevel: number;
+  recipe: MetierRecipe;
+  crafts: number;
+  /** crafts × recipe cost; undefined if the recipe has a missing price. */
+  cost?: number;
+}
+
+/** The cheapest route to the target, switching recipes as better ones unlock. */
+export interface OptimalPlan {
+  steps: OptimalStep[];
+  totalCrafts: number;
+  totalXp: number;
+  totalCost?: number;
+  avgCostPerXp?: number;
+  shopping: PlanIngredient[];
+  incomplete: boolean;
+  /** Number of distinct recipes used along the way. */
+  recipeCount: number;
+}
+
+/**
+ * The cheapest-kamas leveling route from `fromLevel` to `toLevel`. Each level's
+ * XP is independent, so the global minimum is the per-level minimum: at every
+ * level pick the craftable recipe (level ≤ current, including ones that unlock
+ * along the way) whose cost to clear that level is lowest. Consecutive levels
+ * sharing a recipe are merged into paliers. Recipes with a missing price are
+ * only used when nothing priced is craftable (then the plan is incomplete).
+ */
+export function buildOptimalPlan(
+  recipes: MetierRecipe[],
+  prices: PriceMap,
+  fromLevel: number,
+  toLevel: number,
+  coef = 1,
+): OptimalPlan {
+  const from = Math.max(1, Math.floor(fromLevel));
+  const to = Math.min(200, Math.floor(toLevel));
+
+  const steps: OptimalStep[] = [];
+  let usedUnpriced = false;
+
+  for (let level = from; level < to; level++) {
+    let bestPriced: { r: MetierRecipe; crafts: number; cost: number } | undefined;
+    let bestFree: { r: MetierRecipe; crafts: number } | undefined;
+
+    for (const r of recipes) {
+      if (r.resultLevel > level) continue; // not craftable yet
+      const xpc = xpPerCraft(level, r.resultLevel, coef);
+      if (xpc <= 0) continue;
+      const crafts = Math.ceil(xpToNextLevel(level) / xpc);
+      const unit = recipeCost(r, prices);
+      if (unit != null) {
+        const cost = crafts * unit;
+        if (!bestPriced || cost < bestPriced.cost) bestPriced = { r, crafts, cost };
+      } else if (!bestFree || crafts < bestFree.crafts) {
+        bestFree = { r, crafts };
+      }
+    }
+
+    const pick = bestPriced ?? bestFree;
+    if (!pick) continue; // no craftable recipe at this level
+    // pick === bestPriced whenever a priced recipe exists, else bestFree.
+    const cost = bestPriced ? bestPriced.cost : undefined;
+    if (!bestPriced) usedUnpriced = true;
+
+    const last = steps[steps.length - 1];
+    if (last && last.recipe.recipeId === pick.r.recipeId) {
+      last.crafts += pick.crafts;
+      last.toLevel = level + 1;
+      if (last.cost != null && cost != null) last.cost += cost;
+    } else {
+      steps.push({
+        fromLevel: level,
+        toLevel: level + 1,
+        recipe: pick.r,
+        crafts: pick.crafts,
+        cost,
+      });
+    }
+  }
+
+  // Aggregate totals + shopping list across steps.
+  const shoppingById = new Map<string, PlanIngredient>();
+  let totalCrafts = 0;
+  let totalCost: number | undefined = usedUnpriced ? undefined : 0;
+  let incomplete = usedUnpriced;
+
+  for (const step of steps) {
+    totalCrafts += step.crafts;
+    if (step.cost != null && totalCost != null) totalCost += step.cost;
+    for (const ing of step.recipe.ingredients) {
+      const qty = ing.quantity * step.crafts;
+      const unit = prices[ing.item.id];
+      if (unit == null) incomplete = true;
+      const agg = shoppingById.get(ing.item.id);
+      if (agg) {
+        agg.quantity += qty;
+        agg.subtotal = agg.unitPrice != null ? agg.unitPrice * agg.quantity : undefined;
+      } else {
+        shoppingById.set(ing.item.id, {
+          item: ing.item,
+          quantity: qty,
+          unitPrice: unit,
+          subtotal: unit != null ? unit * qty : undefined,
+        });
+      }
+    }
+  }
+
+  const totalXp = xpBetween(from, to);
+  return {
+    steps,
+    totalCrafts,
+    totalXp,
+    totalCost,
+    avgCostPerXp: totalCost != null && totalXp > 0 ? totalCost / totalXp : undefined,
+    shopping: [...shoppingById.values()],
+    incomplete,
+    recipeCount: new Set(steps.map((s) => s.recipe.recipeId)).size,
+  };
+}
