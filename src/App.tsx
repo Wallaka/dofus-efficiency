@@ -7,6 +7,7 @@ import { AvisPage } from "./pages/AvisPage";
 import { QuestsPage } from "./pages/QuestsPage";
 import { PricesPage } from "./pages/PricesPage";
 import { TrackedItemsPage } from "./pages/TrackedItemsPage";
+import { MesRessourcesPage } from "./pages/MesRessourcesPage";
 import { DonneesPage } from "./pages/DonneesPage";
 
 export function App() {
@@ -24,6 +25,7 @@ export function App() {
           <NavLink to="/avis">Avis de recherche</NavLink>
           <NavLink to="/quetes">Quêtes</NavLink>
           <NavLink to="/suivis">Objets suivis</NavLink>
+          <NavLink to="/ressources">Mes ressources</NavLink>
           <NavLink to="/prix">Prix</NavLink>
           <NavLink to="/donnees">Données</NavLink>
         </nav>
@@ -37,6 +39,7 @@ export function App() {
         <Route path="/avis" element={<AvisPage />} />
         <Route path="/quetes" element={<QuestsPage />} />
         <Route path="/suivis" element={<TrackedItemsPage />} />
+        <Route path="/ressources" element={<MesRessourcesPage />} />
         <Route path="/prix" element={<PricesPage />} />
         <Route path="/donnees" element={<DonneesPage />} />
       </Routes>

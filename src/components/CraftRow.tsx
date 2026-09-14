@@ -14,6 +14,8 @@ interface Props {
   prices: Record<string, number | undefined>;
   /** Price entries, for the OCR/manuel source badge on each ingredient. */
   entries: PriceEntryMap;
+  /** Item id → quantity owned; when set, only the remainder is priced. */
+  stock?: Record<string, number>;
   /** Set/clear an item's manual price (null clears); writes the shared store. */
   onPriceChange: (item: Item, value: number | null) => void;
   onRemove: () => void;
@@ -122,6 +124,7 @@ export function CraftRow({
   taxPercent,
   prices,
   entries,
+  stock,
   onPriceChange,
   onRemove,
 }: Props) {
@@ -227,7 +230,10 @@ export function CraftRow({
           </div>
           {entry.ingredients.map((ing) => {
             const unit = prices[ing.item.id];
-            const subtotal = unit != null ? unit * ing.quantity : undefined;
+            const owned = Math.min(stock?.[ing.item.id] ?? 0, ing.quantity);
+            const need = ing.quantity - owned;
+            const subtotal =
+              need === 0 ? 0 : unit != null ? unit * need : undefined;
             return (
               <div className="craft-ing" key={ing.item.id}>
                 <span className="craft-ing-id">
@@ -242,17 +248,25 @@ export function CraftRow({
                     <span className="craft-ing-name" title={ing.item.name}>
                       {ing.item.name}
                     </span>
-                    <IngredientSub
-                      item={ing.item}
-                      price={unit}
-                      entries={entries}
-                    />
+                    {owned > 0 ? (
+                      <span
+                        className={`craft-ing-stock${need === 0 ? " full" : ""}`}
+                      >
+                        −{owned} en stock · {need} à acheter
+                      </span>
+                    ) : (
+                      <IngredientSub
+                        item={ing.item}
+                        price={unit}
+                        entries={entries}
+                      />
+                    )}
                   </span>
                 </span>
                 <span className="craft-ing-qty">{ing.quantity} ×</span>
                 <PriceInput
                   value={unit}
-                  needs={unit == null}
+                  needs={unit == null && need > 0}
                   ariaLabel={`Prix unitaire de ${ing.item.name}`}
                   onCommit={(v) => onPriceChange(ing.item, v)}
                 />

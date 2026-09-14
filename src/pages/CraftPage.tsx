@@ -11,6 +11,12 @@ import { rankRecipes } from "../lib/craft";
 import { loadDataset, loadLastSource, saveLastSource } from "../lib/storage";
 import type { ApplyPrice } from "../lib/priceStore";
 import { usePrices } from "../lib/usePrices";
+import {
+  loadResources,
+  stockQuantities,
+  loadUseMaterials,
+  saveUseMaterials,
+} from "../lib/resources";
 import { useFavourites } from "../lib/useFavourites";
 import { PriceEditor } from "../components/PriceEditor";
 import { CraftTable } from "../components/CraftTable";
@@ -69,9 +75,21 @@ export function CraftPage() {
     [entryPrices],
   );
 
+  // "Mes ressources": loaded once; deducted from costs when the toggle is on.
+  const [resources] = useState(loadResources);
+  const [useMaterials, setUseMaterials] = useState(loadUseMaterials);
+  const stock = useMemo(
+    () => (useMaterials ? stockQuantities(resources) : undefined),
+    [useMaterials, resources],
+  );
+  function toggleMaterials(on: boolean) {
+    setUseMaterials(on);
+    saveUseMaterials(on);
+  }
+
   const evaluations = useMemo(
-    () => rankRecipes(dataset.recipes, dataset.items, prices),
-    [dataset, prices],
+    () => rankRecipes(dataset.recipes, dataset.items, prices, stock),
+    [dataset, prices, stock],
   );
 
   // Item id → when its price was last recorded, for the craft table hints.
@@ -144,6 +162,19 @@ export function CraftPage() {
           priceUpdatedAt={priceUpdatedAt}
         />
         <div>
+          <label className="use-materials use-materials--standalone">
+            <input
+              type="checkbox"
+              checked={useMaterials}
+              onChange={(e) => toggleMaterials(e.target.checked)}
+            />
+            <span>
+              <b>Utiliser mes ressources</b>
+              <span className="hint">
+                Déduit ton stock (page « Mes ressources ») du coût de craft.
+              </span>
+            </span>
+          </label>
           <DataSourcePanel
             active={dataset.kind}
             itemCount={dataset.items.length}
