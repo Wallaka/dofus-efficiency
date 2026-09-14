@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import type { Item, PriceMap, Recipe } from "../types";
+import { useCallback, useMemo, useState } from "react";
+import type { Item, Recipe } from "../types";
 import type { CraftDataset } from "../data/dofusApi";
 import type { ScreenshotFile } from "../lib/medalFolder";
 import {
@@ -8,20 +8,9 @@ import {
   SAMPLE_RECIPES,
 } from "../data/sampleData";
 import { rankRecipes } from "../lib/craft";
-import {
-  loadDataset,
-  loadLastSource,
-  loadPrices,
-  savePrices,
-  saveLastSource,
-} from "../lib/storage";
-import {
-  recordPriceEntry,
-  deletePriceEntry,
-  loadPriceEntries,
-  type PriceEntry,
-  type ApplyPrice,
-} from "../lib/priceStore";
+import { loadDataset, loadLastSource, saveLastSource } from "../lib/storage";
+import type { ApplyPrice } from "../lib/priceStore";
+import { usePrices } from "../lib/usePrices";
 import { useFavourites } from "../lib/useFavourites";
 import { PriceEditor } from "../components/PriceEditor";
 import { CraftTable } from "../components/CraftTable";
@@ -66,25 +55,24 @@ export function CraftPage() {
     [dataset],
   );
 
-  // Prices persist across sessions and across data sources (item ids don't
-  // collide: sample ids are words, DofusDB ids are numeric).
-  const [prices, setPrices] = useState<PriceMap>(
-    () => loadPrices() ?? { ...SAMPLE_PRICES },
+  // Prices come from the shared entry store (single source of truth). Sample
+  // prices are demo defaults layered underneath for the sample dataset; real
+  // item ids never collide (sample ids are words, DofusDB ids are numeric).
+  const {
+    prices: entryPrices,
+    entries: priceEntries,
+    setPrice: recordPrice,
+    clearPrice: forgetPrice,
+  } = usePrices();
+  const prices = useMemo(
+    () => ({ ...SAMPLE_PRICES, ...entryPrices }),
+    [entryPrices],
   );
-
-  useEffect(() => {
-    savePrices(prices);
-  }, [prices]);
 
   const evaluations = useMemo(
     () => rankRecipes(dataset.recipes, dataset.items, prices),
     [dataset, prices],
   );
-
-  // Price entries (with dates/source) kept in state so the table's age hints
-  // update live as prices are applied or edited.
-  const [priceEntries, setPriceEntries] =
-    useState<Record<string, PriceEntry>>(loadPriceEntries);
 
   // Item id → when its price was last recorded, for the craft table hints.
   const priceUpdatedAt = useMemo(() => {
@@ -93,58 +81,23 @@ export function CraftPage() {
     return m;
   }, [priceEntries]);
 
-  // Low-level: update just the number the calc reads.
-  const setPriceNumber = useCallback((itemId: string, price: number | undefined) => {
-    setPrices((prev) => ({ ...prev, [itemId]: price }));
-  }, []);
-
-  // Manual edit from the price editor: update the number and stamp a "manuel"
-  // entry (or forget it when cleared) so the Prix page shows its date/source.
+  // Manual edit from the price editor: stamp a "manuel" entry (or forget it).
   function setPrice(itemId: string, price: number | undefined) {
-    setPriceNumber(itemId, price);
     if (price == null) {
-      deletePriceEntry(itemId);
-      setPriceEntries((prev) => {
-        const next = { ...prev };
-        delete next[itemId];
-        return next;
-      });
+      forgetPrice(itemId);
       return;
     }
-    const item = priceItemsById.get(itemId);
-    const entry: PriceEntry = {
-      itemId,
-      name: item?.name ?? itemId,
-      level: item?.level,
-      img: item?.img,
-      price,
-      updatedAt: Date.now(),
-      source: "manual",
-    };
-    recordPriceEntry(entry);
-    setPriceEntries((prev) => ({ ...prev, [itemId]: entry }));
+    const item = priceItemsById.get(itemId) ?? { id: itemId, name: itemId };
+    recordPrice(item, price);
   }
 
   // OCR feedback loop: store a screenshot-read price for the chosen item, along
   // with any per-quantity lot prices read from the same screen.
   const applyOcrPrice = useCallback<ApplyPrice>(
     (item, price, detail, extra) => {
-      setPriceNumber(item.id, price);
-      const entry: PriceEntry = {
-        itemId: item.id,
-        name: item.name,
-        level: item.level,
-        img: item.img,
-        price,
-        updatedAt: Date.now(),
-        source: "ocr",
-        detail,
-        lots: extra?.lots,
-      };
-      recordPriceEntry(entry);
-      setPriceEntries((prev) => ({ ...prev, [item.id]: entry }));
+      recordPrice(item, price, "ocr", detail, extra?.lots);
     },
-    [setPriceNumber],
+    [recordPrice],
   );
 
   function useSample() {

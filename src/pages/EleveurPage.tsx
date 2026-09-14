@@ -9,13 +9,9 @@ import {
   type CostLine,
   type RaisingInput,
 } from "../lib/eleveur";
-import type { Item, PriceMap } from "../types";
-import {
-  loadEleveur,
-  loadPrices,
-  saveEleveur,
-  savePrices,
-} from "../lib/storage";
+import type { Item } from "../types";
+import { loadEleveur, saveEleveur } from "../lib/storage";
+import { usePrices } from "../lib/usePrices";
 import { useFavourites } from "../lib/useFavourites";
 import { formatKamas, formatPercent } from "../lib/format";
 import { ItemAutocomplete } from "../components/ItemAutocomplete";
@@ -32,18 +28,14 @@ export function EleveurPage() {
   const [input, setInput] = useState<RaisingInput>(
     () => loadEleveur() ?? defaultRaisingInput(),
   );
-  // Shared with the craft page via localStorage: item-linked cost lines price
-  // themselves from here, and edits made here show up on the craft page too.
-  const [prices, setPrices] = useState<PriceMap>(() => loadPrices() ?? {});
+  // Shared price store: item-linked cost lines price themselves from here, and
+  // edits made here show up dated on the Prix/Suivis pages and export too.
+  const { prices, setPrice, clearPrice } = usePrices();
   const { favourites } = useFavourites();
 
   useEffect(() => {
     saveEleveur(input);
   }, [input]);
-
-  useEffect(() => {
-    savePrices(prices);
-  }, [prices]);
 
   const result = useMemo(() => computeRaising(input, prices), [input, prices]);
 
@@ -89,11 +81,15 @@ export function EleveurPage() {
     }));
   }
 
-  function setUnitPrice(itemId: string, v: string) {
-    setPrices((prev) => ({
-      ...prev,
-      [itemId]: v === "" ? undefined : Number(v),
-    }));
+  function setUnitPrice(cost: CostLine, v: string) {
+    if (!cost.itemId) return;
+    if (v === "") {
+      clearPrice(cost.itemId);
+      return;
+    }
+    const n = Number(v);
+    if (!Number.isFinite(n) || n < 0) return;
+    setPrice({ id: cost.itemId, name: cost.label }, n);
   }
 
   function reset() {
@@ -207,7 +203,7 @@ export function EleveurPage() {
                     inputMode="numeric"
                     placeholder="prix"
                     value={prices[cost.itemId] ?? ""}
-                    onChange={(e) => setUnitPrice(cost.itemId!, e.target.value)}
+                    onChange={(e) => setUnitPrice(cost, e.target.value)}
                     aria-label={`Prix unitaire de ${cost.label}`}
                   />
                   <span

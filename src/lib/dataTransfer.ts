@@ -18,8 +18,6 @@ import {
 } from "./priceStore";
 import { loadCraftList, saveCraftList, type CraftEntry } from "./craftList";
 import {
-  loadPrices,
-  savePrices,
   loadFavourites,
   saveFavourites,
   loadEleveur,
@@ -86,14 +84,8 @@ export const SECTIONS: PortableSection[] = [
     label: "Prix enregistrés",
     load: () => loadPriceEntries(),
     save: (value) => {
-      const entries = (isObject(value) ? value : {}) as PriceEntryMap;
-      savePriceEntries(entries);
-      // Keep the plain price map (what the maths read) in sync with the entries.
-      const prices = loadPrices() ?? {};
-      for (const [id, entry] of Object.entries(entries)) {
-        if (entry && typeof entry.price === "number") prices[id] = entry.price;
-      }
-      savePrices(prices);
+      // Entries are the single source of truth; the price map derives from them.
+      savePriceEntries((isObject(value) ? value : {}) as PriceEntryMap);
     },
     merge: (current, incoming) => {
       const cur = (isObject(current) ? current : {}) as PriceEntryMap;

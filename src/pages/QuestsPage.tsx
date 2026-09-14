@@ -16,9 +16,8 @@ import {
   type QuestPeriod,
   type QuestSort,
 } from "../lib/quests";
-import { loadPrices } from "../lib/storage";
-import { loadPriceEntries, type PriceEntryMap } from "../lib/priceStore";
-import { setManualPrice, clearPrice } from "../lib/trackedPrices";
+import { usePrices } from "../lib/usePrices";
+import type { PriceEntryMap } from "../lib/priceStore";
 import { formatKamas } from "../lib/format";
 import { ItemAutocomplete } from "../components/ItemAutocomplete";
 
@@ -41,28 +40,12 @@ export function QuestsPage() {
     saveQuests(quests);
   }, [quests]);
 
-  // Shared price store, held in state so hand-typed prices re-render totals.
-  const [prices, setPrices] = useState<PriceMap>(() => loadPrices() ?? {});
-  const [entries, setEntries] = useState<PriceEntryMap>(loadPriceEntries);
+  // Shared price store (entries are the single source; the map derives from it).
+  const { prices, entries, setPrice, clearPrice } = usePrices();
 
   function onPriceChange(item: Item, value: number | null) {
-    if (value == null || Number.isNaN(value)) {
-      clearPrice(item.id);
-      setPrices((p) => {
-        const next = { ...p };
-        delete next[item.id];
-        return next;
-      });
-      setEntries((e) => {
-        const next = { ...e };
-        delete next[item.id];
-        return next;
-      });
-      return;
-    }
-    const entry = setManualPrice(item, value);
-    setPrices((p) => ({ ...p, [item.id]: value }));
-    setEntries((e) => ({ ...e, [item.id]: entry }));
+    if (value == null || Number.isNaN(value)) clearPrice(item.id);
+    else setPrice(item, value);
   }
 
   // --- Quest CRUD -----------------------------------------------------------

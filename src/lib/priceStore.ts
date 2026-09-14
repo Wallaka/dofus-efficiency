@@ -1,4 +1,4 @@
-import type { Item } from "../types";
+import type { Item, PriceMap } from "../types";
 import type { Lot, ScreenshotAnalysis } from "./screenshotAnalysis";
 
 /**
@@ -18,11 +18,14 @@ export type ApplyPrice = (
  * (OCR from a screenshot, or typed by hand). That lets the Prix page show each
  * price's age and whether it's fresh or needs re-scanning.
  *
- * The plain number map (PriceMap, in storage.ts) is still the source the calc
- * reads; these entries live alongside it and stay in sync via recordPriceEntry.
+ * This is the single source of truth for prices: the plain number map the calc
+ * reads (PriceMap) is *derived* from these entries via `pricesFromEntries`, so
+ * the two can never drift.
  */
 
 const ENTRIES_KEY = "dofus-efficiency:priceEntries:v1";
+/** Legacy standalone price map (pre-single-store); folded into entries once. */
+const LEGACY_PRICES_KEY = "dofus-efficiency:prices:v1";
 
 /** Prices older than this are flagged "à mettre à jour" (the HDV moves fast). */
 export const STALE_AFTER_MS = 24 * 60 * 60 * 1000;
@@ -81,6 +84,53 @@ export function deletePriceEntry(itemId: string): void {
   if (itemId in map) {
     delete map[itemId];
     savePriceEntries(map);
+  }
+}
+
+/** Derive the plain price map the maths read from the entries. */
+export function pricesFromEntries(entries: PriceEntryMap): PriceMap {
+  const map: PriceMap = {};
+  for (const id of Object.keys(entries)) map[id] = entries[id].price;
+  return map;
+}
+
+/** The current price map, derived from the stored entries. */
+export function loadPricesView(): PriceMap {
+  return pricesFromEntries(loadPriceEntries());
+}
+
+/**
+ * One-time migration from the old standalone price map to entries. Any price
+ * that has no entry yet (e.g. typed on the Éleveur page in an older version) is
+ * folded in as a stale "manual" entry so it survives and stays shareable, then
+ * the legacy key is dropped.
+ */
+export function migrateLegacyPriceMap(): void {
+  try {
+    const raw = localStorage.getItem(LEGACY_PRICES_KEY);
+    if (raw == null) return;
+    const map = JSON.parse(raw);
+    if (map && typeof map === "object" && !Array.isArray(map)) {
+      const entries = loadPriceEntries();
+      let changed = false;
+      for (const [id, price] of Object.entries(map)) {
+        if (typeof price === "number" && !entries[id]) {
+          entries[id] = {
+            itemId: id,
+            name: id,
+            price,
+            updatedAt: 0, // unknown age → flagged "à mettre à jour"
+            source: "manual",
+            detail: "Repris d'une version précédente",
+          };
+          changed = true;
+        }
+      }
+      if (changed) savePriceEntries(entries);
+    }
+    localStorage.removeItem(LEGACY_PRICES_KEY);
+  } catch {
+    // Migration is best-effort; a bad legacy blob shouldn't break startup.
   }
 }
 

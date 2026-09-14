@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { AvisReward } from "../lib/avis";
 import { avitonUnitValue, effectiveAvitons } from "../lib/avis";
-import type { Item, PriceMap } from "../types";
+import type { Item } from "../types";
 import { fetchAvisDeRecherche } from "../data/dofusApi";
 import {
   loadAvisAviton,
@@ -9,7 +9,6 @@ import {
   loadAvisChasseOnly,
   loadAvisOverrides,
   loadAvisParticipation,
-  loadPrices,
   saveAvisAviton,
   saveAvisCatalog,
   saveAvisChasseOnly,
@@ -17,8 +16,7 @@ import {
   saveAvisParticipation,
   type AvisOverrides,
 } from "../lib/storage";
-import { loadPriceEntries, type PriceEntryMap } from "../lib/priceStore";
-import { setManualPrice, clearPrice } from "../lib/trackedPrices";
+import { usePrices } from "../lib/usePrices";
 import { formatDateTime, formatKamas } from "../lib/format";
 import { AvisCard, type AvisSlot } from "../components/AvisCard";
 
@@ -35,30 +33,13 @@ export function AvisPage() {
   const [error, setError] = useState<string>();
   // Free-text name filter, so a given avis is one keystroke away.
   const [filter, setFilter] = useState("");
-  // Shared price store (carte + resource prices). Held in state so hand-typed
-  // prices re-render and recompute benefits; `entries` carries each price's
-  // source (OCR vs manual) for the badge.
-  const [prices, setPrices] = useState<PriceMap>(() => loadPrices() ?? {});
-  const [entries, setEntries] = useState<PriceEntryMap>(loadPriceEntries);
+  // Shared price store (carte + resource prices). Entries are the single source
+  // of truth; the map derives from them, and each entry's source drives the badge.
+  const { prices, entries, setPrice, clearPrice } = usePrices();
 
   function onPriceChange(item: Item, value: number | null) {
-    if (value == null) {
-      clearPrice(item.id);
-      setPrices((p) => {
-        const next = { ...p };
-        delete next[item.id];
-        return next;
-      });
-      setEntries((e) => {
-        const next = { ...e };
-        delete next[item.id];
-        return next;
-      });
-      return;
-    }
-    const entry = setManualPrice(item, value);
-    setPrices((p) => ({ ...p, [item.id]: value }));
-    setEntries((e) => ({ ...e, [item.id]: entry }));
+    if (value == null) clearPrice(item.id);
+    else setPrice(item, value);
   }
 
   // Per-avis manual item corrections (wrong/missing auto-detection).

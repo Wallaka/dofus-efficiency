@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import type { Item, PriceMap } from "../types";
+import type { Item } from "../types";
 import { fetchJobs, fetchJobRecipes, type JobOption } from "../data/dofusApi";
 import {
   planRecipesToTarget,
@@ -17,8 +17,7 @@ import {
   saveJobRecipes,
   type MetierInput,
 } from "../lib/metierStore";
-import { loadPrices } from "../lib/storage";
-import { setManualPrice, clearPrice } from "../lib/trackedPrices";
+import { usePrices } from "../lib/usePrices";
 import { formatKamas } from "../lib/format";
 import { MetierRecipeRow } from "../components/MetierRecipeRow";
 import { PriceInput } from "../components/PriceInput";
@@ -40,7 +39,7 @@ function count(value: number | undefined): string {
  */
 export function MetierPage() {
   const [input, setInput] = useState<MetierInput>(loadMetierInput);
-  const [prices, setPrices] = useState<PriceMap>(() => loadPrices() ?? {});
+  const { prices, setPrice, clearPrice } = usePrices();
 
   const [jobs, setJobs] = useState<JobOption[]>(() => loadJobs() ?? []);
   const [recipes, setRecipes] = useState<MetierRecipe[]>([]);
@@ -103,17 +102,8 @@ export function MetierPage() {
 
   // Manual price edit → shared store, then mirror to local state (as Avis/Craft).
   function onPriceChange(item: Item, value: number | null) {
-    if (value == null) {
-      clearPrice(item.id);
-      setPrices((p) => {
-        const next = { ...p };
-        delete next[item.id];
-        return next;
-      });
-      return;
-    }
-    setManualPrice(item, value);
-    setPrices((p) => ({ ...p, [item.id]: value }));
+    if (value == null) clearPrice(item.id);
+    else setPrice(item, value);
   }
 
   const coef = (input.coefPercent || 100) / 100;

@@ -2,13 +2,8 @@ import { useMemo, useState } from "react";
 import type { Item } from "../types";
 import { ItemAutocomplete } from "../components/ItemAutocomplete";
 import { useFavourites } from "../lib/useFavourites";
-import {
-  loadPriceEntries,
-  isStale,
-  relativeAge,
-  type PriceEntryMap,
-} from "../lib/priceStore";
-import { setManualPrice, clearPrice } from "../lib/trackedPrices";
+import { isStale, relativeAge } from "../lib/priceStore";
+import { usePrices } from "../lib/usePrices";
 import { formatDateTime } from "../lib/format";
 
 /**
@@ -19,7 +14,7 @@ import { formatDateTime } from "../lib/format";
  */
 export function TrackedItemsPage() {
   const { favourites, isFavourite, add, remove } = useFavourites();
-  const [entries, setEntries] = useState<PriceEntryMap>(loadPriceEntries);
+  const { entries, setPrice, clearPrice } = usePrices();
   // In-progress text per row, so typing doesn't fight the stored value.
   const [drafts, setDrafts] = useState<Record<string, string>>({});
   const now = Date.now();
@@ -40,17 +35,11 @@ export function TrackedItemsPage() {
     });
     if (text === "") {
       clearPrice(item.id);
-      setEntries((prev) => {
-        const next = { ...prev };
-        delete next[item.id];
-        return next;
-      });
       return;
     }
     const value = Number(text);
     if (!Number.isFinite(value) || value < 0) return;
-    const entry = setManualPrice(item, value);
-    setEntries((prev) => ({ ...prev, [item.id]: entry }));
+    setPrice(item, value);
   }
 
   function untrack(item: Item) {
