@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import type { AvisReward } from "../lib/avis";
 import { avitonUnitValue, effectiveAvitons, avisInLevelRange } from "../lib/avis";
 import type { Item } from "../types";
-import { fetchAvisDeRecherche } from "../data/dofusApi";
+import { fetchAvisDeRecherche, fetchRecipesFor } from "../data/dofusApi";
 import {
   loadAvisAviton,
   loadAvisCatalog,
@@ -10,17 +10,24 @@ import {
   loadAvisLevelRange,
   loadAvisOverrides,
   loadAvisParticipation,
+  loadCarteRecipes,
   saveAvisAviton,
   saveAvisCatalog,
   saveAvisChasseOnly,
   saveAvisLevelRange,
   saveAvisOverrides,
   saveAvisParticipation,
+  saveCarteRecipes,
   type AvisOverrides,
+  type CarteRecipeCache,
 } from "../lib/storage";
 import { usePrices } from "../lib/usePrices";
 import { formatDateTime, formatKamas } from "../lib/format";
-import { AvisCard, type AvisSlot } from "../components/AvisCard";
+import {
+  AvisCard,
+  type AvisSlot,
+  type CarteCraft,
+} from "../components/AvisCard";
 
 type Status = "idle" | "loading" | "error";
 
@@ -77,6 +84,65 @@ export function AvisPage() {
       saveAvisOverrides(next);
       return next;
     });
+  }
+
+  // Carte craft recipes (carte id → ingredients), cached; fetched on demand when
+  // a card's craft breakdown is first opened. `[]` means "not craftable".
+  const [carteRecipes, setCarteRecipes] =
+    useState<CarteRecipeCache>(loadCarteRecipes);
+  const [carteStatus, setCarteStatus] = useState<
+    Record<string, "loading" | "error">
+  >({});
+
+  async function loadCarteRecipe(carteId: string) {
+    if (carteId in carteRecipes || carteStatus[carteId] === "loading") return;
+    setCarteStatus((s) => ({ ...s, [carteId]: "loading" }));
+    try {
+      const recipes = await fetchRecipesFor(carteId);
+      const ings = (recipes[0]?.ingredients ?? []).map((i) => ({
+        item: i.item,
+        quantity: i.quantity,
+      }));
+      setCarteRecipes((prev) => {
+        const next = { ...prev, [carteId]: ings };
+        saveCarteRecipes(next);
+        return next;
+      });
+      setCarteStatus((s) => {
+        const next = { ...s };
+        delete next[carteId];
+        return next;
+      });
+    } catch {
+      setCarteStatus((s) => ({ ...s, [carteId]: "error" }));
+    }
+  }
+
+  /** Build the buy-vs-craft option for one avis's carte (undefined if unresolved). */
+  function buildCarteCraft(carteItem: Item | undefined): CarteCraft | undefined {
+    if (!carteItem) return undefined;
+    const carteId = carteItem.id;
+    const ings = carteRecipes[carteId]; // undefined = not fetched yet
+    let cost = 0;
+    let complete = true;
+    const ingredients = ings?.map((i) => {
+      const price = prices[i.item.id];
+      if (price == null) complete = false;
+      else cost += price * i.quantity;
+      return { item: i.item, quantity: i.quantity, price };
+    });
+    const status: CarteCraft["status"] = ings
+      ? ings.length > 0
+        ? "ok"
+        : "none"
+      : (carteStatus[carteId] ?? "idle");
+    return {
+      status,
+      ingredients,
+      cost: ings && ings.length > 0 && complete ? cost : undefined,
+      onExpand: () => loadCarteRecipe(carteId),
+      onIngredientPrice: (item, value) => onPriceChange(item, value),
+    };
   }
 
   /** Build a carte/resource slot: effective item (override ?? auto), price, hooks. */
@@ -309,12 +375,14 @@ export function AvisPage() {
               }
             : undefined;
           const avitons = effectiveAvitons(avis.avitons, chasseOnly);
+          const carteItem = ov.carte ?? carteAuto;
           return (
             <AvisCard
               key={avis.id}
               avis={avis}
               carte={buildSlot(id, "carte", carteAuto, ov.carte)}
               resource={buildSlot(id, "resource", resourceAuto, ov.resource)}
+              carteCraft={buildCarteCraft(carteItem)}
               avitons={avitons}
               avitonValue={avitonUnit * avitons}
               participationCost={participation[avis.id] ?? 0}

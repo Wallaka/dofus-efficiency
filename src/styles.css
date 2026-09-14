@@ -3656,3 +3656,153 @@ td.negative {
 .craft-ing-stock.full {
   color: var(--positive);
 }
+
+/* Avis: craft-the-carte breakdown + dual benefit */
+.avis-craft-toggle {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  border-radius: 7px;
+  padding: 1px 7px;
+  font-size: 0.72rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.avis-craft-toggle:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.avis-cheap-badge {
+  font-size: 0.6rem;
+  color: var(--positive);
+  border: 1px solid color-mix(in srgb, var(--positive) 45%, transparent);
+  border-radius: 999px;
+  padding: 1px 6px;
+  white-space: nowrap;
+}
+
+.avis-cardcraft {
+  margin: 2px 0 8px 44px;
+  padding: 10px 12px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+}
+
+.avis-cardcraft-h {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.avis-ci {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 8px;
+  align-items: center;
+  font-size: 0.85rem;
+  padding: 3px 0;
+}
+
+.avis-ci-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.avis-ci-q {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.avis-ci-sub {
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  min-width: 64px;
+  text-align: right;
+}
+
+.avis-ci-sub.missing {
+  color: var(--negative);
+}
+
+.avis-cardcraft-tot {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--border);
+  font-size: 0.88rem;
+}
+
+.avis-cardcraft-tot .hint {
+  margin: 0;
+}
+
+.avis-cardcraft-tot b {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.avis-benefit2 {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.avis-b2row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.avis-b2lab {
+  font-size: 0.82rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.avis-b2val {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+.avis-b2row.best .avis-b2lab {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.avis-b2row.best .avis-b2val {
+  font-size: 1.12rem;
+}
+
+.avis-b2row.best .avis-b2val.avis-benefit--positive {
+  color: var(--positive);
+}
+
+.avis-b2row.best .avis-b2val.avis-benefit--negative {
+  color: var(--negative);
+}
+
+.avis-best-badge {
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--positive) 50%, transparent);
+  color: var(--positive);
+}

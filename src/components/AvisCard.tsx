@@ -1,6 +1,10 @@
 import { useState, type ReactNode } from "react";
 import type { AvisReward } from "../lib/avis";
-import { computeAvisBenefit, questCriminalName } from "../lib/avis";
+import {
+  computeAvisBenefit,
+  questCriminalName,
+  type AvisBenefit,
+} from "../lib/avis";
 import type { Item } from "../types";
 import type { PriceSource } from "../lib/priceStore";
 import { formatKamas, formatKamasSigned } from "../lib/format";
@@ -22,10 +26,32 @@ export interface AvisSlot {
   onPriceChange: (value: number | null) => void;
 }
 
+/** A priced ingredient of the carte's craft recipe. */
+export interface CarteCraftIngredient {
+  item: Item;
+  quantity: number;
+  price?: number;
+}
+
+/** The "craft the carte instead of buying it" option for one avis. */
+export interface CarteCraft {
+  /** idle: not fetched yet · ok: recipe loaded · none: not craftable. */
+  status: "idle" | "loading" | "error" | "none" | "ok";
+  ingredients?: CarteCraftIngredient[];
+  /** Total craft cost when every ingredient price is known; else undefined. */
+  cost?: number;
+  /** Fetch the recipe (called on first expand). */
+  onExpand: () => void;
+  /** Edit an ingredient's price (writes the shared store). */
+  onIngredientPrice: (item: Item, value: number | null) => void;
+}
+
 interface Props {
   avis: AvisReward;
   carte: AvisSlot;
   resource: AvisSlot;
+  /** Buy-vs-craft option for the carte; absent when the carte isn't resolved. */
+  carteCraft?: CarteCraft;
   /** Effective aviton count to show (already halved when done via chasse alone). */
   avitons?: number;
   /** Value of this avis's avitons (avitons × per-aviton rate); 0 when unset. */
@@ -101,11 +127,17 @@ function EditableItemLine({
   label,
   avisName,
   slot,
+  extra,
+  below,
 }: {
   variant: "cost" | "reward";
   label: string;
   avisName: string;
   slot: AvisSlot;
+  /** Extra controls in the label row (e.g. the carte's "⚒ craft" toggle). */
+  extra?: ReactNode;
+  /** Content rendered right under the line (e.g. the craft breakdown). */
+  below?: ReactNode;
 }) {
   const [editing, setEditing] = useState(false);
 
@@ -161,46 +193,50 @@ function EditableItemLine({
   }
 
   return (
-    <div className={`avis-line avis-line--${variant}`}>
-      <button
-        type="button"
-        className="avis-line-icon avis-icon-btn"
-        onClick={() => setEditing(true)}
-        aria-label={`Corriger l'objet (${label})`}
-        title="Corriger l'objet"
-      >
-        {iconInner}
-        <span className="avis-icon-pen" aria-hidden>
-          ✎
-        </span>
-      </button>
-      <div className="avis-line-body">
-        <span className="avis-line-label-row">
-          <span className="avis-line-label">{label}</span>
-          {tag && <span className={`avis-src ${tag.cls}`}>{tag.label}</span>}
-          {slot.overridden && (
-            <button
-              type="button"
-              className="avis-revert"
-              onClick={slot.onRevert}
-              title="Revenir à la détection automatique"
-            >
-              ↺ auto
-            </button>
-          )}
-        </span>
-        <span className="avis-line-name" title={slot.item?.name}>
-          {slot.item?.name ?? "Inconnu"}
-        </span>
+    <>
+      <div className={`avis-line avis-line--${variant}`}>
+        <button
+          type="button"
+          className="avis-line-icon avis-icon-btn"
+          onClick={() => setEditing(true)}
+          aria-label={`Corriger l'objet (${label})`}
+          title="Corriger l'objet"
+        >
+          {iconInner}
+          <span className="avis-icon-pen" aria-hidden>
+            ✎
+          </span>
+        </button>
+        <div className="avis-line-body">
+          <span className="avis-line-label-row">
+            <span className="avis-line-label">{label}</span>
+            {tag && <span className={`avis-src ${tag.cls}`}>{tag.label}</span>}
+            {slot.overridden && (
+              <button
+                type="button"
+                className="avis-revert"
+                onClick={slot.onRevert}
+                title="Revenir à la détection automatique"
+              >
+                ↺ auto
+              </button>
+            )}
+            {extra}
+          </span>
+          <span className="avis-line-name" title={slot.item?.name}>
+            {slot.item?.name ?? "Inconnu"}
+          </span>
+        </div>
+        <PriceInput
+          value={slot.price}
+          needs={slot.price == null}
+          disabled={!slot.item}
+          ariaLabel={`Prix (${label}) pour ${avisName}`}
+          onCommit={slot.onPriceChange}
+        />
       </div>
-      <PriceInput
-        value={slot.price}
-        needs={slot.price == null}
-        disabled={!slot.item}
-        ariaLabel={`Prix (${label}) pour ${avisName}`}
-        onCommit={slot.onPriceChange}
-      />
-    </div>
+      {below}
+    </>
   );
 }
 
@@ -240,30 +276,110 @@ function AvisLine({
   );
 }
 
+/** The carte's craft recipe: editable ingredient prices + a craft-cost total. */
+function CarteCraftPanel({ craft }: { craft: CarteCraft }) {
+  if (craft.status === "loading") {
+    return (
+      <div className="avis-cardcraft">
+        <span className="hint">Chargement de la recette…</span>
+      </div>
+    );
+  }
+  if (craft.status === "error") {
+    return (
+      <div className="avis-cardcraft">
+        <span className="hint error-text">Recette indisponible.</span>
+      </div>
+    );
+  }
+  if (craft.status === "none") {
+    return (
+      <div className="avis-cardcraft">
+        <span className="hint">Cette carte n'est pas craftable.</span>
+      </div>
+    );
+  }
+  const ings = craft.ingredients ?? [];
+  return (
+    <div className="avis-cardcraft">
+      <div className="avis-cardcraft-h">⚒ Craft de la carte — recette DofusDB</div>
+      {ings.map((ing) => (
+        <div className="avis-ci" key={ing.item.id}>
+          <span className="avis-ci-name" title={ing.item.name}>
+            {ing.item.name} <span className="avis-ci-q">×{ing.quantity}</span>
+          </span>
+          <PriceInput
+            value={ing.price}
+            needs={ing.price == null}
+            ariaLabel={`Prix unitaire de ${ing.item.name}`}
+            onCommit={(v) => craft.onIngredientPrice(ing.item, v)}
+          />
+          <span
+            className={`avis-ci-sub${ing.price == null ? " missing" : ""}`}
+          >
+            {ing.price != null ? formatKamas(ing.price * ing.quantity) : "prix ?"}
+          </span>
+        </div>
+      ))}
+      <div className="avis-cardcraft-tot">
+        <span className="hint">Coût de craft de la carte</span>
+        <b>{craft.cost != null ? formatKamas(craft.cost) : "prix ?"}</b>
+      </div>
+    </div>
+  );
+}
+
 /** One avis de recherche: picture, name, level, avitons + carte cost / resource + aviton reward / benefit. */
 export function AvisCard({
   avis,
   carte,
   resource,
+  carteCraft,
   avitons = avis.avitons,
   avitonValue = 0,
   participationCost = 0,
   onParticipationChange,
 }: Props) {
+  const [showCraft, setShowCraft] = useState(false);
+
   const benefit = computeAvisBenefit({
     cartePrice: carte.price,
     resourcePrice: resource.price,
     avitonValue,
     participationCost,
   });
-  const benefitClass =
-    benefit.value == null
+  const craftCost = carteCraft?.cost;
+  const craftBenefit =
+    craftCost != null
+      ? computeAvisBenefit({
+          cartePrice: craftCost,
+          resourcePrice: resource.price,
+          avitonValue,
+          participationCost,
+        })
+      : null;
+
+  // Craft is the cheaper carte source when its cost is known and below the buy price.
+  const craftCheaper =
+    craftCost != null && carte.price != null && craftCost < carte.price;
+  // Which benefit to highlight (higher is better; craft wins ties).
+  const craftIsBest =
+    craftBenefit != null &&
+    (benefit.value == null ||
+      (craftBenefit.value ?? -Infinity) >= (benefit.value ?? -Infinity));
+
+  const benefitClass = (b: AvisBenefit | null) =>
+    !b || b.value == null
       ? ""
-      : benefit.value > 0
+      : b.value > 0
         ? "avis-benefit--positive"
-        : benefit.value < 0
+        : b.value < 0
           ? "avis-benefit--negative"
           : "";
+  const benefitText = (b: AvisBenefit) =>
+    b.known
+      ? `${b.partial ? "≈ " : ""}${formatKamasSigned(b.value)}`
+      : "—";
 
   return (
     <li className="avis-card">
@@ -296,6 +412,34 @@ export function AvisCard({
           label="Carte requise"
           avisName={avis.name}
           slot={carte}
+          extra={
+            carteCraft && carte.item ? (
+              <>
+                {craftCheaper && (
+                  <span className="avis-cheap-badge">
+                    craft −{formatKamas(carte.price! - craftCost!)}
+                  </span>
+                )}
+                <button
+                  type="button"
+                  className="avis-craft-toggle"
+                  aria-expanded={showCraft}
+                  onClick={() => {
+                    const next = !showCraft;
+                    setShowCraft(next);
+                    if (next) carteCraft.onExpand();
+                  }}
+                >
+                  ⚒ craft {showCraft ? "▲" : "▼"}
+                </button>
+              </>
+            ) : undefined
+          }
+          below={
+            carteCraft && carte.item && showCraft ? (
+              <CarteCraftPanel craft={carteCraft} />
+            ) : undefined
+          }
         />
         <EditableItemLine
           variant="reward"
@@ -339,24 +483,45 @@ export function AvisCard({
         />
       </div>
 
-      <footer
-        className={`avis-benefit ${benefitClass}`}
-        title={
-          benefit.partial
-            ? "Bénéfice = ressource + avitons + participation − carte. Estimation : un prix manque (compté à 0)."
-            : "Bénéfice = ressource + avitons + participation − carte."
-        }
-      >
-        <span className="avis-benefit-label">
-          Bénéfice
-          {benefit.partial && <span className="avis-benefit-partial"> · estimé</span>}
-        </span>
-        <span className="avis-benefit-value">
-          {benefit.known
-            ? `${benefit.partial ? "≈ " : ""}${formatKamasSigned(benefit.value)}`
-            : "—"}
-        </span>
-      </footer>
+      {craftBenefit ? (
+        <footer className="avis-benefit2">
+          <div className={`avis-b2row ${craftIsBest ? "dim" : "best"}`}>
+            <span className="avis-b2lab">
+              Bénéfice · carte achetée
+              {!craftIsBest && <span className="avis-best-badge">meilleur</span>}
+            </span>
+            <span className={`avis-b2val ${benefitClass(benefit)}`}>
+              {benefitText(benefit)}
+            </span>
+          </div>
+          <div className={`avis-b2row ${craftIsBest ? "best" : "dim"}`}>
+            <span className="avis-b2lab">
+              Bénéfice · carte craftée
+              {craftIsBest && <span className="avis-best-badge">meilleur</span>}
+            </span>
+            <span className={`avis-b2val ${benefitClass(craftBenefit)}`}>
+              {benefitText(craftBenefit)}
+            </span>
+          </div>
+        </footer>
+      ) : (
+        <footer
+          className={`avis-benefit ${benefitClass(benefit)}`}
+          title={
+            benefit.partial
+              ? "Bénéfice = ressource + avitons + participation − carte. Estimation : un prix manque (compté à 0)."
+              : "Bénéfice = ressource + avitons + participation − carte."
+          }
+        >
+          <span className="avis-benefit-label">
+            Bénéfice
+            {benefit.partial && (
+              <span className="avis-benefit-partial"> · estimé</span>
+            )}
+          </span>
+          <span className="avis-benefit-value">{benefitText(benefit)}</span>
+        </footer>
+      )}
     </li>
   );
 }
