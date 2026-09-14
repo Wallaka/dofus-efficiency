@@ -3,6 +3,7 @@ import type { Item, PriceMap } from "../types";
 import { fetchJobs, fetchJobRecipes, type JobOption } from "../data/dofusApi";
 import {
   planRecipesToTarget,
+  buildOptimalPlan,
   xpBetween,
   type MetierRecipe,
 } from "../lib/metierXp";
@@ -122,10 +123,39 @@ export function MetierPage() {
     return planRecipesToTarget(recipes, prices, input.current, input.target, coef);
   }, [recipes, prices, input.current, input.target, coef, validRange]);
 
-  // Selected recipe = the one the user picked if still in the list, else the best.
-  const selected =
-    plans.find((p) => p.recipe.recipeId === selectedId) ?? plans[0];
+  // The cheapest auto-switching route (uses recipes that unlock along the way).
+  const optimal = useMemo(() => {
+    if (recipes.length === 0 || !validRange) return null;
+    return buildOptimalPlan(recipes, prices, input.current, input.target, coef);
+  }, [recipes, prices, input.current, input.target, coef, validRange]);
+
+  const hasPlan = optimal != null && (optimal.steps.length > 0 || plans.length > 0);
+  // Default selection is "optimal"; a fixed pick wins only if still in the list.
+  const fixedSelected = plans.find((p) => p.recipe.recipeId === selectedId);
+  const isOptimal = !fixedSelected;
   const totalXp = validRange ? xpBetween(input.current, input.target) : 0;
+
+  // Unified view driving the tiles + shopping list, from whichever is selected.
+  const view =
+    isOptimal && optimal
+      ? {
+          label: "chemin optimal",
+          crafts: optimal.totalCrafts,
+          cost: optimal.totalCost,
+          costPerXp: optimal.avgCostPerXp,
+          incomplete: optimal.incomplete,
+          shopping: optimal.shopping,
+        }
+      : fixedSelected
+        ? {
+            label: `« ${fixedSelected.recipe.result.name} »`,
+            crafts: fixedSelected.crafts,
+            cost: fixedSelected.cost,
+            costPerXp: fixedSelected.costPerXp,
+            incomplete: fixedSelected.incomplete,
+            shopping: fixedSelected.shopping,
+          }
+        : null;
 
   const pct = (lvl: number) => `${Math.min(100, (lvl / MAX_LEVEL) * 100)}%`;
 
@@ -249,19 +279,19 @@ export function MetierPage() {
         input.jobId != null &&
         validRange &&
         recipes.length > 0 &&
-        plans.length === 0 && (
+        !hasPlan && (
           <p className="hint">
-            Aucune recette de ce métier n'est craftable au niveau {input.current}.
+            Aucune recette de ce métier n'est craftable sur cette plage de niveaux.
           </p>
         )}
 
-      {selected && (
+      {hasPlan && view && optimal && (
         <>
           <div className="metier-tiles">
             <div className="metier-tile">
               <span className="metier-tile-label">Crafts</span>
-              <span className="metier-tile-value">{count(selected.crafts)}</span>
-              <span className="metier-tile-sub">de « {selected.recipe.result.name} »</span>
+              <span className="metier-tile-value">{count(view.crafts)}</span>
+              <span className="metier-tile-sub">{view.label}</span>
             </div>
             <div className="metier-tile">
               <span className="metier-tile-label">XP à gagner</span>
@@ -272,15 +302,15 @@ export function MetierPage() {
             </div>
             <div className="metier-tile accent">
               <span className="metier-tile-label">Coût total</span>
-              <span className="metier-tile-value">{formatKamas(selected.cost)}</span>
+              <span className="metier-tile-value">{formatKamas(view.cost)}</span>
               <span className="metier-tile-sub">
-                {selected.incomplete ? "partiel (prix manquants)" : "aux prix actuels"}
+                {view.incomplete ? "partiel (prix manquants)" : "aux prix actuels"}
               </span>
             </div>
             <div className="metier-tile">
               <span className="metier-tile-label">Coût moyen</span>
               <span className="metier-tile-value">
-                {selected.costPerXp != null ? formatKamas(selected.costPerXp) : "—"}
+                {view.costPerXp != null ? formatKamas(view.costPerXp) : "—"}
               </span>
               <span className="metier-tile-sub">kamas / XP</span>
             </div>
@@ -289,9 +319,9 @@ export function MetierPage() {
           <section>
             <h3 className="metier-h3">Choisir une recette</h3>
             <p className="hint metier-h3-sub">
-              Cliquez une recette pour voir combien de crafts et de kamas il faut
-              pour aller de {input.current} à {input.target}. Triées de la moins
-              chère à la plus chère.
+              « Optimal » enchaîne les recettes les moins chères et change quand une
+              meilleure se débloque. Ou fixez une seule recette (façon DofusDB).
+              Triées de la moins chère à la plus chère.
             </p>
             <ul className="metier-path">
               <li className="metier-head metier-head-rrow" aria-hidden>
@@ -302,11 +332,77 @@ export function MetierPage() {
                 <span className="num">Coût</span>
                 <span className="num">k/XP</span>
               </li>
+
+              {/* Optimal (auto-switching) row + its palier breakdown. */}
+              <li>
+                <button
+                  type="button"
+                  className={`metier-rrow metier-rrow--optimal${isOptimal ? " selected" : ""}`}
+                  aria-pressed={isOptimal}
+                  onClick={() => setSelectedId(undefined)}
+                >
+                  <span className="metier-radio" aria-hidden>
+                    {isOptimal ? "●" : "○"}
+                  </span>
+                  <span className="metier-recipe">
+                    <span className="metier-thumb">🏆</span>
+                    <span className="metier-recipe-text">
+                      <span className="metier-recipe-name">Optimal (auto)</span>
+                      <span className="metier-recipe-meta">
+                        change de recette au fil des niveaux
+                        {optimal.recipeCount > 1 && (
+                          <span className="metier-slots">
+                            {optimal.recipeCount} recettes
+                          </span>
+                        )}
+                      </span>
+                    </span>
+                  </span>
+                  <span className="num metier-xpcraft">—</span>
+                  <span className="num metier-crafts">
+                    {optimal.totalCrafts.toLocaleString("fr-FR")}
+                  </span>
+                  <span className="num metier-cost">{formatKamas(optimal.totalCost)}</span>
+                  <span className="num metier-kxp-cell">
+                    <span className="metier-kxp">
+                      {optimal.avgCostPerXp != null
+                        ? `${formatKamas(optimal.avgCostPerXp)}/xp`
+                        : "—"}
+                    </span>
+                  </span>
+                </button>
+                {isOptimal && optimal.steps.length > 0 && (
+                  <div className="metier-paliers">
+                    <div className="metier-pcap">Étapes du chemin</div>
+                    {optimal.steps.map((step, i) => (
+                      <div className="metier-pal" key={`${step.fromLevel}-${step.recipe.recipeId}`}>
+                        <span className="metier-pband">
+                          <strong>
+                            Niv {step.fromLevel}–{step.toLevel}
+                          </strong>
+                        </span>
+                        <span className="metier-pname" title={step.recipe.result.name}>
+                          <span className="metier-slots">Niv {step.recipe.resultLevel}</span>
+                          {step.recipe.result.name}
+                          {i > 0 && (
+                            <span className="metier-pswitch"> ↑ débloqué/moins cher</span>
+                          )}
+                        </span>
+                        <span className="metier-pcrafts">
+                          {step.crafts.toLocaleString("fr-FR")} crafts
+                          {step.cost != null ? ` · ${formatKamas(step.cost)}` : ""}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </li>
+
               {plans.map((plan) => (
                 <MetierRecipeRow
                   key={plan.recipe.recipeId}
                   plan={plan}
-                  selected={plan.recipe.recipeId === selected.recipe.recipeId}
+                  selected={!isOptimal && plan.recipe.recipeId === selectedId}
                   onSelect={() => setSelectedId(plan.recipe.recipeId)}
                 />
               ))}
@@ -316,11 +412,11 @@ export function MetierPage() {
           <section className="panel">
             <h3 className="metier-h3">Liste de courses</h3>
             <p className="hint">
-              Pour crafter « {selected.recipe.result.name} »{" "}
-              {count(selected.crafts)} fois — ce qu'il faut acheter/farmer.
+              Pour le {view.label} — {count(view.crafts)} crafts — ce qu'il faut
+              acheter/farmer.
             </p>
             <div className="metier-shopping">
-              {selected.shopping.map((ing) => (
+              {view.shopping.map((ing) => (
                 <div className="metier-ing" key={ing.item.id}>
                   <span className="metier-ing-id">
                     <span className="metier-ing-icon">

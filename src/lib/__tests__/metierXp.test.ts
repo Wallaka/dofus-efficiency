@@ -7,6 +7,7 @@ import {
   xpBetween,
   planRecipeToTarget,
   planRecipesToTarget,
+  buildOptimalPlan,
   type MetierRecipe,
 } from "../metierXp";
 import type { PriceMap } from "../../types";
@@ -91,5 +92,26 @@ describe("planRecipesToTarget", () => {
     const plans = planRecipesToTarget(recipes, prices, 60, 80, 1);
     expect(plans.map((p) => p.recipe.recipeId)).toEqual(["cheap", "dear", "noprice"]);
     expect(plans[0].cost!).toBeLessThan(plans[1].cost!);
+  });
+});
+
+describe("buildOptimalPlan", () => {
+  const prices: PriceMap = { a: 1, b: 1 };
+  const recipes = [
+    recipe("A", 1, [["a", 1]]), // craftable from level 1
+    recipe("B", 4, [["b", 1]]), // unlocks at level 4, higher base XP → cheaper then
+  ];
+
+  it("switches to a cheaper recipe when it unlocks", () => {
+    const plan = buildOptimalPlan(recipes, prices, 1, 6, 1);
+    expect(plan.recipeCount).toBe(2);
+    expect(plan.steps.map((s) => s.recipe.recipeId)).toEqual(["A", "B"]);
+    expect(plan.steps[1].fromLevel).toBe(4); // B kicks in exactly at its unlock level
+  });
+
+  it("is never more expensive than spamming a single recipe", () => {
+    const optimal = buildOptimalPlan(recipes, prices, 1, 20, 1);
+    const fixedA = planRecipeToTarget(recipes[0], prices, 1, 20, 1);
+    expect(optimal.totalCost!).toBeLessThanOrEqual(fixedA.cost!);
   });
 });

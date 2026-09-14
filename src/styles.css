@@ -3255,3 +3255,83 @@ td.negative {
     align-self: center;
   }
 }
+
+/* Métiers — Optimal (auto-switching) row + palier breakdown. */
+.metier-rrow--optimal .metier-thumb {
+  background: color-mix(in srgb, var(--accent) 16%, var(--num-bg));
+}
+.metier-paliers {
+  padding: 4px 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: color-mix(in srgb, var(--num-bg) 55%, transparent);
+  border-top: 1px dashed var(--border);
+  box-shadow: inset 3px 0 0 color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.metier-pcap {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  padding: 6px 0 2px;
+}
+.metier-pal {
+  display: grid;
+  grid-template-columns: 92px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 0;
+}
+.metier-pband {
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+.metier-pband strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.metier-pname {
+  min-width: 0;
+  font-size: 0.88rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.metier-pname .metier-slots {
+  margin-left: 0;
+  margin-right: 6px;
+}
+.metier-pcrafts {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.83rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.metier-pswitch {
+  color: #e0b24d;
+  font-size: 0.68rem;
+}
+
+@media (max-width: 680px) {
+  .metier-pal {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "band crafts"
+      "name name";
+    row-gap: 2px;
+  }
+  .metier-pband {
+    grid-area: band;
+  }
+  .metier-pcrafts {
+    grid-area: crafts;
+    justify-self: end;
+  }
+  .metier-pname {
+    grid-area: name;
+    white-space: normal;
+  }
+}
