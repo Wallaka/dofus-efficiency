@@ -122,18 +122,12 @@ function collectEntries(dir) {
   return entries;
 }
 
-function main() {
-  if (!existsSync(SRC_DIR)) {
-    console.error(`[build-catalog] no ${relative(ROOT, SRC_DIR)}/ — nothing to build.`);
-    return;
-  }
-  const entries = collectEntries(SRC_DIR);
-  const catalog = buildCatalog(entries);
+/** Serialize a catalog tree to `src/data/catalog.generated.ts`. */
+export function writeCatalog(catalog) {
   const count = catalog.reduce(
     (n, t) => n + t.categories.reduce((m, c) => m + c.items.length, 0),
     0,
   );
-
   const banner =
     "import type { CatalogTab } from \"./catalog\";\n\n" +
     "/**\n * AUTO-GENERATED — do not edit by hand.\n" +
@@ -151,7 +145,17 @@ function main() {
   );
 }
 
+/** Read every raw file under catalog-src/ and (re)write the generated catalog. */
+export function buildFromDisk() {
+  if (!existsSync(SRC_DIR)) {
+    console.error(`[build-catalog] no ${relative(ROOT, SRC_DIR)}/ — nothing to build.`);
+    writeCatalog([]);
+    return;
+  }
+  writeCatalog(buildCatalog(collectEntries(SRC_DIR)));
+}
+
 // Only run when invoked directly (so tests can import the pure functions).
 if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
-  main();
+  buildFromDisk();
 }
