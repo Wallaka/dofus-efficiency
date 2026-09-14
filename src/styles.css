@@ -1501,12 +1501,15 @@ table.lots td.num {
   color: var(--muted);
 }
 
+/* A dim, desaturated cost/reward hint — not an alarm. The strong red is
+   reserved for the "à saisir"/"introuvable" badges (real to-dos), so a filled
+   line no longer looks like an error. */
 .avis-line--cost .avis-line-label {
-  color: var(--negative);
+  color: color-mix(in srgb, var(--negative) 42%, var(--muted));
 }
 
 .avis-line--reward .avis-line-label {
-  color: var(--positive);
+  color: color-mix(in srgb, var(--positive) 42%, var(--muted));
 }
 
 .avis-line-name {
