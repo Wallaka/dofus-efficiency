@@ -82,16 +82,26 @@ describe("planRecipeToTarget", () => {
 
 describe("planRecipesToTarget", () => {
   const prices: PriceMap = { a: 100, b: 10 };
-  it("ranks craftable recipes cheapest-first, drops over-level, unpriced last", () => {
+  it("lists craftable-now cheapest-first, unpriced last, then locked recipes", () => {
     const recipes = [
       recipe("cheap", 40, [["b", 5]]), // cost 50
       recipe("dear", 40, [["a", 5]]), // cost 500
-      recipe("noprice", 40, [["z", 1]]), // unknown cost → last
-      recipe("locked", 80, [["b", 1]]), // above level 60 → excluded
+      recipe("noprice", 40, [["z", 1]]), // unknown cost → after priced
+      recipe("locked", 70, [["b", 1]]), // unlocks at 70 → last, flagged locked
     ];
     const plans = planRecipesToTarget(recipes, prices, 60, 80, 1);
-    expect(plans.map((p) => p.recipe.recipeId)).toEqual(["cheap", "dear", "noprice"]);
+    expect(plans.map((p) => p.recipe.recipeId)).toEqual([
+      "cheap",
+      "dear",
+      "noprice",
+      "locked",
+    ]);
     expect(plans[0].cost!).toBeLessThan(plans[1].cost!);
+    const locked = plans[3];
+    expect(locked.locked).toBe(true);
+    expect(locked.startLevel).toBe(70); // counted from its unlock level
+    expect(plans[2].priced).toBe(false); // "noprice" flagged unpriced
+    expect(plans[0].priced).toBe(true);
   });
 });
 

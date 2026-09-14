@@ -112,6 +112,12 @@ export interface RecipePlan {
   shopping: PlanIngredient[];
   /** True when at least one ingredient price is missing. */
   incomplete: boolean;
+  /** Every ingredient has a known price (opposite of incomplete). */
+  priced: boolean;
+  /** The recipe unlocks above the current level — can't be spammed from now. */
+  locked: boolean;
+  /** Level the count starts from (current level, or the unlock level if locked). */
+  startLevel: number;
 }
 
 /**
@@ -153,6 +159,8 @@ export function planRecipeToTarget(
     };
   });
 
+  const incomplete = recipe.ingredients.some((ing) => prices[ing.item.id] == null);
+
   return {
     recipe,
     xpPerCraft: xpPerCraft(from, recipe.resultLevel, coef),
@@ -160,14 +168,19 @@ export function planRecipeToTarget(
     cost,
     costPerXp,
     shopping,
-    incomplete: recipe.ingredients.some((ing) => prices[ing.item.id] == null),
+    incomplete,
+    priced: !incomplete,
+    locked: recipe.resultLevel > from,
+    startLevel: from,
   };
 }
 
 /**
- * Plan every recipe craftable at `fromLevel` for reaching `toLevel`, cheapest
- * first (by total cost; recipes with a missing price sort last, by fewest
- * crafts). The first entry is the recommended recipe.
+ * Plan every recipe usable somewhere in `fromLevel`→`toLevel` (level ≤ target),
+ * so the whole set is visible and priceable — not just the ones craftable now.
+ * Craftable-now recipes come first, cheapest by total cost (unpriced last); then
+ * the locked ones (unlock above the current level) by unlock level. A locked
+ * recipe's count is measured from its unlock level, not the current level.
  */
 export function planRecipesToTarget(
   recipes: MetierRecipe[],
@@ -177,11 +190,18 @@ export function planRecipesToTarget(
   coef = 1,
 ): RecipePlan[] {
   const from = Math.max(1, Math.floor(fromLevel));
+  const to = Math.min(200, Math.floor(toLevel));
   const plans = recipes
-    .filter((r) => r.resultLevel <= from && xpPerCraft(from, r.resultLevel, coef) > 0)
-    .map((r) => planRecipeToTarget(r, prices, fromLevel, toLevel, coef));
+    .filter((r) => r.resultLevel >= 1 && r.resultLevel <= to)
+    .map((r) => {
+      const start = Math.max(from, r.resultLevel);
+      const base = planRecipeToTarget(r, prices, start, to, coef);
+      return { ...base, locked: r.resultLevel > from, startLevel: start };
+    });
 
   plans.sort((a, b) => {
+    if (a.locked !== b.locked) return a.locked ? 1 : -1; // craftable-now first
+    if (a.locked) return a.recipe.resultLevel - b.recipe.resultLevel; // then by unlock
     if (a.cost == null && b.cost == null) return a.crafts - b.crafts;
     if (a.cost == null) return 1;
     if (b.cost == null) return -1;
