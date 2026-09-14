@@ -41,14 +41,17 @@ describe("XP formula", () => {
     expect(craftPenalty(8)).toBeCloseTo(0.5);
   });
 
-  it("crafting at your level yields exactly one level of XP", () => {
-    expect(xpPerCraft(100, 100)).toBe(xpToNextLevel(100)); // 2000
+  it("crafting at your level grants the recipe's level in XP (~1/20th of a level)", () => {
+    // Base XP = recipe level (confirmed in-game): crafting at your level gives
+    // `level` XP, and you need 20×level to level up → ~20 crafts per level.
+    expect(xpPerCraft(100, 100)).toBe(100);
+    expect(xpPerCraft(100, 100)).toBe(xpToNextLevel(100) / 20);
   });
 
   it("applies the gap penalty, the coefficient, and blocks over-level recipes", () => {
-    // gap 8: floor(20×100 / (1 + 0.1·8^1.1)) = floor(1007.58) = 1007.
-    expect(xpPerCraft(108, 100)).toBe(1007);
-    expect(xpPerCraft(100, 100, 1.2)).toBe(2400);
+    // gap 8: floor(100 / (1 + 0.1·8^1.1)) = floor(50.38) = 50.
+    expect(xpPerCraft(108, 100)).toBe(50);
+    expect(xpPerCraft(100, 100, 1.2)).toBe(120); // 100 × 1.2
     expect(xpPerCraft(50, 60)).toBe(0); // recipe above job level
   });
 });
@@ -57,45 +60,47 @@ describe("planRecipeToTarget", () => {
   const prices: PriceMap = { b: 10 };
 
   it("sums crafts level by level (penalty grows) with cost and shopping", () => {
-    // recipe level 10, 1 ingredient ×2 @10 → unit cost 20.
-    // lvl10: xpc=200, need 200 → 1 craft. lvl11: xpc=round(200×8/9)=178, need 220 → 2.
+    // recipe level 10 (base XP 10), 1 ingredient ×2 @10 → unit cost 20.
+    // lvl10 gap0: xpc=10, need 200 → 20 crafts. lvl11 gap1: xpc=floor(10×.909)=9,
+    // need 220 → 25 crafts. Total 45.
     const plan = planRecipeToTarget(recipe("ring", 10, [["b", 2]]), prices, 10, 12, 1);
-    expect(plan.crafts).toBe(3);
-    expect(plan.cost).toBe(60);
-    expect(plan.costPerXp).toBeCloseTo(60 / xpBetween(10, 12));
+    expect(plan.crafts).toBe(45);
+    expect(plan.cost).toBe(900); // 45 × 20
+    expect(plan.costPerXp).toBeCloseTo(900 / xpBetween(10, 12));
     expect(plan.incomplete).toBe(false);
-    expect(plan.shopping[0]).toMatchObject({ quantity: 6, subtotal: 60 });
+    expect(plan.shopping[0]).toMatchObject({ quantity: 90, subtotal: 900 });
   });
 
   it("flags incomplete when a price is missing", () => {
     const plan = planRecipeToTarget(recipe("ring", 10, [["z", 2]]), prices, 10, 12, 1);
     expect(plan.incomplete).toBe(true);
     expect(plan.cost).toBeUndefined();
-    expect(plan.crafts).toBe(3); // crafts don't depend on price
+    expect(plan.crafts).toBe(45); // crafts don't depend on price
   });
 
   it("subtracts resale revenue (net of tax) to get net cost", () => {
-    // recipe level 1, 1× "a" @10; result "res-R" sells for 30.
-    // 1→3: lvl1 1 craft, lvl2 ceil(40/18)=3 → 4 crafts. cost = 4×10 = 40.
+    // recipe level 1 (base XP 1), 1× "a" @10; result "res-R" sells for 30.
+    // 1→3: lvl1 gap0 xpc=1, need 20 → 20 crafts; lvl2 gap1 xpc=1, need 40 → 40.
+    // Total 60 crafts. cost = 60×10 = 600.
     const r = recipe("R", 1, [["a", 1]]);
     const withPrices = { a: 10, "res-R": 30 };
 
     const noTax = planRecipeToTarget(r, withPrices, 1, 3, 1, 0);
-    expect(noTax.crafts).toBe(4);
-    expect(noTax.cost).toBe(40);
-    expect(noTax.revenue).toBe(120); // 30 × 4
-    expect(noTax.netCost).toBe(-80); // profit while leveling
+    expect(noTax.crafts).toBe(60);
+    expect(noTax.cost).toBe(600);
+    expect(noTax.revenue).toBe(1800); // 30 × 60
+    expect(noTax.netCost).toBe(-1200); // profit while leveling
     expect(noTax.resultPriced).toBe(true);
 
     const taxed = planRecipeToTarget(r, withPrices, 1, 3, 1, 0.5);
-    expect(taxed.revenue).toBe(60); // 30 × 0.5 × 4
-    expect(taxed.netCost).toBe(-20);
+    expect(taxed.revenue).toBe(900); // 30 × 0.5 × 60
+    expect(taxed.netCost).toBe(-300);
   });
 
-  it("matches the DofusDB reference for a level-1 recipe 1→20 (523) closely", () => {
-    // Ankama's exact ratio table + floored XP gives 528 vs DofusDB's 523 (~1%).
-    const plan = planRecipeToTarget(recipe("lvl1", 1, [["b", 1]]), prices, 1, 20, 1);
-    expect(plan.crafts).toBe(528);
+  it("matches the DofusDB reference exactly: a level-5 recipe 5→10 needs 199 crafts", () => {
+    // Confirmed in-game: base XP = recipe level, penalty 1/(1+0.1·gap^1.1).
+    const plan = planRecipeToTarget(recipe("lvl5", 5, [["b", 1]]), prices, 5, 10, 1);
+    expect(plan.crafts).toBe(199);
   });
 });
 
