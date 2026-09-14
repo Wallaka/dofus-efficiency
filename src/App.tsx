@@ -3,6 +3,7 @@ import { CraftPage } from "./pages/CraftPage";
 import { CraftListPage } from "./pages/CraftListPage";
 import { EleveurPage } from "./pages/EleveurPage";
 import { AvisPage } from "./pages/AvisPage";
+import { QuestsPage } from "./pages/QuestsPage";
 import { PricesPage } from "./pages/PricesPage";
 import { TrackedItemsPage } from "./pages/TrackedItemsPage";
 
@@ -18,6 +19,7 @@ export function App() {
           <NavLink to="/craft">Craft</NavLink>
           <NavLink to="/eleveur">Éleveur</NavLink>
           <NavLink to="/avis">Avis de recherche</NavLink>
+          <NavLink to="/quetes">Quêtes</NavLink>
           <NavLink to="/suivis">Objets suivis</NavLink>
           <NavLink to="/prix">Prix</NavLink>
         </nav>
@@ -28,6 +30,7 @@ export function App() {
         <Route path="/craft" element={<CraftListPage />} />
         <Route path="/eleveur" element={<EleveurPage />} />
         <Route path="/avis" element={<AvisPage />} />
+        <Route path="/quetes" element={<QuestsPage />} />
         <Route path="/suivis" element={<TrackedItemsPage />} />
         <Route path="/prix" element={<PricesPage />} />
       </Routes>

@@ -2327,3 +2327,162 @@ td.negative {
     grid-column: 2;
   }
 }
+
+/* Quêtes (daily/weekly routine) page */
+.quests-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.quest-add {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.quest-add-name {
+  flex: 2 1 180px;
+}
+.quest-add-url {
+  flex: 3 1 220px;
+}
+.quest-add-kamas {
+  width: 8rem;
+}
+.quest-add input,
+.quest-add select {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+  color: inherit;
+  font: inherit;
+}
+
+.quests-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.quests-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.quests-section-head h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+.quests-section-total {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.quest-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.quest-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: var(--num-bg);
+}
+
+.quest-card-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.quest-name {
+  font-weight: 600;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.quest-name a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.quest-name a:hover {
+  text-decoration: underline;
+}
+.quest-kamas {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.quest-kamas input {
+  width: 7rem;
+  padding: 4px 8px;
+  text-align: right;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+  color: inherit;
+  font: inherit;
+}
+.quest-del {
+  padding: 2px 8px;
+}
+
+.quest-rewards {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0 0;
+}
+.quest-rewards th,
+.quest-rewards td {
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+  vertical-align: middle;
+}
+.quest-rewards th {
+  color: var(--muted);
+  font-weight: 500;
+  text-align: left;
+}
+.quest-qty {
+  width: 4.5rem;
+}
+.quest-price {
+  width: 7rem;
+}
+.quest-qty,
+.quest-price {
+  padding: 3px 6px;
+  text-align: right;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--panel);
+  color: inherit;
+  font: inherit;
+}
+
+.quest-add-reward {
+  margin-top: 10px;
+  max-width: 360px;
+}
+
+.quest-total {
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+.quest-missing {
+  font-size: 0.8rem;
+}
