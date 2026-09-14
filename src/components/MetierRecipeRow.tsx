@@ -29,22 +29,18 @@ export function MetierRecipeRow({
 
   return (
     <li className={open ? "metier-ritem open" : "metier-ritem"}>
-      <div
+      <button
+        type="button"
         className={`metier-rrow${selected ? " selected" : ""}${locked ? " metier-rrow--locked" : ""}`}
-        onClick={onSelect}
+        aria-expanded={open}
+        onClick={() => {
+          onSelect();
+          setOpen((o) => !o);
+        }}
       >
-        <button
-          type="button"
-          className="metier-rchevron"
-          aria-expanded={open}
-          aria-label={open ? "Masquer les prix" : "Voir / éditer les prix"}
-          onClick={(e) => {
-            e.stopPropagation();
-            setOpen((o) => !o);
-          }}
-        >
+        <span className="metier-rchevron" aria-hidden>
           ›
-        </button>
+        </span>
         <span className="metier-recipe">
           <span className="metier-thumb">
             {recipe.result.img ? (
@@ -77,7 +73,7 @@ export function MetierRecipeRow({
             {costPerXp != null ? `${formatKamas(costPerXp)}/xp` : "—"}
           </span>
         </span>
-      </div>
+      </button>
 
       {open && (
         <div className="metier-rprices">
