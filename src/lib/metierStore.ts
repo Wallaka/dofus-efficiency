@@ -9,7 +9,6 @@ import type { JobOption } from "../data/dofusApi";
  */
 
 const INPUT_KEY = "dofus-efficiency:metierInput:v1";
-const CURVE_KEY = "dofus-efficiency:metierXpCurve:v1";
 const JOBS_KEY = "dofus-efficiency:metierJobs:v1";
 const RECIPES_PREFIX = "dofus-efficiency:metierRecipes:v1:";
 
@@ -43,25 +42,6 @@ export function loadMetierInput(): MetierInput {
 export function saveMetierInput(input: MetierInput): void {
   try {
     localStorage.setItem(INPUT_KEY, JSON.stringify(input));
-  } catch {
-    // non-fatal
-  }
-}
-
-export function loadXpCurve(): number[] | null {
-  try {
-    const raw = localStorage.getItem(CURVE_KEY);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) && parsed.length > 1 ? (parsed as number[]) : null;
-  } catch {
-    return null;
-  }
-}
-
-export function saveXpCurve(curve: number[]): void {
-  try {
-    localStorage.setItem(CURVE_KEY, JSON.stringify(curve));
   } catch {
     // non-fatal
   }

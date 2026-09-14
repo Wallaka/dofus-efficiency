@@ -1,21 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import type { Item, PriceMap } from "../types";
-import {
-  fetchJobs,
-  fetchJobRecipes,
-  fetchJobXpCurve,
-  type JobOption,
-} from "../data/dofusApi";
-import {
-  buildLevelingPlan,
-  rankRecipes,
-  type MetierRecipe,
-} from "../lib/metierXp";
+import { fetchJobs, fetchJobRecipes, type JobOption } from "../data/dofusApi";
+import { buildLevelingPlan, type MetierRecipe } from "../lib/metierXp";
 import {
   loadMetierInput,
   saveMetierInput,
-  loadXpCurve,
-  saveXpCurve,
   loadJobs,
   saveJobs,
   loadJobRecipes,
@@ -35,15 +24,17 @@ const MAX_LEVEL = 200;
 /** Compact kamas for the big tiles, e.g. 5 430 000 -> "5,4 M". */
 function short(value: number | undefined): string {
   if (value == null) return "—";
-  if (value >= 1_000_000) return `${(value / 1_000_000).toLocaleString("fr-FR", { maximumFractionDigits: 1 })} M`;
-  if (value >= 1_000) return `${(value / 1_000).toLocaleString("fr-FR", { maximumFractionDigits: 0 })} k`;
+  if (value >= 1_000_000)
+    return `${(value / 1_000_000).toLocaleString("fr-FR", { maximumFractionDigits: 1 })} M`;
+  if (value >= 1_000)
+    return `${(value / 1_000).toLocaleString("fr-FR", { maximumFractionDigits: 0 })} k`;
   return Math.round(value).toLocaleString("fr-FR");
 }
 
 /**
  * The Métiers page: pick a job + current/target level and get the cheapest
  * leveling path (crafts, cost, shopping list), priced from the shared store.
- * XP is an estimate (see metierXp.ts); the cost side is exact.
+ * XP comes from the Dofus level formula (see metierXp.ts); the cost is exact.
  */
 export function MetierPage() {
   const [input, setInput] = useState<MetierInput>(loadMetierInput);
@@ -52,15 +43,8 @@ export function MetierPage() {
     useState<PriceEntryMap>(loadPriceEntries);
 
   const [jobs, setJobs] = useState<JobOption[]>(() => loadJobs() ?? []);
-  const [curve, setCurve] = useState<number[]>(() => loadXpCurve() ?? []);
   const [recipes, setRecipes] = useState<MetierRecipe[]>([]);
-
   const [recipesStatus, setRecipesStatus] = useState<Load>("idle");
-  // Curve starts "loading" until the initial fetch resolves (unless cached), so
-  // the fallback list doesn't flash before the curve has had a chance to arrive.
-  const [curveStatus, setCurveStatus] = useState<Load>(() =>
-    (loadXpCurve()?.length ?? 0) > 1 ? "idle" : "loading",
-  );
   const [error, setError] = useState<string>();
 
   function patchInput(patch: Partial<MetierInput>) {
@@ -71,31 +55,16 @@ export function MetierPage() {
     });
   }
 
-  // Jobs list + XP curve: fetched once, then cached (both are static-ish).
+  // Jobs list: fetched once, then cached.
   useEffect(() => {
+    if (jobs.length > 0) return;
     const ctrl = new AbortController();
-    if (jobs.length === 0) {
-      fetchJobs(ctrl.signal)
-        .then((j) => {
-          setJobs(j);
-          saveJobs(j);
-        })
-        .catch(() => {});
-    }
-    if (curve.length === 0) {
-      setCurveStatus("loading");
-      fetchJobXpCurve(ctrl.signal)
-        .then((c) => {
-          if (c.length > 1) {
-            setCurve(c);
-            saveXpCurve(c);
-          }
-          setCurveStatus("idle");
-        })
-        .catch(() => {
-          if (!ctrl.signal.aborted) setCurveStatus("error");
-        });
-    }
+    fetchJobs(ctrl.signal)
+      .then((j) => {
+        setJobs(j);
+        saveJobs(j);
+      })
+      .catch(() => {});
     return () => ctrl.abort();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -110,9 +79,11 @@ export function MetierPage() {
     const cached = loadJobRecipes(jobId);
     if (cached) {
       setRecipes(cached);
+      setRecipesStatus("idle");
       return;
     }
     const ctrl = new AbortController();
+    setRecipes([]);
     setRecipesStatus("loading");
     setError(undefined);
     fetchJobRecipes(jobId, ctrl.signal)
@@ -151,25 +122,17 @@ export function MetierPage() {
   }
 
   const coef = (input.coefPercent || 100) / 100;
-  const haveCurve = curve.length > 1;
 
   const plan = useMemo(() => {
-    if (!haveCurve || recipes.length === 0) return null;
+    if (recipes.length === 0 || input.current >= input.target) return null;
     return buildLevelingPlan(
       recipes,
       prices,
-      curve,
       input.current,
       input.target,
       coef,
     );
-  }, [haveCurve, recipes, prices, curve, input.current, input.target, coef]);
-
-  // Fallback when the XP curve is unavailable: rank the best recipes right now.
-  const ranked = useMemo(() => {
-    if (haveCurve || recipes.length === 0) return [];
-    return rankRecipes(recipes, prices, input.current, coef).slice(0, 20);
-  }, [haveCurve, recipes, prices, input.current, coef]);
+  }, [recipes, prices, input.current, input.target, coef]);
 
   const pct = (lvl: number) => `${Math.min(100, (lvl / MAX_LEVEL) * 100)}%`;
 
@@ -180,8 +143,9 @@ export function MetierPage() {
         <p className="hint">
           Choisissez un métier et vos niveaux : on calcule le chemin de leveling
           le moins cher, avec le nombre de crafts, la liste de courses et le coût
-          — d'après vos prix suivis (OCR / manuels). L'XP par craft est une
-          estimation ; le coût, lui, vient de vos vrais prix.
+          — d'après vos prix suivis (OCR / manuels). L'XP par craft suit la
+          formule Dofus (20 × niveau de la recette, moins un malus d'écart de
+          niveau) ; le coût, lui, vient de vos vrais prix.
         </p>
 
         <div className="metier-controls">
@@ -275,22 +239,22 @@ export function MetierPage() {
       {input.jobId == null && (
         <p className="hint">Choisissez un métier pour voir le chemin de leveling.</p>
       )}
-      {(recipesStatus === "loading" ||
-        (input.jobId != null && curveStatus === "loading")) && (
+      {recipesStatus === "loading" && (
         <div className="metier-loading">
           <span className="metier-spinner" aria-hidden />
-          <span>
-            {recipesStatus === "loading"
-              ? "Chargement des recettes du métier…"
-              : "Chargement de la courbe d'XP…"}
-          </span>
+          <span>Chargement des recettes du métier…</span>
         </div>
       )}
       {recipesStatus === "error" && (
         <p className="hint error-text">Erreur : {error}</p>
       )}
+      {recipesStatus === "idle" &&
+        input.jobId != null &&
+        input.current >= input.target && (
+          <p className="hint">Le niveau cible doit être supérieur au niveau actuel.</p>
+        )}
 
-      {recipesStatus !== "loading" && plan && plan.steps.length > 0 && (
+      {plan && plan.steps.length > 0 && (
         <>
           <div className="metier-tiles">
             <div className="metier-tile">
@@ -352,8 +316,8 @@ export function MetierPage() {
             </ul>
             {plan.stuckAtLevel != null && (
               <p className="hint">
-                Aucune recette connue ne donne d'XP au niveau {plan.stuckAtLevel} ;
-                le chemin s'arrête là.
+                Aucune recette de ce métier n'est craftable au niveau{" "}
+                {plan.stuckAtLevel} ; le chemin s'arrête là.
               </p>
             )}
           </section>
@@ -400,52 +364,13 @@ export function MetierPage() {
         </>
       )}
 
-      {/* Fallback: the curve couldn't load, so show the cheapest recipes now. */}
-      {curveStatus !== "loading" &&
-        recipesStatus !== "loading" &&
-        !haveCurve &&
-        recipes.length > 0 && (
-        <section className="panel">
-          <p className="hint">
-            Courbe d'XP indisponible pour l'instant — impossible d'estimer le
-            nombre de crafts. Voici les recettes les moins chères à crafter au
-            niveau {input.current} (kamas par XP).
-          </p>
-          <ul className="metier-path">
-            <li className="metier-head metier-head-rank" aria-hidden>
-              <span>Recette</span>
-              <span className="num">XP/craft</span>
-              <span className="num">Coût/craft</span>
-              <span className="num">k/XP</span>
-            </li>
-            {ranked.map((r) => (
-              <li key={r.recipe.recipeId} className="metier-rank-row">
-                <span className="metier-recipe">
-                  <span className="metier-thumb">
-                    {r.recipe.result.img ? (
-                      <img src={r.recipe.result.img} alt="" />
-                    ) : (
-                      <span aria-hidden>⚒️</span>
-                    )}
-                  </span>
-                  <span className="metier-recipe-text">
-                    <span className="metier-recipe-name">{r.recipe.result.name}</span>
-                    <span className="metier-recipe-meta">
-                      Niv. {r.recipe.resultLevel}
-                      <span className="metier-slots">{r.recipe.slots} cases</span>
-                    </span>
-                  </span>
-                </span>
-                <span className="num">{r.xpPerCraft}</span>
-                <span className="num">{r.cost != null ? formatKamas(r.cost) : "—"}</span>
-                <span className="num metier-kxp">
-                  {r.costPerXp != null ? `${formatKamas(r.costPerXp)}/xp` : "—"}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+      {recipesStatus === "idle" &&
+        input.jobId != null &&
+        recipes.length > 0 &&
+        plan != null &&
+        plan.steps.length === 0 && (
+          <p className="hint">Aucune recette exploitable pour ce métier.</p>
+        )}
     </main>
   );
 }
