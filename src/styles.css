@@ -2369,13 +2369,34 @@ td.negative {
   align-items: center;
 }
 
+.quests-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0 10px;
+}
+
+.quests-chars,
 .quests-sort {
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-left: auto;
   font-size: 0.82rem;
   color: var(--muted);
+}
+.quests-sort {
+  margin-left: auto;
+}
+.quests-chars input {
+  width: 4rem;
+  padding: 4px 8px;
+  text-align: right;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+  color: inherit;
+  font: inherit;
 }
 .quests-sort select {
   padding: 4px 8px;
@@ -2384,6 +2405,9 @@ td.negative {
   background: var(--num-bg);
   color: inherit;
   font: inherit;
+}
+.quests-chars-note {
+  margin: 8px 0 0;
 }
 
 .quests-section-head {

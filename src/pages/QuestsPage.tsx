@@ -8,6 +8,10 @@ import {
   sortQuests,
   importCatalog,
   newQuestId,
+  loadCharacterCount,
+  saveCharacterCount,
+  clampCharacters,
+  MAX_CHARACTERS,
   type Quest,
   type QuestPeriod,
   type QuestSort,
@@ -112,6 +116,12 @@ export function QuestsPage() {
 
   const [sort, setSort] = useState<QuestSort>("manual");
 
+  // Quest rewards are per character, so the routine is worth N× on N characters.
+  const [characters, setCharacters] = useState<number>(loadCharacterCount);
+  useEffect(() => {
+    saveCharacterCount(characters);
+  }, [characters]);
+
   const daily = useMemo(() => quests.filter((q) => q.period === "daily"), [quests]);
   const weekly = useMemo(() => quests.filter((q) => q.period === "weekly"), [quests]);
 
@@ -125,11 +135,14 @@ export function QuestsPage() {
     [weekly, prices, sort],
   );
 
-  // Variant-aware totals: quests sharing a variantGroup count only once.
-  const dailyTotal = periodTotal(daily, prices);
-  const weeklyTotal = periodTotal(weekly, prices);
-  // A full week's routine: every daily done 7×, plus the weeklies once.
-  const weeklyRoutine = dailyTotal * 7 + weeklyTotal;
+  // Per-character, variant-aware totals: quests sharing a variantGroup count once.
+  const dailyPerChar = periodTotal(daily, prices);
+  const weeklyPerChar = periodTotal(weekly, prices);
+  // Scaled to the whole account (N characters).
+  const dailyTotal = dailyPerChar * characters;
+  const weeklyTotal = weeklyPerChar * characters;
+  // A full week's routine: every daily done 7×, plus the weeklies once, × N characters.
+  const weeklyRoutine = (dailyPerChar * 7 + weeklyPerChar) * characters;
 
   function onImport() {
     setQuests((qs) => {
@@ -203,35 +216,61 @@ export function QuestsPage() {
         </div>
 
         {quests.length > 0 && (
-          <div className="quests-summary">
-            <span className="badge">
-              Quotidiennes&nbsp;: {formatKamas(dailyTotal)} / jour
-            </span>
-            <span className="badge">
-              Hebdomadaires&nbsp;: {formatKamas(weeklyTotal)} / semaine
-            </span>
-            <span className="badge badge-fresh">
-              Routine&nbsp;: ≈ {formatKamas(weeklyRoutine)} / semaine
-            </span>
-            <label className="quests-sort">
-              Trier&nbsp;:
-              <select
-                value={sort}
-                onChange={(e) => setSort(e.target.value as QuestSort)}
-                aria-label="Trier les quêtes"
-              >
-                <option value="manual">Ordre d'ajout</option>
-                <option value="value">Rentabilité (décroissant)</option>
-              </select>
-            </label>
-          </div>
+          <>
+            <div className="quests-controls">
+              <label className="quests-chars">
+                Personnages&nbsp;:
+                <input
+                  type="number"
+                  min={1}
+                  max={MAX_CHARACTERS}
+                  inputMode="numeric"
+                  value={characters}
+                  onChange={(e) =>
+                    setCharacters(clampCharacters(Number(e.target.value)))
+                  }
+                  aria-label="Nombre de personnages"
+                />
+              </label>
+              <label className="quests-sort">
+                Trier&nbsp;:
+                <select
+                  value={sort}
+                  onChange={(e) => setSort(e.target.value as QuestSort)}
+                  aria-label="Trier les quêtes"
+                >
+                  <option value="manual">Ordre d'ajout</option>
+                  <option value="value">Rentabilité (décroissant)</option>
+                </select>
+              </label>
+            </div>
+
+            <div className="quests-summary">
+              <span className="badge">
+                Quotidiennes&nbsp;: {formatKamas(dailyTotal)} / jour
+              </span>
+              <span className="badge">
+                Hebdomadaires&nbsp;: {formatKamas(weeklyTotal)} / semaine
+              </span>
+              <span className="badge badge-fresh">
+                Routine&nbsp;: ≈ {formatKamas(weeklyRoutine)} / semaine
+              </span>
+            </div>
+            {characters > 1 && (
+              <p className="hint quests-chars-note">
+                Totaux pour {characters} personnages&nbsp;: récompenses par
+                personne × {characters}. Les valeurs par quête ci-dessous restent
+                pour un personnage.
+              </p>
+            )}
+          </>
         )}
       </section>
 
       <QuestSection
         title="Quotidiennes"
         list={dailySorted}
-        total={dailyTotal}
+        total={dailyPerChar}
         prices={prices}
         entries={entries}
         onPriceChange={onPriceChange}
@@ -244,7 +283,7 @@ export function QuestsPage() {
       <QuestSection
         title="Hebdomadaires"
         list={weeklySorted}
-        total={weeklyTotal}
+        total={weeklyPerChar}
         prices={prices}
         entries={entries}
         onPriceChange={onPriceChange}

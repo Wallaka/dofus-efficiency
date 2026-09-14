@@ -4,6 +4,8 @@ import {
   periodTotal,
   sortQuests,
   importCatalog,
+  clampCharacters,
+  MAX_CHARACTERS,
   type Quest,
 } from "../quests";
 import type { PriceMap } from "../../types";
@@ -106,6 +108,26 @@ describe("sortQuests", () => {
     const list = [a, b, c];
     sortQuests(list, { "10": 500 }, "value");
     expect(list.map((q) => q.id)).toEqual(["a", "b", "c"]);
+  });
+});
+
+describe("clampCharacters", () => {
+  it("keeps whole counts within range", () => {
+    expect(clampCharacters(1)).toBe(1);
+    expect(clampCharacters(3)).toBe(3);
+    expect(clampCharacters(MAX_CHARACTERS)).toBe(MAX_CHARACTERS);
+  });
+
+  it("floors below 1 to 1 and caps above the max", () => {
+    expect(clampCharacters(0)).toBe(1);
+    expect(clampCharacters(-5)).toBe(1);
+    expect(clampCharacters(MAX_CHARACTERS + 10)).toBe(MAX_CHARACTERS);
+  });
+
+  it("rounds fractions and defaults NaN to 1", () => {
+    expect(clampCharacters(2.4)).toBe(2);
+    expect(clampCharacters(2.6)).toBe(3);
+    expect(clampCharacters(Number.NaN)).toBe(1);
   });
 });
 
