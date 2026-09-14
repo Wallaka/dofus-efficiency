@@ -71,6 +71,12 @@ describe("planRecipeToTarget", () => {
     expect(plan.cost).toBeUndefined();
     expect(plan.crafts).toBe(3); // crafts don't depend on price
   });
+
+  it("matches the DofusDB reference for a level-1 recipe 1→20 (523) closely", () => {
+    // Ankama's exact ratio table + floored XP gives 528 vs DofusDB's 523 (~1%).
+    const plan = planRecipeToTarget(recipe("lvl1", 1, [["b", 1]]), prices, 1, 20, 1);
+    expect(plan.crafts).toBe(528);
+  });
 });
 
 describe("planRecipesToTarget", () => {
