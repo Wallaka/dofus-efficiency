@@ -26,6 +26,8 @@ interface Props {
   avis: AvisReward;
   carte: AvisSlot;
   resource: AvisSlot;
+  /** Effective aviton count to show (already halved when done via chasse alone). */
+  avitons?: number;
   /** Value of this avis's avitons (avitons × per-aviton rate); 0 when unset. */
   avitonValue?: number;
   /** Flat fee paid to join this hunt's "spot" (per avis). */
@@ -243,6 +245,7 @@ export function AvisCard({
   avis,
   carte,
   resource,
+  avitons = avis.avitons,
   avitonValue = 0,
   participationCost = 0,
   onParticipationChange,
@@ -282,7 +285,7 @@ export function AvisCard({
             {avis.level != null && (
               <span className="avis-level">Niv. {avis.level}</span>
             )}
-            <span className="avis-avitons">{avis.avitons} avitons</span>
+            <span className="avis-avitons">{avitons} avitons</span>
           </div>
         </div>
       </header>
@@ -304,7 +307,7 @@ export function AvisCard({
           <AvisLine
             variant="reward"
             label="Avitons"
-            name={`${avis.avitons} avitons`}
+            name={`${avitons} avitons`}
             placeholder="🪙"
             price={avitonValue}
           />
