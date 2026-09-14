@@ -1,26 +1,50 @@
+import { useState } from "react";
 import type { RecipePlan } from "../lib/metierXp";
+import type { Item, PriceMap } from "../types";
 import { formatKamas } from "../lib/format";
+import { PriceInput } from "./PriceInput";
 
 interface Props {
   plan: RecipePlan;
   selected: boolean;
+  prices: PriceMap;
   onSelect: () => void;
+  onPriceChange: (item: Item, value: number | null) => void;
 }
 
-/** One recipe with its crafts-to-target / cost, selectable to plan or price it. */
-export function MetierRecipeRow({ plan, selected, onSelect }: Props) {
+/**
+ * One recipe row: click it to plan with it; click the chevron to expand its
+ * ingredients and enter/edit their prices inline (so any "prix ?" recipe can be
+ * priced right here). Prices write to the shared store.
+ */
+export function MetierRecipeRow({
+  plan,
+  selected,
+  prices,
+  onSelect,
+  onPriceChange,
+}: Props) {
+  const [open, setOpen] = useState(false);
   const { recipe, xpPerCraft, crafts, cost, costPerXp, locked, priced } = plan;
+
   return (
-    <li>
-      <button
-        type="button"
+    <li className={open ? "metier-ritem open" : "metier-ritem"}>
+      <div
         className={`metier-rrow${selected ? " selected" : ""}${locked ? " metier-rrow--locked" : ""}`}
-        aria-pressed={selected}
         onClick={onSelect}
       >
-        <span className="metier-radio" aria-hidden>
-          {selected ? "●" : "○"}
-        </span>
+        <button
+          type="button"
+          className="metier-rchevron"
+          aria-expanded={open}
+          aria-label={open ? "Masquer les prix" : "Voir / éditer les prix"}
+          onClick={(e) => {
+            e.stopPropagation();
+            setOpen((o) => !o);
+          }}
+        >
+          ›
+        </button>
         <span className="metier-recipe">
           <span className="metier-thumb">
             {recipe.result.img ? (
@@ -53,7 +77,44 @@ export function MetierRecipeRow({ plan, selected, onSelect }: Props) {
             {costPerXp != null ? `${formatKamas(costPerXp)}/xp` : "—"}
           </span>
         </span>
-      </button>
+      </div>
+
+      {open && (
+        <div className="metier-rprices">
+          <div className="metier-pcap">Prix des ingrédients (par craft)</div>
+          {recipe.ingredients.map((ing) => {
+            const unit = prices[ing.item.id];
+            return (
+              <div className="metier-ing" key={ing.item.id}>
+                <span className="metier-ing-id">
+                  <span className="metier-ing-icon">
+                    {ing.item.img ? (
+                      <img src={ing.item.img} alt="" />
+                    ) : (
+                      <span aria-hidden>▪</span>
+                    )}
+                  </span>
+                  <span className="metier-ing-name" title={ing.item.name}>
+                    {ing.item.name}
+                  </span>
+                </span>
+                <span className="metier-ing-qty">×{ing.quantity}</span>
+                <PriceInput
+                  value={unit}
+                  needs={unit == null}
+                  ariaLabel={`Prix unitaire de ${ing.item.name}`}
+                  onCommit={(v) => onPriceChange(ing.item, v)}
+                />
+                <span
+                  className={`metier-ing-total${unit == null ? " missing" : ""}`}
+                >
+                  {unit != null ? formatKamas(unit * ing.quantity) : "prix ?"}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </li>
   );
 }
