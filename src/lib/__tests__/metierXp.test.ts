@@ -4,8 +4,9 @@ import {
   cumulativeXp,
   craftPenalty,
   xpPerCraft,
-  rankRecipes,
-  buildLevelingPlan,
+  xpBetween,
+  planRecipeToTarget,
+  planRecipesToTarget,
   type MetierRecipe,
 } from "../metierXp";
 import type { PriceMap } from "../../types";
@@ -50,66 +51,39 @@ describe("XP formula", () => {
   });
 });
 
-describe("rankRecipes", () => {
-  const prices: PriceMap = { a: 100, b: 10 };
-  it("orders by cost-per-XP, drops over-level recipes, unpriced last", () => {
-    const recipes = [
-      recipe("cheap", 50, [["b", 5]]), // cost 50
-      recipe("dear", 50, [["a", 5]]), // cost 500
-      recipe("noprice", 50, [["z", 1]]), // unknown cost
-      recipe("locked", 80, [["b", 1]]), // above level 60 → excluded
-    ];
-    const r = rankRecipes(recipes, prices, 60, 1);
-    expect(r.map((x) => x.recipe.recipeId)).toEqual(["cheap", "dear", "noprice"]);
-    expect(r[0].costPerXp).toBeLessThan(r[1].costPerXp!);
-  });
-});
-
-describe("buildLevelingPlan", () => {
+describe("planRecipeToTarget", () => {
   const prices: PriceMap = { b: 10 };
 
-  it("computes crafts, cost, XP and shopping over a merged palier", () => {
+  it("sums crafts level by level (penalty grows) with cost and shopping", () => {
     // recipe level 10, 1 ingredient ×2 @10 → unit cost 20.
     // lvl10: xpc=200, need 200 → 1 craft. lvl11: xpc=round(200×8/9)=178, need 220 → 2.
-    const plan = buildLevelingPlan(
-      [recipe("ring", 10, [["b", 2]])],
-      prices,
-      10,
-      12,
-      1,
-    );
-    expect(plan.steps).toHaveLength(1);
-    const step = plan.steps[0];
-    expect(step.fromLevel).toBe(10);
-    expect(step.toLevel).toBe(12);
-    expect(step.crafts).toBe(3);
-    expect(step.cost).toBe(60);
-    expect(plan.totalXp).toBe(420); // 200 + 220
+    const plan = planRecipeToTarget(recipe("ring", 10, [["b", 2]]), prices, 10, 12, 1);
+    expect(plan.crafts).toBe(3);
+    expect(plan.cost).toBe(60);
+    expect(plan.costPerXp).toBeCloseTo(60 / xpBetween(10, 12));
     expect(plan.incomplete).toBe(false);
     expect(plan.shopping[0]).toMatchObject({ quantity: 6, subtotal: 60 });
   });
 
-  it("flags incomplete totals when a price is missing", () => {
-    const plan = buildLevelingPlan(
-      [recipe("ring", 10, [["z", 2]])],
-      prices,
-      10,
-      12,
-      1,
-    );
+  it("flags incomplete when a price is missing", () => {
+    const plan = planRecipeToTarget(recipe("ring", 10, [["z", 2]]), prices, 10, 12, 1);
     expect(plan.incomplete).toBe(true);
-    expect(plan.totalCost).toBeUndefined();
+    expect(plan.cost).toBeUndefined();
+    expect(plan.crafts).toBe(3); // crafts don't depend on price
   });
+});
 
-  it("gets stuck when no recipe is craftable at a level", () => {
-    const plan = buildLevelingPlan(
-      [recipe("high", 50, [["b", 1]])],
-      prices,
-      10,
-      20,
-      1,
-    );
-    expect(plan.stuckAtLevel).toBe(10);
-    expect(plan.steps).toHaveLength(0);
+describe("planRecipesToTarget", () => {
+  const prices: PriceMap = { a: 100, b: 10 };
+  it("ranks craftable recipes cheapest-first, drops over-level, unpriced last", () => {
+    const recipes = [
+      recipe("cheap", 40, [["b", 5]]), // cost 50
+      recipe("dear", 40, [["a", 5]]), // cost 500
+      recipe("noprice", 40, [["z", 1]]), // unknown cost → last
+      recipe("locked", 80, [["b", 1]]), // above level 60 → excluded
+    ];
+    const plans = planRecipesToTarget(recipes, prices, 60, 80, 1);
+    expect(plans.map((p) => p.recipe.recipeId)).toEqual(["cheap", "dear", "noprice"]);
+    expect(plans[0].cost!).toBeLessThan(plans[1].cost!);
   });
 });

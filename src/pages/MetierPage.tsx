@@ -1,7 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import type { Item, PriceMap } from "../types";
 import { fetchJobs, fetchJobRecipes, type JobOption } from "../data/dofusApi";
-import { buildLevelingPlan, type MetierRecipe } from "../lib/metierXp";
+import {
+  planRecipesToTarget,
+  xpBetween,
+  type MetierRecipe,
+} from "../lib/metierXp";
 import {
   loadMetierInput,
   saveMetierInput,
@@ -12,10 +16,9 @@ import {
   type MetierInput,
 } from "../lib/metierStore";
 import { loadPrices } from "../lib/storage";
-import { loadPriceEntries, type PriceEntryMap } from "../lib/priceStore";
 import { setManualPrice, clearPrice } from "../lib/trackedPrices";
 import { formatKamas } from "../lib/format";
-import { MetierStepRow } from "../components/MetierStepRow";
+import { MetierRecipeRow } from "../components/MetierRecipeRow";
 import { PriceInput } from "../components/PriceInput";
 
 type Load = "idle" | "loading" | "error";
@@ -28,20 +31,20 @@ function count(value: number | undefined): string {
 }
 
 /**
- * The Métiers page: pick a job + current/target level and get the cheapest
- * leveling path (crafts, cost, shopping list), priced from the shared store.
- * XP comes from the Dofus level formula (see metierXp.ts); the cost is exact.
+ * The Métiers page: pick a job + current/target level, then choose a recipe to
+ * see how many crafts (and how much kamas) it takes to reach the target. Recipes
+ * are ranked cheapest-first; the top one is picked by default. XP comes from the
+ * Dofus level formula (see metierXp.ts); the cost is exact, from the price store.
  */
 export function MetierPage() {
   const [input, setInput] = useState<MetierInput>(loadMetierInput);
   const [prices, setPrices] = useState<PriceMap>(() => loadPrices() ?? {});
-  const [priceEntries, setPriceEntries] =
-    useState<PriceEntryMap>(loadPriceEntries);
 
   const [jobs, setJobs] = useState<JobOption[]>(() => loadJobs() ?? []);
   const [recipes, setRecipes] = useState<MetierRecipe[]>([]);
   const [recipesStatus, setRecipesStatus] = useState<Load>("idle");
   const [error, setError] = useState<string>();
+  const [selectedId, setSelectedId] = useState<string>();
 
   function patchInput(patch: Partial<MetierInput>) {
     setInput((prev) => {
@@ -105,30 +108,24 @@ export function MetierPage() {
         delete next[item.id];
         return next;
       });
-      setPriceEntries((e) => {
-        const next = { ...e };
-        delete next[item.id];
-        return next;
-      });
       return;
     }
-    const entry = setManualPrice(item, value);
+    setManualPrice(item, value);
     setPrices((p) => ({ ...p, [item.id]: value }));
-    setPriceEntries((e) => ({ ...e, [item.id]: entry }));
   }
 
   const coef = (input.coefPercent || 100) / 100;
+  const validRange = input.current < input.target;
 
-  const plan = useMemo(() => {
-    if (recipes.length === 0 || input.current >= input.target) return null;
-    return buildLevelingPlan(
-      recipes,
-      prices,
-      input.current,
-      input.target,
-      coef,
-    );
-  }, [recipes, prices, input.current, input.target, coef]);
+  const plans = useMemo(() => {
+    if (recipes.length === 0 || !validRange) return [];
+    return planRecipesToTarget(recipes, prices, input.current, input.target, coef);
+  }, [recipes, prices, input.current, input.target, coef, validRange]);
+
+  // Selected recipe = the one the user picked if still in the list, else the best.
+  const selected =
+    plans.find((p) => p.recipe.recipeId === selectedId) ?? plans[0];
+  const totalXp = validRange ? xpBetween(input.current, input.target) : 0;
 
   const pct = (lvl: number) => `${Math.min(100, (lvl / MAX_LEVEL) * 100)}%`;
 
@@ -137,11 +134,11 @@ export function MetierPage() {
       <section className="panel">
         <h2>Métiers</h2>
         <p className="hint">
-          Choisissez un métier et vos niveaux : on calcule le chemin de leveling
-          le moins cher, avec le nombre de crafts, la liste de courses et le coût
-          — d'après vos prix suivis (OCR / manuels). L'XP par craft suit la
-          formule Dofus (20 × niveau de la recette, moins un malus d'écart de
-          niveau) ; le coût, lui, vient de vos vrais prix.
+          Choisissez un métier et vos niveaux, puis une recette : on calcule
+          combien de crafts (et combien de kamas) il faut pour atteindre le niveau
+          cible. Les recettes sont triées de la moins chère à la plus chère ; la
+          meilleure est sélectionnée par défaut. Les prix viennent de vos prix
+          suivis (OCR / manuels) ; l'XP suit la formule Dofus.
         </p>
 
         <div className="metier-controls">
@@ -153,6 +150,7 @@ export function MetierPage() {
               onChange={(e) => {
                 const id = e.target.value ? Number(e.target.value) : undefined;
                 const name = jobs.find((j) => j.id === id)?.name;
+                setSelectedId(undefined);
                 patchInput({ jobId: id, jobName: name });
               }}
             >
@@ -233,7 +231,7 @@ export function MetierPage() {
       </section>
 
       {input.jobId == null && (
-        <p className="hint">Choisissez un métier pour voir le chemin de leveling.</p>
+        <p className="hint">Choisissez un métier pour voir les recettes.</p>
       )}
       {recipesStatus === "loading" && (
         <div className="metier-loading">
@@ -244,88 +242,85 @@ export function MetierPage() {
       {recipesStatus === "error" && (
         <p className="hint error-text">Erreur : {error}</p>
       )}
+      {recipesStatus === "idle" && input.jobId != null && !validRange && (
+        <p className="hint">Le niveau cible doit être supérieur au niveau actuel.</p>
+      )}
       {recipesStatus === "idle" &&
         input.jobId != null &&
-        input.current >= input.target && (
-          <p className="hint">Le niveau cible doit être supérieur au niveau actuel.</p>
+        validRange &&
+        recipes.length > 0 &&
+        plans.length === 0 && (
+          <p className="hint">
+            Aucune recette de ce métier n'est craftable au niveau {input.current}.
+          </p>
         )}
 
-      {plan && plan.steps.length > 0 && (
+      {selected && (
         <>
           <div className="metier-tiles">
             <div className="metier-tile">
               <span className="metier-tile-label">Crafts</span>
-              <span className="metier-tile-value">{count(plan.totalCrafts)}</span>
-              <span className="metier-tile-sub">réussis, au total</span>
+              <span className="metier-tile-value">{count(selected.crafts)}</span>
+              <span className="metier-tile-sub">de « {selected.recipe.result.name} »</span>
             </div>
             <div className="metier-tile">
               <span className="metier-tile-label">XP à gagner</span>
-              <span className="metier-tile-value">{count(plan.totalXp)}</span>
+              <span className="metier-tile-value">{count(totalXp)}</span>
               <span className="metier-tile-sub">
                 {input.current} → {input.target}
               </span>
             </div>
             <div className="metier-tile accent">
               <span className="metier-tile-label">Coût total</span>
-              <span className="metier-tile-value">
-                {formatKamas(plan.totalCost)}
-              </span>
+              <span className="metier-tile-value">{formatKamas(selected.cost)}</span>
               <span className="metier-tile-sub">
-                {plan.incomplete ? "partiel (prix manquants)" : "aux prix actuels"}
+                {selected.incomplete ? "partiel (prix manquants)" : "aux prix actuels"}
               </span>
             </div>
             <div className="metier-tile">
               <span className="metier-tile-label">Coût moyen</span>
               <span className="metier-tile-value">
-                {plan.avgCostPerXp != null ? formatKamas(plan.avgCostPerXp) : "—"}
+                {selected.costPerXp != null ? formatKamas(selected.costPerXp) : "—"}
               </span>
               <span className="metier-tile-sub">kamas / XP</span>
             </div>
           </div>
 
           <section>
-            <h3 className="metier-h3">Chemin de leveling</h3>
+            <h3 className="metier-h3">Choisir une recette</h3>
             <p className="hint metier-h3-sub">
-              À chaque palier de niveaux, craftez la recette indiquée le nombre de
-              fois affiché — c'est le plus rentable (kamas/XP) pour aller de{" "}
-              {input.current} à {input.target}. Cliquez une ligne pour la liste de
-              courses de ce palier.
+              Cliquez une recette pour voir combien de crafts et de kamas il faut
+              pour aller de {input.current} à {input.target}. Triées de la moins
+              chère à la plus chère.
             </p>
             <ul className="metier-path">
-              <li className="metier-head" aria-hidden>
+              <li className="metier-head metier-head-rrow" aria-hidden>
                 <span></span>
-                <span>Palier</span>
-                <span>Recette à spammer</span>
+                <span>Recette</span>
                 <span className="num">XP/craft</span>
                 <span className="num">Crafts</span>
                 <span className="num">Coût</span>
                 <span className="num">k/XP</span>
               </li>
-              {plan.steps.map((step) => (
-                <MetierStepRow
-                  key={`${step.fromLevel}-${step.recipe.recipeId}`}
-                  step={step}
-                  entries={priceEntries}
-                  onPriceChange={onPriceChange}
+              {plans.map((plan) => (
+                <MetierRecipeRow
+                  key={plan.recipe.recipeId}
+                  plan={plan}
+                  selected={plan.recipe.recipeId === selected.recipe.recipeId}
+                  onSelect={() => setSelectedId(plan.recipe.recipeId)}
                 />
               ))}
             </ul>
-            {plan.stuckAtLevel != null && (
-              <p className="hint">
-                Aucune recette de ce métier n'est craftable au niveau{" "}
-                {plan.stuckAtLevel} ; le chemin s'arrête là.
-              </p>
-            )}
           </section>
 
           <section className="panel">
-            <h3 className="metier-h3">Liste de courses totale</h3>
+            <h3 className="metier-h3">Liste de courses</h3>
             <p className="hint">
-              Toutes les ressources des paliers cumulées — ce qu'il faut
-              acheter/farmer en tout.
+              Pour crafter « {selected.recipe.result.name} »{" "}
+              {count(selected.crafts)} fois — ce qu'il faut acheter/farmer.
             </p>
             <div className="metier-shopping">
-              {plan.shopping.map((ing) => (
+              {selected.shopping.map((ing) => (
                 <div className="metier-ing" key={ing.item.id}>
                   <span className="metier-ing-id">
                     <span className="metier-ing-icon">
@@ -359,14 +354,6 @@ export function MetierPage() {
           </section>
         </>
       )}
-
-      {recipesStatus === "idle" &&
-        input.jobId != null &&
-        recipes.length > 0 &&
-        plan != null &&
-        plan.steps.length === 0 && (
-          <p className="hint">Aucune recette exploitable pour ce métier.</p>
-        )}
     </main>
   );
 }
