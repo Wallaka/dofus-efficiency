@@ -4026,3 +4026,139 @@ td.negative {
   white-space: pre-wrap;
   word-break: break-word;
 }
+
+/* ---------------------------------------------------------------------------
+   HDV — in-app marketplace, category grid with fast price entry
+--------------------------------------------------------------------------- */
+.hdv-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 12px 0 16px;
+}
+.hdv-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.hdv-tab {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.hdv-tab:hover {
+  color: var(--text);
+}
+.hdv-tab.active {
+  background: color-mix(in srgb, var(--accent) 20%, var(--num-bg));
+  border-color: var(--accent);
+  color: var(--text);
+}
+.hdv-filter {
+  flex: 1 1 200px;
+  min-width: 160px;
+  padding: 7px 10px;
+  background: var(--num-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+}
+.hdv-progress {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.hdv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 18px 24px;
+  align-items: start;
+}
+.hdv-cat-title {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 4px;
+}
+.hdv-cat-count {
+  color: var(--muted);
+  font-weight: normal;
+  font-size: 0.8rem;
+}
+.hdv-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.hdv-row {
+  display: grid;
+  grid-template-columns: 28px 1fr 92px;
+  grid-template-rows: auto auto;
+  align-items: center;
+  gap: 2px 8px;
+  padding: 4px 6px;
+  border-radius: 8px;
+}
+.hdv-row:hover {
+  background: var(--num-bg);
+}
+.hdv-ic {
+  grid-row: 1;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+.hdv-ic-empty {
+  display: inline-block;
+  border: 1px dashed var(--border);
+  border-radius: 6px;
+}
+.hdv-name {
+  grid-column: 2;
+  grid-row: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hdv-lvl {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-style: normal;
+}
+.hdv-price {
+  grid-column: 3;
+  grid-row: 1;
+  width: 92px;
+  padding: 6px 8px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.hdv-price:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+.hdv-age {
+  grid-column: 2 / 4;
+  grid-row: 2;
+  font-size: 0.75rem;
+  min-height: 0.9rem;
+}
+.hdv-fresh {
+  color: var(--positive);
+}
+.hdv-stale {
+  color: var(--negative);
+}
+.hdv-footer {
+  margin-top: 20px;
+}
