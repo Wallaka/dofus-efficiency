@@ -5,6 +5,7 @@ import { EleveurPage } from "./pages/EleveurPage";
 import { AvisPage } from "./pages/AvisPage";
 import { PricesPage } from "./pages/PricesPage";
 import { TrackedItemsPage } from "./pages/TrackedItemsPage";
+import { DonneesPage } from "./pages/DonneesPage";
 
 export function App() {
   return (
@@ -20,6 +21,7 @@ export function App() {
           <NavLink to="/avis">Avis de recherche</NavLink>
           <NavLink to="/suivis">Objets suivis</NavLink>
           <NavLink to="/prix">Prix</NavLink>
+          <NavLink to="/donnees">Données</NavLink>
         </nav>
       </header>
 
@@ -30,6 +32,7 @@ export function App() {
         <Route path="/avis" element={<AvisPage />} />
         <Route path="/suivis" element={<TrackedItemsPage />} />
         <Route path="/prix" element={<PricesPage />} />
+        <Route path="/donnees" element={<DonneesPage />} />
       </Routes>
 
       <footer className="app-footer">
