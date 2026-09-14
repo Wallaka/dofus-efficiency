@@ -8,6 +8,7 @@ import { QuestsPage } from "./pages/QuestsPage";
 import { PricesPage } from "./pages/PricesPage";
 import { TrackedItemsPage } from "./pages/TrackedItemsPage";
 import { MesRessourcesPage } from "./pages/MesRessourcesPage";
+import { VoicePage } from "./pages/VoicePage";
 import { DonneesPage } from "./pages/DonneesPage";
 
 export function App() {
@@ -27,6 +28,7 @@ export function App() {
           <NavLink to="/suivis">Objets suivis</NavLink>
           <NavLink to="/ressources">Mes ressources</NavLink>
           <NavLink to="/prix">Prix</NavLink>
+          <NavLink to="/vocal">Vocal</NavLink>
           <NavLink to="/donnees">Données</NavLink>
         </nav>
       </header>
@@ -41,6 +43,7 @@ export function App() {
         <Route path="/suivis" element={<TrackedItemsPage />} />
         <Route path="/ressources" element={<MesRessourcesPage />} />
         <Route path="/prix" element={<PricesPage />} />
+        <Route path="/vocal" element={<VoicePage />} />
         <Route path="/donnees" element={<DonneesPage />} />
       </Routes>
 
