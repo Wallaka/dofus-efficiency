@@ -83,6 +83,22 @@ export function periodTotal(quests: Quest[], prices: PriceMap): number {
   return total;
 }
 
+/** How a quest list is ordered for display. */
+export type QuestSort = "manual" | "value";
+
+/**
+ * Order quests for display. "value" ranks by total reward value (kamas + priced
+ * resources), most profitable first — a quest with unpriced rewards sorts on the
+ * value known so far. "manual" keeps the original (insertion) order. Returns a
+ * new array when sorting, the same reference otherwise.
+ */
+export function sortQuests(quests: Quest[], prices: PriceMap, sort: QuestSort): Quest[] {
+  if (sort !== "value") return quests;
+  return [...quests].sort(
+    (a, b) => questValue(b, prices).total - questValue(a, prices).total,
+  );
+}
+
 export function newQuestId(): string {
   try {
     return crypto.randomUUID();

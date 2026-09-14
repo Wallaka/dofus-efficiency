@@ -5,10 +5,12 @@ import {
   saveQuests,
   questValue,
   periodTotal,
+  sortQuests,
   importCatalog,
   newQuestId,
   type Quest,
   type QuestPeriod,
+  type QuestSort,
 } from "../lib/quests";
 import { loadPrices } from "../lib/storage";
 import { loadPriceEntries, type PriceEntryMap } from "../lib/priceStore";
@@ -20,6 +22,7 @@ const PERIOD_LABEL: Record<QuestPeriod, string> = {
   daily: "Quotidienne",
   weekly: "Hebdomadaire",
 };
+
 
 /**
  * The daily/weekly quest routine: user-curated quests that reward kamas and
@@ -107,8 +110,20 @@ export function QuestsPage() {
     setKamas("");
   }
 
+  const [sort, setSort] = useState<QuestSort>("manual");
+
   const daily = useMemo(() => quests.filter((q) => q.period === "daily"), [quests]);
   const weekly = useMemo(() => quests.filter((q) => q.period === "weekly"), [quests]);
+
+  // Ordered copies for display (profitability first, or insertion order).
+  const dailySorted = useMemo(
+    () => sortQuests(daily, prices, sort),
+    [daily, prices, sort],
+  );
+  const weeklySorted = useMemo(
+    () => sortQuests(weekly, prices, sort),
+    [weekly, prices, sort],
+  );
 
   // Variant-aware totals: quests sharing a variantGroup count only once.
   const dailyTotal = periodTotal(daily, prices);
@@ -198,13 +213,24 @@ export function QuestsPage() {
             <span className="badge badge-fresh">
               Routine&nbsp;: ≈ {formatKamas(weeklyRoutine)} / semaine
             </span>
+            <label className="quests-sort">
+              Trier&nbsp;:
+              <select
+                value={sort}
+                onChange={(e) => setSort(e.target.value as QuestSort)}
+                aria-label="Trier les quêtes"
+              >
+                <option value="manual">Ordre d'ajout</option>
+                <option value="value">Rentabilité (décroissant)</option>
+              </select>
+            </label>
           </div>
         )}
       </section>
 
       <QuestSection
         title="Quotidiennes"
-        list={daily}
+        list={dailySorted}
         total={dailyTotal}
         prices={prices}
         entries={entries}
@@ -217,7 +243,7 @@ export function QuestsPage() {
       />
       <QuestSection
         title="Hebdomadaires"
-        list={weekly}
+        list={weeklySorted}
         total={weeklyTotal}
         prices={prices}
         entries={entries}
