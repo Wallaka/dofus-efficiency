@@ -56,6 +56,11 @@ export function MetierPage() {
   const [recipes, setRecipes] = useState<MetierRecipe[]>([]);
 
   const [recipesStatus, setRecipesStatus] = useState<Load>("idle");
+  // Curve starts "loading" until the initial fetch resolves (unless cached), so
+  // the fallback list doesn't flash before the curve has had a chance to arrive.
+  const [curveStatus, setCurveStatus] = useState<Load>(() =>
+    (loadXpCurve()?.length ?? 0) > 1 ? "idle" : "loading",
+  );
   const [error, setError] = useState<string>();
 
   function patchInput(patch: Partial<MetierInput>) {
@@ -78,14 +83,18 @@ export function MetierPage() {
         .catch(() => {});
     }
     if (curve.length === 0) {
+      setCurveStatus("loading");
       fetchJobXpCurve(ctrl.signal)
         .then((c) => {
           if (c.length > 1) {
             setCurve(c);
             saveXpCurve(c);
           }
+          setCurveStatus("idle");
         })
-        .catch(() => {});
+        .catch(() => {
+          if (!ctrl.signal.aborted) setCurveStatus("error");
+        });
     }
     return () => ctrl.abort();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -266,14 +275,22 @@ export function MetierPage() {
       {input.jobId == null && (
         <p className="hint">Choisissez un métier pour voir le chemin de leveling.</p>
       )}
-      {recipesStatus === "loading" && (
-        <p className="hint">Chargement des recettes du métier…</p>
+      {(recipesStatus === "loading" ||
+        (input.jobId != null && curveStatus === "loading")) && (
+        <div className="metier-loading">
+          <span className="metier-spinner" aria-hidden />
+          <span>
+            {recipesStatus === "loading"
+              ? "Chargement des recettes du métier…"
+              : "Chargement de la courbe d'XP…"}
+          </span>
+        </div>
       )}
       {recipesStatus === "error" && (
         <p className="hint error-text">Erreur : {error}</p>
       )}
 
-      {plan && plan.steps.length > 0 && (
+      {recipesStatus !== "loading" && plan && plan.steps.length > 0 && (
         <>
           <div className="metier-tiles">
             <div className="metier-tile">
@@ -308,6 +325,12 @@ export function MetierPage() {
 
           <section>
             <h3 className="metier-h3">Chemin de leveling</h3>
+            <p className="hint metier-h3-sub">
+              À chaque palier de niveaux, craftez la recette indiquée le nombre de
+              fois affiché — c'est le plus rentable (kamas/XP) pour aller de{" "}
+              {input.current} à {input.target}. Cliquez une ligne pour la liste de
+              courses de ce palier.
+            </p>
             <ul className="metier-path">
               <li className="metier-head" aria-hidden>
                 <span></span>
@@ -378,7 +401,10 @@ export function MetierPage() {
       )}
 
       {/* Fallback: the curve couldn't load, so show the cheapest recipes now. */}
-      {!haveCurve && recipes.length > 0 && (
+      {curveStatus !== "loading" &&
+        recipesStatus !== "loading" &&
+        !haveCurve &&
+        recipes.length > 0 && (
         <section className="panel">
           <p className="hint">
             Courbe d'XP indisponible pour l'instant — impossible d'estimer le
