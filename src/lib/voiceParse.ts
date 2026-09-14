@@ -5,23 +5,25 @@
  * This is the heart of the voice-entry experiment: speech-to-text gives us a
  * raw French string, and these *pure* functions pull out the item name and the
  * price. Keeping them free of any browser/mic dependency means we can unit-test
- * the tricky bits (French number words, "k"/"mille", lot quantities) exactly.
+ * the tricky bits (French number words, "k"/"mille", chaining) exactly.
  *
  * Grammar we understand (loosely):
- *   <name> <price>                  →  "chanvre 12"          → chanvre, 12
- *   <name> <price> k                →  "frostiz 3 k"         → frostiz, 3000
- *   <name> fois <qty> <price>       →  "ortie fois cent 900" → ortie, 900, lot 100
- *   <name> x<qty> <price>           →  "ortie x100 900"      → ortie, 900, lot 100
- * Numbers may be digits ("147", "12 000") or French words ("cent quarante-sept").
+ *   <name> <price>       →  "chanvre 12"       → chanvre, 12
+ *   <name> <price> k     →  "frostiz 3 k"      → frostiz, 3000
+ * Prices are always the *unit* price. Numbers may be digits ("147", "12 000")
+ * or French words ("cent quarante-sept").
+ *
+ * Several items may be chained in one breath — the *price* is the delimiter, so
+ * "bois de frêne 147 chanvre 12 ortie 5" splits into three. See
+ * `parseUtterances`; `parseUtterance` keeps the single-item shape for callers
+ * that want just the first.
  */
 
 export interface ParsedUtterance {
   /** The item name as spoken (accents kept, trimmed). */
   name: string;
-  /** Price in kamas, or null if we couldn't find a trailing number. */
+  /** Unit price in kamas, or null if we couldn't find a trailing number. */
   price: number | null;
-  /** Lot quantity (x1/x10/x100/x1000) if a "fois N" / "xN" was spoken. */
-  lot?: number;
 }
 
 /** French number words → value. Enough for realistic HDV prices. */
@@ -138,41 +140,45 @@ export function parseFrenchNumber(text: string): number | null {
 }
 
 /**
- * Split a spoken phrase into `{ name, price, lot? }`.
+ * Split a spoken phrase into one `{ name, price }` per item.
  *
- * Strategy: peel number-like tokens off the END to get the price, then look for
- * a "fois N" / "xN" lot marker just before the remaining name.
+ * Strategy: walk left→right accumulating name words; a contiguous run of number
+ * tokens is the (unit) price and closes the current item, then the next words
+ * start the next item.
  */
-export function parseUtterance(raw: string): ParsedUtterance | null {
-  let text = raw.replace(/[,]/g, " ").replace(/\s+/g, " ").trim();
-  if (text === "") return null;
+export function parseUtterances(raw: string): ParsedUtterance[] {
+  const text = raw.replace(/[,]/g, " ").replace(/\s+/g, " ").trim();
+  if (text === "") return [];
+  const tokens = text.split(" ").filter(Boolean);
 
-  // Pull out an optional lot marker first — "x100", "x 100", or "fois cent" —
-  // so its quantity doesn't get swallowed into the price when the two numbers
-  // sit next to each other ("ortie x100 900").
-  let lot: number | undefined;
-  const lotRe = /\b(?:x\s*(\d+)|fois\s+([\wÀ-ɏ]+))\b/i;
-  const lotMatch = lotRe.exec(text);
-  if (lotMatch) {
-    const qty = lotMatch[1]
-      ? Number(lotMatch[1])
-      : parseFrenchNumber(lotMatch[2]);
-    if (qty && qty > 0) {
-      lot = qty;
-      text = (text.slice(0, lotMatch.index) + text.slice(lotMatch.index + lotMatch[0].length))
-        .replace(/\s+/g, " ")
-        .trim();
-    }
+  const out: ParsedUtterance[] = [];
+  let nameTokens: string[] = [];
+
+  // Emit the item built so far (skipping nameless fragments), then reset.
+  function flush(price: number | null) {
+    const name = nameTokens.join(" ").replace(/[.,]+$/, "").trim();
+    if (name !== "") out.push({ name, price });
+    nameTokens = [];
   }
 
-  // Peel the trailing number tokens off what remains as the price.
-  const tokens = text.split(" ").filter(Boolean);
-  let cut = tokens.length;
-  while (cut > 0 && isNumberToken(tokens[cut - 1])) cut--;
-  const price =
-    cut < tokens.length ? parseFrenchNumber(tokens.slice(cut).join(" ")) : null;
+  for (let i = 0; i < tokens.length; ) {
+    // A price closes the current item: swallow the whole contiguous number run.
+    if (isNumberToken(tokens[i])) {
+      const run: string[] = [];
+      while (i < tokens.length && isNumberToken(tokens[i])) run.push(tokens[i++]);
+      flush(parseFrenchNumber(run.join(" ")));
+      continue;
+    }
 
-  const name = tokens.slice(0, cut).join(" ").replace(/[.,]+$/, "").trim();
-  if (name === "" && price === null) return null;
-  return { name, price, ...(lot ? { lot } : {}) };
+    nameTokens.push(tokens[i]);
+    i++;
+  }
+  // A trailing name with no price (e.g. "frostiz") still counts as an item.
+  if (nameTokens.length > 0) flush(null);
+  return out;
+}
+
+/** Parse just the first item from a phrase (single-item convenience). */
+export function parseUtterance(raw: string): ParsedUtterance | null {
+  return parseUtterances(raw)[0] ?? null;
 }

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { Item } from "../types";
 import { searchItems } from "../data/dofusApi";
-import { parseUtterance } from "../lib/voiceParse";
+import { parseUtterances } from "../lib/voiceParse";
 import { formatKamas } from "../lib/format";
 
 /**
@@ -28,10 +28,8 @@ interface Row {
   raw: string;
   /** Parsed item name (editable). */
   name: string;
-  /** Parsed price in kamas (editable), or null. */
+  /** Parsed unit price in kamas (editable), or null. */
   price: number | null;
-  /** Lot size if a "fois N"/"xN" was spoken. */
-  lot?: number;
   resolve: Resolve;
 }
 
@@ -110,19 +108,23 @@ export function VoicePage() {
   }
 
   function addUtterance(raw: string) {
-    const parsed = parseUtterance(raw);
-    if (!parsed) return;
-    const id = `row-${++rowSeq}-${Date.now()}`;
-    const row: Row = {
-      id,
-      raw,
-      name: parsed.name,
-      price: parsed.price,
-      lot: parsed.lot,
+    // One spoken phrase can carry several items ("bois 147 chanvre 12"); the
+    // price delimits them. Each becomes its own row.
+    const parsed = parseUtterances(raw);
+    if (parsed.length === 0) return;
+    const many = parsed.length > 1;
+    const newRows: Row[] = parsed.map((p, i) => ({
+      id: `row-${++rowSeq}-${Date.now()}-${i}`,
+      // Show the slice of the phrase this row came from when several share one
+      // transcript, so an editable row still reads sensibly.
+      raw: many ? `${p.name}${p.price != null ? ` ${p.price}` : ""}` : raw,
+      name: p.name,
+      price: p.price,
       resolve: { status: "loading" },
-    };
-    setRows((prev) => [row, ...prev]);
-    resolveRow(id, parsed.name);
+    }));
+    // Newest phrase on top, items within it kept in spoken order.
+    setRows((prev) => [...newRows, ...prev]);
+    newRows.forEach((row) => resolveRow(row.id, row.name));
   }
 
   // --- Speech recognition --------------------------------------------------
@@ -233,7 +235,6 @@ export function VoicePage() {
       spoken: r.raw,
       name: r.name,
       price: r.price,
-      ...(r.lot ? { lot: r.lot } : {}),
       itemId: r.resolve.status === "ok" ? r.resolve.chosen.id : null,
       matched: r.resolve.status === "ok" ? r.resolve.chosen.name : null,
     }));
@@ -265,10 +266,11 @@ export function VoicePage() {
     <section className="panel voice-page">
       <h2>Saisie vocale → JSON</h2>
       <p className="hint">
-        Expérimentation. Dis par exemple «&nbsp;<em>bois de frêne 147</em>&nbsp;» ou
-        «&nbsp;<em>ortie fois cent 900</em>&nbsp;» : l'app transcrit, en extrait
-        le nom et le prix, et cherche l'objet correspondant sur DofusDB. But du
-        jour : <strong>mesurer la précision</strong> avant d'aller plus loin.
+        Expérimentation. Enchaîne plusieurs objets d'une traite —
+        «&nbsp;<em>bois de frêne 147, chanvre 12, ortie 5</em>&nbsp;» : chaque
+        <strong> prix unitaire</strong> sépare un objet. L'app transcrit, extrait
+        nom + prix, et cherche l'objet sur DofusDB. But du jour :
+        <strong> mesurer la précision</strong> avant d'aller plus loin.
       </p>
 
       <div className="voice-controls">
@@ -315,7 +317,6 @@ export function VoicePage() {
                   onBlur={(e) => commitName(r.id, e.target.value)}
                   placeholder="nom"
                 />
-                {r.lot && <span className="voice-lot">×{r.lot}</span>}
                 <input
                   className="voice-price"
                   value={r.price ?? ""}

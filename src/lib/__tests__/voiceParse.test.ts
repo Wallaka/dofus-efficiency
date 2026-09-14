@@ -1,5 +1,9 @@
 import { describe, it, expect } from "vitest";
-import { parseFrenchNumber, parseUtterance } from "../voiceParse";
+import {
+  parseFrenchNumber,
+  parseUtterance,
+  parseUtterances,
+} from "../voiceParse";
 
 /**
  * Deterministic tests for the voice-entry parsers — no mic/STT involved, so they
@@ -63,27 +67,46 @@ describe("parseUtterance", () => {
     });
   });
 
-  it("reads a lot with 'fois'", () => {
-    expect(parseUtterance("ortie fois cent 900")).toEqual({
-      name: "ortie",
-      price: 900,
-      lot: 100,
-    });
-  });
-
-  it("reads a lot with x-notation", () => {
-    expect(parseUtterance("ortie x100 900")).toEqual({
-      name: "ortie",
-      price: 900,
-      lot: 100,
-    });
-  });
-
   it("keeps the name when no price is present", () => {
     expect(parseUtterance("frostiz")).toEqual({ name: "frostiz", price: null });
   });
 
   it("returns null on empty input", () => {
     expect(parseUtterance("   ")).toBeNull();
+  });
+});
+
+describe("parseUtterances (multiple items in one breath)", () => {
+  it("splits a chain on each price", () => {
+    expect(parseUtterances("bois de frêne 147 chanvre 12 ortie 5")).toEqual([
+      { name: "bois de frêne", price: 147 },
+      { name: "chanvre", price: 12 },
+      { name: "ortie", price: 5 },
+    ]);
+  });
+
+  it("handles word-prices and k-suffix side by side", () => {
+    expect(parseUtterances("orchidée douze mille frostiz 3k")).toEqual([
+      { name: "orchidée", price: 12000 },
+      { name: "frostiz", price: 3000 },
+    ]);
+  });
+
+  it("swallows a separating 'et' but keeps 'et' inside a number", () => {
+    expect(parseUtterances("chanvre vingt et un et ortie 5")).toEqual([
+      { name: "chanvre", price: 21 },
+      { name: "ortie", price: 5 },
+    ]);
+  });
+
+  it("keeps a trailing name with no price as its own item", () => {
+    expect(parseUtterances("chanvre 12 frostiz")).toEqual([
+      { name: "chanvre", price: 12 },
+      { name: "frostiz", price: null },
+    ]);
+  });
+
+  it("returns an empty array for empty input", () => {
+    expect(parseUtterances("   ")).toEqual([]);
   });
 });

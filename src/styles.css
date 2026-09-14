@@ -3939,13 +3939,6 @@ td.negative {
   font-variant-numeric: tabular-nums;
   min-width: 70px;
 }
-.voice-lot {
-  padding: 2px 8px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  color: var(--muted);
-  font-size: 0.85rem;
-}
 .voice-del {
   margin-left: auto;
   background: transparent;
