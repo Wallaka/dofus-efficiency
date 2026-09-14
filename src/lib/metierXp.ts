@@ -68,36 +68,6 @@ export interface PlanIngredient {
   subtotal?: number;
 }
 
-/** One palier: a band of levels crafted with a single chosen recipe. */
-export interface MetierStep {
-  fromLevel: number;
-  toLevel: number;
-  recipe: MetierRecipe;
-  /** XP/craft at the palier's starting level (it drifts down across the band). */
-  xpPerCraft: number;
-  crafts: number;
-  /** recipe cost × crafts; undefined if any ingredient price is missing. */
-  cost?: number;
-  /** cost per XP for this step; undefined if the cost is unknown. */
-  costPerXp?: number;
-  ingredients: PlanIngredient[];
-}
-
-export interface MetierPlan {
-  steps: MetierStep[];
-  totalCrafts: number;
-  totalXp: number;
-  /** undefined if any step's cost is unknown. */
-  totalCost?: number;
-  /** undefined if the total cost is unknown. */
-  avgCostPerXp?: number;
-  shopping: PlanIngredient[];
-  /** True when at least one ingredient price is missing (totals are partial). */
-  incomplete: boolean;
-  /** First level with no craftable recipe, if the plan can't reach the target. */
-  stuckAtLevel?: number;
-}
-
 /** Sum a recipe's ingredient cost; undefined if any price is missing. */
 export function recipeCost(
   recipe: MetierRecipe,
@@ -112,158 +82,100 @@ export function recipeCost(
   return total;
 }
 
-/** A recipe scored for a given job level: XP/craft, cost/craft and cost-per-XP. */
-export interface RankedRecipe {
+/** Total XP to go from level `from` to level `to`. */
+export function xpBetween(from: number, to: number): number {
+  return cumulativeXp(Math.min(200, to)) - cumulativeXp(Math.max(1, from));
+}
+
+/** The full plan for reaching a target by spamming one chosen recipe. */
+export interface RecipePlan {
   recipe: MetierRecipe;
+  /** XP/craft at the starting level (it drifts down as you out-level the recipe). */
   xpPerCraft: number;
+  /** Total successful crafts to go from `from` to `to` with this recipe. */
+  crafts: number;
+  /** crafts × recipe cost; undefined if any ingredient price is missing. */
   cost?: number;
+  /** cost ÷ total XP; undefined if the cost is unknown. */
   costPerXp?: number;
+  /** This recipe's ingredients scaled to the whole run — the shopping list. */
+  shopping: PlanIngredient[];
+  /** True when at least one ingredient price is missing. */
+  incomplete: boolean;
 }
 
 /**
- * Rank a job's recipes for a crafter at `level` by cost-per-XP (cheapest first).
- * Only recipes you can craft (level ≤ yours) that still grant XP are included;
- * ones with a missing price sort last (by highest XP/craft).
+ * How many crafts of one recipe it takes to go from `fromLevel` to `toLevel`,
+ * summed level by level so the growing out-level penalty is accounted for, plus
+ * the resulting cost and shopping list. Assumes the recipe is craftable over the
+ * range (its level ≤ fromLevel); callers filter to those.
  */
-export function rankRecipes(
-  recipes: MetierRecipe[],
+export function planRecipeToTarget(
+  recipe: MetierRecipe,
   prices: PriceMap,
-  level: number,
+  fromLevel: number,
+  toLevel: number,
   coef = 1,
-): RankedRecipe[] {
-  const ranked: RankedRecipe[] = [];
-  for (const recipe of recipes) {
+): RecipePlan {
+  const from = Math.max(1, Math.floor(fromLevel));
+  const to = Math.min(200, Math.floor(toLevel));
+
+  let crafts = 0;
+  for (let level = from; level < to; level++) {
     const xpc = xpPerCraft(level, recipe.resultLevel, coef);
     if (xpc <= 0) continue;
-    const cost = recipeCost(recipe, prices);
-    ranked.push({
-      recipe,
-      xpPerCraft: xpc,
-      cost,
-      costPerXp: cost != null ? cost / xpc : undefined,
-    });
+    crafts += Math.ceil(xpToNextLevel(level) / xpc);
   }
-  ranked.sort((a, b) => {
-    if (a.costPerXp == null && b.costPerXp == null)
-      return b.xpPerCraft - a.xpPerCraft;
-    if (a.costPerXp == null) return 1;
-    if (b.costPerXp == null) return -1;
-    return a.costPerXp - b.costPerXp;
-  });
-  return ranked;
-}
 
-/** Pick the cheapest recipe (per XP) craftable at `level`; unpriced as a last resort. */
-function pickRecipe(
-  recipes: MetierRecipe[],
-  level: number,
-  prices: PriceMap,
-  coef: number,
-): MetierRecipe | undefined {
-  return rankRecipes(recipes, prices, level, coef)[0]?.recipe;
+  const unitCost = recipeCost(recipe, prices);
+  const cost = unitCost != null ? unitCost * crafts : undefined;
+  const totalXp = xpBetween(from, to);
+  const costPerXp = cost != null && totalXp > 0 ? cost / totalXp : undefined;
+
+  const shopping: PlanIngredient[] = recipe.ingredients.map((ing) => {
+    const unit = prices[ing.item.id];
+    const quantity = ing.quantity * crafts;
+    return {
+      item: ing.item,
+      quantity,
+      unitPrice: unit,
+      subtotal: unit != null ? unit * quantity : undefined,
+    };
+  });
+
+  return {
+    recipe,
+    xpPerCraft: xpPerCraft(from, recipe.resultLevel, coef),
+    crafts,
+    cost,
+    costPerXp,
+    shopping,
+    incomplete: recipe.ingredients.some((ing) => prices[ing.item.id] == null),
+  };
 }
 
 /**
- * Build a leveling plan from `fromLevel` to `toLevel` for one job, choosing the
- * cheapest recipe at each level and merging consecutive levels that share a
- * recipe into paliers. No external XP data is needed — everything comes from the
- * formula above.
+ * Plan every recipe craftable at `fromLevel` for reaching `toLevel`, cheapest
+ * first (by total cost; recipes with a missing price sort last, by fewest
+ * crafts). The first entry is the recommended recipe.
  */
-export function buildLevelingPlan(
+export function planRecipesToTarget(
   recipes: MetierRecipe[],
   prices: PriceMap,
   fromLevel: number,
   toLevel: number,
   coef = 1,
-): MetierPlan {
+): RecipePlan[] {
   const from = Math.max(1, Math.floor(fromLevel));
-  const to = Math.min(200, Math.floor(toLevel));
+  const plans = recipes
+    .filter((r) => r.resultLevel <= from && xpPerCraft(from, r.resultLevel, coef) > 0)
+    .map((r) => planRecipeToTarget(r, prices, fromLevel, toLevel, coef));
 
-  const steps: MetierStep[] = [];
-  let stuckAtLevel: number | undefined;
-
-  for (let level = from; level < to; level++) {
-    const recipe = pickRecipe(recipes, level, prices, coef);
-    if (!recipe) {
-      stuckAtLevel = level;
-      break;
-    }
-    const xpc = xpPerCraft(level, recipe.resultLevel, coef);
-    const crafts = Math.ceil(xpToNextLevel(level) / xpc);
-
-    const last = steps[steps.length - 1];
-    if (last && last.recipe.recipeId === recipe.recipeId) {
-      last.crafts += crafts;
-      last.toLevel = level + 1;
-    } else {
-      steps.push({
-        fromLevel: level,
-        toLevel: level + 1,
-        recipe,
-        xpPerCraft: xpc,
-        crafts,
-        ingredients: [],
-      });
-    }
-  }
-
-  // Cost + per-step and whole-plan shopping lists.
-  const shoppingById = new Map<string, PlanIngredient>();
-  let incomplete = false;
-  let totalCrafts = 0;
-  let totalCost: number | undefined = 0;
-
-  for (const step of steps) {
-    totalCrafts += step.crafts;
-    const stepXp = cumulativeXp(step.toLevel) - cumulativeXp(step.fromLevel);
-
-    const unitCost = recipeCost(step.recipe, prices);
-    if (unitCost != null) {
-      step.cost = unitCost * step.crafts;
-      step.costPerXp = stepXp > 0 ? step.cost / stepXp : undefined;
-      if (totalCost != null) totalCost += step.cost;
-    } else {
-      incomplete = true;
-      totalCost = undefined;
-    }
-
-    for (const ing of step.recipe.ingredients) {
-      const qty = ing.quantity * step.crafts;
-      const unit = prices[ing.item.id];
-      if (unit == null) incomplete = true;
-      step.ingredients.push({
-        item: ing.item,
-        quantity: qty,
-        unitPrice: unit,
-        subtotal: unit != null ? unit * qty : undefined,
-      });
-      const agg = shoppingById.get(ing.item.id);
-      if (agg) {
-        agg.quantity += qty;
-        agg.subtotal = agg.unitPrice != null ? agg.unitPrice * agg.quantity : undefined;
-      } else {
-        shoppingById.set(ing.item.id, {
-          item: ing.item,
-          quantity: qty,
-          unitPrice: unit,
-          subtotal: unit != null ? unit * qty : undefined,
-        });
-      }
-    }
-  }
-
-  const totalXp = cumulativeXp(to) - cumulativeXp(from);
-  const avgCostPerXp =
-    totalCost != null && totalXp > 0 ? totalCost / totalXp : undefined;
-
-  return {
-    steps,
-    totalCrafts,
-    totalXp,
-    totalCost,
-    avgCostPerXp,
-    shopping: [...shoppingById.values()],
-    incomplete,
-    stuckAtLevel,
-  };
+  plans.sort((a, b) => {
+    if (a.cost == null && b.cost == null) return a.crafts - b.crafts;
+    if (a.cost == null) return 1;
+    if (b.cost == null) return -1;
+    return a.cost - b.cost;
+  });
+  return plans;
 }

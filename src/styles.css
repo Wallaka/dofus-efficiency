@@ -3171,3 +3171,87 @@ td.negative {
     animation: none;
   }
 }
+
+/* Métiers — selectable recipe rows (choose one → crafts to target). */
+.metier-head-rrow,
+.metier-rrow {
+  grid-template-columns: 20px minmax(150px, 1.6fr) 80px 76px 104px 88px;
+}
+.metier-rrow {
+  display: grid;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.metier-path li:last-child .metier-rrow {
+  border-bottom: none;
+}
+.metier-rrow:hover {
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+.metier-rrow.selected {
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+.metier-radio {
+  justify-self: center;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.metier-rrow.selected .metier-radio {
+  color: var(--accent);
+}
+.metier-rrow .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.88rem;
+}
+
+@media (max-width: 680px) {
+  .metier-head-rrow {
+    display: none;
+  }
+  .metier-rrow {
+    grid-template-columns: 20px 1fr auto;
+    grid-template-areas:
+      "radio recipe kxp"
+      "radio metrics kxp";
+    row-gap: 4px;
+  }
+  .metier-radio {
+    grid-area: radio;
+    align-self: start;
+    margin-top: 3px;
+  }
+  .metier-rrow .metier-recipe {
+    grid-area: recipe;
+  }
+  .metier-rrow .metier-xpcraft {
+    display: none;
+  }
+  .metier-rrow .metier-crafts {
+    grid-area: metrics;
+    text-align: left;
+  }
+  .metier-rrow .metier-crafts::before {
+    content: "Crafts ";
+    color: var(--muted);
+    font-size: 0.72rem;
+  }
+  .metier-rrow .metier-cost {
+    display: none;
+  }
+  .metier-rrow .metier-kxp-cell {
+    grid-area: kxp;
+    justify-self: end;
+    align-self: center;
+  }
+}
