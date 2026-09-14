@@ -6,17 +6,31 @@ import type { Item, PriceMap } from "../types";
  * Two well-established facts drive everything:
  *  1. The XP to go from job level L to L+1 is `20 × L`, so the cumulative XP to
  *     reach level N is `10 · N · (N−1)` (e.g. level 100 = 10·100·99 = 99 000).
- *  2. A successful craft grants `20 × recipeLevel`, reduced by a penalty that
- *     grows with the gap between your job level and the recipe's level — so
- *     crafting an item *at* your level gives exactly one level's worth of XP
+ *  2. A successful craft grants `floor(20 × recipeLevel × ratio)`, where `ratio`
+ *     drops with the gap between your job level and the recipe's level — so
+ *     crafting an item *at* your level gives one level's worth of XP
  *     ("1 craft ≈ 1 level"), and out-levelled recipes give steadily less.
  *
- * The penalty is modelled as `8 / (8 + gap)`, which fits the community-documented
- * breakpoints within ~2 % across the whole range (gap 1→0.89, 3→0.73, 8→0.50,
- * 22→0.27, 55→0.13). It's isolated here so it's trivial to refine. The XP is
- * therefore a close estimate; the *cost* side (from your prices) is exact, so
- * "kamas per XP" — what actually decides the cheapest craft — is trustworthy.
+ * `ratio` is Ankama's documented per-gap table (below), extended with a smooth
+ * tail past gap 17. Matched against DofusDB, a level-1 recipe from 1→20 gives
+ * ~528 crafts vs their 523 (~1 %); the residual is their internal rounding. The
+ * cost side (from your prices) is exact, so kamas/XP is trustworthy either way.
  */
+
+/**
+ * XP kept when crafting a recipe `gap` levels below your job level (index = gap).
+ * Ankama's exact table for gaps 0–17; larger gaps use a fitted tail
+ * (≈0.29 at 18, 0.25 at 22, 0.10 at 55) that joins the table smoothly at 17.
+ */
+const XP_RATIO = [
+  1.0, 0.91, 0.82, 0.75, 0.685, 0.63, 0.58, 0.54, 0.5, 0.47, 0.44, 0.415, 0.39,
+  0.37, 0.35, 0.335, 0.32, 0.305,
+] as const;
+
+export function craftPenalty(gap: number): number {
+  const g = Math.max(0, Math.floor(gap));
+  return g < XP_RATIO.length ? XP_RATIO[g] : 7.045 / (g + 6.09);
+}
 
 /** XP required to advance from job level `level` to the next. */
 export function xpToNextLevel(level: number): number {
@@ -29,15 +43,10 @@ export function cumulativeXp(level: number): number {
   return 10 * l * (l - 1);
 }
 
-/** XP kept when crafting a recipe `gap` levels below your job level (1 = at level). */
-export function craftPenalty(gap: number): number {
-  return 8 / (8 + Math.max(0, gap));
-}
-
 /**
  * XP from one successful craft of a recipe of `recipeLevel`, by a crafter at
- * `jobLevel`, scaled by an XP coefficient (1 = none, 1.2 = +20 %). Returns 0 for
- * a recipe above the crafter's level (can't be crafted yet).
+ * `jobLevel`, scaled by an XP coefficient (1 = none, 1.2 = +20 %). Floored like
+ * the game (min 1 for a craftable recipe); 0 for a recipe above your level.
  */
 export function xpPerCraft(
   jobLevel: number,
@@ -45,7 +54,8 @@ export function xpPerCraft(
   coef = 1,
 ): number {
   if (recipeLevel > jobLevel || recipeLevel <= 0) return 0;
-  return Math.round(20 * recipeLevel * craftPenalty(jobLevel - recipeLevel) * coef);
+  const xp = Math.floor(20 * recipeLevel * craftPenalty(jobLevel - recipeLevel) * coef);
+  return Math.max(1, xp);
 }
 
 // --- Leveling plan --------------------------------------------------------
