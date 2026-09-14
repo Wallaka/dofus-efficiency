@@ -22,6 +22,7 @@ const AVIS_KEY = "dofus-efficiency:avisCatalog:v3";
 const AVIS_PARTICIPATION_KEY = "dofus-efficiency:avisParticipation:v2";
 const AVIS_AVITON_KEY = "dofus-efficiency:avisAviton:v1";
 const AVIS_CHASSE_ONLY_KEY = "dofus-efficiency:avisChasseOnly:v1";
+const AVIS_LEVEL_RANGE_KEY = "dofus-efficiency:avisLevelRange:v1";
 const AVIS_OVERRIDES_KEY = "dofus-efficiency:avisOverrides:v1";
 
 /** A DofusDB dataset cached under a key (e.g. a level range), with a timestamp. */
@@ -224,6 +225,42 @@ export function loadAvisChasseOnly(): boolean {
 export function saveAvisChasseOnly(on: boolean): void {
   try {
     localStorage.setItem(AVIS_CHASSE_ONLY_KEY, on ? "1" : "0");
+  } catch {
+    // non-fatal
+  }
+}
+
+/**
+ * The level-range filter for the avis list. A null bound means "no limit" on that
+ * side. Persisted so the chosen range sticks between visits.
+ */
+export interface AvisLevelRange {
+  min: number | null;
+  max: number | null;
+}
+
+export function loadAvisLevelRange(): AvisLevelRange {
+  const empty: AvisLevelRange = { min: null, max: null };
+  try {
+    const raw = localStorage.getItem(AVIS_LEVEL_RANGE_KEY);
+    if (!raw) return empty;
+    const parsed = JSON.parse(raw);
+    if (parsed && typeof parsed === "object") {
+      const toBound = (v: unknown): number | null => {
+        const n = Number(v);
+        return Number.isFinite(n) && n > 0 ? Math.round(n) : null;
+      };
+      return { min: toBound(parsed.min), max: toBound(parsed.max) };
+    }
+    return empty;
+  } catch {
+    return empty;
+  }
+}
+
+export function saveAvisLevelRange(range: AvisLevelRange): void {
+  try {
+    localStorage.setItem(AVIS_LEVEL_RANGE_KEY, JSON.stringify(range));
   } catch {
     // non-fatal
   }

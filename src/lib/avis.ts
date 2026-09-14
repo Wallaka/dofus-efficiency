@@ -143,6 +143,23 @@ export function effectiveAvitons(base: number, chasseOnly: boolean): number {
   return chasseOnly ? Math.floor(base / 2) : base;
 }
 
+/**
+ * Whether an avis's required level falls within [min, max]. A null bound is open
+ * on that side. An avis with no known level is kept only when both bounds are
+ * open (so a level filter never silently hides level-less entries by surprise).
+ */
+export function avisInLevelRange(
+  level: number | undefined,
+  min: number | null,
+  max: number | null,
+): boolean {
+  if (min == null && max == null) return true;
+  if (level == null) return false;
+  if (min != null && level < min) return false;
+  if (max != null && level > max) return false;
+  return true;
+}
+
 /** The fetched catalog, cached with a timestamp. */
 export interface AvisCatalog {
   list: AvisReward[];
