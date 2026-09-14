@@ -11,6 +11,16 @@ import { QUESTS_CATALOG } from "./questsCatalog";
  */
 
 const KEY = "dofus-efficiency:quests:v1";
+const CHAR_KEY = "dofus-efficiency:quests:characters:v1";
+
+/** How many characters the routine is run on (quest rewards are per character). */
+export const MAX_CHARACTERS = 8;
+
+/** Clamp a value to a whole character count in [1, MAX_CHARACTERS]. */
+export function clampCharacters(n: number): number {
+  if (!Number.isFinite(n)) return 1;
+  return Math.min(MAX_CHARACTERS, Math.max(1, Math.round(n)));
+}
 
 export type QuestPeriod = "daily" | "weekly";
 
@@ -161,6 +171,25 @@ export function loadQuests(): Quest[] {
 export function saveQuests(quests: Quest[]): void {
   try {
     localStorage.setItem(KEY, JSON.stringify(quests));
+  } catch {
+    // non-fatal (quota / private mode)
+  }
+}
+
+/** Load the saved character count (defaults to 1). */
+export function loadCharacterCount(): number {
+  try {
+    const raw = localStorage.getItem(CHAR_KEY);
+    if (raw == null) return 1;
+    return clampCharacters(Number(raw));
+  } catch {
+    return 1;
+  }
+}
+
+export function saveCharacterCount(n: number): void {
+  try {
+    localStorage.setItem(CHAR_KEY, String(clampCharacters(n)));
   } catch {
     // non-fatal (quota / private mode)
   }
