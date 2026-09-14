@@ -2486,3 +2486,20 @@ td.negative {
 .quest-missing {
   font-size: 0.8rem;
 }
+
+/* Quêtes: catalog import + zone/note */
+.quest-import {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.quest-zone {
+  color: var(--muted);
+}
+.quest-note {
+  margin: 8px 0 0;
+  font-size: 0.82rem;
+  color: var(--muted);
+}

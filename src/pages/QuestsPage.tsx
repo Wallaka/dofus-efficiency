@@ -4,6 +4,8 @@ import {
   loadQuests,
   saveQuests,
   questValue,
+  periodTotal,
+  importCatalog,
   newQuestId,
   type Quest,
   type QuestPeriod,
@@ -108,12 +110,20 @@ export function QuestsPage() {
   const daily = useMemo(() => quests.filter((q) => q.period === "daily"), [quests]);
   const weekly = useMemo(() => quests.filter((q) => q.period === "weekly"), [quests]);
 
-  const sectionTotal = (list: Quest[]) =>
-    list.reduce((sum, q) => sum + questValue(q, prices).total, 0);
-  const dailyTotal = sectionTotal(daily);
-  const weeklyTotal = sectionTotal(weekly);
+  // Variant-aware totals: quests sharing a variantGroup count only once.
+  const dailyTotal = periodTotal(daily, prices);
+  const weeklyTotal = periodTotal(weekly, prices);
   // A full week's routine: every daily done 7×, plus the weeklies once.
   const weeklyRoutine = dailyTotal * 7 + weeklyTotal;
+
+  function onImport() {
+    setQuests((qs) => {
+      const { quests: next, added } = importCatalog(qs);
+      setImported(added);
+      return next;
+    });
+  }
+  const [imported, setImported] = useState<number | null>(null);
 
   return (
     <main className="quests-page">
@@ -164,6 +174,18 @@ export function QuestsPage() {
             Ajouter
           </button>
         </form>
+
+        <div className="quest-import">
+          <button type="button" className="folder-secondary" onClick={onImport}>
+            Importer les quêtes répétables
+          </button>
+          <span className="hint">
+            Catalogue communautaire (dofuspourlesnoobs) — n'ajoute que celles qui
+            manquent.
+            {imported != null &&
+              ` ${imported} quête${imported > 1 ? "s" : ""} ajoutée${imported > 1 ? "s" : ""}.`}
+          </span>
+        </div>
 
         {quests.length > 0 && (
           <div className="quests-summary">
@@ -273,6 +295,12 @@ function QuestCard({
           )}
         </span>
         <span className="badge">{PERIOD_LABEL[quest.period]}</span>
+        {quest.zone && <span className="badge quest-zone">{quest.zone}</span>}
+        {quest.variantGroup && (
+          <span className="badge badge-warn" title="Une seule quête de ce groupe par jour compte dans le total">
+            variante
+          </span>
+        )}
         <label className="quest-kamas">
           <input
             type="number"
@@ -299,6 +327,10 @@ function QuestCard({
           ✕
         </button>
       </div>
+
+      {quest.note && (
+        <p className="quest-note">Récompense annexe&nbsp;: {quest.note}</p>
+      )}
 
       {quest.rewards.length > 0 && (
         <table className="quest-rewards">
