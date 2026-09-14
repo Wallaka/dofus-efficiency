@@ -222,14 +222,16 @@ export function planRecipesToTarget(
       return { ...base, locked: r.resultLevel > from, startLevel: start };
     });
 
-  // Cheapest by NET cost (after reselling the output); unpriced last, locked last.
+  // Cheapest by GROSS ingredient cost (the real cost to level); unpriced last,
+  // locked last. Resale is shown per row but never reorders the list, so pricing
+  // a resell can't shuffle recipes around.
   plans.sort((a, b) => {
     if (a.locked !== b.locked) return a.locked ? 1 : -1; // craftable-now first
     if (a.locked) return a.recipe.resultLevel - b.recipe.resultLevel; // then by unlock
-    if (a.netCost == null && b.netCost == null) return a.crafts - b.crafts;
-    if (a.netCost == null) return 1;
-    if (b.netCost == null) return -1;
-    return a.netCost - b.netCost;
+    if (a.cost == null && b.cost == null) return a.crafts - b.crafts;
+    if (a.cost == null) return 1;
+    if (b.cost == null) return -1;
+    return a.cost - b.cost;
   });
   return plans;
 }
@@ -268,14 +270,16 @@ export interface OptimalPlan {
 }
 
 /**
- * The cheapest-kamas leveling route from `fromLevel` to `toLevel`, by NET cost —
- * i.e. after reselling every crafted item (net of the HDV tax). Each level's XP
- * is independent, so the global minimum is the per-level minimum: at every level
+ * The cheapest-kamas leveling route from `fromLevel` to `toLevel`, by GROSS
+ * ingredient cost — the genuinely cheapest way to *level*. Each level's XP is
+ * independent, so the global minimum is the per-level minimum: at every level
  * pick the craftable recipe (level ≤ current, including ones that unlock along
- * the way) whose *net* cost to clear that level is lowest. Consecutive levels
- * sharing a recipe are merged into paliers. Recipes with a missing ingredient
- * price are only used when nothing priced is craftable (then the plan is
- * incomplete).
+ * the way) whose ingredient cost to clear that level is lowest. Resale revenue
+ * (net of the HDV tax) is then subtracted from each step for display only — it
+ * never steers the path, so entering a sell price can only lower the shown net
+ * cost, never reshuffle the recipes. Consecutive levels sharing a recipe are
+ * merged into paliers. Recipes with a missing ingredient price are only used
+ * when nothing priced is craftable (then the plan is incomplete).
  */
 export function buildOptimalPlan(
   recipes: MetierRecipe[],
@@ -308,7 +312,12 @@ export function buildOptimalPlan(
         const sell = prices[r.result.id];
         const revenue = sell != null ? sell * (1 - taxRate) * crafts : 0;
         const net = cost - revenue;
-        if (!bestPriced || net < bestPriced.net)
+        // Pick the path by GROSS ingredient cost — the genuinely cheapest way to
+        // *level*. Resale is only ever an offset on top (see below): if we chose
+        // by net cost, entering a sell price would make a profit-to-craft recipe
+        // look "cheapest" and hijack the path into far more crafts, which is
+        // worse to actually do and assumes you can dump every craft at full price.
+        if (!bestPriced || cost < bestPriced.cost)
           bestPriced = { r, crafts, cost, revenue, net };
       } else if (!bestFree || crafts < bestFree.crafts) {
         bestFree = { r, crafts };
