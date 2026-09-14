@@ -3806,3 +3806,230 @@ td.negative {
   border: 1px solid color-mix(in srgb, var(--positive) 50%, transparent);
   color: var(--positive);
 }
+
+/* ---------------------------------------------------------------------------
+   Saisie vocale → JSON (experimental voice-entry page)
+--------------------------------------------------------------------------- */
+.voice-page em {
+  color: var(--text);
+  font-style: italic;
+}
+
+.voice-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 12px 0 4px;
+}
+
+.voice-mic {
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--num-bg);
+  color: var(--text);
+  font-size: 1rem;
+  cursor: pointer;
+}
+.voice-mic:hover {
+  border-color: var(--accent);
+}
+.voice-mic.listening {
+  background: color-mix(in srgb, var(--negative) 22%, var(--num-bg));
+  border-color: var(--negative);
+}
+
+.voice-status {
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.voice-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--negative);
+  animation: voice-pulse 1s ease-in-out infinite;
+}
+@keyframes voice-pulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+.voice-interim {
+  color: var(--text);
+}
+
+.voice-page .ghost {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+.voice-page .ghost:hover:not(:disabled) {
+  color: var(--text);
+  border-color: var(--accent);
+}
+.voice-page .ghost:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.voice-error {
+  color: var(--negative);
+  margin: 8px 0;
+}
+
+.voice-layout {
+  display: grid;
+  grid-template-columns: 1fr minmax(240px, 380px);
+  gap: 20px;
+  align-items: start;
+  margin-top: 12px;
+}
+@media (max-width: 860px) {
+  .voice-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.voice-row {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  background: var(--num-bg);
+}
+.voice-raw {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+}
+.voice-fields {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.voice-name {
+  flex: 1 1 160px;
+  min-width: 120px;
+  padding: 6px 8px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+.voice-price {
+  width: 90px;
+  padding: 6px 8px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.voice-kamas {
+  color: var(--positive);
+  font-variant-numeric: tabular-nums;
+  min-width: 70px;
+}
+.voice-lot {
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.voice-del {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 1rem;
+}
+.voice-del:hover {
+  color: var(--negative);
+}
+
+.voice-match {
+  margin-top: 8px;
+}
+.voice-resolved {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.voice-ic {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+.voice-matched {
+  color: var(--text);
+}
+.voice-cand {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  padding: 4px 6px;
+  max-width: 260px;
+}
+.voice-hint {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.voice-nomatch {
+  color: var(--negative);
+  font-size: 0.85rem;
+}
+.voice-badge {
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  border: 1px solid var(--border);
+}
+.voice-badge.q-exact {
+  color: var(--positive);
+  border-color: color-mix(in srgb, var(--positive) 50%, transparent);
+}
+.voice-badge.q-proche {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+.voice-badge.q-flou {
+  color: var(--negative);
+  border-color: color-mix(in srgb, var(--negative) 50%, transparent);
+}
+
+.voice-json {
+  position: sticky;
+  top: 12px;
+}
+.voice-json-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.voice-json pre {
+  margin: 0;
+  padding: 12px;
+  background: var(--num-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 0.8rem;
+  max-height: 60vh;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
