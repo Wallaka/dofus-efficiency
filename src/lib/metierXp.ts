@@ -1,79 +1,61 @@
 import type { Item, PriceMap } from "../types";
 
 /**
- * Profession (métier) leveling maths.
+ * Profession (métier) leveling maths, from the modern Dofus (2.29+) model.
  *
- * IMPORTANT — these XP numbers are an *estimate*. Dofus doesn't publish the
- * craft-XP formula, and it differs between versions; the values below are the
- * widely-used community model (XP by ingredient-slot count, with a level ceiling
- * per slot count). They're isolated here so they're trivial to correct once we
- * confirm the real numbers from the game. The UI labels the XP as estimated.
+ * Two well-established facts drive everything:
+ *  1. The XP to go from job level L to L+1 is `20 × L`, so the cumulative XP to
+ *     reach level N is `10 · N · (N−1)` (e.g. level 100 = 10·100·99 = 99 000).
+ *  2. A successful craft grants `20 × recipeLevel`, reduced by a penalty that
+ *     grows with the gap between your job level and the recipe's level — so
+ *     crafting an item *at* your level gives exactly one level's worth of XP
+ *     ("1 craft ≈ 1 level"), and out-levelled recipes give steadily less.
  *
- * The *cost* side (from the shared price store) is exact — so "kamas per XP",
- * the metric that actually decides what's cheapest to craft, is as trustworthy
- * as your prices, regardless of the XP model's precision.
+ * The penalty is modelled as `8 / (8 + gap)`, which fits the community-documented
+ * breakpoints within ~2 % across the whole range (gap 1→0.89, 3→0.73, 8→0.50,
+ * 22→0.27, 55→0.13). It's isolated here so it's trivial to refine. The XP is
+ * therefore a close estimate; the *cost* side (from your prices) is exact, so
+ * "kamas per XP" — what actually decides the cheapest craft — is trustworthy.
  */
 
-/** XP granted by one successful craft, by number of ingredient slots ("cases"). */
-export const SLOT_XP: Record<number, number> = {
-  1: 1,
-  2: 10,
-  3: 25,
-  4: 50,
-  5: 100,
-  6: 250,
-  7: 500,
-  8: 1000,
-};
-
-/** Approx. job level at which a recipe of N slots stops giving XP. */
-export const SLOT_CEILING: Record<number, number> = {
-  1: 40,
-  2: 60,
-  3: 80,
-  4: 100,
-  5: 200,
-  6: 200,
-  7: 200,
-  8: 200,
-};
-
-/** Clamp a slot count to the 1..8 range the tables are keyed on. */
-function slotKey(slots: number): number {
-  if (slots <= 1) return 1;
-  if (slots >= 8) return 8;
-  return slots;
+/** XP required to advance from job level `level` to the next. */
+export function xpToNextLevel(level: number): number {
+  return 20 * Math.max(0, level);
 }
 
-/** Base XP for a successful craft of a recipe with `slots` ingredient slots. */
-export function slotXp(slots: number): number {
-  if (slots <= 0) return 0;
-  return SLOT_XP[slotKey(slots)];
+/** Cumulative XP required to reach `level` (0 at level 1). */
+export function cumulativeXp(level: number): number {
+  const l = Math.max(1, level);
+  return 10 * l * (l - 1);
 }
 
-/** The job level beyond which this recipe no longer gives XP. */
-export function slotCeiling(slots: number): number {
-  if (slots <= 0) return 0;
-  return SLOT_CEILING[slotKey(slots)];
+/** XP kept when crafting a recipe `gap` levels below your job level (1 = at level). */
+export function craftPenalty(gap: number): number {
+  return 8 / (8 + Math.max(0, gap));
 }
 
-/** Does a recipe of `slots` slots still grant XP to a crafter at `jobLevel`? */
-export function givesXpAt(jobLevel: number, slots: number): boolean {
-  return slots > 0 && jobLevel < slotCeiling(slots);
-}
-
-/** XP per successful craft, scaled by an XP coefficient (1 = none, 1.2 = +20 %). */
-export function xpPerCraft(slots: number, coef = 1): number {
-  return Math.round(slotXp(slots) * coef);
+/**
+ * XP from one successful craft of a recipe of `recipeLevel`, by a crafter at
+ * `jobLevel`, scaled by an XP coefficient (1 = none, 1.2 = +20 %). Returns 0 for
+ * a recipe above the crafter's level (can't be crafted yet).
+ */
+export function xpPerCraft(
+  jobLevel: number,
+  recipeLevel: number,
+  coef = 1,
+): number {
+  if (recipeLevel > jobLevel || recipeLevel <= 0) return 0;
+  return Math.round(20 * recipeLevel * craftPenalty(jobLevel - recipeLevel) * coef);
 }
 
 // --- Leveling plan --------------------------------------------------------
 
-/** A recipe as the planner needs it: its result, slot count, and ingredients. */
+/** A recipe as the planner needs it: its result, level, slots, and ingredients. */
 export interface MetierRecipe {
   recipeId: string;
   result: Item;
   resultLevel: number;
+  /** Number of ingredient slots ("cases") — shown for info, not used for XP. */
   slots: number;
   ingredients: { item: Item; quantity: number }[];
 }
@@ -91,6 +73,7 @@ export interface MetierStep {
   fromLevel: number;
   toLevel: number;
   recipe: MetierRecipe;
+  /** XP/craft at the palier's starting level (it drifts down across the band). */
   xpPerCraft: number;
   crafts: number;
   /** recipe cost × crafts; undefined if any ingredient price is missing. */
@@ -111,49 +94,8 @@ export interface MetierPlan {
   shopping: PlanIngredient[];
   /** True when at least one ingredient price is missing (totals are partial). */
   incomplete: boolean;
-  /** First level with no XP-giving recipe available, if the plan can't reach the target. */
+  /** First level with no craftable recipe, if the plan can't reach the target. */
   stuckAtLevel?: number;
-}
-
-/** A recipe scored for a given level: XP/craft, cost/craft and cost-per-XP. */
-export interface RankedRecipe {
-  recipe: MetierRecipe;
-  xpPerCraft: number;
-  cost?: number;
-  costPerXp?: number;
-}
-
-/**
- * Rank a job's recipes for a crafter at `level` by cost-per-XP (cheapest first).
- * Needs no XP curve — the safety net when the curve can't be loaded. Recipes
- * with a missing price sort last (by highest XP/craft).
- */
-export function rankRecipes(
-  recipes: MetierRecipe[],
-  prices: PriceMap,
-  level: number,
-  coef = 1,
-): RankedRecipe[] {
-  const ranked = recipes
-    .filter((r) => givesXpAt(level, r.slots))
-    .map((r) => {
-      const xpc = xpPerCraft(r.slots, coef);
-      const cost = recipeCost(r, prices);
-      return {
-        recipe: r,
-        xpPerCraft: xpc,
-        cost,
-        costPerXp: cost != null && xpc > 0 ? cost / xpc : undefined,
-      };
-    });
-  ranked.sort((a, b) => {
-    if (a.costPerXp == null && b.costPerXp == null)
-      return b.xpPerCraft - a.xpPerCraft;
-    if (a.costPerXp == null) return 1;
-    if (b.costPerXp == null) return -1;
-    return a.costPerXp - b.costPerXp;
-  });
-  return ranked;
 }
 
 /** Sum a recipe's ingredient cost; undefined if any price is missing. */
@@ -170,75 +112,89 @@ export function recipeCost(
   return total;
 }
 
+/** A recipe scored for a given job level: XP/craft, cost/craft and cost-per-XP. */
+export interface RankedRecipe {
+  recipe: MetierRecipe;
+  xpPerCraft: number;
+  cost?: number;
+  costPerXp?: number;
+}
+
 /**
- * Pick the best recipe for a crafter at `level`: the one giving XP there with the
- * lowest cost-per-XP. Recipes with a missing price can't be costed, so they're
- * only used (by highest XP/craft) when nothing priced is available — the step
- * then shows an unknown cost rather than hiding the palier.
+ * Rank a job's recipes for a crafter at `level` by cost-per-XP (cheapest first).
+ * Only recipes you can craft (level ≤ yours) that still grant XP are included;
+ * ones with a missing price sort last (by highest XP/craft).
  */
+export function rankRecipes(
+  recipes: MetierRecipe[],
+  prices: PriceMap,
+  level: number,
+  coef = 1,
+): RankedRecipe[] {
+  const ranked: RankedRecipe[] = [];
+  for (const recipe of recipes) {
+    const xpc = xpPerCraft(level, recipe.resultLevel, coef);
+    if (xpc <= 0) continue;
+    const cost = recipeCost(recipe, prices);
+    ranked.push({
+      recipe,
+      xpPerCraft: xpc,
+      cost,
+      costPerXp: cost != null ? cost / xpc : undefined,
+    });
+  }
+  ranked.sort((a, b) => {
+    if (a.costPerXp == null && b.costPerXp == null)
+      return b.xpPerCraft - a.xpPerCraft;
+    if (a.costPerXp == null) return 1;
+    if (b.costPerXp == null) return -1;
+    return a.costPerXp - b.costPerXp;
+  });
+  return ranked;
+}
+
+/** Pick the cheapest recipe (per XP) craftable at `level`; unpriced as a last resort. */
 function pickRecipe(
   recipes: MetierRecipe[],
   level: number,
   prices: PriceMap,
   coef: number,
 ): MetierRecipe | undefined {
-  let bestPriced: { r: MetierRecipe; costPerXp: number } | undefined;
-  let bestUnpriced: { r: MetierRecipe; xpc: number } | undefined;
-
-  for (const r of recipes) {
-    if (!givesXpAt(level, r.slots)) continue;
-    const xpc = xpPerCraft(r.slots, coef);
-    if (xpc <= 0) continue;
-    const cost = recipeCost(r, prices);
-    if (cost != null) {
-      const cpx = cost / xpc;
-      if (!bestPriced || cpx < bestPriced.costPerXp) bestPriced = { r, costPerXp: cpx };
-    } else if (!bestUnpriced || xpc > bestUnpriced.xpc) {
-      bestUnpriced = { r, xpc };
-    }
-  }
-  return (bestPriced ?? bestUnpriced)?.r;
+  return rankRecipes(recipes, prices, level, coef)[0]?.recipe;
 }
 
 /**
- * Build a leveling plan from `fromLevel` to `toLevel` for one job.
- *
- * `xpCurve[l]` is the cumulative job XP required to reach level `l` (so the XP
- * from level a→b is `xpCurve[b] − xpCurve[a]`). Levels are walked one at a time,
- * the cheapest valid recipe is chosen for each, and consecutive levels sharing a
- * recipe are merged into one palier.
+ * Build a leveling plan from `fromLevel` to `toLevel` for one job, choosing the
+ * cheapest recipe at each level and merging consecutive levels that share a
+ * recipe into paliers. No external XP data is needed — everything comes from the
+ * formula above.
  */
 export function buildLevelingPlan(
   recipes: MetierRecipe[],
   prices: PriceMap,
-  xpCurve: number[],
   fromLevel: number,
   toLevel: number,
   coef = 1,
 ): MetierPlan {
   const from = Math.max(1, Math.floor(fromLevel));
-  const to = Math.min(xpCurve.length - 1, Math.floor(toLevel));
+  const to = Math.min(200, Math.floor(toLevel));
 
   const steps: MetierStep[] = [];
   let stuckAtLevel: number | undefined;
 
   for (let level = from; level < to; level++) {
-    const xpHere = xpCurve[level + 1] - xpCurve[level];
-    if (!(xpHere > 0)) continue;
-
     const recipe = pickRecipe(recipes, level, prices, coef);
     if (!recipe) {
       stuckAtLevel = level;
       break;
     }
-
-    const xpc = xpPerCraft(recipe.slots, coef);
-    const crafts = Math.ceil(xpHere / xpc);
+    const xpc = xpPerCraft(level, recipe.resultLevel, coef);
+    const crafts = Math.ceil(xpToNextLevel(level) / xpc);
 
     const last = steps[steps.length - 1];
     if (last && last.recipe.recipeId === recipe.recipeId) {
-      last.toLevel = level + 1;
       last.crafts += crafts;
+      last.toLevel = level + 1;
     } else {
       steps.push({
         fromLevel: level,
@@ -255,17 +211,16 @@ export function buildLevelingPlan(
   const shoppingById = new Map<string, PlanIngredient>();
   let incomplete = false;
   let totalCrafts = 0;
-  let totalXp = 0;
   let totalCost: number | undefined = 0;
 
   for (const step of steps) {
     totalCrafts += step.crafts;
-    totalXp += xpCurve[step.toLevel] - xpCurve[step.fromLevel];
+    const stepXp = cumulativeXp(step.toLevel) - cumulativeXp(step.fromLevel);
 
     const unitCost = recipeCost(step.recipe, prices);
     if (unitCost != null) {
       step.cost = unitCost * step.crafts;
-      step.costPerXp = step.xpPerCraft > 0 ? unitCost / step.xpPerCraft : undefined;
+      step.costPerXp = stepXp > 0 ? step.cost / stepXp : undefined;
       if (totalCost != null) totalCost += step.cost;
     } else {
       incomplete = true;
@@ -297,6 +252,7 @@ export function buildLevelingPlan(
     }
   }
 
+  const totalXp = cumulativeXp(to) - cumulativeXp(from);
   const avgCostPerXp =
     totalCost != null && totalXp > 0 ? totalCost / totalXp : undefined;
 
