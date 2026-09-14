@@ -67,22 +67,6 @@ describe("parseUtterance", () => {
     });
   });
 
-  it("reads a lot with 'fois'", () => {
-    expect(parseUtterance("ortie fois cent 900")).toEqual({
-      name: "ortie",
-      price: 900,
-      lot: 100,
-    });
-  });
-
-  it("reads a lot with x-notation", () => {
-    expect(parseUtterance("ortie x100 900")).toEqual({
-      name: "ortie",
-      price: 900,
-      lot: 100,
-    });
-  });
-
   it("keeps the name when no price is present", () => {
     expect(parseUtterance("frostiz")).toEqual({ name: "frostiz", price: null });
   });
@@ -98,13 +82,6 @@ describe("parseUtterances (multiple items in one breath)", () => {
       { name: "bois de frêne", price: 147 },
       { name: "chanvre", price: 12 },
       { name: "ortie", price: 5 },
-    ]);
-  });
-
-  it("keeps lots attached to the right item in a chain", () => {
-    expect(parseUtterances("ortie fois cent 900 chanvre 12")).toEqual([
-      { name: "ortie", price: 900, lot: 100 },
-      { name: "chanvre", price: 12 },
     ]);
   });
 

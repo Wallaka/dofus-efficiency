@@ -28,10 +28,8 @@ interface Row {
   raw: string;
   /** Parsed item name (editable). */
   name: string;
-  /** Parsed price in kamas (editable), or null. */
+  /** Parsed unit price in kamas (editable), or null. */
   price: number | null;
-  /** Lot size if a "fois N"/"xN" was spoken. */
-  lot?: number;
   resolve: Resolve;
 }
 
@@ -119,12 +117,9 @@ export function VoicePage() {
       id: `row-${++rowSeq}-${Date.now()}-${i}`,
       // Show the slice of the phrase this row came from when several share one
       // transcript, so an editable row still reads sensibly.
-      raw: many
-        ? `${p.name}${p.lot ? ` x${p.lot}` : ""}${p.price != null ? ` ${p.price}` : ""}`
-        : raw,
+      raw: many ? `${p.name}${p.price != null ? ` ${p.price}` : ""}` : raw,
       name: p.name,
       price: p.price,
-      lot: p.lot,
       resolve: { status: "loading" },
     }));
     // Newest phrase on top, items within it kept in spoken order.
@@ -240,7 +235,6 @@ export function VoicePage() {
       spoken: r.raw,
       name: r.name,
       price: r.price,
-      ...(r.lot ? { lot: r.lot } : {}),
       itemId: r.resolve.status === "ok" ? r.resolve.chosen.id : null,
       matched: r.resolve.status === "ok" ? r.resolve.chosen.name : null,
     }));
@@ -273,8 +267,8 @@ export function VoicePage() {
       <h2>Saisie vocale → JSON</h2>
       <p className="hint">
         Expérimentation. Enchaîne plusieurs objets d'une traite —
-        «&nbsp;<em>bois de frêne 147, chanvre 12, ortie fois cent 900</em>&nbsp;» :
-        chaque <strong>prix</strong> sépare un objet. L'app transcrit, extrait
+        «&nbsp;<em>bois de frêne 147, chanvre 12, ortie 5</em>&nbsp;» : chaque
+        <strong> prix unitaire</strong> sépare un objet. L'app transcrit, extrait
         nom + prix, et cherche l'objet sur DofusDB. But du jour :
         <strong> mesurer la précision</strong> avant d'aller plus loin.
       </p>
@@ -323,7 +317,6 @@ export function VoicePage() {
                   onBlur={(e) => commitName(r.id, e.target.value)}
                   placeholder="nom"
                 />
-                {r.lot && <span className="voice-lot">×{r.lot}</span>}
                 <input
                   className="voice-price"
                   value={r.price ?? ""}
