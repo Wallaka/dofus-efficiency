@@ -166,6 +166,25 @@ export function MetierPage() {
           }
         : null;
 
+  // The crafted item(s) of the current plan, with their craft counts, so the
+  // resale prices can be entered in one place instead of expanding each row.
+  const resaleItems = useMemo(() => {
+    const map = new Map<string, { item: Item; crafts: number }>();
+    if (isOptimal && optimal) {
+      for (const s of optimal.steps) {
+        const e = map.get(s.recipe.result.id);
+        if (e) e.crafts += s.crafts;
+        else map.set(s.recipe.result.id, { item: s.recipe.result, crafts: s.crafts });
+      }
+    } else if (fixedSelected) {
+      map.set(fixedSelected.recipe.result.id, {
+        item: fixedSelected.recipe.result,
+        crafts: fixedSelected.crafts,
+      });
+    }
+    return [...map.values()];
+  }, [isOptimal, optimal, fixedSelected]);
+
   const pct = (lvl: number) => `${Math.min(100, (lvl / MAX_LEVEL) * 100)}%`;
 
   /** One editable ingredient line (shared by every shopping list). */
@@ -545,6 +564,53 @@ export function MetierPage() {
               <div className="metier-shopping">{view.shopping.map(ingRow)}</div>
             )}
           </section>
+
+          {resaleItems.length > 0 && (
+            <section className="panel">
+              <h3 className="metier-h3">Revente des objets craftés</h3>
+              <p className="hint">
+                Prix de vente de ce que vous craftez — déduit du coût net
+                {taxRate > 0 ? ` (taxe HDV ${Math.round(taxRate * 100)} % appliquée)` : ""}.
+                Partagé avec les autres pages.
+              </p>
+              <div className="metier-shopping">
+                {resaleItems.map(({ item, crafts }) => {
+                  const unit = prices[item.id];
+                  const revenue = unit != null ? unit * (1 - taxRate) * crafts : undefined;
+                  return (
+                    <div className="metier-ing metier-ing--revenue" key={item.id}>
+                      <span className="metier-ing-id">
+                        <span className="metier-ing-icon">
+                          {item.img ? (
+                            <img src={item.img} alt="" />
+                          ) : (
+                            <span aria-hidden>⚒️</span>
+                          )}
+                        </span>
+                        <span className="metier-ing-name" title={item.name}>
+                          {item.name}
+                        </span>
+                      </span>
+                      <span className="metier-ing-qty">
+                        ×{crafts.toLocaleString("fr-FR")}
+                      </span>
+                      <PriceInput
+                        value={unit}
+                        needs={unit == null}
+                        ariaLabel={`Prix de revente de ${item.name}`}
+                        onCommit={(v) => onPriceChange(item, v)}
+                      />
+                      <span
+                        className={`metier-ing-total${revenue == null ? " missing" : " metier-profit"}`}
+                      >
+                        {revenue != null ? `− ${formatKamas(revenue)}` : "à saisir"}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          )}
         </>
       )}
     </main>
