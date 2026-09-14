@@ -1,4 +1,5 @@
 import type { Item, Recipe } from "../types";
+import type { MetierRecipe } from "../lib/metierXp";
 import type { AvisReward } from "../lib/avis";
 import {
   AVIS_CATEGORY_ID,
@@ -505,6 +506,118 @@ export async function fetchAvisDeRecherche(
 
   list.sort((a, b) => b.avitons - a.avitons);
   return list;
+}
+
+// --- Métiers (profession leveling) ----------------------------------------
+
+/** A craftable job, for the Métiers picker. */
+export interface JobOption {
+  id: number;
+  name: string;
+}
+
+/** List the jobs that have recipes, sorted by name — for the Métiers picker. */
+export async function fetchJobs(signal?: AbortSignal): Promise<JobOption[]> {
+  const raw = await fetchAllPages<RawJob>("/jobs", "lang=fr", signal, 5);
+  const jobs = raw
+    .map((j) => ({ id: j.id, name: pickName(j.name, `Métier ${j.id}`) }))
+    .filter((j) => Number.isFinite(j.id));
+  jobs.sort((a, b) => a.name.localeCompare(b.name, "fr"));
+  return jobs;
+}
+
+/** All recipes of one job, resolved (result + ingredients), for the planner. */
+export async function fetchJobRecipes(
+  jobId: number,
+  signal?: AbortSignal,
+): Promise<MetierRecipe[]> {
+  const rawRecipes = await fetchAllPages<RawRecipe>(
+    "/recipes",
+    `jobId=${jobId}`,
+    signal,
+  );
+  if (rawRecipes.length === 0) return [];
+
+  const idSet = new Set<number>();
+  for (const r of rawRecipes) {
+    if (r.resultId != null) idSet.add(r.resultId);
+    for (const ing of r.ingredientIds ?? []) idSet.add(ing);
+  }
+  const itemsById = await fetchItemsByIds([...idSet], signal);
+  const resolve = (id: number): Item =>
+    itemsById.get(id) ?? { id: String(id), name: `#${id}` };
+
+  const recipes: MetierRecipe[] = [];
+  const seenByResult = new Map<number, number>();
+  for (const r of rawRecipes) {
+    if (r.resultId == null || !Array.isArray(r.ingredientIds)) continue;
+    const seen = seenByResult.get(r.resultId) ?? 0;
+    seenByResult.set(r.resultId, seen + 1);
+    const recipeId = seen === 0 ? `r-${r.resultId}` : `r-${r.resultId}-${seen}`;
+    recipes.push({
+      recipeId,
+      result: resolve(r.resultId),
+      resultLevel: r.resultLevel ?? resolve(r.resultId).level ?? 1,
+      slots: r.ingredientIds.length,
+      ingredients: r.ingredientIds.map((id, idx) => ({
+        item: resolve(id),
+        quantity: r.quantities?.[idx] ?? 1,
+      })),
+    });
+  }
+  return recipes;
+}
+
+/** Candidate field names for the cumulative *job* XP on an /experiences row. */
+const JOB_XP_FIELDS = [
+  "jobExperience",
+  "jobXp",
+  "jobGradeExperience",
+  "jobExp",
+  "job",
+];
+
+interface RawExperience {
+  level?: number;
+  [key: string]: unknown;
+}
+
+/**
+ * The cumulative job-XP curve: `curve[level]` = total XP to reach that level, so
+ * the XP for a→b is `curve[b] − curve[a]`. Sourced from DofusDB's /experiences.
+ * The job-XP field name is detected among a few candidates (the API's exact key
+ * isn't documented); returns an empty array if none is found, so callers can
+ * degrade gracefully.
+ */
+export async function fetchJobXpCurve(signal?: AbortSignal): Promise<number[]> {
+  const rows = await fetchAllPages<RawExperience>("/experiences", "", signal, 6);
+  if (rows.length === 0) return [];
+
+  // Detect which field carries job XP, using the row with the most numeric data.
+  let field: string | undefined;
+  for (const key of JOB_XP_FIELDS) {
+    if (rows.some((r) => Number.isFinite(Number(r[key])) && Number(r[key]) > 0)) {
+      field = key;
+      break;
+    }
+  }
+  if (!field) return [];
+
+  const curve: number[] = [];
+  for (const r of rows) {
+    const level = Number(r.level);
+    const xp = Number(r[field]);
+    if (Number.isFinite(level) && level >= 1 && Number.isFinite(xp)) {
+      curve[level] = xp;
+    }
+  }
+  // Fill any gaps so consecutive-level diffs never read `undefined`.
+  let last = 0;
+  for (let l = 1; l < curve.length; l++) {
+    if (curve[l] == null) curve[l] = last;
+    else last = curve[l];
+  }
+  return curve;
 }
 
 async function getJson<T>(url: string, signal?: AbortSignal): Promise<T> {

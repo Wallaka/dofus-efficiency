@@ -2469,3 +2469,456 @@ td.negative {
   color: var(--positive);
   font-size: 0.88rem;
 }
+/* ---- Shared editable price field (Avis/Craft/Métiers) ---- */
+.price-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.price-edit input {
+  padding: 4px 6px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--num-bg);
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.85rem;
+  text-align: right;
+}
+.price-edit input.needs {
+  border-color: color-mix(in srgb, var(--negative) 55%, var(--border));
+}
+.price-edit input:disabled {
+  opacity: 0.5;
+}
+.price-edit-unit {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+/* ---- Métiers page ---- */
+.metier-page {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.metier-h3 {
+  margin: 0 0 10px;
+  padding: 0 4px;
+  font-size: 0.95rem;
+}
+
+.metier-controls {
+  display: flex;
+  gap: 14px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.metier-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.metier-field label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+.metier-field select,
+.metier-field input {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+  color: var(--text);
+  font-size: 0.95rem;
+}
+.metier-field.job select {
+  min-width: 190px;
+}
+.metier-field.lvl input {
+  width: 92px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.metier-arrow {
+  color: var(--muted);
+  padding-bottom: 8px;
+}
+
+.metier-progress {
+  margin-top: 14px;
+}
+.metier-progress-bar {
+  position: relative;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--num-bg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.metier-progress-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  background: color-mix(in srgb, var(--accent) 55%, transparent);
+}
+.metier-progress-target {
+  position: absolute;
+  top: -3px;
+  bottom: -3px;
+  width: 2px;
+  background: var(--accent);
+}
+.metier-progress-scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.metier-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.metier-tile {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.metier-tile-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+.metier-tile-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.metier-tile-sub {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.metier-tile.accent .metier-tile-value {
+  color: var(--accent);
+}
+
+.metier-path {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+  overflow: hidden;
+}
+.metier-head,
+.metier-row-main {
+  display: grid;
+  grid-template-columns: 24px 92px minmax(140px, 1.4fr) 78px 70px 96px 92px;
+  align-items: center;
+  gap: 12px;
+}
+.metier-head {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+.metier-head .num {
+  text-align: right;
+}
+.metier-step {
+  border-bottom: 1px solid var(--border);
+}
+.metier-step:last-child {
+  border-bottom: none;
+}
+.metier-row-main {
+  width: 100%;
+  padding: 12px 14px;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.metier-row-main:hover {
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+.metier-chevron {
+  color: var(--muted);
+  justify-self: center;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+.metier-step.open .metier-chevron {
+  transform: rotate(90deg);
+}
+.metier-palier {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.82rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.metier-palier strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.metier-recipe {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.metier-thumb {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--num-bg);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-size: 1rem;
+}
+.metier-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.metier-recipe-text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+.metier-recipe-name {
+  font-weight: 600;
+  font-size: 0.92rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.metier-recipe-meta {
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+.metier-slots {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 6px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 0.62rem;
+  color: var(--muted);
+}
+.metier-row-main .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.88rem;
+}
+.metier-kxp {
+  font-weight: 700;
+}
+
+.metier-detail {
+  padding: 6px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: color-mix(in srgb, var(--num-bg) 55%, transparent);
+  border-top: 1px dashed var(--border);
+  box-shadow: inset 3px 0 0 color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.metier-detail-cap,
+.metier-ing {
+  display: grid;
+  grid-template-columns: minmax(130px, 1fr) 84px 96px 96px;
+  gap: 10px;
+  align-items: center;
+}
+.metier-detail-cap {
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  padding-top: 4px;
+}
+.metier-detail-cap .c-qty,
+.metier-detail-cap .c-price,
+.metier-detail-cap .c-total {
+  text-align: right;
+}
+.metier-ing-id {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.metier-ing-icon {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--num-bg);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-size: 0.9rem;
+}
+.metier-ing-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.metier-ing-name {
+  font-size: 0.88rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.metier-ing-sub {
+  font-size: 0.66rem;
+  color: var(--muted);
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.metier-ing-sub .stale {
+  color: var(--negative);
+}
+.metier-src {
+  font-size: 0.56rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  white-space: nowrap;
+}
+.metier-src.ocr {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.metier-src.todo {
+  color: var(--negative);
+  border-color: color-mix(in srgb, var(--negative) 45%, transparent);
+}
+.metier-ing-qty,
+.metier-ing .price-edit,
+.metier-ing-total {
+  justify-self: end;
+}
+.metier-ing-qty {
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+.metier-ing-total {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+.metier-ing-total.missing {
+  color: var(--negative);
+  font-weight: 400;
+  font-style: italic;
+}
+.metier-shopping {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* Fallback ranked list (no XP curve). */
+.metier-head-rank,
+.metier-rank-row {
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) 84px 110px 96px;
+  gap: 12px;
+  align-items: center;
+}
+.metier-rank-row {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.metier-rank-row:last-child {
+  border-bottom: none;
+}
+.metier-rank-row .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.88rem;
+}
+
+@media (max-width: 680px) {
+  .metier-tiles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .metier-head {
+    display: none;
+  }
+  .metier-row-main {
+    grid-template-columns: 24px 1fr auto;
+    grid-template-areas:
+      "chev recipe kxp"
+      "chev palier kxp"
+      "chev metrics kxp";
+    row-gap: 4px;
+  }
+  .metier-chevron {
+    grid-area: chev;
+    align-self: start;
+    margin-top: 3px;
+  }
+  .metier-recipe {
+    grid-area: recipe;
+  }
+  .metier-palier {
+    grid-area: palier;
+  }
+  .metier-row-main .metier-crafts,
+  .metier-row-main .metier-cost {
+    display: none;
+  }
+  .metier-row-main .metier-xpcraft {
+    grid-area: metrics;
+    text-align: left;
+  }
+  .metier-row-main .metier-xpcraft::before {
+    content: "XP/craft ";
+    color: var(--muted);
+    font-size: 0.7rem;
+  }
+  .metier-kxp-cell {
+    grid-area: kxp;
+    align-self: center;
+    justify-self: end;
+  }
+}
