@@ -314,3 +314,38 @@ export function saveAvisOverrides(map: AvisOverrides): void {
     // non-fatal
   }
 }
+
+/**
+ * Cached carte-de-recherche craft recipes (carte item id → ingredients), so the
+ * avis page doesn't refetch a recipe every time a craft breakdown is opened. An
+ * empty ingredient list means the carte is known to be non-craftable.
+ */
+export interface CarteIngredient {
+  item: Item;
+  quantity: number;
+}
+export type CarteRecipeCache = Record<string, CarteIngredient[]>;
+
+const CARTE_RECIPES_KEY = "dofus-efficiency:carteRecipes:v1";
+
+export function loadCarteRecipes(): CarteRecipeCache {
+  try {
+    const raw = localStorage.getItem(CARTE_RECIPES_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+      return parsed as CarteRecipeCache;
+    }
+    return {};
+  } catch {
+    return {};
+  }
+}
+
+export function saveCarteRecipes(map: CarteRecipeCache): void {
+  try {
+    localStorage.setItem(CARTE_RECIPES_KEY, JSON.stringify(map));
+  } catch {
+    // non-fatal
+  }
+}
