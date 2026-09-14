@@ -1,17 +1,19 @@
 import { useEffect, useRef, useState } from "react";
 import type { AvisReward } from "../lib/avis";
-import { avitonUnitValue, effectiveAvitons } from "../lib/avis";
+import { avitonUnitValue, effectiveAvitons, avisInLevelRange } from "../lib/avis";
 import type { Item } from "../types";
 import { fetchAvisDeRecherche } from "../data/dofusApi";
 import {
   loadAvisAviton,
   loadAvisCatalog,
   loadAvisChasseOnly,
+  loadAvisLevelRange,
   loadAvisOverrides,
   loadAvisParticipation,
   saveAvisAviton,
   saveAvisCatalog,
   saveAvisChasseOnly,
+  saveAvisLevelRange,
   saveAvisOverrides,
   saveAvisParticipation,
   type AvisOverrides,
@@ -33,6 +35,21 @@ export function AvisPage() {
   const [error, setError] = useState<string>();
   // Free-text name filter, so a given avis is one keystroke away.
   const [filter, setFilter] = useState("");
+  // Level-range filter (min/max, null = open). Persisted so it sticks.
+  const [levelRange, setLevelRange] = useState(loadAvisLevelRange);
+  function setLevelBound(field: "min" | "max", value: string) {
+    setLevelRange((prev) => {
+      let n: number | null = null;
+      const t = value.trim();
+      if (t !== "") {
+        const parsed = Math.round(Number(t));
+        if (Number.isFinite(parsed) && parsed > 0) n = parsed;
+      }
+      const next = { ...prev, [field]: n };
+      saveAvisLevelRange(next);
+      return next;
+    });
+  }
   // Shared price store (carte + resource prices). Entries are the single source
   // of truth; the map derives from them, and each entry's source drives the badge.
   const { prices, entries, setPrice, clearPrice } = usePrices();
@@ -142,9 +159,13 @@ export function AvisPage() {
       .replace(/[̀-ͯ]/g, "")
       .toLowerCase();
   const query = norm(filter.trim());
-  const visible = query
-    ? list.filter((a) => norm(a.name).includes(query))
-    : list;
+  const filtersActive =
+    query !== "" || levelRange.min != null || levelRange.max != null;
+  const visible = list.filter(
+    (a) =>
+      (query === "" || norm(a.name).includes(query)) &&
+      avisInLevelRange(a.level, levelRange.min, levelRange.max),
+  );
 
   return (
     <main className="avis-page">
@@ -231,7 +252,33 @@ export function AvisPage() {
             placeholder="Filtrer par nom… (ex. Fouduglan)"
             aria-label="Filtrer les avis par nom"
           />
-          {filter.trim() !== "" && (
+          <span className="avis-level-range">
+            <span className="avis-level-label">Niveau</span>
+            <input
+              type="number"
+              min={1}
+              inputMode="numeric"
+              className="avis-level-input"
+              value={levelRange.min ?? ""}
+              placeholder="1"
+              aria-label="Niveau minimum"
+              onChange={(e) => setLevelBound("min", e.target.value)}
+            />
+            <span className="avis-level-dash" aria-hidden>
+              –
+            </span>
+            <input
+              type="number"
+              min={1}
+              inputMode="numeric"
+              className="avis-level-input"
+              value={levelRange.max ?? ""}
+              placeholder="200"
+              aria-label="Niveau maximum"
+              onChange={(e) => setLevelBound("max", e.target.value)}
+            />
+          </span>
+          {filtersActive && (
             <span className="hint">
               {visible.length} / {list.length}
             </span>
@@ -240,7 +287,7 @@ export function AvisPage() {
       )}
 
       {list.length > 0 && visible.length === 0 && (
-        <p className="hint">Aucun avis ne correspond à « {filter.trim()} ».</p>
+        <p className="hint">Aucun avis ne correspond aux filtres.</p>
       )}
 
       <ul className="avis-grid">

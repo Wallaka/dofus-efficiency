@@ -1321,7 +1321,33 @@ table.lots td.num {
 .avis-filter {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 12px;
+}
+
+.avis-level-range {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.avis-level-label {
+  font-weight: 600;
+  color: var(--text);
+}
+.avis-level-input {
+  width: 4rem;
+  padding: 7px 8px;
+  text-align: right;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+  color: inherit;
+  font: inherit;
+}
+.avis-level-dash {
+  color: var(--muted);
 }
 
 .avis-filter-input {
