@@ -46,7 +46,8 @@ describe("XP formula", () => {
   });
 
   it("applies the gap penalty, the coefficient, and blocks over-level recipes", () => {
-    expect(xpPerCraft(108, 100)).toBe(1000); // 20×100×0.5
+    // gap 8: floor(20×100 / (1 + 0.1·8^1.1)) = floor(1007.58) = 1007.
+    expect(xpPerCraft(108, 100)).toBe(1007);
     expect(xpPerCraft(100, 100, 1.2)).toBe(2400);
     expect(xpPerCraft(50, 60)).toBe(0); // recipe above job level
   });

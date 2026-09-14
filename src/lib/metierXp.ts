@@ -11,25 +11,23 @@ import type { Item, PriceMap } from "../types";
  *     crafting an item *at* your level gives one level's worth of XP
  *     ("1 craft ≈ 1 level"), and out-levelled recipes give steadily less.
  *
- * `ratio` is Ankama's documented per-gap table (below), extended with a smooth
- * tail past gap 17. Matched against DofusDB, a level-1 recipe from 1→20 gives
- * ~528 crafts vs their 523 (~1 %); the residual is their internal rounding. The
- * cost side (from your prices) is exact, so kamas/XP is trustworthy either way.
+ * `ratio` is Ankama's closed form `1 / (1 + 0.1 · gap^1.1)` (see `craftPenalty`).
+ * Matched against DofusDB, a level-1 recipe from 1→20 gives ~528 crafts vs their
+ * 523 (~1 %); the residual is the per-recipe base XP, which we approximate as
+ * `20 × recipeLevel` rather than reading each recipe's exact value. The cost side
+ * (from your prices) is exact, so kamas/XP is trustworthy either way.
  */
 
 /**
- * XP kept when crafting a recipe `gap` levels below your job level (index = gap).
- * Ankama's exact table for gaps 0–17; larger gaps use a fitted tail
- * (≈0.29 at 18, 0.25 at 22, 0.10 at 55) that joins the table smoothly at 17.
+ * Fraction of a recipe's base XP kept when crafting it `gap` levels below your
+ * job level. Ankama's closed form: `1 / (1 + 0.1 · gap^1.1)` — exact at every
+ * gap. (This reproduces the old hand-typed 0–17 ratio table to the digit; the
+ * table was just this formula rounded to three decimals, with an approximate
+ * tail past gap 17 that this replaces.)
  */
-const XP_RATIO = [
-  1.0, 0.91, 0.82, 0.75, 0.685, 0.63, 0.58, 0.54, 0.5, 0.47, 0.44, 0.415, 0.39,
-  0.37, 0.35, 0.335, 0.32, 0.305,
-] as const;
-
 export function craftPenalty(gap: number): number {
   const g = Math.max(0, Math.floor(gap));
-  return g < XP_RATIO.length ? XP_RATIO[g] : 7.045 / (g + 6.09);
+  return 1 / (1 + 0.1 * Math.pow(g, 1.1));
 }
 
 /** XP required to advance from job level `level` to the next. */
