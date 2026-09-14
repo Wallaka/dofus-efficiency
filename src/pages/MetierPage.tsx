@@ -476,7 +476,9 @@ export function MetierPage() {
                   key={plan.recipe.recipeId}
                   plan={plan}
                   selected={!isOptimal && plan.recipe.recipeId === selectedId}
+                  prices={prices}
                   onSelect={() => setSelectedId(plan.recipe.recipeId)}
+                  onPriceChange={onPriceChange}
                 />
               ))}
             </ul>
