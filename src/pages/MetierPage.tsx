@@ -18,6 +18,7 @@ import {
   type MetierInput,
 } from "../lib/metierStore";
 import { usePrices } from "../lib/usePrices";
+import { loadCraftTaxPercent } from "../lib/craftList";
 import { formatKamas } from "../lib/format";
 import { MetierRecipeRow } from "../components/MetierRecipeRow";
 import { PriceInput } from "../components/PriceInput";
@@ -107,18 +108,20 @@ export function MetierPage() {
   }
 
   const coef = (input.coefPercent || 100) / 100;
+  // HDV sell tax (shared with the Craft tab) applied to resale revenue.
+  const taxRate = loadCraftTaxPercent() / 100;
   const validRange = input.current < input.target;
 
   const plans = useMemo(() => {
     if (recipes.length === 0 || !validRange) return [];
-    return planRecipesToTarget(recipes, prices, input.current, input.target, coef);
-  }, [recipes, prices, input.current, input.target, coef, validRange]);
+    return planRecipesToTarget(recipes, prices, input.current, input.target, coef, taxRate);
+  }, [recipes, prices, input.current, input.target, coef, taxRate, validRange]);
 
   // The cheapest auto-switching route (uses recipes that unlock along the way).
   const optimal = useMemo(() => {
     if (recipes.length === 0 || !validRange) return null;
-    return buildOptimalPlan(recipes, prices, input.current, input.target, coef);
-  }, [recipes, prices, input.current, input.target, coef, validRange]);
+    return buildOptimalPlan(recipes, prices, input.current, input.target, coef, taxRate);
+  }, [recipes, prices, input.current, input.target, coef, taxRate, validRange]);
 
   const hasPlan = optimal != null && (optimal.steps.length > 0 || plans.length > 0);
   // Default selection is "optimal"; a fixed pick wins only if still in the list.
@@ -140,7 +143,9 @@ export function MetierPage() {
           crafts: optimal.totalCrafts,
           xp: optimal.totalXp,
           cost: optimal.totalCost,
-          costPerXp: optimal.avgCostPerXp,
+          revenue: optimal.totalRevenue,
+          netCost: optimal.netCost,
+          netCostPerXp: optimal.netCostPerXp,
           incomplete: optimal.incomplete,
           shopping: optimal.shopping,
         }
@@ -153,7 +158,9 @@ export function MetierPage() {
             crafts: fixedSelected.crafts,
             xp: xpBetween(fixedSelected.startLevel, input.target),
             cost: fixedSelected.cost,
-            costPerXp: fixedSelected.costPerXp,
+            revenue: fixedSelected.revenue,
+            netCost: fixedSelected.netCost,
+            netCostPerXp: fixedSelected.netCostPerXp,
             incomplete: fixedSelected.incomplete,
             shopping: fixedSelected.shopping,
           }
@@ -331,28 +338,42 @@ export function MetierPage() {
         <>
           <div className="metier-tiles">
             <div className="metier-tile">
-              <span className="metier-tile-label">Crafts</span>
-              <span className="metier-tile-value">{count(view.crafts)}</span>
-              <span className="metier-tile-sub">{view.label}</span>
+              <span className="metier-tile-label">Coût ingrédients</span>
+              <span className="metier-tile-value">{formatKamas(view.cost)}</span>
+              <span className="metier-tile-sub">{count(view.crafts)} crafts</span>
             </div>
             <div className="metier-tile">
-              <span className="metier-tile-label">XP à gagner</span>
-              <span className="metier-tile-value">{count(view.xp)}</span>
+              <span className="metier-tile-label">Revente</span>
+              <span className="metier-tile-value">
+                {view.revenue > 0 ? `− ${formatKamas(view.revenue)}` : "—"}
+              </span>
               <span className="metier-tile-sub">
-                {view.fromLevel} → {input.target}
+                revendus{taxRate > 0 ? ` (taxe ${Math.round(taxRate * 100)} %)` : ""}
               </span>
             </div>
             <div className="metier-tile accent">
-              <span className="metier-tile-label">Coût total</span>
-              <span className="metier-tile-value">{formatKamas(view.cost)}</span>
+              <span className="metier-tile-label">Coût net</span>
+              <span
+                className={`metier-tile-value${view.netCost != null && view.netCost < 0 ? " metier-profit" : ""}`}
+              >
+                {view.netCost == null
+                  ? "—"
+                  : view.netCost >= 0
+                    ? formatKamas(view.netCost)
+                    : `+${formatKamas(-view.netCost)}`}
+              </span>
               <span className="metier-tile-sub">
-                {view.incomplete ? "partiel (prix manquants)" : "aux prix actuels"}
+                {view.netCost != null && view.netCost < 0
+                  ? "bénéfice en montant !"
+                  : view.incomplete
+                    ? "partiel (prix manquants)"
+                    : "coût − revente"}
               </span>
             </div>
             <div className="metier-tile">
-              <span className="metier-tile-label">Coût moyen</span>
+              <span className="metier-tile-label">Coût net / XP</span>
               <span className="metier-tile-value">
-                {view.costPerXp != null ? formatKamas(view.costPerXp) : "—"}
+                {view.netCostPerXp != null ? formatKamas(view.netCostPerXp) : "—"}
               </span>
               <span className="metier-tile-sub">kamas / XP</span>
             </div>
@@ -410,11 +431,19 @@ export function MetierPage() {
                   <span className="num metier-crafts">
                     {optimal.totalCrafts.toLocaleString("fr-FR")}
                   </span>
-                  <span className="num metier-cost">{formatKamas(optimal.totalCost)}</span>
+                  <span
+                    className={`num metier-cost${optimal.netCost != null && optimal.netCost < 0 ? " metier-profit" : ""}`}
+                  >
+                    {optimal.netCost == null
+                      ? "—"
+                      : optimal.netCost >= 0
+                        ? formatKamas(optimal.netCost)
+                        : `+${formatKamas(-optimal.netCost)}`}
+                  </span>
                   <span className="num metier-kxp-cell">
                     <span className="metier-kxp">
-                      {optimal.avgCostPerXp != null
-                        ? `${formatKamas(optimal.avgCostPerXp)}/xp`
+                      {optimal.netCostPerXp != null
+                        ? `${formatKamas(optimal.netCostPerXp)}/xp`
                         : "—"}
                     </span>
                   </span>
@@ -445,7 +474,9 @@ export function MetierPage() {
                         </span>
                         <span className="metier-pcrafts">
                           {step.crafts.toLocaleString("fr-FR")} crafts
-                          {step.cost != null ? ` · ${formatKamas(step.cost)}` : ""}
+                          {step.netCost != null
+                            ? ` · net ${step.netCost >= 0 ? formatKamas(step.netCost) : `+${formatKamas(-step.netCost)}`}`
+                            : ""}
                         </span>
                       </div>
                     ))}

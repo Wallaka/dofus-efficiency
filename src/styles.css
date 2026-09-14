@@ -3449,3 +3449,14 @@ td.negative {
   border-top: 1px dashed var(--border);
   box-shadow: inset 3px 0 0 color-mix(in srgb, var(--accent) 45%, transparent);
 }
+
+/* Métiers — net cost / resale styling. */
+.metier-profit {
+  color: var(--positive) !important;
+}
+.metier-ing--revenue .metier-ing-name {
+  color: var(--positive);
+}
+.metier-ing--revenue .metier-ing-icon {
+  border-color: color-mix(in srgb, var(--positive) 45%, var(--border));
+}

@@ -118,6 +118,16 @@ export interface RecipePlan {
   locked: boolean;
   /** Level the count starts from (current level, or the unlock level if locked). */
   startLevel: number;
+  /** Unit sell price of the crafted item (pre-tax), if known. */
+  sellPrice?: number;
+  /** What selling every crafted item brings back: crafts × sellPrice × (1−tax). 0 if unpriced. */
+  revenue: number;
+  /** cost − revenue (the real cost after reselling the output); undefined if cost unknown. */
+  netCost?: number;
+  /** netCost ÷ total XP; undefined if not computable. */
+  netCostPerXp?: number;
+  /** The crafted item's sell price is known (so the recoup is real, not 0). */
+  resultPriced: boolean;
 }
 
 /**
@@ -132,6 +142,7 @@ export function planRecipeToTarget(
   fromLevel: number,
   toLevel: number,
   coef = 1,
+  taxRate = 0,
 ): RecipePlan {
   const from = Math.max(1, Math.floor(fromLevel));
   const to = Math.min(200, Math.floor(toLevel));
@@ -147,6 +158,12 @@ export function planRecipeToTarget(
   const cost = unitCost != null ? unitCost * crafts : undefined;
   const totalXp = xpBetween(from, to);
   const costPerXp = cost != null && totalXp > 0 ? cost / totalXp : undefined;
+
+  // Revenue from reselling every crafted item, net of the HDV sell tax.
+  const sellPrice = prices[recipe.result.id];
+  const revenue = sellPrice != null ? sellPrice * (1 - taxRate) * crafts : 0;
+  const netCost = cost != null ? cost - revenue : undefined;
+  const netCostPerXp = netCost != null && totalXp > 0 ? netCost / totalXp : undefined;
 
   const shopping: PlanIngredient[] = recipe.ingredients.map((ing) => {
     const unit = prices[ing.item.id];
@@ -172,6 +189,11 @@ export function planRecipeToTarget(
     priced: !incomplete,
     locked: recipe.resultLevel > from,
     startLevel: from,
+    sellPrice,
+    revenue,
+    netCost,
+    netCostPerXp,
+    resultPriced: sellPrice != null,
   };
 }
 
@@ -188,6 +210,7 @@ export function planRecipesToTarget(
   fromLevel: number,
   toLevel: number,
   coef = 1,
+  taxRate = 0,
 ): RecipePlan[] {
   const from = Math.max(1, Math.floor(fromLevel));
   const to = Math.min(200, Math.floor(toLevel));
@@ -195,17 +218,18 @@ export function planRecipesToTarget(
     .filter((r) => r.resultLevel >= 1 && r.resultLevel <= to)
     .map((r) => {
       const start = Math.max(from, r.resultLevel);
-      const base = planRecipeToTarget(r, prices, start, to, coef);
+      const base = planRecipeToTarget(r, prices, start, to, coef, taxRate);
       return { ...base, locked: r.resultLevel > from, startLevel: start };
     });
 
+  // Cheapest by NET cost (after reselling the output); unpriced last, locked last.
   plans.sort((a, b) => {
     if (a.locked !== b.locked) return a.locked ? 1 : -1; // craftable-now first
     if (a.locked) return a.recipe.resultLevel - b.recipe.resultLevel; // then by unlock
-    if (a.cost == null && b.cost == null) return a.crafts - b.crafts;
-    if (a.cost == null) return 1;
-    if (b.cost == null) return -1;
-    return a.cost - b.cost;
+    if (a.netCost == null && b.netCost == null) return a.crafts - b.crafts;
+    if (a.netCost == null) return 1;
+    if (b.netCost == null) return -1;
+    return a.netCost - b.netCost;
   });
   return plans;
 }
@@ -218,6 +242,10 @@ export interface OptimalStep {
   crafts: number;
   /** crafts × recipe cost; undefined if the recipe has a missing price. */
   cost?: number;
+  /** crafts × sell price × (1−tax); what reselling the output brings back. */
+  revenue: number;
+  /** cost − revenue; undefined if the cost is unknown. */
+  netCost?: number;
 }
 
 /** The cheapest route to the target, switching recipes as better ones unlock. */
@@ -225,8 +253,14 @@ export interface OptimalPlan {
   steps: OptimalStep[];
   totalCrafts: number;
   totalXp: number;
+  /** Gross ingredient cost (undefined if any level used an unpriced recipe). */
   totalCost?: number;
-  avgCostPerXp?: number;
+  /** Total resale revenue (net of tax) from the crafted output. */
+  totalRevenue: number;
+  /** totalCost − totalRevenue; undefined if the gross cost is unknown. */
+  netCost?: number;
+  /** netCost ÷ total XP. */
+  netCostPerXp?: number;
   shopping: PlanIngredient[];
   incomplete: boolean;
   /** Number of distinct recipes used along the way. */
@@ -234,12 +268,14 @@ export interface OptimalPlan {
 }
 
 /**
- * The cheapest-kamas leveling route from `fromLevel` to `toLevel`. Each level's
- * XP is independent, so the global minimum is the per-level minimum: at every
- * level pick the craftable recipe (level ≤ current, including ones that unlock
- * along the way) whose cost to clear that level is lowest. Consecutive levels
- * sharing a recipe are merged into paliers. Recipes with a missing price are
- * only used when nothing priced is craftable (then the plan is incomplete).
+ * The cheapest-kamas leveling route from `fromLevel` to `toLevel`, by NET cost —
+ * i.e. after reselling every crafted item (net of the HDV tax). Each level's XP
+ * is independent, so the global minimum is the per-level minimum: at every level
+ * pick the craftable recipe (level ≤ current, including ones that unlock along
+ * the way) whose *net* cost to clear that level is lowest. Consecutive levels
+ * sharing a recipe are merged into paliers. Recipes with a missing ingredient
+ * price are only used when nothing priced is craftable (then the plan is
+ * incomplete).
  */
 export function buildOptimalPlan(
   recipes: MetierRecipe[],
@@ -247,6 +283,7 @@ export function buildOptimalPlan(
   fromLevel: number,
   toLevel: number,
   coef = 1,
+  taxRate = 0,
 ): OptimalPlan {
   const from = Math.max(1, Math.floor(fromLevel));
   const to = Math.min(200, Math.floor(toLevel));
@@ -255,7 +292,9 @@ export function buildOptimalPlan(
   let usedUnpriced = false;
 
   for (let level = from; level < to; level++) {
-    let bestPriced: { r: MetierRecipe; crafts: number; cost: number } | undefined;
+    let bestPriced:
+      | { r: MetierRecipe; crafts: number; cost: number; revenue: number; net: number }
+      | undefined;
     let bestFree: { r: MetierRecipe; crafts: number } | undefined;
 
     for (const r of recipes) {
@@ -266,7 +305,11 @@ export function buildOptimalPlan(
       const unit = recipeCost(r, prices);
       if (unit != null) {
         const cost = crafts * unit;
-        if (!bestPriced || cost < bestPriced.cost) bestPriced = { r, crafts, cost };
+        const sell = prices[r.result.id];
+        const revenue = sell != null ? sell * (1 - taxRate) * crafts : 0;
+        const net = cost - revenue;
+        if (!bestPriced || net < bestPriced.net)
+          bestPriced = { r, crafts, cost, revenue, net };
       } else if (!bestFree || crafts < bestFree.crafts) {
         bestFree = { r, crafts };
       }
@@ -274,8 +317,8 @@ export function buildOptimalPlan(
 
     const pick = bestPriced ?? bestFree;
     if (!pick) continue; // no craftable recipe at this level
-    // pick === bestPriced whenever a priced recipe exists, else bestFree.
     const cost = bestPriced ? bestPriced.cost : undefined;
+    const revenue = bestPriced ? bestPriced.revenue : 0;
     if (!bestPriced) usedUnpriced = true;
 
     const last = steps[steps.length - 1];
@@ -283,6 +326,8 @@ export function buildOptimalPlan(
       last.crafts += pick.crafts;
       last.toLevel = level + 1;
       if (last.cost != null && cost != null) last.cost += cost;
+      last.revenue += revenue;
+      last.netCost = last.cost != null ? last.cost - last.revenue : undefined;
     } else {
       steps.push({
         fromLevel: level,
@@ -290,6 +335,8 @@ export function buildOptimalPlan(
         recipe: pick.r,
         crafts: pick.crafts,
         cost,
+        revenue,
+        netCost: cost != null ? cost - revenue : undefined,
       });
     }
   }
@@ -298,11 +345,13 @@ export function buildOptimalPlan(
   const shoppingById = new Map<string, PlanIngredient>();
   let totalCrafts = 0;
   let totalCost: number | undefined = usedUnpriced ? undefined : 0;
+  let totalRevenue = 0;
   let incomplete = usedUnpriced;
 
   for (const step of steps) {
     totalCrafts += step.crafts;
     if (step.cost != null && totalCost != null) totalCost += step.cost;
+    totalRevenue += step.revenue;
     for (const ing of step.recipe.ingredients) {
       const qty = ing.quantity * step.crafts;
       const unit = prices[ing.item.id];
@@ -323,12 +372,15 @@ export function buildOptimalPlan(
   }
 
   const totalXp = xpBetween(from, to);
+  const netCost = totalCost != null ? totalCost - totalRevenue : undefined;
   return {
     steps,
     totalCrafts,
     totalXp,
     totalCost,
-    avgCostPerXp: totalCost != null && totalXp > 0 ? totalCost / totalXp : undefined,
+    totalRevenue,
+    netCost,
+    netCostPerXp: netCost != null && totalXp > 0 ? netCost / totalXp : undefined,
     shopping: [...shoppingById.values()],
     incomplete,
     recipeCount: new Set(steps.map((s) => s.recipe.recipeId)).size,

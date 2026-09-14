@@ -73,6 +73,24 @@ describe("planRecipeToTarget", () => {
     expect(plan.crafts).toBe(3); // crafts don't depend on price
   });
 
+  it("subtracts resale revenue (net of tax) to get net cost", () => {
+    // recipe level 1, 1× "a" @10; result "res-R" sells for 30.
+    // 1→3: lvl1 1 craft, lvl2 ceil(40/18)=3 → 4 crafts. cost = 4×10 = 40.
+    const r = recipe("R", 1, [["a", 1]]);
+    const withPrices = { a: 10, "res-R": 30 };
+
+    const noTax = planRecipeToTarget(r, withPrices, 1, 3, 1, 0);
+    expect(noTax.crafts).toBe(4);
+    expect(noTax.cost).toBe(40);
+    expect(noTax.revenue).toBe(120); // 30 × 4
+    expect(noTax.netCost).toBe(-80); // profit while leveling
+    expect(noTax.resultPriced).toBe(true);
+
+    const taxed = planRecipeToTarget(r, withPrices, 1, 3, 1, 0.5);
+    expect(taxed.revenue).toBe(60); // 30 × 0.5 × 4
+    expect(taxed.netCost).toBe(-20);
+  });
+
   it("matches the DofusDB reference for a level-1 recipe 1→20 (523) closely", () => {
     // Ankama's exact ratio table + floored XP gives 528 vs DofusDB's 523 (~1%).
     const plan = planRecipeToTarget(recipe("lvl1", 1, [["b", 1]]), prices, 1, 20, 1);
