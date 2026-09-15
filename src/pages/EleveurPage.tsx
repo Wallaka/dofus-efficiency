@@ -15,6 +15,7 @@ import {
   type LevelBreakpoint,
   type OutputLine,
 } from "../lib/eleveur";
+import { filetsForLevel, filetById, type FiletDef } from "../lib/filets";
 import type { Item } from "../types";
 import { loadEleveur, saveEleveur } from "../lib/storage";
 import { usePrices } from "../lib/usePrices";
@@ -96,12 +97,15 @@ export function EleveurPage() {
     else setPrice(item, n);
   }
 
-  // ---- capture filet (searchable pick) ----
-  function setFiltre(item: Item) {
-    patch({ filtreItemId: item.id, filtreLabel: item.name, filtreImg: item.img });
-  }
-  function clearFiltre() {
-    patch({ filtreItemId: undefined, filtreLabel: undefined, filtreImg: undefined });
+  // ---- capture filet (level-filtered dropdown) ----
+  function selectFiltre(def: FiletDef) {
+    // Picking a filet also seeds its (editable) mounts-per-capture default.
+    patch({
+      filtreItemId: def.id,
+      filtreLabel: def.name,
+      filtreImg: def.img,
+      mountsPerCapture: def.defaultMounts,
+    });
   }
 
   // ---- breakpoint table ----
@@ -166,6 +170,19 @@ export function EleveurPage() {
 
   const filtrePrice =
     input.filtreItemId != null ? prices[input.filtreItemId] : undefined;
+
+  // Filets usable at the current level, plus the chosen one if it's above level
+  // (kept in the list but flagged, rather than silently dropped).
+  const availableFilets = useMemo(() => filetsForLevel(input.level), [input.level]);
+  const selectedFilet = filetById(input.filtreItemId);
+  const filetOptions = useMemo(() => {
+    if (selectedFilet && !availableFilets.some((f) => f.id === selectedFilet.id)) {
+      return [selectedFilet, ...availableFilets];
+    }
+    return availableFilets;
+  }, [availableFilets, selectedFilet]);
+  const selectedBelowLevel =
+    selectedFilet != null && selectedFilet.level > (input.level ?? 0);
 
   return (
     <main className="eleveur-page">
@@ -415,103 +432,110 @@ export function EleveurPage() {
       <section className="panel">
         <h2>Capture</h2>
         <p className="hint">
-          Le filet utilisé pour capturer une dragodinde (les filets ont un
-          niveau de métier requis — cherchez le bon), et combien il en faut par
-          capture. Prix partagé avec vos prix suivis.
+          Le filet de capture (les filets ont un niveau d'éleveur requis — seuls
+          ceux que votre niveau permet sont proposés), combien il en faut par
+          capture, et combien de montures il rapporte. Prix partagé avec vos prix
+          suivis.
         </p>
 
-        {input.filtreItemId != null ? (
-          <>
-            <div className="eleveur-filet-row">
-              <span className="eleveur-filet-name">
-                {input.filtreImg && (
-                  <img src={input.filtreImg} alt="" className="eleveur-out-icon" />
-                )}
-                {input.filtreLabel ?? "Filet"}
-              </span>
-              <button
-                type="button"
-                className="eleveur-filet-change"
-                onClick={clearFiltre}
-                title="Changer de filet"
+        <div className="eleveur-capture">
+          <div className="field eleveur-filet-select">
+            <label htmlFor="filet">Filet</label>
+            <div className="eleveur-filet-picker">
+              {input.filtreImg && (
+                <img src={input.filtreImg} alt="" className="eleveur-out-icon" />
+              )}
+              <select
+                id="filet"
+                value={input.filtreItemId ?? ""}
+                onChange={(e) => {
+                  const def = filetById(e.target.value);
+                  if (def) selectFiltre(def);
+                  else
+                    patch({
+                      filtreItemId: undefined,
+                      filtreLabel: undefined,
+                      filtreImg: undefined,
+                    });
+                }}
               >
-                Changer
-              </button>
-            </div>
-            <div className="eleveur-capture">
-              <div className="field">
-                <label htmlFor="filtres">Filets / capture</label>
-                <input
-                  id="filtres"
-                  type="number"
-                  min={0}
-                  inputMode="numeric"
-                  value={input.captureFiltres ?? ""}
-                  onChange={(e) => patch({ captureFiltres: num(e.target.value) })}
-                />
-              </div>
-              <div className="field">
-                <label htmlFor="mpc">Montures / capture</label>
-                <input
-                  id="mpc"
-                  type="number"
-                  min={1}
-                  inputMode="numeric"
-                  value={input.mountsPerCapture ?? ""}
-                  onChange={(e) => patch({ mountsPerCapture: num(e.target.value) })}
-                />
-                <p className="hint">Capacité du filet (ex. 2 par combat).</p>
-              </div>
-              <div className="field">
-                <label htmlFor="filtre-price">Prix du filet</label>
-                <input
-                  id="filtre-price"
-                  type="number"
-                  min={0}
-                  inputMode="numeric"
-                  placeholder="prix ?"
-                  className={filtrePrice == null ? "needs-price" : ""}
-                  value={filtrePrice ?? ""}
-                  onChange={(e) =>
-                    setItemPrice(
-                      {
-                        id: input.filtreItemId!,
-                        name: input.filtreLabel ?? "Filet",
-                        img: input.filtreImg,
-                      },
-                      e.target.value,
-                    )
-                  }
-                />
-              </div>
-              <div className="eleveur-capture-total">
-                <span className="eleveur-tile-label">Coût capture / monture</span>
-                <strong>{formatKamas(result.captureCostPerMount)}</strong>
-              </div>
-            </div>
-          </>
-        ) : (
-          <div className="cost-items">
-            <p className="hint">Choisir le filet de capture :</p>
-            {favourites.length > 0 && (
-              <div className="fav-chips">
-                {favourites.map((fav) => (
-                  <button
-                    type="button"
-                    key={fav.id}
-                    className="fav-chip"
-                    onClick={() => setFiltre(fav)}
+                <option value="">— Choisir —</option>
+                {filetOptions.map((f) => (
+                  <option
+                    key={f.id}
+                    value={f.id}
+                    disabled={f.level > (input.level ?? 0)}
                   >
-                    {fav.name}
-                  </button>
+                    {f.name} — niv {f.level}
+                    {f.creature !== "Universel" ? ` · ${f.creature}` : ""}
+                  </option>
                 ))}
-              </div>
-            )}
-            <ItemAutocomplete
-              onPick={setFiltre}
-              placeholder="Rechercher un filet…"
+              </select>
+            </div>
+          </div>
+          <div className="field eleveur-num">
+            <label htmlFor="filtres">Filets / capture</label>
+            <input
+              id="filtres"
+              type="number"
+              min={0}
+              inputMode="numeric"
+              value={input.captureFiltres ?? ""}
+              onChange={(e) => patch({ captureFiltres: num(e.target.value) })}
             />
           </div>
+          <div className="field eleveur-num">
+            <label htmlFor="mpc">Montures / capture</label>
+            <input
+              id="mpc"
+              type="number"
+              min={1}
+              inputMode="numeric"
+              value={input.mountsPerCapture ?? ""}
+              onChange={(e) => patch({ mountsPerCapture: num(e.target.value) })}
+            />
+            <p className="hint">Capacité du filet (modifiable).</p>
+          </div>
+          <div className="field eleveur-num">
+            <label htmlFor="filtre-price">Prix du filet</label>
+            <input
+              id="filtre-price"
+              type="number"
+              min={0}
+              inputMode="numeric"
+              placeholder="prix ?"
+              disabled={input.filtreItemId == null}
+              className={
+                input.filtreItemId != null && filtrePrice == null ? "needs-price" : ""
+              }
+              value={filtrePrice ?? ""}
+              onChange={(e) =>
+                input.filtreItemId != null &&
+                setItemPrice(
+                  {
+                    id: input.filtreItemId,
+                    name: input.filtreLabel ?? "Filet",
+                    img: input.filtreImg,
+                  },
+                  e.target.value,
+                )
+              }
+            />
+          </div>
+          <div className="eleveur-capture-total">
+            <span className="eleveur-tile-label">Coût capture / monture</span>
+            <strong>{formatKamas(result.captureCostPerMount)}</strong>
+          </div>
+        </div>
+
+        {selectedBelowLevel && selectedFilet && (
+          <p className="hint error-text">
+            ⚠ « {selectedFilet.name} » demande le niveau {selectedFilet.level} —
+            au-dessus de votre niveau actuel.
+          </p>
+        )}
+        {availableFilets.length === 0 && (
+          <p className="hint">Aucun filet disponible à votre niveau d'éleveur.</p>
         )}
       </section>
 

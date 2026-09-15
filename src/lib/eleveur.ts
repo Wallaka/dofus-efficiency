@@ -20,14 +20,10 @@
  */
 
 import type { Item, PriceMap } from "../types";
+import { FILETS } from "./filets";
 
-/** The capture filter used on wild dragodindes (from the built-in catalog). */
-export const FILTRE_ITEM: Item = {
-  id: "17869",
-  name: "Filtre à frousse",
-  img: "https://api.dofusdb.fr/img/items/164099.png",
-  level: 200,
-};
+/** Default capture net: the level-1 "Filet de capture universel". */
+const DEFAULT_FILET = FILETS[0];
 
 /**
  * One row of the éleveur level → slots table: from `level` onward you have
@@ -351,10 +347,10 @@ export function defaultEleveurInput(): EleveurInput {
       newBreakpoint(200, 6, 10),
     ],
     captureFiltres: 1,
-    mountsPerCapture: 1,
-    filtreItemId: FILTRE_ITEM.id,
-    filtreLabel: FILTRE_ITEM.name,
-    filtreImg: FILTRE_ITEM.img,
+    mountsPerCapture: DEFAULT_FILET.defaultMounts,
+    filtreItemId: DEFAULT_FILET.id,
+    filtreLabel: DEFAULT_FILET.name,
+    filtreImg: DEFAULT_FILET.img,
     raiseDays: undefined,
     raiseCosts: [newCostLine("Nourriture")],
     outputs: [],
