@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import type { Item } from "../types";
 import { ItemAutocomplete } from "../components/ItemAutocomplete";
+import { CopyName } from "../components/CopyName";
 import {
   loadResources,
   saveResources,
@@ -123,6 +124,7 @@ export function MesRessourcesPage() {
               <span className="res-name" title={item.name}>
                 {item.name}
               </span>
+              <CopyName text={item.name} />
               <input
                 type="number"
                 min={1}

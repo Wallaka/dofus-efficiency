@@ -8,6 +8,7 @@ import {
   type PriceEntry,
 } from "../lib/priceStore";
 import { formatKamas, formatDateTime } from "../lib/format";
+import { CopyName } from "../components/CopyName";
 
 const STALE_DAYS = Math.round(STALE_AFTER_MS / (24 * 60 * 60 * 1000));
 
@@ -119,6 +120,7 @@ export function PricesPage() {
                             <img src={e.img} alt="" className="autocomplete-icon" />
                           )}
                           <span className="item-name">{e.name}</span>
+                          <CopyName text={e.name} />
                           {e.level != null && (
                             <span className="recipe-detail">Niv. {e.level}</span>
                           )}
