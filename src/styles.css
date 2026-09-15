@@ -1707,6 +1707,40 @@ table.eleveur-bp input {
   font-size: 0.72rem;
 }
 
+.eleveur-field-label {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.eleveur-mount-count {
+  color: var(--accent);
+}
+.eleveur-mount-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.eleveur-mount-check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--num-bg);
+  cursor: pointer;
+  font-size: 0.88rem;
+}
+.eleveur-mount-check.checked {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+.eleveur-mount-check-icon {
+  width: 24px;
+  height: 24px;
+}
+
 .eleveur-mount {
   display: flex;
   align-items: center;

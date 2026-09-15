@@ -39,8 +39,7 @@ describe("expectedQuantity", () => {
 function baseInput(overrides: Partial<EleveurInput> = {}): EleveurInput {
   return {
     level: 200,
-    mountId: "4434",
-    mountCreature: "Muldo",
+    mountIds: ["4434"],
     ...overrides,
   };
 }
@@ -125,13 +124,26 @@ describe("computeEleveur", () => {
   });
 
   it("has no filet or capture cost until a mount is chosen", () => {
-    const r = computeEleveur(
-      { level: 200, raiseHours: 10 },
-      PRICES,
-      0,
-    );
+    const r = computeEleveur({ level: 200, mountIds: [] }, PRICES, 0);
     expect(r.filet).toBeUndefined();
     expect(r.captureCostPerMount).toBe(0);
     expect(r.runes).toEqual([]);
+  });
+
+  it("diversifies: capacity split equally averages the runes across muldos", () => {
+    // Indigo (Ré Per Eau, id 7560) + orchidée (Ré Per Feu, id 7457). Each mount
+    // is half one, half the other → Ga Pme stays 0.5, each signature is 4.75/2.
+    const r = computeEleveur(
+      baseInput({ mountIds: ["4434", "4436"] }),
+      PRICES,
+      0,
+      10,
+    );
+    const gaPme = r.runes.find((x) => x.itemId === "1558");
+    const eau = r.runes.find((x) => x.itemId === "7560");
+    const feu = r.runes.find((x) => x.itemId === "7457");
+    expect(gaPme?.perMount).toBeCloseTo(0.5, 6); // 0.5/2 + 0.5/2
+    expect(eau?.perMount).toBeCloseTo(4.75 / 2, 6);
+    expect(feu?.perMount).toBeCloseTo(4.75 / 2, 6);
   });
 });
