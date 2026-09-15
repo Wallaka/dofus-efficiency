@@ -18,8 +18,17 @@
 
 import type { PriceMap } from "../types";
 import { bestFiletFor, filetById, type FiletCreature, type FiletDef } from "./filets";
-import { brisageFor, type RuneYield } from "./mounts";
+import { brisageFor, mountById, type RuneYield } from "./mounts";
 import { mangeoireById, type MangeoireDef } from "./mangeoires";
+
+/** A rune line for display: aggregated expected quantity per mount. */
+export interface RuneLine {
+  itemId: string;
+  label: string;
+  img: string;
+  /** Expected quantity per mount (blended across the selected mounts). */
+  perMount: number;
+}
 
 export const ENCLOS_CAPACITY = 10;
 const ENCLOS_THRESHOLDS = [40, 80, 120, 160, 200];
@@ -44,11 +53,11 @@ export function enclosForLevel(level: number | undefined): number {
 export interface EleveurInput {
   /** Éleveur profession level — drives the enclos count and the filet. */
   level?: number;
-  /** The wild mount captured / raised / broken. */
-  mountId?: string;
-  mountLabel?: string;
-  mountImg?: string;
-  mountCreature?: FiletCreature;
+  /**
+   * The wild mounts captured / raised / broken. Several = diversify: capacity is
+   * split equally between them, so revenue and runes are the average across them.
+   */
+  mountIds?: string[];
   /**
    * Chosen capture net. Undefined = auto (the best usable filet); set it to
    * compare a specific filet's profitability. Must be usable for the creature.
@@ -67,14 +76,21 @@ export interface EleveurInput {
   availTo?: number;
 }
 
+/** The creature of the selected mounts (all muldos share one), or undefined. */
+export function mountCreatureOf(input: EleveurInput): FiletCreature | undefined {
+  const first = input.mountIds?.[0];
+  return mountById(first)?.creature;
+}
+
 /**
  * The filet in effect: the explicit choice if set, otherwise the best usable
  * one. Undefined until a mount (creature) is chosen.
  */
 export function resolveFilet(input: EleveurInput): FiletDef | undefined {
-  if (input.mountCreature == null) return undefined;
+  const creature = mountCreatureOf(input);
+  if (creature == null) return undefined;
   if (input.filetId != null) return filetById(input.filetId);
-  return bestFiletFor(input.level, input.mountCreature);
+  return bestFiletFor(input.level, creature);
 }
 
 export interface EleveurResult {
@@ -113,8 +129,8 @@ export interface EleveurResult {
   /** profitPerCycle × (24 / raiseHours) — profit per day, rotations back-to-back. */
   profitPerDay?: number;
 
-  /** The runes this mount yields (for display), and their expected qty helper. */
-  runes: RuneYield[];
+  /** The runes yielded (aggregated across the selected mounts), for display. */
+  runes: RuneLine[];
   /** Item ids (filet, runes) with no known price. */
   missingPriceItemIds: string[];
 }
@@ -162,12 +178,27 @@ export function computeEleveur(
   const filtresPerMount = filet ? 1 / mpc : 0;
   const captureCostPerMount = filet ? (filetPrice ?? 0) * filtresPerMount : 0;
 
-  const runes =
-    (input.mountId != null && brisageOverrides[input.mountId]) ||
-    brisageFor(input.mountId);
+  // Runes: capacity is split equally between the selected mounts, so each mount
+  // contributes 1/N of its yield to the per-mount average. Same rune from
+  // several mounts is merged.
+  const mountIds = input.mountIds ?? [];
+  const n = mountIds.length;
+  const acc = new Map<string, RuneLine>();
+  if (n > 0) {
+    for (const mid of mountIds) {
+      const yields = brisageOverrides[mid] ?? brisageFor(mid);
+      for (const r of yields) {
+        const perMount = runeExpectedQty(r) / n;
+        const ex = acc.get(r.itemId);
+        if (ex) ex.perMount += perMount;
+        else acc.set(r.itemId, { itemId: r.itemId, label: r.label, img: r.img, perMount });
+      }
+    }
+  }
+  const runes = [...acc.values()];
   const grossRevenuePerMount = runes.reduce((sum, r) => {
     const unit = prices[r.itemId];
-    return sum + (unit == null ? 0 : unit * runeExpectedQty(r));
+    return sum + (unit == null ? 0 : unit * r.perMount);
   }, 0);
   const taxPerMount = grossRevenuePerMount * taxRate;
   const netRevenuePerMount = grossRevenuePerMount - taxPerMount;
@@ -237,7 +268,7 @@ export function computeEleveur(
 export function defaultEleveurInput(): EleveurInput {
   return {
     level: 200,
-    mountId: undefined,
+    mountIds: [],
     mangeoireId: "33341", // Grand Extrait de Mangeoire (4000 énergie)
     rotationsPerDay: 1,
     availFrom: 8,

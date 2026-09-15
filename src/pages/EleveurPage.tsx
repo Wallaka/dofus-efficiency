@@ -3,6 +3,7 @@ import {
   computeEleveur,
   defaultEleveurInput,
   resolveFilet,
+  mountCreatureOf,
   runeExpectedQty,
   BRISAGE_LEVEL,
   ENERGY_PER_ENCLOS,
@@ -12,7 +13,7 @@ import {
 import { bestFiletFor, filetsForLevel } from "../lib/filets";
 import { planRotations, formatClock } from "../lib/planning";
 import { MANGEOIRES } from "../lib/mangeoires";
-import { MOUNTS, MULDOS, mountById, brisageFor, type RuneYield } from "../lib/mounts";
+import { MOUNTS, MULDOS, brisageFor, type RuneYield } from "../lib/mounts";
 import {
   loadBrisageOverrides,
   saveBrisageOverrides,
@@ -95,9 +96,15 @@ function num(v: string): number | undefined {
  * price store.
  */
 export function EleveurPage() {
-  const [input, setInput] = useState<EleveurInput>(
-    () => loadEleveur() ?? defaultEleveurInput(),
-  );
+  const [input, setInput] = useState<EleveurInput>(() => {
+    const loaded = loadEleveur() as (EleveurInput & { mountId?: string }) | null;
+    if (loaded == null) return defaultEleveurInput();
+    // Migrate a legacy single-mount save to the multi-select shape.
+    if (!loaded.mountIds && loaded.mountId) {
+      return { ...loaded, mountIds: [loaded.mountId] };
+    }
+    return loaded;
+  });
   const { prices, setPrice, clearPrice } = usePrices();
   const [tab, setTab] = useState<"sim" | "muldos">("sim");
   const [brisage, setBrisage] = useState<BrisageOverrides>(loadBrisageOverrides);
@@ -130,13 +137,11 @@ export function EleveurPage() {
   // The filet in effect (explicit choice or auto-best). It catches a variable
   // number of mounts, so we evaluate both bounds: `low` = fewest caught (worst
   // case), `high` = most.
+  const creature = mountCreatureOf(input);
+  const selectedIds = input.mountIds ?? [];
   const filet = resolveFilet(input);
-  const bestFilet = input.mountCreature
-    ? bestFiletFor(input.level, input.mountCreature)
-    : undefined;
-  const availableFilets = input.mountCreature
-    ? filetsForLevel(input.level, input.mountCreature)
-    : [];
+  const bestFilet = creature ? bestFiletFor(input.level, creature) : undefined;
+  const availableFilets = creature ? filetsForLevel(input.level, creature) : [];
   const low = useMemo(
     () => computeEleveur(input, prices, taxRate, filet?.mountsMin ?? 1, brisage),
     [input, prices, taxRate, filet, brisage],
@@ -184,14 +189,15 @@ export function EleveurPage() {
     setInput((prev) => ({ ...prev, ...p }));
   }
 
-  function selectMount(id: string) {
-    const m = mountById(id);
-    // Reset the filet choice to auto — a chosen filet may not fit the new creature.
-    patch(
-      m
-        ? { mountId: m.id, mountLabel: m.name, mountImg: m.img, mountCreature: m.creature, filetId: undefined }
-        : { mountId: undefined, mountLabel: undefined, mountImg: undefined, mountCreature: undefined, filetId: undefined },
-    );
+  function toggleMount(id: string) {
+    setInput((prev) => {
+      const cur = prev.mountIds ?? [];
+      const next = cur.includes(id)
+        ? cur.filter((x) => x !== id)
+        : [...cur, id];
+      // Reset the filet choice to auto if the selection is emptied.
+      return { ...prev, mountIds: next, filetId: next.length ? prev.filetId : undefined };
+    });
   }
 
   function setItemPrice(item: Item, v: string) {
@@ -338,23 +344,32 @@ export function EleveurPage() {
             />
           </div>
           <div className="field eleveur-mount-field">
-            <label htmlFor="mount">Monture à capturer</label>
-            <div className="eleveur-mount">
-              {input.mountImg && (
-                <img src={input.mountImg} alt="" className="eleveur-mount-icon" />
+            <span className="eleveur-field-label">
+              Montures à capturer{" "}
+              {selectedIds.length > 1 && (
+                <span className="eleveur-mount-count">
+                  {selectedIds.length} sélectionnés · capacité répartie
+                </span>
               )}
-              <select
-                id="mount"
-                value={input.mountId ?? ""}
-                onChange={(e) => selectMount(e.target.value)}
-              >
-                <option value="">— Choisir —</option>
-                {MOUNTS.map((m) => (
-                  <option key={m.id} value={m.id}>
-                    {m.name} ({m.creature})
-                  </option>
-                ))}
-              </select>
+            </span>
+            <div className="eleveur-mount-checks">
+              {MOUNTS.map((m) => {
+                const checked = selectedIds.includes(m.id);
+                return (
+                  <label
+                    key={m.id}
+                    className={`eleveur-mount-check ${checked ? "checked" : ""}`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={checked}
+                      onChange={() => toggleMount(m.id)}
+                    />
+                    <img src={m.img} alt="" className="eleveur-mount-check-icon" />
+                    {m.name}
+                  </label>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -471,23 +486,20 @@ export function EleveurPage() {
               Runes récoltées par rotation (≈, sur {result.totalSlots} montures)
             </span>
             <div className="eleveur-runes-chips">
-              {result.runes.map((r) => {
-                const perMount = runeExpectedQty(r);
-                return (
-                  <div key={r.itemId} className="eleveur-rune-chip">
-                    <img src={r.img} alt="" className="eleveur-rune-chip-icon" />
-                    <span className="eleveur-rune-chip-count">
-                      {count(perMount * result.totalSlots)}
+              {result.runes.map((r) => (
+                <div key={r.itemId} className="eleveur-rune-chip">
+                  <img src={r.img} alt="" className="eleveur-rune-chip-icon" />
+                  <span className="eleveur-rune-chip-count">
+                    {count(r.perMount * result.totalSlots)}
+                  </span>
+                  <span className="eleveur-rune-chip-name">
+                    {r.label}
+                    <span className="eleveur-rune-chip-sub">
+                      ≈ {r.perMount.toLocaleString("fr-FR", { maximumFractionDigits: 2 })} / monture
                     </span>
-                    <span className="eleveur-rune-chip-name">
-                      {r.label}
-                      <span className="eleveur-rune-chip-sub">
-                        ≈ {perMount.toLocaleString("fr-FR", { maximumFractionDigits: 2 })} / monture
-                      </span>
-                    </span>
-                  </div>
-                );
-              })}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         )}
@@ -532,7 +544,7 @@ export function EleveurPage() {
       {/* ---------------- Capture ---------------- */}
       <section className="panel">
         <h2>Capture</h2>
-        {input.mountCreature ? (
+        {creature ? (
           <>
             <p className="hint">
               Choisissez le filet pour comparer les rentabilités (« Auto » = le
@@ -783,11 +795,11 @@ export function EleveurPage() {
       <section className="panel">
         <h2>Brisage — runes obtenues</h2>
         <p className="hint">
-          {input.mountLabel
-            ? `Runes du brisage d'un ${input.mountLabel} (fixes). `
-            : "Choisissez une monture pour voir ses runes. "}
-          Proba × quantité (min–max) ; le total est l'espérance par monture. Seuls
-          les prix sont modifiables (partagés avec vos prix suivis).
+          {selectedIds.length > 0
+            ? `Runes (espérance moyenne par monture sur ${selectedIds.length > 1 ? "les muldos sélectionnés" : "le muldo"}). `
+            : "Choisissez une ou plusieurs montures pour voir leurs runes. "}
+          Ajustez proba/quantité dans l'onglet « Muldos ». Seuls les prix sont
+          modifiables ici (partagés avec vos prix suivis).
         </p>
 
         {result.runes.length === 0 ? (
@@ -796,7 +808,7 @@ export function EleveurPage() {
           <ul className="cost-list">
             {result.runes.map((r) => {
               const unit = prices[r.itemId];
-              const exp = runeExpectedQty(r);
+              const exp = r.perMount;
               const missing = unit == null;
               return (
                 <li key={r.itemId} className="cost-row item eleveur-rune-row">
@@ -805,10 +817,7 @@ export function EleveurPage() {
                     {r.label}
                   </span>
                   <span className="eleveur-rune-readout">
-                    {Math.round(r.chance * 100)}% ·{" "}
-                    {r.quantityMin === r.quantityMax
-                      ? r.quantityMin
-                      : `${r.quantityMin}–${r.quantityMax}`}
+                    ≈ {exp.toLocaleString("fr-FR", { maximumFractionDigits: 2 })} / monture
                   </span>
                   <input
                     type="number"
