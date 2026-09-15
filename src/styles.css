@@ -1457,6 +1457,55 @@ table.eleveur-bp input {
   font-style: italic;
 }
 
+.eleveur-runes-summary {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.eleveur-runes-title {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.eleveur-runes-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.eleveur-rune-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--num-bg);
+  padding: 8px 12px 8px 8px;
+}
+.eleveur-rune-chip-icon {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+}
+.eleveur-rune-chip-count {
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--positive);
+}
+.eleveur-rune-chip-name {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  font-size: 0.85rem;
+}
+.eleveur-rune-chip-sub {
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
 .eleveur-mount {
   display: flex;
   align-items: center;
