@@ -1411,6 +1411,38 @@ table.eleveur-bp input {
   margin-top: 10px;
 }
 
+.eleveur-filet-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+  margin-bottom: 12px;
+}
+.eleveur-filet-name {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+.eleveur-filet-change {
+  flex: 0 0 auto;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 4px 12px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.eleveur-filet-change:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
 .eleveur-capture {
   display: flex;
   gap: 16px;

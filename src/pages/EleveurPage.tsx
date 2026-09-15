@@ -420,71 +420,76 @@ export function EleveurPage() {
           capture. Prix partagé avec vos prix suivis.
         </p>
 
-        <div className="eleveur-capture">
-          <div className="field">
-            <label htmlFor="filtres">Filets / capture</label>
-            <input
-              id="filtres"
-              type="number"
-              min={0}
-              inputMode="numeric"
-              value={input.captureFiltres ?? ""}
-              onChange={(e) => patch({ captureFiltres: num(e.target.value) })}
-            />
-          </div>
-          <div className="eleveur-capture-total">
-            <span className="eleveur-tile-label">Coût capture / monture</span>
-            <strong>{formatKamas(result.captureCostPerMount)}</strong>
-          </div>
-        </div>
-
         {input.filtreItemId != null ? (
-          <ul className="cost-list eleveur-filet">
-            <li className="cost-row item">
-              <span className="cost-item-name">
+          <>
+            <div className="eleveur-filet-row">
+              <span className="eleveur-filet-name">
                 {input.filtreImg && (
                   <img src={input.filtreImg} alt="" className="eleveur-out-icon" />
                 )}
                 {input.filtreLabel ?? "Filet"}
               </span>
-              <span className="cost-x">prix</span>
-              <input
-                type="number"
-                className="cost-unit"
-                min={0}
-                inputMode="numeric"
-                placeholder="prix ?"
-                value={filtrePrice ?? ""}
-                onChange={(e) =>
-                  setItemPrice(
-                    {
-                      id: input.filtreItemId!,
-                      name: input.filtreLabel ?? "Filet",
-                      img: input.filtreImg,
-                    },
-                    e.target.value,
-                  )
-                }
-                aria-label={`Prix du ${input.filtreLabel ?? "filet"}`}
-              />
-              <span
-                className={`cost-line-total ${filtrePrice == null ? "missing" : ""}`}
-              >
-                {filtrePrice == null
-                  ? "prix ?"
-                  : formatKamas(filtrePrice * (input.captureFiltres ?? 0))}
-              </span>
               <button
                 type="button"
-                className="cost-remove"
+                className="eleveur-filet-change"
                 onClick={clearFiltre}
-                aria-label="Changer de filet"
                 title="Changer de filet"
               >
-                ✕
+                Changer
               </button>
-            </li>
-          </ul>
+            </div>
+            <div className="eleveur-capture">
+              <div className="field">
+                <label htmlFor="filtres">Filets / capture</label>
+                <input
+                  id="filtres"
+                  type="number"
+                  min={0}
+                  inputMode="numeric"
+                  value={input.captureFiltres ?? ""}
+                  onChange={(e) => patch({ captureFiltres: num(e.target.value) })}
+                />
+              </div>
+              <div className="field">
+                <label htmlFor="mpc">Montures / capture</label>
+                <input
+                  id="mpc"
+                  type="number"
+                  min={1}
+                  inputMode="numeric"
+                  value={input.mountsPerCapture ?? ""}
+                  onChange={(e) => patch({ mountsPerCapture: num(e.target.value) })}
+                />
+                <p className="hint">Capacité du filet (ex. 2 par combat).</p>
+              </div>
+              <div className="field">
+                <label htmlFor="filtre-price">Prix du filet</label>
+                <input
+                  id="filtre-price"
+                  type="number"
+                  min={0}
+                  inputMode="numeric"
+                  placeholder="prix ?"
+                  className={filtrePrice == null ? "needs-price" : ""}
+                  value={filtrePrice ?? ""}
+                  onChange={(e) =>
+                    setItemPrice(
+                      {
+                        id: input.filtreItemId!,
+                        name: input.filtreLabel ?? "Filet",
+                        img: input.filtreImg,
+                      },
+                      e.target.value,
+                    )
+                  }
+                />
+              </div>
+              <div className="eleveur-capture-total">
+                <span className="eleveur-tile-label">Coût capture / monture</span>
+                <strong>{formatKamas(result.captureCostPerMount)}</strong>
+              </div>
+            </div>
+          </>
         ) : (
           <div className="cost-items">
             <p className="hint">Choisir le filet de capture :</p>

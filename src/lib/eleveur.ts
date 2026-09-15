@@ -87,8 +87,14 @@ export interface EleveurInput {
   enclosOverride?: number;
   capacityOverride?: number;
 
-  /** Filets spent to capture one dragodinde. */
+  /** Filets consumed per capture action. */
   captureFiltres?: number;
+  /**
+   * Mounts obtained per capture action — a filet ability (some capture several
+   * per fight). Not exposed by the API, so it's entered here (or set by a
+   * hardcoded filet pick). Defaults to 1; clamped to ≥ 1 in the maths.
+   */
+  mountsPerCapture?: number;
   /**
    * The capture item ("filet"), priced from the store. Chosen by search since
    * filets have job-level requirements (a different one per level bracket).
@@ -224,7 +230,11 @@ export function computeEleveur(
 
   const filtreId = input.filtreItemId;
   const filtrePrice = filtreId != null ? prices[filtreId] : undefined;
-  const filtresPerMount = Math.max(0, input.captureFiltres ?? 0);
+  // Filets consumed per mount = filets per capture ÷ mounts caught per capture
+  // (a filet that catches 2 mounts halves the filet cost per mount).
+  const mountsPerCapture = Math.max(1, input.mountsPerCapture ?? 1);
+  const filtresPerCapture = Math.max(0, input.captureFiltres ?? 0);
+  const filtresPerMount = filtresPerCapture / mountsPerCapture;
   const captureCostPerMount =
     filtreId != null ? (filtrePrice ?? 0) * filtresPerMount : 0;
 
@@ -341,6 +351,7 @@ export function defaultEleveurInput(): EleveurInput {
       newBreakpoint(200, 6, 10),
     ],
     captureFiltres: 1,
+    mountsPerCapture: 1,
     filtreItemId: FILTRE_ITEM.id,
     filtreLabel: FILTRE_ITEM.name,
     filtreImg: FILTRE_ITEM.img,

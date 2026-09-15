@@ -110,6 +110,20 @@ describe("computeEleveur", () => {
     expect(r.captureCostPerMount).toBe(0);
   });
 
+  it("splits filet cost across mounts caught per capture", () => {
+    // 2 filets/capture, catches 2 mounts → 1 filet per mount → 100 k capture.
+    const r = computeEleveur(baseInput({ mountsPerCapture: 2 }), PRICES, 0);
+    expect(r.captureCostPerMount).toBe(100);
+    expect(r.filtresPerCycle).toBe(60); // (2 / 2) × 60 slots
+    // profit rises by the 100 k saved vs the 1-mount case.
+    expect(r.profitPerMount).toBe(1050);
+  });
+
+  it("treats mountsPerCapture below 1 as 1", () => {
+    const r = computeEleveur(baseInput({ mountsPerCapture: 0 }), PRICES, 0);
+    expect(r.captureCostPerMount).toBe(200); // unchanged from default
+  });
+
   it("charges nothing (and flags nothing) when no filet is selected", () => {
     const r = computeEleveur(
       baseInput({ filtreItemId: undefined }),
