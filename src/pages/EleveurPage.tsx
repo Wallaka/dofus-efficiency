@@ -6,6 +6,7 @@ import {
   lineCost,
   isMissingPrice,
   isMissingOutputPrice,
+  outputExpectedQty,
   newBreakpoint,
   newCostLine,
   newItemCostLine,
@@ -147,9 +148,12 @@ export function EleveurPage() {
     }
     // Picking a mount seeds its brisage runes as output lines, and drops any
     // chosen filet that no longer fits the new creature (universal net stays).
-    const runes = brisageFor(m.id).map((r) =>
-      newOutputLine({ id: r.itemId, name: r.label, img: r.img }, r.quantity),
-    );
+    const runes = brisageFor(m.id).map((r) => ({
+      ...newOutputLine({ id: r.itemId, name: r.label, img: r.img }),
+      chance: r.chance,
+      quantityMin: r.quantityMin,
+      quantityMax: r.quantityMax,
+    }));
     const currentFilet = filetById(input.filtreItemId);
     const keepFilet =
       currentFilet != null &&
@@ -805,10 +809,11 @@ export function EleveurPage() {
         <h2>Brisage — runes obtenues</h2>
         <p className="hint">
           {input.mountLabel
-            ? `Runes du brisage d'un ${input.mountLabel} (pré-remplies) — ajustez les quantités moyennes si besoin. `
+            ? `Runes du brisage d'un ${input.mountLabel} (pré-remplies) — ajustez proba et quantités si besoin. `
             : "Choisissez une monture en haut pour pré-remplir ses runes, ou ajoutez-les à la main. "}
-          La quantité peut être décimale (rendement moyen). Prix partagés avec vos
-          prix suivis.
+          Brisage aléatoire : proba d'obtention × quantité (min–max). Le total est
+          l'espérance par monture (proba × quantité moyenne × prix). Prix partagés
+          avec vos prix suivis.
         </p>
 
         {input.outputs.length === 0 ? (
@@ -819,64 +824,100 @@ export function EleveurPage() {
           </p>
         ) : (
           <ul className="cost-list">
-            {input.outputs.map((out) => (
-              <li key={out.id} className="cost-row item">
-                <span className="cost-item-name">
-                  {out.img && (
-                    <img src={out.img} alt="" className="eleveur-out-icon" />
-                  )}
-                  {out.label}
-                </span>
-                <input
-                  type="number"
-                  className="cost-qty"
-                  min={0}
-                  step="0.1"
-                  inputMode="decimal"
-                  placeholder="Qté"
-                  value={out.quantity ?? ""}
-                  onChange={(e) =>
-                    updateOutput(out.id, { quantity: num(e.target.value) })
-                  }
-                  aria-label={`Quantité moyenne de ${out.label}`}
-                />
-                <span className="cost-x">×</span>
-                <input
-                  type="number"
-                  className="cost-unit"
-                  min={0}
-                  inputMode="numeric"
-                  placeholder="prix"
-                  value={prices[out.itemId] ?? ""}
-                  onChange={(e) =>
-                    setItemPrice(
-                      { id: out.itemId, name: out.label, img: out.img },
-                      e.target.value,
-                    )
-                  }
-                  aria-label={`Prix unitaire de ${out.label}`}
-                />
-                <span
-                  className={`cost-line-total ${
-                    isMissingOutputPrice(out, prices) ? "missing" : "positive"
-                  }`}
-                >
-                  {isMissingOutputPrice(out, prices)
-                    ? "prix ?"
-                    : formatKamas(
-                        (prices[out.itemId] ?? 0) * (out.quantity ?? 0),
-                      )}
-                </span>
-                <button
-                  type="button"
-                  className="cost-remove"
-                  onClick={() => removeOutput(out.id)}
-                  aria-label={`Retirer ${out.label}`}
-                >
-                  ✕
-                </button>
-              </li>
-            ))}
+            {input.outputs.map((out) => {
+              const exp = outputExpectedQty(out);
+              const unit = prices[out.itemId];
+              return (
+                <li key={out.id} className="cost-row item eleveur-rune-row">
+                  <span className="cost-item-name">
+                    {out.img && (
+                      <img src={out.img} alt="" className="eleveur-out-icon" />
+                    )}
+                    {out.label}
+                  </span>
+                  <label className="eleveur-rune-field">
+                    <span>proba</span>
+                    <input
+                      type="number"
+                      className="eleveur-rune-pct"
+                      min={0}
+                      max={100}
+                      inputMode="numeric"
+                      value={out.chance != null ? Math.round(out.chance * 100) : ""}
+                      onChange={(e) => {
+                        const v = num(e.target.value);
+                        updateOutput(out.id, {
+                          chance: v == null ? undefined : Math.min(1, v / 100),
+                        });
+                      }}
+                      aria-label={`Probabilité d'obtenir ${out.label} (%)`}
+                    />
+                    <span className="eleveur-rune-suffix">%</span>
+                  </label>
+                  <label className="eleveur-rune-field">
+                    <span>qté</span>
+                    <input
+                      type="number"
+                      className="eleveur-rune-qty"
+                      min={0}
+                      inputMode="decimal"
+                      placeholder="min"
+                      value={out.quantityMin ?? ""}
+                      onChange={(e) =>
+                        updateOutput(out.id, { quantityMin: num(e.target.value) })
+                      }
+                      aria-label={`Quantité min de ${out.label}`}
+                    />
+                    <span className="cost-x">à</span>
+                    <input
+                      type="number"
+                      className="eleveur-rune-qty"
+                      min={0}
+                      inputMode="decimal"
+                      placeholder="max"
+                      value={out.quantityMax ?? ""}
+                      onChange={(e) =>
+                        updateOutput(out.id, { quantityMax: num(e.target.value) })
+                      }
+                      aria-label={`Quantité max de ${out.label}`}
+                    />
+                  </label>
+                  <input
+                    type="number"
+                    className="cost-unit"
+                    min={0}
+                    inputMode="numeric"
+                    placeholder="prix"
+                    value={unit ?? ""}
+                    onChange={(e) =>
+                      setItemPrice(
+                        { id: out.itemId, name: out.label, img: out.img },
+                        e.target.value,
+                      )
+                    }
+                    aria-label={`Prix unitaire de ${out.label}`}
+                  />
+                  <span
+                    className={`cost-line-total ${
+                      isMissingOutputPrice(out, prices) ? "missing" : "positive"
+                    }`}
+                    title={`≈ ${exp.toLocaleString("fr-FR", { maximumFractionDigits: 2 })} / monture`}
+                  >
+                    {isMissingOutputPrice(out, prices)
+                      ? "prix ?"
+                      : formatKamas((unit ?? 0) * exp)}
+                  </span>
+                  <button
+                    type="button"
+                    className="cost-remove"
+                    onClick={() => removeOutput(out.id)}
+                    aria-label={`Retirer ${out.label}`}
+                  >
+                    ✕
+                  </button>
+                </li>
+              );
+            })}
           </ul>
         )}
 

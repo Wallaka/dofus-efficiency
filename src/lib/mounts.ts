@@ -49,14 +49,20 @@ export function mountById(id: string | undefined): MountDef | undefined {
 }
 
 /**
- * One rune obtained by brising a mount, with its catalog id (so its price comes
- * from the shared store) and the average quantity per mount.
+ * One rune obtained by brising a mount. Brisage is random, so a yield is a
+ * probability of obtaining the rune × a quantity range when obtained (see the
+ * expected-value maths in eleveur.ts). Ids/icons come from the HDV catalog so
+ * the price resolves from the shared store.
  */
 export interface RuneYield {
   itemId: string;
   label: string;
   img: string;
-  quantity: number;
+  /** Probability (0..1) of obtaining the rune. */
+  chance: number;
+  /** Quantity when obtained (low / high of the range). */
+  quantityMin: number;
+  quantityMax: number;
 }
 
 const IMG = (icon: number) => `https://api.dofusdb.fr/img/items/${icon}.png`;
@@ -71,23 +77,25 @@ const RUNE = {
   rePerEau: { itemId: "7560", label: "Rune Ré Per Eau", img: IMG(78031) },
 } as const;
 
-const yields = (base: { itemId: string; label: string; img: string }, quantity: number): RuneYield => ({
-  ...base,
-  quantity,
-});
+const y = (
+  base: { itemId: string; label: string; img: string },
+  chance: number,
+  quantityMin: number,
+  quantityMax: number,
+): RuneYield => ({ ...base, chance, quantityMin, quantityMax });
 
-/**
- * Brisage yield per muldo (monster id → runes). Each muldo gives 1 Rune Ga Pme
- * plus its signature rune. The Ga Pme (1) and the ébène Air count (13) are
- * confirmed; the other signature-rune counts default to 13 by symmetry and are
- * editable per line on the page.
- */
+// Every muldo: 50 % of 1 Rune Ga Pme, plus 50 % of 4–15 of its signature rune.
+const GA_PME = y(RUNE.gaPme, 0.5, 1, 1);
+const sig = (base: { itemId: string; label: string; img: string }) =>
+  y(base, 0.5, 4, 15);
+
+/** Brisage yield per muldo (monster id → runes). */
 const BRISAGE: Record<string, RuneYield[]> = {
-  "4435": [yields(RUNE.gaPme, 1), yields(RUNE.rePerAir, 13)], // ébène → Air
-  "4438": [yields(RUNE.gaPme, 1), yields(RUNE.pui, 13)], // doré → Puissance
-  "4436": [yields(RUNE.gaPme, 1), yields(RUNE.rePerFeu, 13)], // orchidée → Feu
-  "4437": [yields(RUNE.gaPme, 1), yields(RUNE.rePerTerre, 13)], // pourpre → Terre
-  "4434": [yields(RUNE.gaPme, 1), yields(RUNE.rePerEau, 13)], // indigo → Eau
+  "4435": [GA_PME, sig(RUNE.rePerAir)], // ébène → Air
+  "4438": [GA_PME, sig(RUNE.pui)], // doré → Puissance
+  "4436": [GA_PME, sig(RUNE.rePerFeu)], // orchidée → Feu
+  "4437": [GA_PME, sig(RUNE.rePerTerre)], // pourpre → Terre
+  "4434": [GA_PME, sig(RUNE.rePerEau)], // indigo → Eau
 };
 
 /** The runes a mount yields when broken (empty if unknown). */

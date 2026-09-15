@@ -58,17 +58,30 @@ export interface CostLine {
 }
 
 /**
- * One rune yielded by brisage, valued from the shared price store. `quantity`
- * is the *average* number obtained per broken mount, so fractional values are
- * allowed (e.g. 0.4 of a rune per mount on average).
+ * One rune yielded by brisage, valued from the shared price store. Brisage is
+ * random, so a line is a probability of obtaining the rune × a quantity range
+ * when obtained. The expected quantity per mount is `chance × (min + max) / 2`
+ * (e.g. 50 % of 4–15 → 0.5 × 9.5 = 4.75 per mount).
  */
 export interface OutputLine {
   id: string;
   itemId: string;
   label: string;
   img?: string;
-  /** Average quantity obtained per mount (fractional allowed). */
-  quantity?: number;
+  /** Probability (0..1) of obtaining this rune on a brisage. Default 1. */
+  chance?: number;
+  /** Quantity when obtained — the low end of the range. */
+  quantityMin?: number;
+  /** Quantity when obtained — the high end (=== min when fixed). */
+  quantityMax?: number;
+}
+
+/** Expected number of this rune per broken mount: chance × mid-range quantity. */
+export function outputExpectedQty(line: OutputLine): number {
+  const chance = Math.min(1, Math.max(0, line.chance ?? 1));
+  const min = line.quantityMin ?? 0;
+  const max = line.quantityMax ?? min;
+  return chance * ((min + max) / 2);
 }
 
 export interface EleveurInput {
@@ -202,10 +215,10 @@ export function isMissingPrice(line: CostLine, prices: PriceMap): boolean {
   return line.itemId != null && prices[line.itemId] == null;
 }
 
-/** The kamas value of one output (rune) line: unit price × average quantity. */
+/** The kamas value of one output (rune) line: unit price × expected quantity. */
 export function outputValue(line: OutputLine, prices: PriceMap): number {
   const unit = prices[line.itemId];
-  return unit == null ? 0 : unit * (line.quantity ?? 0);
+  return unit == null ? 0 : unit * outputExpectedQty(line);
 }
 
 /** True when an output line's rune has no known price yet. */
@@ -326,14 +339,16 @@ export function newItemCostLine(item: Item, quantity = 1): CostLine {
   return { id: makeId(), label: item.name, itemId: item.id, quantity };
 }
 
-/** A fresh rune output line linked to an item. */
+/** A fresh rune output line linked to an item (deterministic: 100 %, fixed qty). */
 export function newOutputLine(item: Item, quantity = 1): OutputLine {
   return {
     id: makeId(),
     itemId: item.id,
     label: item.name,
     img: item.img,
-    quantity,
+    chance: 1,
+    quantityMin: quantity,
+    quantityMax: quantity,
   };
 }
 

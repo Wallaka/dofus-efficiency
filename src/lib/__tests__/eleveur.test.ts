@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest";
 import {
   slotsForLevel,
   computeEleveur,
+  outputExpectedQty,
   newBreakpoint,
   type EleveurInput,
   type LevelBreakpoint,
@@ -36,6 +37,20 @@ describe("slotsForLevel", () => {
   });
 });
 
+describe("outputExpectedQty", () => {
+  it("is chance × mid-range quantity", () => {
+    // 50% of 4–15 → 0.5 × 9.5 = 4.75
+    expect(outputExpectedQty({ id: "x", itemId: "r", label: "r", chance: 0.5, quantityMin: 4, quantityMax: 15 })).toBeCloseTo(4.75, 6);
+    // 50% of a fixed 1 → 0.5
+    expect(outputExpectedQty({ id: "x", itemId: "r", label: "r", chance: 0.5, quantityMin: 1, quantityMax: 1 })).toBe(0.5);
+  });
+
+  it("defaults chance to 1 and clamps it to [0,1]", () => {
+    expect(outputExpectedQty({ id: "x", itemId: "r", label: "r", quantityMin: 2, quantityMax: 2 })).toBe(2);
+    expect(outputExpectedQty({ id: "x", itemId: "r", label: "r", chance: 5, quantityMin: 3, quantityMax: 3 })).toBe(3);
+  });
+});
+
 function baseInput(overrides: Partial<EleveurInput> = {}): EleveurInput {
   return {
     level: 60, // → 3 enclos × 20 = 60 slots with TABLE
@@ -46,7 +61,9 @@ function baseInput(overrides: Partial<EleveurInput> = {}): EleveurInput {
     raiseCosts: [
       { id: "c1", label: "Nourriture", itemId: "food", quantity: 10 },
     ],
-    outputs: [{ id: "o1", itemId: "rune", label: "Rune Pa", quantity: 3 }],
+    outputs: [
+      { id: "o1", itemId: "rune", label: "Rune Pa", chance: 1, quantityMin: 3, quantityMax: 3 },
+    ],
     ...overrides,
   };
 }

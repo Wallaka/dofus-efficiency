@@ -1509,6 +1509,33 @@ input.needs-price {
   vertical-align: middle;
   margin-right: 6px;
 }
+
+/* Probabilistic rune rows (proba × qty min–max) */
+.eleveur-rune-row {
+  flex-wrap: wrap;
+}
+.eleveur-rune-field {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 0 0 auto;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.eleveur-rune-pct,
+.eleveur-rune-qty {
+  width: 46px;
+  padding: 6px 6px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+  color: var(--text);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.eleveur-rune-suffix {
+  color: var(--muted);
+}
 .cost-line-total.positive {
   color: var(--positive);
 }
