@@ -4030,12 +4030,31 @@ td.negative {
 /* ---------------------------------------------------------------------------
    HDV — game-like marketplace: category rail (left) + item list (right)
 --------------------------------------------------------------------------- */
+.hdv-search {
+  width: 100%;
+  margin-top: 14px;
+  padding: 9px 14px;
+  background: var(--num-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+.hdv-search:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
 .hdv-layout {
   display: grid;
   grid-template-columns: 220px 1fr;
   gap: 20px;
   align-items: start;
-  margin-top: 12px;
+  margin-top: 14px;
+}
+
+.hdv-cat-tag {
+  color: var(--accent);
 }
 
 /* Left rail: categories grouped by tab. */

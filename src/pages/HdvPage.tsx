@@ -33,6 +33,7 @@ export function HdvPage() {
     catalog[0] ? keyOf(catalog[0].tab, catalog[0].categories[0]?.category ?? "") : "",
   );
   const [filter, setFilter] = useState("");
+  const [search, setSearch] = useState("");
   const listRef = useRef<HTMLDivElement>(null);
 
   // Flat lookup of the active category's items.
@@ -98,11 +99,36 @@ export function HdvPage() {
   }
 
   const now = Date.now();
-  const query = norm(filter.trim());
-  const shownItems =
-    active && query
-      ? active.items.filter((it) => norm(it.name).includes(query))
-      : (active?.items ?? []);
+
+  // Global search spans every category; when active it replaces the category
+  // view with a flat results list (each row tagged with its category).
+  const searching = search.trim() !== "";
+  const gq = norm(search.trim());
+  const results: { item: CatalogItem; category: string }[] = [];
+  if (searching) {
+    for (const tab of catalog) {
+      for (const cat of tab.categories) {
+        for (const it of cat.items) {
+          if (norm(it.name).includes(gq)) {
+            results.push({ item: it, category: cat.category });
+          }
+        }
+      }
+    }
+  }
+
+  const catQuery = norm(filter.trim());
+  const catItems = active
+    ? catQuery
+      ? active.items.filter((it) => norm(it.name).includes(catQuery))
+      : active.items
+    : [];
+
+  // What the right pane renders: search results (with category) or the category.
+  const display: { item: CatalogItem; category: string }[] = searching
+    ? results
+    : catItems.map((item) => ({ item, category: "" }));
+
   const pricedCount = active
     ? active.items.filter((it) => entries[it.id] != null).length
     : 0;
@@ -115,6 +141,13 @@ export function HdvPage() {
         <kbd>Entrée</kbd> enregistre et passe au suivant. «&nbsp;3k&nbsp;» = 3000.
       </p>
 
+      <input
+        className="hdv-search"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder="Rechercher un objet dans tout le HDV…"
+      />
+
       <div className="hdv-layout">
         <nav className="hdv-rail">
           {catalog.map((tab) => (
@@ -125,10 +158,15 @@ export function HdvPage() {
                 return (
                   <button
                     key={k}
-                    className={k === selected ? "hdv-cat-btn active" : "hdv-cat-btn"}
+                    className={
+                      !searching && k === selected
+                        ? "hdv-cat-btn active"
+                        : "hdv-cat-btn"
+                    }
                     onClick={() => {
                       setSelected(k);
                       setFilter("");
+                      setSearch("");
                     }}
                   >
                     {cat.category}
@@ -141,23 +179,34 @@ export function HdvPage() {
 
         <div className="hdv-detail">
           <div className="hdv-detail-head">
-            <h3>{active?.category}</h3>
-            <input
-              className="hdv-filter"
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-              placeholder="Filtrer…"
-            />
-            <span className="hdv-progress">
-              {pricedCount}/{active?.items.length ?? 0} prix
-            </span>
+            {searching ? (
+              <>
+                <h3>Résultats</h3>
+                <span className="hdv-progress">
+                  {results.length} objet{results.length > 1 ? "s" : ""}
+                </span>
+              </>
+            ) : (
+              <>
+                <h3>{active?.category}</h3>
+                <input
+                  className="hdv-filter"
+                  value={filter}
+                  onChange={(e) => setFilter(e.target.value)}
+                  placeholder="Filtrer dans cette catégorie…"
+                />
+                <span className="hdv-progress">
+                  {pricedCount}/{active?.items.length ?? 0} prix
+                </span>
+              </>
+            )}
           </div>
 
           <div className="hdv-rows" ref={listRef}>
-            {shownItems.length === 0 && (
+            {display.length === 0 && (
               <p className="hint">Aucun objet ne correspond.</p>
             )}
-            {shownItems.map((item) => {
+            {display.map(({ item, category }) => {
               const entry = entries[item.id];
               const stale = entry ? isStale(entry.updatedAt, now) : false;
               return (
@@ -168,7 +217,10 @@ export function HdvPage() {
                     <span className="hdv-ic hdv-ic-empty" />
                   )}
                   <span className="hdv-name">{item.name}</span>
-                  {item.level ? <span className="hdv-lvl">niv. {item.level}</span> : <span />}
+                  <span className="hdv-lvl">
+                    {category && <span className="hdv-cat-tag">{category}</span>}
+                    {item.level ? ` niv. ${item.level}` : ""}
+                  </span>
                   <input
                     className="hdv-price"
                     type="text"
