@@ -110,6 +110,16 @@ describe("computeEleveur", () => {
     expect(r.captureCostPerMount).toBe(0);
   });
 
+  it("charges nothing (and flags nothing) when no filet is selected", () => {
+    const r = computeEleveur(
+      baseInput({ filtreItemId: undefined }),
+      { rune: 400, food: 5 },
+      0,
+    );
+    expect(r.captureCostPerMount).toBe(0);
+    expect(r.missingPriceItemIds).toEqual([]);
+  });
+
   it("leaves margin and per-day undefined when not computable", () => {
     const noCost = computeEleveur(
       baseInput({ captureFiltres: 0, raiseCosts: [] }),

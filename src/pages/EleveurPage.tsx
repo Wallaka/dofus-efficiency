@@ -10,7 +10,6 @@ import {
   newCostLine,
   newItemCostLine,
   newOutputLine,
-  FILTRE_ITEM,
   type CostLine,
   type EleveurInput,
   type LevelBreakpoint,
@@ -97,6 +96,14 @@ export function EleveurPage() {
     else setPrice(item, n);
   }
 
+  // ---- capture filet (searchable pick) ----
+  function setFiltre(item: Item) {
+    patch({ filtreItemId: item.id, filtreLabel: item.name, filtreImg: item.img });
+  }
+  function clearFiltre() {
+    patch({ filtreItemId: undefined, filtreLabel: undefined, filtreImg: undefined });
+  }
+
   // ---- breakpoint table ----
   function updateBreakpoint(id: string, p: Partial<LevelBreakpoint>) {
     patch({
@@ -157,7 +164,8 @@ export function EleveurPage() {
     setInput(defaultEleveurInput());
   }
 
-  const filtrePrice = prices[input.filtreItemId ?? FILTRE_ITEM.id];
+  const filtrePrice =
+    input.filtreItemId != null ? prices[input.filtreItemId] : undefined;
 
   return (
     <main className="eleveur-page">
@@ -407,12 +415,14 @@ export function EleveurPage() {
       <section className="panel">
         <h2>Capture</h2>
         <p className="hint">
-          Combien de filtres pour capturer une dragodinde, et à quel prix. Le
-          prix du filtre est partagé avec vos prix suivis.
+          Le filet utilisé pour capturer une dragodinde (les filets ont un
+          niveau de métier requis — cherchez le bon), et combien il en faut par
+          capture. Prix partagé avec vos prix suivis.
         </p>
+
         <div className="eleveur-capture">
           <div className="field">
-            <label htmlFor="filtres">Filtres / capture</label>
+            <label htmlFor="filtres">Filets / capture</label>
             <input
               id="filtres"
               type="number"
@@ -422,35 +432,82 @@ export function EleveurPage() {
               onChange={(e) => patch({ captureFiltres: num(e.target.value) })}
             />
           </div>
-          <div className="field">
-            <label htmlFor="filtre-price">
-              Prix du {input.filtreLabel ?? FILTRE_ITEM.name}
-            </label>
-            <input
-              id="filtre-price"
-              type="number"
-              min={0}
-              inputMode="numeric"
-              placeholder="prix ?"
-              className={filtrePrice == null ? "needs-price" : ""}
-              value={filtrePrice ?? ""}
-              onChange={(e) =>
-                setItemPrice(
-                  {
-                    id: input.filtreItemId ?? FILTRE_ITEM.id,
-                    name: input.filtreLabel ?? FILTRE_ITEM.name,
-                    img: FILTRE_ITEM.img,
-                  },
-                  e.target.value,
-                )
-              }
-            />
-          </div>
           <div className="eleveur-capture-total">
             <span className="eleveur-tile-label">Coût capture / monture</span>
             <strong>{formatKamas(result.captureCostPerMount)}</strong>
           </div>
         </div>
+
+        {input.filtreItemId != null ? (
+          <ul className="cost-list eleveur-filet">
+            <li className="cost-row item">
+              <span className="cost-item-name">
+                {input.filtreImg && (
+                  <img src={input.filtreImg} alt="" className="eleveur-out-icon" />
+                )}
+                {input.filtreLabel ?? "Filet"}
+              </span>
+              <span className="cost-x">prix</span>
+              <input
+                type="number"
+                className="cost-unit"
+                min={0}
+                inputMode="numeric"
+                placeholder="prix ?"
+                value={filtrePrice ?? ""}
+                onChange={(e) =>
+                  setItemPrice(
+                    {
+                      id: input.filtreItemId!,
+                      name: input.filtreLabel ?? "Filet",
+                      img: input.filtreImg,
+                    },
+                    e.target.value,
+                  )
+                }
+                aria-label={`Prix du ${input.filtreLabel ?? "filet"}`}
+              />
+              <span
+                className={`cost-line-total ${filtrePrice == null ? "missing" : ""}`}
+              >
+                {filtrePrice == null
+                  ? "prix ?"
+                  : formatKamas(filtrePrice * (input.captureFiltres ?? 0))}
+              </span>
+              <button
+                type="button"
+                className="cost-remove"
+                onClick={clearFiltre}
+                aria-label="Changer de filet"
+                title="Changer de filet"
+              >
+                ✕
+              </button>
+            </li>
+          </ul>
+        ) : (
+          <div className="cost-items">
+            <p className="hint">Choisir le filet de capture :</p>
+            {favourites.length > 0 && (
+              <div className="fav-chips">
+                {favourites.map((fav) => (
+                  <button
+                    type="button"
+                    key={fav.id}
+                    className="fav-chip"
+                    onClick={() => setFiltre(fav)}
+                  >
+                    {fav.name}
+                  </button>
+                ))}
+              </div>
+            )}
+            <ItemAutocomplete
+              onPick={setFiltre}
+              placeholder="Rechercher un filet…"
+            />
+          </div>
+        )}
       </section>
 
       {/* ---------------- Élevage ---------------- */}

@@ -87,11 +87,16 @@ export interface EleveurInput {
   enclosOverride?: number;
   capacityOverride?: number;
 
-  /** Filtres spent to capture one dragodinde. */
+  /** Filets spent to capture one dragodinde. */
   captureFiltres?: number;
-  /** The filtre item (priced from the store). Defaults to Filtre à frousse. */
+  /**
+   * The capture item ("filet"), priced from the store. Chosen by search since
+   * filets have job-level requirements (a different one per level bracket).
+   * Undefined means no filet picked → no capture cost.
+   */
   filtreItemId?: string;
   filtreLabel?: string;
+  filtreImg?: string;
 
   /** Days a mount is raised before it can be broken (for profit-per-day). */
   raiseDays?: number;
@@ -217,10 +222,11 @@ export function computeEleveur(
       : derived.capacity;
   const totalSlots = enclos * capacity;
 
-  const filtreId = input.filtreItemId ?? FILTRE_ITEM.id;
-  const filtrePrice = prices[filtreId];
+  const filtreId = input.filtreItemId;
+  const filtrePrice = filtreId != null ? prices[filtreId] : undefined;
   const filtresPerMount = Math.max(0, input.captureFiltres ?? 0);
-  const captureCostPerMount = (filtrePrice ?? 0) * filtresPerMount;
+  const captureCostPerMount =
+    filtreId != null ? (filtrePrice ?? 0) * filtresPerMount : 0;
 
   const raiseCostPerMount = input.raiseCosts.reduce(
     (sum, c) => sum + lineCost(c, prices),
@@ -248,7 +254,9 @@ export function computeEleveur(
 
   // Missing-price bookkeeping, so the UI can flag what to price.
   const missing = new Set<string>();
-  if (filtresPerMount > 0 && filtrePrice == null) missing.add(filtreId);
+  if (filtreId != null && filtresPerMount > 0 && filtrePrice == null) {
+    missing.add(filtreId);
+  }
   for (const c of input.raiseCosts) {
     if (isMissingPrice(c, prices)) missing.add(c.itemId as string);
   }
@@ -315,18 +323,27 @@ export function newBreakpoint(
 }
 
 /**
- * A first-run input the user then edits. The breakpoint table starts with a
- * single starter row (level 1 → 1 enclos) so the shape is obvious; the user
- * fills in the real thresholds they know. Nothing here is a claimed game
- * constant — it's a template.
+ * A first-run input the user then edits. The breakpoint table is seeded with
+ * the known éleveur enclos progression: 1 enclos of 10 places at level 1, then
+ * one more enclos every 40 levels (40/80/120/160/200). All rows stay editable.
+ * The filet is a searchable pick (defaults to Filtre à frousse) since filets
+ * have job-level requirements.
  */
 export function defaultEleveurInput(): EleveurInput {
   return {
     level: 1,
-    breakpoints: [newBreakpoint(1, 1, 1)],
+    breakpoints: [
+      newBreakpoint(1, 1, 10),
+      newBreakpoint(40, 2, 10),
+      newBreakpoint(80, 3, 10),
+      newBreakpoint(120, 4, 10),
+      newBreakpoint(160, 5, 10),
+      newBreakpoint(200, 6, 10),
+    ],
     captureFiltres: 1,
     filtreItemId: FILTRE_ITEM.id,
     filtreLabel: FILTRE_ITEM.name,
+    filtreImg: FILTRE_ITEM.img,
     raiseDays: undefined,
     raiseCosts: [newCostLine("Nourriture")],
     outputs: [],
