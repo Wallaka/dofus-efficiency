@@ -545,7 +545,7 @@ export function EleveurPage() {
           </div>
 
           <div className="eleveur-week-total">
-            Total : <strong>{forecastRotations} rotations</strong> ·{" "}
+            Total net : <strong>{forecastRotations} rotations</strong> ·{" "}
             <strong>
               <Range
                 a={forecastRotations * low.profitPerCycle}
@@ -553,6 +553,33 @@ export function EleveurPage() {
                 fmt={formatKamasSigned}
               />
             </strong>
+          </div>
+          <div className="eleveur-forecast-costs">
+            dont dépenses déduites :{" "}
+            {result.mangeoire ? (
+              <>
+                {forecastRotations * result.mangeoiresPerCycle} mangeoires ={" "}
+                <Range
+                  a={forecastRotations * result.foodCostPerCycle}
+                  b={forecastRotations * result.foodCostPerCycle}
+                  fmt={formatKamas}
+                  higherIsBetter={false}
+                />
+              </>
+            ) : (
+              "mangeoire non choisie"
+            )}
+            {filet && (
+              <>
+                {" · filets = "}
+                <Range
+                  a={forecastRotations * low.filtresCostPerCycle}
+                  b={forecastRotations * high.filtresCostPerCycle}
+                  fmt={formatKamas}
+                  higherIsBetter={false}
+                />
+              </>
+            )}
           </div>
 
           {forecastDays <= 14 ? (

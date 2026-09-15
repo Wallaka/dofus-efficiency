@@ -1690,6 +1690,12 @@ table.eleveur-bp input {
   font-size: 0.92rem;
   font-variant-numeric: tabular-nums;
 }
+.eleveur-forecast-costs {
+  margin: 4px 0 10px;
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
 .eleveur-week-total .positive {
   color: var(--positive);
 }
