@@ -12,7 +12,12 @@ import {
 import { bestFiletFor, filetsForLevel } from "../lib/filets";
 import { planRotations, formatClock } from "../lib/planning";
 import { MANGEOIRES } from "../lib/mangeoires";
-import { MOUNTS, mountById } from "../lib/mounts";
+import { MOUNTS, MULDOS, mountById, brisageFor, type RuneYield } from "../lib/mounts";
+import {
+  loadBrisageOverrides,
+  saveBrisageOverrides,
+  type BrisageOverrides,
+} from "../lib/brisageStore";
 import type { Item } from "../types";
 import { loadEleveur, saveEleveur } from "../lib/storage";
 import { usePrices } from "../lib/usePrices";
@@ -94,12 +99,33 @@ export function EleveurPage() {
     () => loadEleveur() ?? defaultEleveurInput(),
   );
   const { prices, setPrice, clearPrice } = usePrices();
+  const [tab, setTab] = useState<"sim" | "muldos">("sim");
+  const [brisage, setBrisage] = useState<BrisageOverrides>(loadBrisageOverrides);
 
   useEffect(() => {
     saveEleveur(input);
   }, [input]);
 
   const taxRate = loadCraftTaxPercent() / 100;
+
+  // ---- brisage overrides (Muldos tab) ----
+  function runesFor(mountId: string): RuneYield[] {
+    return brisage[mountId] ?? brisageFor(mountId);
+  }
+  function editRune(mountId: string, index: number, patch: Partial<RuneYield>) {
+    const current = runesFor(mountId).map((r, i) =>
+      i === index ? { ...r, ...patch } : r,
+    );
+    const next = { ...brisage, [mountId]: current };
+    setBrisage(next);
+    saveBrisageOverrides(next);
+  }
+  function resetMuldo(mountId: string) {
+    const next = { ...brisage };
+    delete next[mountId];
+    setBrisage(next);
+    saveBrisageOverrides(next);
+  }
 
   // The filet in effect (explicit choice or auto-best). It catches a variable
   // number of mounts, so we evaluate both bounds: `low` = fewest caught (worst
@@ -112,12 +138,12 @@ export function EleveurPage() {
     ? filetsForLevel(input.level, input.mountCreature)
     : [];
   const low = useMemo(
-    () => computeEleveur(input, prices, taxRate, filet?.mountsMin ?? 1),
-    [input, prices, taxRate, filet],
+    () => computeEleveur(input, prices, taxRate, filet?.mountsMin ?? 1, brisage),
+    [input, prices, taxRate, filet, brisage],
   );
   const high = useMemo(
-    () => computeEleveur(input, prices, taxRate, filet?.mountsMax ?? 1),
-    [input, prices, taxRate, filet],
+    () => computeEleveur(input, prices, taxRate, filet?.mountsMax ?? 1, brisage),
+    [input, prices, taxRate, filet, brisage],
   );
   const result = high;
   const ranged = filet != null && filet.mountsMin !== filet.mountsMax;
@@ -176,6 +202,121 @@ export function EleveurPage() {
 
   return (
     <main className="eleveur-page">
+      <div className="eleveur-tabs">
+        <button
+          type="button"
+          className={tab === "sim" ? "active" : ""}
+          onClick={() => setTab("sim")}
+        >
+          Simulateur
+        </button>
+        <button
+          type="button"
+          className={tab === "muldos" ? "active" : ""}
+          onClick={() => setTab("muldos")}
+        >
+          Muldos (brisage)
+        </button>
+      </div>
+
+      {tab === "muldos" && (
+        <section className="panel">
+          <h2>Estimation du brisage par muldo</h2>
+          <p className="hint">
+            Ajustez la proba et la quantité (min–max) de chaque rune obtenue au
+            brisage. Ces valeurs sont utilisées par le simulateur. « Réinitialiser
+            » revient aux valeurs par défaut.
+          </p>
+          <div className="eleveur-muldos-edit">
+            {MULDOS.map((m) => {
+              const runes = runesFor(m.id);
+              const overridden = brisage[m.id] != null;
+              return (
+                <div key={m.id} className="eleveur-muldo-card">
+                  <div className="eleveur-muldo-head">
+                    <img src={m.img} alt="" className="eleveur-mount-icon" />
+                    <span className="eleveur-muldo-name">{m.name}</span>
+                    {overridden && <span className="eleveur-muldo-badge">modifié</span>}
+                    <button
+                      type="button"
+                      className="eleveur-muldo-reset"
+                      disabled={!overridden}
+                      onClick={() => resetMuldo(m.id)}
+                    >
+                      Réinitialiser
+                    </button>
+                  </div>
+                  <ul className="cost-list">
+                    {runes.map((r, i) => (
+                      <li key={r.itemId} className="cost-row item eleveur-rune-row">
+                        <span className="cost-item-name">
+                          <img src={r.img} alt="" className="eleveur-out-icon" />
+                          {r.label}
+                        </span>
+                        <label className="eleveur-rune-field">
+                          <span>proba</span>
+                          <input
+                            type="number"
+                            className="eleveur-rune-pct"
+                            min={0}
+                            max={100}
+                            inputMode="numeric"
+                            value={Math.round(r.chance * 100)}
+                            onChange={(e) => {
+                              const v = num(e.target.value);
+                              editRune(m.id, i, {
+                                chance: v == null ? 0 : Math.min(1, v / 100),
+                              });
+                            }}
+                            aria-label={`Probabilité de ${r.label} pour ${m.name}`}
+                          />
+                          <span className="eleveur-rune-suffix">%</span>
+                        </label>
+                        <label className="eleveur-rune-field">
+                          <span>qté</span>
+                          <input
+                            type="number"
+                            className="eleveur-rune-qty"
+                            min={0}
+                            inputMode="decimal"
+                            value={r.quantityMin}
+                            onChange={(e) =>
+                              editRune(m.id, i, { quantityMin: num(e.target.value) ?? 0 })
+                            }
+                            aria-label={`Quantité min de ${r.label} pour ${m.name}`}
+                          />
+                          <span className="cost-x">à</span>
+                          <input
+                            type="number"
+                            className="eleveur-rune-qty"
+                            min={0}
+                            inputMode="decimal"
+                            value={r.quantityMax}
+                            onChange={(e) =>
+                              editRune(m.id, i, { quantityMax: num(e.target.value) ?? 0 })
+                            }
+                            aria-label={`Quantité max de ${r.label} pour ${m.name}`}
+                          />
+                        </label>
+                        <span className="eleveur-rune-readout">
+                          ≈{" "}
+                          {runeExpectedQty(r).toLocaleString("fr-FR", {
+                            maximumFractionDigits: 2,
+                          })}{" "}
+                          / monture
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {tab === "sim" && (
+        <>
       {/* ---------------- Réglages ---------------- */}
       <section className="panel">
         <h2>Réglages</h2>
@@ -696,6 +837,8 @@ export function EleveurPage() {
           </ul>
         )}
       </section>
+        </>
+      )}
     </main>
   );
 }

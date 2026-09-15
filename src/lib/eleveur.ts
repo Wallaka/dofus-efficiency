@@ -147,6 +147,7 @@ export function computeEleveur(
   prices: PriceMap,
   taxRate = 0,
   mountsPerCapture?: number,
+  brisageOverrides: Record<string, RuneYield[]> = {},
 ): EleveurResult {
   const enclos = enclosForLevel(input.level);
   const capacity = ENCLOS_CAPACITY;
@@ -161,7 +162,9 @@ export function computeEleveur(
   const filtresPerMount = filet ? 1 / mpc : 0;
   const captureCostPerMount = filet ? (filetPrice ?? 0) * filtresPerMount : 0;
 
-  const runes = brisageFor(input.mountId);
+  const runes =
+    (input.mountId != null && brisageOverrides[input.mountId]) ||
+    brisageFor(input.mountId);
   const grossRevenuePerMount = runes.reduce((sum, r) => {
     const unit = prices[r.itemId];
     return sum + (unit == null ? 0 : unit * runeExpectedQty(r));
