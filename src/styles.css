@@ -1518,12 +1518,15 @@ table.eleveur-bp input {
   font-size: 0.82rem;
 }
 
-/* Min–max range: favourable bound green, other amber. */
+/* Value colours: gain green, spend amber, loss red (single value or range bound). */
 .rng-good {
   color: var(--positive);
 }
 .rng-bad {
   color: var(--warn);
+}
+.rng-neg {
+  color: var(--negative);
 }
 .rng-sep {
   color: var(--muted);
