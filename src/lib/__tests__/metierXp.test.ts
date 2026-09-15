@@ -170,4 +170,42 @@ describe("buildOptimalPlan", () => {
     // Resale still shows up as revenue in the display totals.
     expect(withResale.totalRevenue).toBe(0); // "spam" isn't in the path, so nothing to resell
   });
+
+  it("the 'net' objective prefers a pricier craft that resells over a cheap one that doesn't", () => {
+    // Two recipes craftable from level 1, both 1 craft/level here:
+    //  - "cheapNoSell": ingredients cost 1, output has no resale price.
+    //  - "dearResell": ingredients cost 5, output resells for 20.
+    // Gross → cheapNoSell (cost 1 < 5). Net → dearResell (5 − 20 = −15 < 1).
+    const rs = [
+      recipe("cheapNoSell", 1, [["cheap-ing", 1]]),
+      recipe("dearResell", 1, [["dear-ing", 1]]),
+    ];
+    const px: PriceMap = {
+      "cheap-ing": 1,
+      "dear-ing": 5,
+      "res-dearResell": 20, // resale price of dearResell's output
+    };
+
+    const gross = buildOptimalPlan(rs, px, 1, 3, 1, 0, "gross");
+    expect(gross.steps.every((s) => s.recipe.recipeId === "cheapNoSell")).toBe(true);
+
+    const net = buildOptimalPlan(rs, px, 1, 3, 1, 0, "net");
+    expect(net.steps.every((s) => s.recipe.recipeId === "dearResell")).toBe(true);
+    // Reselling the output makes the profitable route a net gain (negative net cost).
+    expect(net.netCost!).toBeLessThan(0);
+    expect(net.netCost!).toBeLessThan(gross.netCost!);
+  });
+
+  it("defaults to the gross objective", () => {
+    const rs = [
+      recipe("cheapNoSell", 1, [["cheap-ing", 1]]),
+      recipe("dearResell", 1, [["dear-ing", 1]]),
+    ];
+    const px: PriceMap = { "cheap-ing": 1, "dear-ing": 5, "res-dearResell": 20 };
+    const def = buildOptimalPlan(rs, px, 1, 3, 1, 0);
+    const gross = buildOptimalPlan(rs, px, 1, 3, 1, 0, "gross");
+    expect(def.steps.map((s) => s.recipe.recipeId)).toEqual(
+      gross.steps.map((s) => s.recipe.recipeId),
+    );
+  });
 });
