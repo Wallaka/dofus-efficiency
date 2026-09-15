@@ -10,6 +10,7 @@ import {
   type EleveurInput,
 } from "../lib/eleveur";
 import { bestFiletFor, filetsForLevel } from "../lib/filets";
+import { planRotations, formatClock } from "../lib/planning";
 import { MANGEOIRES } from "../lib/mangeoires";
 import { MOUNTS, mountById } from "../lib/mounts";
 import type { Item } from "../types";
@@ -93,6 +94,18 @@ export function EleveurPage() {
   );
   const result = high;
   const ranged = filet != null && filet.mountsMin !== filet.mountsMax;
+
+  // Rotation planner: ideal login schedule within a connection window.
+  const plan = useMemo(
+    () =>
+      planRotations({
+        availFrom: input.availFrom ?? 8,
+        availTo: input.availTo ?? 24,
+        rotationHours: RAISE_HOURS,
+        horizonDays: 3,
+      }),
+    [input.availFrom, input.availTo],
+  );
 
   function patch(p: Partial<EleveurInput>) {
     setInput((prev) => ({ ...prev, ...p }));
@@ -462,9 +475,89 @@ export function EleveurPage() {
           <p className="hint">
             Combien de cycles complets vous bouclez réellement par jour (une
             rotation ≈ {RAISE_HOURS.toFixed(0)} h + votre temps mort). Sert au
-            bénéfice / jour.
+            bénéfice / jour — ou laissez le planning ci-dessous le remplir.
           </p>
         </div>
+      </section>
+
+      {/* ---------------- Planning des rotations ---------------- */}
+      <section className="panel">
+        <h2>Planning des rotations</h2>
+        <p className="hint">
+          Une rotation dure ~{RAISE_HOURS.toFixed(1)} h (qui « dérive » chaque
+          jour) et il faut être connecté pour briser + remettre en enclos.
+          Indiquez votre fenêtre de connexion : on calcule la meilleure heure de
+          mise et l'horaire des connexions.
+        </p>
+        <div className="eleveur-settings">
+          <div className="field eleveur-num">
+            <label htmlFor="avail-from">Connecté dès (h)</label>
+            <input
+              id="avail-from"
+              type="number"
+              min={0}
+              max={23}
+              inputMode="numeric"
+              value={input.availFrom ?? ""}
+              placeholder="8"
+              onChange={(e) => patch({ availFrom: num(e.target.value) })}
+            />
+          </div>
+          <div className="field eleveur-num">
+            <label htmlFor="avail-to">Jusqu'à (h)</label>
+            <input
+              id="avail-to"
+              type="number"
+              min={1}
+              max={24}
+              inputMode="numeric"
+              value={input.availTo ?? ""}
+              placeholder="24"
+              onChange={(e) => patch({ availTo: num(e.target.value) })}
+            />
+          </div>
+          <div className="eleveur-capture-total">
+            <span className="eleveur-tile-label">Rotations / jour</span>
+            <strong>{plan.rotationsPerDay.toFixed(1)}</strong>
+          </div>
+          <button
+            type="button"
+            className="eleveur-apply"
+            onClick={() =>
+              patch({ rotationsPerDay: Math.round(plan.rotationsPerDay * 10) / 10 })
+            }
+          >
+            Utiliser pour le bénéfice / jour
+          </button>
+        </div>
+
+        <p className="eleveur-derived-line">
+          Meilleure heure de mise en enclos :{" "}
+          <strong>{formatClock(plan.startClock)}</strong> · ~
+          {plan.idleHours > 0
+            ? `${(plan.idleHours / plan.horizonDays).toFixed(1)} h d'attente perdue / jour`
+            : "aucune attente perdue"}
+        </p>
+
+        <ol className="eleveur-plan">
+          {plan.events.slice(0, 6).map((ev, i) => (
+            <li key={i} className={`eleveur-plan-ev ${ev.type}`}>
+              <span className="eleveur-plan-time">
+                J{ev.day + 1} · {formatClock(ev.clock)}
+              </span>
+              <span className="eleveur-plan-label">
+                {ev.type === "place"
+                  ? "Mettre en enclos"
+                  : "Se connecter : briser + remettre en enclos"}
+                {ev.idleHours > 0.05 && (
+                  <span className="eleveur-plan-idle">
+                    {" "}(après {ev.idleHours.toFixed(1)} h d'attente)
+                  </span>
+                )}
+              </span>
+            </li>
+          ))}
+        </ol>
       </section>
 
       {/* ---------------- Brisage (runes) ---------------- */}
