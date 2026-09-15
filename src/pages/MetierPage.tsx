@@ -23,6 +23,7 @@ import { loadCraftTaxPercent } from "../lib/craftList";
 import { formatKamas } from "../lib/format";
 import { MetierRecipeRow } from "../components/MetierRecipeRow";
 import { PriceInput } from "../components/PriceInput";
+import { CopyName } from "../components/CopyName";
 
 type Load = "idle" | "loading" | "error";
 const MAX_LEVEL = 200;
@@ -217,6 +218,7 @@ export function MetierPage() {
         <span className="metier-ing-name" title={ing.item.name}>
           {ing.item.name}
         </span>
+        <CopyName text={ing.item.name} />
       </span>
       <span className="metier-ing-qty">{ing.quantity.toLocaleString("fr-FR")}</span>
       <PriceInput

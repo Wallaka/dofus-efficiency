@@ -5,6 +5,7 @@ import { useFavourites } from "../lib/useFavourites";
 import { isStale, relativeAge } from "../lib/priceStore";
 import { usePrices } from "../lib/usePrices";
 import { formatDateTime } from "../lib/format";
+import { CopyName } from "../components/CopyName";
 
 /**
  * The "objets suivis" page: the manual counterpart to OCR. Every tracked item is
@@ -106,6 +107,7 @@ export function TrackedItemsPage() {
                             />
                           )}
                           <span className="item-name">{item.name}</span>
+                          <CopyName text={item.name} />
                           {item.level != null && (
                             <span className="recipe-detail">
                               Niv. {item.level}

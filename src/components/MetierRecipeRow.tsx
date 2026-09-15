@@ -3,6 +3,7 @@ import type { RecipePlan } from "../lib/metierXp";
 import type { Item, PriceMap } from "../types";
 import { formatKamas } from "../lib/format";
 import { PriceInput } from "./PriceInput";
+import { CopyName } from "./CopyName";
 
 interface Props {
   plan: RecipePlan;
@@ -103,6 +104,7 @@ export function MetierRecipeRow({
                   <span className="metier-ing-name" title={ing.item.name}>
                     {ing.item.name}
                   </span>
+                  <CopyName text={ing.item.name} />
                 </span>
                 <span className="metier-ing-qty">×{ing.quantity}</span>
                 <PriceInput
@@ -133,6 +135,7 @@ export function MetierRecipeRow({
               <span className="metier-ing-name" title={recipe.result.name}>
                 {recipe.result.name}
               </span>
+              <CopyName text={recipe.result.name} />
             </span>
             <span className="metier-ing-qty">vente</span>
             <PriceInput

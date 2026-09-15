@@ -4,6 +4,7 @@ import type { Item } from "../types";
 import type { PriceEntryMap } from "../lib/priceStore";
 import { isStale, relativeAge } from "../lib/priceStore";
 import { formatKamas, formatKamasSigned, formatPercent } from "../lib/format";
+import { CopyName } from "./CopyName";
 
 interface Props {
   entry: CraftEntry;
@@ -167,6 +168,7 @@ export function CraftRow({
                 .join(" · ") || "—"}
             </span>
           </span>
+          <CopyName text={entry.resultItem.name} />
         </span>
 
         <span className="col-num craft-cost">
@@ -261,6 +263,7 @@ export function CraftRow({
                       />
                     )}
                   </span>
+                  <CopyName text={ing.item.name} />
                 </span>
                 <span className="craft-ing-qty">{ing.quantity} ×</span>
                 <PriceInput

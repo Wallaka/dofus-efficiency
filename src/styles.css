@@ -4652,3 +4652,59 @@ td.negative {
   background-size: 13px 13px;
   padding-right: 22px;
 }
+
+/* --- "Copier le nom" button (after a resource/item name) -------------------
+   Placed inside the flex container that holds the name; hidden until the row is
+   hovered (its direct parent's :hover) or the button is focused/just copied, so
+   lists stay clean. Space is reserved even when hidden, so nothing shifts. */
+.copy-name {
+  flex: 0 0 auto;
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  opacity: 0;
+  transition: color 0.12s, background 0.12s, border-color 0.12s, opacity 0.12s;
+}
+.copy-name svg {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+.copy-name:hover {
+  color: var(--text);
+  background: var(--num-bg);
+  border-color: var(--border);
+}
+.copy-name:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  opacity: 1;
+}
+/* Reveal when the name's row (the button's direct parent) is hovered. */
+*:hover > .copy-name {
+  opacity: 1;
+}
+.copy-name.copied {
+  opacity: 1;
+  color: var(--positive);
+  border-color: color-mix(in srgb, var(--positive) 40%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .copy-name {
+    transition: none;
+  }
+}
+/* Keep the neighbouring name able to shrink (ellipsis) once a button sits after it. */
+.metier-ing-name,
+.craft-ing-name,
+.craft-name,
+.item-name {
+  min-width: 0;
+}
