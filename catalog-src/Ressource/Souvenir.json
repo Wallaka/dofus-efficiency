@@ -1,0 +1,50 @@
+[
+  {
+    "id": 12582,
+    "name": {
+      "fr": "Pierre Noire de Vulkania"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24736.png",
+    "level": 1
+  },
+  {
+    "id": 12583,
+    "name": {
+      "fr": "Kœur en Plastique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24263.png",
+    "level": 1
+  },
+  {
+    "id": 12584,
+    "name": {
+      "fr": "Relique du Cimetière des Os Posés"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24057.png",
+    "level": 1
+  },
+  {
+    "id": 12585,
+    "name": {
+      "fr": "Conserve de Vacancier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/125002.png",
+    "level": 1
+  },
+  {
+    "id": 12586,
+    "name": {
+      "fr": "Cristal de Vie et de Prospérité"
+    },
+    "img": "https://api.dofusdb.fr/img/items/125000.png",
+    "level": 1
+  },
+  {
+    "id": 12587,
+    "name": {
+      "fr": "Figurine de Krokille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/125001.png",
+    "level": 1
+  }
+]

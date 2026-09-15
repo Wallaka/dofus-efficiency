@@ -1,0 +1,330 @@
+[
+  {
+    "id": 16663,
+    "name": {
+      "fr": "Viande Intangible"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63407.png",
+    "level": 1
+  },
+  {
+    "id": 17123,
+    "name": {
+      "fr": "Viande Hachée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/175008.png",
+    "level": 10
+  },
+  {
+    "id": 17124,
+    "name": {
+      "fr": "Viande Faisandée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63348.png",
+    "level": 20
+  },
+  {
+    "id": 17125,
+    "name": {
+      "fr": "Bidoche Faisandée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63414.png",
+    "level": 20
+  },
+  {
+    "id": 17126,
+    "name": {
+      "fr": "Viande Frelatée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63491.png",
+    "level": 30
+  },
+  {
+    "id": 17127,
+    "name": {
+      "fr": "Bidoche Frelatée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63492.png",
+    "level": 30
+  },
+  {
+    "id": 17128,
+    "name": {
+      "fr": "Viande Minérale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63411.png",
+    "level": 40
+  },
+  {
+    "id": 17129,
+    "name": {
+      "fr": "Bidoche Minérale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63412.png",
+    "level": 40
+  },
+  {
+    "id": 17130,
+    "name": {
+      "fr": "Viande Tendre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63483.png",
+    "level": 50
+  },
+  {
+    "id": 17131,
+    "name": {
+      "fr": "Bidoche Tendre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63484.png",
+    "level": 50
+  },
+  {
+    "id": 17132,
+    "name": {
+      "fr": "Viande Ladre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63420.png",
+    "level": 60
+  },
+  {
+    "id": 17133,
+    "name": {
+      "fr": "Bidoche Ladre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63421.png",
+    "level": 60
+  },
+  {
+    "id": 17134,
+    "name": {
+      "fr": "Viande Avariée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63426.png",
+    "level": 70
+  },
+  {
+    "id": 17135,
+    "name": {
+      "fr": "Bidoche Avariée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63427.png",
+    "level": 70
+  },
+  {
+    "id": 17136,
+    "name": {
+      "fr": "Viande Sanguinolente"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63464.png",
+    "level": 80
+  },
+  {
+    "id": 17137,
+    "name": {
+      "fr": "Bidoche Sanguinolente"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63465.png",
+    "level": 80
+  },
+  {
+    "id": 17138,
+    "name": {
+      "fr": "Viande Rassie"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63473.png",
+    "level": 90
+  },
+  {
+    "id": 17139,
+    "name": {
+      "fr": "Bidoche Rassie"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63474.png",
+    "level": 90
+  },
+  {
+    "id": 17140,
+    "name": {
+      "fr": "Viande Exsudative"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63471.png",
+    "level": 100
+  },
+  {
+    "id": 17141,
+    "name": {
+      "fr": "Bidoche Exsudative"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63472.png",
+    "level": 100
+  },
+  {
+    "id": 17142,
+    "name": {
+      "fr": "Viande Séchée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63506.png",
+    "level": 110
+  },
+  {
+    "id": 17143,
+    "name": {
+      "fr": "Bidoche Séchée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63507.png",
+    "level": 110
+  },
+  {
+    "id": 17144,
+    "name": {
+      "fr": "Viande Saignante"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63453.png",
+    "level": 120
+  },
+  {
+    "id": 17145,
+    "name": {
+      "fr": "Bidoche Saignante"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63454.png",
+    "level": 120
+  },
+  {
+    "id": 17146,
+    "name": {
+      "fr": "Viande Persillée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63457.png",
+    "level": 130
+  },
+  {
+    "id": 17147,
+    "name": {
+      "fr": "Bidoche Persillée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63458.png",
+    "level": 130
+  },
+  {
+    "id": 17148,
+    "name": {
+      "fr": "Viande Macérée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63476.png",
+    "level": 140
+  },
+  {
+    "id": 17149,
+    "name": {
+      "fr": "Bidoche Macérée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63477.png",
+    "level": 140
+  },
+  {
+    "id": 17150,
+    "name": {
+      "fr": "Viande de Brousse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63372.png",
+    "level": 150
+  },
+  {
+    "id": 17151,
+    "name": {
+      "fr": "Bidoche de Brousse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63469.png",
+    "level": 150
+  },
+  {
+    "id": 17152,
+    "name": {
+      "fr": "Viande Fraîche"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63441.png",
+    "level": 160
+  },
+  {
+    "id": 17153,
+    "name": {
+      "fr": "Bidoche Fraîche"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63442.png",
+    "level": 160
+  },
+  {
+    "id": 17154,
+    "name": {
+      "fr": "Viande Maigre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63391.png",
+    "level": 170
+  },
+  {
+    "id": 17155,
+    "name": {
+      "fr": "Bidoche Maigre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63400.png",
+    "level": 170
+  },
+  {
+    "id": 17156,
+    "name": {
+      "fr": "Viande Gâtée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63533.png",
+    "level": 180
+  },
+  {
+    "id": 17157,
+    "name": {
+      "fr": "Bidoche Gâtée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63534.png",
+    "level": 180
+  },
+  {
+    "id": 17158,
+    "name": {
+      "fr": "Viande Noire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63439.png",
+    "level": 190
+  },
+  {
+    "id": 17159,
+    "name": {
+      "fr": "Bidoche Noire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63440.png",
+    "level": 190
+  },
+  {
+    "id": 17160,
+    "name": {
+      "fr": "Viande Goûtue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63487.png",
+    "level": 200
+  },
+  {
+    "id": 17161,
+    "name": {
+      "fr": "Bidoche Goûtue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63448.png",
+    "level": 200
+  },
+  {
+    "id": 17421,
+    "name": {
+      "fr": "Bidoche Intangible"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63470.png",
+    "level": 10
+  }
+]

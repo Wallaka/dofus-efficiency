@@ -1,0 +1,66 @@
+[
+  {
+    "id": 26345,
+    "name": {
+      "fr": "Gravure de Tsunami"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15211.png",
+    "level": 80
+  },
+  {
+    "id": 26347,
+    "name": {
+      "fr": "Gravure de Séisme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15214.png",
+    "level": 80
+  },
+  {
+    "id": 26348,
+    "name": {
+      "fr": "Gravure d'Incendie"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15212.png",
+    "level": 80
+  },
+  {
+    "id": 26349,
+    "name": {
+      "fr": "Gravure d'Ouragan"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15213.png",
+    "level": 80
+  },
+  {
+    "id": 26353,
+    "name": {
+      "fr": "Gravure d'Étincelle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15212.png",
+    "level": 20
+  },
+  {
+    "id": 26354,
+    "name": {
+      "fr": "Gravure de Courant d'Air"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15213.png",
+    "level": 20
+  },
+  {
+    "id": 26355,
+    "name": {
+      "fr": "Gravure de Crachin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15211.png",
+    "level": 20
+  },
+  {
+    "id": 26358,
+    "name": {
+      "fr": "Gravure de Secousse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15214.png",
+    "level": 20
+  }
+]

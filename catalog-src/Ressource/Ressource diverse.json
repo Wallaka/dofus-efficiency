@@ -1,0 +1,3986 @@
+[
+  {
+    "id": 276,
+    "name": {
+      "fr": "Pièce du Trésor du Badoul"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15268.png",
+    "level": 43
+  },
+  {
+    "id": 292,
+    "name": {
+      "fr": "Testicules de Cocholou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15010.png",
+    "level": 96
+  },
+  {
+    "id": 302,
+    "name": {
+      "fr": "Tambour de Gobaladée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24287.png",
+    "level": 40
+  },
+  {
+    "id": 373,
+    "name": {
+      "fr": "Intestin d'Araknosé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36045.png",
+    "level": 13
+  },
+  {
+    "id": 382,
+    "name": {
+      "fr": "Longue-vue de Gob-Trotteur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24286.png",
+    "level": 40
+  },
+  {
+    "id": 406,
+    "name": {
+      "fr": "Estomac de Wo Wabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15146.png",
+    "level": 56
+  },
+  {
+    "id": 410,
+    "name": {
+      "fr": "Livre du Bwork Mage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/25130.png",
+    "level": 45
+  },
+  {
+    "id": 420,
+    "name": {
+      "fr": "Ficelle en Lin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15118.png",
+    "level": 1
+  },
+  {
+    "id": 440,
+    "name": {
+      "fr": "Griffe de Muloubard"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15107.png",
+    "level": 96
+  },
+  {
+    "id": 501,
+    "name": {
+      "fr": "Sève d'Abraknyde Retravaillée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15162.png",
+    "level": 30
+  },
+  {
+    "id": 641,
+    "name": {
+      "fr": "Coton Ancestral"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15657.png",
+    "level": 18
+  },
+  {
+    "id": 642,
+    "name": {
+      "fr": "Cocon de Ver à Soie"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15489.png",
+    "level": 36
+  },
+  {
+    "id": 643,
+    "name": {
+      "fr": "Fil de Soie"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15486.png",
+    "level": 18
+  },
+  {
+    "id": 666,
+    "name": {
+      "fr": "Purée pique-fêle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15116.png",
+    "level": 1
+  },
+  {
+    "id": 792,
+    "name": {
+      "fr": "Muqueuse de Moumoule"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15162.png",
+    "level": 46
+  },
+  {
+    "id": 838,
+    "name": {
+      "fr": "Manuel du Directeur Grunob"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24289.png",
+    "level": 40
+  },
+  {
+    "id": 1023,
+    "name": {
+      "fr": "Bouteille de rhum"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15177.png",
+    "level": 1
+  },
+  {
+    "id": 1086,
+    "name": {
+      "fr": "Peinture noire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15175.png",
+    "level": 1
+  },
+  {
+    "id": 1089,
+    "name": {
+      "fr": "Ticket pour l'île de Moon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15172.png",
+    "level": 1
+  },
+  {
+    "id": 1328,
+    "name": {
+      "fr": "Kama énigmatique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15182.png",
+    "level": 1
+  },
+  {
+    "id": 1506,
+    "name": {
+      "fr": "Symbole de l'étrange"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15224.png",
+    "level": 1
+  },
+  {
+    "id": 1507,
+    "name": {
+      "fr": "Bon 1000 Kek"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15225.png",
+    "level": 1
+  },
+  {
+    "id": 1508,
+    "name": {
+      "fr": "Bon 2000 Kek"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15225.png",
+    "level": 1
+  },
+  {
+    "id": 1509,
+    "name": {
+      "fr": "Bon 5000 Kek"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15225.png",
+    "level": 1
+  },
+  {
+    "id": 1510,
+    "name": {
+      "fr": "Bon 10000 Kek"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15225.png",
+    "level": 1
+  },
+  {
+    "id": 1676,
+    "name": {
+      "fr": "Osier Enchanté"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15123.png",
+    "level": 86
+  },
+  {
+    "id": 1683,
+    "name": {
+      "fr": "Sac à Patates Clair"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15243.png",
+    "level": 42
+  },
+  {
+    "id": 1684,
+    "name": {
+      "fr": "Sac à Patates Sombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15244.png",
+    "level": 42
+  },
+  {
+    "id": 1731,
+    "name": {
+      "fr": "Dose de jus goûtu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15262.png",
+    "level": 1
+  },
+  {
+    "id": 1732,
+    "name": {
+      "fr": "Bol"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15263.png",
+    "level": 1
+  },
+  {
+    "id": 1733,
+    "name": {
+      "fr": "Terrine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15264.png",
+    "level": 1
+  },
+  {
+    "id": 1749,
+    "name": {
+      "fr": "Jeton de la Foire du Trool"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15737.png",
+    "level": 1
+  },
+  {
+    "id": 1770,
+    "name": {
+      "fr": "Bout de Blop Coco"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15281.png",
+    "level": 26
+  },
+  {
+    "id": 1771,
+    "name": {
+      "fr": "Souris verte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15932.png",
+    "level": 56
+  },
+  {
+    "id": 1773,
+    "name": {
+      "fr": "Bout de Blop Reinette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15284.png",
+    "level": 26
+  },
+  {
+    "id": 1775,
+    "name": {
+      "fr": "Bout de Blop Griotte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15286.png",
+    "level": 26
+  },
+  {
+    "id": 1777,
+    "name": {
+      "fr": "Bout de Blop Indigo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15288.png",
+    "level": 26
+  },
+  {
+    "id": 1977,
+    "name": {
+      "fr": "Épices"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15378.png",
+    "level": 1
+  },
+  {
+    "id": 1983,
+    "name": {
+      "fr": "Graisse Gélatineuse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15379.png",
+    "level": 54
+  },
+  {
+    "id": 2058,
+    "name": {
+      "fr": "Cœur de Brandon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15328.png",
+    "level": 110
+  },
+  {
+    "id": 2059,
+    "name": {
+      "fr": "Corbac Mort"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15329.png",
+    "level": 106
+  },
+  {
+    "id": 2259,
+    "name": {
+      "fr": "Pic de Lance de Gobet"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24285.png",
+    "level": 40
+  },
+  {
+    "id": 2268,
+    "name": {
+      "fr": "Scalp de Bwork Archer"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15425.png",
+    "level": 43
+  },
+  {
+    "id": 2274,
+    "name": {
+      "fr": "Bougie du Mineur Sombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15428.png",
+    "level": 24
+  },
+  {
+    "id": 2280,
+    "name": {
+      "fr": "Paille Vampiresque"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15433.png",
+    "level": 43
+  },
+  {
+    "id": 2286,
+    "name": {
+      "fr": "Bandelettes"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15438.png",
+    "level": 86
+  },
+  {
+    "id": 2294,
+    "name": {
+      "fr": "Viscères de Scarafeuille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15445.png",
+    "level": 38
+  },
+  {
+    "id": 2295,
+    "name": {
+      "fr": "Fragment d'Épée Reptilienne"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15446.png",
+    "level": 66
+  },
+  {
+    "id": 2297,
+    "name": {
+      "fr": "Flèche du Chafer Archer"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15125.png",
+    "level": 46
+  },
+  {
+    "id": 2302,
+    "name": {
+      "fr": "Langue d'Étoile"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15452.png",
+    "level": 46
+  },
+  {
+    "id": 2320,
+    "name": {
+      "fr": "Collier Cassé de Macien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15462.png",
+    "level": 66
+  },
+  {
+    "id": 2321,
+    "name": {
+      "fr": "Babines de Macien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15463.png",
+    "level": 66
+  },
+  {
+    "id": 2330,
+    "name": {
+      "fr": "Capsule Explosive"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15711.png",
+    "level": 45
+  },
+  {
+    "id": 2401,
+    "name": {
+      "fr": "Carte de Kwelsh"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15224.png",
+    "level": 1
+  },
+  {
+    "id": 2448,
+    "name": {
+      "fr": "Cervelle de Bouftou des Cavernes"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15492.png",
+    "level": 96
+  },
+  {
+    "id": 2454,
+    "name": {
+      "fr": "Estomac de Tofu Ventripotent"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15498.png",
+    "level": 36
+  },
+  {
+    "id": 2466,
+    "name": {
+      "fr": "Langue de Gargrouille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15505.png",
+    "level": 36
+  },
+  {
+    "id": 2467,
+    "name": {
+      "fr": "Rondelles de Milirat Strubien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63373.png",
+    "level": 26
+  },
+  {
+    "id": 2468,
+    "name": {
+      "fr": "Estomac de Ouassingue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15506.png",
+    "level": 36
+  },
+  {
+    "id": 2479,
+    "name": {
+      "fr": "Fléau de Robot Fléau"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15945.png",
+    "level": 56
+  },
+  {
+    "id": 2481,
+    "name": {
+      "fr": "Chaîne de Robot Fléau"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15943.png",
+    "level": 56
+  },
+  {
+    "id": 2482,
+    "name": {
+      "fr": "Charnière Cassée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15942.png",
+    "level": 56
+  },
+  {
+    "id": 2483,
+    "name": {
+      "fr": "Bidule inutile"
+    },
+    "img": "https://api.dofusdb.fr/img/items/156005.png",
+    "level": 56
+  },
+  {
+    "id": 2486,
+    "name": {
+      "fr": "Coque Endommagée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15944.png",
+    "level": 56
+  },
+  {
+    "id": 2488,
+    "name": {
+      "fr": "Viscères de Scorbute"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15445.png",
+    "level": 65
+  },
+  {
+    "id": 2493,
+    "name": {
+      "fr": "Cœur de Buveur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15518.png",
+    "level": 106
+  },
+  {
+    "id": 2500,
+    "name": {
+      "fr": "Kolérat Mort"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15524.png",
+    "level": 66
+  },
+  {
+    "id": 2504,
+    "name": {
+      "fr": "Langue de Craquelope"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15527.png",
+    "level": 66
+  },
+  {
+    "id": 2505,
+    "name": {
+      "fr": "Baballe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/176011.png",
+    "level": 64
+  },
+  {
+    "id": 2506,
+    "name": {
+      "fr": "Grelot"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15529.png",
+    "level": 56
+  },
+  {
+    "id": 2510,
+    "name": {
+      "fr": "Estomac de Gliglidoudur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15532.png",
+    "level": 146
+  },
+  {
+    "id": 2515,
+    "name": {
+      "fr": "Groin de Sanglier des Plaines"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15540.png",
+    "level": 44
+  },
+  {
+    "id": 2526,
+    "name": {
+      "fr": "Faux du Maître Corbac"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15557.png",
+    "level": 160
+  },
+  {
+    "id": 2527,
+    "name": {
+      "fr": "Clakoss"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15558.png",
+    "level": 110
+  },
+  {
+    "id": 2549,
+    "name": {
+      "fr": "Boîte de Vétauran"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15560.png",
+    "level": 66
+  },
+  {
+    "id": 2558,
+    "name": {
+      "fr": "Blop mort"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15568.png",
+    "level": 44
+  },
+  {
+    "id": 2561,
+    "name": {
+      "fr": "Bracelet de Force de Trooll"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15571.png",
+    "level": 115
+  },
+  {
+    "id": 2566,
+    "name": {
+      "fr": "Tranche Magique de Krambwork"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15576.png",
+    "level": 86
+  },
+  {
+    "id": 2572,
+    "name": {
+      "fr": "Estomac de Tofukaz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15578.png",
+    "level": 36
+  },
+  {
+    "id": 2575,
+    "name": {
+      "fr": "Scalp de Mulounoké"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15581.png",
+    "level": 96
+  },
+  {
+    "id": 2576,
+    "name": {
+      "fr": "Scalp de Milimulou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15582.png",
+    "level": 26
+  },
+  {
+    "id": 2577,
+    "name": {
+      "fr": "Scalp du Meulou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15583.png",
+    "level": 100
+  },
+  {
+    "id": 2584,
+    "name": {
+      "fr": "Main de Boo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15590.png",
+    "level": 66
+  },
+  {
+    "id": 2585,
+    "name": {
+      "fr": "Cœur de Boue du Boo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15591.png",
+    "level": 27
+  },
+  {
+    "id": 2607,
+    "name": {
+      "fr": "Trukikol Mort"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15600.png",
+    "level": 100
+  },
+  {
+    "id": 2617,
+    "name": {
+      "fr": "Tranche de Nodkoko"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15605.png",
+    "level": 50
+  },
+  {
+    "id": 2618,
+    "name": {
+      "fr": "Kokopaille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15433.png",
+    "level": 50
+  },
+  {
+    "id": 2622,
+    "name": {
+      "fr": "Boulet de Canondorf"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164079.png",
+    "level": 90
+  },
+  {
+    "id": 2623,
+    "name": {
+      "fr": "Bwak Squelettique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15608.png",
+    "level": 90
+  },
+  {
+    "id": 2625,
+    "name": {
+      "fr": "Poupée Vaudou Eth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15610.png",
+    "level": 60
+  },
+  {
+    "id": 2626,
+    "name": {
+      "fr": "Poupée Vaudou Jav"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15611.png",
+    "level": 60
+  },
+  {
+    "id": 2627,
+    "name": {
+      "fr": "Poupée Vaudou Sarbak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15612.png",
+    "level": 60
+  },
+  {
+    "id": 2628,
+    "name": {
+      "fr": "Poupée Vaudou Ark"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15613.png",
+    "level": 60
+  },
+  {
+    "id": 2645,
+    "name": {
+      "fr": "Groin de Dragon Cochon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15620.png",
+    "level": 100
+  },
+  {
+    "id": 2648,
+    "name": {
+      "fr": "Griffes de Kwak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15624.png",
+    "level": 44
+  },
+  {
+    "id": 2649,
+    "name": {
+      "fr": "Ver de Terre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15625.png",
+    "level": 44
+  },
+  {
+    "id": 2650,
+    "name": {
+      "fr": "Ver d'Eau"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15626.png",
+    "level": 44
+  },
+  {
+    "id": 2651,
+    "name": {
+      "fr": "Ver de Feu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15627.png",
+    "level": 44
+  },
+  {
+    "id": 2652,
+    "name": {
+      "fr": "Ver d'Air"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15628.png",
+    "level": 44
+  },
+  {
+    "id": 2653,
+    "name": {
+      "fr": "Arakne Majeure Morte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15629.png",
+    "level": 44
+  },
+  {
+    "id": 2663,
+    "name": {
+      "fr": "Engrais"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15635.png",
+    "level": 18
+  },
+  {
+    "id": 2669,
+    "name": {
+      "fr": "Chauve-souris"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15641.png",
+    "level": 35
+  },
+  {
+    "id": 2676,
+    "name": {
+      "fr": "Noeul Mort"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15645.png",
+    "level": 22
+  },
+  {
+    "id": 2805,
+    "name": {
+      "fr": "Testicules Magiques de Muloubard"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15650.png",
+    "level": 96
+  },
+  {
+    "id": 2806,
+    "name": {
+      "fr": "Testicules Magiques du Meulou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15651.png",
+    "level": 100
+  },
+  {
+    "id": 3209,
+    "name": {
+      "fr": "Scalp de Bizarbwork"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15653.png",
+    "level": 86
+  },
+  {
+    "id": 6476,
+    "name": {
+      "fr": "Griffe de Robionicle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47855.png",
+    "level": 56
+  },
+  {
+    "id": 6478,
+    "name": {
+      "fr": "Makroute Déchiqueté"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15702.png",
+    "level": 46
+  },
+  {
+    "id": 6479,
+    "name": {
+      "fr": "Ours Déchiqueté"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15703.png",
+    "level": 46
+  },
+  {
+    "id": 6480,
+    "name": {
+      "fr": "Osier Sombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15123.png",
+    "level": 65
+  },
+  {
+    "id": 6622,
+    "name": {
+      "fr": "Hochet du Dark Vlad"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15696.png",
+    "level": 1
+  },
+  {
+    "id": 6625,
+    "name": {
+      "fr": "Bilboquet Du Maître Corbac"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15710.png",
+    "level": 1
+  },
+  {
+    "id": 6626,
+    "name": {
+      "fr": "Corde à Sauter du Captain Chafer"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15695.png",
+    "level": 1
+  },
+  {
+    "id": 6648,
+    "name": {
+      "fr": "Ballon rouge"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15690.png",
+    "level": 1
+  },
+  {
+    "id": 6649,
+    "name": {
+      "fr": "Ballon bleu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15691.png",
+    "level": 1
+  },
+  {
+    "id": 6650,
+    "name": {
+      "fr": "Ballon vert"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15692.png",
+    "level": 1
+  },
+  {
+    "id": 6651,
+    "name": {
+      "fr": "Ballon jaune"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15693.png",
+    "level": 1
+  },
+  {
+    "id": 6652,
+    "name": {
+      "fr": "Boule à neige foire du trooll"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15694.png",
+    "level": 1
+  },
+  {
+    "id": 6659,
+    "name": {
+      "fr": "Faux Koinkoin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15700.png",
+    "level": 1
+  },
+  {
+    "id": 6885,
+    "name": {
+      "fr": "Jeton du Bworker"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15090.png",
+    "level": 100
+  },
+  {
+    "id": 6904,
+    "name": {
+      "fr": "Protection usagée du Bworker"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15714.png",
+    "level": 160
+  },
+  {
+    "id": 7220,
+    "name": {
+      "fr": "Ticket de loterie"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15717.png",
+    "level": 2
+  },
+  {
+    "id": 7259,
+    "name": {
+      "fr": "Poterie cassée de Lolojiki"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164684.png",
+    "level": 130
+  },
+  {
+    "id": 7270,
+    "name": {
+      "fr": "Langue de Grenufar"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164669.png",
+    "level": 110
+  },
+  {
+    "id": 7343,
+    "name": {
+      "fr": "Bracelet de Ino-Naru"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164674.png",
+    "level": 140
+  },
+  {
+    "id": 7385,
+    "name": {
+      "fr": "Braises bleutées"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164740.png",
+    "level": 170
+  },
+  {
+    "id": 7386,
+    "name": {
+      "fr": "Testicules du Tanukouï San"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164679.png",
+    "level": 130
+  },
+  {
+    "id": 7410,
+    "name": {
+      "fr": "Lanterne usée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164738.png",
+    "level": 170
+  },
+  {
+    "id": 7919,
+    "name": {
+      "fr": "Jeton du Maître de Jeu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15737.png",
+    "level": 1
+  },
+  {
+    "id": 8001,
+    "name": {
+      "fr": "Bandelette du Guerrier Koalak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15719.png",
+    "level": 106
+  },
+  {
+    "id": 8137,
+    "name": {
+      "fr": "Viscères du Scarabosse Doré"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15726.png",
+    "level": 40
+  },
+  {
+    "id": 8326,
+    "name": {
+      "fr": "Bandelette du Mominotor"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15734.png",
+    "level": 114
+  },
+  {
+    "id": 8364,
+    "name": {
+      "fr": "Lanière en cuir de Gliglitch"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15744.png",
+    "level": 146
+  },
+  {
+    "id": 8396,
+    "name": {
+      "fr": "Mojo de Mergranlou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15752.png",
+    "level": 96
+  },
+  {
+    "id": 8399,
+    "name": {
+      "fr": "Koinkoin de bain de Nagate"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164657.png",
+    "level": 130
+  },
+  {
+    "id": 8400,
+    "name": {
+      "fr": "Piques à cheveux de Shihan"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164671.png",
+    "level": 140
+  },
+  {
+    "id": 8516,
+    "name": {
+      "fr": "Cœur de Bworkcelhaine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15518.png",
+    "level": 33
+  },
+  {
+    "id": 8517,
+    "name": {
+      "fr": "Moumoule"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15756.png",
+    "level": 30
+  },
+  {
+    "id": 8671,
+    "name": {
+      "fr": "Relique du Corailleur Magistral"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24152.png",
+    "level": 50
+  },
+  {
+    "id": 8672,
+    "name": {
+      "fr": "Relique de Gourlo le Terrible"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24153.png",
+    "level": 70
+  },
+  {
+    "id": 8673,
+    "name": {
+      "fr": "Relique du Rasboul Majeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24154.png",
+    "level": 110
+  },
+  {
+    "id": 8674,
+    "name": {
+      "fr": "Relique du Tynril"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24155.png",
+    "level": 140
+  },
+  {
+    "id": 8675,
+    "name": {
+      "fr": "Relique du Kimbo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24156.png",
+    "level": 160
+  },
+  {
+    "id": 8759,
+    "name": {
+      "fr": "Coffret maudit du Flib"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15013.png",
+    "level": 24
+  },
+  {
+    "id": 8765,
+    "name": {
+      "fr": "Bâton du Kilibriss"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15017.png",
+    "level": 104
+  },
+  {
+    "id": 8783,
+    "name": {
+      "fr": "Amygdales du Bitouf Sombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15018.png",
+    "level": 136
+  },
+  {
+    "id": 8784,
+    "name": {
+      "fr": "Talon d'achille de l'Abrakleur sombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15019.png",
+    "level": 137
+  },
+  {
+    "id": 8787,
+    "name": {
+      "fr": "Cloaque du Poolay"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15021.png",
+    "level": 150
+  },
+  {
+    "id": 8788,
+    "name": {
+      "fr": "Croupion du Bitouf aérien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15022.png",
+    "level": 152
+  },
+  {
+    "id": 8790,
+    "name": {
+      "fr": "Rembourrage de Meupette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15024.png",
+    "level": 149
+  },
+  {
+    "id": 8805,
+    "name": {
+      "fr": "Mouchoir de la Gamine Zoth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15027.png",
+    "level": 120
+  },
+  {
+    "id": 8806,
+    "name": {
+      "fr": "Écusson du Sergent Zoth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15757.png",
+    "level": 120
+  },
+  {
+    "id": 8810,
+    "name": {
+      "fr": "Tourbe séchée de Tourbassingue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15760.png",
+    "level": 106
+  },
+  {
+    "id": 8811,
+    "name": {
+      "fr": "Faux menton du Bourbassingue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15761.png",
+    "level": 101
+  },
+  {
+    "id": 8812,
+    "name": {
+      "fr": "Encre du Kralamoure géant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15762.png",
+    "level": 200
+  },
+  {
+    "id": 8813,
+    "name": {
+      "fr": "Ventouse du Kralamoure géant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15763.png",
+    "level": 200
+  },
+  {
+    "id": 9269,
+    "name": {
+      "fr": "Langue de Champodonte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15765.png",
+    "level": 176
+  },
+  {
+    "id": 9571,
+    "name": {
+      "fr": "Weischelcreme Torte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15145.png",
+    "level": 180
+  },
+  {
+    "id": 9935,
+    "name": {
+      "fr": "Corde d'escalade"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15170.png",
+    "level": 1
+  },
+  {
+    "id": 9969,
+    "name": {
+      "fr": "Salace de poissons empoisonnée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/49140.png",
+    "level": 153
+  },
+  {
+    "id": 9973,
+    "name": {
+      "fr": "Extrémité du Grattoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15716.png",
+    "level": 155
+  },
+  {
+    "id": 9975,
+    "name": {
+      "fr": "Manche du Grattoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15052.png",
+    "level": 1
+  },
+  {
+    "id": 9976,
+    "name": {
+      "fr": "Grattoir à dos inachevé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15052.png",
+    "level": 1
+  },
+  {
+    "id": 10018,
+    "name": {
+      "fr": "Schéma de la Pince à Linge"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15767.png",
+    "level": 1
+  },
+  {
+    "id": 10019,
+    "name": {
+      "fr": "Seau de Pinces à Linge"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15768.png",
+    "level": 137
+  },
+  {
+    "id": 10070,
+    "name": {
+      "fr": "Tonneau en Bombu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15165.png",
+    "level": 172
+  },
+  {
+    "id": 10272,
+    "name": {
+      "fr": "Masque à Zag"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15772.png",
+    "level": 180
+  },
+  {
+    "id": 10276,
+    "name": {
+      "fr": "Passe pour l'îlot Estitch"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15770.png",
+    "level": 1
+  },
+  {
+    "id": 10284,
+    "name": {
+      "fr": "Viscères de Tanuki"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15445.png",
+    "level": 125
+  },
+  {
+    "id": 11279,
+    "name": {
+      "fr": "Scie à glace"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15781.png",
+    "level": 100
+  },
+  {
+    "id": 11282,
+    "name": {
+      "fr": "Gants de protection"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15783.png",
+    "level": 100
+  },
+  {
+    "id": 11310,
+    "name": {
+      "fr": "Corde du Fancrôme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15779.png",
+    "level": 140
+  },
+  {
+    "id": 11311,
+    "name": {
+      "fr": "Bouée de Fantomalamère"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15780.png",
+    "level": 140
+  },
+  {
+    "id": 11705,
+    "name": {
+      "fr": "Écumouth vivant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15785.png",
+    "level": 1
+  },
+  {
+    "id": 11815,
+    "name": {
+      "fr": "Boostoplasme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15786.png",
+    "level": 40
+  },
+  {
+    "id": 11942,
+    "name": {
+      "fr": "Antenne de Gloursaya"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15787.png",
+    "level": 190
+  },
+  {
+    "id": 12374,
+    "name": {
+      "fr": "Poignée du Gorgouille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15792.png",
+    "level": 100
+  },
+  {
+    "id": 12444,
+    "name": {
+      "fr": "Fumée Juvénile"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15795.png",
+    "level": 25
+  },
+  {
+    "id": 12445,
+    "name": {
+      "fr": "Fumée Novice"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15795.png",
+    "level": 75
+  },
+  {
+    "id": 12446,
+    "name": {
+      "fr": "Fumée Mature"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15795.png",
+    "level": 125
+  },
+  {
+    "id": 12447,
+    "name": {
+      "fr": "Fumée Vénérable"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15795.png",
+    "level": 175
+  },
+  {
+    "id": 13140,
+    "name": {
+      "fr": "Serrure du Coffre des Forgerons"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15799.png",
+    "level": 50
+  },
+  {
+    "id": 13338,
+    "name": {
+      "fr": "Enfumoir Zoth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15130.png",
+    "level": 114
+  },
+  {
+    "id": 13339,
+    "name": {
+      "fr": "Sceau Royal Contrefait"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15131.png",
+    "level": 43
+  },
+  {
+    "id": 13340,
+    "name": {
+      "fr": "Pustule de Rat Sio"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165026.png",
+    "level": 110
+  },
+  {
+    "id": 13342,
+    "name": {
+      "fr": "Tatouage de Mauvais Garçon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15132.png",
+    "level": 46
+  },
+  {
+    "id": 13343,
+    "name": {
+      "fr": "Nœud de Marin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15129.png",
+    "level": 90
+  },
+  {
+    "id": 13489,
+    "name": {
+      "fr": "Miroir de Dopeul"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15092.png",
+    "level": 41
+  },
+  {
+    "id": 13491,
+    "name": {
+      "fr": "Relique Familiale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15094.png",
+    "level": 46
+  },
+  {
+    "id": 13494,
+    "name": {
+      "fr": "Nageoire de Compétition"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15096.png",
+    "level": 18
+  },
+  {
+    "id": 13499,
+    "name": {
+      "fr": "Jouet de Gamine Zoth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15099.png",
+    "level": 118
+  },
+  {
+    "id": 13503,
+    "name": {
+      "fr": "Calumet Zoth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/4062.png",
+    "level": 130
+  },
+  {
+    "id": 13505,
+    "name": {
+      "fr": "Bourse Suspecte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/141010.png",
+    "level": 45
+  },
+  {
+    "id": 13700,
+    "name": {
+      "fr": "Couche usagée de Warko Violet"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15803.png",
+    "level": 112
+  },
+  {
+    "id": 13702,
+    "name": {
+      "fr": "Dédicace de Skeunk pour Émeraude"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15804.png",
+    "level": 120
+  },
+  {
+    "id": 13703,
+    "name": {
+      "fr": "Épingle à Cheveux de Saphira"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15805.png",
+    "level": 120
+  },
+  {
+    "id": 13706,
+    "name": {
+      "fr": "Journal Intime d'Émeraude"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15807.png",
+    "level": 120
+  },
+  {
+    "id": 13708,
+    "name": {
+      "fr": "Pense-bête de Rubise"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15809.png",
+    "level": 120
+  },
+  {
+    "id": 13709,
+    "name": {
+      "fr": "Place de Concert de Diamantine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15810.png",
+    "level": 120
+  },
+  {
+    "id": 13720,
+    "name": {
+      "fr": "Braise de Tofutoflamme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15811.png",
+    "level": 114
+  },
+  {
+    "id": 13721,
+    "name": {
+      "fr": "Croupion de Tofuzmo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15812.png",
+    "level": 114
+  },
+  {
+    "id": 13726,
+    "name": {
+      "fr": "Conque Marine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15813.png",
+    "level": 18
+  },
+  {
+    "id": 13727,
+    "name": {
+      "fr": "Crème à bronzer"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15814.png",
+    "level": 18
+  },
+  {
+    "id": 13728,
+    "name": {
+      "fr": "Paupière d'Étoile"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15815.png",
+    "level": 46
+  },
+  {
+    "id": 13729,
+    "name": {
+      "fr": "Papier Charbon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15816.png",
+    "level": 41
+  },
+  {
+    "id": 13732,
+    "name": {
+      "fr": "Vieille Ventouse de Kralamoure"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15817.png",
+    "level": 106
+  },
+  {
+    "id": 13733,
+    "name": {
+      "fr": "Boulier Zoth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15818.png",
+    "level": 126
+  },
+  {
+    "id": 13736,
+    "name": {
+      "fr": "Furoncle de la Mama Bwork"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15819.png",
+    "level": 174
+  },
+  {
+    "id": 13746,
+    "name": {
+      "fr": "Boulon de Cybwork"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15820.png",
+    "level": 179
+  },
+  {
+    "id": 13873,
+    "name": {
+      "fr": "Sac de bijoutier frigostien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/139016.png",
+    "level": 100
+  },
+  {
+    "id": 13898,
+    "name": {
+      "fr": "Sac de boucher frigostien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/139023.png",
+    "level": 100
+  },
+  {
+    "id": 13899,
+    "name": {
+      "fr": "Sac de boulanger frigostien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/139024.png",
+    "level": 100
+  },
+  {
+    "id": 13900,
+    "name": {
+      "fr": "Sac de bricoleur frigostien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/139025.png",
+    "level": 100
+  },
+  {
+    "id": 13901,
+    "name": {
+      "fr": "Sac de cordonnier frigostien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/139026.png",
+    "level": 100
+  },
+  {
+    "id": 13902,
+    "name": {
+      "fr": "Sac de forgeur d'épées frigostien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/139027.png",
+    "level": 100
+  },
+  {
+    "id": 13903,
+    "name": {
+      "fr": "Sac de forgeur de boucliers frigostien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/139028.png",
+    "level": 100
+  },
+  {
+    "id": 13904,
+    "name": {
+      "fr": "Sac de forgeur de dagues frigostien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/139029.png",
+    "level": 100
+  },
+  {
+    "id": 13905,
+    "name": {
+      "fr": "Sac de forgeur de haches frigostien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/139030.png",
+    "level": 100
+  },
+  {
+    "id": 13906,
+    "name": {
+      "fr": "Sac de forgeur de marteaux frigostien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/139031.png",
+    "level": 100
+  },
+  {
+    "id": 13907,
+    "name": {
+      "fr": "Sac de forgeur de pelles frigostien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/139032.png",
+    "level": 100
+  },
+  {
+    "id": 13908,
+    "name": {
+      "fr": "Sac de poissonnier frigostien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/139033.png",
+    "level": 100
+  },
+  {
+    "id": 13909,
+    "name": {
+      "fr": "Sac de sculpteur d'arcs frigostien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/139034.png",
+    "level": 100
+  },
+  {
+    "id": 13910,
+    "name": {
+      "fr": "Sac de sculpteur de baguettes frigostien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/139035.png",
+    "level": 100
+  },
+  {
+    "id": 13911,
+    "name": {
+      "fr": "Sac de sculpteur de bâtons frigostien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/139036.png",
+    "level": 100
+  },
+  {
+    "id": 13912,
+    "name": {
+      "fr": "Sac de tailleur frigostien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/139037.png",
+    "level": 100
+  },
+  {
+    "id": 13917,
+    "name": {
+      "fr": "Cervelle de Peunch"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15821.png",
+    "level": 200
+  },
+  {
+    "id": 13920,
+    "name": {
+      "fr": "Cœur d'Empaillé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15822.png",
+    "level": 200
+  },
+  {
+    "id": 13924,
+    "name": {
+      "fr": "Scalp de Klime"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15823.png",
+    "level": 200
+  },
+  {
+    "id": 13930,
+    "name": {
+      "fr": "Malleus de Karkanik"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15826.png",
+    "level": 200
+  },
+  {
+    "id": 13932,
+    "name": {
+      "fr": "Cervelle de Verglasseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15827.png",
+    "level": 200
+  },
+  {
+    "id": 13979,
+    "name": {
+      "fr": "Cœur Gelé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15829.png",
+    "level": 140
+  },
+  {
+    "id": 13995,
+    "name": {
+      "fr": "Bandelette du Comte Harebourg"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15831.png",
+    "level": 200
+  },
+  {
+    "id": 14142,
+    "name": {
+      "fr": "Boulon neuf"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15832.png",
+    "level": 200
+  },
+  {
+    "id": 14266,
+    "name": {
+      "fr": "Poche de charbon de Grasmera"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15834.png",
+    "level": 100
+  },
+  {
+    "id": 14268,
+    "name": {
+      "fr": "Poche de magma de Grasmera"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15835.png",
+    "level": 200
+  },
+  {
+    "id": 14278,
+    "name": {
+      "fr": "Chaînes Brisées"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15245.png",
+    "level": 47
+  },
+  {
+    "id": 14282,
+    "name": {
+      "fr": "Boules de Kanniboul"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164077.png",
+    "level": 60
+  },
+  {
+    "id": 14284,
+    "name": {
+      "fr": "Flamme Spectrale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15247.png",
+    "level": 65
+  },
+  {
+    "id": 14461,
+    "name": {
+      "fr": "Langue de Tiwabbit Kiafin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15836.png",
+    "level": 44
+  },
+  {
+    "id": 14469,
+    "name": {
+      "fr": "Estomac de Black Wo Wabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15148.png",
+    "level": 80
+  },
+  {
+    "id": 14472,
+    "name": {
+      "fr": "Bâton de Blanc Pa Wabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/4117.png",
+    "level": 80
+  },
+  {
+    "id": 14473,
+    "name": {
+      "fr": "Boulon Wabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/150007.png",
+    "level": 80
+  },
+  {
+    "id": 14490,
+    "name": {
+      "fr": "Lunettes de Tiwobot"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164022.png",
+    "level": 80
+  },
+  {
+    "id": 14507,
+    "name": {
+      "fr": "Pelote d'Ecaflip"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15837.png",
+    "level": 80
+  },
+  {
+    "id": 14511,
+    "name": {
+      "fr": "Élastique de Gobvious"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15838.png",
+    "level": 94
+  },
+  {
+    "id": 14795,
+    "name": {
+      "fr": "Pile Steamer"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15839.png",
+    "level": 200
+  },
+  {
+    "id": 14865,
+    "name": {
+      "fr": "Cœur de Merkator"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15841.png",
+    "level": 200
+  },
+  {
+    "id": 14868,
+    "name": {
+      "fr": "Vieille Tête de Marteau"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15845.png",
+    "level": 200
+  },
+  {
+    "id": 14927,
+    "name": {
+      "fr": "Symbole des Obscuranti"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15860.png",
+    "level": 190
+  },
+  {
+    "id": 14936,
+    "name": {
+      "fr": "Insigne des Justiciers"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15849.png",
+    "level": 200
+  },
+  {
+    "id": 14945,
+    "name": {
+      "fr": "Vieille Partition"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15851.png",
+    "level": 46
+  },
+  {
+    "id": 14950,
+    "name": {
+      "fr": "Langue de Kraméléhon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15856.png",
+    "level": 114
+  },
+  {
+    "id": 14954,
+    "name": {
+      "fr": "Éclat Obscur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15859.png",
+    "level": 190
+  },
+  {
+    "id": 14977,
+    "name": {
+      "fr": "Bitte d'amarrage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15862.png",
+    "level": 179
+  },
+  {
+    "id": 15044,
+    "name": {
+      "fr": "Frimousse d'Alhyène"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164034.png",
+    "level": 156
+  },
+  {
+    "id": 15047,
+    "name": {
+      "fr": "Chaîne de Panthègros"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164035.png",
+    "level": 154
+  },
+  {
+    "id": 15048,
+    "name": {
+      "fr": "Boule de Panthègros"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164036.png",
+    "level": 154
+  },
+  {
+    "id": 15065,
+    "name": {
+      "fr": "Paire de boules de Haute Truche"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164038.png",
+    "level": 130
+  },
+  {
+    "id": 15069,
+    "name": {
+      "fr": "Croupion de Truchmuche"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164039.png",
+    "level": 121
+  },
+  {
+    "id": 15070,
+    "name": {
+      "fr": "Langue de Truchmuche"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164040.png",
+    "level": 121
+  },
+  {
+    "id": 15072,
+    "name": {
+      "fr": "Morpion de Truchideur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164041.png",
+    "level": 120
+  },
+  {
+    "id": 15074,
+    "name": {
+      "fr": "Glandes de Truchtine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164042.png",
+    "level": 119
+  },
+  {
+    "id": 15165,
+    "name": {
+      "fr": "Corde de Boursoin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15864.png",
+    "level": 100
+  },
+  {
+    "id": 15166,
+    "name": {
+      "fr": "Langue de Mimikado"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15865.png",
+    "level": 100
+  },
+  {
+    "id": 15167,
+    "name": {
+      "fr": "Antenne de Trésantène"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15866.png",
+    "level": 100
+  },
+  {
+    "id": 15180,
+    "name": {
+      "fr": "Morceau de clef de Paspartou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15879.png",
+    "level": 200
+  },
+  {
+    "id": 15182,
+    "name": {
+      "fr": "Kamatrix"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15881.png",
+    "level": 100
+  },
+  {
+    "id": 15230,
+    "name": {
+      "fr": "Pièce de Koffrefor"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15882.png",
+    "level": 100
+  },
+  {
+    "id": 15416,
+    "name": {
+      "fr": "Insigne de Malveilleur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15894.png",
+    "level": 130
+  },
+  {
+    "id": 15444,
+    "name": {
+      "fr": "Tête de mort"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15885.png",
+    "level": 100
+  },
+  {
+    "id": 15446,
+    "name": {
+      "fr": "Piège désamorcé de Mâchassin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15886.png",
+    "level": 200
+  },
+  {
+    "id": 15457,
+    "name": {
+      "fr": "Cœur du Capitaine Ekarlatte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15891.png",
+    "level": 130
+  },
+  {
+    "id": 15459,
+    "name": {
+      "fr": "Sacoche de Kartouche"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15892.png",
+    "level": 130
+  },
+  {
+    "id": 15461,
+    "name": {
+      "fr": "Bandelette de Tromblion"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15893.png",
+    "level": 130
+  },
+  {
+    "id": 15531,
+    "name": {
+      "fr": "Crochet rouillé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24968.png",
+    "level": 130
+  },
+  {
+    "id": 15533,
+    "name": {
+      "fr": "Rossignol"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24969.png",
+    "level": 130
+  },
+  {
+    "id": 15551,
+    "name": {
+      "fr": "Bouteille de Gein"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24970.png",
+    "level": 200
+  },
+  {
+    "id": 15582,
+    "name": {
+      "fr": "Coupon du lecteur 1/3"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24176.png",
+    "level": 1
+  },
+  {
+    "id": 15583,
+    "name": {
+      "fr": "Coupon du lecteur 2/3"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24176.png",
+    "level": 1
+  },
+  {
+    "id": 15584,
+    "name": {
+      "fr": "Coupon du lecteur 3/3"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24176.png",
+    "level": 1
+  },
+  {
+    "id": 15686,
+    "name": {
+      "fr": "Antenne de Bacterrib"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164046.png",
+    "level": 200
+  },
+  {
+    "id": 15689,
+    "name": {
+      "fr": "Noyau de Protozorreur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164047.png",
+    "level": 200
+  },
+  {
+    "id": 15727,
+    "name": {
+      "fr": "Pixel de Fraktale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15907.png",
+    "level": 120
+  },
+  {
+    "id": 15728,
+    "name": {
+      "fr": "Pixel de Gromorso"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15908.png",
+    "level": 120
+  },
+  {
+    "id": 15729,
+    "name": {
+      "fr": "Pixel de Farfacette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15909.png",
+    "level": 120
+  },
+  {
+    "id": 15730,
+    "name": {
+      "fr": "Pixel de Brikablak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15910.png",
+    "level": 120
+  },
+  {
+    "id": 15731,
+    "name": {
+      "fr": "Pixel d'Éklatleth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15911.png",
+    "level": 120
+  },
+  {
+    "id": 15732,
+    "name": {
+      "fr": "Pixel de Segmantid"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15912.png",
+    "level": 120
+  },
+  {
+    "id": 15733,
+    "name": {
+      "fr": "Sablier miniature"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15913.png",
+    "level": 100
+  },
+  {
+    "id": 15809,
+    "name": {
+      "fr": "Symbole de Xélomorphe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15920.png",
+    "level": 120
+  },
+  {
+    "id": 16000,
+    "name": {
+      "fr": "Kamiam"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164048.png",
+    "level": 40
+  },
+  {
+    "id": 16001,
+    "name": {
+      "fr": "Antennes de Vilinsekt"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164049.png",
+    "level": 36
+  },
+  {
+    "id": 16008,
+    "name": {
+      "fr": "Batterie rechargeable de l'Hyperscampe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164052.png",
+    "level": 200
+  },
+  {
+    "id": 16009,
+    "name": {
+      "fr": "Élixir de Brumen"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164050.png",
+    "level": 60
+  },
+  {
+    "id": 16153,
+    "name": {
+      "fr": "Arakne Écrabouillée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164055.png",
+    "level": 82
+  },
+  {
+    "id": 16155,
+    "name": {
+      "fr": "Toile d'Abrakne Sombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164056.png",
+    "level": 86
+  },
+  {
+    "id": 16158,
+    "name": {
+      "fr": "Arakne Irascible Écrasée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164057.png",
+    "level": 130
+  },
+  {
+    "id": 16160,
+    "name": {
+      "fr": "Mandibule d'Abrakne Irascible"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164058.png",
+    "level": 134
+  },
+  {
+    "id": 16161,
+    "name": {
+      "fr": "Doigt de Branche Invocatrice"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164059.png",
+    "level": 138
+  },
+  {
+    "id": 16180,
+    "name": {
+      "fr": "Soie Baveuse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164060.png",
+    "level": 90
+  },
+  {
+    "id": 16181,
+    "name": {
+      "fr": "Globule de Nyée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164061.png",
+    "level": 90
+  },
+  {
+    "id": 16207,
+    "name": {
+      "fr": "Sceau Sylvestre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164062.png",
+    "level": 90
+  },
+  {
+    "id": 16214,
+    "name": {
+      "fr": "Pilule du Gang"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164063.png",
+    "level": 139
+  },
+  {
+    "id": 16215,
+    "name": {
+      "fr": "Glande d'Arak-haï"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164064.png",
+    "level": 86
+  },
+  {
+    "id": 16216,
+    "name": {
+      "fr": "Chélicères d'Arapex"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47843.png",
+    "level": 86
+  },
+  {
+    "id": 16219,
+    "name": {
+      "fr": "Fil de Néfileuse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164065.png",
+    "level": 86
+  },
+  {
+    "id": 16518,
+    "name": {
+      "fr": "Feu Intérieur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164067.png",
+    "level": 1
+  },
+  {
+    "id": 16524,
+    "name": {
+      "fr": "Relique d'Incarnam"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164068.png",
+    "level": 5
+  },
+  {
+    "id": 16526,
+    "name": {
+      "fr": "Tête de Marteau en Jade"
+    },
+    "img": "https://api.dofusdb.fr/img/items/126041.png",
+    "level": 8
+  },
+  {
+    "id": 17046,
+    "name": {
+      "fr": "Levure de boulanger saine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48137.png",
+    "level": 12
+  },
+  {
+    "id": 17065,
+    "name": {
+      "fr": "Poupée Vaudou Tam"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164076.png",
+    "level": 60
+  },
+  {
+    "id": 17116,
+    "name": {
+      "fr": "Épaulière Massive du K.O."
+    },
+    "img": "https://api.dofusdb.fr/img/items/164081.png",
+    "level": 180
+  },
+  {
+    "id": 17117,
+    "name": {
+      "fr": "Pied de Voldelor"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164082.png",
+    "level": 200
+  },
+  {
+    "id": 17442,
+    "name": {
+      "fr": "Pointes de Knout"
+    },
+    "img": "https://api.dofusdb.fr/img/items/20023.png",
+    "level": 172
+  },
+  {
+    "id": 17443,
+    "name": {
+      "fr": "Manche de Knout"
+    },
+    "img": "https://api.dofusdb.fr/img/items/3008.png",
+    "level": 172
+  },
+  {
+    "id": 17444,
+    "name": {
+      "fr": "Lanières de Knout"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15744.png",
+    "level": 172
+  },
+  {
+    "id": 17567,
+    "name": {
+      "fr": "Biscuit de chance"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164085.png",
+    "level": 100
+  },
+  {
+    "id": 17568,
+    "name": {
+      "fr": "Larve pétrifiée d'Ecaflipuce"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164083.png",
+    "level": 110
+  },
+  {
+    "id": 17570,
+    "name": {
+      "fr": "Carte du Grand Jeu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164084.png",
+    "level": 200
+  },
+  {
+    "id": 17611,
+    "name": {
+      "fr": "Palpe de Pikbul"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47848.png",
+    "level": 110
+  },
+  {
+    "id": 17614,
+    "name": {
+      "fr": "Glande du Pounicheur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164086.png",
+    "level": 110
+  },
+  {
+    "id": 17625,
+    "name": {
+      "fr": "Sceau du Roi Joueur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164089.png",
+    "level": 200
+  },
+  {
+    "id": 17626,
+    "name": {
+      "fr": "Dé du Chalœil"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164090.png",
+    "level": 200
+  },
+  {
+    "id": 17713,
+    "name": {
+      "fr": "Jeton du Chazino du Grand Jeu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/126077.png",
+    "level": 200
+  },
+  {
+    "id": 17714,
+    "name": {
+      "fr": "Jeton du Chazino des Matougarous"
+    },
+    "img": "https://api.dofusdb.fr/img/items/126076.png",
+    "level": 160
+  },
+  {
+    "id": 17715,
+    "name": {
+      "fr": "Jeton du Chazino des Ecaflipuces"
+    },
+    "img": "https://api.dofusdb.fr/img/items/126075.png",
+    "level": 110
+  },
+  {
+    "id": 17864,
+    "name": {
+      "fr": "Ambre de muldo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164094.png",
+    "level": 60
+  },
+  {
+    "id": 17865,
+    "name": {
+      "fr": "Marque des grands fonds"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164095.png",
+    "level": 200
+  },
+  {
+    "id": 17866,
+    "name": {
+      "fr": "Steamopompe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164096.png",
+    "level": 200
+  },
+  {
+    "id": 17867,
+    "name": {
+      "fr": "Hélice en laiton"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164097.png",
+    "level": 200
+  },
+  {
+    "id": 17868,
+    "name": {
+      "fr": "Plombs de plongée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164098.png",
+    "level": 200
+  },
+  {
+    "id": 17869,
+    "name": {
+      "fr": "Filtre à frousse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164099.png",
+    "level": 200
+  },
+  {
+    "id": 17870,
+    "name": {
+      "fr": "Socle en coquillage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164100.png",
+    "level": 200
+  },
+  {
+    "id": 17974,
+    "name": {
+      "fr": "Parasite Aquatique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15936.png",
+    "level": 200
+  },
+  {
+    "id": 17975,
+    "name": {
+      "fr": "Lanterne de Tourthon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15939.png",
+    "level": 200
+  },
+  {
+    "id": 17977,
+    "name": {
+      "fr": "Encre de Poulpée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15940.png",
+    "level": 200
+  },
+  {
+    "id": 17983,
+    "name": {
+      "fr": "Tentacule de Grofond"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103729.png",
+    "level": 200
+  },
+  {
+    "id": 17984,
+    "name": {
+      "fr": "Tentacule de N'Yalg"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103728.png",
+    "level": 200
+  },
+  {
+    "id": 17987,
+    "name": {
+      "fr": "Flûte de Klûtiste"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15938.png",
+    "level": 200
+  },
+  {
+    "id": 18198,
+    "name": {
+      "fr": "Gâtrool"
+    },
+    "img": "https://api.dofusdb.fr/img/items/69149.png",
+    "level": 116
+  },
+  {
+    "id": 18348,
+    "name": {
+      "fr": "Flûte de Mastodonte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/3063.png",
+    "level": 80
+  },
+  {
+    "id": 18358,
+    "name": {
+      "fr": "Maraca de Lévito"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15949.png",
+    "level": 130
+  },
+  {
+    "id": 18359,
+    "name": {
+      "fr": "Parchemin de Cactana"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15951.png",
+    "level": 130
+  },
+  {
+    "id": 18364,
+    "name": {
+      "fr": "Étoile d'Or d'El Piko"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15950.png",
+    "level": 130
+  },
+  {
+    "id": 18367,
+    "name": {
+      "fr": "Boule de Boulépique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15947.png",
+    "level": 80
+  },
+  {
+    "id": 18385,
+    "name": {
+      "fr": "Cœur du Mantiscore"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164118.png",
+    "level": 80
+  },
+  {
+    "id": 18537,
+    "name": {
+      "fr": "Fragment de Chakanoubis"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15952.png",
+    "level": 200
+  },
+  {
+    "id": 18540,
+    "name": {
+      "fr": "Paupière Dorée de Rykaon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15953.png",
+    "level": 200
+  },
+  {
+    "id": 18563,
+    "name": {
+      "fr": "Langue de Morsquale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164136.png",
+    "level": 170
+  },
+  {
+    "id": 18733,
+    "name": {
+      "fr": "Flèche de Crâmbo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15960.png",
+    "level": 190
+  },
+  {
+    "id": 18735,
+    "name": {
+      "fr": "Bouteille de Bouchonnois"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15962.png",
+    "level": 190
+  },
+  {
+    "id": 18738,
+    "name": {
+      "fr": "Plan de Pièges à Chasseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24055.png",
+    "level": 190
+  },
+  {
+    "id": 18739,
+    "name": {
+      "fr": "Formule de Breuvage Musculaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24055.png",
+    "level": 190
+  },
+  {
+    "id": 18740,
+    "name": {
+      "fr": "Schéma d'Implants Rustiques"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24055.png",
+    "level": 190
+  },
+  {
+    "id": 18741,
+    "name": {
+      "fr": "Coffre de Pièges à Chasseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24044.png",
+    "level": 190
+  },
+  {
+    "id": 18743,
+    "name": {
+      "fr": "Implants Rustiques"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15056.png",
+    "level": 190
+  },
+  {
+    "id": 19068,
+    "name": {
+      "fr": "Pic d'Anerice"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164137.png",
+    "level": 200
+  },
+  {
+    "id": 19073,
+    "name": {
+      "fr": "Nez de Pipisteuse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164138.png",
+    "level": 200
+  },
+  {
+    "id": 19074,
+    "name": {
+      "fr": "Goulobule rouge"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164139.png",
+    "level": 200
+  },
+  {
+    "id": 19233,
+    "name": {
+      "fr": "Brûlâme encapsulé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15984.png",
+    "level": 200
+  },
+  {
+    "id": 19234,
+    "name": {
+      "fr": "Cendres de Chause"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15986.png",
+    "level": 200
+  },
+  {
+    "id": 19235,
+    "name": {
+      "fr": "Fragment d'Ectorche"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15987.png",
+    "level": 200
+  },
+  {
+    "id": 19236,
+    "name": {
+      "fr": "Restes d'Esprigné"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15985.png",
+    "level": 200
+  },
+  {
+    "id": 19401,
+    "name": {
+      "fr": "Langue de Hacharné"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164145.png",
+    "level": 200
+  },
+  {
+    "id": 19404,
+    "name": {
+      "fr": "Cervelle de Solar"
+    },
+    "img": "https://api.dofusdb.fr/img/items/182019.png",
+    "level": 200
+  },
+  {
+    "id": 19406,
+    "name": {
+      "fr": "Chair de Zombruth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/111755.png",
+    "level": 200
+  },
+  {
+    "id": 19640,
+    "name": {
+      "fr": "Fil enchanté"
+    },
+    "img": "https://api.dofusdb.fr/img/items/20004.png",
+    "level": 25
+  },
+  {
+    "id": 19642,
+    "name": {
+      "fr": "Crème à bois"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15814.png",
+    "level": 25
+  },
+  {
+    "id": 19643,
+    "name": {
+      "fr": "Corps de Quintaine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24044.png",
+    "level": 1
+  },
+  {
+    "id": 19656,
+    "name": {
+      "fr": "Mélange de Vermifuge"
+    },
+    "img": "https://api.dofusdb.fr/img/items/43039.png",
+    "level": 1
+  },
+  {
+    "id": 19968,
+    "name": {
+      "fr": "Chope de Bière"
+    },
+    "img": "https://api.dofusdb.fr/img/items/37002.png",
+    "level": 200
+  },
+  {
+    "id": 20126,
+    "name": {
+      "fr": "Réplique du Dofus Ébène"
+    },
+    "img": "https://api.dofusdb.fr/img/items/23007.png",
+    "level": 1
+  },
+  {
+    "id": 20127,
+    "name": {
+      "fr": "Réplique du Dofus Émeraude"
+    },
+    "img": "https://api.dofusdb.fr/img/items/23002.png",
+    "level": 1
+  },
+  {
+    "id": 20128,
+    "name": {
+      "fr": "Réplique du Dofus Ivoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/23011.png",
+    "level": 1
+  },
+  {
+    "id": 20129,
+    "name": {
+      "fr": "Réplique du Dofus Ocre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/23012.png",
+    "level": 1
+  },
+  {
+    "id": 20130,
+    "name": {
+      "fr": "Réplique du Dofus Pourpre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/23001.png",
+    "level": 1
+  },
+  {
+    "id": 20131,
+    "name": {
+      "fr": "Réplique du Dofus Turquoise"
+    },
+    "img": "https://api.dofusdb.fr/img/items/23003.png",
+    "level": 1
+  },
+  {
+    "id": 20142,
+    "name": {
+      "fr": "Badge de Malicien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24766.png",
+    "level": 1
+  },
+  {
+    "id": 20162,
+    "name": {
+      "fr": "Métal abyssal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/107737.png",
+    "level": 200
+  },
+  {
+    "id": 20815,
+    "name": {
+      "fr": "Éclat du Mawabouaino"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50730.png",
+    "level": 60
+  },
+  {
+    "id": 20817,
+    "name": {
+      "fr": "Tendon de Waccro"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15995.png",
+    "level": 55
+  },
+  {
+    "id": 20818,
+    "name": {
+      "fr": "Emballage Suspect"
+    },
+    "img": "https://api.dofusdb.fr/img/items/154016.png",
+    "level": 52
+  },
+  {
+    "id": 20905,
+    "name": {
+      "fr": "Tablette Waddict"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15008.png",
+    "level": 60
+  },
+  {
+    "id": 20906,
+    "name": {
+      "fr": "Tablette Croquante"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15007.png",
+    "level": 130
+  },
+  {
+    "id": 20907,
+    "name": {
+      "fr": "Tablette Chocomancienne"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15003.png",
+    "level": 200
+  },
+  {
+    "id": 20910,
+    "name": {
+      "fr": "Chaudron de Températurge"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59664.png",
+    "level": 200
+  },
+  {
+    "id": 20912,
+    "name": {
+      "fr": "Diadème de Chocoligarque"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59661.png",
+    "level": 200
+  },
+  {
+    "id": 20914,
+    "name": {
+      "fr": "Éclat Kao brisé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50732.png",
+    "level": 200
+  },
+  {
+    "id": 20939,
+    "name": {
+      "fr": "Cœur du Croqueleur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51501.png",
+    "level": 130
+  },
+  {
+    "id": 20941,
+    "name": {
+      "fr": "Pépite croquée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50731.png",
+    "level": 130
+  },
+  {
+    "id": 20942,
+    "name": {
+      "fr": "Estomac de Mansocolat"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15996.png",
+    "level": 130
+  },
+  {
+    "id": 20963,
+    "name": {
+      "fr": "Plasmogrine gelée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164629.png",
+    "level": 200
+  },
+  {
+    "id": 20972,
+    "name": {
+      "fr": "Nanogrine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164634.png",
+    "level": 200
+  },
+  {
+    "id": 21205,
+    "name": {
+      "fr": "Binocles du Grand Chronomaître"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164022.png",
+    "level": 200
+  },
+  {
+    "id": 21208,
+    "name": {
+      "fr": "Langue de Kashkaille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164635.png",
+    "level": 200
+  },
+  {
+    "id": 21210,
+    "name": {
+      "fr": "Poupée de Caïguille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/25011.png",
+    "level": 200
+  },
+  {
+    "id": 21465,
+    "name": {
+      "fr": "Manche équilibré"
+    },
+    "img": "https://api.dofusdb.fr/img/items/176013.png",
+    "level": 1
+  },
+  {
+    "id": 21466,
+    "name": {
+      "fr": "Lame en mousse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/176012.png",
+    "level": 1
+  },
+  {
+    "id": 21467,
+    "name": {
+      "fr": "Met'Hache immaculée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/19080.png",
+    "level": 1
+  },
+  {
+    "id": 21468,
+    "name": {
+      "fr": "Met'Hache"
+    },
+    "img": "https://api.dofusdb.fr/img/items/19080.png",
+    "level": 1
+  },
+  {
+    "id": 21681,
+    "name": {
+      "fr": "Dofus Blanc"
+    },
+    "img": "https://api.dofusdb.fr/img/items/23031.png",
+    "level": 1
+  },
+  {
+    "id": 21682,
+    "name": {
+      "fr": "Peinture Jaune"
+    },
+    "img": "https://api.dofusdb.fr/img/items/136117.png",
+    "level": 1
+  },
+  {
+    "id": 21683,
+    "name": {
+      "fr": "Peinture Rouge"
+    },
+    "img": "https://api.dofusdb.fr/img/items/136122.png",
+    "level": 1
+  },
+  {
+    "id": 21684,
+    "name": {
+      "fr": "Peinture Bleue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/136120.png",
+    "level": 1
+  },
+  {
+    "id": 21685,
+    "name": {
+      "fr": "Peinture Orange"
+    },
+    "img": "https://api.dofusdb.fr/img/items/136119.png",
+    "level": 1
+  },
+  {
+    "id": 21686,
+    "name": {
+      "fr": "Peinture Verte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/136118.png",
+    "level": 1
+  },
+  {
+    "id": 21687,
+    "name": {
+      "fr": "Peinture Violette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/136121.png",
+    "level": 1
+  },
+  {
+    "id": 21689,
+    "name": {
+      "fr": "Peinture Noire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/136123.png",
+    "level": 1
+  },
+  {
+    "id": 21948,
+    "name": {
+      "fr": "Pouvoir de Draconiros"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63528.png",
+    "level": 1
+  },
+  {
+    "id": 21982,
+    "name": {
+      "fr": "Livre Endommagé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/25007.png",
+    "level": 1
+  },
+  {
+    "id": 22048,
+    "name": {
+      "fr": "Langue de Krèvladal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24277.png",
+    "level": 200
+  },
+  {
+    "id": 22052,
+    "name": {
+      "fr": "Terre Stérile"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24276.png",
+    "level": 200
+  },
+  {
+    "id": 22203,
+    "name": {
+      "fr": "Germes corrompus"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24269.png",
+    "level": 200
+  },
+  {
+    "id": 22207,
+    "name": {
+      "fr": "Langue de Pistilangue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24270.png",
+    "level": 200
+  },
+  {
+    "id": 22218,
+    "name": {
+      "fr": "Baguette Rythmique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15998.png",
+    "level": 200
+  },
+  {
+    "id": 22219,
+    "name": {
+      "fr": "Verrou de Servitude"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24268.png",
+    "level": 200
+  },
+  {
+    "id": 22222,
+    "name": {
+      "fr": "Collier d'esclave"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15997.png",
+    "level": 200
+  },
+  {
+    "id": 22223,
+    "name": {
+      "fr": "Boulet lesté"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24266.png",
+    "level": 200
+  },
+  {
+    "id": 22224,
+    "name": {
+      "fr": "Manche de Fouet"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24265.png",
+    "level": 200
+  },
+  {
+    "id": 22236,
+    "name": {
+      "fr": "Outil de rapiéçage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/20004.png",
+    "level": 1
+  },
+  {
+    "id": 22248,
+    "name": {
+      "fr": "Sang coagulé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24278.png",
+    "level": 200
+  },
+  {
+    "id": 22250,
+    "name": {
+      "fr": "Fragment d'armure"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24280.png",
+    "level": 200
+  },
+  {
+    "id": 22251,
+    "name": {
+      "fr": "Linothorax"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24281.png",
+    "level": 200
+  },
+  {
+    "id": 23038,
+    "name": {
+      "fr": "Échantillon sanguin de Sel Dawa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24031.png",
+    "level": 1
+  },
+  {
+    "id": 23104,
+    "name": {
+      "fr": "Alliage de Katana"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164727.png",
+    "level": 1
+  },
+  {
+    "id": 23105,
+    "name": {
+      "fr": "Lame de Katana"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164725.png",
+    "level": 1
+  },
+  {
+    "id": 23106,
+    "name": {
+      "fr": "Poignée de Katana"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164726.png",
+    "level": 1
+  },
+  {
+    "id": 23481,
+    "name": {
+      "fr": "Poussière de Roche"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48691.png",
+    "level": 1
+  },
+  {
+    "id": 23523,
+    "name": {
+      "fr": "Branche de bambou spirituel"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38670.png",
+    "level": 1
+  },
+  {
+    "id": 23694,
+    "name": {
+      "fr": "Concassé de brume"
+    },
+    "img": "https://api.dofusdb.fr/img/items/64406.png",
+    "level": 160
+  },
+  {
+    "id": 23958,
+    "name": {
+      "fr": "Poing-virgule d'Imushin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24193.png",
+    "level": 200
+  },
+  {
+    "id": 23959,
+    "name": {
+      "fr": "Carapace circonflexe d'Imorok"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59676.png",
+    "level": 200
+  },
+  {
+    "id": 23960,
+    "name": {
+      "fr": "Guillemets d'Imiyama"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47875.png",
+    "level": 200
+  },
+  {
+    "id": 23961,
+    "name": {
+      "fr": "Cédille d'Imetsu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103732.png",
+    "level": 200
+  },
+  {
+    "id": 23962,
+    "name": {
+      "fr": "Apostrophe d'Imafugo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47873.png",
+    "level": 200
+  },
+  {
+    "id": 23963,
+    "name": {
+      "fr": "Diacritique du Roi Imagami"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15413.png",
+    "level": 200
+  },
+  {
+    "id": 23966,
+    "name": {
+      "fr": "Poing-virgule de Shinlam"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24194.png",
+    "level": 200
+  },
+  {
+    "id": 23967,
+    "name": {
+      "fr": "Carapace circonflexe de Rokoram"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59677.png",
+    "level": 200
+  },
+  {
+    "id": 23968,
+    "name": {
+      "fr": "Guillemets de Mabram"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47876.png",
+    "level": 200
+  },
+  {
+    "id": 23969,
+    "name": {
+      "fr": "Cédille de Tsunam"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103731.png",
+    "level": 200
+  },
+  {
+    "id": 23970,
+    "name": {
+      "fr": "Apostrophe de Fugokam"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47874.png",
+    "level": 200
+  },
+  {
+    "id": 23971,
+    "name": {
+      "fr": "Diacritique de la Reine Amirukam"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15414.png",
+    "level": 200
+  },
+  {
+    "id": 24102,
+    "name": {
+      "fr": "Offrande aux esprits célestes"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164704.png",
+    "level": 1
+  },
+  {
+    "id": 25178,
+    "name": {
+      "fr": "Scalp de Bwariok"
+    },
+    "img": "https://api.dofusdb.fr/img/items/176032.png",
+    "level": 200
+  },
+  {
+    "id": 25179,
+    "name": {
+      "fr": "Groin de Porkzebuth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/176033.png",
+    "level": 200
+  },
+  {
+    "id": 25760,
+    "name": {
+      "fr": "Vieux Bouquin de Rat Li"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165025.png",
+    "level": 110
+  },
+  {
+    "id": 25761,
+    "name": {
+      "fr": "Ouvrage magique d'Aloevée Rate"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165030.png",
+    "level": 110
+  },
+  {
+    "id": 25767,
+    "name": {
+      "fr": "Collier de Chak Rat"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165031.png",
+    "level": 110
+  },
+  {
+    "id": 25817,
+    "name": {
+      "fr": "Pelote de laine boufcoul"
+    },
+    "img": "https://api.dofusdb.fr/img/items/126129.png",
+    "level": 100
+  },
+  {
+    "id": 26031,
+    "name": {
+      "fr": "Mâchoire de Brutasmodan"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165039.png",
+    "level": 200
+  },
+  {
+    "id": 26032,
+    "name": {
+      "fr": "Langue de Diabélial"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165040.png",
+    "level": 200
+  },
+  {
+    "id": 26034,
+    "name": {
+      "fr": "Tentacule de Démoloch"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165042.png",
+    "level": 200
+  },
+  {
+    "id": 26035,
+    "name": {
+      "fr": "Épaule de Maléphisto"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165043.png",
+    "level": 200
+  },
+  {
+    "id": 26036,
+    "name": {
+      "fr": "Pic de Ravageur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165038.png",
+    "level": 200
+  },
+  {
+    "id": 26159,
+    "name": {
+      "fr": "Vertu d'harmonie suprême"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164711.png",
+    "level": 180
+  },
+  {
+    "id": 26319,
+    "name": {
+      "fr": "Pic de Malépik"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36658.png",
+    "level": 150
+  },
+  {
+    "id": 26320,
+    "name": {
+      "fr": "Porte-bonheur de Malalfa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24283.png",
+    "level": 150
+  },
+  {
+    "id": 26373,
+    "name": {
+      "fr": "Encre d'Oktapodas"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15265.png",
+    "level": 1
+  },
+  {
+    "id": 27368,
+    "name": {
+      "fr": "La cambriole pour les Nuls"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24292.png",
+    "level": 50
+  },
+  {
+    "id": 27402,
+    "name": {
+      "fr": "Rouge à lèvres de Belladone"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24293.png",
+    "level": 200
+  },
+  {
+    "id": 27438,
+    "name": {
+      "fr": "Élastique de barbe de Sanglirok"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165062.png",
+    "level": 190
+  },
+  {
+    "id": 27439,
+    "name": {
+      "fr": "Cloche de Barbéryl Clochecuivre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165063.png",
+    "level": 190
+  },
+  {
+    "id": 27517,
+    "name": {
+      "fr": "Cire de Cire Momore"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165068.png",
+    "level": 200
+  },
+  {
+    "id": 27518,
+    "name": {
+      "fr": "Cœur de Cire Momore"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165067.png",
+    "level": 200
+  },
+  {
+    "id": 28269,
+    "name": {
+      "fr": "Coffre-forge"
+    },
+    "img": "https://api.dofusdb.fr/img/items/172029.png",
+    "level": 30
+  },
+  {
+    "id": 28270,
+    "name": {
+      "fr": "Brochette de Laikteur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63535.png",
+    "level": 30
+  },
+  {
+    "id": 28279,
+    "name": {
+      "fr": "Pièces de module"
+    },
+    "img": "https://api.dofusdb.fr/img/items/176028.png",
+    "level": 50
+  },
+  {
+    "id": 29117,
+    "name": {
+      "fr": "Morceau du Ménologium"
+    },
+    "img": "https://api.dofusdb.fr/img/items/80046.png",
+    "level": 1
+  },
+  {
+    "id": 29379,
+    "name": {
+      "fr": "Métronome du Début-Temps"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164174.png",
+    "level": 120
+  },
+  {
+    "id": 30067,
+    "name": {
+      "fr": "Module d'analyse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/136127.png",
+    "level": 1
+  },
+  {
+    "id": 30068,
+    "name": {
+      "fr": "Module d'impression"
+    },
+    "img": "https://api.dofusdb.fr/img/items/136128.png",
+    "level": 1
+  },
+  {
+    "id": 30069,
+    "name": {
+      "fr": "Rubis onirique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50100.png",
+    "level": 1
+  },
+  {
+    "id": 30070,
+    "name": {
+      "fr": "Module optique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/136129.png",
+    "level": 1
+  },
+  {
+    "id": 30779,
+    "name": {
+      "fr": "Pâte à tarte de Mama Ayuto"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15565.png",
+    "level": 200
+  },
+  {
+    "id": 30781,
+    "name": {
+      "fr": "Mèche enflammée du Dark Vlad"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15698.png",
+    "level": 200
+  },
+  {
+    "id": 31524,
+    "name": {
+      "fr": "Viscères de Balebz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/136143.png",
+    "level": 170
+  },
+  {
+    "id": 31667,
+    "name": {
+      "fr": "Lampe de Gyrafor"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165961.png",
+    "level": 200
+  },
+  {
+    "id": 31669,
+    "name": {
+      "fr": "Groin de Brutapir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165962.png",
+    "level": 200
+  },
+  {
+    "id": 31670,
+    "name": {
+      "fr": "Mâchoire de Gropotam"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47894.png",
+    "level": 200
+  },
+  {
+    "id": 31671,
+    "name": {
+      "fr": "Langue d'Amphibouc"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165963.png",
+    "level": 200
+  },
+  {
+    "id": 31892,
+    "name": {
+      "fr": "Feu sacré de Gargandyas"
+    },
+    "img": "https://api.dofusdb.fr/img/items/79021.png",
+    "level": 200
+  },
+  {
+    "id": 32253,
+    "name": {
+      "fr": "Éclair de Flasho"
+    },
+    "img": "https://api.dofusdb.fr/img/items/80047.png",
+    "level": 190
+  },
+  {
+    "id": 32256,
+    "name": {
+      "fr": "Âme glacée du Chevalier de Glace"
+    },
+    "img": "https://api.dofusdb.fr/img/items/80049.png",
+    "level": 200
+  },
+  {
+    "id": 32257,
+    "name": {
+      "fr": "Cœur de Culbutœuf"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15699.png",
+    "level": 200
+  },
+  {
+    "id": 32258,
+    "name": {
+      "fr": "Dard d'abeille de Glourdorak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/80050.png",
+    "level": 200
+  },
+  {
+    "id": 32501,
+    "name": {
+      "fr": "Pièce draconique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/148037.png",
+    "level": 1
+  },
+  {
+    "id": 32569,
+    "name": {
+      "fr": "Rouage de Qil Bil"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24519.png",
+    "level": 70
+  },
+  {
+    "id": 32577,
+    "name": {
+      "fr": "Pic de Trukipik"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36665.png",
+    "level": 100
+  },
+  {
+    "id": 32580,
+    "name": {
+      "fr": "Langue de Fojumo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15134.png",
+    "level": 140
+  },
+  {
+    "id": 32582,
+    "name": {
+      "fr": "Scalp de Predagob"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15584.png",
+    "level": 190
+  },
+  {
+    "id": 33511,
+    "name": {
+      "fr": "Poussière d'élevage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48260.png",
+    "level": 1
+  },
+  {
+    "id": 33512,
+    "name": {
+      "fr": "Généton"
+    },
+    "img": "https://api.dofusdb.fr/img/items/148038.png",
+    "level": 1
+  },
+  {
+    "id": 33515,
+    "name": {
+      "fr": "Neurone de dragodinde"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15295.png",
+    "level": 60
+  },
+  {
+    "id": 34324,
+    "name": {
+      "fr": "Pièce d'armure des Gardiens du Sanctuaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24527.png",
+    "level": 200
+  },
+  {
+    "id": 34325,
+    "name": {
+      "fr": "Pommeau brisé de la Reine Écarlate"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24528.png",
+    "level": 200
+  },
+  {
+    "id": 34339,
+    "name": {
+      "fr": "Aileron de Willorque"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24535.png",
+    "level": 200
+  },
+  {
+    "id": 34340,
+    "name": {
+      "fr": "Lueur abyssale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24536.png",
+    "level": 200
+  },
+  {
+    "id": 34478,
+    "name": {
+      "fr": "Ovaton"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164184.png",
+    "level": 1
+  }
+]

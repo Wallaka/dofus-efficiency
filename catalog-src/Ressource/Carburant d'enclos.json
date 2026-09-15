@@ -1,0 +1,962 @@
+[
+  {
+    "id": 33309,
+    "name": {
+      "fr": "Minuscule Extrait de Baffeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93198.png",
+    "level": 5
+  },
+  {
+    "id": 33310,
+    "name": {
+      "fr": "Minuscule Extrait de Caresseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93199.png",
+    "level": 5
+  },
+  {
+    "id": 33311,
+    "name": {
+      "fr": "Minuscule Extrait de Dragofesse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93200.png",
+    "level": 5
+  },
+  {
+    "id": 33312,
+    "name": {
+      "fr": "Minuscule Extrait de Foudroyeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93201.png",
+    "level": 5
+  },
+  {
+    "id": 33313,
+    "name": {
+      "fr": "Minuscule Extrait d'Abreuvoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93197.png",
+    "level": 5
+  },
+  {
+    "id": 33314,
+    "name": {
+      "fr": "Minuscule Extrait de Mangeoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93202.png",
+    "level": 5
+  },
+  {
+    "id": 33315,
+    "name": {
+      "fr": "Petit Extrait de Baffeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93222.png",
+    "level": 15
+  },
+  {
+    "id": 33316,
+    "name": {
+      "fr": "Petit Extrait de Caresseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93223.png",
+    "level": 15
+  },
+  {
+    "id": 33317,
+    "name": {
+      "fr": "Petit Extrait de Dragofesse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93224.png",
+    "level": 15
+  },
+  {
+    "id": 33318,
+    "name": {
+      "fr": "Petit Extrait de Foudroyeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93225.png",
+    "level": 15
+  },
+  {
+    "id": 33319,
+    "name": {
+      "fr": "Petit Extrait d'Abreuvoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93221.png",
+    "level": 15
+  },
+  {
+    "id": 33320,
+    "name": {
+      "fr": "Petit Extrait de Mangeoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93226.png",
+    "level": 15
+  },
+  {
+    "id": 33326,
+    "name": {
+      "fr": "Extrait de Baffeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93138.png",
+    "level": 25
+  },
+  {
+    "id": 33327,
+    "name": {
+      "fr": "Extrait de Caresseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93139.png",
+    "level": 25
+  },
+  {
+    "id": 33328,
+    "name": {
+      "fr": "Extrait de Dragofesse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93140.png",
+    "level": 25
+  },
+  {
+    "id": 33329,
+    "name": {
+      "fr": "Extrait de Foudroyeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93141.png",
+    "level": 25
+  },
+  {
+    "id": 33330,
+    "name": {
+      "fr": "Extrait d'Abreuvoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93137.png",
+    "level": 25
+  },
+  {
+    "id": 33331,
+    "name": {
+      "fr": "Extrait de Mangeoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93142.png",
+    "level": 25
+  },
+  {
+    "id": 33336,
+    "name": {
+      "fr": "Grand Extrait de Baffeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93174.png",
+    "level": 35
+  },
+  {
+    "id": 33337,
+    "name": {
+      "fr": "Grand Extrait de Caresseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93175.png",
+    "level": 35
+  },
+  {
+    "id": 33338,
+    "name": {
+      "fr": "Grand Extrait de Dragofesse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93176.png",
+    "level": 35
+  },
+  {
+    "id": 33339,
+    "name": {
+      "fr": "Grand Extrait de Foudroyeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93177.png",
+    "level": 35
+  },
+  {
+    "id": 33340,
+    "name": {
+      "fr": "Grand Extrait d'Abreuvoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93173.png",
+    "level": 35
+  },
+  {
+    "id": 33341,
+    "name": {
+      "fr": "Grand Extrait de Mangeoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93178.png",
+    "level": 35
+  },
+  {
+    "id": 33347,
+    "name": {
+      "fr": "Gigantesque Extrait de Baffeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93150.png",
+    "level": 45
+  },
+  {
+    "id": 33348,
+    "name": {
+      "fr": "Gigantesque Extrait de Caresseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93151.png",
+    "level": 45
+  },
+  {
+    "id": 33349,
+    "name": {
+      "fr": "Gigantesque Extrait de Dragofesse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93152.png",
+    "level": 45
+  },
+  {
+    "id": 33350,
+    "name": {
+      "fr": "Gigantesque Extrait de Foudroyeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93153.png",
+    "level": 45
+  },
+  {
+    "id": 33351,
+    "name": {
+      "fr": "Gigantesque Extrait d'Abreuvoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93149.png",
+    "level": 45
+  },
+  {
+    "id": 33352,
+    "name": {
+      "fr": "Gigantesque Extrait de Mangeoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93154.png",
+    "level": 45
+  },
+  {
+    "id": 33357,
+    "name": {
+      "fr": "Minuscule Philtre de Baffeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93204.png",
+    "level": 55
+  },
+  {
+    "id": 33358,
+    "name": {
+      "fr": "Minuscule Philtre de Caresseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93205.png",
+    "level": 55
+  },
+  {
+    "id": 33359,
+    "name": {
+      "fr": "Minuscule Philtre de Dragofesse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93206.png",
+    "level": 55
+  },
+  {
+    "id": 33360,
+    "name": {
+      "fr": "Minuscule Philtre de Foudroyeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93207.png",
+    "level": 55
+  },
+  {
+    "id": 33361,
+    "name": {
+      "fr": "Minuscule Philtre d'Abreuvoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93203.png",
+    "level": 55
+  },
+  {
+    "id": 33362,
+    "name": {
+      "fr": "Minuscule Philtre de Mangeoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93208.png",
+    "level": 55
+  },
+  {
+    "id": 33368,
+    "name": {
+      "fr": "Petit Philtre de Baffeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93228.png",
+    "level": 65
+  },
+  {
+    "id": 33369,
+    "name": {
+      "fr": "Petit Philtre de Caresseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93229.png",
+    "level": 65
+  },
+  {
+    "id": 33370,
+    "name": {
+      "fr": "Petit Philtre de Dragofesse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93230.png",
+    "level": 65
+  },
+  {
+    "id": 33371,
+    "name": {
+      "fr": "Petit Philtre de Foudroyeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93231.png",
+    "level": 65
+  },
+  {
+    "id": 33372,
+    "name": {
+      "fr": "Petit Philtre d'Abreuvoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93227.png",
+    "level": 65
+  },
+  {
+    "id": 33373,
+    "name": {
+      "fr": "Petit Philtre de Mangeoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93232.png",
+    "level": 65
+  },
+  {
+    "id": 33378,
+    "name": {
+      "fr": "Philtre de Baffeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93240.png",
+    "level": 75
+  },
+  {
+    "id": 33379,
+    "name": {
+      "fr": "Philtre de Caresseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93241.png",
+    "level": 75
+  },
+  {
+    "id": 33380,
+    "name": {
+      "fr": "Philtre de Dragofesse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93242.png",
+    "level": 75
+  },
+  {
+    "id": 33381,
+    "name": {
+      "fr": "Philtre de Foudroyeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93243.png",
+    "level": 75
+  },
+  {
+    "id": 33382,
+    "name": {
+      "fr": "Philtre d'Abreuvoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93239.png",
+    "level": 75
+  },
+  {
+    "id": 33383,
+    "name": {
+      "fr": "Philtre de Mangeoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93244.png",
+    "level": 75
+  },
+  {
+    "id": 33389,
+    "name": {
+      "fr": "Grand Philtre de Baffeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93180.png",
+    "level": 85
+  },
+  {
+    "id": 33390,
+    "name": {
+      "fr": "Grand Philtre de Caresseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93181.png",
+    "level": 85
+  },
+  {
+    "id": 33391,
+    "name": {
+      "fr": "Grand Philtre de Dragofesse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93182.png",
+    "level": 85
+  },
+  {
+    "id": 33392,
+    "name": {
+      "fr": "Grand Philtre de Foudroyeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93183.png",
+    "level": 85
+  },
+  {
+    "id": 33393,
+    "name": {
+      "fr": "Grand Philtre d'Abreuvoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93179.png",
+    "level": 85
+  },
+  {
+    "id": 33394,
+    "name": {
+      "fr": "Grand Philtre de Mangeoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93184.png",
+    "level": 85
+  },
+  {
+    "id": 33399,
+    "name": {
+      "fr": "Gigantesque Philtre de Baffeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93156.png",
+    "level": 95
+  },
+  {
+    "id": 33400,
+    "name": {
+      "fr": "Gigantesque Philtre de Caresseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93157.png",
+    "level": 95
+  },
+  {
+    "id": 33401,
+    "name": {
+      "fr": "Gigantesque Philtre de Dragofesse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93158.png",
+    "level": 95
+  },
+  {
+    "id": 33402,
+    "name": {
+      "fr": "Gigantesque Philtre de Foudroyeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93159.png",
+    "level": 95
+  },
+  {
+    "id": 33403,
+    "name": {
+      "fr": "Gigantesque Philtre d'Abreuvoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93155.png",
+    "level": 95
+  },
+  {
+    "id": 33404,
+    "name": {
+      "fr": "Gigantesque Philtre de Mangeoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93160.png",
+    "level": 95
+  },
+  {
+    "id": 33410,
+    "name": {
+      "fr": "Minuscule Potion de Baffeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93210.png",
+    "level": 105
+  },
+  {
+    "id": 33411,
+    "name": {
+      "fr": "Minuscule Potion de Caresseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93211.png",
+    "level": 105
+  },
+  {
+    "id": 33412,
+    "name": {
+      "fr": "Minuscule Potion de Dragofesse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93212.png",
+    "level": 105
+  },
+  {
+    "id": 33413,
+    "name": {
+      "fr": "Minuscule Potion de Foudroyeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93213.png",
+    "level": 105
+  },
+  {
+    "id": 33414,
+    "name": {
+      "fr": "Minuscule Potion d'Abreuvoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93209.png",
+    "level": 105
+  },
+  {
+    "id": 33415,
+    "name": {
+      "fr": "Minuscule Potion de Mangeoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93214.png",
+    "level": 105
+  },
+  {
+    "id": 33420,
+    "name": {
+      "fr": "Petite Potion de Baffeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93234.png",
+    "level": 115
+  },
+  {
+    "id": 33421,
+    "name": {
+      "fr": "Petite Potion de Caresseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93235.png",
+    "level": 115
+  },
+  {
+    "id": 33422,
+    "name": {
+      "fr": "Petite Potion de Dragofesse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93236.png",
+    "level": 115
+  },
+  {
+    "id": 33423,
+    "name": {
+      "fr": "Petite Potion de Foudroyeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93237.png",
+    "level": 115
+  },
+  {
+    "id": 33424,
+    "name": {
+      "fr": "Petite Potion d'Abreuvoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93233.png",
+    "level": 115
+  },
+  {
+    "id": 33425,
+    "name": {
+      "fr": "Petite Potion de Mangeoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93238.png",
+    "level": 115
+  },
+  {
+    "id": 33431,
+    "name": {
+      "fr": "Potion de Baffeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93246.png",
+    "level": 125
+  },
+  {
+    "id": 33432,
+    "name": {
+      "fr": "Potion de Caresseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93247.png",
+    "level": 125
+  },
+  {
+    "id": 33433,
+    "name": {
+      "fr": "Potion de Dragofesse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93248.png",
+    "level": 125
+  },
+  {
+    "id": 33434,
+    "name": {
+      "fr": "Potion de Foudroyeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93249.png",
+    "level": 125
+  },
+  {
+    "id": 33435,
+    "name": {
+      "fr": "Potion d'Abreuvoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93245.png",
+    "level": 125
+  },
+  {
+    "id": 33436,
+    "name": {
+      "fr": "Potion de Mangeoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93250.png",
+    "level": 125
+  },
+  {
+    "id": 33441,
+    "name": {
+      "fr": "Grande Potion de Baffeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93186.png",
+    "level": 135
+  },
+  {
+    "id": 33442,
+    "name": {
+      "fr": "Grande Potion de Caresseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93187.png",
+    "level": 135
+  },
+  {
+    "id": 33443,
+    "name": {
+      "fr": "Grande Potion de Dragofesse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93188.png",
+    "level": 135
+  },
+  {
+    "id": 33444,
+    "name": {
+      "fr": "Grande Potion de Foudroyeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93189.png",
+    "level": 135
+  },
+  {
+    "id": 33445,
+    "name": {
+      "fr": "Grande Potion d'Abreuvoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93185.png",
+    "level": 135
+  },
+  {
+    "id": 33446,
+    "name": {
+      "fr": "Grande Potion de Mangeoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93190.png",
+    "level": 135
+  },
+  {
+    "id": 33452,
+    "name": {
+      "fr": "Gigantesque Potion de Baffeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93162.png",
+    "level": 145
+  },
+  {
+    "id": 33453,
+    "name": {
+      "fr": "Gigantesque Potion de Caresseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93163.png",
+    "level": 145
+  },
+  {
+    "id": 33454,
+    "name": {
+      "fr": "Gigantesque Potion de Dragofesse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93164.png",
+    "level": 145
+  },
+  {
+    "id": 33455,
+    "name": {
+      "fr": "Gigantesque Potion de Foudroyeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93165.png",
+    "level": 145
+  },
+  {
+    "id": 33456,
+    "name": {
+      "fr": "Gigantesque Potion d'Abreuvoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93161.png",
+    "level": 145
+  },
+  {
+    "id": 33457,
+    "name": {
+      "fr": "Gigantesque Potion de Mangeoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93166.png",
+    "level": 145
+  },
+  {
+    "id": 33462,
+    "name": {
+      "fr": "Minuscule Élixir de Baffeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93192.png",
+    "level": 155
+  },
+  {
+    "id": 33463,
+    "name": {
+      "fr": "Minuscule Élixir de Caresseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93193.png",
+    "level": 155
+  },
+  {
+    "id": 33464,
+    "name": {
+      "fr": "Minuscule Élixir de Dragofesse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93194.png",
+    "level": 155
+  },
+  {
+    "id": 33465,
+    "name": {
+      "fr": "Minuscule Élixir de Foudroyeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93195.png",
+    "level": 155
+  },
+  {
+    "id": 33466,
+    "name": {
+      "fr": "Minuscule Élixir d'Abreuvoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93191.png",
+    "level": 155
+  },
+  {
+    "id": 33467,
+    "name": {
+      "fr": "Minuscule Élixir de Mangeoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93196.png",
+    "level": 155
+  },
+  {
+    "id": 33471,
+    "name": {
+      "fr": "Petit Élixir de Baffeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93216.png",
+    "level": 165
+  },
+  {
+    "id": 33472,
+    "name": {
+      "fr": "Petit Élixir de Caresseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93217.png",
+    "level": 165
+  },
+  {
+    "id": 33473,
+    "name": {
+      "fr": "Petit Élixir de Dragofesse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93218.png",
+    "level": 165
+  },
+  {
+    "id": 33474,
+    "name": {
+      "fr": "Petit Élixir de Foudroyeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93219.png",
+    "level": 165
+  },
+  {
+    "id": 33475,
+    "name": {
+      "fr": "Petit Élixir d'Abreuvoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93215.png",
+    "level": 165
+  },
+  {
+    "id": 33476,
+    "name": {
+      "fr": "Petit Élixir de Mangeoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93220.png",
+    "level": 165
+  },
+  {
+    "id": 33480,
+    "name": {
+      "fr": "Élixir de Baffeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93132.png",
+    "level": 175
+  },
+  {
+    "id": 33481,
+    "name": {
+      "fr": "Élixir de Caresseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93133.png",
+    "level": 175
+  },
+  {
+    "id": 33482,
+    "name": {
+      "fr": "Élixir de Dragofesse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93134.png",
+    "level": 175
+  },
+  {
+    "id": 33483,
+    "name": {
+      "fr": "Élixir de Foudroyeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93135.png",
+    "level": 175
+  },
+  {
+    "id": 33484,
+    "name": {
+      "fr": "Élixir d'Abreuvoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93131.png",
+    "level": 175
+  },
+  {
+    "id": 33485,
+    "name": {
+      "fr": "Élixir de Mangeoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93136.png",
+    "level": 175
+  },
+  {
+    "id": 33489,
+    "name": {
+      "fr": "Grand Élixir de Baffeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93168.png",
+    "level": 185
+  },
+  {
+    "id": 33490,
+    "name": {
+      "fr": "Grand Élixir de Caresseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93169.png",
+    "level": 185
+  },
+  {
+    "id": 33491,
+    "name": {
+      "fr": "Grand Élixir de Dragofesse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93170.png",
+    "level": 185
+  },
+  {
+    "id": 33492,
+    "name": {
+      "fr": "Grand Élixir de Foudroyeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93171.png",
+    "level": 185
+  },
+  {
+    "id": 33493,
+    "name": {
+      "fr": "Grand Élixir d'Abreuvoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93167.png",
+    "level": 185
+  },
+  {
+    "id": 33494,
+    "name": {
+      "fr": "Grand Élixir de Mangeoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93172.png",
+    "level": 185
+  },
+  {
+    "id": 33498,
+    "name": {
+      "fr": "Gigantesque Élixir de Baffeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93144.png",
+    "level": 195
+  },
+  {
+    "id": 33499,
+    "name": {
+      "fr": "Gigantesque Élixir de Caresseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93145.png",
+    "level": 195
+  },
+  {
+    "id": 33500,
+    "name": {
+      "fr": "Gigantesque Élixir de Dragofesse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93146.png",
+    "level": 195
+  },
+  {
+    "id": 33501,
+    "name": {
+      "fr": "Gigantesque Élixir de Foudroyeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93147.png",
+    "level": 195
+  },
+  {
+    "id": 33502,
+    "name": {
+      "fr": "Gigantesque Élixir d'Abreuvoir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93143.png",
+    "level": 195
+  },
+  {
+    "id": 33503,
+    "name": {
+      "fr": "Gigantesque Élixir de Mangeoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93148.png",
+    "level": 195
+  }
+]

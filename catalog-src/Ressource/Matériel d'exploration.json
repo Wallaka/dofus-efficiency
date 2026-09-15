@@ -1,0 +1,50 @@
+[
+  {
+    "id": 17963,
+    "name": {
+      "fr": "Sceau des fondateurs"
+    },
+    "img": "https://api.dofusdb.fr/img/items/181001.png",
+    "level": 200
+  },
+  {
+    "id": 17964,
+    "name": {
+      "fr": "Volant hydraulique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/181002.png",
+    "level": 200
+  },
+  {
+    "id": 17965,
+    "name": {
+      "fr": "Accélérateur de propulsion"
+    },
+    "img": "https://api.dofusdb.fr/img/items/181003.png",
+    "level": 200
+  },
+  {
+    "id": 17966,
+    "name": {
+      "fr": "Lest anti-tourbillon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/181004.png",
+    "level": 200
+  },
+  {
+    "id": 17967,
+    "name": {
+      "fr": "Attrape-peur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/181005.png",
+    "level": 200
+  },
+  {
+    "id": 17968,
+    "name": {
+      "fr": "Statuette de Snedon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/181006.png",
+    "level": 200
+  }
+]

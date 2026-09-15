@@ -1,0 +1,370 @@
+[
+  {
+    "id": 301,
+    "name": {
+      "fr": "Plume de Tofu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53014.png",
+    "level": 36
+  },
+  {
+    "id": 414,
+    "name": {
+      "fr": "Plume du Kwak de Glace"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53112.png",
+    "level": 44
+  },
+  {
+    "id": 415,
+    "name": {
+      "fr": "Plume du Kwak de Flamme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53111.png",
+    "level": 44
+  },
+  {
+    "id": 416,
+    "name": {
+      "fr": "Plume du Kwak de Vent"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53113.png",
+    "level": 44
+  },
+  {
+    "id": 1141,
+    "name": {
+      "fr": "Plume du Kwak de Terre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53223.png",
+    "level": 44
+  },
+  {
+    "id": 1670,
+    "name": {
+      "fr": "Plume Pointue de Renarbo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53393.png",
+    "level": 106
+  },
+  {
+    "id": 1889,
+    "name": {
+      "fr": "Plume de Crowneille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53327.png",
+    "level": 66
+  },
+  {
+    "id": 2247,
+    "name": {
+      "fr": "Plume de Tofu Royal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53413.png",
+    "level": 120
+  },
+  {
+    "id": 2602,
+    "name": {
+      "fr": "Plume de Domoizelle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53663.png",
+    "level": 100
+  },
+  {
+    "id": 2605,
+    "name": {
+      "fr": "Plume de Dostrogo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53662.png",
+    "level": 100
+  },
+  {
+    "id": 2675,
+    "name": {
+      "fr": "Plume de Tofu Maléfique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53644.png",
+    "level": 26
+  },
+  {
+    "id": 6897,
+    "name": {
+      "fr": "Plume de Piou Bleu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53114.png",
+    "level": 13
+  },
+  {
+    "id": 6898,
+    "name": {
+      "fr": "Plume de Piou Violet"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53115.png",
+    "level": 13
+  },
+  {
+    "id": 6899,
+    "name": {
+      "fr": "Plume de Piou Vert"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53116.png",
+    "level": 13
+  },
+  {
+    "id": 6900,
+    "name": {
+      "fr": "Plume de Piou Rouge"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53117.png",
+    "level": 13
+  },
+  {
+    "id": 6902,
+    "name": {
+      "fr": "Plume de Piou Jaune"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53118.png",
+    "level": 13
+  },
+  {
+    "id": 6903,
+    "name": {
+      "fr": "Plume de Piou Rose"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53119.png",
+    "level": 14
+  },
+  {
+    "id": 8158,
+    "name": {
+      "fr": "Plume Graisseuse du Tofu Ventripotent"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53001.png",
+    "level": 44
+  },
+  {
+    "id": 8249,
+    "name": {
+      "fr": "Plume de Buveur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53002.png",
+    "level": 105
+  },
+  {
+    "id": 8252,
+    "name": {
+      "fr": "Plume de Corbac Apprivoisé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53003.png",
+    "level": 105
+  },
+  {
+    "id": 8309,
+    "name": {
+      "fr": "Plume du Serpiplume"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53004.png",
+    "level": 124
+  },
+  {
+    "id": 8387,
+    "name": {
+      "fr": "Plume Vibrante du Tofu Royal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53645.png",
+    "level": 120
+  },
+  {
+    "id": 8557,
+    "name": {
+      "fr": "Plume de Batofu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53120.png",
+    "level": 40
+  },
+  {
+    "id": 8766,
+    "name": {
+      "fr": "Plume de fesse du Kido"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53005.png",
+    "level": 101
+  },
+  {
+    "id": 11223,
+    "name": {
+      "fr": "Plume du Timansot"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53646.png",
+    "level": 132
+  },
+  {
+    "id": 11232,
+    "name": {
+      "fr": "Plume du Mansot Royal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53647.png",
+    "level": 140
+  },
+  {
+    "id": 11257,
+    "name": {
+      "fr": "Plume de Gélikan"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53648.png",
+    "level": 82
+  },
+  {
+    "id": 12016,
+    "name": {
+      "fr": "Plume du Kwakwa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53649.png",
+    "level": 50
+  },
+  {
+    "id": 13165,
+    "name": {
+      "fr": "Duvet du Maître Corbac"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53651.png",
+    "level": 120
+  },
+  {
+    "id": 13167,
+    "name": {
+      "fr": "Plume du Rasboul Majeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53650.png",
+    "level": 100
+  },
+  {
+    "id": 13717,
+    "name": {
+      "fr": "Houpette de Vilain Petit Tofu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53652.png",
+    "level": 109
+  },
+  {
+    "id": 13719,
+    "name": {
+      "fr": "Plumeau de Tofuzmo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53653.png",
+    "level": 114
+  },
+  {
+    "id": 13722,
+    "name": {
+      "fr": "Plume de Tofubine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53654.png",
+    "level": 115
+  },
+  {
+    "id": 13941,
+    "name": {
+      "fr": "Plume de Dodox"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53655.png",
+    "level": 200
+  },
+  {
+    "id": 13984,
+    "name": {
+      "fr": "Plume de Granduk"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53656.png",
+    "level": 200
+  },
+  {
+    "id": 13989,
+    "name": {
+      "fr": "Plume de Cycloïde"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53657.png",
+    "level": 200
+  },
+  {
+    "id": 14512,
+    "name": {
+      "fr": "Plume de Gobvious"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53658.png",
+    "level": 94
+  },
+  {
+    "id": 15071,
+    "name": {
+      "fr": "Plume de Truchideur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53659.png",
+    "level": 120
+  },
+  {
+    "id": 15075,
+    "name": {
+      "fr": "Duvet de Truchon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53660.png",
+    "level": 118
+  },
+  {
+    "id": 15720,
+    "name": {
+      "fr": "Plume de Brabuzar"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15900.png",
+    "level": 200
+  },
+  {
+    "id": 16512,
+    "name": {
+      "fr": "Plume Chimérique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53661.png",
+    "level": 1
+  },
+  {
+    "id": 17622,
+    "name": {
+      "fr": "Plume du Cavalier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53664.png",
+    "level": 200
+  },
+  {
+    "id": 19237,
+    "name": {
+      "fr": "Plume d'Ilyzaelle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15991.png",
+    "level": 200
+  },
+  {
+    "id": 20960,
+    "name": {
+      "fr": "Plume de l'Aziz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53665.png",
+    "level": 200
+  },
+  {
+    "id": 22046,
+    "name": {
+      "fr": "Plume de Misère"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53666.png",
+    "level": 200
+  },
+  {
+    "id": 27364,
+    "name": {
+      "fr": "Plume de Thomondor"
+    },
+    "img": "https://api.dofusdb.fr/img/items/53667.png",
+    "level": 50
+  }
+]

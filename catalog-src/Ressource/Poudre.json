@@ -1,0 +1,202 @@
+[
+  {
+    "id": 286,
+    "name": {
+      "fr": "Levure de Boulanger"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48137.png",
+    "level": 1
+  },
+  {
+    "id": 519,
+    "name": {
+      "fr": "Poudre de Perlinpainpain"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48002.png",
+    "level": 1
+  },
+  {
+    "id": 1334,
+    "name": {
+      "fr": "Blague de Soufre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48051.png",
+    "level": 1
+  },
+  {
+    "id": 1730,
+    "name": {
+      "fr": "Mesure de sel"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48261.png",
+    "level": 1
+  },
+  {
+    "id": 1978,
+    "name": {
+      "fr": "Mesure de Poivre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48734.png",
+    "level": 1
+  },
+  {
+    "id": 1984,
+    "name": {
+      "fr": "Cendres Éternelles"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48671.png",
+    "level": 1
+  },
+  {
+    "id": 1986,
+    "name": {
+      "fr": "Poudre Temporelle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48002.png",
+    "level": 1
+  },
+  {
+    "id": 6601,
+    "name": {
+      "fr": "Poudre d'Artifice"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48670.png",
+    "level": 1
+  },
+  {
+    "id": 8761,
+    "name": {
+      "fr": "Poudre explosive"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48001.png",
+    "level": 70
+  },
+  {
+    "id": 9981,
+    "name": {
+      "fr": "Farine Humée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/52264.png",
+    "level": 158
+  },
+  {
+    "id": 10909,
+    "name": {
+      "fr": "Phéromone de Tofu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48241.png",
+    "level": 1
+  },
+  {
+    "id": 12432,
+    "name": {
+      "fr": "Poudre Juvénile"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48281.png",
+    "level": 25
+  },
+  {
+    "id": 12433,
+    "name": {
+      "fr": "Poudre Novice"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48281.png",
+    "level": 75
+  },
+  {
+    "id": 12434,
+    "name": {
+      "fr": "Poudre Mature"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48281.png",
+    "level": 125
+  },
+  {
+    "id": 12435,
+    "name": {
+      "fr": "Poudre Vénérable"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48281.png",
+    "level": 175
+  },
+  {
+    "id": 12436,
+    "name": {
+      "fr": "Cendres Juvéniles"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48282.png",
+    "level": 25
+  },
+  {
+    "id": 12437,
+    "name": {
+      "fr": "Cendres Novices"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48282.png",
+    "level": 75
+  },
+  {
+    "id": 12438,
+    "name": {
+      "fr": "Cendres Matures"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48282.png",
+    "level": 125
+  },
+  {
+    "id": 12439,
+    "name": {
+      "fr": "Cendres Vénérables"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48282.png",
+    "level": 175
+  },
+  {
+    "id": 13154,
+    "name": {
+      "fr": "Poudre glaciale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48292.png",
+    "level": 190
+  },
+  {
+    "id": 13718,
+    "name": {
+      "fr": "Cendres de Tofutoflamme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48301.png",
+    "level": 114
+  },
+  {
+    "id": 15691,
+    "name": {
+      "fr": "Sel de Baleine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164045.png",
+    "level": 200
+  },
+  {
+    "id": 18366,
+    "name": {
+      "fr": "Sable Fin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48691.png",
+    "level": 80
+  },
+  {
+    "id": 28268,
+    "name": {
+      "fr": "Farine de contrebande"
+    },
+    "img": "https://api.dofusdb.fr/img/items/52259.png",
+    "level": 30
+  },
+  {
+    "id": 32575,
+    "name": {
+      "fr": "Poudre à canon de Carlita"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24523.png",
+    "level": 100
+  }
+]

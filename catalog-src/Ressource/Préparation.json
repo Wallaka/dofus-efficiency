@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1461,
+    "name": {
+      "fr": "Poison cinglant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15189.png",
+    "level": 100
+  },
+  {
+    "id": 1462,
+    "name": {
+      "fr": "Liquide vampiresque"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15188.png",
+    "level": 30
+  },
+  {
+    "id": 7652,
+    "name": {
+      "fr": "Potion de Souvenir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/12002.png",
+    "level": 30
+  },
+  {
+    "id": 9979,
+    "name": {
+      "fr": "Philtre de Longévité"
+    },
+    "img": "https://api.dofusdb.fr/img/items/12040.png",
+    "level": 158
+  },
+  {
+    "id": 10204,
+    "name": {
+      "fr": "Potion de Sésanabolisant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/12002.png",
+    "level": 180
+  },
+  {
+    "id": 11701,
+    "name": {
+      "fr": "Jus d'Écumouth pressé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/12723.png",
+    "level": 60
+  },
+  {
+    "id": 12734,
+    "name": {
+      "fr": "Potion d'altération"
+    },
+    "img": "https://api.dofusdb.fr/img/items/12725.png",
+    "level": 145
+  },
+  {
+    "id": 12743,
+    "name": {
+      "fr": "Potion minérale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/12727.png",
+    "level": 55
+  },
+  {
+    "id": 16419,
+    "name": {
+      "fr": "Potion des Ancêtres"
+    },
+    "img": "https://api.dofusdb.fr/img/items/174001.png",
+    "level": 135
+  },
+  {
+    "id": 16420,
+    "name": {
+      "fr": "Potion de Glandage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/174002.png",
+    "level": 175
+  },
+  {
+    "id": 17060,
+    "name": {
+      "fr": "Potion de Vieillesse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/12002.png",
+    "level": 95
+  },
+  {
+    "id": 17781,
+    "name": {
+      "fr": "Dissolvant Phosphorescent"
+    },
+    "img": "https://api.dofusdb.fr/img/items/79007.png",
+    "level": 185
+  },
+  {
+    "id": 31654,
+    "name": {
+      "fr": "Shampoing Rhoarim"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164966.png",
+    "level": 200
+  }
+]

@@ -1,0 +1,818 @@
+[
+  {
+    "id": 372,
+    "name": {
+      "fr": "Bandeau du Black Tiwabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15029.png",
+    "level": 46
+  },
+  {
+    "id": 485,
+    "name": {
+      "fr": "Slip en cuir du Chafer Lancier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56152.png",
+    "level": 46
+  },
+  {
+    "id": 756,
+    "name": {
+      "fr": "Slip en Cuir Moulant du Garglyphe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/25154.png",
+    "level": 36
+  },
+  {
+    "id": 998,
+    "name": {
+      "fr": "Caleçon Mignon du Pirate"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15163.png",
+    "level": 90
+  },
+  {
+    "id": 1020,
+    "name": {
+      "fr": "Casque cassé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15173.png",
+    "level": 1
+  },
+  {
+    "id": 1691,
+    "name": {
+      "fr": "Faux Visage de Choudini"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15976.png",
+    "level": 90
+  },
+  {
+    "id": 2480,
+    "name": {
+      "fr": "Slip en cuir de Porkass"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56508.png",
+    "level": 46
+  },
+  {
+    "id": 2560,
+    "name": {
+      "fr": "Épaulière de Troolligark"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15570.png",
+    "level": 115
+  },
+  {
+    "id": 2562,
+    "name": {
+      "fr": "Slip de Troollaraj"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56572.png",
+    "level": 115
+  },
+  {
+    "id": 2646,
+    "name": {
+      "fr": "Slip en cuir de Cochon de Lait"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56621.png",
+    "level": 49
+  },
+  {
+    "id": 2674,
+    "name": {
+      "fr": "Bonnet de Gobaliste"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24288.png",
+    "level": 40
+  },
+  {
+    "id": 3000,
+    "name": {
+      "fr": "Casque cassé de Bwork"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15646.png",
+    "level": 50
+  },
+  {
+    "id": 3001,
+    "name": {
+      "fr": "Épaulière de Bwork"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15647.png",
+    "level": 50
+  },
+  {
+    "id": 3002,
+    "name": {
+      "fr": "Botte trouée de Mégabwork"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15648.png",
+    "level": 86
+  },
+  {
+    "id": 3208,
+    "name": {
+      "fr": "Slip de Bwork Archer"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56649.png",
+    "level": 43
+  },
+  {
+    "id": 6475,
+    "name": {
+      "fr": "Casque Cassé du Chafer"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15709.png",
+    "level": 40
+  },
+  {
+    "id": 6843,
+    "name": {
+      "fr": "Gant de Sherpoa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/25148.png",
+    "level": 26
+  },
+  {
+    "id": 6845,
+    "name": {
+      "fr": "Casque de Martoa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/25149.png",
+    "level": 26
+  },
+  {
+    "id": 7275,
+    "name": {
+      "fr": "Masque de Shinibaru"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164680.png",
+    "level": 130
+  },
+  {
+    "id": 7276,
+    "name": {
+      "fr": "Baguette de Tétonuki"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164682.png",
+    "level": 130
+  },
+  {
+    "id": 7277,
+    "name": {
+      "fr": "Lunettes de Parashukouï"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164683.png",
+    "level": 130
+  },
+  {
+    "id": 7278,
+    "name": {
+      "fr": "Poing rocheux d'Ishigro Pake"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164681.png",
+    "level": 130
+  },
+  {
+    "id": 7308,
+    "name": {
+      "fr": "Salopette Kwapa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164655.png",
+    "level": 130
+  },
+  {
+    "id": 7408,
+    "name": {
+      "fr": "Kapokaza"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164736.png",
+    "level": 170
+  },
+  {
+    "id": 7411,
+    "name": {
+      "fr": "Masque brisé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164739.png",
+    "level": 170
+  },
+  {
+    "id": 8086,
+    "name": {
+      "fr": "Coiffe déchiquetée de Drakoalak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15725.png",
+    "level": 94
+  },
+  {
+    "id": 8344,
+    "name": {
+      "fr": "Akaslip d'Akakwa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164654.png",
+    "level": 130
+  },
+  {
+    "id": 8401,
+    "name": {
+      "fr": "Écharpe de Hanshi"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164672.png",
+    "level": 140
+  },
+  {
+    "id": 8757,
+    "name": {
+      "fr": "Maillot de corps de Barbroussa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15011.png",
+    "level": 64
+  },
+  {
+    "id": 8758,
+    "name": {
+      "fr": "Morceau de caleçon de Gourlo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15012.png",
+    "level": 70
+  },
+  {
+    "id": 8760,
+    "name": {
+      "fr": "Foulard du Sparo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15014.png",
+    "level": 63
+  },
+  {
+    "id": 8789,
+    "name": {
+      "fr": "Chaussette du Kimbo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15023.png",
+    "level": 160
+  },
+  {
+    "id": 8804,
+    "name": {
+      "fr": "Braguette du Maître Zoth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15025.png",
+    "level": 120
+  },
+  {
+    "id": 8809,
+    "name": {
+      "fr": "Culotte à l'envers du Roissingue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15759.png",
+    "level": 196
+  },
+  {
+    "id": 11281,
+    "name": {
+      "fr": "Masque de protection"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15782.png",
+    "level": 100
+  },
+  {
+    "id": 11696,
+    "name": {
+      "fr": "Cagoule du Kanniboul Ebil"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15784.png",
+    "level": 60
+  },
+  {
+    "id": 13098,
+    "name": {
+      "fr": "Casque du Chafer Primitif"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15798.png",
+    "level": 36
+  },
+  {
+    "id": 13172,
+    "name": {
+      "fr": "Casque Mâchouillé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15800.png",
+    "level": 160
+  },
+  {
+    "id": 13492,
+    "name": {
+      "fr": "Short de Capoei Rat"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165033.png",
+    "level": 110
+  },
+  {
+    "id": 13496,
+    "name": {
+      "fr": "Bandeau de Nakunbra"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15088.png",
+    "level": 90
+  },
+  {
+    "id": 13497,
+    "name": {
+      "fr": "Ruban d'Uchiwang"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164673.png",
+    "level": 140
+  },
+  {
+    "id": 13699,
+    "name": {
+      "fr": "Foulard de Koalak Farouche"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15802.png",
+    "level": 110
+  },
+  {
+    "id": 13737,
+    "name": {
+      "fr": "String en Cuir de la Mama Bwork"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164000.png",
+    "level": 174
+  },
+  {
+    "id": 13738,
+    "name": {
+      "fr": "Bandeau troué de Feu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164001.png",
+    "level": 175
+  },
+  {
+    "id": 13739,
+    "name": {
+      "fr": "Caleçon Rouge"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164002.png",
+    "level": 175
+  },
+  {
+    "id": 13740,
+    "name": {
+      "fr": "Bandeau troué de Terre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164003.png",
+    "level": 175
+  },
+  {
+    "id": 13741,
+    "name": {
+      "fr": "Caleçon Brun"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164004.png",
+    "level": 175
+  },
+  {
+    "id": 13742,
+    "name": {
+      "fr": "Bandeau troué d'Eau"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164005.png",
+    "level": 175
+  },
+  {
+    "id": 13743,
+    "name": {
+      "fr": "Caleçon Bleu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164006.png",
+    "level": 175
+  },
+  {
+    "id": 13744,
+    "name": {
+      "fr": "Bandeau troué d'Air"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164007.png",
+    "level": 175
+  },
+  {
+    "id": 13745,
+    "name": {
+      "fr": "Caleçon Blanc"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164008.png",
+    "level": 175
+  },
+  {
+    "id": 13747,
+    "name": {
+      "fr": "Caleçon de Cybwork"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164009.png",
+    "level": 179
+  },
+  {
+    "id": 13914,
+    "name": {
+      "fr": "Culotte de Harrogant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164010.png",
+    "level": 200
+  },
+  {
+    "id": 13936,
+    "name": {
+      "fr": "Culotte de Missiz Frizz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164011.png",
+    "level": 200
+  },
+  {
+    "id": 13947,
+    "name": {
+      "fr": "Broderie de Nileza"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164012.png",
+    "level": 200
+  },
+  {
+    "id": 13948,
+    "name": {
+      "fr": "Braguette de Nileza"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164013.png",
+    "level": 200
+  },
+  {
+    "id": 14143,
+    "name": {
+      "fr": "Fermeture éclair"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15833.png",
+    "level": 200
+  },
+  {
+    "id": 14466,
+    "name": {
+      "fr": "Bandeau de Black Wabbit Squelette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164015.png",
+    "level": 54
+  },
+  {
+    "id": 14471,
+    "name": {
+      "fr": "Casque de Wobot"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164014.png",
+    "level": 80
+  },
+  {
+    "id": 14517,
+    "name": {
+      "fr": "Slip troué de Dramak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164026.png",
+    "level": 100
+  },
+  {
+    "id": 14518,
+    "name": {
+      "fr": "Chaussette trouée de Dramak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164025.png",
+    "level": 100
+  },
+  {
+    "id": 14861,
+    "name": {
+      "fr": "Broderie d'Eskoglyphe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164027.png",
+    "level": 200
+  },
+  {
+    "id": 14863,
+    "name": {
+      "fr": "Chaussette du Cyclophandre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164028.png",
+    "level": 200
+  },
+  {
+    "id": 14922,
+    "name": {
+      "fr": "Masque du Vide"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164029.png",
+    "level": 190
+  },
+  {
+    "id": 14923,
+    "name": {
+      "fr": "Masque de la Vengeance"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164030.png",
+    "level": 190
+  },
+  {
+    "id": 14924,
+    "name": {
+      "fr": "Masque de la Violence"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164031.png",
+    "level": 190
+  },
+  {
+    "id": 14925,
+    "name": {
+      "fr": "Masque de la Vivacité"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164032.png",
+    "level": 190
+  },
+  {
+    "id": 14926,
+    "name": {
+      "fr": "Masque du Vice"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164033.png",
+    "level": 190
+  },
+  {
+    "id": 15052,
+    "name": {
+      "fr": "Boucle d'Orfélin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164037.png",
+    "level": 155
+  },
+  {
+    "id": 15164,
+    "name": {
+      "fr": "Broderie de Malléfisk"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15863.png",
+    "level": 100
+  },
+  {
+    "id": 15445,
+    "name": {
+      "fr": "Broderie de la Reine des Voleurs"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59643.png",
+    "level": 200
+  },
+  {
+    "id": 15448,
+    "name": {
+      "fr": "Chouchou de Doublure"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164043.png",
+    "level": 200
+  },
+  {
+    "id": 15449,
+    "name": {
+      "fr": "Épaulière de Bourôliste"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15888.png",
+    "level": 200
+  },
+  {
+    "id": 15458,
+    "name": {
+      "fr": "Foulard de Milimaître"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59644.png",
+    "level": 130
+  },
+  {
+    "id": 15462,
+    "name": {
+      "fr": "Slip d'Elsoummo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164044.png",
+    "level": 130
+  },
+  {
+    "id": 15478,
+    "name": {
+      "fr": "Culotte de Frakacia"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24971.png",
+    "level": 30
+  },
+  {
+    "id": 15724,
+    "name": {
+      "fr": "Pagne de Trantroa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15904.png",
+    "level": 170
+  },
+  {
+    "id": 15811,
+    "name": {
+      "fr": "Boucle des Égarés"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15918.png",
+    "level": 200
+  },
+  {
+    "id": 16152,
+    "name": {
+      "fr": "Masque Brisé d'Araknotron"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164053.png",
+    "level": 82
+  },
+  {
+    "id": 16157,
+    "name": {
+      "fr": "Masque Cassé d'Araknotron Irascible"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164054.png",
+    "level": 130
+  },
+  {
+    "id": 17617,
+    "name": {
+      "fr": "Collier de Chakichan"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15030.png",
+    "level": 160
+  },
+  {
+    "id": 17623,
+    "name": {
+      "fr": "Gilet du Valet"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15031.png",
+    "level": 200
+  },
+  {
+    "id": 17624,
+    "name": {
+      "fr": "Ceinture de la Dame"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15032.png",
+    "level": 200
+  },
+  {
+    "id": 18363,
+    "name": {
+      "fr": "String de Pampactus"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164114.png",
+    "level": 130
+  },
+  {
+    "id": 19408,
+    "name": {
+      "fr": "Protection de Funespadon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164146.png",
+    "level": 200
+  },
+  {
+    "id": 19410,
+    "name": {
+      "fr": "Bout d'Armure de Macrab"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164147.png",
+    "level": 200
+  },
+  {
+    "id": 19969,
+    "name": {
+      "fr": "Épaulière de Dazak Martegel"
+    },
+    "img": "https://api.dofusdb.fr/img/items/25162.png",
+    "level": 200
+  },
+  {
+    "id": 19970,
+    "name": {
+      "fr": "Armure de Tanklume"
+    },
+    "img": "https://api.dofusdb.fr/img/items/25161.png",
+    "level": 200
+  },
+  {
+    "id": 19973,
+    "name": {
+      "fr": "Jambière de Kasrok"
+    },
+    "img": "https://api.dofusdb.fr/img/items/25164.png",
+    "level": 200
+  },
+  {
+    "id": 20911,
+    "name": {
+      "fr": "Toque de Cabosseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59665.png",
+    "level": 200
+  },
+  {
+    "id": 20913,
+    "name": {
+      "fr": "Broderie de la Prêtresse de Kao"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59660.png",
+    "level": 200
+  },
+  {
+    "id": 21209,
+    "name": {
+      "fr": "Bandeau de Voapah"
+    },
+    "img": "https://api.dofusdb.fr/img/items/16580.png",
+    "level": 200
+  },
+  {
+    "id": 21211,
+    "name": {
+      "fr": "Pagne d'Alashasss"
+    },
+    "img": "https://api.dofusdb.fr/img/items/10339.png",
+    "level": 200
+  },
+  {
+    "id": 22047,
+    "name": {
+      "fr": "Épaulière de Ferrailleur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164638.png",
+    "level": 200
+  },
+  {
+    "id": 22050,
+    "name": {
+      "fr": "Capuche de Skentu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164639.png",
+    "level": 200
+  },
+  {
+    "id": 22217,
+    "name": {
+      "fr": "Capuche d'Armécréante"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15999.png",
+    "level": 200
+  },
+  {
+    "id": 22246,
+    "name": {
+      "fr": "Bonnet de Guerre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164640.png",
+    "level": 200
+  },
+  {
+    "id": 27401,
+    "name": {
+      "fr": "Casque de Statulipe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165066.png",
+    "level": 200
+  },
+  {
+    "id": 31528,
+    "name": {
+      "fr": "Slip feuillu de Supervizœuf"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56671.png",
+    "level": 170
+  },
+  {
+    "id": 31629,
+    "name": {
+      "fr": "Bandeau d'Ébourifauve"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164958.png",
+    "level": 200
+  },
+  {
+    "id": 32247,
+    "name": {
+      "fr": "Bouton de Monsieur Pingouin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24294.png",
+    "level": 130
+  },
+  {
+    "id": 32250,
+    "name": {
+      "fr": "Masque brisé de Vengeuse Masquée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24295.png",
+    "level": 160
+  }
+]

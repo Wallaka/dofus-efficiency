@@ -1,0 +1,186 @@
+[
+  {
+    "id": 290,
+    "name": {
+      "fr": "Champignon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15001.png",
+    "level": 66
+  },
+  {
+    "id": 377,
+    "name": {
+      "fr": "Épine du Champ Champ"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15049.png",
+    "level": 18
+  },
+  {
+    "id": 378,
+    "name": {
+      "fr": "Sporme du Champ Champ"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15050.png",
+    "level": 18
+  },
+  {
+    "id": 1674,
+    "name": {
+      "fr": "Champignon Luidegît"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15390.png",
+    "level": 35
+  },
+  {
+    "id": 9267,
+    "name": {
+      "fr": "Trompe de la Tromperelle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15764.png",
+    "level": 176
+  },
+  {
+    "id": 9278,
+    "name": {
+      "fr": "Lamelle de Champbis"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15766.png",
+    "level": 176
+  },
+  {
+    "id": 9280,
+    "name": {
+      "fr": "Épine d'Ougah"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15040.png",
+    "level": 180
+  },
+  {
+    "id": 9281,
+    "name": {
+      "fr": "Fragment d'Ougalurette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15041.png",
+    "level": 180
+  },
+  {
+    "id": 11885,
+    "name": {
+      "fr": "Lamelle de Dramanite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/119001.png",
+    "level": 170
+  },
+  {
+    "id": 11888,
+    "name": {
+      "fr": "Volve de Fistulor"
+    },
+    "img": "https://api.dofusdb.fr/img/items/119002.png",
+    "level": 170
+  },
+  {
+    "id": 11889,
+    "name": {
+      "fr": "Pédoncule de Fongeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/119005.png",
+    "level": 170
+  },
+  {
+    "id": 11890,
+    "name": {
+      "fr": "Volve de Fongeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/119004.png",
+    "level": 170
+  },
+  {
+    "id": 11893,
+    "name": {
+      "fr": "Lamelle de Mérulette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/119003.png",
+    "level": 170
+  },
+  {
+    "id": 11894,
+    "name": {
+      "fr": "Pédoncule de Mérulette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/119006.png",
+    "level": 170
+  },
+  {
+    "id": 13977,
+    "name": {
+      "fr": "Volve de Mérulor"
+    },
+    "img": "https://api.dofusdb.fr/img/items/119007.png",
+    "level": 200
+  },
+  {
+    "id": 13978,
+    "name": {
+      "fr": "Pédoncule de Mérulor"
+    },
+    "img": "https://api.dofusdb.fr/img/items/119008.png",
+    "level": 200
+  },
+  {
+    "id": 14144,
+    "name": {
+      "fr": "Mycoses gelées"
+    },
+    "img": "https://api.dofusdb.fr/img/items/119009.png",
+    "level": 200
+  },
+  {
+    "id": 15485,
+    "name": {
+      "fr": "Sporme de Dremoan"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24972.png",
+    "level": 180
+  },
+  {
+    "id": 16165,
+    "name": {
+      "fr": "Lamelle de Champa Bleu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/119010.png",
+    "level": 39
+  },
+  {
+    "id": 16166,
+    "name": {
+      "fr": "Lamelle de Champa Marron"
+    },
+    "img": "https://api.dofusdb.fr/img/items/119011.png",
+    "level": 39
+  },
+  {
+    "id": 16167,
+    "name": {
+      "fr": "Lamelle de Champa Rouge"
+    },
+    "img": "https://api.dofusdb.fr/img/items/119012.png",
+    "level": 39
+  },
+  {
+    "id": 16168,
+    "name": {
+      "fr": "Lamelle de Champa Vert"
+    },
+    "img": "https://api.dofusdb.fr/img/items/119013.png",
+    "level": 39
+  },
+  {
+    "id": 16523,
+    "name": {
+      "fr": "Volve d'Aminite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/119014.png",
+    "level": 5
+  }
+]

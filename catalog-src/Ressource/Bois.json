@@ -1,0 +1,298 @@
+[
+  {
+    "id": 303,
+    "name": {
+      "fr": "Bois de Frêne"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38017.png",
+    "level": 1
+  },
+  {
+    "id": 449,
+    "name": {
+      "fr": "Bois d'Ébène"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38073.png",
+    "level": 140
+  },
+  {
+    "id": 460,
+    "name": {
+      "fr": "Bois de Chêne"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38092.png",
+    "level": 60
+  },
+  {
+    "id": 461,
+    "name": {
+      "fr": "Bois d'If"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38094.png",
+    "level": 100
+  },
+  {
+    "id": 470,
+    "name": {
+      "fr": "Bois d'Orme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38140.png",
+    "level": 180
+  },
+  {
+    "id": 471,
+    "name": {
+      "fr": "Bois d'Érable"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38153.png",
+    "level": 80
+  },
+  {
+    "id": 472,
+    "name": {
+      "fr": "Bois de Charme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38138.png",
+    "level": 160
+  },
+  {
+    "id": 473,
+    "name": {
+      "fr": "Bois de Châtaignier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38086.png",
+    "level": 20
+  },
+  {
+    "id": 474,
+    "name": {
+      "fr": "Bois de Merisier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38139.png",
+    "level": 120
+  },
+  {
+    "id": 476,
+    "name": {
+      "fr": "Bois de Noyer"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38095.png",
+    "level": 40
+  },
+  {
+    "id": 920,
+    "name": {
+      "fr": "Bois Ancestral"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38137.png",
+    "level": 100
+  },
+  {
+    "id": 1002,
+    "name": {
+      "fr": "Tronc de Kokoko"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38167.png",
+    "level": 50
+  },
+  {
+    "id": 1329,
+    "name": {
+      "fr": "Bois élastique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38049.png",
+    "level": 1
+  },
+  {
+    "id": 2250,
+    "name": {
+      "fr": "Bois de Tronknyde"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38416.png",
+    "level": 39
+  },
+  {
+    "id": 2357,
+    "name": {
+      "fr": "Bois d'Oliviolet"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38481.png",
+    "level": 90
+  },
+  {
+    "id": 2358,
+    "name": {
+      "fr": "Bois de Bombu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38482.png",
+    "level": 70
+  },
+  {
+    "id": 2379,
+    "name": {
+      "fr": "Bois de Kaerlier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38140.png",
+    "level": 40
+  },
+  {
+    "id": 2564,
+    "name": {
+      "fr": "Sourcils de Tronknyde"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38574.png",
+    "level": 39
+  },
+  {
+    "id": 2565,
+    "name": {
+      "fr": "Rondelle de Bois"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15575.png",
+    "level": 36
+  },
+  {
+    "id": 6489,
+    "name": {
+      "fr": "Bois de Chêne Mou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38668.png",
+    "level": 140
+  },
+  {
+    "id": 7013,
+    "name": {
+      "fr": "Bois de Bambou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38673.png",
+    "level": 110
+  },
+  {
+    "id": 7014,
+    "name": {
+      "fr": "Bois de Bambou Sacré"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38671.png",
+    "level": 190
+  },
+  {
+    "id": 7015,
+    "name": {
+      "fr": "Pousses de Bambou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38676.png",
+    "level": 50
+  },
+  {
+    "id": 7016,
+    "name": {
+      "fr": "Bois de Bambou Sombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38672.png",
+    "level": 170
+  },
+  {
+    "id": 7925,
+    "name": {
+      "fr": "Bois de Kaliptus"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38001.png",
+    "level": 150
+  },
+  {
+    "id": 8796,
+    "name": {
+      "fr": "Nœud de l'Abrakleur clair"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38002.png",
+    "level": 156
+  },
+  {
+    "id": 8797,
+    "name": {
+      "fr": "Souche de l'Abrakleur clair"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38003.png",
+    "level": 156
+  },
+  {
+    "id": 11107,
+    "name": {
+      "fr": "Bois de Tremble"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38677.png",
+    "level": 200
+  },
+  {
+    "id": 11315,
+    "name": {
+      "fr": "Mât de Fantômat"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38680.png",
+    "level": 140
+  },
+  {
+    "id": 14460,
+    "name": {
+      "fr": "Branche de Tiwabbit Kiafin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38681.png",
+    "level": 44
+  },
+  {
+    "id": 14513,
+    "name": {
+      "fr": "Échasse de Molette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38682.png",
+    "level": 95
+  },
+  {
+    "id": 16487,
+    "name": {
+      "fr": "Bois Vermoulu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38683.png",
+    "level": 18
+  },
+  {
+    "id": 16488,
+    "name": {
+      "fr": "Bois de Noisetier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38143.png",
+    "level": 130
+  },
+  {
+    "id": 17991,
+    "name": {
+      "fr": "Bois d'Aquajou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38684.png",
+    "level": 200
+  },
+  {
+    "id": 22105,
+    "name": {
+      "fr": "Planche hatoufer"
+    },
+    "img": "https://api.dofusdb.fr/img/items/95014.png",
+    "level": 100
+  },
+  {
+    "id": 22216,
+    "name": {
+      "fr": "Bois de pagaie usée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24267.png",
+    "level": 200
+  },
+  {
+    "id": 27375,
+    "name": {
+      "fr": "Bois de Pin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38686.png",
+    "level": 90
+  }
+]

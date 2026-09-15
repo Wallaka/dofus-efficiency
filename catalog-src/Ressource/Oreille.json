@@ -1,0 +1,218 @@
+[
+  {
+    "id": 360,
+    "name": {
+      "fr": "Oreilles du Tiwabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106030.png",
+    "level": 45
+  },
+  {
+    "id": 419,
+    "name": {
+      "fr": "Oreille du Grand Pa Wabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106115.png",
+    "level": 56
+  },
+  {
+    "id": 2497,
+    "name": {
+      "fr": "Oreille de Guerrier Mental"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106522.png",
+    "level": 56
+  },
+  {
+    "id": 2551,
+    "name": {
+      "fr": "Oreille de Foufayteur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106562.png",
+    "level": 66
+  },
+  {
+    "id": 2647,
+    "name": {
+      "fr": "Oreille de Médibwork"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106623.png",
+    "level": 86
+  },
+  {
+    "id": 6844,
+    "name": {
+      "fr": "Oreille de Douzdoa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/25150.png",
+    "level": 26
+  },
+  {
+    "id": 11119,
+    "name": {
+      "fr": "Oreille de Bouftonmouth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106624.png",
+    "level": 112
+  },
+  {
+    "id": 11231,
+    "name": {
+      "fr": "Oreille du Fu Mansot"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106625.png",
+    "level": 132
+  },
+  {
+    "id": 11247,
+    "name": {
+      "fr": "Oreille percée du Fricochère"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106626.png",
+    "level": 130
+  },
+  {
+    "id": 11248,
+    "name": {
+      "fr": "Oreille de Kaniglou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106627.png",
+    "level": 130
+  },
+  {
+    "id": 11336,
+    "name": {
+      "fr": "Oreille de Soryo Givrefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106629.png",
+    "level": 160
+  },
+  {
+    "id": 11519,
+    "name": {
+      "fr": "Oreille de Gobosteur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106628.png",
+    "level": 180
+  },
+  {
+    "id": 11887,
+    "name": {
+      "fr": "Oreille de Fistulor"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106630.png",
+    "level": 170
+  },
+  {
+    "id": 11920,
+    "name": {
+      "fr": "Oreille de Fleuro"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106631.png",
+    "level": 180
+  },
+  {
+    "id": 11926,
+    "name": {
+      "fr": "Oreille de Croleur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106632.png",
+    "level": 180
+  },
+  {
+    "id": 11928,
+    "name": {
+      "fr": "Oreille de Blérice"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106633.png",
+    "level": 180
+  },
+  {
+    "id": 11934,
+    "name": {
+      "fr": "Oreille d'Apériglours"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106634.png",
+    "level": 180
+  },
+  {
+    "id": 13976,
+    "name": {
+      "fr": "Oreille de Mécanofoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106636.png",
+    "level": 200
+  },
+  {
+    "id": 14476,
+    "name": {
+      "fr": "Oreilles de Wabbit Fluo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106637.png",
+    "level": 120
+  },
+  {
+    "id": 14509,
+    "name": {
+      "fr": "Oreille de Bouledogre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106639.png",
+    "level": 93
+  },
+  {
+    "id": 14516,
+    "name": {
+      "fr": "Oreille de Rhinoféroce"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106638.png",
+    "level": 96
+  },
+  {
+    "id": 15049,
+    "name": {
+      "fr": "Oreille de Kaniblou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106640.png",
+    "level": 155
+  },
+  {
+    "id": 17618,
+    "name": {
+      "fr": "Oreille de Chargus"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106641.png",
+    "level": 160
+  },
+  {
+    "id": 18541,
+    "name": {
+      "fr": "Oreille de Griffotep"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106642.png",
+    "level": 200
+  },
+  {
+    "id": 20940,
+    "name": {
+      "fr": "Oreille de Kakoalak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106643.png",
+    "level": 130
+  },
+  {
+    "id": 25762,
+    "name": {
+      "fr": "Oreille de Rat Plapla"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165024.png",
+    "level": 110
+  },
+  {
+    "id": 31668,
+    "name": {
+      "fr": "Oreille de Lapilope"
+    },
+    "img": "https://api.dofusdb.fr/img/items/106644.png",
+    "level": 200
+  }
+]

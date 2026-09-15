@@ -1,0 +1,338 @@
+[
+  {
+    "id": 23845,
+    "name": {
+      "fr": "Haïku de papier : Qilin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164797.png",
+    "level": 1
+  },
+  {
+    "id": 23846,
+    "name": {
+      "fr": "Haïku de papier : Granouille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164797.png",
+    "level": 1
+  },
+  {
+    "id": 23847,
+    "name": {
+      "fr": "Haïku de papier : Chtigre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164797.png",
+    "level": 1
+  },
+  {
+    "id": 23848,
+    "name": {
+      "fr": "Haïku de papier : Cochon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164797.png",
+    "level": 1
+  },
+  {
+    "id": 23849,
+    "name": {
+      "fr": "Haïku de papier : Cygrue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164797.png",
+    "level": 1
+  },
+  {
+    "id": 23850,
+    "name": {
+      "fr": "Haïku d'encre : Mystère"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164798.png",
+    "level": 1
+  },
+  {
+    "id": 23851,
+    "name": {
+      "fr": "Haïku d'encre : Conte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164798.png",
+    "level": 1
+  },
+  {
+    "id": 23852,
+    "name": {
+      "fr": "Haïku d'encre : Illusion"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164798.png",
+    "level": 1
+  },
+  {
+    "id": 23853,
+    "name": {
+      "fr": "Haïku d'encre : Ombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164798.png",
+    "level": 1
+  },
+  {
+    "id": 23854,
+    "name": {
+      "fr": "Haïku d'encre : Invisible"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164798.png",
+    "level": 1
+  },
+  {
+    "id": 23855,
+    "name": {
+      "fr": "Haïku du dragon : Résolution"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164799.png",
+    "level": 1
+  },
+  {
+    "id": 23856,
+    "name": {
+      "fr": "Haïku du dragon : Destruction"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164799.png",
+    "level": 1
+  },
+  {
+    "id": 23857,
+    "name": {
+      "fr": "Haïku du dragon : Passion"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164799.png",
+    "level": 1
+  },
+  {
+    "id": 23858,
+    "name": {
+      "fr": "Haïku du dragon : Création"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164799.png",
+    "level": 1
+  },
+  {
+    "id": 23859,
+    "name": {
+      "fr": "Haïku du dragon : Renaissance"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164799.png",
+    "level": 1
+  },
+  {
+    "id": 23860,
+    "name": {
+      "fr": "Haïku des deux Royaumes : Floraison"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164800.png",
+    "level": 1
+  },
+  {
+    "id": 23861,
+    "name": {
+      "fr": "Haïku des deux Royaumes : Moisson"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164800.png",
+    "level": 1
+  },
+  {
+    "id": 23862,
+    "name": {
+      "fr": "Haïku des deux Royaumes : Fermentation"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164800.png",
+    "level": 1
+  },
+  {
+    "id": 23863,
+    "name": {
+      "fr": "Haïku des deux Royaumes : Sommeil"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164800.png",
+    "level": 1
+  },
+  {
+    "id": 23864,
+    "name": {
+      "fr": "Haïku des deux Royaumes : Passage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164800.png",
+    "level": 1
+  },
+  {
+    "id": 23865,
+    "name": {
+      "fr": "Haïku du Wukin : Soir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164801.png",
+    "level": 1
+  },
+  {
+    "id": 23866,
+    "name": {
+      "fr": "Haïku du Wukin : Sakoura"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164801.png",
+    "level": 1
+  },
+  {
+    "id": 23867,
+    "name": {
+      "fr": "Haïku du Wukin : Noir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164801.png",
+    "level": 1
+  },
+  {
+    "id": 23868,
+    "name": {
+      "fr": "Haïku du Wukin : Épouvantail"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164801.png",
+    "level": 1
+  },
+  {
+    "id": 23869,
+    "name": {
+      "fr": "Haïku du Wukin : Froid"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164801.png",
+    "level": 1
+  },
+  {
+    "id": 23870,
+    "name": {
+      "fr": "Haïku du Wukang : Matin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164802.png",
+    "level": 1
+  },
+  {
+    "id": 23871,
+    "name": {
+      "fr": "Haïku du Wukang : Sakoura"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164802.png",
+    "level": 1
+  },
+  {
+    "id": 23872,
+    "name": {
+      "fr": "Haïku du Wukang : Chaleur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164802.png",
+    "level": 1
+  },
+  {
+    "id": 23873,
+    "name": {
+      "fr": "Haïku du Wukang : Tonnerre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164802.png",
+    "level": 1
+  },
+  {
+    "id": 23874,
+    "name": {
+      "fr": "Haïku du Wukang : Blanc"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164802.png",
+    "level": 1
+  },
+  {
+    "id": 23875,
+    "name": {
+      "fr": "Haïku de Pandala : Taverne interdite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164803.png",
+    "level": 1
+  },
+  {
+    "id": 23876,
+    "name": {
+      "fr": "Haïku de Pandala : Plantala"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164803.png",
+    "level": 1
+  },
+  {
+    "id": 23877,
+    "name": {
+      "fr": "Haïku de Pandala : Terrdala"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164803.png",
+    "level": 1
+  },
+  {
+    "id": 23878,
+    "name": {
+      "fr": "Haïku de Pandala : Akwadala"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164803.png",
+    "level": 1
+  },
+  {
+    "id": 23879,
+    "name": {
+      "fr": "Haïku de Pandala : Feudala"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164803.png",
+    "level": 1
+  },
+  {
+    "id": 23880,
+    "name": {
+      "fr": "Haïku de Pandala : Aerdala"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164803.png",
+    "level": 1
+  },
+  {
+    "id": 23881,
+    "name": {
+      "fr": "Haïku de Pandala : Grobe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164803.png",
+    "level": 1
+  },
+  {
+    "id": 23882,
+    "name": {
+      "fr": "Haïku des samouraïs : Printemps"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164804.png",
+    "level": 1
+  },
+  {
+    "id": 23883,
+    "name": {
+      "fr": "Haïku des samouraïs : Été"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164804.png",
+    "level": 1
+  },
+  {
+    "id": 23884,
+    "name": {
+      "fr": "Haïku des samouraïs : Automne"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164804.png",
+    "level": 1
+  },
+  {
+    "id": 23885,
+    "name": {
+      "fr": "Haïku des samouraïs : Hiver"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164804.png",
+    "level": 1
+  },
+  {
+    "id": 23886,
+    "name": {
+      "fr": "Haïku des samouraïs : Nouvel an"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164804.png",
+    "level": 1
+  }
+]

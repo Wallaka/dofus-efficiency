@@ -1,0 +1,250 @@
+[
+  {
+    "id": 438,
+    "name": {
+      "fr": "Queue du Mulou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65105.png",
+    "level": 96
+  },
+  {
+    "id": 2464,
+    "name": {
+      "fr": "Queue de Boostache Prépubère"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65503.png",
+    "level": 36
+  },
+  {
+    "id": 2496,
+    "name": {
+      "fr": "Queue de Rat d'Hyoactif"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65521.png",
+    "level": 56
+  },
+  {
+    "id": 2512,
+    "name": {
+      "fr": "Queue de Sanglier des Plaines"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65536.png",
+    "level": 44
+  },
+  {
+    "id": 2598,
+    "name": {
+      "fr": "Queue de dragodinde sauvage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65594.png",
+    "level": 66
+  },
+  {
+    "id": 8381,
+    "name": {
+      "fr": "Queue Magique de Founoroshi"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65751.png",
+    "level": 140
+  },
+  {
+    "id": 8798,
+    "name": {
+      "fr": "Queue emplumée du Rasboul Majeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65001.png",
+    "level": 110
+  },
+  {
+    "id": 11135,
+    "name": {
+      "fr": "Queue du Boufmouth légendaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65752.png",
+    "level": 112
+  },
+  {
+    "id": 11219,
+    "name": {
+      "fr": "Queue du Royalmouth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65755.png",
+    "level": 120
+  },
+  {
+    "id": 11230,
+    "name": {
+      "fr": "Queue du Fu Mansot"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65753.png",
+    "level": 132
+  },
+  {
+    "id": 11238,
+    "name": {
+      "fr": "Queue d'Écumouth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65754.png",
+    "level": 130
+  },
+  {
+    "id": 11312,
+    "name": {
+      "fr": "Queue de Fantomalamère"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65757.png",
+    "level": 140
+  },
+  {
+    "id": 11882,
+    "name": {
+      "fr": "Queue de Yomi Givrefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65758.png",
+    "level": 160
+  },
+  {
+    "id": 11921,
+    "name": {
+      "fr": "Queue de Wolvero"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65759.png",
+    "level": 180
+  },
+  {
+    "id": 11929,
+    "name": {
+      "fr": "Queue de Blérom"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65760.png",
+    "level": 180
+  },
+  {
+    "id": 11943,
+    "name": {
+      "fr": "Queue de Glourséleste"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65761.png",
+    "level": 190
+  },
+  {
+    "id": 11945,
+    "name": {
+      "fr": "Queue de Meliglours"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65762.png",
+    "level": 190
+  },
+  {
+    "id": 13493,
+    "name": {
+      "fr": "Queue de Rat du Gang"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65521.png",
+    "level": 139
+  },
+  {
+    "id": 13972,
+    "name": {
+      "fr": "Queue de Brikoglours"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65763.png",
+    "level": 200
+  },
+  {
+    "id": 13991,
+    "name": {
+      "fr": "Queue de Sinistrofu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65764.png",
+    "level": 200
+  },
+  {
+    "id": 14458,
+    "name": {
+      "fr": "Queue de Black Wabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65765.png",
+    "level": 52
+  },
+  {
+    "id": 15040,
+    "name": {
+      "fr": "Queue de Kanigroula"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65766.png",
+    "level": 160
+  },
+  {
+    "id": 15175,
+    "name": {
+      "fr": "Queue de Mère Veilleuse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15874.png",
+    "level": 150
+  },
+  {
+    "id": 16515,
+    "name": {
+      "fr": "Queue de Chapardam"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65767.png",
+    "level": 4
+  },
+  {
+    "id": 17615,
+    "name": {
+      "fr": "Queue de Chasquatch"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65768.png",
+    "level": 160
+  },
+  {
+    "id": 17973,
+    "name": {
+      "fr": "Queue de Mantaze"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65769.png",
+    "level": 200
+  },
+  {
+    "id": 18369,
+    "name": {
+      "fr": "Queue de Scordion Bleu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65770.png",
+    "level": 80
+  },
+  {
+    "id": 18370,
+    "name": {
+      "fr": "Queue de Fennex"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65771.png",
+    "level": 80
+  },
+  {
+    "id": 18730,
+    "name": {
+      "fr": "Queue de Chevrotine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15957.png",
+    "level": 190
+  },
+  {
+    "id": 19411,
+    "name": {
+      "fr": "Queue de Bethel Akarna"
+    },
+    "img": "https://api.dofusdb.fr/img/items/65772.png",
+    "level": 200
+  },
+  {
+    "id": 20820,
+    "name": {
+      "fr": "Pompon Brunâtre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59667.png",
+    "level": 54
+  }
+]

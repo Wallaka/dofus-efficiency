@@ -1,0 +1,322 @@
+[
+  {
+    "id": 306,
+    "name": {
+      "fr": "Fleur de Pissenlit Diabolique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35018.png",
+    "level": 18
+  },
+  {
+    "id": 309,
+    "name": {
+      "fr": "Pétale de Rose Démoniaque"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35020.png",
+    "level": 16
+  },
+  {
+    "id": 593,
+    "name": {
+      "fr": "Orchidée Freyesque"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35192.png",
+    "level": 80
+  },
+  {
+    "id": 594,
+    "name": {
+      "fr": "Edelweiss"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35191.png",
+    "level": 100
+  },
+  {
+    "id": 1339,
+    "name": {
+      "fr": "Clochettes"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35046.png",
+    "level": 1
+  },
+  {
+    "id": 2253,
+    "name": {
+      "fr": "Fleur de Gloutovore"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35420.png",
+    "level": 100
+  },
+  {
+    "id": 2659,
+    "name": {
+      "fr": "Pétale de Tournesol Sauvage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35632.png",
+    "level": 18
+  },
+  {
+    "id": 6842,
+    "name": {
+      "fr": "Pétale de Rose Obscure"
+    },
+    "img": "https://api.dofusdb.fr/img/items/25153.png",
+    "level": 23
+  },
+  {
+    "id": 7020,
+    "name": {
+      "fr": "Fleur de Lotus"
+    },
+    "img": "https://api.dofusdb.fr/img/items/38141.png",
+    "level": 30
+  },
+  {
+    "id": 7379,
+    "name": {
+      "fr": "Fleur d'Onabu-Geisha"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164766.png",
+    "level": 160
+  },
+  {
+    "id": 7904,
+    "name": {
+      "fr": "Fleur de Kaliptus"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35001.png",
+    "level": 80
+  },
+  {
+    "id": 8157,
+    "name": {
+      "fr": "Pétale Magique du Tournesol Affamé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35002.png",
+    "level": 20
+  },
+  {
+    "id": 8745,
+    "name": {
+      "fr": "Pétale Kouraçao"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35003.png",
+    "level": 43
+  },
+  {
+    "id": 8746,
+    "name": {
+      "fr": "Pétale Malibout"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35005.png",
+    "level": 43
+  },
+  {
+    "id": 8747,
+    "name": {
+      "fr": "Pétale Passaoh"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35004.png",
+    "level": 43
+  },
+  {
+    "id": 8748,
+    "name": {
+      "fr": "Pétale Morito"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35006.png",
+    "level": 43
+  },
+  {
+    "id": 9381,
+    "name": {
+      "fr": "Fleur de Gloutoblop"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35007.png",
+    "level": 60
+  },
+  {
+    "id": 9382,
+    "name": {
+      "fr": "Fleur de Blopignon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35008.png",
+    "level": 54
+  },
+  {
+    "id": 9384,
+    "name": {
+      "fr": "Fleur de Blop Griotte Royal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35012.png",
+    "level": 60
+  },
+  {
+    "id": 9385,
+    "name": {
+      "fr": "Fleur de Blop Coco Royal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35009.png",
+    "level": 60
+  },
+  {
+    "id": 9386,
+    "name": {
+      "fr": "Fleur de Blop Indigo Royal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35011.png",
+    "level": 60
+  },
+  {
+    "id": 9387,
+    "name": {
+      "fr": "Fleur de Blop Reinette Royal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35010.png",
+    "level": 60
+  },
+  {
+    "id": 9391,
+    "name": {
+      "fr": "Fleur de Blop Multicolore Royal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35013.png",
+    "level": 120
+  },
+  {
+    "id": 11102,
+    "name": {
+      "fr": "Perce-Neige"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35635.png",
+    "level": 200
+  },
+  {
+    "id": 11501,
+    "name": {
+      "fr": "Étoile des Neiges"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35290.png",
+    "level": 200
+  },
+  {
+    "id": 11695,
+    "name": {
+      "fr": "Carniflore"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35636.png",
+    "level": 60
+  },
+  {
+    "id": 16382,
+    "name": {
+      "fr": "Orchidée de Génie"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35639.png",
+    "level": 80
+  },
+  {
+    "id": 16383,
+    "name": {
+      "fr": "Edelweiss Marguerite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35640.png",
+    "level": 100
+  },
+  {
+    "id": 16387,
+    "name": {
+      "fr": "Belladone"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35638.png",
+    "level": 160
+  },
+  {
+    "id": 16388,
+    "name": {
+      "fr": "Belladonzelle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35641.png",
+    "level": 160
+  },
+  {
+    "id": 16513,
+    "name": {
+      "fr": "Pétale Diaphane"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35642.png",
+    "level": 2
+  },
+  {
+    "id": 17780,
+    "name": {
+      "fr": "Fleur de Korriandre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36046.png",
+    "level": 180
+  },
+  {
+    "id": 18361,
+    "name": {
+      "fr": "Fleur de Cactiflore"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35643.png",
+    "level": 130
+  },
+  {
+    "id": 22212,
+    "name": {
+      "fr": "Pétale de Gangredogue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24274.png",
+    "level": 200
+  },
+  {
+    "id": 23824,
+    "name": {
+      "fr": "Tulipe en papier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164832.png",
+    "level": 200
+  },
+  {
+    "id": 27403,
+    "name": {
+      "fr": "Fleur des protecteurs"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36662.png",
+    "level": 200
+  },
+  {
+    "id": 27714,
+    "name": {
+      "fr": "Fleur de Cendrepierre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36047.png",
+    "level": 190
+  },
+  {
+    "id": 32578,
+    "name": {
+      "fr": "Fleur de Nenufor Tilotus"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35014.png",
+    "level": 120
+  },
+  {
+    "id": 34323,
+    "name": {
+      "fr": "Fleur des protecteurs du Sanctuaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24526.png",
+    "level": 200
+  },
+  {
+    "id": 34326,
+    "name": {
+      "fr": "Bouquet de lianes de la Princesse Maudite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24529.png",
+    "level": 200
+  }
+]

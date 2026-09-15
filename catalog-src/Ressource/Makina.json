@@ -1,0 +1,650 @@
+[
+  {
+    "id": 33321,
+    "name": {
+      "fr": "Kromakina Dragodinde de Génération 2"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93251.png",
+    "level": 17
+  },
+  {
+    "id": 33322,
+    "name": {
+      "fr": "Kromakina Volkorne de Génération 2"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93253.png",
+    "level": 19
+  },
+  {
+    "id": 33323,
+    "name": {
+      "fr": "Kromakina Muldo de Génération 2"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93255.png",
+    "level": 21
+  },
+  {
+    "id": 33324,
+    "name": {
+      "fr": "Animakina Dragodinde de Génération 2"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93104.png",
+    "level": 23
+  },
+  {
+    "id": 33325,
+    "name": {
+      "fr": "Animakina Volkorne de Génération 2"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93106.png",
+    "level": 25
+  },
+  {
+    "id": 33332,
+    "name": {
+      "fr": "Animakina Muldo de Génération 2"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93108.png",
+    "level": 27
+  },
+  {
+    "id": 33333,
+    "name": {
+      "fr": "Optimakina Dragodinde de Génération 2"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93278.png",
+    "level": 29
+  },
+  {
+    "id": 33334,
+    "name": {
+      "fr": "Optimakina Volkorne de Génération 2"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93280.png",
+    "level": 31
+  },
+  {
+    "id": 33335,
+    "name": {
+      "fr": "Optimakina Muldo de Génération 2"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93282.png",
+    "level": 33
+  },
+  {
+    "id": 33342,
+    "name": {
+      "fr": "Kromakina Dragodinde de Génération 3"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93254.png",
+    "level": 37
+  },
+  {
+    "id": 33343,
+    "name": {
+      "fr": "Kromakina Volkorne de Génération 3"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93256.png",
+    "level": 39
+  },
+  {
+    "id": 33344,
+    "name": {
+      "fr": "Kromakina Muldo de Génération 3"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93258.png",
+    "level": 41
+  },
+  {
+    "id": 33345,
+    "name": {
+      "fr": "Animakina Dragodinde de Génération 3"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93107.png",
+    "level": 43
+  },
+  {
+    "id": 33346,
+    "name": {
+      "fr": "Animakina Volkorne de Génération 3"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93109.png",
+    "level": 45
+  },
+  {
+    "id": 33353,
+    "name": {
+      "fr": "Animakina Muldo de Génération 3"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93111.png",
+    "level": 47
+  },
+  {
+    "id": 33354,
+    "name": {
+      "fr": "Optimakina Dragodinde de Génération 3"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93281.png",
+    "level": 49
+  },
+  {
+    "id": 33355,
+    "name": {
+      "fr": "Optimakina Volkorne de Génération 3"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93283.png",
+    "level": 51
+  },
+  {
+    "id": 33356,
+    "name": {
+      "fr": "Optimakina Muldo de Génération 3"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93285.png",
+    "level": 53
+  },
+  {
+    "id": 33363,
+    "name": {
+      "fr": "Kromakina Dragodinde de Génération 4"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93257.png",
+    "level": 57
+  },
+  {
+    "id": 33364,
+    "name": {
+      "fr": "Kromakina Volkorne de Génération 4"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93259.png",
+    "level": 59
+  },
+  {
+    "id": 33365,
+    "name": {
+      "fr": "Kromakina Muldo de Génération 4"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93261.png",
+    "level": 61
+  },
+  {
+    "id": 33366,
+    "name": {
+      "fr": "Animakina Dragodinde de Génération 4"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93110.png",
+    "level": 63
+  },
+  {
+    "id": 33367,
+    "name": {
+      "fr": "Animakina Volkorne de Génération 4"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93112.png",
+    "level": 65
+  },
+  {
+    "id": 33374,
+    "name": {
+      "fr": "Animakina Muldo de Génération 4"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93114.png",
+    "level": 67
+  },
+  {
+    "id": 33375,
+    "name": {
+      "fr": "Optimakina Dragodinde de Génération 4"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93284.png",
+    "level": 69
+  },
+  {
+    "id": 33376,
+    "name": {
+      "fr": "Optimakina Volkorne de Génération 4"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93286.png",
+    "level": 71
+  },
+  {
+    "id": 33377,
+    "name": {
+      "fr": "Optimakina Muldo de Génération 4"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93288.png",
+    "level": 73
+  },
+  {
+    "id": 33384,
+    "name": {
+      "fr": "Kromakina Dragodinde de Génération 5"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93260.png",
+    "level": 77
+  },
+  {
+    "id": 33385,
+    "name": {
+      "fr": "Kromakina Volkorne de Génération 5"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93262.png",
+    "level": 79
+  },
+  {
+    "id": 33386,
+    "name": {
+      "fr": "Kromakina Muldo de Génération 5"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93264.png",
+    "level": 81
+  },
+  {
+    "id": 33387,
+    "name": {
+      "fr": "Animakina Dragodinde de Génération 5"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93113.png",
+    "level": 83
+  },
+  {
+    "id": 33388,
+    "name": {
+      "fr": "Animakina Volkorne de Génération 5"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93115.png",
+    "level": 85
+  },
+  {
+    "id": 33395,
+    "name": {
+      "fr": "Animakina Muldo de Génération 5"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93117.png",
+    "level": 87
+  },
+  {
+    "id": 33396,
+    "name": {
+      "fr": "Optimakina Dragodinde de Génération 5"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93287.png",
+    "level": 89
+  },
+  {
+    "id": 33397,
+    "name": {
+      "fr": "Optimakina Volkorne de Génération 5"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93289.png",
+    "level": 91
+  },
+  {
+    "id": 33398,
+    "name": {
+      "fr": "Optimakina Muldo de Génération 5"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93291.png",
+    "level": 93
+  },
+  {
+    "id": 33405,
+    "name": {
+      "fr": "Kromakina Dragodinde de Génération 6"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93263.png",
+    "level": 97
+  },
+  {
+    "id": 33406,
+    "name": {
+      "fr": "Kromakina Volkorne de Génération 6"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93265.png",
+    "level": 99
+  },
+  {
+    "id": 33407,
+    "name": {
+      "fr": "Kromakina Muldo de Génération 6"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93267.png",
+    "level": 101
+  },
+  {
+    "id": 33408,
+    "name": {
+      "fr": "Animakina Dragodinde de Génération 6"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93116.png",
+    "level": 103
+  },
+  {
+    "id": 33409,
+    "name": {
+      "fr": "Animakina Volkorne de Génération 6"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93118.png",
+    "level": 105
+  },
+  {
+    "id": 33416,
+    "name": {
+      "fr": "Animakina Muldo de Génération 6"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93120.png",
+    "level": 107
+  },
+  {
+    "id": 33417,
+    "name": {
+      "fr": "Optimakina Dragodinde de Génération 6"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93290.png",
+    "level": 109
+  },
+  {
+    "id": 33418,
+    "name": {
+      "fr": "Optimakina Volkorne de Génération 6"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93292.png",
+    "level": 111
+  },
+  {
+    "id": 33419,
+    "name": {
+      "fr": "Optimakina Muldo de Génération 6"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93294.png",
+    "level": 113
+  },
+  {
+    "id": 33426,
+    "name": {
+      "fr": "Kromakina Dragodinde de Génération 7"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93266.png",
+    "level": 117
+  },
+  {
+    "id": 33427,
+    "name": {
+      "fr": "Kromakina Volkorne de Génération 7"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93268.png",
+    "level": 119
+  },
+  {
+    "id": 33428,
+    "name": {
+      "fr": "Kromakina Muldo de Génération 7"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93270.png",
+    "level": 121
+  },
+  {
+    "id": 33429,
+    "name": {
+      "fr": "Animakina Dragodinde de Génération 7"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93119.png",
+    "level": 123
+  },
+  {
+    "id": 33430,
+    "name": {
+      "fr": "Animakina Volkorne de Génération 7"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93121.png",
+    "level": 125
+  },
+  {
+    "id": 33437,
+    "name": {
+      "fr": "Animakina Muldo de Génération 7"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93123.png",
+    "level": 127
+  },
+  {
+    "id": 33438,
+    "name": {
+      "fr": "Optimakina Dragodinde de Génération 7"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93293.png",
+    "level": 129
+  },
+  {
+    "id": 33439,
+    "name": {
+      "fr": "Optimakina Volkorne de Génération 7"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93295.png",
+    "level": 131
+  },
+  {
+    "id": 33440,
+    "name": {
+      "fr": "Optimakina Muldo de Génération 7"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93297.png",
+    "level": 133
+  },
+  {
+    "id": 33447,
+    "name": {
+      "fr": "Kromakina Dragodinde de Génération 8"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93269.png",
+    "level": 137
+  },
+  {
+    "id": 33448,
+    "name": {
+      "fr": "Kromakina Volkorne de Génération 8"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93271.png",
+    "level": 139
+  },
+  {
+    "id": 33449,
+    "name": {
+      "fr": "Kromakina Muldo de Génération 8"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93273.png",
+    "level": 141
+  },
+  {
+    "id": 33450,
+    "name": {
+      "fr": "Animakina Dragodinde de Génération 8"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93122.png",
+    "level": 143
+  },
+  {
+    "id": 33451,
+    "name": {
+      "fr": "Animakina Volkorne de Génération 8"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93124.png",
+    "level": 145
+  },
+  {
+    "id": 33458,
+    "name": {
+      "fr": "Animakina Muldo de Génération 8"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93126.png",
+    "level": 147
+  },
+  {
+    "id": 33459,
+    "name": {
+      "fr": "Optimakina Dragodinde de Génération 8"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93296.png",
+    "level": 149
+  },
+  {
+    "id": 33460,
+    "name": {
+      "fr": "Optimakina Volkorne de Génération 8"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93299.png",
+    "level": 151
+  },
+  {
+    "id": 33461,
+    "name": {
+      "fr": "Optimakina Muldo de Génération 8"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93301.png",
+    "level": 153
+  },
+  {
+    "id": 33468,
+    "name": {
+      "fr": "Kromakina Dragodinde de Génération 9"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93272.png",
+    "level": 155
+  },
+  {
+    "id": 33469,
+    "name": {
+      "fr": "Kromakina Volkorne de Génération 9"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93274.png",
+    "level": 157
+  },
+  {
+    "id": 33470,
+    "name": {
+      "fr": "Animakina Dragodinde de Génération 9"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93125.png",
+    "level": 161
+  },
+  {
+    "id": 33477,
+    "name": {
+      "fr": "Animakina Volkorne de Génération 9"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93127.png",
+    "level": 163
+  },
+  {
+    "id": 33478,
+    "name": {
+      "fr": "Optimakina Dragodinde de Génération 9"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93300.png",
+    "level": 167
+  },
+  {
+    "id": 33479,
+    "name": {
+      "fr": "Optimakina Volkorne de Génération 9"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93302.png",
+    "level": 169
+  },
+  {
+    "id": 33486,
+    "name": {
+      "fr": "Kromakina Dragodinde de Génération 10"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93275.png",
+    "level": 173
+  },
+  {
+    "id": 33487,
+    "name": {
+      "fr": "Kromakina Volkorne de Génération 10"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93277.png",
+    "level": 175
+  },
+  {
+    "id": 33488,
+    "name": {
+      "fr": "Animakina Dragodinde de Génération 10"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93128.png",
+    "level": 179
+  },
+  {
+    "id": 33495,
+    "name": {
+      "fr": "Animakina Volkorne de Génération 10"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93130.png",
+    "level": 181
+  },
+  {
+    "id": 33496,
+    "name": {
+      "fr": "Optimakina Dragodinde de Génération 10"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93303.png",
+    "level": 185
+  },
+  {
+    "id": 33497,
+    "name": {
+      "fr": "Optimakina Volkorne de Génération 10"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93305.png",
+    "level": 187
+  },
+  {
+    "id": 33536,
+    "name": {
+      "fr": "Kromakina Muldo de Génération 9"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93276.png",
+    "level": 159
+  },
+  {
+    "id": 33537,
+    "name": {
+      "fr": "Animakina Muldo de Génération 9"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93129.png",
+    "level": 165
+  },
+  {
+    "id": 33538,
+    "name": {
+      "fr": "Optimakina Muldo de Génération 9"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93304.png",
+    "level": 171
+  },
+  {
+    "id": 33539,
+    "name": {
+      "fr": "Kromakina Muldo de Génération 10"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93252.png",
+    "level": 177
+  },
+  {
+    "id": 33540,
+    "name": {
+      "fr": "Animakina Muldo de Génération 10"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93105.png",
+    "level": 183
+  },
+  {
+    "id": 33541,
+    "name": {
+      "fr": "Optimakina Muldo de Génération 10"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93279.png",
+    "level": 189
+  }
+]

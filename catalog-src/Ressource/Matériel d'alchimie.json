@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1459,
+    "name": {
+      "fr": "Tube longiforme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/71055.png",
+    "level": 1
+  },
+  {
+    "id": 1460,
+    "name": {
+      "fr": "Grande fiole"
+    },
+    "img": "https://api.dofusdb.fr/img/items/71056.png",
+    "level": 1
+  },
+  {
+    "id": 1463,
+    "name": {
+      "fr": "Fiole à élément"
+    },
+    "img": "https://api.dofusdb.fr/img/items/71057.png",
+    "level": 10
+  },
+  {
+    "id": 1468,
+    "name": {
+      "fr": "Bocal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/71058.png",
+    "level": 1
+  },
+  {
+    "id": 12075,
+    "name": {
+      "fr": "Fiole de fumée de Nelween"
+    },
+    "img": "https://api.dofusdb.fr/img/items/71059.png",
+    "level": 70
+  },
+  {
+    "id": 13193,
+    "name": {
+      "fr": "Fiole de gaz draconique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15846.png",
+    "level": 200
+  },
+  {
+    "id": 18742,
+    "name": {
+      "fr": "Breuvage Musculaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/12192.png",
+    "level": 190
+  }
+]

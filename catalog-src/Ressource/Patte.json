@@ -1,0 +1,242 @@
+[
+  {
+    "id": 365,
+    "name": {
+      "fr": "Patte d'Arakne"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103035.png",
+    "level": 18
+  },
+  {
+    "id": 1652,
+    "name": {
+      "fr": "Patte d'Arakne Majeure"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103246.png",
+    "level": 44
+  },
+  {
+    "id": 1673,
+    "name": {
+      "fr": "Patte d'Arakne Magique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103392.png",
+    "level": 18
+  },
+  {
+    "id": 2060,
+    "name": {
+      "fr": "Patte de Corbac"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103330.png",
+    "level": 106
+  },
+  {
+    "id": 2288,
+    "name": {
+      "fr": "Patte de Wabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103440.png",
+    "level": 48
+  },
+  {
+    "id": 2451,
+    "name": {
+      "fr": "Patte d'Arakne des Égouts"
+    },
+    "img": "https://api.dofusdb.fr/img/items/25159.png",
+    "level": 26
+  },
+  {
+    "id": 2502,
+    "name": {
+      "fr": "Papatte de Croc Gland"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103526.png",
+    "level": 65
+  },
+  {
+    "id": 2571,
+    "name": {
+      "fr": "Patte de Tofukaz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103577.png",
+    "level": 36
+  },
+  {
+    "id": 11252,
+    "name": {
+      "fr": "Patte de Rat Bougri"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103036.png",
+    "level": 82
+  },
+  {
+    "id": 11335,
+    "name": {
+      "fr": "Patte de Soryo Givrefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103579.png",
+    "level": 160
+  },
+  {
+    "id": 11895,
+    "name": {
+      "fr": "Patte de Korriandre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103580.png",
+    "level": 180
+  },
+  {
+    "id": 13341,
+    "name": {
+      "fr": "Patte de la Gardienne des Égouts"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103034.png",
+    "level": 155
+  },
+  {
+    "id": 13724,
+    "name": {
+      "fr": "Patte de Tofu Dodu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103717.png",
+    "level": 118
+  },
+  {
+    "id": 13943,
+    "name": {
+      "fr": "Patte de Termystique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103718.png",
+    "level": 200
+  },
+  {
+    "id": 14457,
+    "name": {
+      "fr": "Patte de Black Wabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103719.png",
+    "level": 50
+  },
+  {
+    "id": 14510,
+    "name": {
+      "fr": "Patte de Bouledogre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103720.png",
+    "level": 93
+  },
+  {
+    "id": 15067,
+    "name": {
+      "fr": "Patte de Gruche"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103721.png",
+    "level": 122
+  },
+  {
+    "id": 15452,
+    "name": {
+      "fr": "Patte de Scoliopode"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103722.png",
+    "level": 180
+  },
+  {
+    "id": 15685,
+    "name": {
+      "fr": "Patte de Tabacille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103723.png",
+    "level": 200
+  },
+  {
+    "id": 15716,
+    "name": {
+      "fr": "Serre d'Ikargn"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15896.png",
+    "level": 200
+  },
+  {
+    "id": 16002,
+    "name": {
+      "fr": "Patte de Kankreblath"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103724.png",
+    "level": 40
+  },
+  {
+    "id": 16159,
+    "name": {
+      "fr": "Patte d'Abrakne Irascible"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103725.png",
+    "level": 134
+  },
+  {
+    "id": 17609,
+    "name": {
+      "fr": "Patte de Pupuce"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103726.png",
+    "level": 110
+  },
+  {
+    "id": 17985,
+    "name": {
+      "fr": "Patte de Li-Fo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103727.png",
+    "level": 200
+  },
+  {
+    "id": 18564,
+    "name": {
+      "fr": "Patte de Masticroc"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103730.png",
+    "level": 170
+  },
+  {
+    "id": 20814,
+    "name": {
+      "fr": "Patte de Twakeuf"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59668.png",
+    "level": 50
+  },
+  {
+    "id": 22210,
+    "name": {
+      "fr": "Patte de Nheur'Gueule"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24272.png",
+    "level": 200
+  },
+  {
+    "id": 22211,
+    "name": {
+      "fr": "Tentacule de Tentaclaque"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24273.png",
+    "level": 200
+  },
+  {
+    "id": 31652,
+    "name": {
+      "fr": "Patte de Kabombz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103033.png",
+    "level": 170
+  },
+  {
+    "id": 31891,
+    "name": {
+      "fr": "Patte de Kabombz perturbé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/103037.png",
+    "level": 170
+  }
+]

@@ -1,0 +1,130 @@
+[
+  {
+    "id": 12898,
+    "name": {
+      "fr": "Emballage de Nowel Écarlate"
+    },
+    "img": "https://api.dofusdb.fr/img/items/154000.png",
+    "level": 1
+  },
+  {
+    "id": 12899,
+    "name": {
+      "fr": "Emballage de mariage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/154010.png",
+    "level": 1
+  },
+  {
+    "id": 12900,
+    "name": {
+      "fr": "Emballage d'anniversaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/154009.png",
+    "level": 1
+  },
+  {
+    "id": 12902,
+    "name": {
+      "fr": "Emballage d'excuses"
+    },
+    "img": "https://api.dofusdb.fr/img/items/154006.png",
+    "level": 1
+  },
+  {
+    "id": 12904,
+    "name": {
+      "fr": "Emballage de félicitations"
+    },
+    "img": "https://api.dofusdb.fr/img/items/154014.png",
+    "level": 1
+  },
+  {
+    "id": 12907,
+    "name": {
+      "fr": "Emballage d'amour"
+    },
+    "img": "https://api.dofusdb.fr/img/items/154012.png",
+    "level": 1
+  },
+  {
+    "id": 12908,
+    "name": {
+      "fr": "Emballage d'amitié"
+    },
+    "img": "https://api.dofusdb.fr/img/items/154007.png",
+    "level": 1
+  },
+  {
+    "id": 12909,
+    "name": {
+      "fr": "Emballage de fraternité"
+    },
+    "img": "https://api.dofusdb.fr/img/items/154008.png",
+    "level": 1
+  },
+  {
+    "id": 12910,
+    "name": {
+      "fr": "Emballage d'affection"
+    },
+    "img": "https://api.dofusdb.fr/img/items/154013.png",
+    "level": 1
+  },
+  {
+    "id": 12911,
+    "name": {
+      "fr": "Emballage de corruption"
+    },
+    "img": "https://api.dofusdb.fr/img/items/154004.png",
+    "level": 1
+  },
+  {
+    "id": 12912,
+    "name": {
+      "fr": "Emballage de tendresse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/154011.png",
+    "level": 1
+  },
+  {
+    "id": 12913,
+    "name": {
+      "fr": "Emballage Boulduk"
+    },
+    "img": "https://api.dofusdb.fr/img/items/154005.png",
+    "level": 1
+  },
+  {
+    "id": 12914,
+    "name": {
+      "fr": "Emballage surprise"
+    },
+    "img": "https://api.dofusdb.fr/img/items/154015.png",
+    "level": 1
+  },
+  {
+    "id": 12928,
+    "name": {
+      "fr": "Emballage de Nowel Enneigé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/154002.png",
+    "level": 1
+  },
+  {
+    "id": 12929,
+    "name": {
+      "fr": "Emballage de Nowel Étoilé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/154001.png",
+    "level": 1
+  },
+  {
+    "id": 13014,
+    "name": {
+      "fr": "Étiquette de cadeau"
+    },
+    "img": "https://api.dofusdb.fr/img/items/154003.png",
+    "level": 1
+  }
+]

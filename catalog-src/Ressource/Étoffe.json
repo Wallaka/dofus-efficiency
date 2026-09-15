@@ -1,0 +1,362 @@
+[
+  {
+    "id": 424,
+    "name": {
+      "fr": "Fibre criminelle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55120.png",
+    "level": 66
+  },
+  {
+    "id": 426,
+    "name": {
+      "fr": "Fibre de Chanvre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55123.png",
+    "level": 176
+  },
+  {
+    "id": 651,
+    "name": {
+      "fr": "Étoffe du Mulou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55199.png",
+    "level": 96
+  },
+  {
+    "id": 652,
+    "name": {
+      "fr": "Étoffe du Sanglier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55220.png",
+    "level": 24
+  },
+  {
+    "id": 653,
+    "name": {
+      "fr": "Étoffe d'Écurouille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55661.png",
+    "level": 26
+  },
+  {
+    "id": 654,
+    "name": {
+      "fr": "Étoffe du Wabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55015.png",
+    "level": 48
+  },
+  {
+    "id": 1696,
+    "name": {
+      "fr": "Étoffe de Choudini"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15975.png",
+    "level": 90
+  },
+  {
+    "id": 2273,
+    "name": {
+      "fr": "Tissu Pourpre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55427.png",
+    "level": 86
+  },
+  {
+    "id": 2277,
+    "name": {
+      "fr": "Linceul"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55430.png",
+    "level": 46
+  },
+  {
+    "id": 2278,
+    "name": {
+      "fr": "Tissu Invisible"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55431.png",
+    "level": 23
+  },
+  {
+    "id": 2281,
+    "name": {
+      "fr": "Tissu de Graboule"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15982.png",
+    "level": 86
+  },
+  {
+    "id": 2285,
+    "name": {
+      "fr": "Tissu Sombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55437.png",
+    "level": 36
+  },
+  {
+    "id": 2513,
+    "name": {
+      "fr": "Étoffe de Gliglidoudur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55537.png",
+    "level": 146
+  },
+  {
+    "id": 2550,
+    "name": {
+      "fr": "Étoffe de Foufayteur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55561.png",
+    "level": 66
+  },
+  {
+    "id": 7301,
+    "name": {
+      "fr": "Étoffe de Kurookin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164675.png",
+    "level": 140
+  },
+  {
+    "id": 7304,
+    "name": {
+      "fr": "Étoffe de Firefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55011.png",
+    "level": 140
+  },
+  {
+    "id": 7384,
+    "name": {
+      "fr": "Étoffe de Samouraï fantôme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164763.png",
+    "level": 160
+  },
+  {
+    "id": 8002,
+    "name": {
+      "fr": "Étoffe de Dok Alako"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55720.png",
+    "level": 74
+  },
+  {
+    "id": 8082,
+    "name": {
+      "fr": "Étoffe du Fauchalak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55013.png",
+    "level": 114
+  },
+  {
+    "id": 8384,
+    "name": {
+      "fr": "Étoffe Magique de Moon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55722.png",
+    "level": 100
+  },
+  {
+    "id": 8398,
+    "name": {
+      "fr": "Étoffe du Wa Wabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55723.png",
+    "level": 60
+  },
+  {
+    "id": 8487,
+    "name": {
+      "fr": "Étoffe de Sphincter Cell"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55727.png",
+    "level": 150
+  },
+  {
+    "id": 8791,
+    "name": {
+      "fr": "Étoffe de Meupette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55016.png",
+    "level": 149
+  },
+  {
+    "id": 8800,
+    "name": {
+      "fr": "Étoffe Zoth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55017.png",
+    "level": 110
+  },
+  {
+    "id": 8801,
+    "name": {
+      "fr": "Étoffe de Ouassingue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55018.png",
+    "level": 92
+  },
+  {
+    "id": 8808,
+    "name": {
+      "fr": "Étoffe du Roissingue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55019.png",
+    "level": 196
+  },
+  {
+    "id": 8995,
+    "name": {
+      "fr": "Étoffe de Gourlo le Terrible"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55729.png",
+    "level": 70
+  },
+  {
+    "id": 10030,
+    "name": {
+      "fr": "Tissu de Rapiéçage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55434.png",
+    "level": 1
+  },
+  {
+    "id": 11249,
+    "name": {
+      "fr": "Étoffe de Kaniglou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55730.png",
+    "level": 130
+  },
+  {
+    "id": 11253,
+    "name": {
+      "fr": "Étoffe de Rat Bougri"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55731.png",
+    "level": 82
+  },
+  {
+    "id": 11319,
+    "name": {
+      "fr": "Étoffe de Vigie Pirate"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55733.png",
+    "level": 140
+  },
+  {
+    "id": 11925,
+    "name": {
+      "fr": "Étoffe de Croleur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55734.png",
+    "level": 180
+  },
+  {
+    "id": 11932,
+    "name": {
+      "fr": "Étoffe de Kolosso"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55735.png",
+    "level": 190
+  },
+  {
+    "id": 11940,
+    "name": {
+      "fr": "Étoffe de Glourmand"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55736.png",
+    "level": 190
+  },
+  {
+    "id": 13487,
+    "name": {
+      "fr": "Serviette de Plage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55130.png",
+    "level": 18
+  },
+  {
+    "id": 13916,
+    "name": {
+      "fr": "Étoffe de Grodruche"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55737.png",
+    "level": 200
+  },
+  {
+    "id": 14921,
+    "name": {
+      "fr": "Étoffe Mystérieuse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15848.png",
+    "level": 1
+  },
+  {
+    "id": 15050,
+    "name": {
+      "fr": "Étoffe de Kaniblou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55738.png",
+    "level": 155
+  },
+  {
+    "id": 15219,
+    "name": {
+      "fr": "Trame Dimensionnelle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59642.png",
+    "level": 100
+  },
+  {
+    "id": 15414,
+    "name": {
+      "fr": "Étoffe de la Cour Sombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59645.png",
+    "level": 200
+  },
+  {
+    "id": 18318,
+    "name": {
+      "fr": "Soie chatoyante"
+    },
+    "img": "https://api.dofusdb.fr/img/items/136078.png",
+    "level": 200
+  },
+  {
+    "id": 21264,
+    "name": {
+      "fr": "Étoffe de Draegnerys"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55739.png",
+    "level": 70
+  },
+  {
+    "id": 22235,
+    "name": {
+      "fr": "Étoffe endommagée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55431.png",
+    "level": 1
+  },
+  {
+    "id": 22247,
+    "name": {
+      "fr": "Étoffe sanglante"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55740.png",
+    "level": 200
+  },
+  {
+    "id": 32249,
+    "name": {
+      "fr": "Tissu spectral de Fantômayte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55021.png",
+    "level": 150
+  }
+]

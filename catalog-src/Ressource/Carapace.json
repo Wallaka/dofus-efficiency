@@ -1,0 +1,106 @@
+[
+  {
+    "id": 2303,
+    "name": {
+      "fr": "Carapace vide de Crabe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/107453.png",
+    "level": 46
+  },
+  {
+    "id": 2609,
+    "name": {
+      "fr": "Carapace Verte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24018.png",
+    "level": 50
+  },
+  {
+    "id": 2610,
+    "name": {
+      "fr": "Carapace Rouge"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24020.png",
+    "level": 50
+  },
+  {
+    "id": 2611,
+    "name": {
+      "fr": "Carapace Jaune"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24019.png",
+    "level": 50
+  },
+  {
+    "id": 2613,
+    "name": {
+      "fr": "Carapace Bleue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24021.png",
+    "level": 50
+  },
+  {
+    "id": 8308,
+    "name": {
+      "fr": "Carapace de Scaratos"
+    },
+    "img": "https://api.dofusdb.fr/img/items/107735.png",
+    "level": 114
+  },
+  {
+    "id": 13944,
+    "name": {
+      "fr": "Carapace de Termystique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/107736.png",
+    "level": 200
+  },
+  {
+    "id": 14819,
+    "name": {
+      "fr": "Carapace de Krabouilleur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/107737.png",
+    "level": 200
+  },
+  {
+    "id": 15415,
+    "name": {
+      "fr": "Chitine de Nécrotique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59646.png",
+    "level": 180
+  },
+  {
+    "id": 18371,
+    "name": {
+      "fr": "Carapace du Mantiscore"
+    },
+    "img": "https://api.dofusdb.fr/img/items/107738.png",
+    "level": 80
+  },
+  {
+    "id": 18567,
+    "name": {
+      "fr": "Carapace de Ver des Sables"
+    },
+    "img": "https://api.dofusdb.fr/img/items/107739.png",
+    "level": 170
+  },
+  {
+    "id": 31533,
+    "name": {
+      "fr": "Carapace de Supervizœuf"
+    },
+    "img": "https://api.dofusdb.fr/img/items/107440.png",
+    "level": 170
+  },
+  {
+    "id": 34338,
+    "name": {
+      "fr": "Carapace d'Exécrabe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24534.png",
+    "level": 200
+  }
+]

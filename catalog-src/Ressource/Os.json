@@ -1,0 +1,1978 @@
+[
+  {
+    "id": 305,
+    "name": {
+      "fr": "Dent de Wabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47758.png",
+    "level": 44
+  },
+  {
+    "id": 310,
+    "name": {
+      "fr": "Os de Chafer"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47015.png",
+    "level": 5
+  },
+  {
+    "id": 366,
+    "name": {
+      "fr": "Bec du Tofu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47037.png",
+    "level": 13
+  },
+  {
+    "id": 375,
+    "name": {
+      "fr": "Dent de Tofu Mutant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47047.png",
+    "level": 36
+  },
+  {
+    "id": 379,
+    "name": {
+      "fr": "Pince de Crabe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47051.png",
+    "level": 46
+  },
+  {
+    "id": 383,
+    "name": {
+      "fr": "Corne de Boufton"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47055.png",
+    "level": 26
+  },
+  {
+    "id": 387,
+    "name": {
+      "fr": "Défense du Sanglier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47059.png",
+    "level": 24
+  },
+  {
+    "id": 407,
+    "name": {
+      "fr": "Pic de Prespic"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47134.png",
+    "level": 26
+  },
+  {
+    "id": 408,
+    "name": {
+      "fr": "Dentier du Chafer d'Élite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47129.png",
+    "level": 46
+  },
+  {
+    "id": 411,
+    "name": {
+      "fr": "Bec du Kwak de Glace"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47133.png",
+    "level": 44
+  },
+  {
+    "id": 412,
+    "name": {
+      "fr": "Bec du Kwak de Flamme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47132.png",
+    "level": 44
+  },
+  {
+    "id": 413,
+    "name": {
+      "fr": "Bec du Kwak de Vent"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47110.png",
+    "level": 44
+  },
+  {
+    "id": 430,
+    "name": {
+      "fr": "Os Invisible du Chafer Invisible"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47126.png",
+    "level": 23
+  },
+  {
+    "id": 432,
+    "name": {
+      "fr": "Côtes du Rib"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47158.png",
+    "level": 33
+  },
+  {
+    "id": 433,
+    "name": {
+      "fr": "Fémur du Chafer Archer"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47101.png",
+    "level": 46
+  },
+  {
+    "id": 439,
+    "name": {
+      "fr": "Canine de Mergranlou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47106.png",
+    "level": 96
+  },
+  {
+    "id": 479,
+    "name": {
+      "fr": "Ivoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47088.png",
+    "level": 80
+  },
+  {
+    "id": 848,
+    "name": {
+      "fr": "Vieil Os de Dragoeuf"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47015.png",
+    "level": 70
+  },
+  {
+    "id": 1142,
+    "name": {
+      "fr": "Bec du Kwak de Terre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47222.png",
+    "level": 44
+  },
+  {
+    "id": 1327,
+    "name": {
+      "fr": "Os taillé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47048.png",
+    "level": 1
+  },
+  {
+    "id": 1614,
+    "name": {
+      "fr": "Bombe de Graboule"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15983.png",
+    "level": 86
+  },
+  {
+    "id": 1664,
+    "name": {
+      "fr": "Dent de Crocodaille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47234.png",
+    "level": 46
+  },
+  {
+    "id": 1675,
+    "name": {
+      "fr": "Os Surprise du Chafer Fantassin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47015.png",
+    "level": 35
+  },
+  {
+    "id": 1680,
+    "name": {
+      "fr": "Corne Brûlée du Minotoror"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47245.png",
+    "level": 120
+  },
+  {
+    "id": 1709,
+    "name": {
+      "fr": "Nonos"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47015.png",
+    "level": 1
+  },
+  {
+    "id": 2179,
+    "name": {
+      "fr": "Dent de dragodinde"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47419.png",
+    "level": 66
+  },
+  {
+    "id": 2249,
+    "name": {
+      "fr": "Dent de Garglyphe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/25155.png",
+    "level": 36
+  },
+  {
+    "id": 2252,
+    "name": {
+      "fr": "Dent en Or de Craqueleur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47418.png",
+    "level": 61
+  },
+  {
+    "id": 2264,
+    "name": {
+      "fr": "Canine de Gobelin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47878.png",
+    "level": 40
+  },
+  {
+    "id": 2279,
+    "name": {
+      "fr": "Canine Vampiresque"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47432.png",
+    "level": 35
+  },
+  {
+    "id": 2300,
+    "name": {
+      "fr": "Fragment d'Os"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47450.png",
+    "level": 46
+  },
+  {
+    "id": 2322,
+    "name": {
+      "fr": "Crocs de Rats"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47464.png",
+    "level": 26
+  },
+  {
+    "id": 2323,
+    "name": {
+      "fr": "Colonne Vertébrale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47465.png",
+    "level": 34
+  },
+  {
+    "id": 2336,
+    "name": {
+      "fr": "Crâne de Chafer"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47480.png",
+    "level": 36
+  },
+  {
+    "id": 2463,
+    "name": {
+      "fr": "Dent de Kwoan"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47502.png",
+    "level": 36
+  },
+  {
+    "id": 2509,
+    "name": {
+      "fr": "Dent de Larve Champêtre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47432.png",
+    "level": 56
+  },
+  {
+    "id": 2514,
+    "name": {
+      "fr": "Sabot de Gliglicérin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47539.png",
+    "level": 146
+  },
+  {
+    "id": 2516,
+    "name": {
+      "fr": "Défense de Gliglicérin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47541.png",
+    "level": 146
+  },
+  {
+    "id": 2528,
+    "name": {
+      "fr": "Ongle de Kanigrou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47559.png",
+    "level": 70
+  },
+  {
+    "id": 2554,
+    "name": {
+      "fr": "Côtes de Porkass"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47159.png",
+    "level": 46
+  },
+  {
+    "id": 2581,
+    "name": {
+      "fr": "Dents de Mulou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47587.png",
+    "level": 100
+  },
+  {
+    "id": 2599,
+    "name": {
+      "fr": "Pic de dragodinde"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47597.png",
+    "level": 61
+  },
+  {
+    "id": 2642,
+    "name": {
+      "fr": "Mâchoire de Rib"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47617.png",
+    "level": 33
+  },
+  {
+    "id": 2656,
+    "name": {
+      "fr": "Os rongé de Gobichon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47879.png",
+    "level": 40
+  },
+  {
+    "id": 2664,
+    "name": {
+      "fr": "Os de Crocodaille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47636.png",
+    "level": 46
+  },
+  {
+    "id": 6738,
+    "name": {
+      "fr": "Crâne de Chef Crocodaille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47637.png",
+    "level": 69
+  },
+  {
+    "id": 7404,
+    "name": {
+      "fr": "Os de Jiangshi-Nobi"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164767.png",
+    "level": 160
+  },
+  {
+    "id": 7906,
+    "name": {
+      "fr": "Corne du Boufcoul"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47009.png",
+    "level": 96
+  },
+  {
+    "id": 8055,
+    "name": {
+      "fr": "Os de Mama Koalak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47638.png",
+    "level": 94
+  },
+  {
+    "id": 8056,
+    "name": {
+      "fr": "Fémur de Koalak Farouche"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47639.png",
+    "level": 110
+  },
+  {
+    "id": 8057,
+    "name": {
+      "fr": "Tibia de Koalak Fossoyeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47640.png",
+    "level": 106
+  },
+  {
+    "id": 8058,
+    "name": {
+      "fr": "Cubitus de Momie Koalak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47641.png",
+    "level": 112
+  },
+  {
+    "id": 8083,
+    "name": {
+      "fr": "Os de Pékeualak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47010.png",
+    "level": 84
+  },
+  {
+    "id": 8327,
+    "name": {
+      "fr": "Corne de Déminoboule"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47643.png",
+    "level": 114
+  },
+  {
+    "id": 8328,
+    "name": {
+      "fr": "Corne de Mominotor"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47642.png",
+    "level": 114
+  },
+  {
+    "id": 8345,
+    "name": {
+      "fr": "Corne de Dragoss Protéiforme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47869.png",
+    "level": 96
+  },
+  {
+    "id": 8346,
+    "name": {
+      "fr": "Corne de Dragoss Calcaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47646.png",
+    "level": 96
+  },
+  {
+    "id": 8357,
+    "name": {
+      "fr": "Corne de Gliglibido"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47649.png",
+    "level": 146
+  },
+  {
+    "id": 8358,
+    "name": {
+      "fr": "Croc de Dragoeuf Protecteur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47868.png",
+    "level": 120
+  },
+  {
+    "id": 8361,
+    "name": {
+      "fr": "Corne de Dragacé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47650.png",
+    "level": 120
+  },
+  {
+    "id": 8363,
+    "name": {
+      "fr": "Corne de Dragmatique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47651.png",
+    "level": 120
+  },
+  {
+    "id": 8365,
+    "name": {
+      "fr": "Corne brisée de Crocabulia"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47652.png",
+    "level": 120
+  },
+  {
+    "id": 8386,
+    "name": {
+      "fr": "Dent de Shin Larve"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47654.png",
+    "level": 50
+  },
+  {
+    "id": 8408,
+    "name": {
+      "fr": "Sabot du Minotot"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47754.png",
+    "level": 160
+  },
+  {
+    "id": 8490,
+    "name": {
+      "fr": "Fémur de Sphincter Cell"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47657.png",
+    "level": 150
+  },
+  {
+    "id": 8515,
+    "name": {
+      "fr": "Os de Trooll"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47640.png",
+    "level": 115
+  },
+  {
+    "id": 8730,
+    "name": {
+      "fr": "Coccyx du Corailleur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47012.png",
+    "level": 44
+  },
+  {
+    "id": 8738,
+    "name": {
+      "fr": "Sacrum magistral"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47011.png",
+    "level": 50
+  },
+  {
+    "id": 8739,
+    "name": {
+      "fr": "Humérus du Sparo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47018.png",
+    "level": 63
+  },
+  {
+    "id": 8740,
+    "name": {
+      "fr": "Chicot du Flib"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47019.png",
+    "level": 62
+  },
+  {
+    "id": 8741,
+    "name": {
+      "fr": "Bec du Kido"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47022.png",
+    "level": 101
+  },
+  {
+    "id": 8744,
+    "name": {
+      "fr": "Pince de Crustorail"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47017.png",
+    "level": 42
+  },
+  {
+    "id": 8802,
+    "name": {
+      "fr": "Tibia du Guerrier Zoth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47020.png",
+    "level": 120
+  },
+  {
+    "id": 8803,
+    "name": {
+      "fr": "Rotule du Disciple Zoth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47021.png",
+    "level": 120
+  },
+  {
+    "id": 9077,
+    "name": {
+      "fr": "Crâne de Féca"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47034.png",
+    "level": 1
+  },
+  {
+    "id": 9078,
+    "name": {
+      "fr": "Crâne d'Osamodas"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47033.png",
+    "level": 1
+  },
+  {
+    "id": 9079,
+    "name": {
+      "fr": "Crâne d'Enutrof"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47032.png",
+    "level": 1
+  },
+  {
+    "id": 9080,
+    "name": {
+      "fr": "Crâne de Sram"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47031.png",
+    "level": 1
+  },
+  {
+    "id": 9081,
+    "name": {
+      "fr": "Crâne de Xélor"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47030.png",
+    "level": 1
+  },
+  {
+    "id": 9082,
+    "name": {
+      "fr": "Crâne d'Ecaflip"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47029.png",
+    "level": 1
+  },
+  {
+    "id": 9083,
+    "name": {
+      "fr": "Crâne d'Eniripsa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47028.png",
+    "level": 1
+  },
+  {
+    "id": 9084,
+    "name": {
+      "fr": "Crâne de Iop"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47027.png",
+    "level": 1
+  },
+  {
+    "id": 9085,
+    "name": {
+      "fr": "Crâne de Crâ"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47026.png",
+    "level": 1
+  },
+  {
+    "id": 9086,
+    "name": {
+      "fr": "Crâne de Sadida"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47025.png",
+    "level": 1
+  },
+  {
+    "id": 9087,
+    "name": {
+      "fr": "Crâne de Sacrieur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47024.png",
+    "level": 1
+  },
+  {
+    "id": 9088,
+    "name": {
+      "fr": "Crâne de Pandawa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47023.png",
+    "level": 1
+  },
+  {
+    "id": 10062,
+    "name": {
+      "fr": "Os à Moil"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47015.png",
+    "level": 174
+  },
+  {
+    "id": 11118,
+    "name": {
+      "fr": "Clavicule de Boufmouth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47660.png",
+    "level": 112
+  },
+  {
+    "id": 11122,
+    "name": {
+      "fr": "Corne de Boufmouth de guerre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47661.png",
+    "level": 112
+  },
+  {
+    "id": 11222,
+    "name": {
+      "fr": "Bec du Timansot"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47662.png",
+    "level": 132
+  },
+  {
+    "id": 11228,
+    "name": {
+      "fr": "Arête géante du Shamansot"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47663.png",
+    "level": 132
+  },
+  {
+    "id": 11240,
+    "name": {
+      "fr": "Dent de Smilomouth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47664.png",
+    "level": 130
+  },
+  {
+    "id": 11242,
+    "name": {
+      "fr": "Défense du Sanglacier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47665.png",
+    "level": 130
+  },
+  {
+    "id": 11251,
+    "name": {
+      "fr": "Sternum de Chachachovage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47666.png",
+    "level": 82
+  },
+  {
+    "id": 11254,
+    "name": {
+      "fr": "Pince de Crabe Hijacob"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47668.png",
+    "level": 82
+  },
+  {
+    "id": 11256,
+    "name": {
+      "fr": "Bec de Gélikan"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47667.png",
+    "level": 82
+  },
+  {
+    "id": 11309,
+    "name": {
+      "fr": "Pince du Fancrôme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47671.png",
+    "level": 140
+  },
+  {
+    "id": 11316,
+    "name": {
+      "fr": "Dent de Fantômat"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47672.png",
+    "level": 140
+  },
+  {
+    "id": 11322,
+    "name": {
+      "fr": "Scapula de Ben le Ripate"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47673.png",
+    "level": 150
+  },
+  {
+    "id": 11326,
+    "name": {
+      "fr": "Ulna de Solfataré"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47674.png",
+    "level": 150
+  },
+  {
+    "id": 11334,
+    "name": {
+      "fr": "Vertèbre d'Obsidiantre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47676.png",
+    "level": 160
+  },
+  {
+    "id": 11340,
+    "name": {
+      "fr": "Crâne de Yokaï Givrefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47675.png",
+    "level": 160
+  },
+  {
+    "id": 11525,
+    "name": {
+      "fr": "Péroné du Marôdeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47670.png",
+    "level": 184
+  },
+  {
+    "id": 11880,
+    "name": {
+      "fr": "Malléole de Yomi Givrefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47678.png",
+    "level": 160
+  },
+  {
+    "id": 11883,
+    "name": {
+      "fr": "Condyle de Fuji Givrefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47677.png",
+    "level": 190
+  },
+  {
+    "id": 11922,
+    "name": {
+      "fr": "Manubrium de Wolvero"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47679.png",
+    "level": 180
+  },
+  {
+    "id": 11923,
+    "name": {
+      "fr": "Griffe de Blérauve"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47680.png",
+    "level": 180
+  },
+  {
+    "id": 11927,
+    "name": {
+      "fr": "Molaire de Blérice"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47681.png",
+    "level": 180
+  },
+  {
+    "id": 11930,
+    "name": {
+      "fr": "Omoplate de Blérom"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47682.png",
+    "level": 180
+  },
+  {
+    "id": 11931,
+    "name": {
+      "fr": "Griffe de Kolosso"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47683.png",
+    "level": 190
+  },
+  {
+    "id": 11933,
+    "name": {
+      "fr": "Vomer d'Apériglours"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47684.png",
+    "level": 180
+  },
+  {
+    "id": 11939,
+    "name": {
+      "fr": "Incisive de Glourmand"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47686.png",
+    "level": 190
+  },
+  {
+    "id": 11944,
+    "name": {
+      "fr": "Hamatum de Glourséleste"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47687.png",
+    "level": 190
+  },
+  {
+    "id": 11946,
+    "name": {
+      "fr": "Calcanéus de Meliglours"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47688.png",
+    "level": 190
+  },
+  {
+    "id": 11949,
+    "name": {
+      "fr": "Incisive de Kami Givrefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47685.png",
+    "level": 160
+  },
+  {
+    "id": 12015,
+    "name": {
+      "fr": "Bec du Kwakwa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47689.png",
+    "level": 50
+  },
+  {
+    "id": 12242,
+    "name": {
+      "fr": "Crâne de Roublard"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47690.png",
+    "level": 1
+  },
+  {
+    "id": 12243,
+    "name": {
+      "fr": "Crâne de Zobal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47691.png",
+    "level": 1
+  },
+  {
+    "id": 12451,
+    "name": {
+      "fr": "Croc de Krokille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47092.png",
+    "level": 175
+  },
+  {
+    "id": 13096,
+    "name": {
+      "fr": "Fémur du Chafer Rōnin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47696.png",
+    "level": 40
+  },
+  {
+    "id": 13097,
+    "name": {
+      "fr": "Mâchoire du Chafer Draugr"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47697.png",
+    "level": 46
+  },
+  {
+    "id": 13157,
+    "name": {
+      "fr": "Ongle du Bworker"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47695.png",
+    "level": 180
+  },
+  {
+    "id": 13164,
+    "name": {
+      "fr": "Sphénoïde du Kimbo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47692.png",
+    "level": 160
+  },
+  {
+    "id": 13168,
+    "name": {
+      "fr": "Ethmoïde du Minotot"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47694.png",
+    "level": 160
+  },
+  {
+    "id": 13274,
+    "name": {
+      "fr": "Crâne de Steamer"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47755.png",
+    "level": 1
+  },
+  {
+    "id": 13334,
+    "name": {
+      "fr": "Chicots d'Halouine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47038.png",
+    "level": 100
+  },
+  {
+    "id": 13495,
+    "name": {
+      "fr": "Crâne d'Aventurier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47031.png",
+    "level": 114
+  },
+  {
+    "id": 13498,
+    "name": {
+      "fr": "Dent de Bourbassingue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47698.png",
+    "level": 101
+  },
+  {
+    "id": 13500,
+    "name": {
+      "fr": "Dent de Larve Émeraude"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47654.png",
+    "level": 47
+  },
+  {
+    "id": 13504,
+    "name": {
+      "fr": "Corne de Gamino"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47699.png",
+    "level": 124
+  },
+  {
+    "id": 13713,
+    "name": {
+      "fr": "Dent de Larve Saphir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47801.png",
+    "level": 45
+  },
+  {
+    "id": 13714,
+    "name": {
+      "fr": "Dent de Larve Rubis"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47802.png",
+    "level": 49
+  },
+  {
+    "id": 13715,
+    "name": {
+      "fr": "Dent de Larve Dorée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47803.png",
+    "level": 51
+  },
+  {
+    "id": 13716,
+    "name": {
+      "fr": "Bec de Vilain Petit Tofu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47804.png",
+    "level": 109
+  },
+  {
+    "id": 13922,
+    "name": {
+      "fr": "Dent de Cuirboule"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47805.png",
+    "level": 200
+  },
+  {
+    "id": 13926,
+    "name": {
+      "fr": "Molaire de Ventrublion"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47806.png",
+    "level": 200
+  },
+  {
+    "id": 13927,
+    "name": {
+      "fr": "Incisive de Stalak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47807.png",
+    "level": 200
+  },
+  {
+    "id": 13928,
+    "name": {
+      "fr": "Ethmoïde de Stalak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47808.png",
+    "level": 200
+  },
+  {
+    "id": 13931,
+    "name": {
+      "fr": "Incus de Verglasseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47809.png",
+    "level": 200
+  },
+  {
+    "id": 13933,
+    "name": {
+      "fr": "Stapes de Frimar"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47810.png",
+    "level": 200
+  },
+  {
+    "id": 13938,
+    "name": {
+      "fr": "Molaire de Nessil"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47811.png",
+    "level": 200
+  },
+  {
+    "id": 13939,
+    "name": {
+      "fr": "Canine de Krakal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47812.png",
+    "level": 200
+  },
+  {
+    "id": 13942,
+    "name": {
+      "fr": "Bec de Dodox"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47813.png",
+    "level": 200
+  },
+  {
+    "id": 13949,
+    "name": {
+      "fr": "Canine de Kanimate"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47814.png",
+    "level": 200
+  },
+  {
+    "id": 13950,
+    "name": {
+      "fr": "Griffe de Kanimate"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47815.png",
+    "level": 200
+  },
+  {
+    "id": 13971,
+    "name": {
+      "fr": "Maxillaire de Brikoglours"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47816.png",
+    "level": 200
+  },
+  {
+    "id": 13973,
+    "name": {
+      "fr": "Bec de Mansordide"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47817.png",
+    "level": 200
+  },
+  {
+    "id": 13974,
+    "name": {
+      "fr": "Sternum de Mansordide"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47818.png",
+    "level": 200
+  },
+  {
+    "id": 13975,
+    "name": {
+      "fr": "Astragale de Mécanofoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47819.png",
+    "level": 200
+  },
+  {
+    "id": 13983,
+    "name": {
+      "fr": "Incisive de Sylargh"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47820.png",
+    "level": 200
+  },
+  {
+    "id": 13985,
+    "name": {
+      "fr": "Bec de Granduk"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47821.png",
+    "level": 200
+  },
+  {
+    "id": 13986,
+    "name": {
+      "fr": "Griffe de Strigide"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15830.png",
+    "level": 200
+  },
+  {
+    "id": 13987,
+    "name": {
+      "fr": "Bec de Strigide"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47822.png",
+    "level": 200
+  },
+  {
+    "id": 13993,
+    "name": {
+      "fr": "Pic du Nocturlabe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47823.png",
+    "level": 200
+  },
+  {
+    "id": 13994,
+    "name": {
+      "fr": "Scapula du Comte Harebourg"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47824.png",
+    "level": 200
+  },
+  {
+    "id": 14264,
+    "name": {
+      "fr": "Fausse dent de Grozilla"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47825.png",
+    "level": 50
+  },
+  {
+    "id": 14267,
+    "name": {
+      "fr": "Pointe osseuse de Grasmera"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47826.png",
+    "level": 200
+  },
+  {
+    "id": 14280,
+    "name": {
+      "fr": "Pic de dragodinde dorée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47598.png",
+    "level": 70
+  },
+  {
+    "id": 14462,
+    "name": {
+      "fr": "Os de Wabbit Squelette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47827.png",
+    "level": 52
+  },
+  {
+    "id": 14463,
+    "name": {
+      "fr": "Crâne de Wabbit Squelette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47828.png",
+    "level": 52
+  },
+  {
+    "id": 14467,
+    "name": {
+      "fr": "Osselet de Black Wabbit Squelette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47757.png",
+    "level": 54
+  },
+  {
+    "id": 14477,
+    "name": {
+      "fr": "Dents de Wabbit Vampire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47756.png",
+    "level": 120
+  },
+  {
+    "id": 14514,
+    "name": {
+      "fr": "Dent de Molette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47830.png",
+    "level": 95
+  },
+  {
+    "id": 14515,
+    "name": {
+      "fr": "Corne de Rhinoféroce"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47829.png",
+    "level": 96
+  },
+  {
+    "id": 14817,
+    "name": {
+      "fr": "Pince de Krabouilleur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47831.png",
+    "level": 200
+  },
+  {
+    "id": 14822,
+    "name": {
+      "fr": "Pic de Pikoleur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47832.png",
+    "level": 200
+  },
+  {
+    "id": 14928,
+    "name": {
+      "fr": "Corne d'Ombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47833.png",
+    "level": 190
+  },
+  {
+    "id": 14951,
+    "name": {
+      "fr": "Corne de Scaratos"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15857.png",
+    "level": 114
+  },
+  {
+    "id": 15045,
+    "name": {
+      "fr": "Griffe de Félygiène"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47834.png",
+    "level": 154
+  },
+  {
+    "id": 15046,
+    "name": {
+      "fr": "Canine de Félygiène"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47835.png",
+    "level": 154
+  },
+  {
+    "id": 15076,
+    "name": {
+      "fr": "Bec de Truchon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47837.png",
+    "level": 118
+  },
+  {
+    "id": 15168,
+    "name": {
+      "fr": "Corne de Berserkoffre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15867.png",
+    "level": 100
+  },
+  {
+    "id": 15170,
+    "name": {
+      "fr": "Défense du Phossile"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15869.png",
+    "level": 150
+  },
+  {
+    "id": 15171,
+    "name": {
+      "fr": "Griffe de Phorrêveur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15870.png",
+    "level": 150
+  },
+  {
+    "id": 15173,
+    "name": {
+      "fr": "Corne de Père Phorreur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15872.png",
+    "level": 150
+  },
+  {
+    "id": 15179,
+    "name": {
+      "fr": "Dent de Lévitrof"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15878.png",
+    "level": 200
+  },
+  {
+    "id": 15229,
+    "name": {
+      "fr": "Dent de Phorreur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47836.png",
+    "level": 150
+  },
+  {
+    "id": 15450,
+    "name": {
+      "fr": "Crâne magique de Magouille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47838.png",
+    "level": 200
+  },
+  {
+    "id": 15454,
+    "name": {
+      "fr": "Pince de Lucrane"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47839.png",
+    "level": 180
+  },
+  {
+    "id": 15456,
+    "name": {
+      "fr": "Dard de Morfrelon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47840.png",
+    "level": 180
+  },
+  {
+    "id": 15460,
+    "name": {
+      "fr": "Os de Sramouraï"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47841.png",
+    "level": 130
+  },
+  {
+    "id": 15661,
+    "name": {
+      "fr": "Ossements sacrés de Givrefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24861.png",
+    "level": 200
+  },
+  {
+    "id": 15717,
+    "name": {
+      "fr": "Corne de Méjaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15897.png",
+    "level": 200
+  },
+  {
+    "id": 15719,
+    "name": {
+      "fr": "Griffe de Buboxor"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15899.png",
+    "level": 200
+  },
+  {
+    "id": 15721,
+    "name": {
+      "fr": "Corne de XLII"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15901.png",
+    "level": 170
+  },
+  {
+    "id": 15722,
+    "name": {
+      "fr": "Dent de Trezz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15902.png",
+    "level": 170
+  },
+  {
+    "id": 16051,
+    "name": {
+      "fr": "Crâne d'Eliotrope"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47842.png",
+    "level": 1
+  },
+  {
+    "id": 16218,
+    "name": {
+      "fr": "Dent de Gargantûl"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47844.png",
+    "level": 86
+  },
+  {
+    "id": 16525,
+    "name": {
+      "fr": "Crâne de Kardorim"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47845.png",
+    "level": 10
+  },
+  {
+    "id": 17441,
+    "name": {
+      "fr": "Crâne d'Huppermage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47846.png",
+    "level": 1
+  },
+  {
+    "id": 17569,
+    "name": {
+      "fr": "Griffe de Matougarou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47847.png",
+    "level": 150
+  },
+  {
+    "id": 17613,
+    "name": {
+      "fr": "Épine de Grath"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47849.png",
+    "level": 110
+  },
+  {
+    "id": 17619,
+    "name": {
+      "fr": "Dent de Chakaroze"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47850.png",
+    "level": 160
+  },
+  {
+    "id": 17971,
+    "name": {
+      "fr": "Pince de Crabe Yoloniste"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47852.png",
+    "level": 200
+  },
+  {
+    "id": 17980,
+    "name": {
+      "fr": "Épine de Diondin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47853.png",
+    "level": 200
+  },
+  {
+    "id": 17982,
+    "name": {
+      "fr": "Dentier de Dantinéa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47854.png",
+    "level": 200
+  },
+  {
+    "id": 17990,
+    "name": {
+      "fr": "Dent de Tilamproie"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47851.png",
+    "level": 200
+  },
+  {
+    "id": 18347,
+    "name": {
+      "fr": "Os de Mastodonte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47015.png",
+    "level": 80
+  },
+  {
+    "id": 18383,
+    "name": {
+      "fr": "Picot d'El Piko"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47856.png",
+    "level": 130
+  },
+  {
+    "id": 18538,
+    "name": {
+      "fr": "Dent de Bandleth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47857.png",
+    "level": 200
+  },
+  {
+    "id": 18562,
+    "name": {
+      "fr": "Dent de Cycloporth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47858.png",
+    "level": 170
+  },
+  {
+    "id": 18566,
+    "name": {
+      "fr": "Pic de Pikténia"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47859.png",
+    "level": 170
+  },
+  {
+    "id": 18618,
+    "name": {
+      "fr": "Crâne d'Ouginak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47860.png",
+    "level": 1
+  },
+  {
+    "id": 18732,
+    "name": {
+      "fr": "Os de Nemroz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15959.png",
+    "level": 190
+  },
+  {
+    "id": 19069,
+    "name": {
+      "fr": "Ongle de Goulafre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47861.png",
+    "level": 200
+  },
+  {
+    "id": 19232,
+    "name": {
+      "fr": "Pince de Crâme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15989.png",
+    "level": 200
+  },
+  {
+    "id": 19399,
+    "name": {
+      "fr": "Dent de Klémort"
+    },
+    "img": "https://api.dofusdb.fr/img/items/40713.png",
+    "level": 200
+  },
+  {
+    "id": 19400,
+    "name": {
+      "fr": "Vertèbre de Trépavois"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47862.png",
+    "level": 200
+  },
+  {
+    "id": 19407,
+    "name": {
+      "fr": "Pointe de Lance de Tournoyé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/40714.png",
+    "level": 200
+  },
+  {
+    "id": 19974,
+    "name": {
+      "fr": "Dent de Vatenbière"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47863.png",
+    "level": 200
+  },
+  {
+    "id": 19975,
+    "name": {
+      "fr": "Corne de volkorne"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47864.png",
+    "level": 60
+  },
+  {
+    "id": 20819,
+    "name": {
+      "fr": "Dent de Waddict"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47865.png",
+    "level": 53
+  },
+  {
+    "id": 20945,
+    "name": {
+      "fr": "Bec de Kwakao"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47866.png",
+    "level": 130
+  },
+  {
+    "id": 21212,
+    "name": {
+      "fr": "Canine de Cronnibal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47867.png",
+    "level": 200
+  },
+  {
+    "id": 21256,
+    "name": {
+      "fr": "Griffe de Dragoeuf Albâtre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47701.png",
+    "level": 70
+  },
+  {
+    "id": 21268,
+    "name": {
+      "fr": "Dent du Kharnozor"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47870.png",
+    "level": 100
+  },
+  {
+    "id": 22049,
+    "name": {
+      "fr": "Côtes de Désosseur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47871.png",
+    "level": 200
+  },
+  {
+    "id": 22204,
+    "name": {
+      "fr": "Corne de Corruption"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24275.png",
+    "level": 200
+  },
+  {
+    "id": 22249,
+    "name": {
+      "fr": "Canine tranchante"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47872.png",
+    "level": 200
+  },
+  {
+    "id": 25182,
+    "name": {
+      "fr": "Appendice Démoniaque"
+    },
+    "img": "https://api.dofusdb.fr/img/items/176029.png",
+    "level": 200
+  },
+  {
+    "id": 25756,
+    "name": {
+      "fr": "Crâne magique de Rate Atinée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165022.png",
+    "level": 110
+  },
+  {
+    "id": 26033,
+    "name": {
+      "fr": "Corne de Typhomet"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165041.png",
+    "level": 200
+  },
+  {
+    "id": 26321,
+    "name": {
+      "fr": "Corne de Malbois"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47877.png",
+    "level": 150
+  },
+  {
+    "id": 27365,
+    "name": {
+      "fr": "Corne de Buffalourd"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47880.png",
+    "level": 50
+  },
+  {
+    "id": 27366,
+    "name": {
+      "fr": "Griffe de Grolours"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47881.png",
+    "level": 50
+  },
+  {
+    "id": 27367,
+    "name": {
+      "fr": "Croc de Trankilou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47882.png",
+    "level": 50
+  },
+  {
+    "id": 30780,
+    "name": {
+      "fr": "Os du Captain Chafer"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47884.png",
+    "level": 200
+  },
+  {
+    "id": 31526,
+    "name": {
+      "fr": "Crâne de Kamikabz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47885.png",
+    "level": 170
+  },
+  {
+    "id": 31527,
+    "name": {
+      "fr": "Cartilage de Quadrabz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47886.png",
+    "level": 170
+  },
+  {
+    "id": 31623,
+    "name": {
+      "fr": "Peigne de Rhoarim"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164959.png",
+    "level": 200
+  },
+  {
+    "id": 31624,
+    "name": {
+      "fr": "Os Divinatoire de Voracle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47887.png",
+    "level": 200
+  },
+  {
+    "id": 31630,
+    "name": {
+      "fr": "Daguosseuse de Domptueuse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47895.png",
+    "level": 200
+  },
+  {
+    "id": 31631,
+    "name": {
+      "fr": "Griffe de la Déchireuse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/44788.png",
+    "level": 200
+  },
+  {
+    "id": 31653,
+    "name": {
+      "fr": "Dent de zarbivore"
+    },
+    "img": "https://api.dofusdb.fr/img/items/44790.png",
+    "level": 200
+  },
+  {
+    "id": 31673,
+    "name": {
+      "fr": "Corne de Gyrafor"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47889.png",
+    "level": 200
+  },
+  {
+    "id": 31674,
+    "name": {
+      "fr": "Corne de Lapilope"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47890.png",
+    "level": 200
+  },
+  {
+    "id": 31675,
+    "name": {
+      "fr": "Défense de Brutapir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47892.png",
+    "level": 200
+  },
+  {
+    "id": 31676,
+    "name": {
+      "fr": "Front osseux de Gropotam"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47893.png",
+    "level": 200
+  },
+  {
+    "id": 31677,
+    "name": {
+      "fr": "Corne d'Amphibouc"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47888.png",
+    "level": 200
+  },
+  {
+    "id": 31678,
+    "name": {
+      "fr": "Corne du Vénérable Endormi"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47891.png",
+    "level": 200
+  },
+  {
+    "id": 31890,
+    "name": {
+      "fr": "Dent de zarbivore perturbé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/44791.png",
+    "level": 200
+  },
+  {
+    "id": 32567,
+    "name": {
+      "fr": "Os de Scalarcin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47898.png",
+    "level": 50
+  },
+  {
+    "id": 32568,
+    "name": {
+      "fr": "Dent de Marzwel"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47899.png",
+    "level": 60
+  },
+  {
+    "id": 32570,
+    "name": {
+      "fr": "Griffe de Tyranne"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47900.png",
+    "level": 80
+  },
+  {
+    "id": 32574,
+    "name": {
+      "fr": "Dent en or de Rok Gnorok"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24522.png",
+    "level": 90
+  },
+  {
+    "id": 32579,
+    "name": {
+      "fr": "Moelle de Demoël"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24524.png",
+    "level": 130
+  },
+  {
+    "id": 33530,
+    "name": {
+      "fr": "Griffe de volkorne"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15294.png",
+    "level": 60
+  }
+]

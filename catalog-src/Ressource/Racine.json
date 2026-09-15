@@ -1,0 +1,74 @@
+[
+  {
+    "id": 435,
+    "name": {
+      "fr": "Racine d'Abraknyde"
+    },
+    "img": "https://api.dofusdb.fr/img/items/98102.png",
+    "level": 44
+  },
+  {
+    "id": 1612,
+    "name": {
+      "fr": "Racine d'Abraknyde Sombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/98232.png",
+    "level": 78
+  },
+  {
+    "id": 6488,
+    "name": {
+      "fr": "Racine du Chêne Mou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/98667.png",
+    "level": 140
+  },
+  {
+    "id": 8496,
+    "name": {
+      "fr": "Racine d'Abraknyde Ancestral"
+    },
+    "img": "https://api.dofusdb.fr/img/items/98668.png",
+    "level": 90
+  },
+  {
+    "id": 9383,
+    "name": {
+      "fr": "Racine de Tronkoblop"
+    },
+    "img": "https://api.dofusdb.fr/img/items/98001.png",
+    "level": 52
+  },
+  {
+    "id": 11795,
+    "name": {
+      "fr": "Racine de synthèse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/98670.png",
+    "level": 180
+  },
+  {
+    "id": 11892,
+    "name": {
+      "fr": "Racine d'Abrazif"
+    },
+    "img": "https://api.dofusdb.fr/img/items/98669.png",
+    "level": 170
+  },
+  {
+    "id": 14141,
+    "name": {
+      "fr": "Racine cristalline"
+    },
+    "img": "https://api.dofusdb.fr/img/items/98671.png",
+    "level": 200
+  },
+  {
+    "id": 16150,
+    "name": {
+      "fr": "Racine d'Abraknyde Vénérable"
+    },
+    "img": "https://api.dofusdb.fr/img/items/98672.png",
+    "level": 80
+  }
+]

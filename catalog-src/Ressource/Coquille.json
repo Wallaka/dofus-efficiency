@@ -1,0 +1,146 @@
+[
+  {
+    "id": 308,
+    "name": {
+      "fr": "Coquille de Dragoeuf Calcaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/111021.png",
+    "level": 70
+  },
+  {
+    "id": 842,
+    "name": {
+      "fr": "Coquille de Dragoeuf Argile"
+    },
+    "img": "https://api.dofusdb.fr/img/items/111202.png",
+    "level": 70
+  },
+  {
+    "id": 843,
+    "name": {
+      "fr": "Coquille de Dragoeuf Charbon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/111203.png",
+    "level": 70
+  },
+  {
+    "id": 1129,
+    "name": {
+      "fr": "Coquille de Dragoeuf Ardoise"
+    },
+    "img": "https://api.dofusdb.fr/img/items/111211.png",
+    "level": 70
+  },
+  {
+    "id": 8348,
+    "name": {
+      "fr": "Coquille de Dragoss Charbon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/111738.png",
+    "level": 96
+  },
+  {
+    "id": 8349,
+    "name": {
+      "fr": "Coquille de Dragoss Ardoise"
+    },
+    "img": "https://api.dofusdb.fr/img/items/111739.png",
+    "level": 96
+  },
+  {
+    "id": 8350,
+    "name": {
+      "fr": "Coquille de Dragoss Protéiforme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/111740.png",
+    "level": 96
+  },
+  {
+    "id": 8351,
+    "name": {
+      "fr": "Coquille de Dragoss Argile"
+    },
+    "img": "https://api.dofusdb.fr/img/items/111741.png",
+    "level": 96
+  },
+  {
+    "id": 8769,
+    "name": {
+      "fr": "Coco du Bitouf des Plaines"
+    },
+    "img": "https://api.dofusdb.fr/img/items/111001.png",
+    "level": 103
+  },
+  {
+    "id": 8776,
+    "name": {
+      "fr": "Coco du Bitouf Sombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/111002.png",
+    "level": 136
+  },
+  {
+    "id": 8792,
+    "name": {
+      "fr": "Coco du Bitouf aérien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/111003.png",
+    "level": 152
+  },
+  {
+    "id": 8793,
+    "name": {
+      "fr": "Coquille du Kaskargo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/111004.png",
+    "level": 154
+  },
+  {
+    "id": 11314,
+    "name": {
+      "fr": "Coquille de Fantimonier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/111751.png",
+    "level": 140
+  },
+  {
+    "id": 11317,
+    "name": {
+      "fr": "Coquille de Harpirate"
+    },
+    "img": "https://api.dofusdb.fr/img/items/111752.png",
+    "level": 140
+  },
+  {
+    "id": 12450,
+    "name": {
+      "fr": "Coquille de Krokille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/111005.png",
+    "level": 125
+  },
+  {
+    "id": 15687,
+    "name": {
+      "fr": "Coquille de Virustine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/111753.png",
+    "level": 200
+  },
+  {
+    "id": 19409,
+    "name": {
+      "fr": "Aquarakne de Crânonier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/111754.png",
+    "level": 200
+  },
+  {
+    "id": 19412,
+    "name": {
+      "fr": "Coquille de Submergé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/111756.png",
+    "level": 200
+  }
+]

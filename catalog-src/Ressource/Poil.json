@@ -1,0 +1,978 @@
+[
+  {
+    "id": 291,
+    "name": {
+      "fr": "Poils de Mulounoké"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54008.png",
+    "level": 96
+  },
+  {
+    "id": 371,
+    "name": {
+      "fr": "Sourcil de Moskito"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15044.png",
+    "level": 13
+  },
+  {
+    "id": 388,
+    "name": {
+      "fr": "Poils d'Arakne Malade"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54060.png",
+    "level": 13
+  },
+  {
+    "id": 409,
+    "name": {
+      "fr": "Poils de Barbe du Bwork Mage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54131.png",
+    "level": 45
+  },
+  {
+    "id": 418,
+    "name": {
+      "fr": "Poils de Barbe du Grand Pa Wabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54114.png",
+    "level": 56
+  },
+  {
+    "id": 646,
+    "name": {
+      "fr": "Poils de Black Tiwabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54195.png",
+    "level": 46
+  },
+  {
+    "id": 649,
+    "name": {
+      "fr": "Poils de Wo Wabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54197.png",
+    "level": 56
+  },
+  {
+    "id": 650,
+    "name": {
+      "fr": "Duvet de Bourdard"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54709.png",
+    "level": 56
+  },
+  {
+    "id": 761,
+    "name": {
+      "fr": "Poils de souris"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54549.png",
+    "level": 1
+  },
+  {
+    "id": 840,
+    "name": {
+      "fr": "Poils du Minotoror"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54201.png",
+    "level": 120
+  },
+  {
+    "id": 1672,
+    "name": {
+      "fr": "Poils de Darit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54555.png",
+    "level": 26
+  },
+  {
+    "id": 1690,
+    "name": {
+      "fr": "Poils du Milimulou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54554.png",
+    "level": 26
+  },
+  {
+    "id": 1890,
+    "name": {
+      "fr": "Poil de Vétauran"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54359.png",
+    "level": 66
+  },
+  {
+    "id": 1894,
+    "name": {
+      "fr": "Poil de Gliglitch"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54364.png",
+    "level": 146
+  },
+  {
+    "id": 2282,
+    "name": {
+      "fr": "Touffe de Cheveux Blancs"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15435.png",
+    "level": 46
+  },
+  {
+    "id": 2299,
+    "name": {
+      "fr": "Mèche Rebelle d'Hell Mina"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54715.png",
+    "level": 150
+  },
+  {
+    "id": 2301,
+    "name": {
+      "fr": "Moustache de Kolérat"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15451.png",
+    "level": 66
+  },
+  {
+    "id": 2559,
+    "name": {
+      "fr": "Crinière de Troollaraj"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15569.png",
+    "level": 115
+  },
+  {
+    "id": 2574,
+    "name": {
+      "fr": "Crinière de Scélérat Strubien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15580.png",
+    "level": 23
+  },
+  {
+    "id": 2621,
+    "name": {
+      "fr": "Barbe du Chouque"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15606.png",
+    "level": 90
+  },
+  {
+    "id": 7292,
+    "name": {
+      "fr": "Poils de Boumbardier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54202.png",
+    "level": 140
+  },
+  {
+    "id": 7293,
+    "name": {
+      "fr": "Poils de Founamboul"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54203.png",
+    "level": 140
+  },
+  {
+    "id": 7294,
+    "name": {
+      "fr": "Poils de Pétartifoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54204.png",
+    "level": 140
+  },
+  {
+    "id": 7305,
+    "name": {
+      "fr": "Poils magiques de Tanuki"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164678.png",
+    "level": 130
+  },
+  {
+    "id": 7306,
+    "name": {
+      "fr": "Pelage aérodynamique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164670.png",
+    "level": 140
+  },
+  {
+    "id": 7393,
+    "name": {
+      "fr": "Moustache du Shogun Tofugawa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164769.png",
+    "level": 160
+  },
+  {
+    "id": 8059,
+    "name": {
+      "fr": "Poils de Koalak Griotte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54660.png",
+    "level": 84
+  },
+  {
+    "id": 8060,
+    "name": {
+      "fr": "Poils de Koalak Coco"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54662.png",
+    "level": 84
+  },
+  {
+    "id": 8061,
+    "name": {
+      "fr": "Poils de Koalak Reinette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54661.png",
+    "level": 84
+  },
+  {
+    "id": 8062,
+    "name": {
+      "fr": "Poils de Koalak Indigo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54659.png",
+    "level": 84
+  },
+  {
+    "id": 8065,
+    "name": {
+      "fr": "Poils de barbe de dragodinde"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54657.png",
+    "level": 66
+  },
+  {
+    "id": 8066,
+    "name": {
+      "fr": "Poils de Barbe du Warko Violet"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54658.png",
+    "level": 112
+  },
+  {
+    "id": 8085,
+    "name": {
+      "fr": "Poils de Koalak Forestier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54004.png",
+    "level": 84
+  },
+  {
+    "id": 8250,
+    "name": {
+      "fr": "Poil de Renarbo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54005.png",
+    "level": 106
+  },
+  {
+    "id": 8311,
+    "name": {
+      "fr": "Poil de Gamino"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54009.png",
+    "level": 124
+  },
+  {
+    "id": 8321,
+    "name": {
+      "fr": "Poil de Capsaaloocke"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54664.png",
+    "level": 110
+  },
+  {
+    "id": 8322,
+    "name": {
+      "fr": "Poil de Troolléolé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54663.png",
+    "level": 116
+  },
+  {
+    "id": 8389,
+    "name": {
+      "fr": "Poil de Bworkette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54665.png",
+    "level": 50
+  },
+  {
+    "id": 8393,
+    "name": {
+      "fr": "Poil de Dragon Cochon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54666.png",
+    "level": 100
+  },
+  {
+    "id": 8397,
+    "name": {
+      "fr": "Poil du Wa Wabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54667.png",
+    "level": 60
+  },
+  {
+    "id": 8403,
+    "name": {
+      "fr": "Tresse du Koulosse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15753.png",
+    "level": 100
+  },
+  {
+    "id": 8405,
+    "name": {
+      "fr": "Poil de Skeunk"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54669.png",
+    "level": 120
+  },
+  {
+    "id": 8481,
+    "name": {
+      "fr": "Poil de Rat d'Égoutant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54670.png",
+    "level": 60
+  },
+  {
+    "id": 8484,
+    "name": {
+      "fr": "Duvet de Tofoune"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54671.png",
+    "level": 36
+  },
+  {
+    "id": 8485,
+    "name": {
+      "fr": "Crinière de Rat Noir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165027.png",
+    "level": 110
+  },
+  {
+    "id": 8486,
+    "name": {
+      "fr": "Crinière de Rat Blanc"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165028.png",
+    "level": 110
+  },
+  {
+    "id": 8570,
+    "name": {
+      "fr": "Poil de Rat Bontarien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165035.png",
+    "level": 110
+  },
+  {
+    "id": 8571,
+    "name": {
+      "fr": "Poil de Rat Brâkmarien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165034.png",
+    "level": 110
+  },
+  {
+    "id": 8754,
+    "name": {
+      "fr": "Barbe inexistante du Barbroussa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54010.png",
+    "level": 64
+  },
+  {
+    "id": 8755,
+    "name": {
+      "fr": "Touffe rousse du Flib"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54011.png",
+    "level": 62
+  },
+  {
+    "id": 8756,
+    "name": {
+      "fr": "Duvet du Kilibriss"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54012.png",
+    "level": 104
+  },
+  {
+    "id": 8763,
+    "name": {
+      "fr": "Moustache du Mufafah"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15015.png",
+    "level": 100
+  },
+  {
+    "id": 8786,
+    "name": {
+      "fr": "Tresse du Poolay"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15020.png",
+    "level": 150
+  },
+  {
+    "id": 11227,
+    "name": {
+      "fr": "Duvet de Mamansot"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54675.png",
+    "level": 132
+  },
+  {
+    "id": 11229,
+    "name": {
+      "fr": "Poil de barbe du Shamansot"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54674.png",
+    "level": 132
+  },
+  {
+    "id": 11241,
+    "name": {
+      "fr": "Poils de Smilomouth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54676.png",
+    "level": 130
+  },
+  {
+    "id": 11250,
+    "name": {
+      "fr": "Poil de Chachachovage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54677.png",
+    "level": 82
+  },
+  {
+    "id": 11321,
+    "name": {
+      "fr": "Poil de Ben le Ripate"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54679.png",
+    "level": 150
+  },
+  {
+    "id": 11814,
+    "name": {
+      "fr": "Moustache de Boostache"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54680.png",
+    "level": 40
+  },
+  {
+    "id": 11924,
+    "name": {
+      "fr": "Poil de Blérauve"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54681.png",
+    "level": 180
+  },
+  {
+    "id": 11936,
+    "name": {
+      "fr": "Poils de Boulglours"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54682.png",
+    "level": 190
+  },
+  {
+    "id": 12076,
+    "name": {
+      "fr": "Duvet de Nelween"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54683.png",
+    "level": 70
+  },
+  {
+    "id": 13335,
+    "name": {
+      "fr": "Rouflaquettes d'Halouine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54015.png",
+    "level": 100
+  },
+  {
+    "id": 13608,
+    "name": {
+      "fr": "Poils de Kerubim"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54685.png",
+    "level": 10
+  },
+  {
+    "id": 13697,
+    "name": {
+      "fr": "Poils de Guerrier Koalak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54686.png",
+    "level": 106
+  },
+  {
+    "id": 13698,
+    "name": {
+      "fr": "Houpette de Koalak Sanguin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54687.png",
+    "level": 108
+  },
+  {
+    "id": 13704,
+    "name": {
+      "fr": "Touffe de Poils de Rubise"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54688.png",
+    "level": 120
+  },
+  {
+    "id": 13923,
+    "name": {
+      "fr": "Moustache de Klime"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54689.png",
+    "level": 200
+  },
+  {
+    "id": 13934,
+    "name": {
+      "fr": "Moustache de Frimar"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54690.png",
+    "level": 200
+  },
+  {
+    "id": 13935,
+    "name": {
+      "fr": "Poil d'aisselle de Missiz Frizz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54691.png",
+    "level": 200
+  },
+  {
+    "id": 13940,
+    "name": {
+      "fr": "Crinière de Krakal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54692.png",
+    "level": 200
+  },
+  {
+    "id": 14459,
+    "name": {
+      "fr": "Moustaches de Tiwabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54693.png",
+    "level": 45
+  },
+  {
+    "id": 14468,
+    "name": {
+      "fr": "Barbe du Wa Wobot"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54694.png",
+    "level": 80
+  },
+  {
+    "id": 14470,
+    "name": {
+      "fr": "Poil de Wobot Kiafin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54695.png",
+    "level": 80
+  },
+  {
+    "id": 14862,
+    "name": {
+      "fr": "Barbe du Cyclophandre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54697.png",
+    "level": 200
+  },
+  {
+    "id": 14864,
+    "name": {
+      "fr": "Barbe de Merkator"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54696.png",
+    "level": 200
+  },
+  {
+    "id": 15039,
+    "name": {
+      "fr": "Poils de Kanigroula"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54698.png",
+    "level": 160
+  },
+  {
+    "id": 15041,
+    "name": {
+      "fr": "Tignasse de Kanihilan"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54699.png",
+    "level": 156
+  },
+  {
+    "id": 15043,
+    "name": {
+      "fr": "Cheveux d'Alhyène"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54700.png",
+    "level": 156
+  },
+  {
+    "id": 15051,
+    "name": {
+      "fr": "Crinière d'Orfélin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54701.png",
+    "level": 155
+  },
+  {
+    "id": 15169,
+    "name": {
+      "fr": "Moustache précieuse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15868.png",
+    "level": 100
+  },
+  {
+    "id": 15178,
+    "name": {
+      "fr": "Sourcil de Barbétoal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15877.png",
+    "level": 200
+  },
+  {
+    "id": 15228,
+    "name": {
+      "fr": "Poils de Barbe d'Enutrofor"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54702.png",
+    "level": 200
+  },
+  {
+    "id": 15725,
+    "name": {
+      "fr": "Barbe de Seith"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15905.png",
+    "level": 170
+  },
+  {
+    "id": 15726,
+    "name": {
+      "fr": "Touffe de cheveux de Soissanth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15906.png",
+    "level": 170
+  },
+  {
+    "id": 15810,
+    "name": {
+      "fr": "Poils d'Hordémon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15919.png",
+    "level": 170
+  },
+  {
+    "id": 16148,
+    "name": {
+      "fr": "Poil d'Abrakne"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54703.png",
+    "level": 46
+  },
+  {
+    "id": 17114,
+    "name": {
+      "fr": "Poils de Zatoïshwan"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54704.png",
+    "level": 150
+  },
+  {
+    "id": 17616,
+    "name": {
+      "fr": "Poil de Chacrebleu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54705.png",
+    "level": 160
+  },
+  {
+    "id": 17620,
+    "name": {
+      "fr": "Moustache de Ush"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164087.png",
+    "level": 160
+  },
+  {
+    "id": 17641,
+    "name": {
+      "fr": "Cheveu d'Atcham"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54706.png",
+    "level": 200
+  },
+  {
+    "id": 17976,
+    "name": {
+      "fr": "Poil de Meno"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54707.png",
+    "level": 200
+  },
+  {
+    "id": 17979,
+    "name": {
+      "fr": "Moustache de Rilur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54708.png",
+    "level": 200
+  },
+  {
+    "id": 18362,
+    "name": {
+      "fr": "Moustaches de Cactoblongo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54710.png",
+    "level": 130
+  },
+  {
+    "id": 18542,
+    "name": {
+      "fr": "Cheveux de Tal Kasha"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54711.png",
+    "level": 200
+  },
+  {
+    "id": 18734,
+    "name": {
+      "fr": "Poils du Comte Razof"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15961.png",
+    "level": 190
+  },
+  {
+    "id": 19072,
+    "name": {
+      "fr": "Poils de Goultime"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54712.png",
+    "level": 200
+  },
+  {
+    "id": 19972,
+    "name": {
+      "fr": "Poils de barbe de Barbélier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54713.png",
+    "level": 200
+  },
+  {
+    "id": 20908,
+    "name": {
+      "fr": "Mèche de Pralicienne"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59663.png",
+    "level": 200
+  },
+  {
+    "id": 20943,
+    "name": {
+      "fr": "Pelage chocolaté"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59658.png",
+    "level": 130
+  },
+  {
+    "id": 21271,
+    "name": {
+      "fr": "Cheveux de Draegnerys"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54714.png",
+    "level": 70
+  },
+  {
+    "id": 25246,
+    "name": {
+      "fr": "Crinière de Qilin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/176041.png",
+    "level": 200
+  },
+  {
+    "id": 27363,
+    "name": {
+      "fr": "Fourrure de Timongouste"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54716.png",
+    "level": 50
+  },
+  {
+    "id": 27433,
+    "name": {
+      "fr": "Poils de barbe de Marteau-Aigri"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165064.png",
+    "level": 190
+  },
+  {
+    "id": 27436,
+    "name": {
+      "fr": "Mèche de Serpyn"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165060.png",
+    "level": 190
+  },
+  {
+    "id": 31523,
+    "name": {
+      "fr": "Touffe de Kabombz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54717.png",
+    "level": 170
+  },
+  {
+    "id": 31625,
+    "name": {
+      "fr": "Mise en plis de Voracle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54719.png",
+    "level": 200
+  },
+  {
+    "id": 31626,
+    "name": {
+      "fr": "Tresse de Domptueuse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54721.png",
+    "level": 200
+  },
+  {
+    "id": 31627,
+    "name": {
+      "fr": "Frange d'Ébourifauve"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54718.png",
+    "level": 200
+  },
+  {
+    "id": 31628,
+    "name": {
+      "fr": "Toison de la Déchireuse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54720.png",
+    "level": 200
+  },
+  {
+    "id": 31672,
+    "name": {
+      "fr": "Crinière du Vénérable Endormi"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54722.png",
+    "level": 200
+  },
+  {
+    "id": 31889,
+    "name": {
+      "fr": "Poil de Rhoarim perturbé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54723.png",
+    "level": 200
+  },
+  {
+    "id": 32248,
+    "name": {
+      "fr": "Poil de Katigrou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54724.png",
+    "level": 140
+  },
+  {
+    "id": 32251,
+    "name": {
+      "fr": "Touffe de cheveux du YeCh'Ti"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54725.png",
+    "level": 170
+  },
+  {
+    "id": 32254,
+    "name": {
+      "fr": "Moustache du Docteur Eggob"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54016.png",
+    "level": 190
+  },
+  {
+    "id": 32573,
+    "name": {
+      "fr": "Poil de Simbadas"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24525.png",
+    "level": 90
+  },
+  {
+    "id": 32576,
+    "name": {
+      "fr": "Cheveux de Naganita"
+    },
+    "img": "https://api.dofusdb.fr/img/items/54017.png",
+    "level": 100
+  },
+  {
+    "id": 33520,
+    "name": {
+      "fr": "Moustache de muldo orchidée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15300.png",
+    "level": 60
+  },
+  {
+    "id": 33521,
+    "name": {
+      "fr": "Moustache de muldo indigo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15299.png",
+    "level": 60
+  },
+  {
+    "id": 33522,
+    "name": {
+      "fr": "Moustache de muldo pourpre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15298.png",
+    "level": 60
+  },
+  {
+    "id": 33523,
+    "name": {
+      "fr": "Moustache de muldo ébène"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15297.png",
+    "level": 60
+  },
+  {
+    "id": 33524,
+    "name": {
+      "fr": "Moustache de muldo doré"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15296.png",
+    "level": 60
+  }
+]

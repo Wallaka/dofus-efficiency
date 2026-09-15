@@ -1,0 +1,146 @@
+[
+  {
+    "id": 16909,
+    "name": {
+      "fr": "Sève de Frêne"
+    },
+    "img": "https://api.dofusdb.fr/img/items/179001.png",
+    "level": 1
+  },
+  {
+    "id": 16910,
+    "name": {
+      "fr": "Sève de Châtaignier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/179002.png",
+    "level": 20
+  },
+  {
+    "id": 16911,
+    "name": {
+      "fr": "Sève de Noyer"
+    },
+    "img": "https://api.dofusdb.fr/img/items/179003.png",
+    "level": 40
+  },
+  {
+    "id": 16912,
+    "name": {
+      "fr": "Sève de Chêne"
+    },
+    "img": "https://api.dofusdb.fr/img/items/179004.png",
+    "level": 60
+  },
+  {
+    "id": 16913,
+    "name": {
+      "fr": "Sève de Bombu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/179005.png",
+    "level": 70
+  },
+  {
+    "id": 16914,
+    "name": {
+      "fr": "Sève d'Érable"
+    },
+    "img": "https://api.dofusdb.fr/img/items/179006.png",
+    "level": 80
+  },
+  {
+    "id": 16915,
+    "name": {
+      "fr": "Sève d'Oliviolet"
+    },
+    "img": "https://api.dofusdb.fr/img/items/179007.png",
+    "level": 90
+  },
+  {
+    "id": 16916,
+    "name": {
+      "fr": "Sève d'If"
+    },
+    "img": "https://api.dofusdb.fr/img/items/179008.png",
+    "level": 100
+  },
+  {
+    "id": 16917,
+    "name": {
+      "fr": "Sève de Bambou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/179009.png",
+    "level": 110
+  },
+  {
+    "id": 16918,
+    "name": {
+      "fr": "Sève de Merisier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/179010.png",
+    "level": 120
+  },
+  {
+    "id": 16919,
+    "name": {
+      "fr": "Sève de Noisetier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/179011.png",
+    "level": 130
+  },
+  {
+    "id": 16920,
+    "name": {
+      "fr": "Sève d'Ébène"
+    },
+    "img": "https://api.dofusdb.fr/img/items/179012.png",
+    "level": 140
+  },
+  {
+    "id": 16921,
+    "name": {
+      "fr": "Sève de Kaliptus"
+    },
+    "img": "https://api.dofusdb.fr/img/items/179013.png",
+    "level": 150
+  },
+  {
+    "id": 16922,
+    "name": {
+      "fr": "Sève de Charme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/179014.png",
+    "level": 160
+  },
+  {
+    "id": 16923,
+    "name": {
+      "fr": "Sève de Bambou Sombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/179015.png",
+    "level": 170
+  },
+  {
+    "id": 16924,
+    "name": {
+      "fr": "Sève d'Orme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/179016.png",
+    "level": 180
+  },
+  {
+    "id": 16925,
+    "name": {
+      "fr": "Sève de Bambou Sacré"
+    },
+    "img": "https://api.dofusdb.fr/img/items/179017.png",
+    "level": 190
+  },
+  {
+    "id": 16926,
+    "name": {
+      "fr": "Sève de Tremble"
+    },
+    "img": "https://api.dofusdb.fr/img/items/179018.png",
+    "level": 200
+  }
+]

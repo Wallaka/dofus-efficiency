@@ -1,0 +1,74 @@
+[
+  {
+    "id": 361,
+    "name": {
+      "fr": "Cawotte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/68031.png",
+    "level": 44
+  },
+  {
+    "id": 537,
+    "name": {
+      "fr": "Pomme de Terre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/68135.png",
+    "level": 1
+  },
+  {
+    "id": 538,
+    "name": {
+      "fr": "Pommes de Terre épluchées"
+    },
+    "img": "https://api.dofusdb.fr/img/items/68136.png",
+    "level": 1
+  },
+  {
+    "id": 1974,
+    "name": {
+      "fr": "Feuille de salace"
+    },
+    "img": "https://api.dofusdb.fr/img/items/68376.png",
+    "level": 26
+  },
+  {
+    "id": 1975,
+    "name": {
+      "fr": "Oignon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/68377.png",
+    "level": 1
+  },
+  {
+    "id": 2287,
+    "name": {
+      "fr": "Concombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164653.png",
+    "level": 130
+  },
+  {
+    "id": 14479,
+    "name": {
+      "fr": "Cawotte Transgénique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/68013.png",
+    "level": 120
+  },
+  {
+    "id": 21463,
+    "name": {
+      "fr": "Petits oignons"
+    },
+    "img": "https://api.dofusdb.fr/img/items/176015.png",
+    "level": 1
+  },
+  {
+    "id": 24056,
+    "name": {
+      "fr": "Pwimen"
+    },
+    "img": "https://api.dofusdb.fr/img/items/42111.png",
+    "level": 1
+  }
+]

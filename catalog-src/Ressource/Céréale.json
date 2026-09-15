@@ -1,0 +1,210 @@
+[
+  {
+    "id": 289,
+    "name": {
+      "fr": "Blé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34009.png",
+    "level": 1
+  },
+  {
+    "id": 400,
+    "name": {
+      "fr": "Orge"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34082.png",
+    "level": 20
+  },
+  {
+    "id": 401,
+    "name": {
+      "fr": "Houblon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34080.png",
+    "level": 60
+  },
+  {
+    "id": 405,
+    "name": {
+      "fr": "Malt"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34561.png",
+    "level": 120
+  },
+  {
+    "id": 423,
+    "name": {
+      "fr": "Lin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34122.png",
+    "level": 80
+  },
+  {
+    "id": 425,
+    "name": {
+      "fr": "Chanvre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34121.png",
+    "level": 140
+  },
+  {
+    "id": 532,
+    "name": {
+      "fr": "Seigle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34083.png",
+    "level": 100
+  },
+  {
+    "id": 533,
+    "name": {
+      "fr": "Avoine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34154.png",
+    "level": 40
+  },
+  {
+    "id": 1671,
+    "name": {
+      "fr": "Avoine Magique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34550.png",
+    "level": 86
+  },
+  {
+    "id": 2018,
+    "name": {
+      "fr": "Blé d'Or"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34474.png",
+    "level": 1
+  },
+  {
+    "id": 2021,
+    "name": {
+      "fr": "Houblon Brillant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34475.png",
+    "level": 60
+  },
+  {
+    "id": 2026,
+    "name": {
+      "fr": "Lin Tempête"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34476.png",
+    "level": 80
+  },
+  {
+    "id": 2029,
+    "name": {
+      "fr": "Seigle Résistant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34477.png",
+    "level": 100
+  },
+  {
+    "id": 2032,
+    "name": {
+      "fr": "Orge en Sucre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34477.png",
+    "level": 20
+  },
+  {
+    "id": 2035,
+    "name": {
+      "fr": "Chanvre Euphorique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34478.png",
+    "level": 70
+  },
+  {
+    "id": 2036,
+    "name": {
+      "fr": "Avoine Aurifère"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34551.png",
+    "level": 20
+  },
+  {
+    "id": 7018,
+    "name": {
+      "fr": "Riz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34010.png",
+    "level": 100
+  },
+  {
+    "id": 11109,
+    "name": {
+      "fr": "Frostiz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34552.png",
+    "level": 200
+  },
+  {
+    "id": 11499,
+    "name": {
+      "fr": "Frostiz soufflé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34553.png",
+    "level": 200
+  },
+  {
+    "id": 16452,
+    "name": {
+      "fr": "Riz Cola"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34556.png",
+    "level": 100
+  },
+  {
+    "id": 16453,
+    "name": {
+      "fr": "Malt Husse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34557.png",
+    "level": 120
+  },
+  {
+    "id": 16454,
+    "name": {
+      "fr": "Maïs"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34554.png",
+    "level": 160
+  },
+  {
+    "id": 16455,
+    "name": {
+      "fr": "Maïssého"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34558.png",
+    "level": 160
+  },
+  {
+    "id": 16456,
+    "name": {
+      "fr": "Millet"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34555.png",
+    "level": 180
+  },
+  {
+    "id": 16457,
+    "name": {
+      "fr": "Millet Zime"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34559.png",
+    "level": 180
+  },
+  {
+    "id": 17993,
+    "name": {
+      "fr": "Quisnoa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/34560.png",
+    "level": 200
+  }
+]

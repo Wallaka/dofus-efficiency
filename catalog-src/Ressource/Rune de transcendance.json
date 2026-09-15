@@ -1,0 +1,650 @@
+[
+  {
+    "id": 20492,
+    "name": {
+      "fr": "Rune Ta Ine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78179.png",
+    "level": 104
+  },
+  {
+    "id": 20556,
+    "name": {
+      "fr": "Rune Pata Ine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78180.png",
+    "level": 126
+  },
+  {
+    "id": 20557,
+    "name": {
+      "fr": "Rune Rata Ine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78181.png",
+    "level": 148
+  },
+  {
+    "id": 20558,
+    "name": {
+      "fr": "Rune Ta Fo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78182.png",
+    "level": 104
+  },
+  {
+    "id": 20559,
+    "name": {
+      "fr": "Rune Pata Fo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78183.png",
+    "level": 126
+  },
+  {
+    "id": 20560,
+    "name": {
+      "fr": "Rune Rata Fo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78184.png",
+    "level": 148
+  },
+  {
+    "id": 20561,
+    "name": {
+      "fr": "Rune Ta Age"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78185.png",
+    "level": 104
+  },
+  {
+    "id": 20562,
+    "name": {
+      "fr": "Rune Pata Age"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78186.png",
+    "level": 126
+  },
+  {
+    "id": 20563,
+    "name": {
+      "fr": "Rune Rata Age"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78187.png",
+    "level": 148
+  },
+  {
+    "id": 20564,
+    "name": {
+      "fr": "Rune Ta Cha"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78188.png",
+    "level": 104
+  },
+  {
+    "id": 20565,
+    "name": {
+      "fr": "Rune Pata Cha"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78189.png",
+    "level": 126
+  },
+  {
+    "id": 20566,
+    "name": {
+      "fr": "Rune Rata Cha"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78190.png",
+    "level": 148
+  },
+  {
+    "id": 20567,
+    "name": {
+      "fr": "Rune Ta Vi"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78251.png",
+    "level": 124
+  },
+  {
+    "id": 20568,
+    "name": {
+      "fr": "Rune Pata Vi"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78252.png",
+    "level": 146
+  },
+  {
+    "id": 20569,
+    "name": {
+      "fr": "Rune Rata Vi"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78253.png",
+    "level": 168
+  },
+  {
+    "id": 20570,
+    "name": {
+      "fr": "Rune Ta Ini"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78254.png",
+    "level": 104
+  },
+  {
+    "id": 20571,
+    "name": {
+      "fr": "Rune Pata Ini"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78255.png",
+    "level": 126
+  },
+  {
+    "id": 20572,
+    "name": {
+      "fr": "Rune Rata Ini"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78256.png",
+    "level": 148
+  },
+  {
+    "id": 20573,
+    "name": {
+      "fr": "Rune Ta Pod"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78257.png",
+    "level": 104
+  },
+  {
+    "id": 20574,
+    "name": {
+      "fr": "Rune Pata Pod"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78258.png",
+    "level": 126
+  },
+  {
+    "id": 20575,
+    "name": {
+      "fr": "Rune Rata Pod"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78259.png",
+    "level": 148
+  },
+  {
+    "id": 20576,
+    "name": {
+      "fr": "Rune Ta Pui"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78191.png",
+    "level": 124
+  },
+  {
+    "id": 20577,
+    "name": {
+      "fr": "Rune Pata Pui"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78192.png",
+    "level": 146
+  },
+  {
+    "id": 20578,
+    "name": {
+      "fr": "Rune Rata Pui"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78193.png",
+    "level": 168
+  },
+  {
+    "id": 20579,
+    "name": {
+      "fr": "Rune Ta Ré Pou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78194.png",
+    "level": 166
+  },
+  {
+    "id": 20580,
+    "name": {
+      "fr": "Rune Pata Ré Pou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78195.png",
+    "level": 188
+  },
+  {
+    "id": 20581,
+    "name": {
+      "fr": "Rune Ta Ré Cri"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78196.png",
+    "level": 166
+  },
+  {
+    "id": 20582,
+    "name": {
+      "fr": "Rune Pata Ré Cri"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78197.png",
+    "level": 188
+  },
+  {
+    "id": 20583,
+    "name": {
+      "fr": "Rune Ta Do Pou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78198.png",
+    "level": 166
+  },
+  {
+    "id": 20584,
+    "name": {
+      "fr": "Rune Pata Do Pou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78199.png",
+    "level": 188
+  },
+  {
+    "id": 20585,
+    "name": {
+      "fr": "Rune Ta Do Cri"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78200.png",
+    "level": 166
+  },
+  {
+    "id": 20586,
+    "name": {
+      "fr": "Rune Pata Do Cri"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78201.png",
+    "level": 188
+  },
+  {
+    "id": 20596,
+    "name": {
+      "fr": "Rune Ta Do Terre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78202.png",
+    "level": 144
+  },
+  {
+    "id": 20597,
+    "name": {
+      "fr": "Rune Pata Do Terre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78203.png",
+    "level": 166
+  },
+  {
+    "id": 20598,
+    "name": {
+      "fr": "Rune Rata Do Terre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78204.png",
+    "level": 188
+  },
+  {
+    "id": 20599,
+    "name": {
+      "fr": "Rune Ta Do Feu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78205.png",
+    "level": 144
+  },
+  {
+    "id": 20600,
+    "name": {
+      "fr": "Rune Pata Do Feu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78206.png",
+    "level": 166
+  },
+  {
+    "id": 20601,
+    "name": {
+      "fr": "Rune Rata Do Feu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78207.png",
+    "level": 188
+  },
+  {
+    "id": 20602,
+    "name": {
+      "fr": "Rune Ta Do Eau"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78208.png",
+    "level": 144
+  },
+  {
+    "id": 20603,
+    "name": {
+      "fr": "Rune Pata Do Eau"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78209.png",
+    "level": 166
+  },
+  {
+    "id": 20604,
+    "name": {
+      "fr": "Rune Rata Do Eau"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78210.png",
+    "level": 188
+  },
+  {
+    "id": 20605,
+    "name": {
+      "fr": "Rune Ta Do Air"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78211.png",
+    "level": 144
+  },
+  {
+    "id": 20606,
+    "name": {
+      "fr": "Rune Pata Do Air"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78212.png",
+    "level": 166
+  },
+  {
+    "id": 20607,
+    "name": {
+      "fr": "Rune Rata Do Air"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78213.png",
+    "level": 188
+  },
+  {
+    "id": 20608,
+    "name": {
+      "fr": "Rune Ta Do Neutre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78214.png",
+    "level": 144
+  },
+  {
+    "id": 20609,
+    "name": {
+      "fr": "Rune Pata Do Neutre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78215.png",
+    "level": 166
+  },
+  {
+    "id": 20610,
+    "name": {
+      "fr": "Rune Rata Do Neutre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78216.png",
+    "level": 188
+  },
+  {
+    "id": 20611,
+    "name": {
+      "fr": "Rune Ta Ré Per Di"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78217.png",
+    "level": 200
+  },
+  {
+    "id": 20612,
+    "name": {
+      "fr": "Rune Ta Ré Per Mé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78218.png",
+    "level": 200
+  },
+  {
+    "id": 20613,
+    "name": {
+      "fr": "Rune Ta Do Per So"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78219.png",
+    "level": 200
+  },
+  {
+    "id": 20614,
+    "name": {
+      "fr": "Rune Ta Do Per Ar"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78220.png",
+    "level": 200
+  },
+  {
+    "id": 20615,
+    "name": {
+      "fr": "Rune Ta Do Per Di"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78221.png",
+    "level": 200
+  },
+  {
+    "id": 20616,
+    "name": {
+      "fr": "Rune Ta Do Per Mé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78222.png",
+    "level": 200
+  },
+  {
+    "id": 20617,
+    "name": {
+      "fr": "Rune Ta Fui"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78223.png",
+    "level": 104
+  },
+  {
+    "id": 20618,
+    "name": {
+      "fr": "Rune Pata Fui"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78224.png",
+    "level": 126
+  },
+  {
+    "id": 20619,
+    "name": {
+      "fr": "Rune Rata Fui"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78225.png",
+    "level": 148
+  },
+  {
+    "id": 20620,
+    "name": {
+      "fr": "Rune Ta Tac"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78226.png",
+    "level": 104
+  },
+  {
+    "id": 20621,
+    "name": {
+      "fr": "Rune Pata Tac"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78227.png",
+    "level": 126
+  },
+  {
+    "id": 20622,
+    "name": {
+      "fr": "Rune Rata Tac"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78228.png",
+    "level": 148
+  },
+  {
+    "id": 20623,
+    "name": {
+      "fr": "Rune Ta Ré Pa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78229.png",
+    "level": 104
+  },
+  {
+    "id": 20624,
+    "name": {
+      "fr": "Rune Pata Ré Pa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78230.png",
+    "level": 126
+  },
+  {
+    "id": 20625,
+    "name": {
+      "fr": "Rune Rata Ré Pa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78231.png",
+    "level": 148
+  },
+  {
+    "id": 20626,
+    "name": {
+      "fr": "Rune Ta Ré Pme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78232.png",
+    "level": 104
+  },
+  {
+    "id": 20627,
+    "name": {
+      "fr": "Rune Pata Ré Pme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78233.png",
+    "level": 126
+  },
+  {
+    "id": 20628,
+    "name": {
+      "fr": "Rune Rata Ré Pme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78234.png",
+    "level": 148
+  },
+  {
+    "id": 20629,
+    "name": {
+      "fr": "Rune Ta Ret Pa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78235.png",
+    "level": 104
+  },
+  {
+    "id": 20630,
+    "name": {
+      "fr": "Rune Pata Ret Pa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78236.png",
+    "level": 126
+  },
+  {
+    "id": 20631,
+    "name": {
+      "fr": "Rune Rata Ret Pa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78237.png",
+    "level": 148
+  },
+  {
+    "id": 20632,
+    "name": {
+      "fr": "Rune Ta Ret Pme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78238.png",
+    "level": 104
+  },
+  {
+    "id": 20633,
+    "name": {
+      "fr": "Rune Pata Ret Pme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78239.png",
+    "level": 126
+  },
+  {
+    "id": 20634,
+    "name": {
+      "fr": "Rune Rata Ret Pme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78240.png",
+    "level": 148
+  },
+  {
+    "id": 20635,
+    "name": {
+      "fr": "Rune Ta Ré Per Terre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78241.png",
+    "level": 188
+  },
+  {
+    "id": 20636,
+    "name": {
+      "fr": "Rune Ta Ré Per Feu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78242.png",
+    "level": 188
+  },
+  {
+    "id": 20637,
+    "name": {
+      "fr": "Rune Ta Ré Per Eau"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78243.png",
+    "level": 188
+  },
+  {
+    "id": 20638,
+    "name": {
+      "fr": "Rune Ta Ré Per Air"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78244.png",
+    "level": 188
+  },
+  {
+    "id": 20639,
+    "name": {
+      "fr": "Rune Ta Ré Per Neutre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78245.png",
+    "level": 188
+  },
+  {
+    "id": 20640,
+    "name": {
+      "fr": "Rune Ta Cri"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78246.png",
+    "level": 164
+  },
+  {
+    "id": 20641,
+    "name": {
+      "fr": "Rune Pata Cri"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78247.png",
+    "level": 188
+  },
+  {
+    "id": 20642,
+    "name": {
+      "fr": "Rune Ta So"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78248.png",
+    "level": 124
+  },
+  {
+    "id": 20643,
+    "name": {
+      "fr": "Rune Pata So"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78249.png",
+    "level": 146
+  },
+  {
+    "id": 20644,
+    "name": {
+      "fr": "Rune Rata So"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78250.png",
+    "level": 168
+  }
+]

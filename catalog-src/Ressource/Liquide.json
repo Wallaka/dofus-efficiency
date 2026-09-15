@@ -1,0 +1,538 @@
+[
+  {
+    "id": 311,
+    "name": {
+      "fr": "Eau Potable"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15026.png",
+    "level": 1
+  },
+  {
+    "id": 385,
+    "name": {
+      "fr": "Bave de Bouftou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15057.png",
+    "level": 7
+  },
+  {
+    "id": 417,
+    "name": {
+      "fr": "Boue du Boo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15116.png",
+    "level": 27
+  },
+  {
+    "id": 752,
+    "name": {
+      "fr": "Sang de Vampire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15089.png",
+    "level": 35
+  },
+  {
+    "id": 1018,
+    "name": {
+      "fr": "Kole"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15171.png",
+    "level": 100
+  },
+  {
+    "id": 1985,
+    "name": {
+      "fr": "Résine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15382.png",
+    "level": 44
+  },
+  {
+    "id": 2012,
+    "name": {
+      "fr": "Sang de Scorbute"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15389.png",
+    "level": 36
+  },
+  {
+    "id": 2266,
+    "name": {
+      "fr": "Lait de Cochon de Lait"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15423.png",
+    "level": 43
+  },
+  {
+    "id": 2455,
+    "name": {
+      "fr": "Sang de Bouftou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15499.png",
+    "level": 19
+  },
+  {
+    "id": 2508,
+    "name": {
+      "fr": "Venin de Serpentin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15531.png",
+    "level": 56
+  },
+  {
+    "id": 2619,
+    "name": {
+      "fr": "Lait de Tortue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15423.png",
+    "level": 50
+  },
+  {
+    "id": 2620,
+    "name": {
+      "fr": "Rhum de Qualité"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15177.png",
+    "level": 90
+  },
+  {
+    "id": 2632,
+    "name": {
+      "fr": "Glouto Rhum"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15177.png",
+    "level": 100
+  },
+  {
+    "id": 2654,
+    "name": {
+      "fr": "Eau de Kwapa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164651.png",
+    "level": 130
+  },
+  {
+    "id": 2662,
+    "name": {
+      "fr": "Bave de Rose Démoniaque"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15634.png",
+    "level": 16
+  },
+  {
+    "id": 7291,
+    "name": {
+      "fr": "Nectar de l'Orient"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164658.png",
+    "level": 110
+  },
+  {
+    "id": 8807,
+    "name": {
+      "fr": "Jus de Ouassingue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15758.png",
+    "level": 92
+  },
+  {
+    "id": 8832,
+    "name": {
+      "fr": "Bave du Kaskargo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15006.png",
+    "level": 154
+  },
+  {
+    "id": 9279,
+    "name": {
+      "fr": "Bave de Champ à Gnons"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15045.png",
+    "level": 176
+  },
+  {
+    "id": 10221,
+    "name": {
+      "fr": "Eau transmutée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15769.png",
+    "level": 179
+  },
+  {
+    "id": 10314,
+    "name": {
+      "fr": "Sang du Kido"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15089.png",
+    "level": 101
+  },
+  {
+    "id": 10970,
+    "name": {
+      "fr": "Sueur de dragodinde"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15773.png",
+    "level": 60
+  },
+  {
+    "id": 11475,
+    "name": {
+      "fr": "Eau calme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15778.png",
+    "level": 1
+  },
+  {
+    "id": 12001,
+    "name": {
+      "fr": "Larme de Givrefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24871.png",
+    "level": 170
+  },
+  {
+    "id": 12428,
+    "name": {
+      "fr": "Boue Juvénile"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15793.png",
+    "level": 25
+  },
+  {
+    "id": 12429,
+    "name": {
+      "fr": "Boue Novice"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15793.png",
+    "level": 75
+  },
+  {
+    "id": 12430,
+    "name": {
+      "fr": "Boue Mature"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15793.png",
+    "level": 125
+  },
+  {
+    "id": 12431,
+    "name": {
+      "fr": "Boue Vénérable"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15793.png",
+    "level": 175
+  },
+  {
+    "id": 12440,
+    "name": {
+      "fr": "Flaque Juvénile"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15794.png",
+    "level": 25
+  },
+  {
+    "id": 12441,
+    "name": {
+      "fr": "Flaque Novice"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15794.png",
+    "level": 75
+  },
+  {
+    "id": 12442,
+    "name": {
+      "fr": "Flaque Mature"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15794.png",
+    "level": 125
+  },
+  {
+    "id": 12443,
+    "name": {
+      "fr": "Flaque Vénérable"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15794.png",
+    "level": 175
+  },
+  {
+    "id": 13490,
+    "name": {
+      "fr": "Bave de Ouassingue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15093.png",
+    "level": 98
+  },
+  {
+    "id": 13502,
+    "name": {
+      "fr": "Fluide Glacial"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15100.png",
+    "level": 18
+  },
+  {
+    "id": 13707,
+    "name": {
+      "fr": "Shampooing au Kaliptus de Saphira"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15808.png",
+    "level": 120
+  },
+  {
+    "id": 13925,
+    "name": {
+      "fr": "Sang de Ventrublion"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15824.png",
+    "level": 200
+  },
+  {
+    "id": 13929,
+    "name": {
+      "fr": "Sang de Karkanik"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15825.png",
+    "level": 200
+  },
+  {
+    "id": 13937,
+    "name": {
+      "fr": "Bave de Nessil"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15828.png",
+    "level": 200
+  },
+  {
+    "id": 14474,
+    "name": {
+      "fr": "Sang de Wabbit Garou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/150006.png",
+    "level": 120
+  },
+  {
+    "id": 14859,
+    "name": {
+      "fr": "Sang de Harpo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15840.png",
+    "level": 200
+  },
+  {
+    "id": 14944,
+    "name": {
+      "fr": "Sueur Froide de Fantôme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15850.png",
+    "level": 46
+  },
+  {
+    "id": 15451,
+    "name": {
+      "fr": "Sang du Toxoliath"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15889.png",
+    "level": 180
+  },
+  {
+    "id": 15455,
+    "name": {
+      "fr": "Venin d'Éperfide"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15890.png",
+    "level": 180
+  },
+  {
+    "id": 16010,
+    "name": {
+      "fr": "Parfum de Pantèroz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164051.png",
+    "level": 130
+  },
+  {
+    "id": 17045,
+    "name": {
+      "fr": "Jus de Viande sain"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15089.png",
+    "level": 12
+  },
+  {
+    "id": 17047,
+    "name": {
+      "fr": "Jus de poisson sain"
+    },
+    "img": "https://api.dofusdb.fr/img/items/176001.png",
+    "level": 12
+  },
+  {
+    "id": 17850,
+    "name": {
+      "fr": "Jus de poisson abominable"
+    },
+    "img": "https://api.dofusdb.fr/img/items/176004.png",
+    "level": 60
+  },
+  {
+    "id": 17851,
+    "name": {
+      "fr": "Jus de poisson asphyxiant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/176001.png",
+    "level": 130
+  },
+  {
+    "id": 17852,
+    "name": {
+      "fr": "Jus de poisson pestilentiel"
+    },
+    "img": "https://api.dofusdb.fr/img/items/176003.png",
+    "level": 200
+  },
+  {
+    "id": 17853,
+    "name": {
+      "fr": "Jus de poisson méphitique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/176002.png",
+    "level": 200
+  },
+  {
+    "id": 17970,
+    "name": {
+      "fr": "Bave de Mol Usk"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15937.png",
+    "level": 200
+  },
+  {
+    "id": 18357,
+    "name": {
+      "fr": "Jus de Cacterre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15948.png",
+    "level": 130
+  },
+  {
+    "id": 18441,
+    "name": {
+      "fr": "Cocktail cacterre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164122.png",
+    "level": 200
+  },
+  {
+    "id": 18729,
+    "name": {
+      "fr": "Sang de Viandargh"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15956.png",
+    "level": 190
+  },
+  {
+    "id": 18731,
+    "name": {
+      "fr": "Bave de Brokouillon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15958.png",
+    "level": 190
+  },
+  {
+    "id": 19405,
+    "name": {
+      "fr": "Sang de Calciné"
+    },
+    "img": "https://api.dofusdb.fr/img/items/12771.png",
+    "level": 200
+  },
+  {
+    "id": 21006,
+    "name": {
+      "fr": "Fluide nasal de Prim"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15045.png",
+    "level": 200
+  },
+  {
+    "id": 23593,
+    "name": {
+      "fr": "Pluie de Pandala"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164743.png",
+    "level": 130
+  },
+  {
+    "id": 27413,
+    "name": {
+      "fr": "Eau Ferrugineuse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/39404.png",
+    "level": 10
+  },
+  {
+    "id": 27435,
+    "name": {
+      "fr": "Bave de Marthos"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165059.png",
+    "level": 190
+  },
+  {
+    "id": 30095,
+    "name": {
+      "fr": "Liquide mauve"
+    },
+    "img": "https://api.dofusdb.fr/img/items/136126.png",
+    "level": 1
+  },
+  {
+    "id": 31525,
+    "name": {
+      "fr": "Jus de Toubibz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/126147.png",
+    "level": 170
+  },
+  {
+    "id": 31620,
+    "name": {
+      "fr": "Jus de poisson"
+    },
+    "img": "https://api.dofusdb.fr/img/items/176003.png",
+    "level": 95
+  },
+  {
+    "id": 32255,
+    "name": {
+      "fr": "Miel de Viti Glourson"
+    },
+    "img": "https://api.dofusdb.fr/img/items/80048.png",
+    "level": 200
+  },
+  {
+    "id": 32581,
+    "name": {
+      "fr": "Sang du Shushu Debruk'Sayl"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15292.png",
+    "level": 180
+  },
+  {
+    "id": 33525,
+    "name": {
+      "fr": "Bave de muldo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15293.png",
+    "level": 60
+  },
+  {
+    "id": 34337,
+    "name": {
+      "fr": "Venin de Mureine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15301.png",
+    "level": 200
+  }
+]

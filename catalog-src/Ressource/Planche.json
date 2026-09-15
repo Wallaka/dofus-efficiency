@@ -1,0 +1,90 @@
+[
+  {
+    "id": 16489,
+    "name": {
+      "fr": "Planche Agglomérée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/95093.png",
+    "level": 1
+  },
+  {
+    "id": 16490,
+    "name": {
+      "fr": "Planche Contreplaquée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/95001.png",
+    "level": 20
+  },
+  {
+    "id": 16491,
+    "name": {
+      "fr": "Planche à Griller"
+    },
+    "img": "https://api.dofusdb.fr/img/items/95017.png",
+    "level": 40
+  },
+  {
+    "id": 16492,
+    "name": {
+      "fr": "Planche de Surf"
+    },
+    "img": "https://api.dofusdb.fr/img/items/95166.png",
+    "level": 60
+  },
+  {
+    "id": 16493,
+    "name": {
+      "fr": "Planche à Repasser"
+    },
+    "img": "https://api.dofusdb.fr/img/items/95006.png",
+    "level": 80
+  },
+  {
+    "id": 16494,
+    "name": {
+      "fr": "Planche de Toilette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/95003.png",
+    "level": 100
+  },
+  {
+    "id": 16495,
+    "name": {
+      "fr": "Planche à Pâtisserie"
+    },
+    "img": "https://api.dofusdb.fr/img/items/95009.png",
+    "level": 120
+  },
+  {
+    "id": 16496,
+    "name": {
+      "fr": "Planche de Gravure"
+    },
+    "img": "https://api.dofusdb.fr/img/items/95024.png",
+    "level": 140
+  },
+  {
+    "id": 16497,
+    "name": {
+      "fr": "Planche à Pain"
+    },
+    "img": "https://api.dofusdb.fr/img/items/95022.png",
+    "level": 160
+  },
+  {
+    "id": 16498,
+    "name": {
+      "fr": "Planche à Dessin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/95005.png",
+    "level": 180
+  },
+  {
+    "id": 16499,
+    "name": {
+      "fr": "Planche de Salut"
+    },
+    "img": "https://api.dofusdb.fr/img/items/95023.png",
+    "level": 200
+  }
+]

@@ -1,0 +1,378 @@
+[
+  {
+    "id": 598,
+    "name": {
+      "fr": "Greuvette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41292.png",
+    "level": 10
+  },
+  {
+    "id": 600,
+    "name": {
+      "fr": "Kralamoure"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41309.png",
+    "level": 90
+  },
+  {
+    "id": 602,
+    "name": {
+      "fr": "Requin Marteau-Faucille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41322.png",
+    "level": 150
+  },
+  {
+    "id": 603,
+    "name": {
+      "fr": "Poisson-Chaton"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41277.png",
+    "level": 40
+  },
+  {
+    "id": 607,
+    "name": {
+      "fr": "Truite Vaseuse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41395.png",
+    "level": 20
+  },
+  {
+    "id": 1750,
+    "name": {
+      "fr": "Poisson Pané"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41269.png",
+    "level": 50
+  },
+  {
+    "id": 1754,
+    "name": {
+      "fr": "Poisson Igloo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41271.png",
+    "level": 50
+  },
+  {
+    "id": 1757,
+    "name": {
+      "fr": "Crabe Sourimi"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41273.png",
+    "level": 30
+  },
+  {
+    "id": 1759,
+    "name": {
+      "fr": "Crabe Sourimi Exotique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41275.png",
+    "level": 30
+  },
+  {
+    "id": 1762,
+    "name": {
+      "fr": "Poisson-Tigre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41279.png",
+    "level": 40
+  },
+  {
+    "id": 1779,
+    "name": {
+      "fr": "Bar Rikain"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41290.png",
+    "level": 160
+  },
+  {
+    "id": 1782,
+    "name": {
+      "fr": "Goujon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41294.png",
+    "level": 1
+  },
+  {
+    "id": 1784,
+    "name": {
+      "fr": "Raie Bleue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41296.png",
+    "level": 130
+  },
+  {
+    "id": 1786,
+    "name": {
+      "fr": "Greuvette Horreur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41298.png",
+    "level": 10
+  },
+  {
+    "id": 1788,
+    "name": {
+      "fr": "Raie de Farle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41300.png",
+    "level": 130
+  },
+  {
+    "id": 1790,
+    "name": {
+      "fr": "Goujon Kiye"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41302.png",
+    "level": 1
+  },
+  {
+    "id": 1792,
+    "name": {
+      "fr": "Bar Iton"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41303.png",
+    "level": 160
+  },
+  {
+    "id": 1794,
+    "name": {
+      "fr": "Carpe d'Iem"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41305.png",
+    "level": 60
+  },
+  {
+    "id": 1796,
+    "name": {
+      "fr": "Carpette des sables"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41307.png",
+    "level": 60
+  },
+  {
+    "id": 1799,
+    "name": {
+      "fr": "Kralamoure Unique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41311.png",
+    "level": 90
+  },
+  {
+    "id": 1801,
+    "name": {
+      "fr": "Perche"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41313.png",
+    "level": 120
+  },
+  {
+    "id": 1803,
+    "name": {
+      "fr": "Chaton-Perche"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41315.png",
+    "level": 120
+  },
+  {
+    "id": 1805,
+    "name": {
+      "fr": "Sardine Brillante"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41317.png",
+    "level": 70
+  },
+  {
+    "id": 1807,
+    "name": {
+      "fr": "Sardine Sombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41319.png",
+    "level": 70
+  },
+  {
+    "id": 1844,
+    "name": {
+      "fr": "Truite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41394.png",
+    "level": 20
+  },
+  {
+    "id": 1846,
+    "name": {
+      "fr": "Truite Ancestrale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41398.png",
+    "level": 20
+  },
+  {
+    "id": 1847,
+    "name": {
+      "fr": "Brochet"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41400.png",
+    "level": 80
+  },
+  {
+    "id": 1849,
+    "name": {
+      "fr": "Brochet Tupe-Halett"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41402.png",
+    "level": 80
+  },
+  {
+    "id": 1853,
+    "name": {
+      "fr": "Requin Marché-Libre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41324.png",
+    "level": 150
+  },
+  {
+    "id": 2187,
+    "name": {
+      "fr": "Pichon Eud'Compet"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41405.png",
+    "level": 1
+  },
+  {
+    "id": 11106,
+    "name": {
+      "fr": "Poisskaille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41403.png",
+    "level": 200
+  },
+  {
+    "id": 11500,
+    "name": {
+      "fr": "Poisskaille Givré"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41404.png",
+    "level": 200
+  },
+  {
+    "id": 13585,
+    "name": {
+      "fr": "Pichon Magique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41406.png",
+    "level": 120
+  },
+  {
+    "id": 16461,
+    "name": {
+      "fr": "Anguille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41407.png",
+    "level": 100
+  },
+  {
+    "id": 16462,
+    "name": {
+      "fr": "Anguille Souroche"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41408.png",
+    "level": 100
+  },
+  {
+    "id": 16463,
+    "name": {
+      "fr": "Dorade Grise"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41409.png",
+    "level": 110
+  },
+  {
+    "id": 16464,
+    "name": {
+      "fr": "Daurade Royale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41410.png",
+    "level": 110
+  },
+  {
+    "id": 16465,
+    "name": {
+      "fr": "Lotte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41411.png",
+    "level": 140
+  },
+  {
+    "id": 16466,
+    "name": {
+      "fr": "Glotte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41412.png",
+    "level": 140
+  },
+  {
+    "id": 16467,
+    "name": {
+      "fr": "Morue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41413.png",
+    "level": 170
+  },
+  {
+    "id": 16468,
+    "name": {
+      "fr": "Morue Barbue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41414.png",
+    "level": 170
+  },
+  {
+    "id": 16469,
+    "name": {
+      "fr": "Tanche"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41415.png",
+    "level": 180
+  },
+  {
+    "id": 16470,
+    "name": {
+      "fr": "Tanche Hantée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41416.png",
+    "level": 180
+  },
+  {
+    "id": 16471,
+    "name": {
+      "fr": "Espadon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41417.png",
+    "level": 190
+  },
+  {
+    "id": 16472,
+    "name": {
+      "fr": "Espadon Quichotte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41418.png",
+    "level": 190
+  },
+  {
+    "id": 17994,
+    "name": {
+      "fr": "Patelle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41419.png",
+    "level": 200
+  },
+  {
+    "id": 23825,
+    "name": {
+      "fr": "Pichon d'encre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/41420.png",
+    "level": 200
+  }
+]

@@ -1,0 +1,178 @@
+[
+  {
+    "id": 6603,
+    "name": {
+      "fr": "Peluche du Bouftou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/61671.png",
+    "level": 1
+  },
+  {
+    "id": 6605,
+    "name": {
+      "fr": "Peluche du Bouftou Royal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/61672.png",
+    "level": 1
+  },
+  {
+    "id": 6606,
+    "name": {
+      "fr": "Peluche du Dopeul Sadida"
+    },
+    "img": "https://api.dofusdb.fr/img/items/61673.png",
+    "level": 1
+  },
+  {
+    "id": 6607,
+    "name": {
+      "fr": "Peluche du Dopeul Ecaflip"
+    },
+    "img": "https://api.dofusdb.fr/img/items/61674.png",
+    "level": 1
+  },
+  {
+    "id": 6608,
+    "name": {
+      "fr": "Peluche du Dopeul Iop"
+    },
+    "img": "https://api.dofusdb.fr/img/items/61675.png",
+    "level": 1
+  },
+  {
+    "id": 6610,
+    "name": {
+      "fr": "Peluche du Dopeul Sram"
+    },
+    "img": "https://api.dofusdb.fr/img/items/61677.png",
+    "level": 1
+  },
+  {
+    "id": 6611,
+    "name": {
+      "fr": "Peluche du Dopeul Eniripsa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/61678.png",
+    "level": 1
+  },
+  {
+    "id": 6612,
+    "name": {
+      "fr": "Peluche du Dopeul Enutrof"
+    },
+    "img": "https://api.dofusdb.fr/img/items/61679.png",
+    "level": 1
+  },
+  {
+    "id": 6613,
+    "name": {
+      "fr": "Peluche du Dopeul Féca"
+    },
+    "img": "https://api.dofusdb.fr/img/items/61680.png",
+    "level": 1
+  },
+  {
+    "id": 6614,
+    "name": {
+      "fr": "Peluche du Dopeul Osamodas"
+    },
+    "img": "https://api.dofusdb.fr/img/items/61681.png",
+    "level": 1
+  },
+  {
+    "id": 6615,
+    "name": {
+      "fr": "Peluche du Dopeul Crâ"
+    },
+    "img": "https://api.dofusdb.fr/img/items/61682.png",
+    "level": 1
+  },
+  {
+    "id": 6616,
+    "name": {
+      "fr": "Peluche du Dopeul Xélor"
+    },
+    "img": "https://api.dofusdb.fr/img/items/61683.png",
+    "level": 1
+  },
+  {
+    "id": 6617,
+    "name": {
+      "fr": "Peluche du Sanglier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/61684.png",
+    "level": 1
+  },
+  {
+    "id": 6618,
+    "name": {
+      "fr": "Peluche du Tofu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/61685.png",
+    "level": 1
+  },
+  {
+    "id": 6619,
+    "name": {
+      "fr": "Peluche du Champ"
+    },
+    "img": "https://api.dofusdb.fr/img/items/61686.png",
+    "level": 1
+  },
+  {
+    "id": 6620,
+    "name": {
+      "fr": "Peluche du Prespic"
+    },
+    "img": "https://api.dofusdb.fr/img/items/61687.png",
+    "level": 1
+  },
+  {
+    "id": 6621,
+    "name": {
+      "fr": "Peluche du Wabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/61688.png",
+    "level": 1
+  },
+  {
+    "id": 6624,
+    "name": {
+      "fr": "Peluche du Dragon Cochon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/61689.png",
+    "level": 1
+  },
+  {
+    "id": 6658,
+    "name": {
+      "fr": "Peluche du Mulou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/61699.png",
+    "level": 1
+  },
+  {
+    "id": 7922,
+    "name": {
+      "fr": "Peluche du Dopeul Sacrieur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/61001.png",
+    "level": 1
+  },
+  {
+    "id": 7923,
+    "name": {
+      "fr": "Peluche du Dopeul Pandawa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/61002.png",
+    "level": 1
+  },
+  {
+    "id": 30170,
+    "name": {
+      "fr": "Peluche du Nomoon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/18011.png",
+    "level": 1
+  }
+]

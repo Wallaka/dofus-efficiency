@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1610,
+    "name": {
+      "fr": "Roue de Tivelo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15977.png",
+    "level": 86
+  },
+  {
+    "id": 1682,
+    "name": {
+      "fr": "Écorce de Liroye Merline"
+    },
+    "img": "https://api.dofusdb.fr/img/items/96542.png",
+    "level": 78
+  },
+  {
+    "id": 8771,
+    "name": {
+      "fr": "Écorce de Floribonde"
+    },
+    "img": "https://api.dofusdb.fr/img/items/96002.png",
+    "level": 135
+  },
+  {
+    "id": 8772,
+    "name": {
+      "fr": "Écorce de Brouture"
+    },
+    "img": "https://api.dofusdb.fr/img/items/96005.png",
+    "level": 133
+  },
+  {
+    "id": 8773,
+    "name": {
+      "fr": "Écorce de Nerbe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/96003.png",
+    "level": 132
+  },
+  {
+    "id": 8774,
+    "name": {
+      "fr": "Écorce de Fécorce"
+    },
+    "img": "https://api.dofusdb.fr/img/items/96006.png",
+    "level": 134
+  },
+  {
+    "id": 8775,
+    "name": {
+      "fr": "Écorce de Chiendent"
+    },
+    "img": "https://api.dofusdb.fr/img/items/96004.png",
+    "level": 131
+  },
+  {
+    "id": 9263,
+    "name": {
+      "fr": "Écorce de Champaknyde"
+    },
+    "img": "https://api.dofusdb.fr/img/items/96109.png",
+    "level": 171
+  },
+  {
+    "id": 11891,
+    "name": {
+      "fr": "Écorce d'Abrazif"
+    },
+    "img": "https://api.dofusdb.fr/img/items/96668.png",
+    "level": 170
+  },
+  {
+    "id": 16151,
+    "name": {
+      "fr": "Écorce d'Abraknyde Vénérable"
+    },
+    "img": "https://api.dofusdb.fr/img/items/96669.png",
+    "level": 80
+  },
+  {
+    "id": 16154,
+    "name": {
+      "fr": "Écorce d'Abrakne Sombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/96670.png",
+    "level": 86
+  }
+]

@@ -1,0 +1,162 @@
+[
+  {
+    "id": 312,
+    "name": {
+      "fr": "Fer"
+    },
+    "img": "https://api.dofusdb.fr/img/items/39024.png",
+    "level": 1
+  },
+  {
+    "id": 313,
+    "name": {
+      "fr": "Or"
+    },
+    "img": "https://api.dofusdb.fr/img/items/39022.png",
+    "level": 160
+  },
+  {
+    "id": 350,
+    "name": {
+      "fr": "Argent"
+    },
+    "img": "https://api.dofusdb.fr/img/items/39028.png",
+    "level": 120
+  },
+  {
+    "id": 441,
+    "name": {
+      "fr": "Cuivre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/39108.png",
+    "level": 20
+  },
+  {
+    "id": 442,
+    "name": {
+      "fr": "Bronze"
+    },
+    "img": "https://api.dofusdb.fr/img/items/39109.png",
+    "level": 40
+  },
+  {
+    "id": 443,
+    "name": {
+      "fr": "Kobalte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/39077.png",
+    "level": 60
+  },
+  {
+    "id": 444,
+    "name": {
+      "fr": "Étain"
+    },
+    "img": "https://api.dofusdb.fr/img/items/39078.png",
+    "level": 100
+  },
+  {
+    "id": 445,
+    "name": {
+      "fr": "Manganèse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/39397.png",
+    "level": 80
+  },
+  {
+    "id": 446,
+    "name": {
+      "fr": "Bauxite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/39076.png",
+    "level": 140
+  },
+  {
+    "id": 447,
+    "name": {
+      "fr": "Charbon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/39075.png",
+    "level": 65
+  },
+  {
+    "id": 480,
+    "name": {
+      "fr": "Minerai Étrange"
+    },
+    "img": "https://api.dofusdb.fr/img/items/39090.png",
+    "level": 56
+  },
+  {
+    "id": 7032,
+    "name": {
+      "fr": "Silicate"
+    },
+    "img": "https://api.dofusdb.fr/img/items/39111.png",
+    "level": 100
+  },
+  {
+    "id": 7033,
+    "name": {
+      "fr": "Dolomite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/39110.png",
+    "level": 180
+  },
+  {
+    "id": 11110,
+    "name": {
+      "fr": "Obsidienne"
+    },
+    "img": "https://api.dofusdb.fr/img/items/39112.png",
+    "level": 200
+  },
+  {
+    "id": 17995,
+    "name": {
+      "fr": "Écume de mer"
+    },
+    "img": "https://api.dofusdb.fr/img/items/39399.png",
+    "level": 200
+  },
+  {
+    "id": 19636,
+    "name": {
+      "fr": "Minerai enchanté"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51267.png",
+    "level": 25
+  },
+  {
+    "id": 19638,
+    "name": {
+      "fr": "Support métallique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/107737.png",
+    "level": 25
+  },
+  {
+    "id": 23902,
+    "name": {
+      "fr": "Cristal liquide"
+    },
+    "img": "https://api.dofusdb.fr/img/items/39402.png",
+    "level": 200
+  },
+  {
+    "id": 23903,
+    "name": {
+      "fr": "Cristal pliable"
+    },
+    "img": "https://api.dofusdb.fr/img/items/39401.png",
+    "level": 200
+  },
+  {
+    "id": 27621,
+    "name": {
+      "fr": "Cendrepierre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/39403.png",
+    "level": 180
+  }
+]

@@ -1,0 +1,154 @@
+[
+  {
+    "id": 287,
+    "name": {
+      "fr": "Graine de Sésame"
+    },
+    "img": "https://api.dofusdb.fr/img/items/58003.png",
+    "level": 1
+  },
+  {
+    "id": 288,
+    "name": {
+      "fr": "Graine de Tournesol"
+    },
+    "img": "https://api.dofusdb.fr/img/items/58006.png",
+    "level": 18
+  },
+  {
+    "id": 300,
+    "name": {
+      "fr": "Graine de Pavot"
+    },
+    "img": "https://api.dofusdb.fr/img/items/58011.png",
+    "level": 18
+  },
+  {
+    "id": 391,
+    "name": {
+      "fr": "Noix de Cajou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/58063.png",
+    "level": 43
+  },
+  {
+    "id": 392,
+    "name": {
+      "fr": "Noix de Pécan"
+    },
+    "img": "https://api.dofusdb.fr/img/items/58064.png",
+    "level": 50
+  },
+  {
+    "id": 393,
+    "name": {
+      "fr": "Gland"
+    },
+    "img": "https://api.dofusdb.fr/img/items/58065.png",
+    "level": 26
+  },
+  {
+    "id": 394,
+    "name": {
+      "fr": "Noisette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/58066.png",
+    "level": 26
+  },
+  {
+    "id": 422,
+    "name": {
+      "fr": "Graine de Lin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/58119.png",
+    "level": 1
+  },
+  {
+    "id": 427,
+    "name": {
+      "fr": "Graine de Chanvre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/58157.png",
+    "level": 10
+  },
+  {
+    "id": 2150,
+    "name": {
+      "fr": "Graine de Scorbute"
+    },
+    "img": "https://api.dofusdb.fr/img/items/58405.png",
+    "level": 66
+  },
+  {
+    "id": 6671,
+    "name": {
+      "fr": "Haricot"
+    },
+    "img": "https://api.dofusdb.fr/img/items/58471.png",
+    "level": 1
+  },
+  {
+    "id": 7059,
+    "name": {
+      "fr": "Graine de Pandouille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/58067.png",
+    "level": 120
+  },
+  {
+    "id": 8785,
+    "name": {
+      "fr": "Graine de l'Abrakleur sombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/58001.png",
+    "level": 137
+  },
+  {
+    "id": 11199,
+    "name": {
+      "fr": "Graine de Frostiz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/58406.png",
+    "level": 200
+  },
+  {
+    "id": 11239,
+    "name": {
+      "fr": "Gland de l'Écumouth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/58068.png",
+    "level": 130
+  },
+  {
+    "id": 13336,
+    "name": {
+      "fr": "Graines de Citwouille Maudites"
+    },
+    "img": "https://api.dofusdb.fr/img/items/58012.png",
+    "level": 100
+  },
+  {
+    "id": 13730,
+    "name": {
+      "fr": "Graine de la Discorde"
+    },
+    "img": "https://api.dofusdb.fr/img/items/58472.png",
+    "level": 41
+  },
+  {
+    "id": 15793,
+    "name": {
+      "fr": "Gland de Fouduglen"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15921.png",
+    "level": 10
+  },
+  {
+    "id": 16384,
+    "name": {
+      "fr": "Pandouille de Trois"
+    },
+    "img": "https://api.dofusdb.fr/img/items/58473.png",
+    "level": 120
+  }
+]

@@ -1,0 +1,290 @@
+[
+  {
+    "id": 20292,
+    "name": {
+      "fr": "Reflet oublié"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164153.png",
+    "level": 1
+  },
+  {
+    "id": 20648,
+    "name": {
+      "fr": "Légende de Brumaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164614.png",
+    "level": 200
+  },
+  {
+    "id": 20649,
+    "name": {
+      "fr": "Légende de Brâm Barbe-Monde"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164625.png",
+    "level": 200
+  },
+  {
+    "id": 20650,
+    "name": {
+      "fr": "Légende de Crocobur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164612.png",
+    "level": 200
+  },
+  {
+    "id": 20651,
+    "name": {
+      "fr": "Légende du Trompe-la-Mort"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164617.png",
+    "level": 200
+  },
+  {
+    "id": 20652,
+    "name": {
+      "fr": "Légende de Dame Jhessica"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164622.png",
+    "level": 200
+  },
+  {
+    "id": 20653,
+    "name": {
+      "fr": "Légende de Mille Lieues"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164618.png",
+    "level": 200
+  },
+  {
+    "id": 20654,
+    "name": {
+      "fr": "Légende de Dodge"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164623.png",
+    "level": 200
+  },
+  {
+    "id": 20655,
+    "name": {
+      "fr": "Légende de Fallanster"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164616.png",
+    "level": 200
+  },
+  {
+    "id": 20656,
+    "name": {
+      "fr": "Légende du Cul Botté"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164619.png",
+    "level": 200
+  },
+  {
+    "id": 20657,
+    "name": {
+      "fr": "Légende du Destin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164613.png",
+    "level": 200
+  },
+  {
+    "id": 20658,
+    "name": {
+      "fr": "Légende de Rykke Errel"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164620.png",
+    "level": 200
+  },
+  {
+    "id": 20659,
+    "name": {
+      "fr": "Légende de Buhorado"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164615.png",
+    "level": 200
+  },
+  {
+    "id": 20660,
+    "name": {
+      "fr": "Légende de Jahash Jurgen"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164621.png",
+    "level": 200
+  },
+  {
+    "id": 20661,
+    "name": {
+      "fr": "Légende de Ganymède"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164624.png",
+    "level": 200
+  },
+  {
+    "id": 20964,
+    "name": {
+      "fr": "Légende animale de Kwakarticho"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164630.png",
+    "level": 200
+  },
+  {
+    "id": 20965,
+    "name": {
+      "fr": "Légende animale de Poukachi"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164631.png",
+    "level": 200
+  },
+  {
+    "id": 20966,
+    "name": {
+      "fr": "Légende animale de Magicrabe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164632.png",
+    "level": 200
+  },
+  {
+    "id": 20967,
+    "name": {
+      "fr": "Légende animale de Bakushana"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164633.png",
+    "level": 200
+  },
+  {
+    "id": 22058,
+    "name": {
+      "fr": "Reflet d'antan"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164149.png",
+    "level": 1
+  },
+  {
+    "id": 22059,
+    "name": {
+      "fr": "Reflet infini"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164152.png",
+    "level": 1
+  },
+  {
+    "id": 22415,
+    "name": {
+      "fr": "Légende de Misère"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164642.png",
+    "level": 200
+  },
+  {
+    "id": 22416,
+    "name": {
+      "fr": "Légende de Guerre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164643.png",
+    "level": 200
+  },
+  {
+    "id": 22417,
+    "name": {
+      "fr": "Légende de Servitude"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164644.png",
+    "level": 200
+  },
+  {
+    "id": 22418,
+    "name": {
+      "fr": "Légende de Corruption"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164641.png",
+    "level": 200
+  },
+  {
+    "id": 32078,
+    "name": {
+      "fr": "Fragment de prysmaradite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/219011.png",
+    "level": 200
+  },
+  {
+    "id": 32079,
+    "name": {
+      "fr": "Reflet onirique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164149.png",
+    "level": 1
+  },
+  {
+    "id": 32080,
+    "name": {
+      "fr": "Bribe de rêve"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164148.png",
+    "level": 1
+  },
+  {
+    "id": 32129,
+    "name": {
+      "fr": "Légende d'Oto Mustam"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164603.png",
+    "level": 200
+  },
+  {
+    "id": 32130,
+    "name": {
+      "fr": "Légende du Miroir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164604.png",
+    "level": 200
+  },
+  {
+    "id": 32131,
+    "name": {
+      "fr": "Légende de Mériana"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164605.png",
+    "level": 200
+  },
+  {
+    "id": 32132,
+    "name": {
+      "fr": "Légende de Menalt"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164606.png",
+    "level": 200
+  },
+  {
+    "id": 32133,
+    "name": {
+      "fr": "Légende de Thanatena"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164607.png",
+    "level": 200
+  },
+  {
+    "id": 32134,
+    "name": {
+      "fr": "Légende d'Helséphine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164608.png",
+    "level": 200
+  },
+  {
+    "id": 32135,
+    "name": {
+      "fr": "Légende d'Henual"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164609.png",
+    "level": 200
+  },
+  {
+    "id": 32162,
+    "name": {
+      "fr": "Légende d'Amayiro"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164602.png",
+    "level": 200
+  }
+]

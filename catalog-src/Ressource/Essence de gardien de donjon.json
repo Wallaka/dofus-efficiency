@@ -1,0 +1,930 @@
+[
+  {
+    "id": 14645,
+    "name": {
+      "fr": "Essence du Tournesol Affamé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 20
+  },
+  {
+    "id": 14646,
+    "name": {
+      "fr": "Essence de Mob l'Éponge"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 10
+  },
+  {
+    "id": 14647,
+    "name": {
+      "fr": "Essence du Bouftou Royal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 30
+  },
+  {
+    "id": 14648,
+    "name": {
+      "fr": "Essence du Scarabosse Doré"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 40
+  },
+  {
+    "id": 14649,
+    "name": {
+      "fr": "Essence de Batofu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 40
+  },
+  {
+    "id": 14650,
+    "name": {
+      "fr": "Essence de Boostache"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 40
+  },
+  {
+    "id": 14651,
+    "name": {
+      "fr": "Essence du Chafer Rōnin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 40
+  },
+  {
+    "id": 14652,
+    "name": {
+      "fr": "Essence de la Bworkette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 50
+  },
+  {
+    "id": 14653,
+    "name": {
+      "fr": "Essence des Forgerons"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 50
+  },
+  {
+    "id": 14654,
+    "name": {
+      "fr": "Essence de la Shin Larve"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 50
+  },
+  {
+    "id": 14655,
+    "name": {
+      "fr": "Essence du Corailleur Magistral"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 50
+  },
+  {
+    "id": 14656,
+    "name": {
+      "fr": "Essence de Damadrya"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 110
+  },
+  {
+    "id": 14657,
+    "name": {
+      "fr": "Essence du Wa Wabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 60
+  },
+  {
+    "id": 14658,
+    "name": {
+      "fr": "Essence du Blop Royal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 60
+  },
+  {
+    "id": 14659,
+    "name": {
+      "fr": "Essence de la Gelée Royale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 60
+  },
+  {
+    "id": 14660,
+    "name": {
+      "fr": "Essence de Nelween"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 70
+  },
+  {
+    "id": 14661,
+    "name": {
+      "fr": "Essence de Gourlo le Terrible"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 70
+  },
+  {
+    "id": 14662,
+    "name": {
+      "fr": "Essence du Craqueleur Légendaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 70
+  },
+  {
+    "id": 14663,
+    "name": {
+      "fr": "Essence de Nagate"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 130
+  },
+  {
+    "id": 14664,
+    "name": {
+      "fr": "Essence du Wa Wobot"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 80
+  },
+  {
+    "id": 14665,
+    "name": {
+      "fr": "Essence de l'Abraknyde Ancestral"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 90
+  },
+  {
+    "id": 14666,
+    "name": {
+      "fr": "Essence du Dragon Cochon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 100
+  },
+  {
+    "id": 14667,
+    "name": {
+      "fr": "Essence du Koulosse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 100
+  },
+  {
+    "id": 14668,
+    "name": {
+      "fr": "Essence du Meulou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 100
+  },
+  {
+    "id": 14669,
+    "name": {
+      "fr": "Essence de Moon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 100
+  },
+  {
+    "id": 14670,
+    "name": {
+      "fr": "Essence de Dramak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 100
+  },
+  {
+    "id": 14671,
+    "name": {
+      "fr": "Essence du Rasboul Majeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 110
+  },
+  {
+    "id": 14672,
+    "name": {
+      "fr": "Essence du Maître Corbac"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 110
+  },
+  {
+    "id": 14673,
+    "name": {
+      "fr": "Essence du Rat Blanc"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 110
+  },
+  {
+    "id": 14674,
+    "name": {
+      "fr": "Essence du Rat Noir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 110
+  },
+  {
+    "id": 14675,
+    "name": {
+      "fr": "Essence du Blop Multicolore Royal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 120
+  },
+  {
+    "id": 14676,
+    "name": {
+      "fr": "Essence du Minotoror"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 120
+  },
+  {
+    "id": 14677,
+    "name": {
+      "fr": "Essence du Royalmouth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 120
+  },
+  {
+    "id": 14678,
+    "name": {
+      "fr": "Essence de Shihan et Hanshi"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 140
+  },
+  {
+    "id": 14679,
+    "name": {
+      "fr": "Essence du Tofu Royal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 120
+  },
+  {
+    "id": 14680,
+    "name": {
+      "fr": "Essence de Crocabulia"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 120
+  },
+  {
+    "id": 14681,
+    "name": {
+      "fr": "Essence de Skeunk"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 120
+  },
+  {
+    "id": 14682,
+    "name": {
+      "fr": "Essence de Tanukouï San"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 130
+  },
+  {
+    "id": 14683,
+    "name": {
+      "fr": "Essence de Founoroshi"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 140
+  },
+  {
+    "id": 14684,
+    "name": {
+      "fr": "Essence du Chêne Mou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 140
+  },
+  {
+    "id": 14685,
+    "name": {
+      "fr": "Essence du Tynril"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 140
+  },
+  {
+    "id": 14686,
+    "name": {
+      "fr": "Essence du Mansot Royal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 140
+  },
+  {
+    "id": 14687,
+    "name": {
+      "fr": "Essence de Ben le Ripate"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 150
+  },
+  {
+    "id": 14688,
+    "name": {
+      "fr": "Essence de Sphincter Cell"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 150
+  },
+  {
+    "id": 14689,
+    "name": {
+      "fr": "Essence du Kimbo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 160
+  },
+  {
+    "id": 14690,
+    "name": {
+      "fr": "Essence du Minotot"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 160
+  },
+  {
+    "id": 14691,
+    "name": {
+      "fr": "Essence de l'Obsidiantre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 160
+  },
+  {
+    "id": 14692,
+    "name": {
+      "fr": "Essence du Tengu Givrefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 170
+  },
+  {
+    "id": 14693,
+    "name": {
+      "fr": "Essence du Korriandre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 180
+  },
+  {
+    "id": 14694,
+    "name": {
+      "fr": "Essence du Kralamoure Géant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 180
+  },
+  {
+    "id": 14695,
+    "name": {
+      "fr": "Essence du Bworker"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 180
+  },
+  {
+    "id": 14696,
+    "name": {
+      "fr": "Essence d'Ougah"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 180
+  },
+  {
+    "id": 14697,
+    "name": {
+      "fr": "Essence du Kolosso"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 190
+  },
+  {
+    "id": 14698,
+    "name": {
+      "fr": "Essence de Fuji Givrefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 190
+  },
+  {
+    "id": 14699,
+    "name": {
+      "fr": "Essence de Grolloum"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 190
+  },
+  {
+    "id": 14700,
+    "name": {
+      "fr": "Essence du Glourséleste"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 190
+  },
+  {
+    "id": 14701,
+    "name": {
+      "fr": "Essence de Missiz Frizz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 190
+  },
+  {
+    "id": 14702,
+    "name": {
+      "fr": "Essence de Sylargh"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 190
+  },
+  {
+    "id": 14703,
+    "name": {
+      "fr": "Essence de Klime"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 190
+  },
+  {
+    "id": 14704,
+    "name": {
+      "fr": "Essence de Nileza"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 190
+  },
+  {
+    "id": 14705,
+    "name": {
+      "fr": "Essence du Comte Harebourg"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 14706,
+    "name": {
+      "fr": "Essence de Merkator"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 190
+  },
+  {
+    "id": 14720,
+    "name": {
+      "fr": "Essence du Kwakwa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 50
+  },
+  {
+    "id": 14774,
+    "name": {
+      "fr": "Essence du Kanniboul Ebil"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 60
+  },
+  {
+    "id": 14975,
+    "name": {
+      "fr": "Essence d'Ombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 190
+  },
+  {
+    "id": 15095,
+    "name": {
+      "fr": "Essence de Kanigroula"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 160
+  },
+  {
+    "id": 15272,
+    "name": {
+      "fr": "Essence du Roi Nidas"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 15273,
+    "name": {
+      "fr": "Essence de Malléfisk"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 100
+  },
+  {
+    "id": 15274,
+    "name": {
+      "fr": "Essence du Phossile"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 150
+  },
+  {
+    "id": 15362,
+    "name": {
+      "fr": "Essence de la Haute Truche"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 130
+  },
+  {
+    "id": 15702,
+    "name": {
+      "fr": "Essence du Capitaine Ekarlatte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 110
+  },
+  {
+    "id": 15703,
+    "name": {
+      "fr": "Essence du Toxoliath"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 180
+  },
+  {
+    "id": 15704,
+    "name": {
+      "fr": "Essence de la Reine des Voleurs"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 15705,
+    "name": {
+      "fr": "Essence du Protozorreur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 15734,
+    "name": {
+      "fr": "Essence de Vortex"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 15735,
+    "name": {
+      "fr": "Essence de XLII"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 170
+  },
+  {
+    "id": 15736,
+    "name": {
+      "fr": "Essence de Fraktale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 120
+  },
+  {
+    "id": 16285,
+    "name": {
+      "fr": "Essence de Kankreblath"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 40
+  },
+  {
+    "id": 16286,
+    "name": {
+      "fr": "Essence de la Reine Nyée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 90
+  },
+  {
+    "id": 17037,
+    "name": {
+      "fr": "Essence de Kardorim"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 10
+  },
+  {
+    "id": 17414,
+    "name": {
+      "fr": "Essence du Chouque"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 90
+  },
+  {
+    "id": 17735,
+    "name": {
+      "fr": "Essence du Chalœil"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 17736,
+    "name": {
+      "fr": "Essence de Ush"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 160
+  },
+  {
+    "id": 17737,
+    "name": {
+      "fr": "Essence du Pounicheur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 110
+  },
+  {
+    "id": 19905,
+    "name": {
+      "fr": "Essence du Mantiscore"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 80
+  },
+  {
+    "id": 19906,
+    "name": {
+      "fr": "Essence de Bethel Akarna"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 19907,
+    "name": {
+      "fr": "Essence de Solar"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 19908,
+    "name": {
+      "fr": "Essence de Meno"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 19909,
+    "name": {
+      "fr": "Essence d'Ilyzaelle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 19910,
+    "name": {
+      "fr": "Essence de Dantinéa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 19911,
+    "name": {
+      "fr": "Essence de la Larve de Koutoulou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 19912,
+    "name": {
+      "fr": "Essence d'Anerice la Shushess"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 19913,
+    "name": {
+      "fr": "Essence du Comte Razof"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 190
+  },
+  {
+    "id": 19914,
+    "name": {
+      "fr": "Essence de Dazak Martegel"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 19915,
+    "name": {
+      "fr": "Essence d'El Piko"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 130
+  },
+  {
+    "id": 19916,
+    "name": {
+      "fr": "Essence de Tal Kasha"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 19921,
+    "name": {
+      "fr": "Essence de Choudini"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 90
+  },
+  {
+    "id": 19938,
+    "name": {
+      "fr": "Essence du Père Ver"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 170
+  },
+  {
+    "id": 21217,
+    "name": {
+      "fr": "Essence de Torkélonia"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 21513,
+    "name": {
+      "fr": "Essence de Draegnerys"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 70
+  },
+  {
+    "id": 21514,
+    "name": {
+      "fr": "Essence du Kharnozor"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 100
+  },
+  {
+    "id": 21515,
+    "name": {
+      "fr": "Essence de Corruption"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 22128,
+    "name": {
+      "fr": "Essence de Guerre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 22129,
+    "name": {
+      "fr": "Essence de Misère"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 22130,
+    "name": {
+      "fr": "Essence de Servitude"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 24133,
+    "name": {
+      "fr": "Essence du Shogun Tofugawa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 160
+  },
+  {
+    "id": 24134,
+    "name": {
+      "fr": "Essence de Koumiho"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 170
+  },
+  {
+    "id": 24135,
+    "name": {
+      "fr": "Essence du Roi Imagami"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 24136,
+    "name": {
+      "fr": "Essence de la Reine Amirukam"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 25318,
+    "name": {
+      "fr": "Essence de Kabahal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 26041,
+    "name": {
+      "fr": "Essence de l'Éternel Conflit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165045.png",
+    "level": 200
+  },
+  {
+    "id": 26803,
+    "name": {
+      "fr": "Essence d'Hell Mina"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 150
+  },
+  {
+    "id": 26804,
+    "name": {
+      "fr": "Essence du Directeur Grunob"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 40
+  },
+  {
+    "id": 27372,
+    "name": {
+      "fr": "Essence de Rakoopeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 50
+  },
+  {
+    "id": 27405,
+    "name": {
+      "fr": "Essence de Belladone"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 200
+  },
+  {
+    "id": 27451,
+    "name": {
+      "fr": "Essence de Barbéryl Clochecuivre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/167001.png",
+    "level": 190
+  }
+]

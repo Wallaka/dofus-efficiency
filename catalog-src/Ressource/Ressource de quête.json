@@ -1,0 +1,274 @@
+[
+  {
+    "id": 11292,
+    "name": {
+      "fr": "Prototype d'Abreuvoir frigostien en Bambou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93097.png",
+    "level": 100
+  },
+  {
+    "id": 11293,
+    "name": {
+      "fr": "Prototype de Mangeoire frigostienne en Bambou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93098.png",
+    "level": 100
+  },
+  {
+    "id": 11294,
+    "name": {
+      "fr": "Prototype de Foudroyeur frigostien en Bambou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93099.png",
+    "level": 100
+  },
+  {
+    "id": 11295,
+    "name": {
+      "fr": "Prototype de Baffeur frigostien en Bambou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93100.png",
+    "level": 100
+  },
+  {
+    "id": 31702,
+    "name": {
+      "fr": "Métal non traité"
+    },
+    "img": "https://api.dofusdb.fr/img/items/40709.png",
+    "level": 20
+  },
+  {
+    "id": 31703,
+    "name": {
+      "fr": "Minerai isolant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/39109.png",
+    "level": 20
+  },
+  {
+    "id": 31704,
+    "name": {
+      "fr": "Acide gobhydrique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/12813.png",
+    "level": 20
+  },
+  {
+    "id": 31705,
+    "name": {
+      "fr": "Sel de galvanisation"
+    },
+    "img": "https://api.dofusdb.fr/img/items/48002.png",
+    "level": 20
+  },
+  {
+    "id": 31707,
+    "name": {
+      "fr": "Graisse de zarbivore"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15392.png",
+    "level": 20
+  },
+  {
+    "id": 31708,
+    "name": {
+      "fr": "Bouillon de viande et d'os"
+    },
+    "img": "https://api.dofusdb.fr/img/items/69789.png",
+    "level": 20
+  },
+  {
+    "id": 31709,
+    "name": {
+      "fr": "Pain de singe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/46644.png",
+    "level": 20
+  },
+  {
+    "id": 31747,
+    "name": {
+      "fr": "Front osseux souple"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47893.png",
+    "level": 200
+  },
+  {
+    "id": 31748,
+    "name": {
+      "fr": "Bézoard dense"
+    },
+    "img": "https://api.dofusdb.fr/img/items/126153.png",
+    "level": 200
+  },
+  {
+    "id": 31754,
+    "name": {
+      "fr": "Poils de zarbivore"
+    },
+    "img": "https://api.dofusdb.fr/img/items/126154.png",
+    "level": 200
+  },
+  {
+    "id": 31819,
+    "name": {
+      "fr": "Noix Kabombz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/46052.png",
+    "level": 1
+  },
+  {
+    "id": 31820,
+    "name": {
+      "fr": "Huile de tournelion"
+    },
+    "img": "https://api.dofusdb.fr/img/items/60073.png",
+    "level": 1
+  },
+  {
+    "id": 31821,
+    "name": {
+      "fr": "Graisse de larve Kabombz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/110736.png",
+    "level": 1
+  },
+  {
+    "id": 31822,
+    "name": {
+      "fr": "Larme délicieuse de Graogarm"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24871.png",
+    "level": 1
+  },
+  {
+    "id": 31823,
+    "name": {
+      "fr": "Moelle Rhoarim"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63422.png",
+    "level": 1
+  },
+  {
+    "id": 31825,
+    "name": {
+      "fr": "Sang ardent du dévoreur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/156022.png",
+    "level": 1
+  },
+  {
+    "id": 31826,
+    "name": {
+      "fr": "Boyau de zarbivore"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63439.png",
+    "level": 1
+  },
+  {
+    "id": 31827,
+    "name": {
+      "fr": "Pétale de tournelion"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35642.png",
+    "level": 1
+  },
+  {
+    "id": 31828,
+    "name": {
+      "fr": "Aigrette épicée de duvetueux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/35018.png",
+    "level": 1
+  },
+  {
+    "id": 31829,
+    "name": {
+      "fr": "Perle de nectar"
+    },
+    "img": "https://api.dofusdb.fr/img/items/136144.png",
+    "level": 1
+  },
+  {
+    "id": 31830,
+    "name": {
+      "fr": "Viande de zarbivore juteuse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/63489.png",
+    "level": 200
+  },
+  {
+    "id": 31831,
+    "name": {
+      "fr": "Souffle liquide de Gargandyas"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15773.png",
+    "level": 1
+  },
+  {
+    "id": 31832,
+    "name": {
+      "fr": "Antennes de Kabombz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/136145.png",
+    "level": 200
+  },
+  {
+    "id": 31833,
+    "name": {
+      "fr": "Zœuf de 100 ans"
+    },
+    "img": "https://api.dofusdb.fr/img/items/105656.png",
+    "level": 200
+  },
+  {
+    "id": 31834,
+    "name": {
+      "fr": "Zœuf non fécondé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/105657.png",
+    "level": 200
+  },
+  {
+    "id": 31869,
+    "name": {
+      "fr": "Poche primordiale de gropotam"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15392.png",
+    "level": 1
+  },
+  {
+    "id": 34205,
+    "name": {
+      "fr": "Baffeur en Bambou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93056.png",
+    "level": 60
+  },
+  {
+    "id": 34206,
+    "name": {
+      "fr": "Abreuvoir en Bambou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93017.png",
+    "level": 60
+  },
+  {
+    "id": 34207,
+    "name": {
+      "fr": "Foudroyeur en Bambou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93072.png",
+    "level": 60
+  },
+  {
+    "id": 34208,
+    "name": {
+      "fr": "Mangeoire en Bambou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/93028.png",
+    "level": 60
+  }
+]

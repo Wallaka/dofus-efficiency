@@ -1,0 +1,138 @@
+[
+  {
+    "id": 12832,
+    "name": {
+      "fr": "Patron de Redolphe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/153001.png",
+    "level": 85
+  },
+  {
+    "id": 12833,
+    "name": {
+      "fr": "Patron du Glutin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/153002.png",
+    "level": 25
+  },
+  {
+    "id": 12834,
+    "name": {
+      "fr": "Patron du Nowel Cauchemardesque"
+    },
+    "img": "https://api.dofusdb.fr/img/items/153003.png",
+    "level": 150
+  },
+  {
+    "id": 12835,
+    "name": {
+      "fr": "Moule de Clef du Donjon de Nowel"
+    },
+    "img": "https://api.dofusdb.fr/img/items/153004.png",
+    "level": 40
+  },
+  {
+    "id": 12836,
+    "name": {
+      "fr": "Moule de Clef de la Caverne de Nowel"
+    },
+    "img": "https://api.dofusdb.fr/img/items/153005.png",
+    "level": 110
+  },
+  {
+    "id": 12837,
+    "name": {
+      "fr": "Moule de Clef de la Maison du Papa Nowel"
+    },
+    "img": "https://api.dofusdb.fr/img/items/153006.png",
+    "level": 180
+  },
+  {
+    "id": 12845,
+    "name": {
+      "fr": "Flocon de Neige"
+    },
+    "img": "https://api.dofusdb.fr/img/items/153007.png",
+    "level": 1
+  },
+  {
+    "id": 12860,
+    "name": {
+      "fr": "Fond de Culotte de Glugubrr"
+    },
+    "img": "https://api.dofusdb.fr/img/items/153008.png",
+    "level": 25
+  },
+  {
+    "id": 12861,
+    "name": {
+      "fr": "Nez-Rouge de Redolphe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/153009.png",
+    "level": 85
+  },
+  {
+    "id": 12862,
+    "name": {
+      "fr": "Antennes du Cafard Fadet"
+    },
+    "img": "https://api.dofusdb.fr/img/items/153010.png",
+    "level": 125
+  },
+  {
+    "id": 12863,
+    "name": {
+      "fr": "Râtelier d'Oogie Betty"
+    },
+    "img": "https://api.dofusdb.fr/img/items/153011.png",
+    "level": 150
+  },
+  {
+    "id": 12876,
+    "name": {
+      "fr": "Blague Glutine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/153012.png",
+    "level": 1
+  },
+  {
+    "id": 12970,
+    "name": {
+      "fr": "Paquet Cadeau du Minotoboule de Nowel"
+    },
+    "img": "https://api.dofusdb.fr/img/items/153013.png",
+    "level": 197
+  },
+  {
+    "id": 15008,
+    "name": {
+      "fr": "Patron du Père Fwetar"
+    },
+    "img": "https://api.dofusdb.fr/img/items/153014.png",
+    "level": 190
+  },
+  {
+    "id": 20668,
+    "name": {
+      "fr": "Flocon de Neige Doré"
+    },
+    "img": "https://api.dofusdb.fr/img/items/153015.png",
+    "level": 1
+  },
+  {
+    "id": 20669,
+    "name": {
+      "fr": "Patron Hirsute"
+    },
+    "img": "https://api.dofusdb.fr/img/items/153016.png",
+    "level": 1
+  },
+  {
+    "id": 20680,
+    "name": {
+      "fr": "Cire de Gligli Améliorée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/147007.png",
+    "level": 1
+  }
+]

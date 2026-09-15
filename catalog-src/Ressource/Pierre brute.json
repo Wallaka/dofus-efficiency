@@ -1,0 +1,554 @@
+[
+  {
+    "id": 274,
+    "name": {
+      "fr": "Pièce du Puzzle de la Griffe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51267.png",
+    "level": 43
+  },
+  {
+    "id": 431,
+    "name": {
+      "fr": "Pierre du Craqueleur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51127.png",
+    "level": 61
+  },
+  {
+    "id": 448,
+    "name": {
+      "fr": "Silex"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51074.png",
+    "level": 66
+  },
+  {
+    "id": 450,
+    "name": {
+      "fr": "Pierre de Granit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51001.png",
+    "level": 26
+  },
+  {
+    "id": 543,
+    "name": {
+      "fr": "Pierre de Diamant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51144.png",
+    "level": 30
+  },
+  {
+    "id": 544,
+    "name": {
+      "fr": "Pierre d'Émeraude"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51145.png",
+    "level": 30
+  },
+  {
+    "id": 545,
+    "name": {
+      "fr": "Pierre de Cristal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51141.png",
+    "level": 30
+  },
+  {
+    "id": 546,
+    "name": {
+      "fr": "Pierre de Saphir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51151.png",
+    "level": 30
+  },
+  {
+    "id": 547,
+    "name": {
+      "fr": "Pierre de Rubis"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51150.png",
+    "level": 30
+  },
+  {
+    "id": 1326,
+    "name": {
+      "fr": "Silex Sanglant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51047.png",
+    "level": 1
+  },
+  {
+    "id": 2251,
+    "name": {
+      "fr": "Méga Pierre du Craqueleur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51417.png",
+    "level": 65
+  },
+  {
+    "id": 2304,
+    "name": {
+      "fr": "Fragment de Pierre Polie"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51454.png",
+    "level": 65
+  },
+  {
+    "id": 2305,
+    "name": {
+      "fr": "Fragment de Pierre Pointue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51455.png",
+    "level": 65
+  },
+  {
+    "id": 2306,
+    "name": {
+      "fr": "Cœur de Craqueleur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51456.png",
+    "level": 61
+  },
+  {
+    "id": 7023,
+    "name": {
+      "fr": "Pierre d'Aigue-Marine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51075.png",
+    "level": 150
+  },
+  {
+    "id": 7024,
+    "name": {
+      "fr": "Pierre de Topaze"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51076.png",
+    "level": 110
+  },
+  {
+    "id": 7025,
+    "name": {
+      "fr": "Pierre d'Agathe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51128.png",
+    "level": 150
+  },
+  {
+    "id": 7383,
+    "name": {
+      "fr": "Yokayu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164741.png",
+    "level": 170
+  },
+  {
+    "id": 8102,
+    "name": {
+      "fr": "Pierre du Craqueleur Légendaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51457.png",
+    "level": 70
+  },
+  {
+    "id": 8394,
+    "name": {
+      "fr": "Méga Pierre du Craqueleur Légendaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51464.png",
+    "level": 70
+  },
+  {
+    "id": 8402,
+    "name": {
+      "fr": "Pierre du Koulosse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51465.png",
+    "level": 100
+  },
+  {
+    "id": 8729,
+    "name": {
+      "fr": "Corail usé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51002.png",
+    "level": 44
+  },
+  {
+    "id": 8731,
+    "name": {
+      "fr": "Corail Magistral"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51009.png",
+    "level": 50
+  },
+  {
+    "id": 8732,
+    "name": {
+      "fr": "Corail Kouraçao"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51003.png",
+    "level": 42
+  },
+  {
+    "id": 8733,
+    "name": {
+      "fr": "Corail Malibout"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51004.png",
+    "level": 42
+  },
+  {
+    "id": 8734,
+    "name": {
+      "fr": "Corail Passaoh"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51005.png",
+    "level": 42
+  },
+  {
+    "id": 8735,
+    "name": {
+      "fr": "Corail Morito"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51006.png",
+    "level": 42
+  },
+  {
+    "id": 8736,
+    "name": {
+      "fr": "Cœur de pierre poli"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51007.png",
+    "level": 102
+  },
+  {
+    "id": 8737,
+    "name": {
+      "fr": "Boule polie"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51008.png",
+    "level": 99
+  },
+  {
+    "id": 9940,
+    "name": {
+      "fr": "Nacre brute"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51010.png",
+    "level": 45
+  },
+  {
+    "id": 9950,
+    "name": {
+      "fr": "Pierre de souillure bleue impure"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51151.png",
+    "level": 1
+  },
+  {
+    "id": 9951,
+    "name": {
+      "fr": "Pierre de souillure jaune impure"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51495.png",
+    "level": 1
+  },
+  {
+    "id": 9952,
+    "name": {
+      "fr": "Pierre de souillure verte impure"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51076.png",
+    "level": 1
+  },
+  {
+    "id": 10121,
+    "name": {
+      "fr": "Petit caillou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51267.png",
+    "level": 1
+  },
+  {
+    "id": 11323,
+    "name": {
+      "fr": "Pierre d'Atomystique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51469.png",
+    "level": 150
+  },
+  {
+    "id": 11324,
+    "name": {
+      "fr": "Téphra d'Atomystique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51470.png",
+    "level": 150
+  },
+  {
+    "id": 11325,
+    "name": {
+      "fr": "Résidu de Solfataré"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51471.png",
+    "level": 150
+  },
+  {
+    "id": 11327,
+    "name": {
+      "fr": "Cœur de Crapeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51472.png",
+    "level": 150
+  },
+  {
+    "id": 11329,
+    "name": {
+      "fr": "Pierre de Fumrirolle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51473.png",
+    "level": 150
+  },
+  {
+    "id": 11331,
+    "name": {
+      "fr": "Pierre de Mofette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51474.png",
+    "level": 150
+  },
+  {
+    "id": 11332,
+    "name": {
+      "fr": "Tuf de Mofette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51475.png",
+    "level": 150
+  },
+  {
+    "id": 11333,
+    "name": {
+      "fr": "Scorie d'Obsidiantre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51492.png",
+    "level": 160
+  },
+  {
+    "id": 11522,
+    "name": {
+      "fr": "Fragment de pépite de Sakaï"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51467.png",
+    "level": 185
+  },
+  {
+    "id": 11530,
+    "name": {
+      "fr": "Pierre du Courtilieur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51466.png",
+    "level": 187
+  },
+  {
+    "id": 11543,
+    "name": {
+      "fr": "Premier Fragment de Feu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51489.png",
+    "level": 125
+  },
+  {
+    "id": 11544,
+    "name": {
+      "fr": "Deuxième Fragment de Feu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51491.png",
+    "level": 125
+  },
+  {
+    "id": 11545,
+    "name": {
+      "fr": "Troisième Fragment de Feu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51490.png",
+    "level": 125
+  },
+  {
+    "id": 11546,
+    "name": {
+      "fr": "Quatrième Fragment de Feu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51488.png",
+    "level": 125
+  },
+  {
+    "id": 11547,
+    "name": {
+      "fr": "Premier Fragment de Terre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51484.png",
+    "level": 125
+  },
+  {
+    "id": 11548,
+    "name": {
+      "fr": "Deuxième Fragment de Terre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51485.png",
+    "level": 125
+  },
+  {
+    "id": 11549,
+    "name": {
+      "fr": "Troisième Fragment de Terre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51486.png",
+    "level": 125
+  },
+  {
+    "id": 11550,
+    "name": {
+      "fr": "Quatrième Fragment de Terre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51487.png",
+    "level": 125
+  },
+  {
+    "id": 11551,
+    "name": {
+      "fr": "Premier Fragment d'Eau"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51476.png",
+    "level": 125
+  },
+  {
+    "id": 11552,
+    "name": {
+      "fr": "Deuxième Fragment d'Eau"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51477.png",
+    "level": 125
+  },
+  {
+    "id": 11553,
+    "name": {
+      "fr": "Troisième Fragment d'Eau"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51478.png",
+    "level": 125
+  },
+  {
+    "id": 11554,
+    "name": {
+      "fr": "Quatrième Fragment d'Eau"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51479.png",
+    "level": 125
+  },
+  {
+    "id": 11555,
+    "name": {
+      "fr": "Premier Fragment d'Air"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51483.png",
+    "level": 125
+  },
+  {
+    "id": 11556,
+    "name": {
+      "fr": "Deuxième Fragment d'Air"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51482.png",
+    "level": 125
+  },
+  {
+    "id": 11557,
+    "name": {
+      "fr": "Troisième Fragment d'Air"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51481.png",
+    "level": 125
+  },
+  {
+    "id": 11558,
+    "name": {
+      "fr": "Quatrième Fragment d'Air"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51480.png",
+    "level": 125
+  },
+  {
+    "id": 12375,
+    "name": {
+      "fr": "Fragment du Gorgouille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51493.png",
+    "level": 100
+  },
+  {
+    "id": 13731,
+    "name": {
+      "fr": "Pierre Médicinale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51496.png",
+    "level": 74
+  },
+  {
+    "id": 14952,
+    "name": {
+      "fr": "Pierre de Serpiplume"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15858.png",
+    "level": 124
+  },
+  {
+    "id": 17021,
+    "name": {
+      "fr": "Pavé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51497.png",
+    "level": 200
+  },
+  {
+    "id": 17022,
+    "name": {
+      "fr": "Basalte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51498.png",
+    "level": 200
+  },
+  {
+    "id": 17988,
+    "name": {
+      "fr": "Pierre Angulaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51499.png",
+    "level": 200
+  },
+  {
+    "id": 19971,
+    "name": {
+      "fr": "Fronde de Boufbos"
+    },
+    "img": "https://api.dofusdb.fr/img/items/25163.png",
+    "level": 200
+  },
+  {
+    "id": 20452,
+    "name": {
+      "fr": "Andésite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/39400.png",
+    "level": 200
+  },
+  {
+    "id": 23592,
+    "name": {
+      "fr": "Pierre de Sélénite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164742.png",
+    "level": 150
+  }
+]

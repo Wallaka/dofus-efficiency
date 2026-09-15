@@ -1,0 +1,162 @@
+[
+  {
+    "id": 384,
+    "name": {
+      "fr": "Laine de Bouftou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/57056.png",
+    "level": 19
+  },
+  {
+    "id": 880,
+    "name": {
+      "fr": "Laine de Bouftou Royal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/57207.png",
+    "level": 30
+  },
+  {
+    "id": 881,
+    "name": {
+      "fr": "Laine de Ramane Strubien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/57208.png",
+    "level": 23
+  },
+  {
+    "id": 882,
+    "name": {
+      "fr": "Laine du Chef de Guerre Bouftou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/57209.png",
+    "level": 29
+  },
+  {
+    "id": 885,
+    "name": {
+      "fr": "Laine de Boufton Noir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/57210.png",
+    "level": 26
+  },
+  {
+    "id": 1694,
+    "name": {
+      "fr": "Laine du Trooll Furieux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/57027.png",
+    "level": 115
+  },
+  {
+    "id": 7905,
+    "name": {
+      "fr": "Laine du Boufcoul"
+    },
+    "img": "https://api.dofusdb.fr/img/items/57001.png",
+    "level": 96
+  },
+  {
+    "id": 11117,
+    "name": {
+      "fr": "Laine de Boufmouth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/57211.png",
+    "level": 112
+  },
+  {
+    "id": 11136,
+    "name": {
+      "fr": "Laine de Boufmouth légendaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/57212.png",
+    "level": 112
+  },
+  {
+    "id": 11221,
+    "name": {
+      "fr": "Laine du Royalmouth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/57213.png",
+    "level": 120
+  },
+  {
+    "id": 11338,
+    "name": {
+      "fr": "Laine de Maho Givrefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/57657.png",
+    "level": 160
+  },
+  {
+    "id": 11339,
+    "name": {
+      "fr": "Laine de Yokaï Givrefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/57658.png",
+    "level": 160
+  },
+  {
+    "id": 11341,
+    "name": {
+      "fr": "Laine de Tengu Givrefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/57659.png",
+    "level": 170
+  },
+  {
+    "id": 11937,
+    "name": {
+      "fr": "Laine de Glouragan"
+    },
+    "img": "https://api.dofusdb.fr/img/items/57214.png",
+    "level": 190
+  },
+  {
+    "id": 13982,
+    "name": {
+      "fr": "Laine de Sylargh"
+    },
+    "img": "https://api.dofusdb.fr/img/items/57660.png",
+    "level": 200
+  },
+  {
+    "id": 16217,
+    "name": {
+      "fr": "Laine de Dardalaine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/57661.png",
+    "level": 86
+  },
+  {
+    "id": 16511,
+    "name": {
+      "fr": "Laine Céleste"
+    },
+    "img": "https://api.dofusdb.fr/img/items/57662.png",
+    "level": 3
+  },
+  {
+    "id": 19694,
+    "name": {
+      "fr": "Laine Urticante"
+    },
+    "img": "https://api.dofusdb.fr/img/items/57056.png",
+    "level": 1
+  },
+  {
+    "id": 32246,
+    "name": {
+      "fr": "Laine de Bouflouth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/57215.png",
+    "level": 120
+  },
+  {
+    "id": 32252,
+    "name": {
+      "fr": "Laine de Fuji Givrefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/57216.png",
+    "level": 190
+  }
+]

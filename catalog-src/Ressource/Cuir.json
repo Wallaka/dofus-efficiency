@@ -1,0 +1,226 @@
+[
+  {
+    "id": 304,
+    "name": {
+      "fr": "Cuir de Scélérat Strubien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/25157.png",
+    "level": 26
+  },
+  {
+    "id": 486,
+    "name": {
+      "fr": "Cuir de Gargrouille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56016.png",
+    "level": 36
+  },
+  {
+    "id": 883,
+    "name": {
+      "fr": "Cuir de Boostache Prépubère"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56534.png",
+    "level": 36
+  },
+  {
+    "id": 884,
+    "name": {
+      "fr": "Cuir de Bouftou Noir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56016.png",
+    "level": 26
+  },
+  {
+    "id": 886,
+    "name": {
+      "fr": "Cuir de Bouftou Royal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56535.png",
+    "level": 30
+  },
+  {
+    "id": 887,
+    "name": {
+      "fr": "Cuir de Ouassingue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/25156.png",
+    "level": 36
+  },
+  {
+    "id": 901,
+    "name": {
+      "fr": "Cuir du Cochon de Lait"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56141.png",
+    "level": 33
+  },
+  {
+    "id": 2271,
+    "name": {
+      "fr": "Cuir Violet de Mégabwork"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56426.png",
+    "level": 86
+  },
+  {
+    "id": 2275,
+    "name": {
+      "fr": "Cuir de Porkass"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56429.png",
+    "level": 46
+  },
+  {
+    "id": 2511,
+    "name": {
+      "fr": "Cuir de Gliglibido"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56410.png",
+    "level": 146
+  },
+  {
+    "id": 2555,
+    "name": {
+      "fr": "Courroie en cuir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15946.png",
+    "level": 56
+  },
+  {
+    "id": 8323,
+    "name": {
+      "fr": "Cuir de Déminoboule"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56657.png",
+    "level": 114
+  },
+  {
+    "id": 8324,
+    "name": {
+      "fr": "Cuir de Capsaaloocke"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56656.png",
+    "level": 110
+  },
+  {
+    "id": 11120,
+    "name": {
+      "fr": "Cuir de Bouftonmouth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56659.png",
+    "level": 112
+  },
+  {
+    "id": 11243,
+    "name": {
+      "fr": "Cuir du Sanglacier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56016.png",
+    "level": 130
+  },
+  {
+    "id": 11337,
+    "name": {
+      "fr": "Cuir de Maho Givrefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56660.png",
+    "level": 160
+  },
+  {
+    "id": 11342,
+    "name": {
+      "fr": "Cuir de Tengu Givrefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56662.png",
+    "level": 170
+  },
+  {
+    "id": 11884,
+    "name": {
+      "fr": "Cuir de Fuji Givrefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56661.png",
+    "level": 190
+  },
+  {
+    "id": 11938,
+    "name": {
+      "fr": "Cuir de Glouragan"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56663.png",
+    "level": 190
+  },
+  {
+    "id": 13196,
+    "name": {
+      "fr": "Cuir synthétique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56664.png",
+    "level": 199
+  },
+  {
+    "id": 13915,
+    "name": {
+      "fr": "Cuir de Grodruche"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56665.png",
+    "level": 200
+  },
+  {
+    "id": 13918,
+    "name": {
+      "fr": "Cuir de Peunch"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56666.png",
+    "level": 200
+  },
+  {
+    "id": 13919,
+    "name": {
+      "fr": "Cuir d'Empaillé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56667.png",
+    "level": 200
+  },
+  {
+    "id": 13921,
+    "name": {
+      "fr": "Cuir de Cuirboule"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56668.png",
+    "level": 200
+  },
+  {
+    "id": 13980,
+    "name": {
+      "fr": "Cuir Onique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56669.png",
+    "level": 120
+  },
+  {
+    "id": 14860,
+    "name": {
+      "fr": "Cuir d'Eskoglyphe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56670.png",
+    "level": 200
+  },
+  {
+    "id": 14946,
+    "name": {
+      "fr": "Cuir de Porsalu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15852.png",
+    "level": 86
+  },
+  {
+    "id": 32260,
+    "name": {
+      "fr": "Cuir de Psikopompe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56015.png",
+    "level": 200
+  }
+]

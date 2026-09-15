@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1526,
+    "name": {
+      "fr": "Métaria rouge"
+    },
+    "img": "https://api.dofusdb.fr/img/items/66241.png",
+    "level": 1
+  },
+  {
+    "id": 1527,
+    "name": {
+      "fr": "Métaria bleue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/66244.png",
+    "level": 1
+  },
+  {
+    "id": 1528,
+    "name": {
+      "fr": "Métaria jaune"
+    },
+    "img": "https://api.dofusdb.fr/img/items/66247.png",
+    "level": 1
+  },
+  {
+    "id": 1529,
+    "name": {
+      "fr": "Métaria verte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/66250.png",
+    "level": 1
+  },
+  {
+    "id": 1531,
+    "name": {
+      "fr": "Métaria Triame bleue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/66245.png",
+    "level": 1
+  },
+  {
+    "id": 1532,
+    "name": {
+      "fr": "Métaria Triame verte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/66248.png",
+    "level": 1
+  },
+  {
+    "id": 1533,
+    "name": {
+      "fr": "Métaria Triame rouge"
+    },
+    "img": "https://api.dofusdb.fr/img/items/66242.png",
+    "level": 1
+  },
+  {
+    "id": 1534,
+    "name": {
+      "fr": "Métaria Triame jaune"
+    },
+    "img": "https://api.dofusdb.fr/img/items/66251.png",
+    "level": 1
+  },
+  {
+    "id": 1535,
+    "name": {
+      "fr": "Métaria Mage rouge"
+    },
+    "img": "https://api.dofusdb.fr/img/items/66243.png",
+    "level": 1
+  },
+  {
+    "id": 1536,
+    "name": {
+      "fr": "Métaria Mage bleue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/66246.png",
+    "level": 1
+  },
+  {
+    "id": 1537,
+    "name": {
+      "fr": "Métaria Mage verte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/66252.png",
+    "level": 1
+  },
+  {
+    "id": 1538,
+    "name": {
+      "fr": "Métaria Mage jaune"
+    },
+    "img": "https://api.dofusdb.fr/img/items/66249.png",
+    "level": 1
+  },
+  {
+    "id": 1634,
+    "name": {
+      "fr": "Sphère à Métarias"
+    },
+    "img": "https://api.dofusdb.fr/img/items/66240.png",
+    "level": 1
+  }
+]

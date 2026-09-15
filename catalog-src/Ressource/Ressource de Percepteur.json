@@ -1,0 +1,58 @@
+[
+  {
+    "id": 27929,
+    "name": {
+      "fr": "Clous de Percepteur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24125.png",
+    "level": 1
+  },
+  {
+    "id": 27930,
+    "name": {
+      "fr": "Mailles de Percepteur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/55020.png",
+    "level": 1
+  },
+  {
+    "id": 27931,
+    "name": {
+      "fr": "Hampe de Percepteur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24126.png",
+    "level": 1
+  },
+  {
+    "id": 27932,
+    "name": {
+      "fr": "Lame de Percepteur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24127.png",
+    "level": 1
+  },
+  {
+    "id": 27933,
+    "name": {
+      "fr": "Plaque de Percepteur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24128.png",
+    "level": 1
+  },
+  {
+    "id": 27934,
+    "name": {
+      "fr": "Serrure de Percepteur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24129.png",
+    "level": 1
+  },
+  {
+    "id": 27935,
+    "name": {
+      "fr": "Sangle de Percepteur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24753.png",
+    "level": 1
+  }
+]

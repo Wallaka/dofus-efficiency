@@ -1,0 +1,74 @@
+[
+  {
+    "id": 381,
+    "name": {
+      "fr": "Fraise"
+    },
+    "img": "https://api.dofusdb.fr/img/items/46053.png",
+    "level": 58
+  },
+  {
+    "id": 997,
+    "name": {
+      "fr": "Noix de Kokoko"
+    },
+    "img": "https://api.dofusdb.fr/img/items/46159.png",
+    "level": 50
+  },
+  {
+    "id": 1678,
+    "name": {
+      "fr": "Noix de Grokoko Traumatisée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/46552.png",
+    "level": 50
+  },
+  {
+    "id": 1734,
+    "name": {
+      "fr": "Cerise"
+    },
+    "img": "https://api.dofusdb.fr/img/items/46265.png",
+    "level": 1
+  },
+  {
+    "id": 1736,
+    "name": {
+      "fr": "Citron"
+    },
+    "img": "https://api.dofusdb.fr/img/items/46266.png",
+    "level": 1
+  },
+  {
+    "id": 2331,
+    "name": {
+      "fr": "Aubergine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/46472.png",
+    "level": 1
+  },
+  {
+    "id": 10831,
+    "name": {
+      "fr": "Bananagrume"
+    },
+    "img": "https://api.dofusdb.fr/img/items/46001.png",
+    "level": 57
+  },
+  {
+    "id": 19950,
+    "name": {
+      "fr": "Orange amère"
+    },
+    "img": "https://api.dofusdb.fr/img/items/46468.png",
+    "level": 200
+  },
+  {
+    "id": 20231,
+    "name": {
+      "fr": "Framboise"
+    },
+    "img": "https://api.dofusdb.fr/img/items/46473.png",
+    "level": 1
+  }
+]

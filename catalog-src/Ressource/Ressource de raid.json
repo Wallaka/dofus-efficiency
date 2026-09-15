@@ -1,0 +1,98 @@
+[
+  {
+    "id": 32464,
+    "name": {
+      "fr": "Sel des profondeurs"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51519.png",
+    "level": 1
+  },
+  {
+    "id": 32465,
+    "name": {
+      "fr": "Quartz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51512.png",
+    "level": 1
+  },
+  {
+    "id": 32466,
+    "name": {
+      "fr": "Opale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51513.png",
+    "level": 1
+  },
+  {
+    "id": 32467,
+    "name": {
+      "fr": "Amazonite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51514.png",
+    "level": 1
+  },
+  {
+    "id": 32468,
+    "name": {
+      "fr": "Aventurine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51515.png",
+    "level": 1
+  },
+  {
+    "id": 32469,
+    "name": {
+      "fr": "Lapiz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51516.png",
+    "level": 1
+  },
+  {
+    "id": 32470,
+    "name": {
+      "fr": "Onyx"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51518.png",
+    "level": 1
+  },
+  {
+    "id": 32471,
+    "name": {
+      "fr": "Jais"
+    },
+    "img": "https://api.dofusdb.fr/img/items/51517.png",
+    "level": 1
+  },
+  {
+    "id": 34334,
+    "name": {
+      "fr": "Unité de Mureine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24533.png",
+    "level": 1
+  },
+  {
+    "id": 34335,
+    "name": {
+      "fr": "Rancune d'Exécrabe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24537.png",
+    "level": 1
+  },
+  {
+    "id": 34336,
+    "name": {
+      "fr": "Noirceur de Willorque"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24532.png",
+    "level": 1
+  },
+  {
+    "id": 34394,
+    "name": {
+      "fr": "Pince d'Exécrabe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24531.png",
+    "level": 200
+  }
+]

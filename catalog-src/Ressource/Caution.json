@@ -1,0 +1,138 @@
+[
+  {
+    "id": 18128,
+    "name": {
+      "fr": "Caution Primaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/77039.png",
+    "level": 60
+  },
+  {
+    "id": 18129,
+    "name": {
+      "fr": "Caution Secondaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/77046.png",
+    "level": 100
+  },
+  {
+    "id": 18130,
+    "name": {
+      "fr": "Caution Tertiaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/77033.png",
+    "level": 140
+  },
+  {
+    "id": 18131,
+    "name": {
+      "fr": "Caution Quaternaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/77047.png",
+    "level": 180
+  },
+  {
+    "id": 18132,
+    "name": {
+      "fr": "Caution Quinaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/77020.png",
+    "level": 200
+  },
+  {
+    "id": 18133,
+    "name": {
+      "fr": "Caution Sauvage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/77038.png",
+    "level": 60
+  },
+  {
+    "id": 18134,
+    "name": {
+      "fr": "Caution Insignifiante"
+    },
+    "img": "https://api.dofusdb.fr/img/items/77034.png",
+    "level": 60
+  },
+  {
+    "id": 18135,
+    "name": {
+      "fr": "Caution Dérisoire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/77028.png",
+    "level": 100
+  },
+  {
+    "id": 18136,
+    "name": {
+      "fr": "Caution Infime"
+    },
+    "img": "https://api.dofusdb.fr/img/items/77029.png",
+    "level": 100
+  },
+  {
+    "id": 18137,
+    "name": {
+      "fr": "Caution Modeste"
+    },
+    "img": "https://api.dofusdb.fr/img/items/77023.png",
+    "level": 140
+  },
+  {
+    "id": 18138,
+    "name": {
+      "fr": "Caution Mineure"
+    },
+    "img": "https://api.dofusdb.fr/img/items/77044.png",
+    "level": 140
+  },
+  {
+    "id": 18139,
+    "name": {
+      "fr": "Caution Moyenne"
+    },
+    "img": "https://api.dofusdb.fr/img/items/77027.png",
+    "level": 180
+  },
+  {
+    "id": 18140,
+    "name": {
+      "fr": "Caution Substantielle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/77026.png",
+    "level": 180
+  },
+  {
+    "id": 18141,
+    "name": {
+      "fr": "Caution Conséquente"
+    },
+    "img": "https://api.dofusdb.fr/img/items/77022.png",
+    "level": 180
+  },
+  {
+    "id": 18142,
+    "name": {
+      "fr": "Caution Considérable"
+    },
+    "img": "https://api.dofusdb.fr/img/items/77021.png",
+    "level": 200
+  },
+  {
+    "id": 18143,
+    "name": {
+      "fr": "Caution Majeure"
+    },
+    "img": "https://api.dofusdb.fr/img/items/77036.png",
+    "level": 200
+  },
+  {
+    "id": 18144,
+    "name": {
+      "fr": "Caution Magistrale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/77040.png",
+    "level": 200
+  }
+]

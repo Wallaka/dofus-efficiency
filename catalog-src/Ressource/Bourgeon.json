@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1611,
+    "name": {
+      "fr": "Bourgeon de Pirolienne"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15979.png",
+    "level": 86
+  },
+  {
+    "id": 6736,
+    "name": {
+      "fr": "Bourgeon de Fourbasse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/108097.png",
+    "level": 100
+  },
+  {
+    "id": 8495,
+    "name": {
+      "fr": "Bourgeon d'Abraknyde Ancestral"
+    },
+    "img": "https://api.dofusdb.fr/img/items/108755.png",
+    "level": 90
+  },
+  {
+    "id": 13528,
+    "name": {
+      "fr": "Bourgeon d'Abraknyde Sombre Irascible"
+    },
+    "img": "https://api.dofusdb.fr/img/items/108230.png",
+    "level": 130
+  },
+  {
+    "id": 16211,
+    "name": {
+      "fr": "Bourgeon explosif de Damadrya"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164664.png",
+    "level": 110
+  }
+]

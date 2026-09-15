@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1686,
+    "name": {
+      "fr": "Teinture Magique de Rougeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/70063.png",
+    "level": 55
+  },
+  {
+    "id": 1687,
+    "name": {
+      "fr": "Teinture Magique Verdâtre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/70064.png",
+    "level": 15
+  },
+  {
+    "id": 1688,
+    "name": {
+      "fr": "Teinture Magique Bleutée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/70065.png",
+    "level": 55
+  },
+  {
+    "id": 1689,
+    "name": {
+      "fr": "Teinture Magique Orange"
+    },
+    "img": "https://api.dofusdb.fr/img/items/70066.png",
+    "level": 20
+  },
+  {
+    "id": 1692,
+    "name": {
+      "fr": "Teinture Magique Sombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/70067.png",
+    "level": 10
+  },
+  {
+    "id": 10031,
+    "name": {
+      "fr": "Teinture Orange Sanguine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/70063.png",
+    "level": 155
+  },
+  {
+    "id": 10064,
+    "name": {
+      "fr": "Teinture Magique Ténébreuse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/70067.png",
+    "level": 174
+  }
+]

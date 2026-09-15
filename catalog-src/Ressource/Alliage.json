@@ -1,0 +1,122 @@
+[
+  {
+    "id": 745,
+    "name": {
+      "fr": "Lingot d'Or"
+    },
+    "img": "https://api.dofusdb.fr/img/items/40241.png",
+    "level": 10
+  },
+  {
+    "id": 746,
+    "name": {
+      "fr": "Ébonite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/40658.png",
+    "level": 40
+  },
+  {
+    "id": 747,
+    "name": {
+      "fr": "Aluminite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/40660.png",
+    "level": 20
+  },
+  {
+    "id": 748,
+    "name": {
+      "fr": "Magnésite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/40659.png",
+    "level": 60
+  },
+  {
+    "id": 749,
+    "name": {
+      "fr": "Bakélélite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/40487.png",
+    "level": 80
+  },
+  {
+    "id": 750,
+    "name": {
+      "fr": "Kouartz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/40664.png",
+    "level": 100
+  },
+  {
+    "id": 6457,
+    "name": {
+      "fr": "Kriptonite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/40706.png",
+    "level": 120
+  },
+  {
+    "id": 6458,
+    "name": {
+      "fr": "Kobalite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/40704.png",
+    "level": 140
+  },
+  {
+    "id": 7035,
+    "name": {
+      "fr": "Pyrute"
+    },
+    "img": "https://api.dofusdb.fr/img/items/40708.png",
+    "level": 180
+  },
+  {
+    "id": 7036,
+    "name": {
+      "fr": "Rutile"
+    },
+    "img": "https://api.dofusdb.fr/img/items/40707.png",
+    "level": 160
+  },
+  {
+    "id": 11280,
+    "name": {
+      "fr": "Plaque d'acier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/40709.png",
+    "level": 100
+  },
+  {
+    "id": 12728,
+    "name": {
+      "fr": "Ardonite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/40710.png",
+    "level": 200
+  },
+  {
+    "id": 13981,
+    "name": {
+      "fr": "Alliage Ivre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/40711.png",
+    "level": 150
+  },
+  {
+    "id": 16440,
+    "name": {
+      "fr": "Ferrite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/40712.png",
+    "level": 1
+  },
+  {
+    "id": 28277,
+    "name": {
+      "fr": "Grizite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/40715.png",
+    "level": 30
+  }
+]

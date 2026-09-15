@@ -1,0 +1,58 @@
+[
+  {
+    "id": 12737,
+    "name": {
+      "fr": "Galet cramoisi"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15290.png",
+    "level": 50
+  },
+  {
+    "id": 12738,
+    "name": {
+      "fr": "Galet rutilant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15291.png",
+    "level": 100
+  },
+  {
+    "id": 12740,
+    "name": {
+      "fr": "Galet brasillant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15289.png",
+    "level": 195
+  },
+  {
+    "id": 13365,
+    "name": {
+      "fr": "Galet Saisonnier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/152006.png",
+    "level": 50
+  },
+  {
+    "id": 13366,
+    "name": {
+      "fr": "Galet Lunaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/152005.png",
+    "level": 100
+  },
+  {
+    "id": 13367,
+    "name": {
+      "fr": "Galet Solaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/152004.png",
+    "level": 150
+  },
+  {
+    "id": 29444,
+    "name": {
+      "fr": "Galet rayonnant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/152001.png",
+    "level": 150
+  }
+]

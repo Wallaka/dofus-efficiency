@@ -1,0 +1,626 @@
+[
+  {
+    "id": 362,
+    "name": {
+      "fr": "Peau de Larve Bleue"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59032.png",
+    "level": 18
+  },
+  {
+    "id": 363,
+    "name": {
+      "fr": "Peau de Larve Orange"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59033.png",
+    "level": 18
+  },
+  {
+    "id": 364,
+    "name": {
+      "fr": "Peau de Larve Verte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59034.png",
+    "level": 18
+  },
+  {
+    "id": 1613,
+    "name": {
+      "fr": "Écaille de Chef Crocodaille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59547.png",
+    "level": 69
+  },
+  {
+    "id": 1663,
+    "name": {
+      "fr": "Écaille de Crocodaille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59233.png",
+    "level": 46
+  },
+  {
+    "id": 1681,
+    "name": {
+      "fr": "Peau Égrotante"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59391.png",
+    "level": 13
+  },
+  {
+    "id": 1891,
+    "name": {
+      "fr": "Peau de serpentin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59361.png",
+    "level": 56
+  },
+  {
+    "id": 2507,
+    "name": {
+      "fr": "Peau de Larve Champêtre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59652.png",
+    "level": 56
+  },
+  {
+    "id": 2563,
+    "name": {
+      "fr": "Peau de Larve Jaune"
+    },
+    "img": "https://api.dofusdb.fr/img/items/25138.png",
+    "level": 18
+  },
+  {
+    "id": 2999,
+    "name": {
+      "fr": "Peau de Minos"
+    },
+    "img": "https://api.dofusdb.fr/img/items/56655.png",
+    "level": 104
+  },
+  {
+    "id": 6739,
+    "name": {
+      "fr": "Peau de Roukouto"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15981.png",
+    "level": 86
+  },
+  {
+    "id": 6740,
+    "name": {
+      "fr": "Peau de Tivelo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15978.png",
+    "level": 86
+  },
+  {
+    "id": 7030,
+    "name": {
+      "fr": "Peau de Krambwork"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59047.png",
+    "level": 86
+  },
+  {
+    "id": 7298,
+    "name": {
+      "fr": "Peau de Rouquette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59042.png",
+    "level": 140
+  },
+  {
+    "id": 7299,
+    "name": {
+      "fr": "Peau de Crachefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59038.png",
+    "level": 140
+  },
+  {
+    "id": 8050,
+    "name": {
+      "fr": "Peau de Koalak Immature"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59003.png",
+    "level": 64
+  },
+  {
+    "id": 8052,
+    "name": {
+      "fr": "Peau de Maître Koalak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59005.png",
+    "level": 114
+  },
+  {
+    "id": 8053,
+    "name": {
+      "fr": "Peau de Chevaucheur Koalak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59006.png",
+    "level": 108
+  },
+  {
+    "id": 8054,
+    "name": {
+      "fr": "Peau de Drakoalak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59007.png",
+    "level": 94
+  },
+  {
+    "id": 8084,
+    "name": {
+      "fr": "Peau de Piralak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59008.png",
+    "level": 84
+  },
+  {
+    "id": 8312,
+    "name": {
+      "fr": "Peau de Minoskito"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59604.png",
+    "level": 104
+  },
+  {
+    "id": 8314,
+    "name": {
+      "fr": "Peau de Kraméléhon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59603.png",
+    "level": 114
+  },
+  {
+    "id": 8315,
+    "name": {
+      "fr": "Peau de Mandrine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59602.png",
+    "level": 104
+  },
+  {
+    "id": 8352,
+    "name": {
+      "fr": "Écaille de Dragoss Charbon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59606.png",
+    "level": 96
+  },
+  {
+    "id": 8353,
+    "name": {
+      "fr": "Écaille de Dragoss Ardoise"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59608.png",
+    "level": 96
+  },
+  {
+    "id": 8354,
+    "name": {
+      "fr": "Écaille de Dragoss Calcaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59607.png",
+    "level": 96
+  },
+  {
+    "id": 8355,
+    "name": {
+      "fr": "Écaille de Dragoss Argile"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59605.png",
+    "level": 96
+  },
+  {
+    "id": 8356,
+    "name": {
+      "fr": "Peau de Dragueuse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59609.png",
+    "level": 120
+  },
+  {
+    "id": 8360,
+    "name": {
+      "fr": "Peau de Draguaindrop"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59610.png",
+    "level": 120
+  },
+  {
+    "id": 8362,
+    "name": {
+      "fr": "Peau de Dragnarok"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59611.png",
+    "level": 120
+  },
+  {
+    "id": 8367,
+    "name": {
+      "fr": "Peau de Crocabulia"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59612.png",
+    "level": 120
+  },
+  {
+    "id": 8383,
+    "name": {
+      "fr": "Peau de Moon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59613.png",
+    "level": 100
+  },
+  {
+    "id": 8385,
+    "name": {
+      "fr": "Peau de Shin Larve"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59614.png",
+    "level": 50
+  },
+  {
+    "id": 8388,
+    "name": {
+      "fr": "Peau de Bworkette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59615.png",
+    "level": 50
+  },
+  {
+    "id": 8390,
+    "name": {
+      "fr": "Peau de Cochon de Farle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59616.png",
+    "level": 94
+  },
+  {
+    "id": 8391,
+    "name": {
+      "fr": "Peau de Don Dorgan"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59617.png",
+    "level": 100
+  },
+  {
+    "id": 8392,
+    "name": {
+      "fr": "Peau de Don Duss Ang"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59618.png",
+    "level": 97
+  },
+  {
+    "id": 8404,
+    "name": {
+      "fr": "Peau de Skeunk"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59620.png",
+    "level": 120
+  },
+  {
+    "id": 8482,
+    "name": {
+      "fr": "Peau de Rat"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59621.png",
+    "level": 56
+  },
+  {
+    "id": 8483,
+    "name": {
+      "fr": "Peau de Ramane d'Égoutant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59622.png",
+    "level": 54
+  },
+  {
+    "id": 8546,
+    "name": {
+      "fr": "Peau de Milimilou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59003.png",
+    "level": 1
+  },
+  {
+    "id": 8680,
+    "name": {
+      "fr": "Écaille poisseuse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59626.png",
+    "level": 18
+  },
+  {
+    "id": 8681,
+    "name": {
+      "fr": "Peau de Raul Mops"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59627.png",
+    "level": 46
+  },
+  {
+    "id": 8682,
+    "name": {
+      "fr": "Peau de Mob l'Éponge"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59628.png",
+    "level": 20
+  },
+  {
+    "id": 9401,
+    "name": {
+      "fr": "Peau du Bworker"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59009.png",
+    "level": 180
+  },
+  {
+    "id": 11225,
+    "name": {
+      "fr": "Peau de Mansobèse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59049.png",
+    "level": 132
+  },
+  {
+    "id": 11318,
+    "name": {
+      "fr": "Écaille de Harpirate"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59631.png",
+    "level": 140
+  },
+  {
+    "id": 11527,
+    "name": {
+      "fr": "Peau d'Ouilleur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59630.png",
+    "level": 183
+  },
+  {
+    "id": 12467,
+    "name": {
+      "fr": "Épine Dorsale de Grozilla"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59050.png",
+    "level": 150
+  },
+  {
+    "id": 13593,
+    "name": {
+      "fr": "Peau de Larve Saphir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59634.png",
+    "level": 45
+  },
+  {
+    "id": 13594,
+    "name": {
+      "fr": "Peau de Larve Émeraude"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59632.png",
+    "level": 47
+  },
+  {
+    "id": 13595,
+    "name": {
+      "fr": "Peau de Larve Rubis"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59633.png",
+    "level": 49
+  },
+  {
+    "id": 13596,
+    "name": {
+      "fr": "Peau de Larve Dorée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59635.png",
+    "level": 51
+  },
+  {
+    "id": 14263,
+    "name": {
+      "fr": "Écaille de Grozilla"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59636.png",
+    "level": 50
+  },
+  {
+    "id": 14265,
+    "name": {
+      "fr": "Écaille de Grasmera"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59637.png",
+    "level": 100
+  },
+  {
+    "id": 14996,
+    "name": {
+      "fr": "Fragment d'Écaille de Courage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59639.png",
+    "level": 100
+  },
+  {
+    "id": 14997,
+    "name": {
+      "fr": "Fragment d'Écaille de Férocité"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59640.png",
+    "level": 100
+  },
+  {
+    "id": 14998,
+    "name": {
+      "fr": "Fragment d'Écaille d'Endurance"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59638.png",
+    "level": 100
+  },
+  {
+    "id": 15042,
+    "name": {
+      "fr": "Peau de Kanihilan"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59641.png",
+    "level": 156
+  },
+  {
+    "id": 15172,
+    "name": {
+      "fr": "Peau de Métaphorreur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15871.png",
+    "level": 150
+  },
+  {
+    "id": 15688,
+    "name": {
+      "fr": "Peau de Pataugerme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59647.png",
+    "level": 200
+  },
+  {
+    "id": 15723,
+    "name": {
+      "fr": "Peau de Vindeux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15903.png",
+    "level": 170
+  },
+  {
+    "id": 16522,
+    "name": {
+      "fr": "Peau de Gloot"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164066.png",
+    "level": 2
+  },
+  {
+    "id": 17115,
+    "name": {
+      "fr": "Scalp d'Anatak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164080.png",
+    "level": 160
+  },
+  {
+    "id": 17118,
+    "name": {
+      "fr": "Peau du Grand Kongoku"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59648.png",
+    "level": 200
+  },
+  {
+    "id": 17612,
+    "name": {
+      "fr": "Peau de Gériatique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59649.png",
+    "level": 110
+  },
+  {
+    "id": 17972,
+    "name": {
+      "fr": "Écaille de Gambaf"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59650.png",
+    "level": 200
+  },
+  {
+    "id": 17981,
+    "name": {
+      "fr": "Peau de Trithon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59651.png",
+    "level": 200
+  },
+  {
+    "id": 18368,
+    "name": {
+      "fr": "Écailles d'Ouroboulos"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59653.png",
+    "level": 80
+  },
+  {
+    "id": 18565,
+    "name": {
+      "fr": "Peau de Trémorse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59654.png",
+    "level": 170
+  },
+  {
+    "id": 20909,
+    "name": {
+      "fr": "Peau de Torréfactueur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59662.png",
+    "level": 200
+  },
+  {
+    "id": 20944,
+    "name": {
+      "fr": "Enrobage de Chocoskargo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59659.png",
+    "level": 130
+  },
+  {
+    "id": 20959,
+    "name": {
+      "fr": "Écaille dorée de Léviathon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59657.png",
+    "level": 200
+  },
+  {
+    "id": 21207,
+    "name": {
+      "fr": "Écaille de Torkélonia"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59674.png",
+    "level": 200
+  },
+  {
+    "id": 21263,
+    "name": {
+      "fr": "Peau de Dragoeuf Albâtre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59675.png",
+    "level": 70
+  },
+  {
+    "id": 22208,
+    "name": {
+      "fr": "Peau pourrie de Dolid"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24271.png",
+    "level": 200
+  },
+  {
+    "id": 31655,
+    "name": {
+      "fr": "Squame du Graogarm"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59680.png",
+    "level": 100
+  },
+  {
+    "id": 31666,
+    "name": {
+      "fr": "Peau de zarbivore"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59679.png",
+    "level": 200
+  }
+]

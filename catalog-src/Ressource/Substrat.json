@@ -1,0 +1,90 @@
+[
+  {
+    "id": 2539,
+    "name": {
+      "fr": "Substrat de Buisson"
+    },
+    "img": "https://api.dofusdb.fr/img/items/26016.png",
+    "level": 20
+  },
+  {
+    "id": 2540,
+    "name": {
+      "fr": "Substrat de Futaie"
+    },
+    "img": "https://api.dofusdb.fr/img/items/26017.png",
+    "level": 60
+  },
+  {
+    "id": 2543,
+    "name": {
+      "fr": "Substrat de Fascine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/26018.png",
+    "level": 80
+  },
+  {
+    "id": 12733,
+    "name": {
+      "fr": "Substrat de Forêt"
+    },
+    "img": "https://api.dofusdb.fr/img/items/12726.png",
+    "level": 140
+  },
+  {
+    "id": 12744,
+    "name": {
+      "fr": "Substrat de Bosquet"
+    },
+    "img": "https://api.dofusdb.fr/img/items/12728.png",
+    "level": 100
+  },
+  {
+    "id": 12745,
+    "name": {
+      "fr": "Substrat de Bocage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/12729.png",
+    "level": 40
+  },
+  {
+    "id": 16212,
+    "name": {
+      "fr": "Substrat de Fourré"
+    },
+    "img": "https://api.dofusdb.fr/img/items/12748.png",
+    "level": 120
+  },
+  {
+    "id": 16458,
+    "name": {
+      "fr": "Substrat de Forêt primaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/177001.png",
+    "level": 160
+  },
+  {
+    "id": 16459,
+    "name": {
+      "fr": "Substrat de Forêt vierge"
+    },
+    "img": "https://api.dofusdb.fr/img/items/177002.png",
+    "level": 180
+  },
+  {
+    "id": 16460,
+    "name": {
+      "fr": "Substrat de Sylve"
+    },
+    "img": "https://api.dofusdb.fr/img/items/177003.png",
+    "level": 200
+  },
+  {
+    "id": 24144,
+    "name": {
+      "fr": "Substrat Astral"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164833.png",
+    "level": 200
+  }
+]

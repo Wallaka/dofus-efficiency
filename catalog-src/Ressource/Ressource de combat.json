@@ -1,0 +1,266 @@
+[
+  {
+    "id": 429,
+    "name": {
+      "fr": "Miséricorde du Chafer d'Élite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164183.png",
+    "level": 46
+  },
+  {
+    "id": 2316,
+    "name": {
+      "fr": "Couteau de Roukouto"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15980.png",
+    "level": 86
+  },
+  {
+    "id": 2484,
+    "name": {
+      "fr": "Trident Cassé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15512.png",
+    "level": 46
+  },
+  {
+    "id": 2553,
+    "name": {
+      "fr": "Gros Boulet"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15564.png",
+    "level": 40
+  },
+  {
+    "id": 7017,
+    "name": {
+      "fr": "Sarbacane en Bambou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164652.png",
+    "level": 130
+  },
+  {
+    "id": 7274,
+    "name": {
+      "fr": "Katana de Kwamouraï"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164656.png",
+    "level": 130
+  },
+  {
+    "id": 7300,
+    "name": {
+      "fr": "Tête de lance de Fangshu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164676.png",
+    "level": 140
+  },
+  {
+    "id": 7405,
+    "name": {
+      "fr": "Plastron de Tambouraï"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164765.png",
+    "level": 160
+  },
+  {
+    "id": 7406,
+    "name": {
+      "fr": "Épaulière de Kabushido"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164768.png",
+    "level": 160
+  },
+  {
+    "id": 7407,
+    "name": {
+      "fr": "Croissant de Tsukinochi"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164764.png",
+    "level": 160
+  },
+  {
+    "id": 8064,
+    "name": {
+      "fr": "Boomerang du Koalak Sanguin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15721.png",
+    "level": 108
+  },
+  {
+    "id": 8075,
+    "name": {
+      "fr": "Boomerang du Dok Alako"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15722.png",
+    "level": 74
+  },
+  {
+    "id": 8076,
+    "name": {
+      "fr": "Boomerang du Maître Koalak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15723.png",
+    "level": 114
+  },
+  {
+    "id": 8077,
+    "name": {
+      "fr": "Boomerang du Warko Marron"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15724.png",
+    "level": 78
+  },
+  {
+    "id": 8347,
+    "name": {
+      "fr": "Lame brisée de Lichangoro"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164677.png",
+    "level": 140
+  },
+  {
+    "id": 13705,
+    "name": {
+      "fr": "Boomerang Abîmé de Diamantine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15806.png",
+    "level": 120
+  },
+  {
+    "id": 15447,
+    "name": {
+      "fr": "Mèche de bombe de Terristocrate"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15887.png",
+    "level": 200
+  },
+  {
+    "id": 17075,
+    "name": {
+      "fr": "Canif Rouillé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164078.png",
+    "level": 90
+  },
+  {
+    "id": 17621,
+    "name": {
+      "fr": "Pique du Soldat"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164088.png",
+    "level": 200
+  },
+  {
+    "id": 17978,
+    "name": {
+      "fr": "Trident de Tryde"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15941.png",
+    "level": 200
+  },
+  {
+    "id": 19402,
+    "name": {
+      "fr": "Grenade de Moribombe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/114008.png",
+    "level": 200
+  },
+  {
+    "id": 22253,
+    "name": {
+      "fr": "Lame tranchante"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24279.png",
+    "level": 200
+  },
+  {
+    "id": 25176,
+    "name": {
+      "fr": "Spalière de Krâradia"
+    },
+    "img": "https://api.dofusdb.fr/img/items/176030.png",
+    "level": 200
+  },
+  {
+    "id": 25177,
+    "name": {
+      "fr": "Diadème de Belilith"
+    },
+    "img": "https://api.dofusdb.fr/img/items/176031.png",
+    "level": 200
+  },
+  {
+    "id": 25181,
+    "name": {
+      "fr": "Sceptre brisé de Kabahal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/176038.png",
+    "level": 200
+  },
+  {
+    "id": 25757,
+    "name": {
+      "fr": "Tuyau Rouillé de Rate Iboisée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165023.png",
+    "level": 110
+  },
+  {
+    "id": 25758,
+    "name": {
+      "fr": "Lance-Pierre de Scélée Rate"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165032.png",
+    "level": 110
+  },
+  {
+    "id": 25759,
+    "name": {
+      "fr": "Lance de Chika Rat"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165029.png",
+    "level": 110
+  },
+  {
+    "id": 26037,
+    "name": {
+      "fr": "Masque cauchemardesque de l'Éternel Conflit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165044.png",
+    "level": 200
+  },
+  {
+    "id": 26318,
+    "name": {
+      "fr": "Bolas de Maltrio"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24284.png",
+    "level": 150
+  },
+  {
+    "id": 27400,
+    "name": {
+      "fr": "Poing de Coquelicogne"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165065.png",
+    "level": 200
+  },
+  {
+    "id": 27434,
+    "name": {
+      "fr": "Armure de Blindur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165058.png",
+    "level": 190
+  },
+  {
+    "id": 27437,
+    "name": {
+      "fr": "Fronde de Boufronde"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165061.png",
+    "level": 190
+  }
+]

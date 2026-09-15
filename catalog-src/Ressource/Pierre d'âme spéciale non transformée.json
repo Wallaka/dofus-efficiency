@@ -1,0 +1,42 @@
+[
+  {
+    "id": 31444,
+    "name": {
+      "fr": "Petite pierre d'âme spéciale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/83003.png",
+    "level": 1
+  },
+  {
+    "id": 31445,
+    "name": {
+      "fr": "Moyenne pierre d'âme spéciale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/83008.png",
+    "level": 1
+  },
+  {
+    "id": 31446,
+    "name": {
+      "fr": "Grande pierre d'âme spéciale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/83009.png",
+    "level": 1
+  },
+  {
+    "id": 31447,
+    "name": {
+      "fr": "Énorme pierre d'âme spéciale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/83010.png",
+    "level": 1
+  },
+  {
+    "id": 31448,
+    "name": {
+      "fr": "Gigantesque pierre d'âme spéciale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/83011.png",
+    "level": 1
+  }
+]

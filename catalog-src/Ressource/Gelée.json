@@ -1,0 +1,90 @@
+[
+  {
+    "id": 368,
+    "name": {
+      "fr": "Gelée à la Fraise"
+    },
+    "img": "https://api.dofusdb.fr/img/items/110040.png",
+    "level": 58
+  },
+  {
+    "id": 369,
+    "name": {
+      "fr": "Gelée à la Menthe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/110041.png",
+    "level": 56
+  },
+  {
+    "id": 370,
+    "name": {
+      "fr": "Gelée Bleuet Royale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/110407.png",
+    "level": 60
+  },
+  {
+    "id": 757,
+    "name": {
+      "fr": "Gelée Bleuet"
+    },
+    "img": "https://api.dofusdb.fr/img/items/110042.png",
+    "level": 54
+  },
+  {
+    "id": 2241,
+    "name": {
+      "fr": "Gelée Menthe Royale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/110408.png",
+    "level": 60
+  },
+  {
+    "id": 2242,
+    "name": {
+      "fr": "Gelée Fraise Royale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/110409.png",
+    "level": 60
+  },
+  {
+    "id": 2436,
+    "name": {
+      "fr": "Gelée Citron"
+    },
+    "img": "https://api.dofusdb.fr/img/items/110490.png",
+    "level": 60
+  },
+  {
+    "id": 2437,
+    "name": {
+      "fr": "Gelée Citron Royale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/110491.png",
+    "level": 60
+  },
+  {
+    "id": 8712,
+    "name": {
+      "fr": "Bout de Goldemort"
+    },
+    "img": "https://api.dofusdb.fr/img/items/110490.png",
+    "level": 1
+  },
+  {
+    "id": 9949,
+    "name": {
+      "fr": "Pâte à Tra Khben"
+    },
+    "img": "https://api.dofusdb.fr/img/items/110042.png",
+    "level": 1
+  },
+  {
+    "id": 10003,
+    "name": {
+      "fr": "Gelée Sbihaine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/110047.png",
+    "level": 1
+  }
+]

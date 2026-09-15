@@ -1,0 +1,154 @@
+[
+  {
+    "id": 367,
+    "name": {
+      "fr": "Œuf de Tofu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/105038.png",
+    "level": 36
+  },
+  {
+    "id": 844,
+    "name": {
+      "fr": "Œuf de Dragoeuf Ardoise"
+    },
+    "img": "https://api.dofusdb.fr/img/items/105204.png",
+    "level": 74
+  },
+  {
+    "id": 845,
+    "name": {
+      "fr": "Œuf de Dragoeuf Argile"
+    },
+    "img": "https://api.dofusdb.fr/img/items/105205.png",
+    "level": 74
+  },
+  {
+    "id": 846,
+    "name": {
+      "fr": "Œuf de Dragoeuf Charbon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/105206.png",
+    "level": 74
+  },
+  {
+    "id": 847,
+    "name": {
+      "fr": "Œuf de Dragoeuf Calcaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/105648.png",
+    "level": 74
+  },
+  {
+    "id": 2673,
+    "name": {
+      "fr": "Œuf Pourri"
+    },
+    "img": "https://api.dofusdb.fr/img/items/105642.png",
+    "level": 36
+  },
+  {
+    "id": 11233,
+    "name": {
+      "fr": "Œuf du Mansot Royal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/105643.png",
+    "level": 140
+  },
+  {
+    "id": 11328,
+    "name": {
+      "fr": "Œuf de Crapeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/105645.png",
+    "level": 150
+  },
+  {
+    "id": 11533,
+    "name": {
+      "fr": "Œuf de Gobus"
+    },
+    "img": "https://api.dofusdb.fr/img/items/105644.png",
+    "level": 189
+  },
+  {
+    "id": 12448,
+    "name": {
+      "fr": "Jaune d'Œuf de Krokille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/105039.png",
+    "level": 25
+  },
+  {
+    "id": 13723,
+    "name": {
+      "fr": "Œuf de Tofubine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/105646.png",
+    "level": 115
+  },
+  {
+    "id": 15066,
+    "name": {
+      "fr": "Œuf de Haute Truche"
+    },
+    "img": "https://api.dofusdb.fr/img/items/105647.png",
+    "level": 130
+  },
+  {
+    "id": 15541,
+    "name": {
+      "fr": "Œuf d'Ali Grothor"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24973.png",
+    "level": 130
+  },
+  {
+    "id": 20971,
+    "name": {
+      "fr": "Œuf inerte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/105650.png",
+    "level": 200
+  },
+  {
+    "id": 28256,
+    "name": {
+      "fr": "Œuf Chimérique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/105651.png",
+    "level": 1
+  },
+  {
+    "id": 31529,
+    "name": {
+      "fr": "Zœuf de Balebz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/105652.png",
+    "level": 170
+  },
+  {
+    "id": 31530,
+    "name": {
+      "fr": "Zœuf de Toubibz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/105653.png",
+    "level": 170
+  },
+  {
+    "id": 31531,
+    "name": {
+      "fr": "Zœuf de Kamikabz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/105654.png",
+    "level": 170
+  },
+  {
+    "id": 31532,
+    "name": {
+      "fr": "Zœuf de Quadrabz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/105655.png",
+    "level": 170
+  }
+]

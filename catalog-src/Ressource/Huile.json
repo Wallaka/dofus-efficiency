@@ -1,0 +1,122 @@
+[
+  {
+    "id": 389,
+    "name": {
+      "fr": "Huile de Tournesol Sauvage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/60061.png",
+    "level": 12
+  },
+  {
+    "id": 390,
+    "name": {
+      "fr": "Huile de Noix"
+    },
+    "img": "https://api.dofusdb.fr/img/items/60062.png",
+    "level": 32
+  },
+  {
+    "id": 396,
+    "name": {
+      "fr": "Huile de Palme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/60068.png",
+    "level": 32
+  },
+  {
+    "id": 397,
+    "name": {
+      "fr": "Huile de Koode"
+    },
+    "img": "https://api.dofusdb.fr/img/items/60069.png",
+    "level": 32
+  },
+  {
+    "id": 399,
+    "name": {
+      "fr": "Huile de Sésame"
+    },
+    "img": "https://api.dofusdb.fr/img/items/60071.png",
+    "level": 1
+  },
+  {
+    "id": 1973,
+    "name": {
+      "fr": "Huile à frire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/60073.png",
+    "level": 1
+  },
+  {
+    "id": 8520,
+    "name": {
+      "fr": "Gratrooll Industriel"
+    },
+    "img": "https://api.dofusdb.fr/img/items/60001.png",
+    "level": 1
+  },
+  {
+    "id": 11226,
+    "name": {
+      "fr": "Huile de Mamansot"
+    },
+    "img": "https://api.dofusdb.fr/img/items/60072.png",
+    "level": 132
+  },
+  {
+    "id": 11313,
+    "name": {
+      "fr": "Huile de Fantimonier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/60074.png",
+    "level": 140
+  },
+  {
+    "id": 11497,
+    "name": {
+      "fr": "Huile de Frostiz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/60073.png",
+    "level": 200
+  },
+  {
+    "id": 14823,
+    "name": {
+      "fr": "Huile de Pikoleur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/60376.png",
+    "level": 200
+  },
+  {
+    "id": 18209,
+    "name": {
+      "fr": "Gratrooll"
+    },
+    "img": "https://api.dofusdb.fr/img/items/60001.png",
+    "level": 116
+  },
+  {
+    "id": 23480,
+    "name": {
+      "fr": "Huile de Riz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/60069.png",
+    "level": 1
+  },
+  {
+    "id": 23693,
+    "name": {
+      "fr": "Huile de Pichon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/176004.png",
+    "level": 140
+  },
+  {
+    "id": 32259,
+    "name": {
+      "fr": "Huile de Mekamouth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15704.png",
+    "level": 200
+  }
+]

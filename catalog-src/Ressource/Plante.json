@@ -1,0 +1,458 @@
+[
+  {
+    "id": 374,
+    "name": {
+      "fr": "Langue d'Épouvanteur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36555.png",
+    "level": 18
+  },
+  {
+    "id": 380,
+    "name": {
+      "fr": "Menthe Sauvage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36052.png",
+    "level": 60
+  },
+  {
+    "id": 395,
+    "name": {
+      "fr": "Trèfle à 5 feuilles"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36067.png",
+    "level": 40
+  },
+  {
+    "id": 421,
+    "name": {
+      "fr": "Ortie"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36642.png",
+    "level": 1
+  },
+  {
+    "id": 428,
+    "name": {
+      "fr": "Sauge"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36643.png",
+    "level": 20
+  },
+  {
+    "id": 1324,
+    "name": {
+      "fr": "Herbe à chacha"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36046.png",
+    "level": 1
+  },
+  {
+    "id": 1332,
+    "name": {
+      "fr": "Vieux Trèfle à 4 feuilles"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36050.png",
+    "level": 1
+  },
+  {
+    "id": 1336,
+    "name": {
+      "fr": "Urtica"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36053.png",
+    "level": 1
+  },
+  {
+    "id": 1344,
+    "name": {
+      "fr": "Verveine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36654.png",
+    "level": 1
+  },
+  {
+    "id": 1428,
+    "name": {
+      "fr": "Immortelle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36054.png",
+    "level": 1
+  },
+  {
+    "id": 2254,
+    "name": {
+      "fr": "Feuille de Fourbasse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36421.png",
+    "level": 100
+  },
+  {
+    "id": 2318,
+    "name": {
+      "fr": "Feuille de Rose Obscure"
+    },
+    "img": "https://api.dofusdb.fr/img/items/25152.png",
+    "level": 23
+  },
+  {
+    "id": 2365,
+    "name": {
+      "fr": "Feuille de ronce d'Hestia"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36415.png",
+    "level": 1
+  },
+  {
+    "id": 2624,
+    "name": {
+      "fr": "Feuille de Tikoko"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36609.png",
+    "level": 50
+  },
+  {
+    "id": 2661,
+    "name": {
+      "fr": "Feuille de Tournesol Sauvage"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36633.png",
+    "level": 18
+  },
+  {
+    "id": 2665,
+    "name": {
+      "fr": "Herbe Folle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36637.png",
+    "level": 18
+  },
+  {
+    "id": 7269,
+    "name": {
+      "fr": "Pollen de Bulbiflore"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164668.png",
+    "level": 110
+  },
+  {
+    "id": 7271,
+    "name": {
+      "fr": "Épine de Bulbuisson"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164667.png",
+    "level": 110
+  },
+  {
+    "id": 7272,
+    "name": {
+      "fr": "Pistil de Floristile"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164666.png",
+    "level": 110
+  },
+  {
+    "id": 7290,
+    "name": {
+      "fr": "Tige de Bambouto"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164665.png",
+    "level": 110
+  },
+  {
+    "id": 8749,
+    "name": {
+      "fr": "Bulbe Kouraçao"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36003.png",
+    "level": 43
+  },
+  {
+    "id": 8750,
+    "name": {
+      "fr": "Bulbe Malibout"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36006.png",
+    "level": 43
+  },
+  {
+    "id": 8751,
+    "name": {
+      "fr": "Bulbe Passaoh"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36004.png",
+    "level": 43
+  },
+  {
+    "id": 8752,
+    "name": {
+      "fr": "Bulbe Morito"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36005.png",
+    "level": 43
+  },
+  {
+    "id": 8753,
+    "name": {
+      "fr": "Crinière fleurie"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36002.png",
+    "level": 100
+  },
+  {
+    "id": 8777,
+    "name": {
+      "fr": "Pistil du Tynril"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36007.png",
+    "level": 140
+  },
+  {
+    "id": 8778,
+    "name": {
+      "fr": "Étamine de Floribonde"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36008.png",
+    "level": 135
+  },
+  {
+    "id": 8779,
+    "name": {
+      "fr": "Carpelle de Brouture"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36009.png",
+    "level": 133
+  },
+  {
+    "id": 8780,
+    "name": {
+      "fr": "Sépale de Nerbe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36010.png",
+    "level": 132
+  },
+  {
+    "id": 8781,
+    "name": {
+      "fr": "Calice de Fécorce"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36012.png",
+    "level": 134
+  },
+  {
+    "id": 8782,
+    "name": {
+      "fr": "Bractée de Chiendent"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36011.png",
+    "level": 131
+  },
+  {
+    "id": 9388,
+    "name": {
+      "fr": "Feuille de Blop Royal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36013.png",
+    "level": 60
+  },
+  {
+    "id": 9389,
+    "name": {
+      "fr": "Feuille de Blop Multicolore Royal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36014.png",
+    "level": 120
+  },
+  {
+    "id": 9622,
+    "name": {
+      "fr": "Pousse de Tanfouguite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36638.png",
+    "level": 1
+  },
+  {
+    "id": 13529,
+    "name": {
+      "fr": "Feuille de Branche Soignante"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36015.png",
+    "level": 138
+  },
+  {
+    "id": 13945,
+    "name": {
+      "fr": "Bractée de Drosérâle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36639.png",
+    "level": 200
+  },
+  {
+    "id": 13946,
+    "name": {
+      "fr": "Sépale de Drosérâle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36640.png",
+    "level": 200
+  },
+  {
+    "id": 14475,
+    "name": {
+      "fr": "Feuille de Cawotman"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36641.png",
+    "level": 120
+  },
+  {
+    "id": 16378,
+    "name": {
+      "fr": "Ortie Roïde"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36646.png",
+    "level": 1
+  },
+  {
+    "id": 16379,
+    "name": {
+      "fr": "Sauge Divine au Rhum"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36647.png",
+    "level": 20
+  },
+  {
+    "id": 16380,
+    "name": {
+      "fr": "Trèfle Agare"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36648.png",
+    "level": 40
+  },
+  {
+    "id": 16381,
+    "name": {
+      "fr": "Menthe Religieuse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36649.png",
+    "level": 60
+  },
+  {
+    "id": 16385,
+    "name": {
+      "fr": "Ginseng"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36644.png",
+    "level": 140
+  },
+  {
+    "id": 16386,
+    "name": {
+      "fr": "Ginsengoku"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36650.png",
+    "level": 140
+  },
+  {
+    "id": 16389,
+    "name": {
+      "fr": "Mandragore"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36645.png",
+    "level": 180
+  },
+  {
+    "id": 16390,
+    "name": {
+      "fr": "Mandragorgonzola"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36651.png",
+    "level": 180
+  },
+  {
+    "id": 17992,
+    "name": {
+      "fr": "Salikrone"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36653.png",
+    "level": 200
+  },
+  {
+    "id": 23345,
+    "name": {
+      "fr": "Feuille de Fujibakama"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36609.png",
+    "level": 30
+  },
+  {
+    "id": 23957,
+    "name": {
+      "fr": "Pétale de Papier"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164861.png",
+    "level": 200
+  },
+  {
+    "id": 23965,
+    "name": {
+      "fr": "Pétale d'encre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164854.png",
+    "level": 200
+  },
+  {
+    "id": 26316,
+    "name": {
+      "fr": "Pétale de Malter"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36655.png",
+    "level": 150
+  },
+  {
+    "id": 26317,
+    "name": {
+      "fr": "Pousse de Malzerb"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36657.png",
+    "level": 150
+  },
+  {
+    "id": 27362,
+    "name": {
+      "fr": "Pom de Pin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36659.png",
+    "level": 50
+  },
+  {
+    "id": 27397,
+    "name": {
+      "fr": "Liane de Soldalia"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36660.png",
+    "level": 200
+  },
+  {
+    "id": 27398,
+    "name": {
+      "fr": "Mousse de Caméliache"
+    },
+    "img": "https://api.dofusdb.fr/img/items/36661.png",
+    "level": 200
+  },
+  {
+    "id": 27399,
+    "name": {
+      "fr": "Épine d'Armuguet"
+    },
+    "img": "https://api.dofusdb.fr/img/items/47883.png",
+    "level": 200
+  },
+  {
+    "id": 27748,
+    "name": {
+      "fr": "Ronce ephedryenne"
+    },
+    "img": "https://api.dofusdb.fr/img/items/25014.png",
+    "level": 1
+  }
+]

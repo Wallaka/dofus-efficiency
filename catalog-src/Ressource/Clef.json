@@ -1,0 +1,1138 @@
+[
+  {
+    "id": 961,
+    "name": {
+      "fr": "Morceau de clef du Matin Pewlant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24003.png",
+    "level": 60
+  },
+  {
+    "id": 962,
+    "name": {
+      "fr": "Morceau de clef du Midi Wayonnant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24004.png",
+    "level": 60
+  },
+  {
+    "id": 963,
+    "name": {
+      "fr": "Morceau de clef du Soiw Woulant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24005.png",
+    "level": 60
+  },
+  {
+    "id": 1568,
+    "name": {
+      "fr": "Clef de la Cour du Bouftou Royal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84226.png",
+    "level": 30
+  },
+  {
+    "id": 1569,
+    "name": {
+      "fr": "Clef du Donjon des Forgerons"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84227.png",
+    "level": 50
+  },
+  {
+    "id": 1570,
+    "name": {
+      "fr": "Clef du Donjon des Squelettes"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84228.png",
+    "level": 40
+  },
+  {
+    "id": 6884,
+    "name": {
+      "fr": "Clef de la Grotte du Bworker"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84713.png",
+    "level": 180
+  },
+  {
+    "id": 7309,
+    "name": {
+      "fr": "Clef du Dojo du vent"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84780.png",
+    "level": 140
+  },
+  {
+    "id": 7310,
+    "name": {
+      "fr": "Clef de la Vallée de la Dame des eaux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84779.png",
+    "level": 130
+  },
+  {
+    "id": 7311,
+    "name": {
+      "fr": "Clef de l'Atelier du Tanukouï San"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84781.png",
+    "level": 130
+  },
+  {
+    "id": 7312,
+    "name": {
+      "fr": "Clef de la Fabrique de foux d'artifice"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84782.png",
+    "level": 140
+  },
+  {
+    "id": 7509,
+    "name": {
+      "fr": "Première partie de la clef du labyrinthe du Dragon Cochon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84001.png",
+    "level": 100
+  },
+  {
+    "id": 7510,
+    "name": {
+      "fr": "Deuxième partie de la clef du labyrinthe du Dragon Cochon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84002.png",
+    "level": 100
+  },
+  {
+    "id": 7511,
+    "name": {
+      "fr": "Clef du labyrinthe du Dragon Cochon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84003.png",
+    "level": 100
+  },
+  {
+    "id": 7557,
+    "name": {
+      "fr": "Clef du Domaine Ancestral"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84004.png",
+    "level": 90
+  },
+  {
+    "id": 7908,
+    "name": {
+      "fr": "Clef de la Caverne du Koulosse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84005.png",
+    "level": 100
+  },
+  {
+    "id": 7918,
+    "name": {
+      "fr": "Clef du Donjon des Tofus"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84006.png",
+    "level": 40
+  },
+  {
+    "id": 7924,
+    "name": {
+      "fr": "Clef du Labyrinthe du Minotoror"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84007.png",
+    "level": 120
+  },
+  {
+    "id": 7926,
+    "name": {
+      "fr": "Clef de la Bibliothèque du Maître Corbac"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84008.png",
+    "level": 110
+  },
+  {
+    "id": 7927,
+    "name": {
+      "fr": "Clef des Pitons Rocheux des Craqueleurs"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84009.png",
+    "level": 70
+  },
+  {
+    "id": 8073,
+    "name": {
+      "fr": "Clef du Repaire de Skeunk"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84011.png",
+    "level": 120
+  },
+  {
+    "id": 8135,
+    "name": {
+      "fr": "Clef du Donjon des Bworks"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84234.png",
+    "level": 50
+  },
+  {
+    "id": 8139,
+    "name": {
+      "fr": "Clef du Donjon des Scarafeuilles"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84233.png",
+    "level": 40
+  },
+  {
+    "id": 8142,
+    "name": {
+      "fr": "Clef Secrète du Tofulailler Royal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84012.png",
+    "level": 120
+  },
+  {
+    "id": 8143,
+    "name": {
+      "fr": "Clef des Champs"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84013.png",
+    "level": 10
+  },
+  {
+    "id": 8156,
+    "name": {
+      "fr": "Clef de la Tanière du Meulou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84235.png",
+    "level": 100
+  },
+  {
+    "id": 8307,
+    "name": {
+      "fr": "Clef de la salle du Minotot"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84015.png",
+    "level": 160
+  },
+  {
+    "id": 8320,
+    "name": {
+      "fr": "Clef de l'antre du Dragon Cochon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84016.png",
+    "level": 100
+  },
+  {
+    "id": 8329,
+    "name": {
+      "fr": "Clef de la mine de Sakaï"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84256.png",
+    "level": 190
+  },
+  {
+    "id": 8342,
+    "name": {
+      "fr": "Clef de l'Antre de Crocabulia"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84018.png",
+    "level": 120
+  },
+  {
+    "id": 8343,
+    "name": {
+      "fr": "Clef de l'Épreuve de Draegnerys"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84017.png",
+    "level": 70
+  },
+  {
+    "id": 8436,
+    "name": {
+      "fr": "Clef de la Clairière du Chêne Mou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84236.png",
+    "level": 140
+  },
+  {
+    "id": 8437,
+    "name": {
+      "fr": "Clef du Château Ensablé"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84237.png",
+    "level": 20
+  },
+  {
+    "id": 8438,
+    "name": {
+      "fr": "Clef de la Sousouricière du Rat Noir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165036.png",
+    "level": 110
+  },
+  {
+    "id": 8439,
+    "name": {
+      "fr": "Clef du Garde-manger du Rat Blanc"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165037.png",
+    "level": 110
+  },
+  {
+    "id": 8476,
+    "name": {
+      "fr": "Première clef du Donjon de Sphincter"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24502.png",
+    "level": 150
+  },
+  {
+    "id": 8477,
+    "name": {
+      "fr": "Deuxième clef du Donjon de Sphincter"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24503.png",
+    "level": 150
+  },
+  {
+    "id": 8545,
+    "name": {
+      "fr": "Clef de la Crypte de Kardorim"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84745.png",
+    "level": 1
+  },
+  {
+    "id": 8917,
+    "name": {
+      "fr": "Clef de la Grotte Hesque"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84244.png",
+    "level": 50
+  },
+  {
+    "id": 8971,
+    "name": {
+      "fr": "Clef de l'Arche d'Otomaï"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84242.png",
+    "level": 70
+  },
+  {
+    "id": 8972,
+    "name": {
+      "fr": "Clef du Goulet du Rasboul"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84243.png",
+    "level": 110
+  },
+  {
+    "id": 8975,
+    "name": {
+      "fr": "Clef du Laboratoire du Tynril"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84246.png",
+    "level": 140
+  },
+  {
+    "id": 8977,
+    "name": {
+      "fr": "Clef de la Canopée du Kimbo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84245.png",
+    "level": 160
+  },
+  {
+    "id": 9247,
+    "name": {
+      "fr": "Clef du Temple du Grand Ougah"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84247.png",
+    "level": 180
+  },
+  {
+    "id": 9248,
+    "name": {
+      "fr": "Clef du Clos des Blops"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84248.png",
+    "level": 60
+  },
+  {
+    "id": 9249,
+    "name": {
+      "fr": "Morceau de clef Griotte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84250.png",
+    "level": 80
+  },
+  {
+    "id": 9250,
+    "name": {
+      "fr": "Morceau de clef Reinette"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84251.png",
+    "level": 80
+  },
+  {
+    "id": 9251,
+    "name": {
+      "fr": "Morceau de clef Coco"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84252.png",
+    "level": 80
+  },
+  {
+    "id": 9252,
+    "name": {
+      "fr": "Morceau de clef Indigo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84249.png",
+    "level": 80
+  },
+  {
+    "id": 9254,
+    "name": {
+      "fr": "Clef de l'antre du Blop Multicolore"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84253.png",
+    "level": 120
+  },
+  {
+    "id": 9999,
+    "name": {
+      "fr": "Copie de la clef du repaire des bandits"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84061.png",
+    "level": 1
+  },
+  {
+    "id": 10067,
+    "name": {
+      "fr": "Clef de l'atelier de Sotsiah Peh"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84061.png",
+    "level": 176
+  },
+  {
+    "id": 11174,
+    "name": {
+      "fr": "Clef de la serre du Royalmouth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84257.png",
+    "level": 120
+  },
+  {
+    "id": 11175,
+    "name": {
+      "fr": "Clef Mansot"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84255.png",
+    "level": 140
+  },
+  {
+    "id": 11176,
+    "name": {
+      "fr": "Clef du Grolandais violent"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84258.png",
+    "level": 150
+  },
+  {
+    "id": 11177,
+    "name": {
+      "fr": "Clef de l'hypogée de l'Obsidiantre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84259.png",
+    "level": 160
+  },
+  {
+    "id": 11178,
+    "name": {
+      "fr": "Clef de la Tanière Givrefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84264.png",
+    "level": 170
+  },
+  {
+    "id": 11179,
+    "name": {
+      "fr": "Clef de l'Antre du Korriandre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84263.png",
+    "level": 180
+  },
+  {
+    "id": 11180,
+    "name": {
+      "fr": "Clef des cavernes du Kolosso"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84714.png",
+    "level": 190
+  },
+  {
+    "id": 11181,
+    "name": {
+      "fr": "Clef de l'Antichambre des Gloursons"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84715.png",
+    "level": 190
+  },
+  {
+    "id": 11636,
+    "name": {
+      "fr": "Trousseau de clefs de Ben le Ripate"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84260.png",
+    "level": 150
+  },
+  {
+    "id": 11798,
+    "name": {
+      "fr": "Clef du Village Kanniboul"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84748.png",
+    "level": 60
+  },
+  {
+    "id": 11799,
+    "name": {
+      "fr": "Clef de la Maison Fantôme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84262.png",
+    "level": 40
+  },
+  {
+    "id": 12017,
+    "name": {
+      "fr": "Clef du Nid du Kwakwa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84265.png",
+    "level": 50
+  },
+  {
+    "id": 12073,
+    "name": {
+      "fr": "Clef du Laboratoire de Brumen Tinctorias"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84716.png",
+    "level": 70
+  },
+  {
+    "id": 12150,
+    "name": {
+      "fr": "Clef du Donjon de Nowel"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84266.png",
+    "level": 50
+  },
+  {
+    "id": 12151,
+    "name": {
+      "fr": "Clef de la Caverne de Nowel"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84267.png",
+    "level": 110
+  },
+  {
+    "id": 12152,
+    "name": {
+      "fr": "Clef de la Maison du Papa Nowel"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84268.png",
+    "level": 180
+  },
+  {
+    "id": 12351,
+    "name": {
+      "fr": "Clef du Repaire de Sphincter Cell"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84717.png",
+    "level": 150
+  },
+  {
+    "id": 12735,
+    "name": {
+      "fr": "Clef de la Bambusaie de Damadrya"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84783.png",
+    "level": 110
+  },
+  {
+    "id": 13333,
+    "name": {
+      "fr": "Clef du Potager d'Halouine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84021.png",
+    "level": 100
+  },
+  {
+    "id": 14043,
+    "name": {
+      "fr": "Clef de la Forgefroide de Missiz Frizz"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84719.png",
+    "level": 200
+  },
+  {
+    "id": 14044,
+    "name": {
+      "fr": "Clef du Transporteur de Sylargh"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84720.png",
+    "level": 200
+  },
+  {
+    "id": 14045,
+    "name": {
+      "fr": "Clef des Salons privés de Klime"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84721.png",
+    "level": 200
+  },
+  {
+    "id": 14046,
+    "name": {
+      "fr": "Clef du Laboratoire de Nileza"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84722.png",
+    "level": 200
+  },
+  {
+    "id": 14047,
+    "name": {
+      "fr": "Clef du Donjon du Comte Harebourg"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84723.png",
+    "level": 200
+  },
+  {
+    "id": 14464,
+    "name": {
+      "fr": "Clef du Château du Wa Wabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84726.png",
+    "level": 60
+  },
+  {
+    "id": 14465,
+    "name": {
+      "fr": "Clef du Terrier du Wa Wabbit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84727.png",
+    "level": 80
+  },
+  {
+    "id": 14560,
+    "name": {
+      "fr": "Clef du Théâtre de Dramak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84728.png",
+    "level": 100
+  },
+  {
+    "id": 14870,
+    "name": {
+      "fr": "Clef de l'Aquadôme de Merkator"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84729.png",
+    "level": 200
+  },
+  {
+    "id": 14935,
+    "name": {
+      "fr": "Clef de la Pyramide d'Ombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84730.png",
+    "level": 190
+  },
+  {
+    "id": 15093,
+    "name": {
+      "fr": "Clef de la Grotte de Kanigroula"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84731.png",
+    "level": 160
+  },
+  {
+    "id": 15162,
+    "name": {
+      "fr": "Clef de la Volière de la Haute Truche"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84735.png",
+    "level": 130
+  },
+  {
+    "id": 15278,
+    "name": {
+      "fr": "Clef de la Fabrique de Malléfisk"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84732.png",
+    "level": 100
+  },
+  {
+    "id": 15279,
+    "name": {
+      "fr": "Clef de la Galerie du Phossile"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84733.png",
+    "level": 150
+  },
+  {
+    "id": 15280,
+    "name": {
+      "fr": "Clef du Palais du roi Nidas"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84734.png",
+    "level": 200
+  },
+  {
+    "id": 15475,
+    "name": {
+      "fr": "Clef du Trône de la Cour Sombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84736.png",
+    "level": 200
+  },
+  {
+    "id": 15476,
+    "name": {
+      "fr": "Clef de la Cave du Toxoliath"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84737.png",
+    "level": 180
+  },
+  {
+    "id": 15477,
+    "name": {
+      "fr": "Clef du Ring du Capitaine Ekarlatte"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84738.png",
+    "level": 130
+  },
+  {
+    "id": 15690,
+    "name": {
+      "fr": "Clef du Ventre de la Baleine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84739.png",
+    "level": 200
+  },
+  {
+    "id": 15806,
+    "name": {
+      "fr": "Clef du Mégalithe de Fraktale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84740.png",
+    "level": 120
+  },
+  {
+    "id": 15807,
+    "name": {
+      "fr": "Clef de l'Horologium de XLII"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84741.png",
+    "level": 170
+  },
+  {
+    "id": 15808,
+    "name": {
+      "fr": "Clef de l'Œil de Vortex"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84742.png",
+    "level": 200
+  },
+  {
+    "id": 15991,
+    "name": {
+      "fr": "Clef de la Cache de Kankreblath"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84743.png",
+    "level": 40
+  },
+  {
+    "id": 16179,
+    "name": {
+      "fr": "Clef de l'Antre de la Reine Nyée"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84744.png",
+    "level": 90
+  },
+  {
+    "id": 17112,
+    "name": {
+      "fr": "Clef de l'Arbre de Moon"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84746.png",
+    "level": 100
+  },
+  {
+    "id": 17113,
+    "name": {
+      "fr": "Clef du Bateau du Chouque"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84747.png",
+    "level": 90
+  },
+  {
+    "id": 17563,
+    "name": {
+      "fr": "Clef du Miausolée du Pounicheur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84749.png",
+    "level": 110
+  },
+  {
+    "id": 17564,
+    "name": {
+      "fr": "Clef du Plateau de Ush"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84750.png",
+    "level": 160
+  },
+  {
+    "id": 17565,
+    "name": {
+      "fr": "Clef du Défi du Chalœil"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84751.png",
+    "level": 200
+  },
+  {
+    "id": 17772,
+    "name": {
+      "fr": "Clef du caveau du Roi Léorictus"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84752.png",
+    "level": 184
+  },
+  {
+    "id": 17777,
+    "name": {
+      "fr": "Clef du caveau du Prince Djamal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84753.png",
+    "level": 184
+  },
+  {
+    "id": 17785,
+    "name": {
+      "fr": "Clef du Temple Maudit"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84754.png",
+    "level": 186
+  },
+  {
+    "id": 18066,
+    "name": {
+      "fr": "Clef du Vaisseau du Capitaine Meno"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84755.png",
+    "level": 200
+  },
+  {
+    "id": 18067,
+    "name": {
+      "fr": "Clef du Palais de Dantinéa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84756.png",
+    "level": 200
+  },
+  {
+    "id": 18068,
+    "name": {
+      "fr": "Clef du Temple de Koutoulou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84757.png",
+    "level": 200
+  },
+  {
+    "id": 18421,
+    "name": {
+      "fr": "Clef du Cimetière des mastodontes"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84758.png",
+    "level": 80
+  },
+  {
+    "id": 18422,
+    "name": {
+      "fr": "Clef de la Caverne d'El Piko"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84759.png",
+    "level": 130
+  },
+  {
+    "id": 18544,
+    "name": {
+      "fr": "Clef de la Chambre de Tal Kasha"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84760.png",
+    "level": 200
+  },
+  {
+    "id": 18552,
+    "name": {
+      "fr": "Clef du Boyau du Père Ver"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84761.png",
+    "level": 170
+  },
+  {
+    "id": 18736,
+    "name": {
+      "fr": "Clef du Camp du Comte Razof"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15963.png",
+    "level": 190
+  },
+  {
+    "id": 19041,
+    "name": {
+      "fr": "Clef du Chapiteau des Magik Riktus"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84763.png",
+    "level": 90
+  },
+  {
+    "id": 19049,
+    "name": {
+      "fr": "Clef du Manoir des Katrepat"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84762.png",
+    "level": 200
+  },
+  {
+    "id": 19216,
+    "name": {
+      "fr": "Clef du Belvédère d'Ilyzaelle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84764.png",
+    "level": 200
+  },
+  {
+    "id": 19514,
+    "name": {
+      "fr": "Clef de la Tour de Solar"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84765.png",
+    "level": 200
+  },
+  {
+    "id": 19515,
+    "name": {
+      "fr": "Clef de la Tour de Bethel"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84766.png",
+    "level": 200
+  },
+  {
+    "id": 19963,
+    "name": {
+      "fr": "Clef de la Brasserie du roi Dazak"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84767.png",
+    "level": 200
+  },
+  {
+    "id": 20918,
+    "name": {
+      "fr": "Clef de la Fonderie des Waddicts"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84768.png",
+    "level": 60
+  },
+  {
+    "id": 20919,
+    "name": {
+      "fr": "Clef de la Croquanterie"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84769.png",
+    "level": 130
+  },
+  {
+    "id": 20920,
+    "name": {
+      "fr": "Clef du Temple du dieu Kao"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84770.png",
+    "level": 200
+  },
+  {
+    "id": 21216,
+    "name": {
+      "fr": "Clef du Sanctuaire de Torkélonia"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84771.png",
+    "level": 200
+  },
+  {
+    "id": 21249,
+    "name": {
+      "fr": "Clef du Repaire du Kharnozor"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84773.png",
+    "level": 100
+  },
+  {
+    "id": 22028,
+    "name": {
+      "fr": "Clef des Fers de la Tyrannie"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84775.png",
+    "level": 200
+  },
+  {
+    "id": 22147,
+    "name": {
+      "fr": "Clef du Trône de Sang"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84776.png",
+    "level": 200
+  },
+  {
+    "id": 22148,
+    "name": {
+      "fr": "Clef de l'Arbre de Mort"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84774.png",
+    "level": 200
+  },
+  {
+    "id": 22149,
+    "name": {
+      "fr": "Clef de la Sentence de la Balance"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84777.png",
+    "level": 200
+  },
+  {
+    "id": 22401,
+    "name": {
+      "fr": "Clef de la Tempête de l'Eliocalypse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84778.png",
+    "level": 200
+  },
+  {
+    "id": 23591,
+    "name": {
+      "fr": "Clef de la Demeure des Esprits"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84785.png",
+    "level": 170
+  },
+  {
+    "id": 23630,
+    "name": {
+      "fr": "Clef de la Tombe du Shogun Tofugawa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84784.png",
+    "level": 160
+  },
+  {
+    "id": 23950,
+    "name": {
+      "fr": "Clef de la Mémoire d'Orukam"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84786.png",
+    "level": 200
+  },
+  {
+    "id": 23951,
+    "name": {
+      "fr": "Clef du Souvenir d'Imagiro"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84787.png",
+    "level": 200
+  },
+  {
+    "id": 25252,
+    "name": {
+      "fr": "Clef du Rituel de Kabahal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84788.png",
+    "level": 200
+  },
+  {
+    "id": 26039,
+    "name": {
+      "fr": "Clef de la Bataille de l'Aurore Pourpre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/165046.png",
+    "level": 200
+  },
+  {
+    "id": 26333,
+    "name": {
+      "fr": "Clef du Tertre du long sommeil"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84789.png",
+    "level": 150
+  },
+  {
+    "id": 26680,
+    "name": {
+      "fr": "Clef de l'Akadémie des Gobs"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84790.png",
+    "level": 40
+  },
+  {
+    "id": 27374,
+    "name": {
+      "fr": "Clef du Refuge sylvestre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84791.png",
+    "level": 50
+  },
+  {
+    "id": 27404,
+    "name": {
+      "fr": "Clef de la Chambre des maléfices"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84792.png",
+    "level": 200
+  },
+  {
+    "id": 27440,
+    "name": {
+      "fr": "Clef du Bastion des Marteaux-Aigris"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84793.png",
+    "level": 190
+  },
+  {
+    "id": 28398,
+    "name": {
+      "fr": "Clef Premium"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24790.png",
+    "level": 1
+  },
+  {
+    "id": 31649,
+    "name": {
+      "fr": "Clef du Poste de contrôle du Supervizœuf"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84794.png",
+    "level": 170
+  },
+  {
+    "id": 31650,
+    "name": {
+      "fr": "Clef du Breuil du Vénérable"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84796.png",
+    "level": 200
+  },
+  {
+    "id": 31651,
+    "name": {
+      "fr": "Clef de l'Autel de la Déchireuse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/84795.png",
+    "level": 200
+  }
+]

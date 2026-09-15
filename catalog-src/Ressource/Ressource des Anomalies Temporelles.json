@@ -1,0 +1,34 @@
+[
+  {
+    "id": 20961,
+    "name": {
+      "fr": "Relique de Bébémoth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164626.png",
+    "level": 200
+  },
+  {
+    "id": 21012,
+    "name": {
+      "fr": "Boucle temporelle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164627.png",
+    "level": 200
+  },
+  {
+    "id": 21013,
+    "name": {
+      "fr": "Boucle intemporelle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164628.png",
+    "level": 200
+  },
+  {
+    "id": 26870,
+    "name": {
+      "fr": "Fragment d'anomalie"
+    },
+    "img": "https://api.dofusdb.fr/img/items/176051.png",
+    "level": 1
+  }
+]

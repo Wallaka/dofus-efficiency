@@ -1,0 +1,50 @@
+[
+  {
+    "id": 21964,
+    "name": {
+      "fr": "Rune astrale mineure"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78260.png",
+    "level": 100
+  },
+  {
+    "id": 21965,
+    "name": {
+      "fr": "Rune astrale moyenne"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78261.png",
+    "level": 120
+  },
+  {
+    "id": 21966,
+    "name": {
+      "fr": "Rune astrale majeure"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78262.png",
+    "level": 140
+  },
+  {
+    "id": 21967,
+    "name": {
+      "fr": "Rune astrale épatante"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78263.png",
+    "level": 160
+  },
+  {
+    "id": 21968,
+    "name": {
+      "fr": "Rune astrale légendaire"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78265.png",
+    "level": 200
+  },
+  {
+    "id": 21969,
+    "name": {
+      "fr": "Rune astrale merveilleuse"
+    },
+    "img": "https://api.dofusdb.fr/img/items/78264.png",
+    "level": 180
+  }
+]

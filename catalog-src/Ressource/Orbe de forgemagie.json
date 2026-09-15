@@ -1,0 +1,66 @@
+[
+  {
+    "id": 17272,
+    "name": {
+      "fr": "Orbe régénérant mineur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50723.png",
+    "level": 60
+  },
+  {
+    "id": 17273,
+    "name": {
+      "fr": "Orbe régénérant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50724.png",
+    "level": 120
+  },
+  {
+    "id": 17274,
+    "name": {
+      "fr": "Orbe régénérant majeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50725.png",
+    "level": 180
+  },
+  {
+    "id": 17275,
+    "name": {
+      "fr": "Orbe régénérant magistral"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50726.png",
+    "level": 200
+  },
+  {
+    "id": 27493,
+    "name": {
+      "fr": "Orbe régénérant magistral (lié)"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50726.png",
+    "level": 200
+  },
+  {
+    "id": 27494,
+    "name": {
+      "fr": "Orbe régénérant majeur (lié)"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50725.png",
+    "level": 180
+  },
+  {
+    "id": 27495,
+    "name": {
+      "fr": "Orbe régénérant (lié)"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50724.png",
+    "level": 120
+  },
+  {
+    "id": 27496,
+    "name": {
+      "fr": "Orbe régénérant mineur (lié)"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50723.png",
+    "level": 60
+  }
+]

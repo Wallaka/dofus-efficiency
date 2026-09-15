@@ -1,0 +1,394 @@
+[
+  {
+    "id": 2056,
+    "name": {
+      "fr": "Œil de Crowneille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109326.png",
+    "level": 66
+  },
+  {
+    "id": 2283,
+    "name": {
+      "fr": "Œil de Kwoan"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109436.png",
+    "level": 35
+  },
+  {
+    "id": 2453,
+    "name": {
+      "fr": "Œil de Ramane Strubien"
+    },
+    "img": "https://api.dofusdb.fr/img/items/25158.png",
+    "level": 26
+  },
+  {
+    "id": 2491,
+    "name": {
+      "fr": "Œil d'Arakmuté"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109516.png",
+    "level": 13
+  },
+  {
+    "id": 2495,
+    "name": {
+      "fr": "Œil de Craquelope"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109520.png",
+    "level": 66
+  },
+  {
+    "id": 2552,
+    "name": {
+      "fr": "Œil de Kanigrou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109563.png",
+    "level": 70
+  },
+  {
+    "id": 2578,
+    "name": {
+      "fr": "Œil de Cocholou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109584.png",
+    "level": 96
+  },
+  {
+    "id": 2579,
+    "name": {
+      "fr": "Œil de Tofu Noir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109585.png",
+    "level": 36
+  },
+  {
+    "id": 2583,
+    "name": {
+      "fr": "Œil de Raul Mops"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109589.png",
+    "level": 46
+  },
+  {
+    "id": 6841,
+    "name": {
+      "fr": "Œil de Pikdoa"
+    },
+    "img": "https://api.dofusdb.fr/img/items/25151.png",
+    "level": 26
+  },
+  {
+    "id": 7403,
+    "name": {
+      "fr": "Œil de Madura"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164747.png",
+    "level": 170
+  },
+  {
+    "id": 9277,
+    "name": {
+      "fr": "Œil de Champmane"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109587.png",
+    "level": 176
+  },
+  {
+    "id": 11121,
+    "name": {
+      "fr": "Œil de Boufmouth de guerre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109590.png",
+    "level": 112
+  },
+  {
+    "id": 11246,
+    "name": {
+      "fr": "Œil torve de Fricochère"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109591.png",
+    "level": 130
+  },
+  {
+    "id": 11255,
+    "name": {
+      "fr": "Œil de Crabe Hijacob"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109592.png",
+    "level": 82
+  },
+  {
+    "id": 11320,
+    "name": {
+      "fr": "Œil de Vigie Pirate"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109594.png",
+    "level": 140
+  },
+  {
+    "id": 11521,
+    "name": {
+      "fr": "Œil de Sapeur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109593.png",
+    "level": 181
+  },
+  {
+    "id": 11886,
+    "name": {
+      "fr": "Œil de Dramanite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109595.png",
+    "level": 170
+  },
+  {
+    "id": 11896,
+    "name": {
+      "fr": "Œil de Korriandre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109596.png",
+    "level": 180
+  },
+  {
+    "id": 11919,
+    "name": {
+      "fr": "Œil de Fleuro"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109597.png",
+    "level": 180
+  },
+  {
+    "id": 11935,
+    "name": {
+      "fr": "Iris de Boulglours"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109598.png",
+    "level": 190
+  },
+  {
+    "id": 11948,
+    "name": {
+      "fr": "Cornée de Kami Givrefoux"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109599.png",
+    "level": 160
+  },
+  {
+    "id": 12449,
+    "name": {
+      "fr": "Œil de Krokille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109327.png",
+    "level": 75
+  },
+  {
+    "id": 13913,
+    "name": {
+      "fr": "Œil de Harrogant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109602.png",
+    "level": 200
+  },
+  {
+    "id": 13988,
+    "name": {
+      "fr": "Œil de Cycloïde"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109603.png",
+    "level": 200
+  },
+  {
+    "id": 14145,
+    "name": {
+      "fr": "Œil de verre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109604.png",
+    "level": 200
+  },
+  {
+    "id": 14478,
+    "name": {
+      "fr": "Œil de Wabbit Céphale"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109605.png",
+    "level": 120
+  },
+  {
+    "id": 14853,
+    "name": {
+      "fr": "Œil de Harpo"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109606.png",
+    "level": 200
+  },
+  {
+    "id": 15073,
+    "name": {
+      "fr": "Œil de Truchtine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109607.png",
+    "level": 119
+  },
+  {
+    "id": 15174,
+    "name": {
+      "fr": "Œil de Phozami"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15873.png",
+    "level": 150
+  },
+  {
+    "id": 15684,
+    "name": {
+      "fr": "Œil de Verminocule"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109608.png",
+    "level": 200
+  },
+  {
+    "id": 15718,
+    "name": {
+      "fr": "Œil de Harpille"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15898.png",
+    "level": 200
+  },
+  {
+    "id": 16149,
+    "name": {
+      "fr": "Œil d'Abrakne"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109609.png",
+    "level": 46
+  },
+  {
+    "id": 16162,
+    "name": {
+      "fr": "Œil de Branche Invocatrice"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109610.png",
+    "level": 138
+  },
+  {
+    "id": 16163,
+    "name": {
+      "fr": "Œil de Branche Soignante"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109611.png",
+    "level": 138
+  },
+  {
+    "id": 16213,
+    "name": {
+      "fr": "Œil de Rat du Gang"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109610.png",
+    "level": 134
+  },
+  {
+    "id": 16220,
+    "name": {
+      "fr": "Œil de Saltik"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109611.png",
+    "level": 86
+  },
+  {
+    "id": 17610,
+    "name": {
+      "fr": "Œil de Morcac"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109613.png",
+    "level": 110
+  },
+  {
+    "id": 17986,
+    "name": {
+      "fr": "Œil de Shokkoth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109614.png",
+    "level": 200
+  },
+  {
+    "id": 18411,
+    "name": {
+      "fr": "Œil de Léolhyène"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109615.png",
+    "level": 80
+  },
+  {
+    "id": 18568,
+    "name": {
+      "fr": "Œil du Père Ver"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109616.png",
+    "level": 170
+  },
+  {
+    "id": 19071,
+    "name": {
+      "fr": "Œil de Gouligane"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109617.png",
+    "level": 200
+  },
+  {
+    "id": 19231,
+    "name": {
+      "fr": "Œil de Feutôme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15988.png",
+    "level": 200
+  },
+  {
+    "id": 19403,
+    "name": {
+      "fr": "Œil de Halbardent"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109618.png",
+    "level": 200
+  },
+  {
+    "id": 20816,
+    "name": {
+      "fr": "Œil Bionique"
+    },
+    "img": "https://api.dofusdb.fr/img/items/59669.png",
+    "level": 51
+  },
+  {
+    "id": 21206,
+    "name": {
+      "fr": "Œil de Crocodaille albinos"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109621.png",
+    "level": 200
+  },
+  {
+    "id": 21265,
+    "name": {
+      "fr": "Œil du Kharnozor"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109622.png",
+    "level": 100
+  },
+  {
+    "id": 22051,
+    "name": {
+      "fr": "Œil de Dawaj"
+    },
+    "img": "https://api.dofusdb.fr/img/items/109623.png",
+    "level": 200
+  },
+  {
+    "id": 32572,
+    "name": {
+      "fr": "Globe oculaire de Musha"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24521.png",
+    "level": 80
+  }
+]

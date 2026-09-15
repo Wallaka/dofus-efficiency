@@ -1,0 +1,402 @@
+[
+  {
+    "id": 315,
+    "name": {
+      "fr": "Diamant"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50025.png",
+    "level": 50
+  },
+  {
+    "id": 316,
+    "name": {
+      "fr": "Émeraude"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50023.png",
+    "level": 50
+  },
+  {
+    "id": 463,
+    "name": {
+      "fr": "Ambre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50096.png",
+    "level": 44
+  },
+  {
+    "id": 464,
+    "name": {
+      "fr": "Ambre d'Abraknyde"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50097.png",
+    "level": 44
+  },
+  {
+    "id": 465,
+    "name": {
+      "fr": "Cristal"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50098.png",
+    "level": 40
+  },
+  {
+    "id": 466,
+    "name": {
+      "fr": "Saphir"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50099.png",
+    "level": 30
+  },
+  {
+    "id": 467,
+    "name": {
+      "fr": "Rubis"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50100.png",
+    "level": 50
+  },
+  {
+    "id": 929,
+    "name": {
+      "fr": "Kristalite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50705.png",
+    "level": 120
+  },
+  {
+    "id": 965,
+    "name": {
+      "fr": "Pierre de Dopeul"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50663.png",
+    "level": 41
+  },
+  {
+    "id": 1575,
+    "name": {
+      "fr": "Guildalogemme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50229.png",
+    "level": 1
+  },
+  {
+    "id": 1660,
+    "name": {
+      "fr": "Ambre d'Abraknyde Sombre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50638.png",
+    "level": 78
+  },
+  {
+    "id": 1679,
+    "name": {
+      "fr": "Pierre de Crystaloboule"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50240.png",
+    "level": 62
+  },
+  {
+    "id": 6490,
+    "name": {
+      "fr": "Ambre du Chêne Mou"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50669.png",
+    "level": 140
+  },
+  {
+    "id": 7026,
+    "name": {
+      "fr": "Aigue-Marine"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50101.png",
+    "level": 150
+  },
+  {
+    "id": 7027,
+    "name": {
+      "fr": "Topaze"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50102.png",
+    "level": 110
+  },
+  {
+    "id": 7028,
+    "name": {
+      "fr": "Agathe"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50103.png",
+    "level": 150
+  },
+  {
+    "id": 7222,
+    "name": {
+      "fr": "Artefact Pandawushu Eau"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164659.png",
+    "level": 130
+  },
+  {
+    "id": 7223,
+    "name": {
+      "fr": "Artefact Pandawushu Vent"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164661.png",
+    "level": 140
+  },
+  {
+    "id": 7224,
+    "name": {
+      "fr": "Artefact Pandawushu Roc"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164662.png",
+    "level": 130
+  },
+  {
+    "id": 7225,
+    "name": {
+      "fr": "Artefact Pandawushu Feu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164663.png",
+    "level": 140
+  },
+  {
+    "id": 7381,
+    "name": {
+      "fr": "Kaokurimono"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164737.png",
+    "level": 170
+  },
+  {
+    "id": 8762,
+    "name": {
+      "fr": "Fragment de cerveau poli"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50003.png",
+    "level": 102
+  },
+  {
+    "id": 8916,
+    "name": {
+      "fr": "Ambre du Tynril"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50715.png",
+    "level": 140
+  },
+  {
+    "id": 9941,
+    "name": {
+      "fr": "Nacre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50004.png",
+    "level": 40
+  },
+  {
+    "id": 10835,
+    "name": {
+      "fr": "Cachet du bizut"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50707.png",
+    "level": 1
+  },
+  {
+    "id": 11330,
+    "name": {
+      "fr": "Artefact de Fumrirolle"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50709.png",
+    "level": 150
+  },
+  {
+    "id": 11517,
+    "name": {
+      "fr": "Eclat temporel"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50708.png",
+    "level": 190
+  },
+  {
+    "id": 11559,
+    "name": {
+      "fr": "Pierre de Feu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50710.png",
+    "level": 1
+  },
+  {
+    "id": 11560,
+    "name": {
+      "fr": "Pierre de Terre"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50711.png",
+    "level": 1
+  },
+  {
+    "id": 11561,
+    "name": {
+      "fr": "Pierre d'Eau"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50712.png",
+    "level": 1
+  },
+  {
+    "id": 11562,
+    "name": {
+      "fr": "Pierre d'Air"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50713.png",
+    "level": 1
+  },
+  {
+    "id": 12468,
+    "name": {
+      "fr": "Bézoard Ardent de Grozilla"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50714.png",
+    "level": 150
+  },
+  {
+    "id": 14279,
+    "name": {
+      "fr": "Pierre Précieuse Zoth"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50716.png",
+    "level": 122
+  },
+  {
+    "id": 14290,
+    "name": {
+      "fr": "Alliogemme"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50717.png",
+    "level": 1
+  },
+  {
+    "id": 14635,
+    "name": {
+      "fr": "Pépite"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50718.png",
+    "level": 1
+  },
+  {
+    "id": 15176,
+    "name": {
+      "fr": "Joyau de la couronne du roi Nidas"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15875.png",
+    "level": 200
+  },
+  {
+    "id": 15177,
+    "name": {
+      "fr": "Corne de Kamasterisk"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15876.png",
+    "level": 200
+  },
+  {
+    "id": 15181,
+    "name": {
+      "fr": "Boule en or de Piloztère"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15880.png",
+    "level": 200
+  },
+  {
+    "id": 15271,
+    "name": {
+      "fr": "Tourmaline"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50719.png",
+    "level": 10
+  },
+  {
+    "id": 16156,
+    "name": {
+      "fr": "Ambre d'Abraknyde Sombre Irascible"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50721.png",
+    "level": 130
+  },
+  {
+    "id": 16208,
+    "name": {
+      "fr": "Fragment de Rubis Fertile"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50722.png",
+    "level": 140
+  },
+  {
+    "id": 18539,
+    "name": {
+      "fr": "Grenat de Momistik"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50727.png",
+    "level": 200
+  },
+  {
+    "id": 18543,
+    "name": {
+      "fr": "Scarabée Chrysonéfritin"
+    },
+    "img": "https://api.dofusdb.fr/img/items/15954.png",
+    "level": 200
+  },
+  {
+    "id": 20969,
+    "name": {
+      "fr": "Cristal temporel"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50728.png",
+    "level": 200
+  },
+  {
+    "id": 20970,
+    "name": {
+      "fr": "Cristal intemporel"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50729.png",
+    "level": 200
+  },
+  {
+    "id": 23311,
+    "name": {
+      "fr": "Artefact Pandawushu Bois"
+    },
+    "img": "https://api.dofusdb.fr/img/items/164660.png",
+    "level": 110
+  },
+  {
+    "id": 27631,
+    "name": {
+      "fr": "Cristal inhibiteur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/40716.png",
+    "level": 200
+  },
+  {
+    "id": 27632,
+    "name": {
+      "fr": "Cristal pacificateur"
+    },
+    "img": "https://api.dofusdb.fr/img/items/40717.png",
+    "level": 200
+  },
+  {
+    "id": 31517,
+    "name": {
+      "fr": "Artefact Pandawushu"
+    },
+    "img": "https://api.dofusdb.fr/img/items/50105.png",
+    "level": 150
+  },
+  {
+    "id": 32571,
+    "name": {
+      "fr": "Joyau des Scalptaras"
+    },
+    "img": "https://api.dofusdb.fr/img/items/24520.png",
+    "level": 80
+  }
+]
