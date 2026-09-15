@@ -26,6 +26,26 @@ const norm = (s: string) =>
 
 const keyOf = (tab: string, category: string) => `${tab}::${category}`;
 
+/** The kama coin, DofusDB-style — inline so it needs no external image. */
+function KamaIcon() {
+  return (
+    <svg className="kama-ic" width="15" height="15" viewBox="0 0 16 16" aria-hidden="true">
+      <circle cx="8" cy="8" r="7" fill="#e8b23a" stroke="#a9781f" strokeWidth="1" />
+      <circle cx="8" cy="8" r="4.4" fill="none" stroke="#a9781f" strokeWidth="0.8" opacity="0.5" />
+      <text
+        x="8"
+        y="11"
+        textAnchor="middle"
+        fontSize="8"
+        fontWeight="700"
+        fill="#7a5410"
+      >
+        k
+      </text>
+    </svg>
+  );
+}
+
 export function HdvPage() {
   const catalog = useMemo(() => loadCatalog(), []);
   const [entries, setEntries] = useState<PriceEntryMap>(loadPriceEntries);
@@ -221,21 +241,24 @@ export function HdvPage() {
                     {category && <span className="hdv-cat-tag">{category}</span>}
                     {item.level ? ` niv. ${item.level}` : ""}
                   </span>
-                  <input
-                    className="hdv-price"
-                    type="text"
-                    inputMode="numeric"
-                    defaultValue={entry ? String(entry.price) : ""}
-                    placeholder="prix"
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        e.preventDefault();
-                        commit(item, e.currentTarget.value);
-                        focusNext(e.currentTarget);
-                      }
-                    }}
-                    onBlur={(e) => commit(item, e.currentTarget.value)}
-                  />
+                  <span className="hdv-price-wrap">
+                    <input
+                      className="hdv-price"
+                      type="text"
+                      inputMode="numeric"
+                      defaultValue={entry ? String(entry.price) : ""}
+                      placeholder="prix"
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          commit(item, e.currentTarget.value);
+                          focusNext(e.currentTarget);
+                        }
+                      }}
+                      onBlur={(e) => commit(item, e.currentTarget.value)}
+                    />
+                    <KamaIcon />
+                  </span>
                   <span className={stale ? "hdv-age hdv-stale" : "hdv-age"}>
                     {entry ? relativeAge(entry.updatedAt, now) : ""}
                   </span>
