@@ -1412,6 +1412,72 @@ table.eleveur-bp input {
   margin-top: 10px;
 }
 
+.eleveur-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.eleveur-tabs button {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--num-bg);
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.eleveur-tabs button.active {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.eleveur-muldos-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.eleveur-muldo-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--num-bg);
+  padding: 12px 14px;
+}
+.eleveur-muldo-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.eleveur-muldo-name {
+  font-weight: 600;
+  flex: 1;
+}
+.eleveur-muldo-badge {
+  font-size: 0.72rem;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 1px 8px;
+}
+.eleveur-muldo-reset {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 4px 12px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+.eleveur-muldo-reset:not(:disabled):hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+.eleveur-muldo-reset:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
 .eleveur-settings {
   display: flex;
   gap: 20px;

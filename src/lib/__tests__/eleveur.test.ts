@@ -112,6 +112,18 @@ describe("computeEleveur", () => {
     expect(r.captureCostPerMount).toBe(1000);
   });
 
+  it("uses a brisage override for the mount when provided", () => {
+    // Override indigo's runes with a single Ga Pme worth 100% of 10 @ 200 k.
+    const override = {
+      "4434": [
+        { itemId: "1558", label: "Rune Ga Pme", img: "", chance: 1, quantityMin: 10, quantityMax: 10 },
+      ],
+    };
+    const r = computeEleveur(baseInput(), { "1558": 200 }, 0, 10, override);
+    expect(r.runes).toHaveLength(1);
+    expect(r.grossRevenuePerMount).toBe(2000); // 10 × 200
+  });
+
   it("has no filet or capture cost until a mount is chosen", () => {
     const r = computeEleveur(
       { level: 200, raiseHours: 10 },
