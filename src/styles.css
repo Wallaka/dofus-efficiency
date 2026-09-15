@@ -1522,6 +1522,66 @@ table.eleveur-bp input {
   padding-top: 12px;
   border-top: 1px solid var(--border);
 }
+
+.eleveur-week {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.eleveur-week-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+.eleveur-week-day {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+  padding: 8px 4px;
+  min-width: 0;
+}
+.eleveur-week-dow {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+}
+.eleveur-week-rot {
+  font-size: 0.82rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.eleveur-week-profit {
+  font-size: 0.74rem;
+  font-variant-numeric: tabular-nums;
+}
+.eleveur-week-profit.positive {
+  color: var(--positive);
+}
+.eleveur-week-profit.negative {
+  color: var(--negative);
+}
+.eleveur-week-total {
+  margin-top: 10px;
+  font-size: 0.92rem;
+  font-variant-numeric: tabular-nums;
+}
+.eleveur-week-total .positive {
+  color: var(--positive);
+}
+.eleveur-week-total .negative {
+  color: var(--negative);
+}
+@media (max-width: 560px) {
+  .eleveur-week-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 .eleveur-runes-title {
   display: block;
   font-size: 0.72rem;

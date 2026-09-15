@@ -107,6 +107,26 @@ export function EleveurPage() {
     [input.availFrom, input.availTo],
   );
 
+  // A full week (Mon → Sun) for the forecast: rotations completed per weekday.
+  const weekPlan = useMemo(
+    () =>
+      planRotations({
+        availFrom: input.availFrom ?? 8,
+        availTo: input.availTo ?? 24,
+        rotationHours: RAISE_HOURS,
+        horizonDays: 7,
+      }),
+    [input.availFrom, input.availTo],
+  );
+  const rotationsByDay = useMemo(() => {
+    const arr = new Array(7).fill(0);
+    for (const e of weekPlan.events) {
+      if (e.type === "cycle" && e.day >= 0 && e.day < 7) arr[e.day] += 1;
+    }
+    return arr as number[];
+  }, [weekPlan]);
+  const weekRotations = rotationsByDay.reduce((a, b) => a + b, 0);
+
   function patch(p: Partial<EleveurInput>) {
     setInput((prev) => ({ ...prev, ...p }));
   }
@@ -310,6 +330,50 @@ export function EleveurPage() {
             </div>
           </div>
         )}
+
+        <div className="eleveur-week">
+          <span className="eleveur-runes-title">
+            Prévision 7 jours (lun. → dim.) · connecté{" "}
+            {input.availFrom ?? 8} h–{input.availTo ?? 24} h
+          </span>
+          <div className="eleveur-week-grid">
+            {["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"].map((d, i) => (
+              <div key={d} className="eleveur-week-day">
+                <span className="eleveur-week-dow">{d}</span>
+                <span className="eleveur-week-rot">{rotationsByDay[i]} rot.</span>
+                <span
+                  className={`eleveur-week-profit ${rangeProfitClass(
+                    rotationsByDay[i] * low.profitPerCycle,
+                    rotationsByDay[i] * high.profitPerCycle,
+                  )}`}
+                >
+                  {rotationsByDay[i] === 0
+                    ? "—"
+                    : fmtRange(
+                        rotationsByDay[i] * low.profitPerCycle,
+                        rotationsByDay[i] * high.profitPerCycle,
+                        formatKamasSigned,
+                      )}
+                </span>
+              </div>
+            ))}
+          </div>
+          <div className="eleveur-week-total">
+            Total semaine : <strong>{weekRotations} rotations</strong> ·{" "}
+            <strong
+              className={rangeProfitClass(
+                weekRotations * low.profitPerCycle,
+                weekRotations * high.profitPerCycle,
+              )}
+            >
+              {fmtRange(
+                weekRotations * low.profitPerCycle,
+                weekRotations * high.profitPerCycle,
+                formatKamasSigned,
+              )}
+            </strong>
+          </div>
+        </div>
       </section>
 
       {/* ---------------- Capture ---------------- */}
