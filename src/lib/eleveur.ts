@@ -59,9 +59,12 @@ export interface EleveurInput {
   /**
    * How many full rotations you realistically complete per day. A rotation
    * takes ~11 h of raising plus your own idle time, so this is rarely 24/11 —
-   * default 1. Drives the profit-per-day figure.
+   * default 1. Drives the profit-per-day figure (the planner can fill it in).
    */
   rotationsPerDay?: number;
+  /** Connection window (clock hours) used by the rotation planner. */
+  availFrom?: number;
+  availTo?: number;
 }
 
 /**
@@ -234,5 +237,7 @@ export function defaultEleveurInput(): EleveurInput {
     mountId: undefined,
     mangeoireId: "33341", // Grand Extrait de Mangeoire (4000 énergie)
     rotationsPerDay: 1,
+    availFrom: 8,
+    availTo: 24,
   };
 }

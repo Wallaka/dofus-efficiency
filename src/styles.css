@@ -1467,6 +1467,56 @@ table.eleveur-bp input {
   width: 120px;
 }
 
+.eleveur-apply {
+  align-self: flex-end;
+  padding: 8px 14px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.eleveur-apply:hover {
+  filter: brightness(1.08);
+}
+.eleveur-plan {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.eleveur-plan-ev {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+}
+.eleveur-plan-ev.place {
+  border-left: 3px solid var(--accent);
+}
+.eleveur-plan-ev.cycle {
+  border-left: 3px solid var(--positive);
+}
+.eleveur-plan-time {
+  flex: 0 0 auto;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  min-width: 96px;
+}
+.eleveur-plan-label {
+  font-size: 0.9rem;
+}
+.eleveur-plan-idle {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
 .eleveur-runes-summary {
   margin-top: 12px;
   padding-top: 12px;
