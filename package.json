@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "prepare:tesseract": "node scripts/prepare-tesseract.mjs",
+    "build:catalog": "node scripts/build-catalog.mjs",
+    "fetch:catalog": "node scripts/fetch-catalog.mjs",
     "predev": "npm run prepare:tesseract",
     "dev": "vite",
     "prebuild": "npm run prepare:tesseract",

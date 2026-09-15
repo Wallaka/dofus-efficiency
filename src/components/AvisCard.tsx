@@ -113,7 +113,6 @@ function PriceInput({
           if (e.key === "Enter") e.currentTarget.blur();
         }}
       />
-      <span className="avis-line-unit">k</span>
     </span>
   );
 }
@@ -477,7 +476,6 @@ export function AvisCard({
                   )
                 }
               />
-              <span className="avis-line-unit">k</span>
             </span>
           }
         />

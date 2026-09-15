@@ -9,6 +9,8 @@
   --positive: #4ccf83;
   --negative: #ef7676;
   --num-bg: #17140f;
+  /* The kama coin (DofusDB-style), as a trailing adornment inside price fields. */
+  --kama-coin: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Ccircle%20cx='8'%20cy='8'%20r='7'%20fill='%23e8b23a'%20stroke='%23a9781f'/%3E%3Ccircle%20cx='8'%20cy='8'%20r='4.4'%20fill='none'%20stroke='%23a9781f'%20stroke-opacity='.5'/%3E%3Ctext%20x='8'%20y='11'%20text-anchor='middle'%20font-size='8'%20font-weight='700'%20font-family='sans-serif'%20fill='%237a5410'%3Ek%3C/text%3E%3C/svg%3E");
 }
 
 * {
@@ -4025,4 +4027,224 @@ td.negative {
   overflow: auto;
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+/* ---------------------------------------------------------------------------
+   HDV — game-like marketplace: category rail (left) + item list (right)
+--------------------------------------------------------------------------- */
+.hdv-search {
+  width: 100%;
+  margin-top: 14px;
+  padding: 9px 14px;
+  background: var(--num-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+.hdv-search:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.hdv-layout {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 20px;
+  align-items: start;
+  margin-top: 14px;
+}
+
+.hdv-cat-tag {
+  color: var(--accent);
+}
+
+/* Left rail: categories grouped by tab. */
+.hdv-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: sticky;
+  top: 12px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+.hdv-rail-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.hdv-rail-tab {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  padding: 2px 8px;
+  margin-bottom: 2px;
+}
+.hdv-cat-btn {
+  text-align: left;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.hdv-cat-btn:hover {
+  background: var(--num-bg);
+}
+.hdv-cat-btn.active {
+  background: color-mix(in srgb, var(--accent) 22%, var(--num-bg));
+  border-color: var(--accent);
+}
+
+/* Right pane: header + compact item rows. */
+.hdv-detail-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.hdv-detail-head h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.hdv-filter {
+  flex: 1 1 160px;
+  min-width: 120px;
+  padding: 6px 10px;
+  background: var(--num-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+}
+.hdv-progress {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.hdv-rows {
+  display: flex;
+  flex-direction: column;
+}
+.hdv-row {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr) auto auto 64px;
+  align-items: center;
+  gap: 10px;
+  padding: 3px 6px;
+  border-radius: 6px;
+}
+.hdv-price-wrap {
+  position: relative;
+  display: inline-flex;
+}
+.kama-ic {
+  position: absolute;
+  right: 7px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.hdv-row:hover {
+  background: var(--num-bg);
+}
+.hdv-ic {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+.hdv-ic-empty {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border: 1px dashed var(--border);
+  border-radius: 5px;
+}
+.hdv-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.hdv-lvl {
+  color: var(--muted);
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+.hdv-price {
+  width: 96px;
+  padding: 5px 26px 5px 8px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.hdv-price:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+.hdv-age {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-align: right;
+  white-space: nowrap;
+}
+.hdv-age.hdv-stale {
+  color: var(--negative);
+}
+.hdv-footer {
+  margin-top: 20px;
+}
+
+/* Mobile: rail becomes a horizontal chip strip above the list. */
+@media (max-width: 720px) {
+  .hdv-layout {
+    grid-template-columns: 1fr;
+  }
+  .hdv-rail {
+    position: static;
+    max-height: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .hdv-rail-group {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .hdv-rail-tab {
+    width: 100%;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Kama coin on every price field — one gold coin, DofusDB-style, painted inside
+   the input's right edge (no wrapper needed, so no layout is disturbed).
+   Appended last so it wins padding-right over each field's own padding.
+--------------------------------------------------------------------------- */
+.price-edit input,
+.craft-price-edit input,
+.avis-line-price-edit input,
+.price-row input,
+.voice-price,
+#sell-price,
+.cost-unit,
+.cost-amount,
+.quest-add-kamas,
+.quest-kamas input,
+.quest-price,
+.tracked-price-input,
+.avis-aviton-price {
+  background-image: var(--kama-coin);
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+  background-size: 13px 13px;
+  padding-right: 22px;
 }
