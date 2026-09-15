@@ -56,6 +56,12 @@ export interface EleveurInput {
   filetId?: string;
   /** The mangeoire fuel used to raise the mounts (its energy drives food cost). */
   mangeoireId?: string;
+  /**
+   * How many full rotations you realistically complete per day. A rotation
+   * takes ~11 h of raising plus your own idle time, so this is rarely 24/11 —
+   * default 1. Drives the profit-per-day figure.
+   */
+  rotationsPerDay?: number;
 }
 
 /**
@@ -181,9 +187,10 @@ export function computeEleveur(
   const filtresPerCycle = filtresPerMount * totalSlots;
   const filtresCostPerCycle = captureCostPerMount * totalSlots;
   const profitPerCycle = profitPerMount * totalSlots;
-  // Raising time is fixed by the xp (RAISE_HOURS); a day fits 24 / RAISE_HOURS
-  // back-to-back rotations.
-  const profitPerDay = profitPerCycle * (24 / RAISE_HOURS);
+  // A rotation takes ~11 h of raising plus idle time, so profit-per-day follows
+  // how many rotations you actually complete (default 1), not a 24 h theoretical.
+  const rotationsPerDay = Math.max(0, input.rotationsPerDay ?? 1);
+  const profitPerDay = profitPerCycle * rotationsPerDay;
 
   const missing = new Set<string>();
   if (filet != null && filtresPerMount > 0 && filetPrice == null) {
@@ -226,5 +233,6 @@ export function defaultEleveurInput(): EleveurInput {
     level: 200,
     mountId: undefined,
     mangeoireId: "33341", // Grand Extrait de Mangeoire (4000 énergie)
+    rotationsPerDay: 1,
   };
 }
