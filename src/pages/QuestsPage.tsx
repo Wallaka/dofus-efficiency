@@ -20,6 +20,7 @@ import { usePrices } from "../lib/usePrices";
 import type { PriceEntryMap } from "../lib/priceStore";
 import { formatKamas } from "../lib/format";
 import { ItemAutocomplete } from "../components/ItemAutocomplete";
+import { CopyName } from "../components/CopyName";
 
 const PERIOD_LABEL: Record<QuestPeriod, string> = {
   daily: "Quotidienne",
@@ -406,6 +407,7 @@ function QuestCard({
                       <span className="item-name" title={r.item.name}>
                         {r.item.name}
                       </span>
+                      <CopyName text={r.item.name} />
                     </span>
                   </td>
                   <td className="num">
