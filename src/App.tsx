@@ -8,6 +8,7 @@ import { QuestsPage } from "./pages/QuestsPage";
 import { PricesPage } from "./pages/PricesPage";
 import { TrackedItemsPage } from "./pages/TrackedItemsPage";
 import { MesRessourcesPage } from "./pages/MesRessourcesPage";
+import { Page } from "./components/Page";
 import { VoicePage } from "./pages/VoicePage";
 import { HdvPage } from "./pages/HdvPage";
 import { DonneesPage } from "./pages/DonneesPage";
@@ -35,7 +36,8 @@ export function App() {
         </nav>
       </header>
 
-      <Routes>
+      <Page>
+        <Routes>
         <Route path="/" element={<CraftPage />} />
         <Route path="/craft" element={<CraftListPage />} />
         <Route path="/metiers" element={<MetierPage />} />
@@ -48,7 +50,8 @@ export function App() {
         <Route path="/prix" element={<PricesPage />} />
         <Route path="/vocal" element={<VoicePage />} />
         <Route path="/donnees" element={<DonneesPage />} />
-      </Routes>
+        </Routes>
+      </Page>
 
       <footer className="app-footer">
         <p>

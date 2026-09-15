@@ -31,6 +31,12 @@ body {
   padding: 24px 20px 48px;
 }
 
+/* The single gap between the top nav and page content (see components/Page). */
+.app-main {
+  display: block;
+  margin-top: 24px;
+}
+
 .app-header h1 {
   margin: 0;
   font-size: 1.8rem;
@@ -683,7 +689,6 @@ table.lots td.num {
 
 /* Prix page */
 .prices-page {
-  margin-top: 24px;
 }
 
 .prices-summary {
@@ -1289,7 +1294,6 @@ table.lots td.num {
 
 /* Avis de recherche */
 .avis-page {
-  margin-top: 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -1803,7 +1807,6 @@ td.negative {
 
 /* ---- Craft page : une ligne par objet craftable, dépliable ---- */
 .craft-page {
-  margin-top: 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -2376,7 +2379,6 @@ td.negative {
 
 /* Quêtes (daily/weekly routine) page */
 .quests-page {
-  margin-top: 24px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -2594,7 +2596,6 @@ td.negative {
 
 /* Données (import/export) page */
 .donnees-page {
-  margin-top: 24px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
@@ -2762,7 +2763,6 @@ td.negative {
 
 /* ---- Métiers page ---- */
 .metier-page {
-  margin-top: 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -3495,7 +3495,6 @@ td.negative {
 
 /* Mes ressources page + "Utiliser mes ressources" toggle */
 .res-page {
-  margin-top: 24px;
 }
 
 .res-add {
