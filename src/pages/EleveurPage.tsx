@@ -268,6 +268,33 @@ export function EleveurPage() {
             </span>
           </div>
         </div>
+
+        {result.runes.length > 0 && (
+          <div className="eleveur-runes-summary">
+            <span className="eleveur-runes-title">
+              Runes récoltées par rotation (≈, sur {result.totalSlots} montures)
+            </span>
+            <div className="eleveur-runes-chips">
+              {result.runes.map((r) => {
+                const perMount = runeExpectedQty(r);
+                return (
+                  <div key={r.itemId} className="eleveur-rune-chip">
+                    <img src={r.img} alt="" className="eleveur-rune-chip-icon" />
+                    <span className="eleveur-rune-chip-count">
+                      {count(perMount * result.totalSlots)}
+                    </span>
+                    <span className="eleveur-rune-chip-name">
+                      {r.label}
+                      <span className="eleveur-rune-chip-sub">
+                        ≈ {perMount.toLocaleString("fr-FR", { maximumFractionDigits: 2 })} / monture
+                      </span>
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </section>
 
       {/* ---------------- Capture ---------------- */}
