@@ -19,11 +19,17 @@ import { usePrices } from "../lib/usePrices";
 import { loadCraftTaxPercent } from "../lib/craftList";
 import { formatKamas, formatKamasSigned, formatPercent } from "../lib/format";
 
+/** Colour of one range bound: a loss (< 0) is red, else green if favourable, amber if not. */
+function boundClass(v: number, favourable: boolean): string {
+  if (v < 0) return "rng-neg";
+  return favourable ? "rng-good" : "rng-bad";
+}
+
 /**
- * A min–max range with each bound coloured by whether it's the favourable end:
- * the good bound green, the other amber. `higherIsBetter` tells which way is
- * good (profit: high is good; cost / filets: low is good). A single value when
- * the bounds coincide.
+ * A value coloured by meaning, whether it's a single number or a min–max range.
+ * `higherIsBetter` says which way is good (profit / revenue: high; cost / filets:
+ * low). Single value: green for a gain, red for a loss, amber for a spend.
+ * Range: favourable bound green, other amber, any negative bound red.
  */
 function Range({
   a,
@@ -39,14 +45,25 @@ function Range({
   if (a == null || b == null) return <>—</>;
   const lo = Math.min(a, b);
   const hi = Math.max(a, b);
-  if (Math.round(lo) === Math.round(hi)) return <>{fmt(lo)}</>;
-  const loClass = higherIsBetter ? "rng-bad" : "rng-good";
-  const hiClass = higherIsBetter ? "rng-good" : "rng-bad";
+  if (Math.round(lo) === Math.round(hi)) {
+    const v = lo;
+    const cls = higherIsBetter
+      ? v > 0
+        ? "rng-good"
+        : v < 0
+          ? "rng-neg"
+          : ""
+      : v < 0
+        ? "rng-neg"
+        : "rng-bad";
+    return <span className={cls}>{fmt(v)}</span>;
+  }
+  const loFavourable = !higherIsBetter; // for a cost, the low end is favourable
   return (
     <>
-      <span className={loClass}>{fmt(lo)}</span>
+      <span className={boundClass(lo, loFavourable)}>{fmt(lo)}</span>
       <span className="rng-sep"> – </span>
-      <span className={hiClass}>{fmt(hi)}</span>
+      <span className={boundClass(hi, !loFavourable)}>{fmt(hi)}</span>
     </>
   );
 }
@@ -247,7 +264,7 @@ export function EleveurPage() {
           <div className="eleveur-tile">
             <span className="eleveur-tile-label">Runes / monture</span>
             <span className="eleveur-tile-value">
-              {formatKamas(result.netRevenuePerMount)}
+              <Range a={result.netRevenuePerMount} b={result.netRevenuePerMount} fmt={formatKamas} />
             </span>
             <span className="eleveur-tile-sub">
               {result.taxPerMount > 0
