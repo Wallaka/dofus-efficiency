@@ -165,25 +165,34 @@ export function EleveurPage() {
     [input.availFrom, input.availTo],
   );
 
-  // A full week (Mon → Sun) for the forecast: rotations completed per weekday.
-  const weekPlan = useMemo(
+  // Forecast over an adjustable horizon: rotations completed per day.
+  const forecastDays = Math.max(1, Math.min(90, Math.round(input.forecastDays ?? 7)));
+  const forecastPlan = useMemo(
     () =>
       planRotations({
         availFrom: input.availFrom ?? 8,
         availTo: input.availTo ?? 24,
         rotationHours: RAISE_HOURS,
-        horizonDays: 7,
+        horizonDays: forecastDays,
       }),
-    [input.availFrom, input.availTo],
+    [input.availFrom, input.availTo, forecastDays],
   );
   const rotationsByDay = useMemo(() => {
-    const arr = new Array(7).fill(0);
-    for (const e of weekPlan.events) {
-      if (e.type === "cycle" && e.day >= 0 && e.day < 7) arr[e.day] += 1;
+    const arr = new Array(forecastDays).fill(0);
+    for (const e of forecastPlan.events) {
+      if (e.type === "cycle" && e.day >= 0 && e.day < forecastDays) arr[e.day] += 1;
     }
     return arr as number[];
-  }, [weekPlan]);
-  const weekRotations = rotationsByDay.reduce((a, b) => a + b, 0);
+  }, [forecastPlan, forecastDays]);
+  const forecastRotations = rotationsByDay.reduce((a, b) => a + b, 0);
+  // For long horizons, group the per-day counts into weeks.
+  const forecastWeeks = useMemo(() => {
+    const weeks: number[] = [];
+    for (let i = 0; i < rotationsByDay.length; i += 7) {
+      weeks.push(rotationsByDay.slice(i, i + 7).reduce((a, b) => a + b, 0));
+    }
+    return weeks;
+  }, [rotationsByDay]);
 
   function patch(p: Partial<EleveurInput>) {
     setInput((prev) => ({ ...prev, ...p }));
@@ -505,39 +514,90 @@ export function EleveurPage() {
         )}
 
         <div className="eleveur-week">
-          <span className="eleveur-runes-title">
-            Prévision 7 jours (lun. → dim.) · connecté{" "}
-            {input.availFrom ?? 8} h–{input.availTo ?? 24} h
-          </span>
-          <div className="eleveur-week-grid">
-            {["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"].map((d, i) => (
-              <div key={d} className="eleveur-week-day">
-                <span className="eleveur-week-dow">{d}</span>
-                <span className="eleveur-week-rot">{rotationsByDay[i]} rot.</span>
-                <span className="eleveur-week-profit">
-                  {rotationsByDay[i] === 0 ? (
-                    "—"
-                  ) : (
-                    <Range
-                      a={rotationsByDay[i] * low.profitPerCycle}
-                      b={rotationsByDay[i] * high.profitPerCycle}
-                      fmt={formatKamasSigned}
-                    />
-                  )}
-                </span>
-              </div>
-            ))}
+          <div className="eleveur-forecast-head">
+            <span className="eleveur-runes-title">
+              Prévision sur {forecastDays} jour{forecastDays > 1 ? "s" : ""} ·
+              connecté {input.availFrom ?? 8} h–{input.availTo ?? 24} h
+            </span>
+            <div className="eleveur-forecast-controls">
+              {[7, 14, 30, 60].map((d) => (
+                <button
+                  key={d}
+                  type="button"
+                  className={`eleveur-preset ${forecastDays === d ? "active" : ""}`}
+                  onClick={() => patch({ forecastDays: d })}
+                >
+                  {d === 30 ? "1 mois" : d === 60 ? "2 mois" : `${d} j`}
+                </button>
+              ))}
+              <input
+                type="number"
+                className="eleveur-forecast-days"
+                min={1}
+                max={90}
+                inputMode="numeric"
+                value={input.forecastDays ?? 7}
+                onChange={(e) => patch({ forecastDays: num(e.target.value) })}
+                aria-label="Nombre de jours de prévision"
+              />
+              <span className="eleveur-rune-suffix">j</span>
+            </div>
           </div>
+
           <div className="eleveur-week-total">
-            Total semaine : <strong>{weekRotations} rotations</strong> ·{" "}
+            Total : <strong>{forecastRotations} rotations</strong> ·{" "}
             <strong>
               <Range
-                a={weekRotations * low.profitPerCycle}
-                b={weekRotations * high.profitPerCycle}
+                a={forecastRotations * low.profitPerCycle}
+                b={forecastRotations * high.profitPerCycle}
                 fmt={formatKamasSigned}
               />
             </strong>
           </div>
+
+          {forecastDays <= 14 ? (
+            <div className="eleveur-week-grid">
+              {rotationsByDay.map((rot, i) => (
+                <div key={i} className="eleveur-week-day">
+                  <span className="eleveur-week-dow">
+                    {["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"][i % 7]} J{i + 1}
+                  </span>
+                  <span className="eleveur-week-rot">{rot} rot.</span>
+                  <span className="eleveur-week-profit">
+                    {rot === 0 ? (
+                      "—"
+                    ) : (
+                      <Range
+                        a={rot * low.profitPerCycle}
+                        b={rot * high.profitPerCycle}
+                        fmt={formatKamasSigned}
+                      />
+                    )}
+                  </span>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="eleveur-week-grid">
+              {forecastWeeks.map((rot, i) => (
+                <div key={i} className="eleveur-week-day">
+                  <span className="eleveur-week-dow">Sem. {i + 1}</span>
+                  <span className="eleveur-week-rot">{rot} rot.</span>
+                  <span className="eleveur-week-profit">
+                    {rot === 0 ? (
+                      "—"
+                    ) : (
+                      <Range
+                        a={rot * low.profitPerCycle}
+                        b={rot * high.profitPerCycle}
+                        fmt={formatKamasSigned}
+                      />
+                    )}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
