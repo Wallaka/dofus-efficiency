@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import type { Item } from "../types";
 import { fetchJobs, fetchJobRecipes, type JobOption } from "../data/dofusApi";
 import {
@@ -7,6 +7,7 @@ import {
   xpBetween,
   type MetierRecipe,
   type PlanIngredient,
+  type OptimalPlan,
 } from "../lib/metierXp";
 import {
   loadMetierInput,
@@ -25,6 +26,8 @@ import { PriceInput } from "../components/PriceInput";
 
 type Load = "idle" | "loading" | "error";
 const MAX_LEVEL = 200;
+/** selectedId sentinel for the "most profitable" auto route (vs undefined = cheapest). */
+const PROFIT = "__profit__";
 
 /** A plain count/XP with thousands separators, e.g. 3800 -> "3 800". */
 function count(value: number | undefined): string {
@@ -123,31 +126,48 @@ export function MetierPage() {
     return buildOptimalPlan(recipes, prices, input.current, input.target, coef, taxRate);
   }, [recipes, prices, input.current, input.target, coef, taxRate, validRange]);
 
+  // The most-profitable route: same idea, but picking each level by NET cost
+  // (ingredients − resale) so a cheap-but-unsellable craft doesn't win.
+  const profitable = useMemo(() => {
+    if (recipes.length === 0 || !validRange) return null;
+    return buildOptimalPlan(
+      recipes, prices, input.current, input.target, coef, taxRate, "net",
+    );
+  }, [recipes, prices, input.current, input.target, coef, taxRate, validRange]);
+
   const hasPlan = optimal != null && (optimal.steps.length > 0 || plans.length > 0);
-  // Default selection is "optimal"; a fixed pick wins only if still in the list.
+  // Selection: undefined = cheapest (default), PROFIT = most profitable, else a
+  // fixed recipe from the list.
   const fixedSelected = plans.find((p) => p.recipe.recipeId === selectedId);
-  const isOptimal = !fixedSelected;
+  const isProfit = selectedId === PROFIT;
+  const isCheapest = selectedId == null;
+  const isOptimal = isCheapest || isProfit;
+  // The active auto route (cheapest or profitable), when one is selected.
+  const activePlan: OptimalPlan | null = isProfit ? profitable : isCheapest ? optimal : null;
 
   // Price coverage: how many in-range recipes can actually be costed. "Le moins
   // cher" is only truly cheapest among priced recipes, so this is surfaced.
   const inRange = plans.length;
   const pricedCount = plans.filter((p) => p.priced).length;
   const unpricedCount = inRange - pricedCount;
+  // How many in-range recipes have a known resale price — the profit route only
+  // differs from the cheapest when resale is actually known for some of them.
+  const resaleKnown = plans.filter((p) => p.resultPriced).length;
 
   // Unified view driving the tiles + shopping list, from whichever is selected.
   const view =
-    isOptimal && optimal
+    isOptimal && activePlan
       ? {
-          label: "chemin le moins cher",
+          label: isProfit ? "chemin le plus rentable" : "chemin le moins cher",
           fromLevel: input.current,
-          crafts: optimal.totalCrafts,
-          xp: optimal.totalXp,
-          cost: optimal.totalCost,
-          revenue: optimal.totalRevenue,
-          netCost: optimal.netCost,
-          netCostPerXp: optimal.netCostPerXp,
-          incomplete: optimal.incomplete,
-          shopping: optimal.shopping,
+          crafts: activePlan.totalCrafts,
+          xp: activePlan.totalXp,
+          cost: activePlan.totalCost,
+          revenue: activePlan.totalRevenue,
+          netCost: activePlan.netCost,
+          netCostPerXp: activePlan.netCostPerXp,
+          incomplete: activePlan.incomplete,
+          shopping: activePlan.shopping,
         }
       : fixedSelected
         ? {
@@ -170,8 +190,8 @@ export function MetierPage() {
   // resale prices can be entered in one place instead of expanding each row.
   const resaleItems = useMemo(() => {
     const map = new Map<string, { item: Item; crafts: number }>();
-    if (isOptimal && optimal) {
-      for (const s of optimal.steps) {
+    if (isOptimal && activePlan) {
+      for (const s of activePlan.steps) {
         const e = map.get(s.recipe.result.id);
         if (e) e.crafts += s.crafts;
         else map.set(s.recipe.result.id, { item: s.recipe.result, crafts: s.crafts });
@@ -183,7 +203,7 @@ export function MetierPage() {
       });
     }
     return [...map.values()];
-  }, [isOptimal, optimal, fixedSelected]);
+  }, [isOptimal, activePlan, fixedSelected]);
 
   const pct = (lvl: number) => `${Math.min(100, (lvl / MAX_LEVEL) * 100)}%`;
 
@@ -401,10 +421,11 @@ export function MetierPage() {
           <section>
             <h3 className="metier-h3">Choisir une recette</h3>
             <p className="hint metier-h3-sub">
-              « Le moins cher » enchaîne les recettes et change quand une meilleure
-              se débloque. Ou fixez une recette (façon DofusDB) — y compris celles
-              qui se débloquent plus haut, pour renseigner leur prix. Sélectionnez
-              une recette pour voir/éditer ses prix dans la liste de courses.
+              « Le moins cher » vise le coût des ingrédients ; « Le plus rentable »
+              vise le coût net (revente déduite) — utile quand un objet pas cher à
+              crafter ne se revend pas. Ou fixez une recette (façon DofusDB), y
+              compris celles qui se débloquent plus haut, pour renseigner leur prix.
+              Sélectionnez une ligne pour voir/éditer ses prix dans la liste de courses.
             </p>
             <ul className="metier-path">
               <li className="metier-head metier-head-rrow" aria-hidden>
@@ -416,100 +437,61 @@ export function MetierPage() {
                 <span className="num">k/XP</span>
               </li>
 
-              {/* Optimal (auto-switching) row + its palier breakdown. */}
-              <li>
-                <button
-                  type="button"
-                  className={`metier-rrow metier-rrow--optimal${isOptimal ? " selected" : ""}`}
-                  aria-pressed={isOptimal}
-                  onClick={() => setSelectedId(undefined)}
-                >
-                  <span className="metier-radio" aria-hidden>
-                    {isOptimal ? "●" : "○"}
-                  </span>
-                  <span className="metier-recipe">
-                    <span className="metier-thumb">🏆</span>
-                    <span className="metier-recipe-text">
-                      <span className="metier-recipe-name">Le moins cher</span>
-                      <span className="metier-recipe-meta">
-                        change de recette au fil des niveaux
-                        {optimal.recipeCount > 1 && (
-                          <span className="metier-slots">
-                            {optimal.recipeCount} recettes
-                          </span>
-                        )}
-                        <span
-                          className={`metier-slots${unpricedCount > 0 ? " metier-unpriced" : ""}`}
-                        >
-                          {pricedCount}/{inRange} chiffrées
-                        </span>
-                      </span>
-                    </span>
-                  </span>
-                  <span className="num metier-xpcraft">—</span>
-                  <span className="num metier-crafts">
-                    {optimal.totalCrafts.toLocaleString("fr-FR")}
-                  </span>
+              {/* Two auto routes: cheapest (by ingredient cost) and most
+                  profitable (by net cost after resale). */}
+              <OptimalRow
+                plan={optimal}
+                selected={isCheapest}
+                onSelect={() => setSelectedId(undefined)}
+                emoji="🏆"
+                title="Le moins cher"
+                subtitle="coût des ingrédients le plus bas"
+                switchLabel="↑ débloqué/moins cher"
+                meta={
                   <span
-                    className={`num metier-cost${optimal.netCost != null && optimal.netCost < 0 ? " metier-profit" : ""}`}
+                    className={`metier-slots${unpricedCount > 0 ? " metier-unpriced" : ""}`}
                   >
-                    {optimal.netCost == null
-                      ? "—"
-                      : optimal.netCost >= 0
-                        ? formatKamas(optimal.netCost)
-                        : `+${formatKamas(-optimal.netCost)}`}
+                    {pricedCount}/{inRange} chiffrées
                   </span>
-                  <span className="num metier-kxp-cell">
-                    <span className="metier-kxp">
-                      {optimal.netCostPerXp != null
-                        ? `${formatKamas(optimal.netCostPerXp)}/xp`
-                        : "—"}
+                }
+                warning={
+                  unpricedCount > 0 ? (
+                    <div className="metier-warn">
+                      ⚠ {unpricedCount} recette{unpricedCount > 1 ? "s" : ""} sans
+                      prix, non comparée{unpricedCount > 1 ? "s" : ""} — l'une
+                      pourrait être moins chère. Renseignez leur prix (marquées «
+                      prix ? » ci-dessous) pour en être sûr.
+                    </div>
+                  ) : null
+                }
+              />
+              {profitable && (
+                <OptimalRow
+                  plan={profitable}
+                  selected={isProfit}
+                  onSelect={() => setSelectedId(PROFIT)}
+                  emoji="💰"
+                  title="Le plus rentable"
+                  subtitle="coût net le plus bas (revente déduite)"
+                  switchLabel="↑ meilleur coût net"
+                  meta={
+                    <span
+                      className={`metier-slots${resaleKnown === 0 ? " metier-unpriced" : ""}`}
+                    >
+                      {resaleKnown}/{inRange} reventes connues
                     </span>
-                  </span>
-                </button>
-                {isOptimal && optimal.steps.length > 0 && (
-                  <div className="metier-paliers">
-                    <div className="metier-pcap">Étapes du chemin</div>
-                    {optimal.steps.map((step, i) => (
-                      <div className="metier-pal" key={`${step.fromLevel}-${step.recipe.recipeId}`}>
-                        <span className="metier-pband">
-                          <strong>
-                            Niv {step.fromLevel}–{step.toLevel}
-                          </strong>
-                        </span>
-                        <span className="metier-pname" title={step.recipe.result.name}>
-                          <span className="metier-picon">
-                            {step.recipe.result.img ? (
-                              <img src={step.recipe.result.img} alt="" />
-                            ) : (
-                              <span aria-hidden>⚒️</span>
-                            )}
-                          </span>
-                          <span className="metier-slots">Niv {step.recipe.resultLevel}</span>
-                          {step.recipe.result.name}
-                          {i > 0 && (
-                            <span className="metier-pswitch"> ↑ débloqué/moins cher</span>
-                          )}
-                        </span>
-                        <span className="metier-pcrafts">
-                          {step.crafts.toLocaleString("fr-FR")} crafts
-                          {step.netCost != null
-                            ? ` · net ${step.netCost >= 0 ? formatKamas(step.netCost) : `+${formatKamas(-step.netCost)}`}`
-                            : ""}
-                        </span>
-                      </div>
-                    ))}
-                    {unpricedCount > 0 && (
+                  }
+                  warning={
+                    resaleKnown === 0 ? (
                       <div className="metier-warn">
-                        ⚠ {unpricedCount} recette{unpricedCount > 1 ? "s" : ""} sans
-                        prix, non comparée{unpricedCount > 1 ? "s" : ""} — l'une
-                        pourrait être moins chère. Renseignez leur prix (marquées «
-                        prix ? » ci-dessous) pour en être sûr.
+                        ⚠ Aucun prix de revente connu — identique au « moins cher »
+                        tant que vous n'aurez pas saisi de prix de revente
+                        (ci-dessous).
                       </div>
-                    )}
-                  </div>
-                )}
-              </li>
+                    ) : null
+                  }
+                />
+              )}
 
               {plans.map((plan) => (
                 <MetierRecipeRow
@@ -532,8 +514,8 @@ export function MetierPage() {
                 : `Pour le ${view.label} — ${count(view.crafts)} crafts — ce qu'il faut acheter/farmer.`}
             </p>
 
-            {isOptimal ? (
-              optimal.steps.map((step) => (
+            {isOptimal && activePlan ? (
+              activePlan.steps.map((step) => (
                 <div
                   className="metier-shop-group"
                   key={`${step.fromLevel}-${step.recipe.recipeId}`}
@@ -614,5 +596,114 @@ export function MetierPage() {
         </>
       )}
     </main>
+  );
+}
+
+/** One auto-route row (cheapest or most-profitable) plus its palier breakdown. */
+function OptimalRow({
+  plan,
+  selected,
+  onSelect,
+  emoji,
+  title,
+  subtitle,
+  switchLabel,
+  meta,
+  warning,
+}: {
+  plan: OptimalPlan;
+  selected: boolean;
+  onSelect: () => void;
+  emoji: string;
+  title: string;
+  subtitle: string;
+  switchLabel: string;
+  meta?: ReactNode;
+  warning?: ReactNode;
+}) {
+  return (
+    <li>
+      <button
+        type="button"
+        className={`metier-rrow metier-rrow--optimal${selected ? " selected" : ""}`}
+        aria-pressed={selected}
+        onClick={onSelect}
+      >
+        <span className="metier-radio" aria-hidden>
+          {selected ? "●" : "○"}
+        </span>
+        <span className="metier-recipe">
+          <span className="metier-thumb">{emoji}</span>
+          <span className="metier-recipe-text">
+            <span className="metier-recipe-name">{title}</span>
+            <span className="metier-recipe-meta">
+              {subtitle}
+              {plan.recipeCount > 1 && (
+                <span className="metier-slots">{plan.recipeCount} recettes</span>
+              )}
+              {meta}
+            </span>
+          </span>
+        </span>
+        <span className="num metier-xpcraft">—</span>
+        <span className="num metier-crafts">
+          {plan.totalCrafts.toLocaleString("fr-FR")}
+        </span>
+        <span
+          className={`num metier-cost${plan.netCost != null && plan.netCost < 0 ? " metier-profit" : ""}`}
+        >
+          {plan.netCost == null
+            ? "—"
+            : plan.netCost >= 0
+              ? formatKamas(plan.netCost)
+              : `+${formatKamas(-plan.netCost)}`}
+        </span>
+        <span className="num metier-kxp-cell">
+          <span className="metier-kxp">
+            {plan.netCostPerXp != null
+              ? `${formatKamas(plan.netCostPerXp)}/xp`
+              : "—"}
+          </span>
+        </span>
+      </button>
+      {selected && plan.steps.length > 0 && (
+        <div className="metier-paliers">
+          <div className="metier-pcap">Étapes du chemin</div>
+          {plan.steps.map((step, i) => (
+            <div
+              className="metier-pal"
+              key={`${step.fromLevel}-${step.recipe.recipeId}`}
+            >
+              <span className="metier-pband">
+                <strong>
+                  Niv {step.fromLevel}–{step.toLevel}
+                </strong>
+              </span>
+              <span className="metier-pname" title={step.recipe.result.name}>
+                <span className="metier-picon">
+                  {step.recipe.result.img ? (
+                    <img src={step.recipe.result.img} alt="" />
+                  ) : (
+                    <span aria-hidden>⚒️</span>
+                  )}
+                </span>
+                <span className="metier-slots">
+                  Niv {step.recipe.resultLevel}
+                </span>
+                {step.recipe.result.name}
+                {i > 0 && <span className="metier-pswitch"> {switchLabel}</span>}
+              </span>
+              <span className="metier-pcrafts">
+                {step.crafts.toLocaleString("fr-FR")} crafts
+                {step.netCost != null
+                  ? ` · net ${step.netCost >= 0 ? formatKamas(step.netCost) : `+${formatKamas(-step.netCost)}`}`
+                  : ""}
+              </span>
+            </div>
+          ))}
+          {warning}
+        </div>
+      )}
+    </li>
   );
 }
