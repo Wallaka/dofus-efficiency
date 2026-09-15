@@ -1467,6 +1467,24 @@ table.eleveur-bp input {
 .eleveur-num input {
   width: 100%;
 }
+.eleveur-num-range {
+  width: auto;
+}
+.eleveur-range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.eleveur-range-inputs input {
+  width: 56px;
+  padding: 7px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+  color: var(--text);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
 .eleveur-capture-total {
   display: flex;
   flex-direction: column;

@@ -95,11 +95,14 @@ export interface EleveurInput {
   /** Filets consumed per capture action. */
   captureFiltres?: number;
   /**
-   * Mounts obtained per capture action — a filet ability (some capture several
-   * per fight). Not exposed by the API, so it's entered here (or set by a
-   * hardcoded filet pick). Defaults to 1; clamped to ≥ 1 in the maths.
+   * Mounts obtained per capture action, as a range (a filet ability — some
+   * capture a variable 1–5 per fight). Deterministic filets set min === max.
+   * The page evaluates both bounds to show a worst/best-case profit spread.
+   * Not exposed by the API, so seeded from the filet pick and editable. Clamped
+   * to ≥ 1 in the maths.
    */
-  mountsPerCapture?: number;
+  mountsPerCaptureMin?: number;
+  mountsPerCaptureMax?: number;
   /**
    * The capture item ("filet"), priced from the store. Chosen by search since
    * filets have job-level requirements (a different one per level bracket).
@@ -214,13 +217,19 @@ export function isMissingOutputPrice(
 }
 
 /**
- * The whole model. `taxRate` is the HDV sell tax as a fraction (e.g. 0.02),
- * charged on rune revenue only — filtres and food are bought, not sold.
+ * The whole model, evaluated for one `mountsPerCapture` value (the page calls it
+ * with the filet's min and max bounds to get a worst/best-case spread).
+ * `taxRate` is the HDV sell tax as a fraction (e.g. 0.02), charged on rune
+ * revenue only — filtres and food are bought, not sold. `mountsPerCapture`
+ * defaults to the input's max bound (falling back to the min, then 1).
  */
 export function computeEleveur(
   input: EleveurInput,
   prices: PriceMap,
   taxRate = 0,
+  mountsPerCapture: number = input.mountsPerCaptureMax ??
+    input.mountsPerCaptureMin ??
+    1,
 ): EleveurResult {
   const derived = slotsForLevel(input.level, input.breakpoints);
   const enclos =
@@ -237,9 +246,9 @@ export function computeEleveur(
   const filtrePrice = filtreId != null ? prices[filtreId] : undefined;
   // Filets consumed per mount = filets per capture ÷ mounts caught per capture
   // (a filet that catches 2 mounts halves the filet cost per mount).
-  const mountsPerCapture = Math.max(1, input.mountsPerCapture ?? 1);
+  const mpc = Math.max(1, mountsPerCapture);
   const filtresPerCapture = Math.max(0, input.captureFiltres ?? 0);
-  const filtresPerMount = filtresPerCapture / mountsPerCapture;
+  const filtresPerMount = filtresPerCapture / mpc;
   const captureCostPerMount =
     filtreId != null ? (filtrePrice ?? 0) * filtresPerMount : 0;
 
@@ -356,7 +365,8 @@ export function defaultEleveurInput(): EleveurInput {
       newBreakpoint(200, 6, 10),
     ],
     captureFiltres: 1,
-    mountsPerCapture: DEFAULT_FILET.defaultMounts,
+    mountsPerCaptureMin: DEFAULT_FILET.mountsMin,
+    mountsPerCaptureMax: DEFAULT_FILET.mountsMax,
     filtreItemId: DEFAULT_FILET.id,
     filtreLabel: DEFAULT_FILET.name,
     filtreImg: DEFAULT_FILET.img,

@@ -110,9 +110,9 @@ describe("computeEleveur", () => {
     expect(r.captureCostPerMount).toBe(0);
   });
 
-  it("splits filet cost across mounts caught per capture", () => {
+  it("splits filet cost across mounts caught per capture (4th arg)", () => {
     // 2 filets/capture, catches 2 mounts → 1 filet per mount → 100 k capture.
-    const r = computeEleveur(baseInput({ mountsPerCapture: 2 }), PRICES, 0);
+    const r = computeEleveur(baseInput(), PRICES, 0, 2);
     expect(r.captureCostPerMount).toBe(100);
     expect(r.filtresPerCycle).toBe(60); // (2 / 2) × 60 slots
     // profit rises by the 100 k saved vs the 1-mount case.
@@ -120,8 +120,18 @@ describe("computeEleveur", () => {
   });
 
   it("treats mountsPerCapture below 1 as 1", () => {
-    const r = computeEleveur(baseInput({ mountsPerCapture: 0 }), PRICES, 0);
-    expect(r.captureCostPerMount).toBe(200); // unchanged from default
+    const r = computeEleveur(baseInput(), PRICES, 0, 0);
+    expect(r.captureCostPerMount).toBe(200); // 2 filtres × 100, 1 mount
+  });
+
+  it("defaults mountsPerCapture to the input's max bound", () => {
+    const r = computeEleveur(
+      baseInput({ mountsPerCaptureMin: 1, mountsPerCaptureMax: 4 }),
+      PRICES,
+      0,
+    );
+    // max = 4 → 2 filtres / 4 mounts × 100 = 50 k capture per mount.
+    expect(r.captureCostPerMount).toBe(50);
   });
 
   it("charges nothing (and flags nothing) when no filet is selected", () => {

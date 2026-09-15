@@ -1,11 +1,15 @@
 /**
  * Capture nets ("filets de capture") for wild mounts, hardcoded from DofusDB
  * (item type 99). The API exposes each filet's id, name, level and icon, but
- * NOT how many mounts it yields per capture — every filet shares the same
- * generic effect id, and even the level-1 universal net (1 mount) carries it.
- * So `defaultMounts` below is a best-guess read from the item's description
- * ("multiplicateur" duplicates, "renforcé" catches several); it seeds the
- * editable "montures / capture" field and the user confirms the real value.
+ * NOT how many mounts it yields per capture. That behaviour is set here from the
+ * item description and the user's in-game observation:
+ *  - universel: 1 mount.
+ *  - multiplicateur: duplicates → 2 mounts.
+ *  - « à … renforcé »: captures a whole cercle-3 zone → 1 to 5 mounts.
+ *  - multiplicateur renforcé: same 1–5, each duplicated → 2 to 10 mounts.
+ * Deterministic filets have `mountsMin === mountsMax`; the variable ones carry a
+ * real range, which the page turns into a worst/best-case profit spread. Both
+ * bounds stay editable in the UI.
  *
  * `level` is the DofusDB item level, treated as the éleveur level required to
  * use the filet — which is what the level-filtered picker keys off.
@@ -24,8 +28,10 @@ export interface FiletDef {
   img: string;
   /** Which wild mount it targets ("Universel" = any). */
   creature: FiletCreature;
-  /** Best-guess average mounts obtained per capture — editable in the UI. */
-  defaultMounts: number;
+  /** Fewest mounts obtained per capture. */
+  mountsMin: number;
+  /** Most mounts obtained per capture (=== min when deterministic). */
+  mountsMax: number;
 }
 
 const IMG = (icon: number) => `https://api.dofusdb.fr/img/items/${icon}.png`;
@@ -37,16 +43,18 @@ export const FILETS: FiletDef[] = [
     level: 1,
     img: IMG(99004),
     creature: "Universel",
-    defaultMounts: 1,
+    mountsMin: 1,
+    mountsMax: 1,
   },
-  // Multiplicateur (niv 100) — duplique la monture capturée.
+  // Multiplicateur (niv 100) — duplique la monture capturée (×2).
   {
     id: "32525",
     name: "Filet multiplicateur de Dragodinde",
     level: 100,
     img: IMG(99010),
     creature: "Dragodinde",
-    defaultMounts: 2,
+    mountsMin: 2,
+    mountsMax: 2,
   },
   {
     id: "32526",
@@ -54,7 +62,8 @@ export const FILETS: FiletDef[] = [
     level: 100,
     img: IMG(99009),
     creature: "Volkorne",
-    defaultMounts: 2,
+    mountsMin: 2,
+    mountsMax: 2,
   },
   {
     id: "32527",
@@ -62,16 +71,18 @@ export const FILETS: FiletDef[] = [
     level: 100,
     img: IMG(99008),
     creature: "Muldo",
-    defaultMounts: 2,
+    mountsMin: 2,
+    mountsMax: 2,
   },
-  // « À X renforcé » (niv 150) — capture plusieurs sauvages d'un coup.
+  // « À X renforcé » (niv 150) — capture tout un cercle de 3 : 1 à 5 sauvages.
   {
     id: "32522",
     name: "Filet à Dragodinde renforcé",
     level: 150,
     img: IMG(99007),
     creature: "Dragodinde",
-    defaultMounts: 3,
+    mountsMin: 1,
+    mountsMax: 5,
   },
   {
     id: "32523",
@@ -79,7 +90,8 @@ export const FILETS: FiletDef[] = [
     level: 150,
     img: IMG(99006),
     creature: "Volkorne",
-    defaultMounts: 3,
+    mountsMin: 1,
+    mountsMax: 5,
   },
   {
     id: "32524",
@@ -87,16 +99,18 @@ export const FILETS: FiletDef[] = [
     level: 150,
     img: IMG(99005),
     creature: "Muldo",
-    defaultMounts: 3,
+    mountsMin: 1,
+    mountsMax: 5,
   },
-  // Multiplicateur renforcé (niv 200) — capture plusieurs ET duplique.
+  // Multiplicateur renforcé (niv 200) — 1 à 5 capturés, chacun dupliqué : 2 à 10.
   {
     id: "32528",
     name: "Filet multiplicateur de Dragodinde renforcé",
     level: 200,
     img: IMG(99013),
     creature: "Dragodinde",
-    defaultMounts: 6,
+    mountsMin: 2,
+    mountsMax: 10,
   },
   {
     id: "32529",
@@ -104,7 +118,8 @@ export const FILETS: FiletDef[] = [
     level: 200,
     img: IMG(99012),
     creature: "Volkorne",
-    defaultMounts: 6,
+    mountsMin: 2,
+    mountsMax: 10,
   },
   {
     id: "32530",
@@ -112,7 +127,8 @@ export const FILETS: FiletDef[] = [
     level: 200,
     img: IMG(99011),
     creature: "Muldo",
-    defaultMounts: 6,
+    mountsMin: 2,
+    mountsMax: 10,
   },
 ];
 

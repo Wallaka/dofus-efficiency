@@ -25,11 +25,34 @@ import { loadCraftTaxPercent } from "../lib/craftList";
 import { formatKamas, formatKamasSigned, formatPercent } from "../lib/format";
 import { ItemAutocomplete } from "../components/ItemAutocomplete";
 
-function profitClass(value: number | undefined): string {
-  if (value == null) return "";
-  if (value > 0) return "positive";
-  if (value < 0) return "negative";
+/** Colour a range: green if even the worst case is positive, red if the best is negative. */
+function rangeProfitClass(a: number | undefined, b: number | undefined): string {
+  if (a == null || b == null) return "";
+  const lo = Math.min(a, b);
+  const hi = Math.max(a, b);
+  if (lo > 0) return "positive";
+  if (hi < 0) return "negative";
   return "";
+}
+
+/** Format two endpoints as "lo – hi" (single value when they coincide). */
+function fmtRange(
+  a: number | undefined,
+  b: number | undefined,
+  fmt: (n: number | undefined) => string,
+): string {
+  if (a == null || b == null) return "—";
+  const lo = Math.min(a, b);
+  const hi = Math.max(a, b);
+  return Math.round(lo) === Math.round(hi)
+    ? fmt(lo)
+    : `${fmt(lo)} – ${fmt(hi)}`;
+}
+
+/** A plain integer-ish count with thousands separators. */
+function count(value: number | undefined): string {
+  if (value == null) return "—";
+  return Math.round(value).toLocaleString("fr-FR");
 }
 
 /** Parse a number input, keeping "" as undefined and rejecting negatives. */
@@ -60,10 +83,22 @@ export function EleveurPage() {
   }, [input]);
 
   const taxRate = loadCraftTaxPercent() / 100;
-  const result = useMemo(
-    () => computeEleveur(input, prices, taxRate),
-    [input, prices, taxRate],
+  // Mounts-per-capture is a range for the variable filets, so we evaluate both
+  // bounds: `low` = fewest mounts (worst case, most filet cost, least profit),
+  // `high` = most mounts (best case). When the filet is deterministic the two
+  // coincide and the UI shows a single figure.
+  const mMin = input.mountsPerCaptureMin ?? 1;
+  const mMax = input.mountsPerCaptureMax ?? mMin;
+  const low = useMemo(
+    () => computeEleveur(input, prices, taxRate, mMin),
+    [input, prices, taxRate, mMin],
   );
+  const high = useMemo(
+    () => computeEleveur(input, prices, taxRate, mMax),
+    [input, prices, taxRate, mMax],
+  );
+  // `result` (high case) still drives the fixed figures unaffected by the range.
+  const result = high;
 
   const outputIds = useMemo(
     () => new Set(input.outputs.map((o) => o.itemId)),
@@ -137,12 +172,13 @@ export function EleveurPage() {
 
   // ---- capture filet (level-filtered dropdown) ----
   function selectFiltre(def: FiletDef) {
-    // Picking a filet also seeds its (editable) mounts-per-capture default.
+    // Picking a filet also seeds its (editable) mounts-per-capture range.
     patch({
       filtreItemId: def.id,
       filtreLabel: def.name,
       filtreImg: def.img,
-      mountsPerCapture: def.defaultMounts,
+      mountsPerCaptureMin: def.mountsMin,
+      mountsPerCaptureMax: def.mountsMax,
     });
   }
 
@@ -274,11 +310,11 @@ export function EleveurPage() {
           <div className="eleveur-tile">
             <span className="eleveur-tile-label">Coût / monture</span>
             <span className="eleveur-tile-value">
-              {formatKamas(result.costPerMount)}
+              {fmtRange(high.costPerMount, low.costPerMount, formatKamas)}
             </span>
             <span className="eleveur-tile-sub">
-              filtres {formatKamas(result.captureCostPerMount)} + élevage{" "}
-              {formatKamas(result.raiseCostPerMount)}
+              filtres {fmtRange(high.captureCostPerMount, low.captureCostPerMount, formatKamas)}{" "}
+              + élevage {formatKamas(result.raiseCostPerMount)}
             </span>
           </div>
           <div className="eleveur-tile">
@@ -294,11 +330,13 @@ export function EleveurPage() {
           </div>
           <div className="eleveur-tile accent">
             <span className="eleveur-tile-label">Bénéfice / monture</span>
-            <span className={`eleveur-tile-value ${profitClass(result.profitPerMount)}`}>
-              {formatKamasSigned(result.profitPerMount)}
+            <span
+              className={`eleveur-tile-value ${rangeProfitClass(low.profitPerMount, high.profitPerMount)}`}
+            >
+              {fmtRange(low.profitPerMount, high.profitPerMount, formatKamasSigned)}
             </span>
             <span className="eleveur-tile-sub">
-              marge {formatPercent(result.marginRatio)}
+              marge {fmtRange(low.marginRatio, high.marginRatio, formatPercent)}
             </span>
           </div>
         </div>
@@ -306,15 +344,20 @@ export function EleveurPage() {
         <div className="eleveur-tiles">
           <div className="eleveur-tile">
             <span className="eleveur-tile-label">Filtres / rotation</span>
-            <span className="eleveur-tile-value">{result.filtresPerCycle}</span>
+            <span className="eleveur-tile-value">
+              {fmtRange(high.filtresPerCycle, low.filtresPerCycle, count)}
+            </span>
             <span className="eleveur-tile-sub">
-              {formatKamas(result.filtresCostPerCycle)} de filtres
+              {fmtRange(high.filtresCostPerCycle, low.filtresCostPerCycle, formatKamas)} de
+              filtres
             </span>
           </div>
           <div className="eleveur-tile">
             <span className="eleveur-tile-label">Bénéfice / rotation</span>
-            <span className={`eleveur-tile-value ${profitClass(result.profitPerCycle)}`}>
-              {formatKamasSigned(result.profitPerCycle)}
+            <span
+              className={`eleveur-tile-value ${rangeProfitClass(low.profitPerCycle, high.profitPerCycle)}`}
+            >
+              {fmtRange(low.profitPerCycle, high.profitPerCycle, formatKamasSigned)}
             </span>
             <span className="eleveur-tile-sub">
               {result.totalSlots} montures brisées
@@ -322,10 +365,12 @@ export function EleveurPage() {
           </div>
           <div className="eleveur-tile">
             <span className="eleveur-tile-label">Bénéfice / jour</span>
-            <span className={`eleveur-tile-value ${profitClass(result.profitPerDay)}`}>
-              {result.profitPerDay == null
+            <span
+              className={`eleveur-tile-value ${rangeProfitClass(low.profitPerDay, high.profitPerDay)}`}
+            >
+              {low.profitPerDay == null
                 ? "—"
-                : `${formatKamasSigned(result.profitPerDay)}`}
+                : fmtRange(low.profitPerDay, high.profitPerDay, formatKamasSigned)}
             </span>
             <span className="eleveur-tile-sub">
               {input.raiseDays ? `sur ${input.raiseDays} j d'élevage` : "durée non saisie"}
@@ -551,17 +596,32 @@ export function EleveurPage() {
               onChange={(e) => patch({ captureFiltres: num(e.target.value) })}
             />
           </div>
-          <div className="field eleveur-num">
-            <label htmlFor="mpc">Montures / capture</label>
-            <input
-              id="mpc"
-              type="number"
-              min={1}
-              inputMode="numeric"
-              value={input.mountsPerCapture ?? ""}
-              onChange={(e) => patch({ mountsPerCapture: num(e.target.value) })}
-            />
-            <p className="hint">Capacité du filet (modifiable).</p>
+          <div className="field eleveur-num eleveur-num-range">
+            <label htmlFor="mpc-min">Montures / capture</label>
+            <div className="eleveur-range-inputs">
+              <input
+                id="mpc-min"
+                type="number"
+                min={1}
+                inputMode="numeric"
+                aria-label="Montures par capture (min)"
+                value={input.mountsPerCaptureMin ?? ""}
+                onChange={(e) => patch({ mountsPerCaptureMin: num(e.target.value) })}
+              />
+              <span className="cost-x">à</span>
+              <input
+                id="mpc-max"
+                type="number"
+                min={1}
+                inputMode="numeric"
+                aria-label="Montures par capture (max)"
+                value={input.mountsPerCaptureMax ?? ""}
+                onChange={(e) => patch({ mountsPerCaptureMax: num(e.target.value) })}
+              />
+            </div>
+            <p className="hint">
+              Fourchette du filet (min–max), modifiable.
+            </p>
           </div>
           <div className="field eleveur-num">
             <label htmlFor="filtre-price">Prix du filet</label>
