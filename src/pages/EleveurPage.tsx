@@ -16,7 +16,7 @@ import {
   type OutputLine,
 } from "../lib/eleveur";
 import { filetsForLevel, filetById, type FiletDef } from "../lib/filets";
-import { MOUNTS, mountById } from "../lib/mounts";
+import { MOUNTS, mountById, brisageFor } from "../lib/mounts";
 import type { Item } from "../types";
 import { loadEleveur, saveEleveur } from "../lib/storage";
 import { usePrices } from "../lib/usePrices";
@@ -110,11 +110,28 @@ export function EleveurPage() {
       });
       return;
     }
+    // Picking a mount seeds its brisage runes as output lines, and drops any
+    // chosen filet that no longer fits the new creature (universal net stays).
+    const runes = brisageFor(m.id).map((r) =>
+      newOutputLine({ id: r.itemId, name: r.label, img: r.img }, r.quantity),
+    );
+    const currentFilet = filetById(input.filtreItemId);
+    const keepFilet =
+      currentFilet != null &&
+      (currentFilet.creature === "Universel" || currentFilet.creature === m.creature);
     patch({
       mountId: m.id,
       mountLabel: m.name,
       mountImg: m.img,
       mountCreature: m.creature,
+      outputs: runes,
+      ...(keepFilet
+        ? {}
+        : {
+            filtreItemId: undefined,
+            filtreLabel: undefined,
+            filtreImg: undefined,
+          }),
     });
   }
 
@@ -194,7 +211,10 @@ export function EleveurPage() {
 
   // Filets usable at the current level, plus the chosen one if it's above level
   // (kept in the list but flagged, rather than silently dropped).
-  const availableFilets = useMemo(() => filetsForLevel(input.level), [input.level]);
+  const availableFilets = useMemo(
+    () => filetsForLevel(input.level, input.mountCreature),
+    [input.level, input.mountCreature],
+  );
   const selectedFilet = filetById(input.filtreItemId);
   const filetOptions = useMemo(() => {
     if (selectedFilet && !availableFilets.some((f) => f.id === selectedFilet.id)) {
@@ -724,13 +744,18 @@ export function EleveurPage() {
       <section className="panel">
         <h2>Brisage — runes obtenues</h2>
         <p className="hint">
-          Les runes obtenues en moyenne par monture brisée. La quantité peut être
-          décimale (rendement moyen, ex. 0,4). Prix partagés avec vos prix suivis.
+          {input.mountLabel
+            ? `Runes du brisage d'un ${input.mountLabel} (pré-remplies) — ajustez les quantités moyennes si besoin. `
+            : "Choisissez une monture en haut pour pré-remplir ses runes, ou ajoutez-les à la main. "}
+          La quantité peut être décimale (rendement moyen). Prix partagés avec vos
+          prix suivis.
         </p>
 
         {input.outputs.length === 0 ? (
           <p className="hint eleveur-empty">
-            Ajoutez les runes que donne le brisage pour chiffrer la revente.
+            {input.mountId
+              ? "Aucune rune connue pour cette monture — ajoutez-les ci-dessous."
+              : "Sélectionnez une monture en haut, ou ajoutez les runes à la main."}
           </p>
         ) : (
           <ul className="cost-list">

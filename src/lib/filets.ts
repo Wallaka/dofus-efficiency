@@ -71,7 +71,7 @@ export const FILETS: FiletDef[] = [
     level: 150,
     img: IMG(99007),
     creature: "Dragodinde",
-    defaultMounts: 2,
+    defaultMounts: 3,
   },
   {
     id: "32523",
@@ -79,7 +79,7 @@ export const FILETS: FiletDef[] = [
     level: 150,
     img: IMG(99006),
     creature: "Volkorne",
-    defaultMounts: 2,
+    defaultMounts: 3,
   },
   {
     id: "32524",
@@ -87,7 +87,7 @@ export const FILETS: FiletDef[] = [
     level: 150,
     img: IMG(99005),
     creature: "Muldo",
-    defaultMounts: 2,
+    defaultMounts: 3,
   },
   // Multiplicateur renforcé (niv 200) — capture plusieurs ET duplique.
   {
@@ -96,7 +96,7 @@ export const FILETS: FiletDef[] = [
     level: 200,
     img: IMG(99013),
     creature: "Dragodinde",
-    defaultMounts: 3,
+    defaultMounts: 6,
   },
   {
     id: "32529",
@@ -104,7 +104,7 @@ export const FILETS: FiletDef[] = [
     level: 200,
     img: IMG(99012),
     creature: "Volkorne",
-    defaultMounts: 3,
+    defaultMounts: 6,
   },
   {
     id: "32530",
@@ -112,7 +112,7 @@ export const FILETS: FiletDef[] = [
     level: 200,
     img: IMG(99011),
     creature: "Muldo",
-    defaultMounts: 3,
+    defaultMounts: 6,
   },
 ];
 
@@ -125,11 +125,19 @@ export function filetById(id: string | undefined): FiletDef | undefined {
 
 /**
  * The filets usable at a given éleveur level (requirement ≤ level), sorted by
- * level then name. Below level 1 this is empty.
+ * level then name. Below level 1 this is empty. When `creature` is given, only
+ * that creature's filets and the universal net are kept.
  */
-export function filetsForLevel(level: number | undefined): FiletDef[] {
+export function filetsForLevel(
+  level: number | undefined,
+  creature?: FiletCreature,
+): FiletDef[] {
   const lvl = level ?? 0;
-  return FILETS.filter((f) => f.level <= lvl).sort(
-    (a, b) => a.level - b.level || a.name.localeCompare(b.name, "fr"),
-  );
+  return FILETS.filter(
+    (f) =>
+      f.level <= lvl &&
+      (creature == null ||
+        f.creature === "Universel" ||
+        f.creature === creature),
+  ).sort((a, b) => a.level - b.level || a.name.localeCompare(b.name, "fr"));
 }

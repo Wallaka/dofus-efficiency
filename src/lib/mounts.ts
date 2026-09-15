@@ -47,3 +47,50 @@ const byId = new Map(MOUNTS.map((m) => [m.id, m]));
 export function mountById(id: string | undefined): MountDef | undefined {
   return id == null ? undefined : byId.get(id);
 }
+
+/**
+ * One rune obtained by brising a mount, with its catalog id (so its price comes
+ * from the shared store) and the average quantity per mount.
+ */
+export interface RuneYield {
+  itemId: string;
+  label: string;
+  img: string;
+  quantity: number;
+}
+
+const IMG = (icon: number) => `https://api.dofusdb.fr/img/items/${icon}.png`;
+
+// Rune catalog entries used by muldo brisage (ids/icons from the HDV catalog).
+const RUNE = {
+  gaPme: { itemId: "1558", label: "Rune Ga Pme", img: IMG(78056) },
+  pui: { itemId: "7436", label: "Rune Pui", img: IMG(78016) },
+  rePerAir: { itemId: "7458", label: "Rune Ré Per Air", img: IMG(78033) },
+  rePerFeu: { itemId: "7457", label: "Rune Ré Per Feu", img: IMG(78029) },
+  rePerTerre: { itemId: "7459", label: "Rune Ré Per Terre", img: IMG(78035) },
+  rePerEau: { itemId: "7560", label: "Rune Ré Per Eau", img: IMG(78031) },
+} as const;
+
+const yields = (base: { itemId: string; label: string; img: string }, quantity: number): RuneYield => ({
+  ...base,
+  quantity,
+});
+
+/**
+ * Brisage yield per muldo (monster id → runes). Each muldo gives 1 Rune Ga Pme
+ * plus its signature rune. The Ga Pme (1) and the ébène Air count (13) are
+ * confirmed; the other signature-rune counts default to 13 by symmetry and are
+ * editable per line on the page.
+ */
+const BRISAGE: Record<string, RuneYield[]> = {
+  "4435": [yields(RUNE.gaPme, 1), yields(RUNE.rePerAir, 13)], // ébène → Air
+  "4438": [yields(RUNE.gaPme, 1), yields(RUNE.pui, 13)], // doré → Puissance
+  "4436": [yields(RUNE.gaPme, 1), yields(RUNE.rePerFeu, 13)], // orchidée → Feu
+  "4437": [yields(RUNE.gaPme, 1), yields(RUNE.rePerTerre, 13)], // pourpre → Terre
+  "4434": [yields(RUNE.gaPme, 1), yields(RUNE.rePerEau, 13)], // indigo → Eau
+};
+
+/** The runes a mount yields when broken (empty if unknown). */
+export function brisageFor(mountId: string | undefined): RuneYield[] {
+  return (mountId != null && BRISAGE[mountId]) || [];
+}

@@ -20,6 +20,19 @@ describe("filetsForLevel", () => {
     expect(filetsForLevel(200)).toHaveLength(10); // + 3 multiplicateurs renforcés
   });
 
+  it("filters to a creature's filets plus the universal net", () => {
+    const muldo = filetsForLevel(200, "Muldo");
+    expect(muldo.map((f) => f.creature).sort()).toEqual([
+      "Muldo",
+      "Muldo",
+      "Muldo",
+      "Universel",
+    ]);
+    // At level 1 only the universal net qualifies for any creature.
+    expect(filetsForLevel(1, "Muldo")).toHaveLength(1);
+    expect(filetsForLevel(1, "Dragodinde")[0].creature).toBe("Universel");
+  });
+
   it("sorts by level then name", () => {
     const list = filetsForLevel(200);
     for (let i = 1; i < list.length; i++) {
