@@ -9,6 +9,8 @@
   --positive: #4ccf83;
   --negative: #ef7676;
   --num-bg: #17140f;
+  /* The kama coin (DofusDB-style), as a trailing adornment inside price fields. */
+  --kama-coin: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Ccircle%20cx='8'%20cy='8'%20r='7'%20fill='%23e8b23a'%20stroke='%23a9781f'/%3E%3Ccircle%20cx='8'%20cy='8'%20r='4.4'%20fill='none'%20stroke='%23a9781f'%20stroke-opacity='.5'/%3E%3Ctext%20x='8'%20y='11'%20text-anchor='middle'%20font-size='8'%20font-weight='700'%20font-family='sans-serif'%20fill='%237a5410'%3Ek%3C/text%3E%3C/svg%3E");
 }
 
 * {
@@ -4220,4 +4222,29 @@ td.negative {
   .hdv-rail-tab {
     width: 100%;
   }
+}
+
+/* ---------------------------------------------------------------------------
+   Kama coin on every price field — one gold coin, DofusDB-style, painted inside
+   the input's right edge (no wrapper needed, so no layout is disturbed).
+   Appended last so it wins padding-right over each field's own padding.
+--------------------------------------------------------------------------- */
+.price-edit input,
+.craft-price-edit input,
+.avis-line-price-edit input,
+.price-row input,
+.voice-price,
+#sell-price,
+.cost-unit,
+.cost-amount,
+.quest-add-kamas,
+.quest-kamas input,
+.quest-price,
+.tracked-price-input,
+.avis-aviton-price {
+  background-image: var(--kama-coin);
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+  background-size: 13px 13px;
+  padding-right: 22px;
 }

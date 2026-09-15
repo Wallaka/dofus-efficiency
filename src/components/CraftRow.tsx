@@ -75,7 +75,6 @@ function PriceInput({
         // Don't toggle the row when interacting with the input.
         onClick={(e) => e.stopPropagation()}
       />
-      <span className="craft-unit">k</span>
     </span>
   );
 }

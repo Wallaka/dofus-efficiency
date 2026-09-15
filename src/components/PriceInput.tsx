@@ -61,7 +61,6 @@ export function PriceInput({
         }}
         onClick={(e) => e.stopPropagation()}
       />
-      <span className="price-edit-unit">k</span>
     </span>
   );
 }

@@ -282,12 +282,12 @@ export function AvisPage() {
             min={0}
             step={1000}
             inputMode="numeric"
+            className="avis-aviton-price"
             aria-label="Prix de vente des avitons"
             value={aviton.price || ""}
             placeholder="0"
             onChange={(e) => setAvitonField("price", e.target.value)}
           />
-          <span className="avis-aviton-unit">k</span>
           {avitonUnit > 0 && (
             <span className="hint">≈ {formatKamas(avitonUnit)} / aviton</span>
           )}
