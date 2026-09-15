@@ -19,9 +19,20 @@
 import type { PriceMap } from "../types";
 import { bestFiletFor, type FiletCreature, type FiletDef } from "./filets";
 import { brisageFor, type RuneYield } from "./mounts";
+import { mangeoireById, type MangeoireDef } from "./mangeoires";
 
 export const ENCLOS_CAPACITY = 10;
 const ENCLOS_THRESHOLDS = [40, 80, 120, 160, 200];
+
+/** A mount must reach level 53 to be brisage-ready. */
+export const BRISAGE_LEVEL = 53;
+/** Total xp (= energy, 1:1) to reach it, per enclos — shared, mount-count independent. */
+export const ENERGY_PER_ENCLOS = 39360;
+/** Leveling rate: 10 xp every 10 s = 1 xp/s. */
+export const XP_PER_SECOND = 1;
+/** Raising time is fixed by the xp: 39 360 xp / 1 xp/s. */
+export const RAISE_SECONDS = ENERGY_PER_ENCLOS / XP_PER_SECOND;
+export const RAISE_HOURS = RAISE_SECONDS / 3600;
 
 /** Enclos unlocked at a level: 1 at level 1, then +1 per threshold reached. */
 export function enclosForLevel(level: number | undefined): number {
@@ -38,8 +49,8 @@ export interface EleveurInput {
   mountLabel?: string;
   mountImg?: string;
   mountCreature?: FiletCreature;
-  /** Hours to raise a mount to a brisage-ready state (≈ 10). */
-  raiseHours?: number;
+  /** The mangeoire fuel used to raise the mounts (its energy drives food cost). */
+  mangeoireId?: string;
 }
 
 export interface EleveurResult {
@@ -51,7 +62,14 @@ export interface EleveurResult {
   filet?: FiletDef;
   /** Filet spend to capture one mount, in kamas. */
   captureCostPerMount: number;
-  /** Food / upkeep per mount (mangeoire) — 0 until the mangeoire is wired. */
+  /** The chosen mangeoire (undefined if none picked). */
+  mangeoire?: MangeoireDef;
+  /** Mangeoires needed per enclos, and across all enclos (a full rotation). */
+  mangeoiresPerEnclos: number;
+  mangeoiresPerCycle: number;
+  /** Total food cost for one rotation, in kamas. */
+  foodCostPerCycle: number;
+  /** Food / upkeep per mount (mangeoire fuel amortized over the slots). */
   raiseCostPerMount: number;
   /** captureCost + raiseCost per mount. */
   costPerMount: number;
@@ -129,8 +147,18 @@ export function computeEleveur(
   const taxPerMount = grossRevenuePerMount * taxRate;
   const netRevenuePerMount = grossRevenuePerMount - taxPerMount;
 
-  // TODO: food cost from the chosen mangeoire over raiseHours. 0 for now.
-  const raiseCostPerMount = 0;
+  // Food: each enclos needs ENERGY_PER_ENCLOS energy (shared, mount-count
+  // independent). A mangeoire is a battery of `energy`; you buy whole ones, the
+  // last one overfills → ceil. Cost is spread across the enclos's slots.
+  const mangeoire = mangeoireById(input.mangeoireId);
+  const mangeoirePrice = mangeoire ? prices[mangeoire.id] : undefined;
+  const mangeoiresPerEnclos =
+    mangeoire && mangeoire.energy > 0
+      ? Math.ceil(ENERGY_PER_ENCLOS / mangeoire.energy)
+      : 0;
+  const mangeoiresPerCycle = mangeoiresPerEnclos * enclos;
+  const foodCostPerCycle = mangeoiresPerCycle * (mangeoirePrice ?? 0);
+  const raiseCostPerMount = totalSlots > 0 ? foodCostPerCycle / totalSlots : 0;
 
   const costPerMount = captureCostPerMount + raiseCostPerMount;
   const profitPerMount = netRevenuePerMount - costPerMount;
@@ -140,9 +168,9 @@ export function computeEleveur(
   const filtresPerCycle = filtresPerMount * totalSlots;
   const filtresCostPerCycle = captureCostPerMount * totalSlots;
   const profitPerCycle = profitPerMount * totalSlots;
-  const hours = input.raiseHours;
-  const profitPerDay =
-    hours != null && hours > 0 ? profitPerCycle * (24 / hours) : undefined;
+  // Raising time is fixed by the xp (RAISE_HOURS); a day fits 24 / RAISE_HOURS
+  // back-to-back rotations.
+  const profitPerDay = profitPerCycle * (24 / RAISE_HOURS);
 
   const missing = new Set<string>();
   if (filet != null && filtresPerMount > 0 && filetPrice == null) {
@@ -151,6 +179,7 @@ export function computeEleveur(
   for (const r of runes) {
     if (prices[r.itemId] == null) missing.add(r.itemId);
   }
+  if (mangeoire != null && mangeoirePrice == null) missing.add(mangeoire.id);
 
   return {
     enclos,
@@ -158,6 +187,10 @@ export function computeEleveur(
     totalSlots,
     filet,
     captureCostPerMount,
+    mangeoire,
+    mangeoiresPerEnclos,
+    mangeoiresPerCycle,
+    foodCostPerCycle,
     raiseCostPerMount,
     costPerMount,
     grossRevenuePerMount,
@@ -174,11 +207,11 @@ export function computeEleveur(
   };
 }
 
-/** A first-run input: max level, no mount picked yet, ~10 h raising. */
+/** A first-run input: max level, no mount picked, a common mid-tier mangeoire. */
 export function defaultEleveurInput(): EleveurInput {
   return {
     level: 200,
     mountId: undefined,
-    raiseHours: 10,
+    mangeoireId: "33341", // Grand Extrait de Mangeoire (4000 énergie)
   };
 }

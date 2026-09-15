@@ -3,6 +3,8 @@ import {
   enclosForLevel,
   computeEleveur,
   expectedQuantity,
+  RAISE_HOURS,
+  ENERGY_PER_ENCLOS,
   type EleveurInput,
 } from "../eleveur";
 import type { PriceMap } from "../../types";
@@ -40,12 +42,12 @@ function baseInput(overrides: Partial<EleveurInput> = {}): EleveurInput {
     level: 200,
     mountId: "4434",
     mountCreature: "Muldo",
-    raiseHours: 10,
     ...overrides,
   };
 }
 
-// Prices: filet + the indigo runes (Ga Pme 1558, Ré Per Eau 7560).
+// Prices: filet + indigo runes (Ga Pme 1558, Ré Per Eau 7560). No mangeoire
+// price by default → food cost 0 but flagged.
 const PRICES: PriceMap = { "32530": 1000, "1558": 200, "7560": 300 };
 
 describe("computeEleveur", () => {
@@ -74,16 +76,30 @@ describe("computeEleveur", () => {
     expect(r.profitPerMount).toBeCloseTo(1425, 6); // − 100 capture
   });
 
-  it("scales to the rotation and to a 24h day", () => {
+  it("scales to the rotation and to a 24h day (fixed raise time)", () => {
     const r = computeEleveur(baseInput(), PRICES, 0, 10);
     expect(r.filtresPerCycle).toBeCloseTo(6, 6); // (1/10) × 60
     expect(r.profitPerCycle).toBeCloseTo(1425 * 60, 6);
-    expect(r.profitPerDay).toBeCloseTo(1425 * 60 * (24 / 10), 6);
+    expect(r.profitPerDay).toBeCloseTo(1425 * 60 * (24 / RAISE_HOURS), 6);
   });
 
-  it("flags missing prices (filet + runes)", () => {
-    const r = computeEleveur(baseInput(), {}, 0, 10);
-    expect(r.missingPriceItemIds.sort()).toEqual(["1558", "32530", "7560"]);
+  it("computes the mangeoire food cost (ceil per enclos × enclos ÷ slots)", () => {
+    // Grand Extrait (id 33341) = 4000 energy @ 500 k. Per enclos:
+    // ceil(39360 / 4000) = 10 mangeoires. 6 enclos → 60. Cost 60 × 500k.
+    const prices = { ...PRICES, "33341": 500 };
+    const r = computeEleveur(baseInput({ mangeoireId: "33341" }), prices, 0, 10);
+    expect(ENERGY_PER_ENCLOS).toBe(39360);
+    expect(r.mangeoiresPerEnclos).toBe(10);
+    expect(r.mangeoiresPerCycle).toBe(60);
+    expect(r.foodCostPerCycle).toBe(60 * 500);
+    expect(r.raiseCostPerMount).toBeCloseTo((60 * 500) / 60, 6); // 500 / mount
+    // profit drops by the food cost per mount vs the no-food case (1425).
+    expect(r.profitPerMount).toBeCloseTo(1425 - 500, 6);
+  });
+
+  it("flags missing prices (filet + runes + mangeoire)", () => {
+    const r = computeEleveur(baseInput({ mangeoireId: "33341" }), {}, 0, 10);
+    expect(r.missingPriceItemIds.sort()).toEqual(["1558", "32530", "33341", "7560"]);
   });
 
   it("has no filet or capture cost until a mount is chosen", () => {

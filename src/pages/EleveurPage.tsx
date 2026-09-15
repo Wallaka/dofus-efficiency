@@ -3,9 +3,13 @@ import {
   computeEleveur,
   defaultEleveurInput,
   runeExpectedQty,
+  BRISAGE_LEVEL,
+  ENERGY_PER_ENCLOS,
+  RAISE_HOURS,
   type EleveurInput,
 } from "../lib/eleveur";
 import { bestFiletFor } from "../lib/filets";
+import { MANGEOIRES } from "../lib/mangeoires";
 import { MOUNTS, mountById } from "../lib/mounts";
 import type { Item } from "../types";
 import { loadEleveur, saveEleveur } from "../lib/storage";
@@ -184,7 +188,10 @@ export function EleveurPage() {
             <span className="eleveur-tile-value">
               {fmtRange(high.costPerMount, low.costPerMount, formatKamas)}
             </span>
-            <span className="eleveur-tile-sub">filet (nourriture à définir)</span>
+            <span className="eleveur-tile-sub">
+              filet {fmtRange(high.captureCostPerMount, low.captureCostPerMount, formatKamas)}{" "}
+              + nourriture {formatKamas(result.raiseCostPerMount)}
+            </span>
           </div>
           <div className="eleveur-tile">
             <span className="eleveur-tile-label">Runes / monture</span>
@@ -239,7 +246,7 @@ export function EleveurPage() {
                 : fmtRange(low.profitPerDay, high.profitPerDay, formatKamasSigned)}
             </span>
             <span className="eleveur-tile-sub">
-              {input.raiseHours ? `rotations de ${input.raiseHours} h (24 h)` : "durée non saisie"}
+              rotations de {RAISE_HOURS.toFixed(1)} h (sur 24 h)
             </span>
           </div>
           <div className="eleveur-tile">
@@ -307,25 +314,74 @@ export function EleveurPage() {
       <section className="panel">
         <h2>Élevage</h2>
         <p className="hint">
-          Une monture met environ 10 h à atteindre le niveau utile au brisage. La
-          nourriture dépendra de la mangeoire choisie (à venir).
+          Chaque monture atteint le niveau {BRISAGE_LEVEL} (utile au brisage) en{" "}
+          <strong>{ENERGY_PER_ENCLOS.toLocaleString("fr-FR")} xp</strong> ≈{" "}
+          <strong>{RAISE_HOURS.toFixed(1)} h</strong> (10 xp / 10 s). La mangeoire
+          est une « batterie » d'énergie : il en faut{" "}
+          {ENERGY_PER_ENCLOS.toLocaleString("fr-FR")} par enclos (partagé, 1 ou 10
+          montures = pareil).
         </p>
-        <div className="field eleveur-num">
-          <label htmlFor="hours">Durée d'élevage (heures)</label>
-          <input
-            id="hours"
-            type="number"
-            min={0}
-            inputMode="numeric"
-            placeholder="10"
-            value={input.raiseHours ?? ""}
-            onChange={(e) => patch({ raiseHours: num(e.target.value) })}
-          />
-          <p className="hint">Sert au bénéfice par jour.</p>
+        <div className="eleveur-settings">
+          <div className="field eleveur-mount-field">
+            <label htmlFor="mangeoire">Mangeoire</label>
+            <div className="eleveur-mount">
+              {result.mangeoire && (
+                <img src={result.mangeoire.img} alt="" className="eleveur-mount-icon" />
+              )}
+              <select
+                id="mangeoire"
+                value={input.mangeoireId ?? ""}
+                onChange={(e) =>
+                  patch({ mangeoireId: e.target.value || undefined })
+                }
+              >
+                <option value="">— Choisir —</option>
+                {MANGEOIRES.map((m) => (
+                  <option key={m.id} value={m.id}>
+                    {m.name} ({m.energy.toLocaleString("fr-FR")} én.)
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          {result.mangeoire && (
+            <div className="field eleveur-num">
+              <label htmlFor="mangeoire-price">Prix mangeoire</label>
+              <input
+                id="mangeoire-price"
+                type="number"
+                min={0}
+                inputMode="numeric"
+                placeholder="prix ?"
+                className={prices[result.mangeoire.id] == null ? "needs-price" : ""}
+                value={prices[result.mangeoire.id] ?? ""}
+                onChange={(e) =>
+                  setItemPrice(
+                    {
+                      id: result.mangeoire!.id,
+                      name: result.mangeoire!.name,
+                      img: result.mangeoire!.img,
+                    },
+                    e.target.value,
+                  )
+                }
+              />
+            </div>
+          )}
         </div>
-        <p className="hint eleveur-todo">
-          🍽️ Coût de nourriture (mangeoire) : à configurer — non compté pour l'instant.
-        </p>
+        {result.mangeoire ? (
+          <p className="eleveur-derived-line">
+            <strong>{result.mangeoiresPerEnclos}</strong> mangeoires / enclos ×{" "}
+            {result.enclos} = <strong>{result.mangeoiresPerCycle}</strong> par
+            rotation · nourriture ={" "}
+            <strong>{formatKamas(result.foodCostPerCycle)}</strong> (
+            {formatKamas(result.raiseCostPerMount)} / monture)
+          </p>
+        ) : (
+          <p className="hint eleveur-todo">
+            🍽️ Choisissez une mangeoire pour compter la nourriture.
+          </p>
+        )}
       </section>
 
       {/* ---------------- Brisage (runes) ---------------- */}
