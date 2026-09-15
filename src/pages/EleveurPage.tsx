@@ -253,7 +253,9 @@ export function EleveurPage() {
                 : fmtRange(low.profitPerDay, high.profitPerDay, formatKamasSigned)}
             </span>
             <span className="eleveur-tile-sub">
-              rotations de {RAISE_HOURS.toFixed(1)} h (sur 24 h)
+              {input.rotationsPerDay ?? 1} rotation
+              {(input.rotationsPerDay ?? 1) > 1 ? "s" : ""} / jour (~
+              {RAISE_HOURS.toFixed(0)} h chacune)
             </span>
           </div>
           <div className="eleveur-tile">
@@ -445,6 +447,24 @@ export function EleveurPage() {
             🍽️ Choisissez une mangeoire pour compter la nourriture.
           </p>
         )}
+        <div className="field eleveur-num eleveur-rotations">
+          <label htmlFor="rotations">Rotations / jour</label>
+          <input
+            id="rotations"
+            type="number"
+            min={0}
+            step="0.5"
+            inputMode="decimal"
+            placeholder="1"
+            value={input.rotationsPerDay ?? ""}
+            onChange={(e) => patch({ rotationsPerDay: num(e.target.value) })}
+          />
+          <p className="hint">
+            Combien de cycles complets vous bouclez réellement par jour (une
+            rotation ≈ {RAISE_HOURS.toFixed(0)} h + votre temps mort). Sert au
+            bénéfice / jour.
+          </p>
+        </div>
       </section>
 
       {/* ---------------- Brisage (runes) ---------------- */}

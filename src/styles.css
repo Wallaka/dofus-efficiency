@@ -1456,6 +1456,16 @@ table.eleveur-bp input {
   margin-top: 10px;
   font-style: italic;
 }
+.eleveur-rotations {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  width: auto;
+  max-width: 320px;
+}
+.eleveur-rotations input {
+  width: 120px;
+}
 
 .eleveur-runes-summary {
   margin-top: 12px;

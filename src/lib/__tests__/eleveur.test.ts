@@ -3,7 +3,6 @@ import {
   enclosForLevel,
   computeEleveur,
   expectedQuantity,
-  RAISE_HOURS,
   ENERGY_PER_ENCLOS,
   type EleveurInput,
 } from "../eleveur";
@@ -76,11 +75,13 @@ describe("computeEleveur", () => {
     expect(r.profitPerMount).toBeCloseTo(1425, 6); // − 100 capture
   });
 
-  it("scales to the rotation and to a 24h day (fixed raise time)", () => {
+  it("scales to the rotation, and per day by rotations/day (default 1)", () => {
     const r = computeEleveur(baseInput(), PRICES, 0, 10);
     expect(r.filtresPerCycle).toBeCloseTo(6, 6); // (1/10) × 60
     expect(r.profitPerCycle).toBeCloseTo(1425 * 60, 6);
-    expect(r.profitPerDay).toBeCloseTo(1425 * 60 * (24 / RAISE_HOURS), 6);
+    expect(r.profitPerDay).toBeCloseTo(1425 * 60, 6); // × 1 rotation/day
+    const twice = computeEleveur(baseInput({ rotationsPerDay: 2 }), PRICES, 0, 10);
+    expect(twice.profitPerDay).toBeCloseTo(1425 * 60 * 2, 6);
   });
 
   it("computes the mangeoire food cost (ceil per enclos × enclos ÷ slots)", () => {
