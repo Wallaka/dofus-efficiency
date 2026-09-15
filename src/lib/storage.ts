@@ -349,3 +349,32 @@ export function saveCarteRecipes(map: CarteRecipeCache): void {
     // non-fatal
   }
 }
+
+/**
+ * HDV resources the user chose to hide: item ids the price-punching flow skips
+ * (and the progress count ignores) until they're shown again. Persisted so the
+ * hidden set sticks between visits.
+ */
+const HDV_HIDDEN_KEY = "dofus-efficiency:hdvHidden:v1";
+
+export function loadHdvHidden(): string[] {
+  try {
+    const raw = localStorage.getItem(HDV_HIDDEN_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed)) {
+      return parsed.filter((x): x is string => typeof x === "string");
+    }
+    return [];
+  } catch {
+    return [];
+  }
+}
+
+export function saveHdvHidden(ids: string[]): void {
+  try {
+    localStorage.setItem(HDV_HIDDEN_KEY, JSON.stringify(ids));
+  } catch {
+    // non-fatal
+  }
+}
