@@ -4138,13 +4138,15 @@ td.negative {
   border-radius: 6px;
 }
 .hdv-price-wrap {
-  display: flex;
-  align-items: center;
-  gap: 5px;
+  position: relative;
+  display: inline-flex;
 }
 .kama-ic {
-  flex: none;
-  display: block;
+  position: absolute;
+  right: 7px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 .hdv-row:hover {
   background: var(--num-bg);
@@ -4172,8 +4174,8 @@ td.negative {
   white-space: nowrap;
 }
 .hdv-price {
-  width: 84px;
-  padding: 5px 8px;
+  width: 96px;
+  padding: 5px 26px 5px 8px;
   background: var(--panel);
   border: 1px solid var(--border);
   border-radius: 6px;
