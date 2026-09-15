@@ -1292,6 +1292,168 @@ table.lots td.num {
   border-color: var(--accent);
 }
 
+/* Éleveur — brisage loop */
+.eleveur-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.eleveur-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.eleveur-tiles + .eleveur-tiles {
+  margin-top: 12px;
+}
+.eleveur-tile {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--num-bg);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.eleveur-tile.accent {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+}
+.eleveur-tile-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+.eleveur-tile-value {
+  font-size: 1.35rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.eleveur-tile-value.positive {
+  color: var(--positive);
+}
+.eleveur-tile-value.negative {
+  color: var(--negative);
+}
+.eleveur-tile-sub {
+  font-size: 0.72rem;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.eleveur-level-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.eleveur-derived {
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.eleveur-derived strong {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+table.eleveur-bp {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 4px 0 12px;
+}
+table.eleveur-bp th {
+  text-align: left;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  padding: 4px 8px;
+  font-weight: 600;
+}
+table.eleveur-bp td {
+  padding: 3px 8px;
+}
+table.eleveur-bp tr.active td {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+table.eleveur-bp tr.active td:first-child {
+  border-left: 2px solid var(--accent);
+}
+table.eleveur-bp input {
+  width: 90px;
+  padding: 6px 8px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+  color: var(--text);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.eleveur-override {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.eleveur-override-fields {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.eleveur-capture {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.eleveur-capture-total {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 6px 0;
+}
+.eleveur-capture-total strong {
+  font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
+}
+.eleveur-days {
+  max-width: 260px;
+}
+
+input.needs-price {
+  border-color: color-mix(in srgb, var(--negative) 55%, var(--border));
+}
+
+.eleveur-out-icon {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+.cost-line-total.positive {
+  color: var(--positive);
+}
+.eleveur-empty {
+  font-style: italic;
+}
+
+@media (max-width: 720px) {
+  .eleveur-tiles {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* Avis de recherche */
 .avis-page {
   display: flex;
