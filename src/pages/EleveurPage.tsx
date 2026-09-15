@@ -16,6 +16,7 @@ import {
   type OutputLine,
 } from "../lib/eleveur";
 import { filetsForLevel, filetById, type FiletDef } from "../lib/filets";
+import { MOUNTS, mountById } from "../lib/mounts";
 import type { Item } from "../types";
 import { loadEleveur, saveEleveur } from "../lib/storage";
 import { usePrices } from "../lib/usePrices";
@@ -95,6 +96,26 @@ export function EleveurPage() {
     const n = num(v);
     if (n == null) clearPrice(item.id);
     else setPrice(item, n);
+  }
+
+  // ---- mount to raise (top selector) ----
+  function selectMount(id: string) {
+    const m = mountById(id);
+    if (!m) {
+      patch({
+        mountId: undefined,
+        mountLabel: undefined,
+        mountImg: undefined,
+        mountCreature: undefined,
+      });
+      return;
+    }
+    patch({
+      mountId: m.id,
+      mountLabel: m.name,
+      mountImg: m.img,
+      mountCreature: m.creature,
+    });
   }
 
   // ---- capture filet (level-filtered dropdown) ----
@@ -186,6 +207,32 @@ export function EleveurPage() {
 
   return (
     <main className="eleveur-page">
+      {/* ---------------- Mount selector ---------------- */}
+      <section className="panel">
+        <h2>Monture à élever</h2>
+        <p className="hint">
+          Choisissez la monture sauvage à capturer, élever dans vos enclos, puis
+          briser. Elle déterminera les filets adaptés et les runes du brisage.
+        </p>
+        <div className="eleveur-mount">
+          {input.mountImg && (
+            <img src={input.mountImg} alt="" className="eleveur-mount-icon" />
+          )}
+          <select
+            aria-label="Monture à élever"
+            value={input.mountId ?? ""}
+            onChange={(e) => selectMount(e.target.value)}
+          >
+            <option value="">— Choisir une monture —</option>
+            {MOUNTS.map((m) => (
+              <option key={m.id} value={m.id}>
+                {m.name} ({m.creature})
+              </option>
+            ))}
+          </select>
+        </div>
+      </section>
+
       {/* ---------------- Results dashboard ---------------- */}
       <section className="panel">
         <h2>Rentabilité du brisage</h2>

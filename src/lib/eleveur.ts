@@ -20,7 +20,7 @@
  */
 
 import type { Item, PriceMap } from "../types";
-import { FILETS } from "./filets";
+import { FILETS, type FiletCreature } from "./filets";
 
 /** Default capture net: the level-1 "Filet de capture universel". */
 const DEFAULT_FILET = FILETS[0];
@@ -72,6 +72,15 @@ export interface OutputLine {
 }
 
 export interface EleveurInput {
+  /**
+   * The wild mount chosen to capture / raise / brise. Drives which filets apply
+   * (same creature) and, later, the brisage rune list.
+   */
+  mountId?: string;
+  mountLabel?: string;
+  mountImg?: string;
+  mountCreature?: FiletCreature;
+
   /** Current éleveur profession level, used to resolve the slots table. */
   level?: number;
   /** Editable level → (enclos, capacity) table. */

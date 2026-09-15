@@ -1411,6 +1411,31 @@ table.eleveur-bp input {
   margin-top: 10px;
 }
 
+.eleveur-mount {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.eleveur-mount select {
+  flex: 1;
+  min-width: 0;
+  max-width: 360px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+  color: var(--text);
+}
+.eleveur-mount-icon {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--num-bg);
+  object-fit: contain;
+}
+
 .eleveur-capture {
   display: flex;
   gap: 16px;
