@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { FILETS, filetById, filetsForLevel } from "../filets";
+import { FILETS, filetById, filetsForLevel, bestFiletFor } from "../filets";
 
 describe("filetsForLevel", () => {
   it("returns nothing below level 1", () => {
@@ -38,6 +38,19 @@ describe("filetsForLevel", () => {
     for (let i = 1; i < list.length; i++) {
       expect(list[i].level).toBeGreaterThanOrEqual(list[i - 1].level);
     }
+  });
+});
+
+describe("bestFiletFor", () => {
+  it("picks the highest-tier filet usable for the creature", () => {
+    expect(bestFiletFor(200, "Muldo")?.name).toBe(
+      "Filet multiplicateur de Muldo renforcé",
+    );
+    expect(bestFiletFor(150, "Muldo")?.name).toBe("Filet à Muldo renforcé");
+    expect(bestFiletFor(100, "Muldo")?.name).toBe("Filet multiplicateur de Muldo");
+    // Below 100 only the universal net qualifies.
+    expect(bestFiletFor(1, "Muldo")?.creature).toBe("Universel");
+    expect(bestFiletFor(0, "Muldo")).toBeUndefined();
   });
 });
 

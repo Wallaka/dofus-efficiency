@@ -1411,6 +1411,52 @@ table.eleveur-bp input {
   margin-top: 10px;
 }
 
+.eleveur-settings {
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.eleveur-mount-field {
+  flex: 1 1 260px;
+  min-width: 220px;
+}
+.eleveur-derived-line {
+  margin: 14px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.eleveur-derived-line strong {
+  color: var(--text);
+}
+
+.eleveur-capture-auto {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.eleveur-capture-meta {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+.eleveur-capture-meta strong {
+  color: var(--text);
+}
+.eleveur-rune-readout {
+  flex: 0 0 auto;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+  min-width: 96px;
+}
+.eleveur-todo {
+  margin-top: 10px;
+  font-style: italic;
+}
+
 .eleveur-mount {
   display: flex;
   align-items: center;

@@ -157,3 +157,22 @@ export function filetsForLevel(
         f.creature === creature),
   ).sort((a, b) => a.level - b.level || a.name.localeCompare(b.name, "fr"));
 }
+
+/**
+ * The best filet for a level + creature: the highest-tier one usable (filets
+ * unlock in strictly better tiers, so the highest level wins), preferring the
+ * creature-specific net over the universal one at the same tier. Undefined
+ * below level 1.
+ */
+export function bestFiletFor(
+  level: number | undefined,
+  creature?: FiletCreature,
+): FiletDef | undefined {
+  const usable = filetsForLevel(level, creature);
+  if (usable.length === 0) return undefined;
+  return usable.reduce((best, f) => {
+    if (f.level !== best.level) return f.level > best.level ? f : best;
+    // Same tier: prefer a creature-specific net over the universal one.
+    return best.creature === "Universel" ? f : best;
+  });
+}

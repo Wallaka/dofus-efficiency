@@ -59,16 +59,8 @@ export interface PortableSection {
 const isObject = (x: unknown): x is Record<string, unknown> =>
   !!x && typeof x === "object" && !Array.isArray(x);
 
-/** Shape check for the éleveur settings singleton (brisage model). */
-const isEleveurInput = (x: unknown): x is EleveurInput => {
-  if (!isObject(x)) return false;
-  const e = x as Partial<EleveurInput>;
-  return (
-    Array.isArray(e.breakpoints) &&
-    Array.isArray(e.raiseCosts) &&
-    Array.isArray(e.outputs)
-  );
-};
+/** Shape check for the éleveur settings singleton (level + mount). */
+const isEleveurInput = (x: unknown): x is EleveurInput => isObject(x);
 
 /** Merge two id-keyed maps; `incoming` wins on a key clash. */
 function mergeMap(

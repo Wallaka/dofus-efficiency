@@ -1,282 +1,138 @@
 /**
- * Éleveur (breeder) profitability model — the "brisage" loop.
+ * Éleveur (breeder) profitability model — the "brisage" loop, simplified.
  *
- * The money-making method this models, step by step:
- *  1. Capture wild dragodindes — each capture spends some "Filtre à frousse".
- *  2. Raise them in your enclos for a number of days (food / upkeep costs).
- *  3. "Briser" (break) each raised mount → it yields runes.
- *  4. Sell the runes at the HDV.
+ * The user provides only two things: their éleveur **level** and the **mount**
+ * they capture. Everything else is automatic:
+ *  - Enclos: 1 enclos of 10 places at level 1, then +1 enclos every 40 levels
+ *    (40/80/120/160/200). Derived from the level, not configurable.
+ *  - Filet: the best capture net usable at that level for that creature.
+ *  - Runes: the hardcoded brisage yield of the mount (probabilistic).
+ *  - Food: driven by the chosen mangeoire over the raising time (TODO — pending
+ *    the mangeoire data; contributes 0 for now).
  *
- * How many mounts you can run at once is capped by your enclos: your éleveur
- * level unlocks a number of enclos, each holding a number of mounts. That
- * level → (enclos, capacity) mapping isn't a public constant and changes with
- * the game, so instead of hard-coding it we keep an editable breakpoint table
- * (the user types the thresholds they know) and resolve the current slots from
- * it. Everything else — filtre count, food, rune yield — is priced from the
- * shared price store, so the numbers stay honest and update themselves.
- *
- * The compute function is pure (input + prices + tax rate → result) so it's
- * trivially testable and mirrors how the craft/métier pages fold in HDV tax.
+ * Only market prices (filet, runes, food) are entered, and those come from the
+ * shared price store. The compute function is pure and evaluated for one
+ * mounts-per-capture value (the page calls it with the filet's min and max
+ * bounds to show a worst/best-case spread).
  */
 
-import type { Item, PriceMap } from "../types";
-import { FILETS, type FiletCreature } from "./filets";
+import type { PriceMap } from "../types";
+import { bestFiletFor, type FiletCreature, type FiletDef } from "./filets";
+import { brisageFor, type RuneYield } from "./mounts";
 
-/** Default capture net: the level-1 "Filet de capture universel". */
-const DEFAULT_FILET = FILETS[0];
+export const ENCLOS_CAPACITY = 10;
+const ENCLOS_THRESHOLDS = [40, 80, 120, 160, 200];
 
-/**
- * One row of the éleveur level → slots table: from `level` onward you have
- * `enclos` enclos of `capacity` mounts each. The resolver walks the rows in
- * ascending order and keeps the last one whose `level` you've reached.
- */
-export interface LevelBreakpoint {
-  id: string;
-  /** Éleveur level at which this row takes effect. */
-  level: number;
-  /** Number of enclos unlocked at/after this level. */
-  enclos: number;
-  /** Mounts each enclos can hold. */
-  capacity: number;
-}
-
-/**
- * A raising cost incurred per mount. Two flavours, like the craft/métier pages:
- *  - manual: a `label` + fixed `amount` in kamas.
- *  - item-linked: references a tracked item (`itemId`), priced × `quantity`
- *    from the shared price map (e.g. a food item).
- */
-export interface CostLine {
-  id: string;
-  label: string;
-  /** Manual kamas amount. Used only when `itemId` is not set. */
-  amount?: number;
-  /** When set, this line is item-linked and priced × quantity. */
-  itemId?: string;
-  /** Quantity for an item-linked line. */
-  quantity?: number;
-}
-
-/**
- * One rune yielded by brisage, valued from the shared price store. Brisage is
- * random, so a line is a probability of obtaining the rune × a quantity range
- * when obtained. The expected quantity per mount is `chance × (min + max) / 2`
- * (e.g. 50 % of 4–15 → 0.5 × 9.5 = 4.75 per mount).
- */
-export interface OutputLine {
-  id: string;
-  itemId: string;
-  label: string;
-  img?: string;
-  /** Probability (0..1) of obtaining this rune on a brisage. Default 1. */
-  chance?: number;
-  /** Quantity when obtained — the low end of the range. */
-  quantityMin?: number;
-  /** Quantity when obtained — the high end (=== min when fixed). */
-  quantityMax?: number;
-}
-
-/** Expected number of this rune per broken mount: chance × mid-range quantity. */
-export function outputExpectedQty(line: OutputLine): number {
-  const chance = Math.min(1, Math.max(0, line.chance ?? 1));
-  const min = line.quantityMin ?? 0;
-  const max = line.quantityMax ?? min;
-  return chance * ((min + max) / 2);
+/** Enclos unlocked at a level: 1 at level 1, then +1 per threshold reached. */
+export function enclosForLevel(level: number | undefined): number {
+  const lvl = level ?? 0;
+  if (lvl < 1) return 0;
+  return 1 + ENCLOS_THRESHOLDS.filter((t) => lvl >= t).length;
 }
 
 export interface EleveurInput {
-  /**
-   * The wild mount chosen to capture / raise / brise. Drives which filets apply
-   * (same creature) and, later, the brisage rune list.
-   */
+  /** Éleveur profession level — drives the enclos count and the filet. */
+  level?: number;
+  /** The wild mount captured / raised / broken. */
   mountId?: string;
   mountLabel?: string;
   mountImg?: string;
   mountCreature?: FiletCreature;
-
-  /** Current éleveur profession level, used to resolve the slots table. */
-  level?: number;
-  /** Editable level → (enclos, capacity) table. */
-  breakpoints: LevelBreakpoint[];
-  /**
-   * Manual overrides for enclos / capacity. When set, they win over the value
-   * derived from the table — handy while the table is still being filled in.
-   */
-  enclosOverride?: number;
-  capacityOverride?: number;
-
-  /** Filets consumed per capture action. */
-  captureFiltres?: number;
-  /**
-   * Mounts obtained per capture action, as a range (a filet ability — some
-   * capture a variable 1–5 per fight). Deterministic filets set min === max.
-   * The page evaluates both bounds to show a worst/best-case profit spread.
-   * Not exposed by the API, so seeded from the filet pick and editable. Clamped
-   * to ≥ 1 in the maths.
-   */
-  mountsPerCaptureMin?: number;
-  mountsPerCaptureMax?: number;
-  /**
-   * The capture item ("filet"), priced from the store. Chosen by search since
-   * filets have job-level requirements (a different one per level bracket).
-   * Undefined means no filet picked → no capture cost.
-   */
-  filtreItemId?: string;
-  filtreLabel?: string;
-  filtreImg?: string;
-
-  /** Days a mount is raised before it can be broken (for profit-per-day). */
-  raiseDays?: number;
-  /** Food / upkeep costs charged per mount. */
-  raiseCosts: CostLine[];
-
-  /** Runes obtained per mount when broken. */
-  outputs: OutputLine[];
+  /** Hours to raise a mount to a brisage-ready state (≈ 10). */
+  raiseHours?: number;
 }
 
 export interface EleveurResult {
-  /** Enclos actually used (override if set, else derived from the table). */
   enclos: number;
-  /** Mounts per enclos actually used. */
   capacity: number;
-  /** What the table alone gives for the current level (before overrides). */
-  derivedEnclos: number;
-  derivedCapacity: number;
-  /** enclos × capacity — mounts processed in one full rotation. */
   totalSlots: number;
 
-  /** Filtre spend to capture one mount, in kamas. */
+  /** The auto-picked capture net (undefined below level 1). */
+  filet?: FiletDef;
+  /** Filet spend to capture one mount, in kamas. */
   captureCostPerMount: number;
-  /** Food / upkeep per mount, in kamas. */
+  /** Food / upkeep per mount (mangeoire) — 0 until the mangeoire is wired. */
   raiseCostPerMount: number;
   /** captureCost + raiseCost per mount. */
   costPerMount: number;
 
-  /** Rune sale value per mount, before HDV tax. */
+  /** Rune sale value per mount, before HDV tax (expected value). */
   grossRevenuePerMount: number;
-  /** HDV tax on one mount's runes. */
   taxPerMount: number;
-  /** Rune value per mount after tax. */
   netRevenuePerMount: number;
-  /** netRevenue − cost, per mount. */
   profitPerMount: number;
-  /** profitPerMount / costPerMount, as a ratio. undefined if cost is 0. */
   marginRatio?: number;
 
-  /** Filtres needed to fill every slot once. */
+  /** Filets needed to fill every slot once, and their cost. */
   filtresPerCycle: number;
-  /** Kamas cost of those filtres. */
   filtresCostPerCycle: number;
-  /** profitPerMount × totalSlots — one full rotation. */
+  /** One full rotation (all slots). */
   profitPerCycle: number;
-  /** profitPerCycle / raiseDays. undefined without a usable duration. */
+  /** profitPerCycle × (24 / raiseHours) — profit per day, rotations back-to-back. */
   profitPerDay?: number;
 
-  /** Item ids referenced (filtre, food, runes) that have no known price. */
+  /** The runes this mount yields (for display), and their expected qty helper. */
+  runes: RuneYield[];
+  /** Item ids (filet, runes) with no known price. */
   missingPriceItemIds: string[];
 }
 
-/**
- * Resolve enclos + capacity for a level from the breakpoint table: the last
- * row (by level) whose threshold is ≤ the level wins. Below every threshold,
- * or with an empty table, you have no slots.
- */
-export function slotsForLevel(
-  level: number | undefined,
-  breakpoints: LevelBreakpoint[],
-): { enclos: number; capacity: number } {
-  const lvl = level ?? 0;
-  const sorted = [...breakpoints]
-    .filter((b) => Number.isFinite(b.level))
-    .sort((a, b) => a.level - b.level);
-  let cur = { enclos: 0, capacity: 0 };
-  for (const bp of sorted) {
-    if (bp.level <= lvl) {
-      cur = {
-        enclos: Math.max(0, bp.enclos || 0),
-        capacity: Math.max(0, bp.capacity || 0),
-      };
-    }
-  }
-  return cur;
+/** Expected count from a probabilistic yield: chance × mid-range quantity. */
+export function expectedQuantity(
+  chance: number | undefined,
+  min: number | undefined,
+  max: number | undefined,
+): number {
+  const c = Math.min(1, Math.max(0, chance ?? 1));
+  const lo = min ?? 0;
+  const hi = max ?? lo;
+  return c * ((lo + hi) / 2);
 }
 
-/** The kamas cost of a single raising-cost line (item-linked priced × qty). */
-export function lineCost(line: CostLine, prices: PriceMap): number {
-  if (line.itemId != null) {
-    const unit = prices[line.itemId];
-    return unit == null ? 0 : unit * (line.quantity ?? 0);
-  }
-  return line.amount ?? 0;
-}
-
-/** True when a line is item-linked but that item has no known price. */
-export function isMissingPrice(line: CostLine, prices: PriceMap): boolean {
-  return line.itemId != null && prices[line.itemId] == null;
-}
-
-/** The kamas value of one output (rune) line: unit price × expected quantity. */
-export function outputValue(line: OutputLine, prices: PriceMap): number {
-  const unit = prices[line.itemId];
-  return unit == null ? 0 : unit * outputExpectedQty(line);
-}
-
-/** True when an output line's rune has no known price yet. */
-export function isMissingOutputPrice(
-  line: OutputLine,
-  prices: PriceMap,
-): boolean {
-  return prices[line.itemId] == null;
+/** Expected number of a rune per broken mount. */
+export function runeExpectedQty(r: RuneYield): number {
+  return expectedQuantity(r.chance, r.quantityMin, r.quantityMax);
 }
 
 /**
  * The whole model, evaluated for one `mountsPerCapture` value (the page calls it
- * with the filet's min and max bounds to get a worst/best-case spread).
- * `taxRate` is the HDV sell tax as a fraction (e.g. 0.02), charged on rune
- * revenue only — filtres and food are bought, not sold. `mountsPerCapture`
- * defaults to the input's max bound (falling back to the min, then 1).
+ * with the filet's min and max bounds). `taxRate` is the HDV sell tax as a
+ * fraction (e.g. 0.02), charged on rune revenue only. `mountsPerCapture`
+ * defaults to the filet's max bound.
  */
 export function computeEleveur(
   input: EleveurInput,
   prices: PriceMap,
   taxRate = 0,
-  mountsPerCapture: number = input.mountsPerCaptureMax ??
-    input.mountsPerCaptureMin ??
-    1,
+  mountsPerCapture?: number,
 ): EleveurResult {
-  const derived = slotsForLevel(input.level, input.breakpoints);
-  const enclos =
-    input.enclosOverride != null && input.enclosOverride >= 0
-      ? input.enclosOverride
-      : derived.enclos;
-  const capacity =
-    input.capacityOverride != null && input.capacityOverride >= 0
-      ? input.capacityOverride
-      : derived.capacity;
+  const enclos = enclosForLevel(input.level);
+  const capacity = ENCLOS_CAPACITY;
   const totalSlots = enclos * capacity;
 
-  const filtreId = input.filtreItemId;
-  const filtrePrice = filtreId != null ? prices[filtreId] : undefined;
-  // Filets consumed per mount = filets per capture ÷ mounts caught per capture
-  // (a filet that catches 2 mounts halves the filet cost per mount).
-  const mpc = Math.max(1, mountsPerCapture);
-  const filtresPerCapture = Math.max(0, input.captureFiltres ?? 0);
-  const filtresPerMount = filtresPerCapture / mpc;
-  const captureCostPerMount =
-    filtreId != null ? (filtrePrice ?? 0) * filtresPerMount : 0;
+  // Only pick a filet once a mount (creature) is chosen — capture is
+  // creature-specific, so without a mount there's nothing to capture.
+  const filet = input.mountCreature
+    ? bestFiletFor(input.level, input.mountCreature)
+    : undefined;
+  const mpc = Math.max(1, mountsPerCapture ?? filet?.mountsMax ?? 1);
+  const filetPrice = filet ? prices[filet.id] : undefined;
+  // One filet per capture; a filet that catches several mounts splits its cost.
+  const filtresPerMount = filet ? 1 / mpc : 0;
+  const captureCostPerMount = filet ? (filetPrice ?? 0) * filtresPerMount : 0;
 
-  const raiseCostPerMount = input.raiseCosts.reduce(
-    (sum, c) => sum + lineCost(c, prices),
-    0,
-  );
-  const costPerMount = captureCostPerMount + raiseCostPerMount;
-
-  const grossRevenuePerMount = input.outputs.reduce(
-    (sum, o) => sum + outputValue(o, prices),
-    0,
-  );
+  const runes = brisageFor(input.mountId);
+  const grossRevenuePerMount = runes.reduce((sum, r) => {
+    const unit = prices[r.itemId];
+    return sum + (unit == null ? 0 : unit * runeExpectedQty(r));
+  }, 0);
   const taxPerMount = grossRevenuePerMount * taxRate;
   const netRevenuePerMount = grossRevenuePerMount - taxPerMount;
+
+  // TODO: food cost from the chosen mangeoire over raiseHours. 0 for now.
+  const raiseCostPerMount = 0;
+
+  const costPerMount = captureCostPerMount + raiseCostPerMount;
   const profitPerMount = netRevenuePerMount - costPerMount;
   const marginRatio =
     costPerMount > 0 ? profitPerMount / costPerMount : undefined;
@@ -284,29 +140,23 @@ export function computeEleveur(
   const filtresPerCycle = filtresPerMount * totalSlots;
   const filtresCostPerCycle = captureCostPerMount * totalSlots;
   const profitPerCycle = profitPerMount * totalSlots;
+  const hours = input.raiseHours;
   const profitPerDay =
-    input.raiseDays != null && input.raiseDays > 0
-      ? profitPerCycle / input.raiseDays
-      : undefined;
+    hours != null && hours > 0 ? profitPerCycle * (24 / hours) : undefined;
 
-  // Missing-price bookkeeping, so the UI can flag what to price.
   const missing = new Set<string>();
-  if (filtreId != null && filtresPerMount > 0 && filtrePrice == null) {
-    missing.add(filtreId);
+  if (filet != null && filtresPerMount > 0 && filetPrice == null) {
+    missing.add(filet.id);
   }
-  for (const c of input.raiseCosts) {
-    if (isMissingPrice(c, prices)) missing.add(c.itemId as string);
-  }
-  for (const o of input.outputs) {
-    if (isMissingOutputPrice(o, prices)) missing.add(o.itemId);
+  for (const r of runes) {
+    if (prices[r.itemId] == null) missing.add(r.itemId);
   }
 
   return {
     enclos,
     capacity,
-    derivedEnclos: derived.enclos,
-    derivedCapacity: derived.capacity,
     totalSlots,
+    filet,
     captureCostPerMount,
     raiseCostPerMount,
     costPerMount,
@@ -319,74 +169,16 @@ export function computeEleveur(
     filtresCostPerCycle,
     profitPerCycle,
     profitPerDay,
+    runes,
     missingPriceItemIds: [...missing],
   };
 }
 
-function makeId(): string {
-  return typeof crypto !== "undefined" && "randomUUID" in crypto
-    ? crypto.randomUUID()
-    : `e-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
-}
-
-/** A fresh manual raising-cost line. */
-export function newCostLine(label = ""): CostLine {
-  return { id: makeId(), label };
-}
-
-/** A raising-cost line linked to a tracked item (e.g. a food), priced × qty. */
-export function newItemCostLine(item: Item, quantity = 1): CostLine {
-  return { id: makeId(), label: item.name, itemId: item.id, quantity };
-}
-
-/** A fresh rune output line linked to an item (deterministic: 100 %, fixed qty). */
-export function newOutputLine(item: Item, quantity = 1): OutputLine {
-  return {
-    id: makeId(),
-    itemId: item.id,
-    label: item.name,
-    img: item.img,
-    chance: 1,
-    quantityMin: quantity,
-    quantityMax: quantity,
-  };
-}
-
-/** A fresh, editable level-breakpoint row. */
-export function newBreakpoint(
-  level = 1,
-  enclos = 1,
-  capacity = 1,
-): LevelBreakpoint {
-  return { id: makeId(), level, enclos, capacity };
-}
-
-/**
- * A first-run input the user then edits. The breakpoint table is seeded with
- * the known éleveur enclos progression: 1 enclos of 10 places at level 1, then
- * one more enclos every 40 levels (40/80/120/160/200). All rows stay editable.
- * The filet is a searchable pick (defaults to Filtre à frousse) since filets
- * have job-level requirements.
- */
+/** A first-run input: max level, no mount picked yet, ~10 h raising. */
 export function defaultEleveurInput(): EleveurInput {
   return {
-    level: 1,
-    breakpoints: [
-      newBreakpoint(1, 1, 10),
-      newBreakpoint(40, 2, 10),
-      newBreakpoint(80, 3, 10),
-      newBreakpoint(120, 4, 10),
-      newBreakpoint(160, 5, 10),
-      newBreakpoint(200, 6, 10),
-    ],
-    captureFiltres: 1,
-    mountsPerCaptureMin: DEFAULT_FILET.mountsMin,
-    mountsPerCaptureMax: DEFAULT_FILET.mountsMax,
-    filtreItemId: DEFAULT_FILET.id,
-    filtreLabel: DEFAULT_FILET.name,
-    filtreImg: DEFAULT_FILET.img,
-    raiseDays: undefined,
-    raiseCosts: [newCostLine("Nourriture")],
-    outputs: [],
+    level: 200,
+    mountId: undefined,
+    raiseHours: 10,
   };
 }
