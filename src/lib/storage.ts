@@ -14,10 +14,10 @@ import type { Item } from "../types";
 const DATASET_PREFIX = "dofus-efficiency:dataset:v1:";
 const LAST_SOURCE_KEY = "dofus-efficiency:lastSource:v1";
 const FAVOURITES_KEY = "dofus-efficiency:favourites:v1";
-// v2: the éleveur page moved from a generic cost/sell budget (RaisingInput) to
-// the capture → raise → brisage model (EleveurInput). The shapes are
-// incompatible, so a new key drops stale v1 data instead of mis-reading it.
-const ELEVEUR_KEY = "dofus-efficiency:eleveur:v2";
+// v3: the éleveur page was simplified to just a level + mount (enclos, filet,
+// runes are all derived now), so the stored shape changed again. A new key
+// drops stale v1/v2 data instead of mis-reading it.
+const ELEVEUR_KEY = "dofus-efficiency:eleveur:v3";
 // v3: catalog now carries the "Carte de …" hunt map too — invalidate older
 // caches so the page refetches automatically instead of showing carte-less cards.
 const AVIS_KEY = "dofus-efficiency:avisCatalog:v3";
@@ -108,12 +108,7 @@ export function loadEleveur(): EleveurInput | null {
     const raw = localStorage.getItem(ELEVEUR_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw);
-    if (
-      parsed &&
-      Array.isArray(parsed.breakpoints) &&
-      Array.isArray(parsed.raiseCosts) &&
-      Array.isArray(parsed.outputs)
-    ) {
+    if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
       return parsed as EleveurInput;
     }
     return null;
