@@ -74,6 +74,8 @@ export interface EleveurInput {
   /** Connection window (clock hours) used by the rotation planner. */
   availFrom?: number;
   availTo?: number;
+  /** Forecast horizon in days (default 7). */
+  forecastDays?: number;
 }
 
 /** The creature of the selected mounts (all muldos share one), or undefined. */
