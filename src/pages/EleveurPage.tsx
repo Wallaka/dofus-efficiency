@@ -2,13 +2,14 @@ import { useEffect, useMemo, useState } from "react";
 import {
   computeEleveur,
   defaultEleveurInput,
+  resolveFilet,
   runeExpectedQty,
   BRISAGE_LEVEL,
   ENERGY_PER_ENCLOS,
   RAISE_HOURS,
   type EleveurInput,
 } from "../lib/eleveur";
-import { bestFiletFor } from "../lib/filets";
+import { bestFiletFor, filetsForLevel } from "../lib/filets";
 import { MANGEOIRES } from "../lib/mangeoires";
 import { MOUNTS, mountById } from "../lib/mounts";
 import type { Item } from "../types";
@@ -72,11 +73,16 @@ export function EleveurPage() {
 
   const taxRate = loadCraftTaxPercent() / 100;
 
-  // The auto-picked filet catches a variable number of mounts, so we evaluate
-  // both bounds: `low` = fewest mounts caught (worst case), `high` = most.
-  const filet = input.mountCreature
+  // The filet in effect (explicit choice or auto-best). It catches a variable
+  // number of mounts, so we evaluate both bounds: `low` = fewest caught (worst
+  // case), `high` = most.
+  const filet = resolveFilet(input);
+  const bestFilet = input.mountCreature
     ? bestFiletFor(input.level, input.mountCreature)
     : undefined;
+  const availableFilets = input.mountCreature
+    ? filetsForLevel(input.level, input.mountCreature)
+    : [];
   const low = useMemo(
     () => computeEleveur(input, prices, taxRate, filet?.mountsMin ?? 1),
     [input, prices, taxRate, filet],
@@ -94,10 +100,11 @@ export function EleveurPage() {
 
   function selectMount(id: string) {
     const m = mountById(id);
+    // Reset the filet choice to auto — a chosen filet may not fit the new creature.
     patch(
       m
-        ? { mountId: m.id, mountLabel: m.name, mountImg: m.img, mountCreature: m.creature }
-        : { mountId: undefined, mountLabel: undefined, mountImg: undefined, mountCreature: undefined },
+        ? { mountId: m.id, mountLabel: m.name, mountImg: m.img, mountCreature: m.creature, filetId: undefined }
+        : { mountId: undefined, mountLabel: undefined, mountImg: undefined, mountCreature: undefined, filetId: undefined },
     );
   }
 
@@ -266,44 +273,73 @@ export function EleveurPage() {
       {/* ---------------- Capture ---------------- */}
       <section className="panel">
         <h2>Capture</h2>
-        {filet ? (
+        {input.mountCreature ? (
           <>
             <p className="hint">
-              Filet auto pour votre niveau et cette monture. Nombre de filets
-              nécessaires calculé d'après sa capture ({ranged ? "variable" : "fixe"}).
+              Choisissez le filet pour comparer les rentabilités (« Auto » = le
+              meilleur pour votre niveau). Le nombre de filets est calculé d'après
+              sa capture ({ranged ? "variable" : "fixe"}).
             </p>
-            <div className="eleveur-capture-auto">
-              <span className="eleveur-filet-name">
-                <img src={filet.img} alt="" className="eleveur-out-icon" />
-                {filet.name}
-              </span>
-              <span className="eleveur-capture-meta">
-                capture{" "}
+            <div className="eleveur-settings">
+              <div className="field eleveur-mount-field">
+                <label htmlFor="filet">Filet</label>
+                <div className="eleveur-mount">
+                  {filet && (
+                    <img src={filet.img} alt="" className="eleveur-mount-icon" />
+                  )}
+                  <select
+                    id="filet"
+                    value={input.filetId ?? ""}
+                    onChange={(e) =>
+                      patch({ filetId: e.target.value || undefined })
+                    }
+                  >
+                    <option value="">
+                      Auto — meilleur{bestFilet ? ` (${bestFilet.name})` : ""}
+                    </option>
+                    {availableFilets.map((f) => (
+                      <option key={f.id} value={f.id}>
+                        {f.name} — capture{" "}
+                        {f.mountsMin === f.mountsMax
+                          ? f.mountsMin
+                          : `${f.mountsMin}–${f.mountsMax}`}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              {filet && (
+                <div className="field eleveur-num">
+                  <label htmlFor="filet-price">Prix du filet</label>
+                  <input
+                    id="filet-price"
+                    type="number"
+                    min={0}
+                    inputMode="numeric"
+                    placeholder="prix ?"
+                    className={prices[filet.id] == null ? "needs-price" : ""}
+                    value={prices[filet.id] ?? ""}
+                    onChange={(e) =>
+                      setItemPrice(
+                        { id: filet.id, name: filet.name, img: filet.img },
+                        e.target.value,
+                      )
+                    }
+                  />
+                </div>
+              )}
+            </div>
+            {filet && (
+              <p className="eleveur-derived-line">
+                <strong>{filet.name}</strong> · capture{" "}
                 {filet.mountsMin === filet.mountsMax
                   ? filet.mountsMin
                   : `${filet.mountsMin}–${filet.mountsMax}`}{" "}
-                / combat · <strong>{fmtRange(high.filtresPerCycle, low.filtresPerCycle, count)}</strong>{" "}
+                / combat ·{" "}
+                <strong>{fmtRange(high.filtresPerCycle, low.filtresPerCycle, count)}</strong>{" "}
                 filets pour remplir {result.totalSlots} places
-              </span>
-              <div className="field eleveur-num">
-                <label htmlFor="filet-price">Prix du filet</label>
-                <input
-                  id="filet-price"
-                  type="number"
-                  min={0}
-                  inputMode="numeric"
-                  placeholder="prix ?"
-                  className={prices[filet.id] == null ? "needs-price" : ""}
-                  value={prices[filet.id] ?? ""}
-                  onChange={(e) =>
-                    setItemPrice(
-                      { id: filet.id, name: filet.name, img: filet.img },
-                      e.target.value,
-                    )
-                  }
-                />
-              </div>
-            </div>
+              </p>
+            )}
           </>
         ) : (
           <p className="hint">Choisissez une monture pour déterminer le filet.</p>

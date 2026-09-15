@@ -102,6 +102,15 @@ describe("computeEleveur", () => {
     expect(r.missingPriceItemIds.sort()).toEqual(["1558", "32530", "33341", "7560"]);
   });
 
+  it("honours an explicit filet choice over the auto-best", () => {
+    // Force the universal net (id 32521, 1 mount) instead of the level-200 best.
+    const prices = { ...PRICES, "32521": 1000 };
+    const r = computeEleveur(baseInput({ filetId: "32521" }), prices, 0);
+    expect(r.filet?.id).toBe("32521");
+    // 1 filet / 1 mount × 1000 = 1000 capture per mount.
+    expect(r.captureCostPerMount).toBe(1000);
+  });
+
   it("has no filet or capture cost until a mount is chosen", () => {
     const r = computeEleveur(
       { level: 200, raiseHours: 10 },
