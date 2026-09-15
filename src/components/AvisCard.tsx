@@ -9,6 +9,7 @@ import type { Item } from "../types";
 import type { PriceSource } from "../lib/priceStore";
 import { formatKamas, formatKamasSigned } from "../lib/format";
 import { ItemAutocomplete } from "./ItemAutocomplete";
+import { CopyName } from "./CopyName";
 
 /** Everything a carte/resource line needs: the resolved item, its price, and edit hooks. */
 export interface AvisSlot {
@@ -304,8 +305,11 @@ function CarteCraftPanel({ craft }: { craft: CarteCraft }) {
       <div className="avis-cardcraft-h">⚒ Craft de la carte — recette DofusDB</div>
       {ings.map((ing) => (
         <div className="avis-ci" key={ing.item.id}>
-          <span className="avis-ci-name" title={ing.item.name}>
-            {ing.item.name} <span className="avis-ci-q">×{ing.quantity}</span>
+          <span className="avis-ci-namewrap">
+            <span className="avis-ci-name" title={ing.item.name}>
+              {ing.item.name} <span className="avis-ci-q">×{ing.quantity}</span>
+            </span>
+            <CopyName text={ing.item.name} />
           </span>
           <PriceInput
             value={ing.price}

@@ -3,6 +3,7 @@ import type { CraftEvaluation, Item } from "../types";
 import { formatKamas, formatPercent } from "../lib/format";
 import { isStale, relativeAge } from "../lib/priceStore";
 import { Pagination, PAGE_SIZE } from "./Pagination";
+import { CopyName } from "./CopyName";
 
 interface Props {
   evaluations: CraftEvaluation[];
@@ -81,7 +82,10 @@ export function CraftTable({ evaluations, itemsById, priceUpdatedAt }: Props) {
             {pageRows.map((ev) => (
               <tr key={ev.recipe.id}>
                 <td>
-                  <span className="item-name">{ev.resultItem.name}</span>
+                  <span className="price-item">
+                    <span className="item-name">{ev.resultItem.name}</span>
+                    <CopyName text={ev.resultItem.name} />
+                  </span>
                   <span className="recipe-detail">
                     {ev.recipe.ingredients
                       .map((ing) => {

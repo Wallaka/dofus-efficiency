@@ -4180,6 +4180,12 @@ td.negative {
   padding: 3px 0;
 }
 
+.avis-ci-namewrap {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
 .avis-ci-name {
   min-width: 0;
   overflow: hidden;
@@ -4679,6 +4685,12 @@ td.negative {
   border: 1px dashed var(--border);
   border-radius: 5px;
 }
+.hdv-namewrap {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
 .hdv-name {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -4764,9 +4776,9 @@ td.negative {
 }
 
 /* --- "Copier le nom" button (after a resource/item name) -------------------
-   Placed inside the flex container that holds the name; hidden until the row is
-   hovered (its direct parent's :hover) or the button is focused/just copied, so
-   lists stay clean. Space is reserved even when hidden, so nothing shifts. */
+   A small always-visible icon sitting right after the name. Only the icon is
+   clickable (it copies the name); clicking it never triggers the row it lives
+   in. Subtle at rest, brighter on hover, green tick just after a copy. */
 .copy-name {
   flex: 0 0 auto;
   display: inline-grid;
@@ -4779,7 +4791,8 @@ td.negative {
   background: transparent;
   color: var(--muted);
   cursor: pointer;
-  opacity: 0;
+  opacity: 0.55;
+  vertical-align: middle;
   transition: color 0.12s, background 0.12s, border-color 0.12s, opacity 0.12s;
 }
 .copy-name svg {
@@ -4788,6 +4801,7 @@ td.negative {
   display: block;
 }
 .copy-name:hover {
+  opacity: 1;
   color: var(--text);
   background: var(--num-bg);
   border-color: var(--border);
@@ -4795,10 +4809,6 @@ td.negative {
 .copy-name:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 1px;
-  opacity: 1;
-}
-/* Reveal when the name's row (the button's direct parent) is hovered. */
-*:hover > .copy-name {
   opacity: 1;
 }
 .copy-name.copied {
@@ -4815,6 +4825,7 @@ td.negative {
 .metier-ing-name,
 .craft-ing-name,
 .craft-name,
-.item-name {
+.item-name,
+.hdv-name {
   min-width: 0;
 }

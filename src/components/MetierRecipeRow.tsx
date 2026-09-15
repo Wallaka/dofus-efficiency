@@ -37,13 +37,23 @@ export function MetierRecipeRow({
 
   return (
     <li className={open ? "metier-ritem open" : "metier-ritem"}>
-      <button
-        type="button"
+      {/* A div, not a button, so the name can hold its own copy button
+          (a button can't be nested inside a button). */}
+      <div
+        role="button"
+        tabIndex={0}
         className={`metier-rrow${selected ? " selected" : ""}${locked ? " metier-rrow--locked" : ""}`}
         aria-expanded={open}
         onClick={() => {
           onSelect();
           setOpen((o) => !o);
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onSelect();
+            setOpen((o) => !o);
+          }
         }}
       >
         <span className="metier-rchevron" aria-hidden>
@@ -68,6 +78,7 @@ export function MetierRecipeRow({
               {!priced && <span className="metier-unpriced">prix ?</span>}
             </span>
           </span>
+          <CopyName text={recipe.result.name} />
         </span>
         <span className="num metier-xpcraft" title="XP par craft au niveau de départ">
           {xpPerCraft}
@@ -84,7 +95,7 @@ export function MetierRecipeRow({
             {netCostPerXp != null ? `${formatKamas(netCostPerXp)}/xp` : "—"}
           </span>
         </span>
-      </button>
+      </div>
 
       {open && (
         <div className="metier-rprices">

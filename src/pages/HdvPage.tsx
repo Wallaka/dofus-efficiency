@@ -11,6 +11,7 @@ import {
 } from "../lib/priceStore";
 import { loadHdvHidden, saveHdvHidden } from "../lib/storage";
 import { parseFrenchNumber } from "../lib/voiceParse";
+import { CopyName } from "../components/CopyName";
 
 /**
  * The in-app HDV: a game-like marketplace. The left rail lists categories
@@ -281,7 +282,10 @@ export function HdvPage() {
                   ) : (
                     <span className="hdv-ic hdv-ic-empty" />
                   )}
-                  <span className="hdv-name">{item.name}</span>
+                  <span className="hdv-namewrap">
+                    <span className="hdv-name">{item.name}</span>
+                    <CopyName text={item.name} />
+                  </span>
                   <span className="hdv-lvl">
                     {category && <span className="hdv-cat-tag">{category}</span>}
                     {item.level ? ` niv. ${item.level}` : ""}
@@ -330,7 +334,10 @@ export function HdvPage() {
                     ) : (
                       <span className="hdv-ic hdv-ic-empty" />
                     )}
-                    <span className="hdv-name">{item.name}</span>
+                    <span className="hdv-namewrap">
+                      <span className="hdv-name">{item.name}</span>
+                      <CopyName text={item.name} />
+                    </span>
                     <span className="hdv-lvl">
                       {category && (
                         <span className="hdv-cat-tag">{category}</span>
