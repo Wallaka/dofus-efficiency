@@ -1,5 +1,5 @@
 import type { CraftDataset } from "../data/dofusApi";
-import type { RaisingInput } from "./eleveur";
+import type { EleveurInput } from "./eleveur";
 import type { AvisCatalog, AvisReward } from "./avis";
 import type { Item } from "../types";
 
@@ -14,7 +14,10 @@ import type { Item } from "../types";
 const DATASET_PREFIX = "dofus-efficiency:dataset:v1:";
 const LAST_SOURCE_KEY = "dofus-efficiency:lastSource:v1";
 const FAVOURITES_KEY = "dofus-efficiency:favourites:v1";
-const ELEVEUR_KEY = "dofus-efficiency:eleveur:v1";
+// v2: the éleveur page moved from a generic cost/sell budget (RaisingInput) to
+// the capture → raise → brisage model (EleveurInput). The shapes are
+// incompatible, so a new key drops stale v1 data instead of mis-reading it.
+const ELEVEUR_KEY = "dofus-efficiency:eleveur:v2";
 // v3: catalog now carries the "Carte de …" hunt map too — invalidate older
 // caches so the page refetches automatically instead of showing carte-less cards.
 const AVIS_KEY = "dofus-efficiency:avisCatalog:v3";
@@ -99,20 +102,27 @@ export function saveFavourites(items: Item[]): void {
   }
 }
 
-/** Éleveur (raising-profitability) inputs, persisted between sessions. */
-export function loadEleveur(): RaisingInput | null {
+/** Éleveur (brisage-profitability) inputs, persisted between sessions. */
+export function loadEleveur(): EleveurInput | null {
   try {
     const raw = localStorage.getItem(ELEVEUR_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw);
-    if (parsed && Array.isArray(parsed.costs)) return parsed as RaisingInput;
+    if (
+      parsed &&
+      Array.isArray(parsed.breakpoints) &&
+      Array.isArray(parsed.raiseCosts) &&
+      Array.isArray(parsed.outputs)
+    ) {
+      return parsed as EleveurInput;
+    }
     return null;
   } catch {
     return null;
   }
 }
 
-export function saveEleveur(input: RaisingInput): void {
+export function saveEleveur(input: EleveurInput): void {
   try {
     localStorage.setItem(ELEVEUR_KEY, JSON.stringify(input));
   } catch {

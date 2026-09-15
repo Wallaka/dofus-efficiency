@@ -10,7 +10,7 @@
  *   { app: "dofus-efficiency", schema: 1, exportedAt, sections: { <id>: value } }
  */
 import type { Item } from "../types";
-import type { RaisingInput } from "./eleveur";
+import type { EleveurInput } from "./eleveur";
 import {
   loadPriceEntries,
   savePriceEntries,
@@ -58,6 +58,17 @@ export interface PortableSection {
 
 const isObject = (x: unknown): x is Record<string, unknown> =>
   !!x && typeof x === "object" && !Array.isArray(x);
+
+/** Shape check for the éleveur settings singleton (brisage model). */
+const isEleveurInput = (x: unknown): x is EleveurInput => {
+  if (!isObject(x)) return false;
+  const e = x as Partial<EleveurInput>;
+  return (
+    Array.isArray(e.breakpoints) &&
+    Array.isArray(e.raiseCosts) &&
+    Array.isArray(e.outputs)
+  );
+};
 
 /** Merge two id-keyed maps; `incoming` wins on a key clash. */
 function mergeMap(
@@ -150,15 +161,13 @@ export const SECTIONS: PortableSection[] = [
     label: "Éleveur (réglages)",
     load: () => loadEleveur(),
     save: (value) => {
-      if (isObject(value) && Array.isArray((value as unknown as RaisingInput).costs)) {
-        saveEleveur(value as unknown as RaisingInput);
-      }
+      if (isEleveurInput(value)) saveEleveur(value);
     },
     // Singleton settings object: incoming replaces.
     merge: (_current, incoming) => incoming,
-    valid: (v) => isObject(v) && Array.isArray((v as unknown as RaisingInput).costs),
+    valid: (v) => isEleveurInput(v),
     size: () => undefined,
-    present: (v) => isObject(v) && Array.isArray((v as unknown as RaisingInput).costs),
+    present: (v) => isEleveurInput(v),
   },
   {
     id: "avisParticipation",
