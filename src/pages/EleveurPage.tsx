@@ -19,26 +19,36 @@ import { usePrices } from "../lib/usePrices";
 import { loadCraftTaxPercent } from "../lib/craftList";
 import { formatKamas, formatKamasSigned, formatPercent } from "../lib/format";
 
-/** Colour a range: green if even the worst case is positive, red if the best is negative. */
-function rangeProfitClass(a: number | undefined, b: number | undefined): string {
-  if (a == null || b == null) return "";
+/**
+ * A min–max range with each bound coloured by whether it's the favourable end:
+ * the good bound green, the other amber. `higherIsBetter` tells which way is
+ * good (profit: high is good; cost / filets: low is good). A single value when
+ * the bounds coincide.
+ */
+function Range({
+  a,
+  b,
+  fmt,
+  higherIsBetter = true,
+}: {
+  a: number | undefined;
+  b: number | undefined;
+  fmt: (n: number | undefined) => string;
+  higherIsBetter?: boolean;
+}) {
+  if (a == null || b == null) return <>—</>;
   const lo = Math.min(a, b);
   const hi = Math.max(a, b);
-  if (lo > 0) return "positive";
-  if (hi < 0) return "negative";
-  return "";
-}
-
-/** Format two endpoints as "lo – hi" (single value when they coincide). */
-function fmtRange(
-  a: number | undefined,
-  b: number | undefined,
-  fmt: (n: number | undefined) => string,
-): string {
-  if (a == null || b == null) return "—";
-  const lo = Math.min(a, b);
-  const hi = Math.max(a, b);
-  return Math.round(lo) === Math.round(hi) ? fmt(lo) : `${fmt(lo)} – ${fmt(hi)}`;
+  if (Math.round(lo) === Math.round(hi)) return <>{fmt(lo)}</>;
+  const loClass = higherIsBetter ? "rng-bad" : "rng-good";
+  const hiClass = higherIsBetter ? "rng-good" : "rng-bad";
+  return (
+    <>
+      <span className={loClass}>{fmt(lo)}</span>
+      <span className="rng-sep"> – </span>
+      <span className={hiClass}>{fmt(hi)}</span>
+    </>
+  );
 }
 
 /** A plain integer-ish count with thousands separators. */
@@ -226,10 +236,11 @@ export function EleveurPage() {
           <div className="eleveur-tile">
             <span className="eleveur-tile-label">Coût / monture</span>
             <span className="eleveur-tile-value">
-              {fmtRange(high.costPerMount, low.costPerMount, formatKamas)}
+              <Range a={low.costPerMount} b={high.costPerMount} fmt={formatKamas} higherIsBetter={false} />
             </span>
             <span className="eleveur-tile-sub">
-              filet {fmtRange(high.captureCostPerMount, low.captureCostPerMount, formatKamas)}{" "}
+              filet{" "}
+              <Range a={low.captureCostPerMount} b={high.captureCostPerMount} fmt={formatKamas} higherIsBetter={false} />{" "}
               + nourriture {formatKamas(result.raiseCostPerMount)}
             </span>
           </div>
@@ -246,13 +257,11 @@ export function EleveurPage() {
           </div>
           <div className="eleveur-tile accent">
             <span className="eleveur-tile-label">Bénéfice / monture</span>
-            <span
-              className={`eleveur-tile-value ${rangeProfitClass(low.profitPerMount, high.profitPerMount)}`}
-            >
-              {fmtRange(low.profitPerMount, high.profitPerMount, formatKamasSigned)}
+            <span className="eleveur-tile-value">
+              <Range a={low.profitPerMount} b={high.profitPerMount} fmt={formatKamasSigned} />
             </span>
             <span className="eleveur-tile-sub">
-              marge {fmtRange(low.marginRatio, high.marginRatio, formatPercent)}
+              marge <Range a={low.marginRatio} b={high.marginRatio} fmt={formatPercent} />
             </span>
           </div>
         </div>
@@ -261,29 +270,23 @@ export function EleveurPage() {
           <div className="eleveur-tile">
             <span className="eleveur-tile-label">Filets / rotation</span>
             <span className="eleveur-tile-value">
-              {fmtRange(high.filtresPerCycle, low.filtresPerCycle, count)}
+              <Range a={low.filtresPerCycle} b={high.filtresPerCycle} fmt={count} higherIsBetter={false} />
             </span>
             <span className="eleveur-tile-sub">
-              {fmtRange(high.filtresCostPerCycle, low.filtresCostPerCycle, formatKamas)}
+              <Range a={low.filtresCostPerCycle} b={high.filtresCostPerCycle} fmt={formatKamas} higherIsBetter={false} />
             </span>
           </div>
           <div className="eleveur-tile">
             <span className="eleveur-tile-label">Bénéfice / rotation</span>
-            <span
-              className={`eleveur-tile-value ${rangeProfitClass(low.profitPerCycle, high.profitPerCycle)}`}
-            >
-              {fmtRange(low.profitPerCycle, high.profitPerCycle, formatKamasSigned)}
+            <span className="eleveur-tile-value">
+              <Range a={low.profitPerCycle} b={high.profitPerCycle} fmt={formatKamasSigned} />
             </span>
             <span className="eleveur-tile-sub">{result.totalSlots} montures</span>
           </div>
           <div className="eleveur-tile">
             <span className="eleveur-tile-label">Bénéfice / jour</span>
-            <span
-              className={`eleveur-tile-value ${rangeProfitClass(low.profitPerDay, high.profitPerDay)}`}
-            >
-              {low.profitPerDay == null
-                ? "—"
-                : fmtRange(low.profitPerDay, high.profitPerDay, formatKamasSigned)}
+            <span className="eleveur-tile-value">
+              <Range a={low.profitPerDay} b={high.profitPerDay} fmt={formatKamasSigned} />
             </span>
             <span className="eleveur-tile-sub">
               {input.rotationsPerDay ?? 1} rotation
@@ -341,36 +344,28 @@ export function EleveurPage() {
               <div key={d} className="eleveur-week-day">
                 <span className="eleveur-week-dow">{d}</span>
                 <span className="eleveur-week-rot">{rotationsByDay[i]} rot.</span>
-                <span
-                  className={`eleveur-week-profit ${rangeProfitClass(
-                    rotationsByDay[i] * low.profitPerCycle,
-                    rotationsByDay[i] * high.profitPerCycle,
-                  )}`}
-                >
-                  {rotationsByDay[i] === 0
-                    ? "—"
-                    : fmtRange(
-                        rotationsByDay[i] * low.profitPerCycle,
-                        rotationsByDay[i] * high.profitPerCycle,
-                        formatKamasSigned,
-                      )}
+                <span className="eleveur-week-profit">
+                  {rotationsByDay[i] === 0 ? (
+                    "—"
+                  ) : (
+                    <Range
+                      a={rotationsByDay[i] * low.profitPerCycle}
+                      b={rotationsByDay[i] * high.profitPerCycle}
+                      fmt={formatKamasSigned}
+                    />
+                  )}
                 </span>
               </div>
             ))}
           </div>
           <div className="eleveur-week-total">
             Total semaine : <strong>{weekRotations} rotations</strong> ·{" "}
-            <strong
-              className={rangeProfitClass(
-                weekRotations * low.profitPerCycle,
-                weekRotations * high.profitPerCycle,
-              )}
-            >
-              {fmtRange(
-                weekRotations * low.profitPerCycle,
-                weekRotations * high.profitPerCycle,
-                formatKamasSigned,
-              )}
+            <strong>
+              <Range
+                a={weekRotations * low.profitPerCycle}
+                b={weekRotations * high.profitPerCycle}
+                fmt={formatKamasSigned}
+              />
             </strong>
           </div>
         </div>
@@ -442,7 +437,9 @@ export function EleveurPage() {
                   ? filet.mountsMin
                   : `${filet.mountsMin}–${filet.mountsMax}`}{" "}
                 / combat ·{" "}
-                <strong>{fmtRange(high.filtresPerCycle, low.filtresPerCycle, count)}</strong>{" "}
+                <strong>
+                  <Range a={low.filtresPerCycle} b={high.filtresPerCycle} fmt={count} higherIsBetter={false} />
+                </strong>{" "}
                 filets pour remplir {result.totalSlots} places
               </p>
             )}
