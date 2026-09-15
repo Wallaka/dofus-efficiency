@@ -17,7 +17,7 @@
  */
 
 import type { PriceMap } from "../types";
-import { bestFiletFor, type FiletCreature, type FiletDef } from "./filets";
+import { bestFiletFor, filetById, type FiletCreature, type FiletDef } from "./filets";
 import { brisageFor, type RuneYield } from "./mounts";
 import { mangeoireById, type MangeoireDef } from "./mangeoires";
 
@@ -49,8 +49,23 @@ export interface EleveurInput {
   mountLabel?: string;
   mountImg?: string;
   mountCreature?: FiletCreature;
+  /**
+   * Chosen capture net. Undefined = auto (the best usable filet); set it to
+   * compare a specific filet's profitability. Must be usable for the creature.
+   */
+  filetId?: string;
   /** The mangeoire fuel used to raise the mounts (its energy drives food cost). */
   mangeoireId?: string;
+}
+
+/**
+ * The filet in effect: the explicit choice if set, otherwise the best usable
+ * one. Undefined until a mount (creature) is chosen.
+ */
+export function resolveFilet(input: EleveurInput): FiletDef | undefined {
+  if (input.mountCreature == null) return undefined;
+  if (input.filetId != null) return filetById(input.filetId);
+  return bestFiletFor(input.level, input.mountCreature);
 }
 
 export interface EleveurResult {
@@ -128,11 +143,9 @@ export function computeEleveur(
   const capacity = ENCLOS_CAPACITY;
   const totalSlots = enclos * capacity;
 
-  // Only pick a filet once a mount (creature) is chosen — capture is
-  // creature-specific, so without a mount there's nothing to capture.
-  const filet = input.mountCreature
-    ? bestFiletFor(input.level, input.mountCreature)
-    : undefined;
+  // The filet in effect (explicit choice, else best) — only once a mount is
+  // chosen, since capture is creature-specific.
+  const filet = resolveFilet(input);
   const mpc = Math.max(1, mountsPerCapture ?? filet?.mountsMax ?? 1);
   const filetPrice = filet ? prices[filet.id] : undefined;
   // One filet per capture; a filet that catches several mounts splits its cost.
