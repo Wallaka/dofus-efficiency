@@ -9,6 +9,7 @@ import {
   type PriceEntry,
   type PriceEntryMap,
 } from "../lib/priceStore";
+import { loadHdvHidden, saveHdvHidden } from "../lib/storage";
 import { parseFrenchNumber } from "../lib/voiceParse";
 
 /**
@@ -54,7 +55,21 @@ export function HdvPage() {
   );
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
+  // Resources the user chose to hide: skipped by the Enter/Tab flow and the
+  // progress count, until revealed via the "show masked" toggle.
+  const [hidden, setHidden] = useState<Set<string>>(() => new Set(loadHdvHidden()));
+  const [showHidden, setShowHidden] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
+
+  function toggleHidden(id: string) {
+    setHidden((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      saveHdvHidden([...next]);
+      return next;
+    });
+  }
 
   // Flat lookup of the active category's items.
   const active = useMemo(() => {
@@ -149,9 +164,16 @@ export function HdvPage() {
     ? results
     : catItems.map((item) => ({ item, category: "" }));
 
-  const pricedCount = active
-    ? active.items.filter((it) => entries[it.id] != null).length
-    : 0;
+  // Split off hidden resources: only the shown ones get a price field (so the
+  // Enter/Tab flow skips the hidden). Masked rows appear dimmed under a toggle.
+  const shown = display.filter((d) => !hidden.has(d.item.id));
+  const masked = display.filter((d) => hidden.has(d.item.id));
+
+  // Progress counts only non-hidden items of the active category.
+  const visibleItems = active
+    ? active.items.filter((it) => !hidden.has(it.id))
+    : [];
+  const pricedCount = visibleItems.filter((it) => entries[it.id] != null).length;
 
   return (
     <section className="panel hdv-page">
@@ -203,7 +225,7 @@ export function HdvPage() {
               <>
                 <h3>Résultats</h3>
                 <span className="hdv-progress">
-                  {results.length} objet{results.length > 1 ? "s" : ""}
+                  {shown.length} objet{shown.length > 1 ? "s" : ""}
                 </span>
               </>
             ) : (
@@ -216,21 +238,44 @@ export function HdvPage() {
                   placeholder="Filtrer dans cette catégorie…"
                 />
                 <span className="hdv-progress">
-                  {pricedCount}/{active?.items.length ?? 0} prix
+                  {pricedCount}/{visibleItems.length} prix
                 </span>
               </>
+            )}
+            {masked.length > 0 && (
+              <button
+                type="button"
+                className="hdv-show-hidden"
+                onClick={() => setShowHidden((v) => !v)}
+                aria-pressed={showHidden}
+              >
+                {showHidden ? "Cacher les masqués" : "Afficher les masqués"} (
+                {masked.length})
+              </button>
             )}
           </div>
 
           <div className="hdv-rows" ref={listRef}>
-            {display.length === 0 && (
+            {shown.length === 0 && masked.length === 0 && (
               <p className="hint">Aucun objet ne correspond.</p>
             )}
-            {display.map(({ item, category }) => {
+            {shown.map(({ item, category }) => {
               const entry = entries[item.id];
               const stale = entry ? isStale(entry.updatedAt, now) : false;
               return (
                 <label key={item.id} className="hdv-row">
+                  <button
+                    type="button"
+                    className="hdv-hide-btn"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      toggleHidden(item.id);
+                    }}
+                    aria-label={`Masquer ${item.name}`}
+                    title="Masquer cette ressource"
+                  >
+                    👁
+                  </button>
                   {item.img ? (
                     <img src={item.img} alt="" className="hdv-ic" />
                   ) : (
@@ -265,6 +310,37 @@ export function HdvPage() {
                 </label>
               );
             })}
+
+            {showHidden && masked.length > 0 && (
+              <>
+                <div className="hdv-masked-head">Masqués</div>
+                {masked.map(({ item, category }) => (
+                  <div key={item.id} className="hdv-row hdv-row-hidden">
+                    <button
+                      type="button"
+                      className="hdv-hide-btn"
+                      onClick={() => toggleHidden(item.id)}
+                      aria-label={`Réafficher ${item.name}`}
+                      title="Réafficher cette ressource"
+                    >
+                      🚫
+                    </button>
+                    {item.img ? (
+                      <img src={item.img} alt="" className="hdv-ic" />
+                    ) : (
+                      <span className="hdv-ic hdv-ic-empty" />
+                    )}
+                    <span className="hdv-name">{item.name}</span>
+                    <span className="hdv-lvl">
+                      {category && (
+                        <span className="hdv-cat-tag">{category}</span>
+                      )}
+                      {item.level ? ` niv. ${item.level}` : ""}
+                    </span>
+                  </div>
+                ))}
+              </>
+            )}
           </div>
         </div>
       </div>
