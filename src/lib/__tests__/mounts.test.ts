@@ -21,7 +21,7 @@ describe("mounts", () => {
 });
 
 describe("brisageFor", () => {
-  it("gives every muldo a 50% Ga Pme + a 50% signature rune of 4–15", () => {
+  it("gives every muldo a 50% Ga Pme + a 50% signature rune", () => {
     for (const m of MULDOS) {
       const runes = brisageFor(m.id);
       expect(runes.length).toBe(2);
@@ -30,11 +30,17 @@ describe("brisageFor", () => {
       expect(runes[0].chance).toBe(0.5);
       expect(runes[0].quantityMin).toBe(1);
       expect(runes[0].quantityMax).toBe(1);
-      // Signature rune: 50% of 4–15.
+      // Signature rune: 50% chance.
       expect(runes[1].chance).toBe(0.5);
-      expect(runes[1].quantityMin).toBe(4);
-      expect(runes[1].quantityMax).toBe(15);
     }
+  });
+
+  it("uses 4–15 for resistance runes and 20–45 for Rune Pui (doré)", () => {
+    const air = brisageFor("4435")[1]; // ébène → Ré Per Air
+    expect([air.quantityMin, air.quantityMax]).toEqual([4, 15]);
+    const pui = brisageFor("4438")[1]; // doré → Pui
+    expect(pui.label).toBe("Rune Pui");
+    expect([pui.quantityMin, pui.quantityMax]).toEqual([20, 45]);
   });
 
   it("maps each muldo to the right signature rune (per the brisage table)", () => {

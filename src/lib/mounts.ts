@@ -84,7 +84,9 @@ const y = (
   quantityMax: number,
 ): RuneYield => ({ ...base, chance, quantityMin, quantityMax });
 
-// Every muldo: 50 % of 1 Rune Ga Pme, plus 50 % of 4–15 of its signature rune.
+// Every muldo: 50 % of 1 Rune Ga Pme, plus 50 % of its signature rune. The
+// resistance runes come out at 4–15; Rune Pui (doré) is worth more and comes at
+// 20–45.
 const GA_PME = y(RUNE.gaPme, 0.5, 1, 1);
 const sig = (base: { itemId: string; label: string; img: string }) =>
   y(base, 0.5, 4, 15);
@@ -92,7 +94,7 @@ const sig = (base: { itemId: string; label: string; img: string }) =>
 /** Brisage yield per muldo (monster id → runes). */
 const BRISAGE: Record<string, RuneYield[]> = {
   "4435": [GA_PME, sig(RUNE.rePerAir)], // ébène → Air
-  "4438": [GA_PME, sig(RUNE.pui)], // doré → Puissance
+  "4438": [GA_PME, y(RUNE.pui, 0.5, 20, 45)], // doré → Puissance (20–45)
   "4436": [GA_PME, sig(RUNE.rePerFeu)], // orchidée → Feu
   "4437": [GA_PME, sig(RUNE.rePerTerre)], // pourpre → Terre
   "4434": [GA_PME, sig(RUNE.rePerEau)], // indigo → Eau
