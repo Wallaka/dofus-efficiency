@@ -95,6 +95,13 @@ export function CraftListPage() {
     setEntries((prev) => prev.filter((e) => e.recipeId !== recipeId));
   }
 
+  function setEntryQuantity(recipeId: string, quantity: number) {
+    const q = Math.max(1, Math.floor(quantity) || 1);
+    setEntries((prev) =>
+      prev.map((e) => (e.recipeId === recipeId ? { ...e, quantity: q } : e)),
+    );
+  }
+
   // Manual price edit → write both shared stores, then mirror into local state
   // so the affected rows recompute immediately. (Same path as the Avis page.)
   function onPriceChange(item: Item, value: number | null) {
@@ -117,9 +124,16 @@ export function CraftListPage() {
       entry,
       evaluation: evaluateEntry(entry, prices, taxRate, stock),
     }));
+    // Rank by PER-UNIT margin so changing a quantity never reshuffles the list.
     evaluated.sort((a, b) => {
-      const am = a.evaluation.netMargin;
-      const bm = b.evaluation.netMargin;
+      const am =
+        a.evaluation.netMargin != null
+          ? a.evaluation.netMargin / a.evaluation.quantity
+          : undefined;
+      const bm =
+        b.evaluation.netMargin != null
+          ? b.evaluation.netMargin / b.evaluation.quantity
+          : undefined;
       if (am == null && bm == null) return b.entry.addedAt - a.entry.addedAt;
       if (am == null) return 1;
       if (bm == null) return -1;
@@ -230,11 +244,13 @@ export function CraftListPage() {
                   key={entry.recipeId}
                   entry={entry}
                   evaluation={evaluation}
+                  quantity={evaluation.quantity}
                   taxPercent={taxPercent}
                   prices={prices}
                   entries={priceEntries}
                   stock={stock}
                   onPriceChange={onPriceChange}
+                  onQuantityChange={(q) => setEntryQuantity(entry.recipeId, q)}
                   onRemove={() => removeCraft(entry.recipeId)}
                 />
               ))}

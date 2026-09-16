@@ -19,6 +19,10 @@ interface Props {
   stock?: Record<string, number>;
   /** Set/clear an item's manual price (null clears); writes the shared store. */
   onPriceChange: (item: Item, value: number | null) => void;
+  /** How many to craft (≥ 1); scales the cost and profit. */
+  quantity: number;
+  /** Change the craft quantity for this row. */
+  onQuantityChange: (quantity: number) => void;
   onRemove: () => void;
 }
 
@@ -125,13 +129,26 @@ export function CraftRow({
   prices,
   entries,
   stock,
+  quantity,
   onPriceChange,
+  onQuantityChange,
   onRemove,
 }: Props) {
   const [open, setOpen] = useState(false);
+  // Local draft so the field can be cleared/retyped without snapping to 1.
+  const [qtyDraft, setQtyDraft] = useState<string | null>(null);
   const { craftCost, sellPrice, tax, netMargin, netMarginRatio } = evaluation;
+  // sellPrice is per unit; the sale total scales with the craft quantity.
+  const sells = sellPrice != null ? sellPrice * quantity : undefined;
 
   const toggle = () => setOpen((o) => !o);
+
+  function commitQty() {
+    if (qtyDraft == null) return;
+    const n = Math.max(1, Math.floor(Number(qtyDraft)) || 1);
+    setQtyDraft(null);
+    if (n !== quantity) onQuantityChange(n);
+  }
 
   return (
     <li className={`craft-item${open ? " open" : ""}`}>
@@ -169,6 +186,52 @@ export function CraftRow({
             </span>
           </span>
           <CopyName text={entry.resultItem.name} />
+          <span
+            className="craft-qty"
+            onClick={(e) => e.stopPropagation()}
+            title="Nombre à crafter — met à l'échelle le coût et le bénéfice"
+          >
+            <button
+              type="button"
+              className="craft-qty-btn"
+              aria-label="Diminuer la quantité"
+              disabled={quantity <= 1}
+              onClick={(e) => {
+                e.stopPropagation();
+                onQuantityChange(Math.max(1, quantity - 1));
+              }}
+            >
+              −
+            </button>
+            <input
+              type="number"
+              min={1}
+              inputMode="numeric"
+              className="craft-qty-input"
+              aria-label={`Quantité à crafter de ${entry.resultItem.name}`}
+              value={qtyDraft ?? String(quantity)}
+              onChange={(e) => {
+                setQtyDraft(e.target.value);
+                const n = Math.floor(Number(e.target.value));
+                if (Number.isFinite(n) && n >= 1) onQuantityChange(n);
+              }}
+              onBlur={commitQty}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") e.currentTarget.blur();
+              }}
+            />
+            <button
+              type="button"
+              className="craft-qty-btn"
+              aria-label="Augmenter la quantité"
+              onClick={(e) => {
+                e.stopPropagation();
+                onQuantityChange(quantity + 1);
+              }}
+            >
+              +
+            </button>
+          </span>
         </span>
 
         <span className="col-num craft-cost">
@@ -195,10 +258,17 @@ export function CraftRow({
         <span className="col-num">
           <span
             className={`craft-benefit-value ${benefitClass(netMargin)}`}
-            title="Bénéfice net = prix de vente − taxe HDV − coût de craft"
+            title={
+              quantity > 1
+                ? `Bénéfice net total pour ${quantity} crafts`
+                : "Bénéfice net = prix de vente − taxe HDV − coût de craft"
+            }
           >
             {netMargin != null ? formatKamasSigned(netMargin) : "—"}
           </span>
+          {quantity > 1 && (
+            <span className="craft-qty-note">total ×{quantity}</span>
+          )}
         </span>
 
         <span className="col-num m-hide-margin">
@@ -231,8 +301,9 @@ export function CraftRow({
           </div>
           {entry.ingredients.map((ing) => {
             const unit = prices[ing.item.id];
-            const owned = Math.min(stock?.[ing.item.id] ?? 0, ing.quantity);
-            const need = ing.quantity - owned;
+            const totalQty = ing.quantity * quantity;
+            const owned = Math.min(stock?.[ing.item.id] ?? 0, totalQty);
+            const need = totalQty - owned;
             const subtotal =
               need === 0 ? 0 : unit != null ? unit * need : undefined;
             return (
@@ -265,7 +336,7 @@ export function CraftRow({
                   </span>
                   <CopyName text={ing.item.name} />
                 </span>
-                <span className="craft-ing-qty">{ing.quantity} ×</span>
+                <span className="craft-ing-qty">{totalQty} ×</span>
                 <PriceInput
                   value={unit}
                   needs={unit == null && need > 0}
@@ -282,9 +353,15 @@ export function CraftRow({
           })}
 
           <dl className="craft-recap">
+            {quantity > 1 && (
+              <div className="craft-recap-row">
+                <dt>Quantité</dt>
+                <dd>× {quantity}</dd>
+              </div>
+            )}
             <div className="craft-recap-row">
-              <dt>Prix de vente</dt>
-              <dd>{formatKamas(sellPrice)}</dd>
+              <dt>{quantity > 1 ? `Ventes (× ${quantity})` : "Prix de vente"}</dt>
+              <dd>{formatKamas(sells)}</dd>
             </div>
             <div className="craft-recap-row">
               <dt>Taxe HDV ({taxPercent} %)</dt>

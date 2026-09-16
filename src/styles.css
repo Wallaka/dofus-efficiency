@@ -4988,3 +4988,68 @@ td.negative {
 .hdv-name {
   min-width: 0;
 }
+
+/* --- Craft-quantity stepper (per craftable row) ---------------------------
+   A compact −/number/+ control next to the name; scales the row's cost and
+   profit to "how much if I craft N". Clicks stop at the control (never toggle
+   the row). */
+.craft-qty {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 4px;
+  padding: 1px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--num-bg);
+}
+.craft-qty-btn {
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1;
+}
+.craft-qty-btn:hover:not(:disabled) {
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+}
+.craft-qty-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.craft-qty-input {
+  width: 40px;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  text-align: center;
+  font: inherit;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+.craft-qty-input::-webkit-outer-spin-button,
+.craft-qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.craft-qty-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-radius: 4px;
+}
+.craft-qty-note {
+  display: block;
+  margin-top: 1px;
+  font-size: 0.62rem;
+  color: var(--muted);
+}
