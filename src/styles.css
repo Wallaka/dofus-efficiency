@@ -5000,6 +5000,268 @@ td.negative {
   min-width: 0;
 }
 
+/* ============================================================ */
+/* Ocre — Chasse aux archimonstres (progress + buy-vs-capture)  */
+/* ============================================================ */
+.ocre .page-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+.ocre .page-head h2 { margin: 0; }
+.ocre .page-sub { color: var(--muted); font-size: 0.9rem; }
+
+.ocre-empty { margin-top: 18px; color: var(--muted); }
+.ocre-empty code {
+  background: var(--num-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1px 6px;
+  color: var(--text);
+}
+
+/* A trailing gold coin, reusing the shared kama glyph. */
+.coin {
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  margin-left: 3px;
+  vertical-align: -2px;
+  background: var(--kama-coin) center / contain no-repeat;
+}
+
+/* Freshness dot before a price. */
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: 1px;
+}
+.dot.fresh { background: var(--positive); }
+.dot.stale { background: var(--warn); }
+.dot.none { background: var(--border); }
+
+/* KPI tiles */
+.ocre-stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+}
+@media (max-width: 1100px) { .ocre-stats { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 680px) { .ocre-stats { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 440px) { .ocre-stats { grid-template-columns: 1fr; } }
+.ocre-stats .tile {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 13px 15px;
+}
+.ocre-stats .tile.hero {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+}
+.tile-label {
+  color: var(--muted);
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.tile-value {
+  font-size: 1.42rem;
+  font-weight: 700;
+  margin-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+.tile-value.accent { color: var(--accent); }
+.tile-value.buyc { color: #cbbcff; }
+.tile-value.capc { color: var(--positive); }
+.tile-of { color: var(--muted); font-weight: 400; }
+.tile-foot { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
+.tile-foot.pos { color: var(--positive); }
+.ocre-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--num-bg);
+  overflow: hidden;
+  margin-top: 9px;
+  border: 1px solid var(--border);
+}
+.ocre-bar > span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #c3b1ff);
+}
+
+/* Inline stone-price row */
+.ocre-stones {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+.ocre-stones-label {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.ocre-stone {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.ocre-stone-input {
+  width: 5.5rem;
+  background: var(--num-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 5px 8px;
+  font-size: 0.85rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.ocre-stone-input:focus { outline: none; border-color: var(--accent); }
+
+/* Controls */
+.ocre-controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 20px 0 12px;
+}
+.segmented {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.segmented button {
+  background: none;
+  border: 0;
+  color: var(--muted);
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+.segmented button.on {
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  color: var(--text);
+}
+.ocre-field {
+  background: var(--num-bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+}
+select.ocre-field { cursor: pointer; }
+.ocre-count { color: var(--muted); font-size: 0.82rem; margin-left: auto; }
+
+/* Table */
+.ocre-table-wrap { padding: 0; overflow: hidden; }
+.ocre-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.ocre-table thead th {
+  text-align: left;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+}
+.ocre-table th.num, .ocre-table td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.ocre-table tbody td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.ocre-table tbody tr:last-child td { border-bottom: 0; }
+.ocre-table tbody tr:hover { background: color-mix(in srgb, var(--accent) 6%, transparent); }
+.ocre-table tbody tr.captured { color: var(--muted); }
+.ocre-table tbody tr.captured .ocre-name { text-decoration: line-through; text-decoration-color: var(--border); }
+.col-chk { width: 40px; }
+.col-lvl { width: 52px; }
+.col-buy { width: 130px; }
+.col-stone { width: 190px; }
+.col-benefit { width: 120px; }
+.col-best { width: 190px; }
+
+.ocre-chk {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--num-bg);
+  color: transparent;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.ocre-chk:hover { border-color: var(--accent); }
+.ocre-chk.on { background: var(--positive); border-color: var(--positive); color: #0c1a10; }
+
+.ocre-mon { display: flex; align-items: center; gap: 10px; }
+.ocre-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: var(--num-bg);
+  border: 1px solid var(--border);
+  object-fit: contain;
+  flex: none;
+}
+.ocre-avatar.placeholder { display: inline-block; }
+.ocre-mon-text { min-width: 0; }
+.ocre-name-row { display: flex; align-items: center; gap: 6px; }
+.ocre-name { font-weight: 600; }
+.ocre-soul { display: block; color: var(--muted); font-size: 0.76rem; }
+/* Reveal the copy button on row hover (matches the app's copy-name pattern). */
+.ocre-table .copy-name { opacity: 0; transition: opacity 0.12s; }
+.ocre-table tr:hover .copy-name,
+.ocre-table .copy-name:focus-visible,
+.ocre-table .copy-name.copied { opacity: 1; }
+
+.price { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.price.pos { color: var(--positive); }
+.price.neg { color: var(--negative); }
+.ocre-noprice { color: var(--muted); }
+
+.tag.stone {
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 50%, var(--border));
+}
+.badge.buy {
+  color: #cbbcff;
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+  font-weight: 700;
+}
+.badge.cap {
+  color: var(--positive);
+  background: color-mix(in srgb, var(--positive) 18%, transparent);
+  border-color: color-mix(in srgb, var(--positive) 40%, var(--border));
+  font-weight: 700;
+}
+.ocre-verdict { display: inline-flex; align-items: center; gap: 8px; }
+.ocre-delta { color: var(--muted); font-size: 0.78rem; font-variant-numeric: tabular-nums; }
+.ocre-done { color: var(--positive); }
+.ocre-none { color: var(--muted); padding: 14px; margin: 0; }
+.ocre-legend { color: var(--muted); font-size: 0.8rem; margin: 16px 2px 0; }
+.ocre-legend b { color: var(--text); font-weight: 600; }
+
 /* --- Craft-quantity stepper (per craftable row) ---------------------------
    A compact −/number/+ control next to the name; scales the row's cost and
    profit to "how much if I craft N". Clicks stop at the control (never toggle

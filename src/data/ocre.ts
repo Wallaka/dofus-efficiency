@@ -1,0 +1,185 @@
+import type { PriceMap } from "../types";
+
+/**
+ * Dofus Ocre — the "Chasse aux archimonstres" model.
+ *
+ * To earn the Dofus Ocre you must capture the soul of every archimonster once.
+ * For each one there are two ways to get its soul, each with a real kama cost:
+ *
+ *   - Acheter  — buy the captured "Âme de …" soul at the HDV (the archimonster's
+ *                tradeable soul item; priced through the normal price store).
+ *   - Capturer — consume an empty "pierre d'âme spéciale" to capture it yourself;
+ *                the cost is that stone's HDV price (stone-price only — we don't
+ *                model the time to find and kill the archimonster).
+ *
+ * The stone you need is the smallest tier whose capacity covers the
+ * archimonster's level. The five capture stones already live in the HDV catalog
+ * (item ids below), so they price through the same store as everything else.
+ */
+
+export type StoneTier = "petite" | "moyenne" | "grande" | "enorme" | "gigantesque";
+
+export interface SoulStone {
+  tier: StoneTier;
+  /** DofusDB item id (already present in the bundled catalog). */
+  itemId: string;
+  name: string;
+  /** Highest archimonster level this stone can capture. */
+  maxLevel: number;
+}
+
+/**
+ * The five "spéciale" capture stones, smallest first. Level caps are the in-game
+ * capacities (petite 50 · moyenne 100 · grande 150 · énorme 190 · gigantesque:
+ * everything above — no practical ceiling).
+ */
+export const SOUL_STONES: SoulStone[] = [
+  { tier: "petite", itemId: "31444", name: "Petite pierre d'âme spéciale", maxLevel: 50 },
+  { tier: "moyenne", itemId: "31445", name: "Moyenne pierre d'âme spéciale", maxLevel: 100 },
+  { tier: "grande", itemId: "31446", name: "Grande pierre d'âme spéciale", maxLevel: 150 },
+  { tier: "enorme", itemId: "31447", name: "Énorme pierre d'âme spéciale", maxLevel: 190 },
+  { tier: "gigantesque", itemId: "31448", name: "Gigantesque pierre d'âme spéciale", maxLevel: 1000 },
+];
+
+/** The smallest stone whose capacity covers `level` (falls back to the biggest). */
+export function stoneForLevel(level: number): SoulStone {
+  return (
+    SOUL_STONES.find((s) => level <= s.maxLevel) ?? SOUL_STONES[SOUL_STONES.length - 1]
+  );
+}
+
+/** One archimonster in the hunt, as baked into `archimonsters.generated.ts`. */
+export interface Archimonster {
+  /** DofusDB monster id (the capture-tracking key). */
+  monsterId: number;
+  name: string;
+  level: number;
+  /** Monster picture. */
+  img?: string;
+  /** The tradeable "Âme de …" soul item id, for the "acheter" price. */
+  soulItemId?: string;
+  soulName?: string;
+  soulImg?: string;
+}
+
+/** How to obtain a soul, cheapest first: buy it, or capture it with a stone. */
+export type OcrePath = "buy" | "capture";
+
+/** One archimonster resolved against the current prices and capture state. */
+export interface OcreRow {
+  archi: Archimonster;
+  captured: boolean;
+  /** The stone required to capture it (smallest tier covering its level). */
+  stone: SoulStone;
+  /** HDV price of the "Âme de …" soul (buy), if known. */
+  buyPrice?: number;
+  /** HDV price of the required capture stone, if known. */
+  stonePrice?: number;
+  /**
+   * Profit from capturing then reselling the soul: buy − stone. Positive means
+   * the soul sells for more than the stone costs (worth farming). Undefined
+   * when either price is unknown.
+   */
+  benefit?: number;
+  /** Cheaper way to obtain this soul for the collection, when a price is known. */
+  bestPath?: OcrePath;
+  /** Cost of `bestPath` — the cheapest way to obtain this one soul. */
+  bestCost?: number;
+}
+
+/** Resolve one archimonster against prices + capture state (pure). */
+export function ocreRow(
+  archi: Archimonster,
+  captured: boolean,
+  prices: PriceMap,
+): OcreRow {
+  const stone = stoneForLevel(archi.level);
+  const buyPrice = archi.soulItemId ? prices[archi.soulItemId] : undefined;
+  const stonePrice = prices[stone.itemId];
+  const benefit =
+    buyPrice != null && stonePrice != null ? buyPrice - stonePrice : undefined;
+
+  let bestPath: OcrePath | undefined;
+  let bestCost: number | undefined;
+  if (buyPrice != null) {
+    bestPath = "buy";
+    bestCost = buyPrice;
+  }
+  // Capture wins ties are broken toward buying (buy set first); capture only
+  // takes over when it is strictly cheaper, or when no buy price is known.
+  if (stonePrice != null && (bestCost == null || stonePrice < bestCost)) {
+    bestPath = "capture";
+    bestCost = stonePrice;
+  }
+
+  return { archi, captured, stone, buyPrice, stonePrice, benefit, bestPath, bestCost };
+}
+
+/** Headline numbers for the top-of-page tiles. */
+export interface OcreSummary {
+  total: number;
+  capturedCount: number;
+  missingCount: number;
+  /** Captured / total, 0..1 (0 when there are no archimonsters yet). */
+  progress: number;
+  /** Σ of every known soul price — buy the whole collection at the HDV. */
+  packHdv: number;
+  /** Archimonsters with no known soul price (excluded from `packHdv`). */
+  packHdvUnpriced: number;
+  /** Σ of every required stone price — capture the whole collection. */
+  packCaptured: number;
+  /** Archimonsters whose stone has no known price (excluded from `packCaptured`). */
+  packCapturedUnpriced: number;
+  /** Σ of the cheapest path over the *missing* archimonsters. */
+  costToComplete: number;
+  /** Missing archimonsters with no usable price (excluded from `costToComplete`). */
+  completeUnpriced: number;
+  /** Saved vs buying every missing soul at the HDV (over comparable rows). */
+  saving: number;
+}
+
+/** Aggregate a set of resolved rows into the headline summary (pure). */
+export function ocreSummary(rows: OcreRow[]): OcreSummary {
+  let capturedCount = 0;
+  let packHdv = 0;
+  let packHdvUnpriced = 0;
+  let packCaptured = 0;
+  let packCapturedUnpriced = 0;
+  let costToComplete = 0;
+  let completeUnpriced = 0;
+  let saving = 0;
+
+  for (const r of rows) {
+    if (r.captured) capturedCount++;
+
+    if (r.buyPrice != null) packHdv += r.buyPrice;
+    else packHdvUnpriced++;
+
+    if (r.stonePrice != null) packCaptured += r.stonePrice;
+    else packCapturedUnpriced++;
+
+    if (!r.captured) {
+      if (r.bestCost != null) costToComplete += r.bestCost;
+      else completeUnpriced++;
+      // Saving is only meaningful where the soul has a buy price to beat.
+      if (r.buyPrice != null && r.bestCost != null) {
+        saving += r.buyPrice - r.bestCost;
+      }
+    }
+  }
+
+  const total = rows.length;
+  return {
+    total,
+    capturedCount,
+    missingCount: total - capturedCount,
+    progress: total > 0 ? capturedCount / total : 0,
+    packHdv,
+    packHdvUnpriced,
+    packCaptured,
+    packCapturedUnpriced,
+    costToComplete,
+    completeUnpriced,
+    saving,
+  };
+}
