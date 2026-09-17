@@ -150,17 +150,14 @@ async function main() {
   const ids = parseIds(readFileSync(IDS_FILE, "utf8"));
   console.log(`[fetch-ocre] ${ids.length} monster ids`);
 
-  // TEMP: dump every item mentioning "âme" to find the capture-stone ids/names.
-  for (const term of ["pierre d ame", "ame", "soul stone"]) {
+  // TEMP: hyphenated-substring probe (slug.fr[$search] matches the raw slug).
+  for (const term of ["pierre-d-ame", "d-ame", "petite-pierre", "ame-de"]) {
     try {
       const url = `${BASE}/items?slug.fr[$search]=${encodeURIComponent(term)}&$limit=100&lang=fr`;
       const page = await getJson(url);
       const items = Array.isArray(page?.data) ? page.data : [];
-      const hits = items
-        .map((it) => ({ id: it.id, n: pickName(it.name, "") }))
-        .filter((x) => /ame|soul/i.test(x.n))
-        .map((x) => `${x.id}:${x.n}`);
-      console.log(`[stone] term="${term}" (${items.length} items) → ${hits.join(" | ") || "none"}`);
+      const hits = items.map((it) => `${it.id}:${pickName(it.name, "")}`);
+      console.log(`[stone] term="${term}" (${items.length}) → ${hits.slice(0, 30).join(" | ") || "none"}`);
     } catch (e) {
       console.log(`[stone] term="${term}" error ${e.message}`);
     }
