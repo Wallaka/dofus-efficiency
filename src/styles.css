@@ -5113,19 +5113,12 @@ td.negative {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-}
-.ocre-stone-input {
-  width: 5.5rem;
-  background: var(--num-bg);
-  border: 1px solid var(--border);
-  color: var(--text);
-  border-radius: 8px;
-  padding: 5px 8px;
   font-size: 0.85rem;
-  text-align: right;
-  font-variant-numeric: tabular-nums;
 }
-.ocre-stone-input:focus { outline: none; border-color: var(--accent); }
+.ocre-stones-hint {
+  color: var(--warn);
+  font-size: 0.8rem;
+}
 
 /* Controls */
 .ocre-controls {

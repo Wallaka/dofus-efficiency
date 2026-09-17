@@ -11,15 +11,15 @@ import { useCaptured } from "../lib/useCaptured";
 import { isStale } from "../lib/priceStore";
 import { formatKamas } from "../lib/format";
 import { CopyName } from "../components/CopyName";
-import type { Item } from "../types";
 
 /**
  * "Ocre" — the Chasse aux archimonstres tracker. Progress toward the Dofus Ocre
  * plus, for each archimonster, the cost to buy its soul at the HDV vs. capture it
  * with the required stone, and the resale benefit of capturing.
  *
- * Prices come from the shared store (OCR / Objets suivis / HDV); the five capture
- * stones can be priced inline here since they gate the whole capture side.
+ * Every price — soul buy prices and the five capture stones — comes from the
+ * shared store (OCR / Craft / Objets suivis / HDV / Prix). Nothing is entered
+ * here; the page only reads and compares.
  */
 
 type StatusFilter = "all" | "missing" | "captured";
@@ -37,13 +37,12 @@ function formatKamasShort(value: number): string {
 }
 
 export function OcrePage() {
-  const { prices, entries, setPrice } = usePrices();
+  const { prices, entries } = usePrices();
   const { isCaptured, toggle, capturedCount } = useCaptured();
 
   const [status, setStatus] = useState<StatusFilter>("missing");
   const [sort, setSort] = useState<SortKey>("cost");
   const [query, setQuery] = useState("");
-  const [stoneDrafts, setStoneDrafts] = useState<Record<string, string>>({});
 
   // Resolve every archimonster against the current prices + capture state.
   const rows = useMemo<OcreRow[]>(
@@ -82,20 +81,6 @@ export function OcrePage() {
     });
     return list;
   }, [rows, status, query, sort, entries]);
-
-  function commitStone(stoneItemId: string, name: string, raw: string) {
-    const text = raw.trim().replace(/[  ]/g, "");
-    setStoneDrafts((d) => {
-      const next = { ...d };
-      delete next[stoneItemId];
-      return next;
-    });
-    if (text === "") return;
-    const value = Number(text);
-    if (!Number.isFinite(value) || value <= 0) return;
-    const item: Item = { id: stoneItemId, name };
-    setPrice(item, Math.round(value), "manual", "Saisie Ocre");
-  }
 
   const empty = ARCHIMONSTERS.length === 0;
 
@@ -178,34 +163,31 @@ export function OcrePage() {
             </div>
           </section>
 
-          {/* Inline stone prices — they gate the whole capture side. */}
+          {/* Capture-stone prices, read from the shared store (set on Craft / Prix). */}
           <div className="ocre-stones panel">
             <span className="ocre-stones-label">Pierres d'âme spéciales</span>
             {SOUL_STONES.map((s) => {
-              const entry = entries[s.itemId];
-              const draft = stoneDrafts[s.itemId];
-              const value =
-                draft ?? (entry ? String(Math.round(entry.price)) : "");
+              const price = prices[s.itemId];
               return (
-                <label key={s.itemId} className="ocre-stone">
-                  <span className="tag stone">{s.name.replace(/ pierre.*/i, "")}</span>
-                  <input
-                    className="ocre-stone-input"
-                    inputMode="numeric"
-                    placeholder="prix"
-                    value={value}
-                    onChange={(e) =>
-                      setStoneDrafts((d) => ({ ...d, [s.itemId]: e.target.value }))
-                    }
-                    onBlur={(e) => commitStone(s.itemId, s.name, e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") e.currentTarget.blur();
-                    }}
-                  />
-                  <i className="coin" />
-                </label>
+                <span key={s.itemId} className="ocre-stone">
+                  <span className="tag stone">
+                    {s.name.replace(/ pierre.*/i, "")}
+                  </span>
+                  {price != null ? (
+                    <span className="price">
+                      {formatKamas(price)}
+                    </span>
+                  ) : (
+                    <span className="ocre-noprice">—</span>
+                  )}
+                </span>
               );
             })}
+            {SOUL_STONES.some((s) => prices[s.itemId] == null) && (
+              <span className="ocre-stones-hint">
+                prix manquants → à renseigner sur Craft / Prix
+              </span>
+            )}
           </div>
 
           {/* Controls */}
