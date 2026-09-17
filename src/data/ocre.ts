@@ -8,20 +8,20 @@ import type { PriceMap } from "../types";
  *
  *   - Acheter  — buy the captured "Âme de …" soul at the HDV (the archimonster's
  *                tradeable soul item; priced through the normal price store).
- *   - Capturer — consume an empty "pierre d'âme spéciale" to capture it yourself;
- *                the cost is that stone's HDV price (stone-price only — we don't
- *                model the time to find and kill the archimonster).
+ *   - Capturer — consume an empty "pierre d'âme" to capture it yourself; the cost
+ *                is that stone's HDV price (stone-price only — we don't model the
+ *                time to find and kill the archimonster).
  *
  * The stone you need is the smallest tier whose capacity covers the
- * archimonster's level. The five capture stones already live in the HDV catalog
- * (item ids below), so they price through the same store as everything else.
+ * archimonster's level. The five stones are ordinary priced items, so they read
+ * from the same price store as everything else (set them on Craft / Prix).
  */
 
 export type StoneTier = "petite" | "moyenne" | "grande" | "enorme" | "gigantesque";
 
 export interface SoulStone {
   tier: StoneTier;
-  /** DofusDB item id (already present in the bundled catalog). */
+  /** DofusDB item id — the regular "Pierre d'âme" tiers used to capture. */
   itemId: string;
   name: string;
   /** Highest archimonster level this stone can capture. */
@@ -29,16 +29,16 @@ export interface SoulStone {
 }
 
 /**
- * The five "spéciale" capture stones, smallest first. Level caps are the in-game
+ * The five capture stones, smallest first. Level caps are the in-game
  * capacities (petite 50 · moyenne 100 · grande 150 · énorme 190 · gigantesque:
  * everything above — no practical ceiling).
  */
 export const SOUL_STONES: SoulStone[] = [
-  { tier: "petite", itemId: "31444", name: "Petite pierre d'âme spéciale", maxLevel: 50 },
-  { tier: "moyenne", itemId: "31445", name: "Moyenne pierre d'âme spéciale", maxLevel: 100 },
-  { tier: "grande", itemId: "31446", name: "Grande pierre d'âme spéciale", maxLevel: 150 },
-  { tier: "enorme", itemId: "31447", name: "Énorme pierre d'âme spéciale", maxLevel: 190 },
-  { tier: "gigantesque", itemId: "31448", name: "Gigantesque pierre d'âme spéciale", maxLevel: 1000 },
+  { tier: "petite", itemId: "9686", name: "Petite pierre d'âme", maxLevel: 50 },
+  { tier: "moyenne", itemId: "9687", name: "Moyenne pierre d'âme", maxLevel: 100 },
+  { tier: "grande", itemId: "9688", name: "Grande pierre d'âme", maxLevel: 150 },
+  { tier: "enorme", itemId: "9689", name: "Énorme pierre d'âme", maxLevel: 190 },
+  { tier: "gigantesque", itemId: "9690", name: "Gigantesque pierre d'âme", maxLevel: 1000 },
 ];
 
 /** The smallest stone whose capacity covers `level` (falls back to the biggest). */

@@ -165,7 +165,7 @@ export function OcrePage() {
 
           {/* Capture-stone prices, read from the shared store (set on Craft / Prix). */}
           <div className="ocre-stones panel">
-            <span className="ocre-stones-label">Pierres d'âme spéciales</span>
+            <span className="ocre-stones-label">Pierres d'âme</span>
             {SOUL_STONES.map((s) => {
               const price = prices[s.itemId];
               return (
