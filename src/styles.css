@@ -5228,6 +5228,26 @@ select.ocre-field { cursor: pointer; }
 .ocre-table .copy-name.copied { opacity: 1; }
 
 .price { font-variant-numeric: tabular-nums; white-space: nowrap; }
+/* Inline, spreadsheet-style soul-price cell: looks like text, editable on focus. */
+.ocre-buy { display: inline-flex; align-items: center; gap: 2px; justify-content: flex-end; }
+.ocre-buy-input {
+  width: 5rem;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text);
+  border-radius: 6px;
+  padding: 3px 6px;
+  font-size: 0.85rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.ocre-buy-input:hover { border-color: var(--border); }
+.ocre-buy-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--num-bg);
+}
+.ocre-buy-input::placeholder { color: var(--muted); }
 .price.pos { color: var(--positive); }
 .price.neg { color: var(--negative); }
 .ocre-noprice { color: var(--muted); }

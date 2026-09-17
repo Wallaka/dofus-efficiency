@@ -5,6 +5,7 @@ import {
   ocreRow,
   ocreSummary,
   type OcreRow,
+  type Archimonster,
 } from "../data/ocre";
 import { usePrices } from "../lib/usePrices";
 import { useCaptured } from "../lib/useCaptured";
@@ -37,7 +38,7 @@ function formatKamasShort(value: number): string {
 }
 
 export function OcrePage() {
-  const { prices, entries } = usePrices();
+  const { prices, entries, setPrice, clearPrice } = usePrices();
   const { isCaptured, toggle, capturedCount } = useCaptured();
 
   const [status, setStatus] = useState<StatusFilter>("missing");
@@ -81,6 +82,25 @@ export function OcrePage() {
     });
     return list;
   }, [rows, status, query, sort, entries]);
+
+  // Type a soul's HDV buy price directly on the page (writes to the shared store).
+  function commitBuy(archi: Archimonster, raw: string) {
+    const id = archi.soulItemId;
+    if (!id) return;
+    const text = raw.replace(/\s/g, "");
+    if (text === "") {
+      clearPrice(id);
+      return;
+    }
+    const value = Number(text);
+    if (!Number.isFinite(value) || value <= 0) return;
+    setPrice(
+      { id, name: archi.soulName || archi.name, level: archi.level, img: archi.soulImg },
+      Math.round(value),
+      "manual",
+      "Saisie Ocre",
+    );
+  }
 
   const empty = ARCHIMONSTERS.length === 0;
 
@@ -259,6 +279,7 @@ export function OcrePage() {
                         : undefined
                     }
                     onToggle={() => toggle(r.archi.monsterId)}
+                    onCommitBuy={(raw) => commitBuy(r.archi, raw)}
                   />
                 ))}
               </tbody>
@@ -294,11 +315,14 @@ interface RowProps {
   row: OcreRow;
   age: number | undefined;
   onToggle: () => void;
+  onCommitBuy: (raw: string) => void;
 }
 
-function OcreTableRow({ row, age, onToggle }: RowProps) {
+function OcreTableRow({ row, age, onToggle, onCommitBuy }: RowProps) {
   const { archi, captured, stone, buyPrice, stonePrice, benefit, bestPath } = row;
   const dot = priceDot(buyPrice, age);
+  // Local draft so typing doesn't fight the stored value; committed on blur.
+  const [buyDraft, setBuyDraft] = useState<string | null>(null);
 
   return (
     <tr className={captured ? "captured" : ""}>
@@ -340,15 +364,31 @@ function OcreTableRow({ row, age, onToggle }: RowProps) {
       <td className="num col-lvl">{archi.level}</td>
 
       <td className="num col-buy">
-        {buyPrice != null ? (
-          <span className="price">
-            <span className={`dot ${dot}`} />
-            {formatKamas(buyPrice)}
+        {archi.soulItemId ? (
+          <span className="ocre-buy">
+            <span className={`dot ${dot}`} title={dot === "stale" ? "prix à revérifier" : undefined} />
+            <input
+              className="ocre-buy-input"
+              inputMode="numeric"
+              placeholder="prix ?"
+              aria-label={`Prix de l'âme de ${archi.name}`}
+              value={
+                buyDraft ?? (buyPrice != null ? String(Math.round(buyPrice)) : "")
+              }
+              onChange={(e) => setBuyDraft(e.target.value)}
+              onBlur={(e) => {
+                onCommitBuy(e.target.value);
+                setBuyDraft(null);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") e.currentTarget.blur();
+              }}
+            />
           </span>
         ) : (
           <span className="ocre-noprice">
             <span className="dot none" />
-            {archi.soulItemId ? "prix ?" : "âme ?"}
+            âme ?
           </span>
         )}
       </td>
