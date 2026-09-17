@@ -6,7 +6,6 @@ import { EleveurPage } from "./pages/EleveurPage";
 import { AvisPage } from "./pages/AvisPage";
 import { QuestsPage } from "./pages/QuestsPage";
 import { PricesPage } from "./pages/PricesPage";
-import { TrackedItemsPage } from "./pages/TrackedItemsPage";
 import { MesRessourcesPage } from "./pages/MesRessourcesPage";
 import { Page } from "./components/Page";
 import { VoicePage } from "./pages/VoicePage";
@@ -28,7 +27,6 @@ export function App() {
           <NavLink to="/eleveur">Éleveur</NavLink>
           <NavLink to="/avis">Avis de recherche</NavLink>
           <NavLink to="/quetes">Quêtes</NavLink>
-          <NavLink to="/suivis">Objets suivis</NavLink>
           <NavLink to="/ressources">Mes ressources</NavLink>
           <NavLink to="/hdv">HDV</NavLink>
           <NavLink to="/prix">Prix</NavLink>
@@ -46,7 +44,6 @@ export function App() {
         <Route path="/eleveur" element={<EleveurPage />} />
         <Route path="/avis" element={<AvisPage />} />
         <Route path="/quetes" element={<QuestsPage />} />
-        <Route path="/suivis" element={<TrackedItemsPage />} />
         <Route path="/ressources" element={<MesRessourcesPage />} />
         <Route path="/hdv" element={<HdvPage />} />
         <Route path="/prix" element={<PricesPage />} />

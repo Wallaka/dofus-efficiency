@@ -240,7 +240,7 @@ export function AvisPage() {
         <p className="hint">
           Tous les avis de recherche qui rapportent des avitons (source DofusDB).
           Les prix carte et ressource sont remplis par l'OCR ou saisissables à la
-          main&nbsp;; ils alimentent aussi les pages Objets suivis et Prix.
+          main&nbsp;; ils alimentent aussi la page Prix.
           Détection carte/ressource incorrecte&nbsp;? Cliquez l'icône de la ligne
           pour chercher et fixer le bon objet.
         </p>

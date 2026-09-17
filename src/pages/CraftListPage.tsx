@@ -184,7 +184,7 @@ export function CraftListPage({ mode = "all" }: Props = {}) {
               Cherchez un objet craftable et ajoutez-le à la liste. Cliquez une
               ligne pour voir et éditer les prix des ingrédients. Les prix viennent
               de l'OCR / des prix suivis, ou se saisissent à la main&nbsp;; ils
-              alimentent aussi les pages Objets suivis et Prix. Marquez une ⭐ pour
+              alimentent aussi la page Prix. Marquez une ⭐ pour
               l'épingler dans « Mes crafts ». La marge n'est calculée que si tous
               les prix sont connus.
             </>
