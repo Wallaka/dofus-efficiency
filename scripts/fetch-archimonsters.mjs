@@ -90,32 +90,50 @@ function parseIds(text) {
   return ids;
 }
 
+let DEBUG_LEFT = 8;
+
 /** Resolve the "Âme de <monster>" soul item, or null if none is sold. */
 async function fetchSoul(monsterName) {
   const slug = slugify(monsterName);
   if (!slug) return null;
+  const firstTok = slug.split(" ")[0];
   const target = `ame de ${slug}`;
-  try {
-    const url = `${BASE}/items?slug.fr[$search]=${encodeURIComponent(slug)}&$limit=50&lang=fr`;
-    const page = await getJson(url);
-    const items = Array.isArray(page?.data) ? page.data : [];
-    const named = items.map((it) => ({ it, slug: slugify(pickName(it.name, "")) }));
-    // Prefer an exact "Âme de <name>"; else the first soul mentioning the name.
-    let hit = named.find((n) => n.slug === target)?.it;
-    if (!hit) {
-      hit = named.find(
-        (n) => n.slug.startsWith("ame de ") && n.slug.includes(slug),
-      )?.it;
+  // Search by full name first, then by the leading proper-noun token (some
+  // souls drop the archimonster's epithet).
+  for (const term of [slug, firstTok]) {
+    try {
+      const url = `${BASE}/items?slug.fr[$search]=${encodeURIComponent(term)}&$limit=50&lang=fr`;
+      const page = await getJson(url);
+      const items = Array.isArray(page?.data) ? page.data : [];
+      if (DEBUG_LEFT > 0) {
+        DEBUG_LEFT--;
+        const sample = items
+          .slice(0, 8)
+          .map((it) => pickName(it.name, "?"))
+          .join(" | ");
+        console.log(
+          `  [debug] "${monsterName}" term="${term}" → ${items.length}: ${sample}`,
+        );
+      }
+      const named = items.map((it) => ({ it, slug: slugify(pickName(it.name, "")) }));
+      let hit = named.find((n) => n.slug === target)?.it;
+      if (!hit) {
+        hit = named.find(
+          (n) => n.slug.startsWith("ame ") && n.slug.includes(firstTok),
+        )?.it;
+      }
+      if (hit) {
+        return {
+          soulItemId: String(hit.id),
+          soulName: pickName(hit.name, ""),
+          soulImg: hit.img,
+        };
+      }
+    } catch {
+      // Non-fatal: try the next term / leave unpriced.
     }
-    if (!hit) return null;
-    return {
-      soulItemId: String(hit.id),
-      soulName: pickName(hit.name, ""),
-      soulImg: hit.img,
-    };
-  } catch {
-    return null; // Non-fatal: the archimonster just shows no "acheter" price.
   }
+  return null;
 }
 
 /** Run `fn` over `items` with limited concurrency and a polite pause. */
