@@ -5,7 +5,7 @@ import type { Archimonster } from "./ocre";
  * Run `npm run fetch:ocre` (network, local) to refresh from DofusDB.
  */
 
-export const ARCHIMONSTERS_GENERATED_AT = "2026-09-17T11:52:23.833Z";
+export const ARCHIMONSTERS_GENERATED_AT = "2026-09-17T11:54:44.738Z";
 
 export const ARCHIMONSTERS: Archimonster[] = [
   {
