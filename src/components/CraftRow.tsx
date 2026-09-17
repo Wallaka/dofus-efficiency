@@ -23,6 +23,10 @@ interface Props {
   quantity: number;
   /** Change the craft quantity for this row. */
   onQuantityChange: (quantity: number) => void;
+  /** Whether this craft is starred (shown on "Mes crafts"). */
+  favourite: boolean;
+  /** Toggle the starred state. */
+  onToggleFavourite: () => void;
   onRemove: () => void;
 }
 
@@ -130,8 +134,10 @@ export function CraftRow({
   entries,
   stock,
   quantity,
+  favourite,
   onPriceChange,
   onQuantityChange,
+  onToggleFavourite,
   onRemove,
 }: Props) {
   const [open, setOpen] = useState(false);
@@ -168,6 +174,35 @@ export function CraftRow({
           ›
         </button>
         <span className="craft-id">
+          <button
+            type="button"
+            className={`craft-fav${favourite ? " active" : ""}`}
+            aria-pressed={favourite}
+            aria-label={
+              favourite
+                ? `Retirer ${entry.resultItem.name} des favoris`
+                : `Ajouter ${entry.resultItem.name} aux favoris`
+            }
+            title={favourite ? "Retirer des favoris" : "Ajouter aux favoris (Mes crafts)"}
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleFavourite();
+            }}
+          >
+            <svg
+              viewBox="0 0 24 24"
+              width="16"
+              height="16"
+              aria-hidden
+              fill={favourite ? "currentColor" : "none"}
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+            >
+              <path d="M12 3.5l2.6 5.27 5.82.85-4.21 4.1.99 5.8L12 17.77l-5.2 2.74.99-5.8-4.21-4.1 5.82-.85z" />
+            </svg>
+          </button>
           <span className="craft-thumb">
             {entry.resultItem.img ? (
               <img src={entry.resultItem.img} alt="" />

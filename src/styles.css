@@ -5064,3 +5064,36 @@ td.negative {
   font-size: 0.62rem;
   color: var(--muted);
 }
+
+/* --- Favourite (star) toggle on a craft row -------------------------------
+   Sits at the start of the name cell; gold when starred. Clicks never toggle
+   the row (handled in the component). Starred crafts show on "Mes crafts". */
+.craft-fav {
+  flex: 0 0 auto;
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  opacity: 0.7;
+  transition: color 0.12s, opacity 0.12s, background 0.12s;
+}
+.craft-fav:hover {
+  opacity: 1;
+  color: var(--text);
+  background: var(--num-bg);
+}
+.craft-fav.active,
+.craft-fav.active:hover {
+  opacity: 1;
+  color: #e8b23a;
+}
+.craft-fav:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
