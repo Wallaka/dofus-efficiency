@@ -11,6 +11,10 @@ import { evaluateRecipe } from "./craft";
 export interface CraftEntry extends ResolvedRecipe {
   /** When it was added, ms since epoch. */
   addedAt: number;
+  /** How many to craft — scales the cost and profit. Defaults to 1. */
+  quantity?: number;
+  /** Starred by the user — surfaced on the "Mes crafts" page. */
+  favourite?: boolean;
 }
 
 const CRAFT_LIST_KEY = "dofus-efficiency:craftList:v1";
@@ -19,13 +23,19 @@ const CRAFT_TAX_KEY = "dofus-efficiency:craftTax:v1";
 /** Default HDV sell tax, as a percentage of the sale price. */
 export const DEFAULT_TAX_PERCENT = 2;
 
-/** Evaluation of a craft, with the HDV sell tax folded into a net benefit. */
+/**
+ * Evaluation of a craft, with the HDV sell tax folded into a net benefit. When a
+ * quantity > 1 is set, `craftCost`, `tax` and `netMargin` are TOTALS for that
+ * many crafts; `sellPrice` stays the per-unit price (it's what you edit).
+ */
 export interface CraftBenefit extends CraftEvaluation {
-  /** Tax paid to sell at the HDV: sellPrice × rate, in kamas. undefined if no sell price. */
+  /** How many crafts this evaluation covers (≥ 1). */
+  quantity: number;
+  /** Total HDV sell tax for `quantity` crafts, in kamas. undefined if no sell price. */
   tax?: number;
-  /** Net margin after tax: sellPrice − tax − craftCost. undefined if not computable. */
+  /** Net margin after tax for `quantity` crafts: sells − tax − craftCost. */
   netMargin?: number;
-  /** netMargin / craftCost, as a ratio. undefined if not computable. */
+  /** netMargin / craftCost, as a ratio (unaffected by quantity). undefined if not computable. */
   netMarginRatio?: number;
 }
 
@@ -45,6 +55,8 @@ function isCraftEntry(x: unknown): x is CraftEntry {
   return (
     typeof e.recipeId === "string" &&
     isItem(e.resultItem) &&
+    (e.quantity == null || typeof e.quantity === "number") &&
+    (e.favourite == null || typeof e.favourite === "boolean") &&
     Array.isArray(e.ingredients) &&
     e.ingredients.every((i) => isItem(i?.item) && typeof i?.quantity === "number")
   );
@@ -102,13 +114,16 @@ export function evaluateEntry(
   /** Item id → quantity owned; deducted from ingredient costs when provided. */
   stock?: Record<string, number>,
 ): CraftBenefit {
+  const quantity = Math.max(1, Math.floor(entry.quantity ?? 1));
+  // Scale ingredient quantities by the craft count, so stock is applied to the
+  // TOTAL need and `craftCost` comes back as the total for all crafts.
   const recipe: Recipe = {
     id: entry.recipeId,
     resultItemId: entry.resultItem.id,
     job: entry.job,
     ingredients: entry.ingredients.map((i) => ({
       itemId: i.item.id,
-      quantity: i.quantity,
+      quantity: i.quantity * quantity,
     })),
   };
   const itemsById = new Map<string, Item>();
@@ -116,15 +131,18 @@ export function evaluateEntry(
   for (const i of entry.ingredients) itemsById.set(i.item.id, i.item);
   const base = evaluateRecipe(recipe, itemsById, prices, stock);
 
-  const { craftCost, sellPrice } = base;
-  const tax = sellPrice != null ? Math.round(sellPrice * taxRate) : undefined;
+  const { craftCost } = base;
+  // sellPrice from the store is per unit; the sale total scales with quantity.
+  const unitSell = base.sellPrice;
+  const sells = unitSell != null ? unitSell * quantity : undefined;
+  const tax = sells != null ? Math.round(sells * taxRate) : undefined;
 
   let netMargin: number | undefined;
   let netMarginRatio: number | undefined;
-  if (craftCost != null && sellPrice != null) {
-    netMargin = sellPrice - (tax ?? 0) - craftCost;
+  if (craftCost != null && sells != null) {
+    netMargin = sells - (tax ?? 0) - craftCost;
     netMarginRatio = craftCost > 0 ? netMargin / craftCost : undefined;
   }
 
-  return { ...base, tax, netMargin, netMarginRatio };
+  return { ...base, sellPrice: unitSell, quantity, tax, netMargin, netMarginRatio };
 }

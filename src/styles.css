@@ -1200,10 +1200,16 @@ table.lots td.num {
 .cost-item-name {
   flex: 1;
   min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+.cost-item-label {
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 0.9rem;
 }
 
 .cost-qty,
@@ -1745,6 +1751,11 @@ table.eleveur-bp input {
   flex-direction: column;
   line-height: 1.2;
   font-size: 0.85rem;
+}
+.eleveur-rune-chip-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 .eleveur-rune-chip-sub {
   color: var(--muted);
@@ -5250,3 +5261,101 @@ select.ocre-field { cursor: pointer; }
 .ocre-none { color: var(--muted); padding: 14px; margin: 0; }
 .ocre-legend { color: var(--muted); font-size: 0.8rem; margin: 16px 2px 0; }
 .ocre-legend b { color: var(--text); font-weight: 600; }
+
+/* --- Craft-quantity stepper (per craftable row) ---------------------------
+   A compact −/number/+ control next to the name; scales the row's cost and
+   profit to "how much if I craft N". Clicks stop at the control (never toggle
+   the row). */
+.craft-qty {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: 4px;
+  padding: 1px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--num-bg);
+}
+.craft-qty-btn {
+  width: 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.95rem;
+  line-height: 1;
+}
+.craft-qty-btn:hover:not(:disabled) {
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+}
+.craft-qty-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.craft-qty-input {
+  width: 40px;
+  border: none;
+  background: transparent;
+  color: var(--text);
+  text-align: center;
+  font: inherit;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+.craft-qty-input::-webkit-outer-spin-button,
+.craft-qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.craft-qty-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-radius: 4px;
+}
+.craft-qty-note {
+  display: block;
+  margin-top: 1px;
+  font-size: 0.62rem;
+  color: var(--muted);
+}
+
+/* --- Favourite (star) toggle on a craft row -------------------------------
+   Sits at the start of the name cell; gold when starred. Clicks never toggle
+   the row (handled in the component). Starred crafts show on "Mes crafts". */
+.craft-fav {
+  flex: 0 0 auto;
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  opacity: 0.7;
+  transition: color 0.12s, opacity 0.12s, background 0.12s;
+}
+.craft-fav:hover {
+  opacity: 1;
+  color: var(--text);
+  background: var(--num-bg);
+}
+.craft-fav.active,
+.craft-fav.active:hover {
+  opacity: 1;
+  color: #e8b23a;
+}
+.craft-fav:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}

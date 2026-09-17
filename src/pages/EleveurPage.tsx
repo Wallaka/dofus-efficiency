@@ -22,6 +22,7 @@ import {
 import type { Item } from "../types";
 import { loadEleveur, saveEleveur } from "../lib/storage";
 import { usePrices } from "../lib/usePrices";
+import { CopyName } from "../components/CopyName";
 import { loadCraftTaxPercent } from "../lib/craftList";
 import { formatKamas, formatKamasSigned, formatPercent } from "../lib/format";
 
@@ -266,7 +267,8 @@ export function EleveurPage() {
                       <li key={r.itemId} className="cost-row item eleveur-rune-row">
                         <span className="cost-item-name">
                           <img src={r.img} alt="" className="eleveur-out-icon" />
-                          {r.label}
+                          <span className="cost-item-label">{r.label}</span>
+                          <CopyName text={r.label} />
                         </span>
                         <label className="eleveur-rune-field">
                           <span>proba</span>
@@ -502,7 +504,10 @@ export function EleveurPage() {
                     {count(r.perMount * result.totalSlots)}
                   </span>
                   <span className="eleveur-rune-chip-name">
-                    {r.label}
+                    <span className="eleveur-rune-chip-label">
+                      {r.label}
+                      <CopyName text={r.label} />
+                    </span>
                     <span className="eleveur-rune-chip-sub">
                       ≈ {r.perMount.toLocaleString("fr-FR", { maximumFractionDigits: 2 })} / monture
                     </span>
@@ -901,7 +906,8 @@ export function EleveurPage() {
                 <li key={r.itemId} className="cost-row item eleveur-rune-row">
                   <span className="cost-item-name">
                     <img src={r.img} alt="" className="eleveur-out-icon" />
-                    {r.label}
+                    <span className="cost-item-label">{r.label}</span>
+                    <CopyName text={r.label} />
                   </span>
                   <span className="eleveur-rune-readout">
                     ≈ {exp.toLocaleString("fr-FR", { maximumFractionDigits: 2 })} / monture

@@ -21,13 +21,25 @@ import { CraftRow } from "../components/CraftRow";
 
 type Status = "idle" | "loading" | "error";
 
+interface Props {
+  /**
+   * "all" (default) is the full Craft page. "favourites" is the "Mes crafts"
+   * page: the same rows, filtered to the starred crafts, without the add box.
+   */
+  mode?: "all" | "favourites";
+}
+
 /**
  * The Craft page: search an item, add it to a list, and read its craft benefit.
  * Each row's ingredient/sell prices come from the shared price store (OCR or
  * manual) and edits here write straight back to it, so a price typed on this
  * page updates the Prix, Objets suivis and other craft views too.
+ *
+ * In `favourites` mode it becomes "Mes crafts": only the starred crafts, so the
+ * ones you make often are one click away. Both modes read the same stored list.
  */
-export function CraftListPage() {
+export function CraftListPage({ mode = "all" }: Props = {}) {
+  const favouritesOnly = mode === "favourites";
   const [entries, setEntries] = useState<CraftEntry[]>(loadCraftList);
   const { prices, entries: priceEntries, setPrice, clearPrice } = usePrices();
   // "Mes ressources": loaded once; deducted from costs when the toggle is on.
@@ -95,6 +107,21 @@ export function CraftListPage() {
     setEntries((prev) => prev.filter((e) => e.recipeId !== recipeId));
   }
 
+  function setEntryQuantity(recipeId: string, quantity: number) {
+    const q = Math.max(1, Math.floor(quantity) || 1);
+    setEntries((prev) =>
+      prev.map((e) => (e.recipeId === recipeId ? { ...e, quantity: q } : e)),
+    );
+  }
+
+  function toggleFavourite(recipeId: string) {
+    setEntries((prev) =>
+      prev.map((e) =>
+        e.recipeId === recipeId ? { ...e, favourite: !e.favourite } : e,
+      ),
+    );
+  }
+
   // Manual price edit → write both shared stores, then mirror into local state
   // so the affected rows recompute immediately. (Same path as the Avis page.)
   function onPriceChange(item: Item, value: number | null) {
@@ -111,15 +138,25 @@ export function CraftListPage() {
       .toLowerCase();
   const query = norm(filter.trim());
 
+  // In "Mes crafts" mode only the starred crafts are shown.
+  const scoped = favouritesOnly ? entries.filter((e) => e.favourite) : entries;
+
   const rows = useMemo(() => {
     const taxRate = taxPercent / 100;
-    const evaluated = entries.map((entry) => ({
+    const evaluated = scoped.map((entry) => ({
       entry,
       evaluation: evaluateEntry(entry, prices, taxRate, stock),
     }));
+    // Rank by PER-UNIT margin so changing a quantity never reshuffles the list.
     evaluated.sort((a, b) => {
-      const am = a.evaluation.netMargin;
-      const bm = b.evaluation.netMargin;
+      const am =
+        a.evaluation.netMargin != null
+          ? a.evaluation.netMargin / a.evaluation.quantity
+          : undefined;
+      const bm =
+        b.evaluation.netMargin != null
+          ? b.evaluation.netMargin / b.evaluation.quantity
+          : undefined;
       if (am == null && bm == null) return b.entry.addedAt - a.entry.addedAt;
       if (am == null) return 1;
       if (bm == null) return -1;
@@ -129,32 +166,43 @@ export function CraftListPage() {
       ? evaluated.filter((r) => norm(r.entry.resultItem.name).includes(query))
       : evaluated;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [entries, prices, query, taxPercent, stock]);
+  }, [entries, prices, query, taxPercent, stock, favouritesOnly]);
 
   return (
     <main className="craft-page">
       <section className="panel">
-        <h2>Craft</h2>
+        <h2>{favouritesOnly ? "Mes crafts" : "Craft"}</h2>
         <p className="hint">
-          Cherchez un objet craftable et ajoutez-le à la liste. Cliquez une ligne
-          pour voir et éditer les prix des ingrédients. Les prix viennent de l'OCR
-          / des prix suivis, ou se saisissent à la main&nbsp;; ils alimentent aussi
-          les pages Objets suivis et Prix. La marge n'est calculée que si tous les
-          prix sont connus.
+          {favouritesOnly ? (
+            <>
+              Vos crafts favoris, marqués d'une ⭐ sur la page Craft — pour
+              retrouver d'un coup ceux que vous faites souvent. Prix et marges se
+              mettent à jour comme sur la page Craft.
+            </>
+          ) : (
+            <>
+              Cherchez un objet craftable et ajoutez-le à la liste. Cliquez une
+              ligne pour voir et éditer les prix des ingrédients. Les prix viennent
+              de l'OCR / des prix suivis, ou se saisissent à la main&nbsp;; ils
+              alimentent aussi la page Prix. Marquez une ⭐ pour
+              l'épingler dans « Mes crafts ». La marge n'est calculée que si tous
+              les prix sont connus.
+            </>
+          )}
         </p>
-        <div className="craft-search">
-          <ItemAutocomplete
-            onPick={addCraft}
-            isPicked={(id) => pickedIds.has(id)}
-            placeholder="Rechercher un objet à crafter… (ex. Gelano)"
-          />
-          <span className="craft-search-status">
-            {status === "loading" && adding && `Ajout de « ${adding} »…`}
-            {status === "error" && (
-              <span className="error-text">{error}</span>
-            )}
-          </span>
-        </div>
+        {!favouritesOnly && (
+          <div className="craft-search">
+            <ItemAutocomplete
+              onPick={addCraft}
+              isPicked={(id) => pickedIds.has(id)}
+              placeholder="Rechercher un objet à crafter… (ex. Gelano)"
+            />
+            <span className="craft-search-status">
+              {status === "loading" && adding && `Ajout de « ${adding} »…`}
+              {status === "error" && <span className="error-text">{error}</span>}
+            </span>
+          </div>
+        )}
         <div className="craft-tax">
           <label htmlFor="craft-tax-input" className="craft-tax-label">
             Taxe HDV
@@ -191,9 +239,11 @@ export function CraftListPage() {
         </label>
       </section>
 
-      {entries.length === 0 ? (
+      {scoped.length === 0 ? (
         <p className="hint">
-          Aucun craft pour l'instant. Cherchez un objet ci-dessus pour commencer.
+          {favouritesOnly
+            ? "Aucun craft favori. Cliquez l'étoile ⭐ sur un craft (page Craft) pour l'épingler ici."
+            : "Aucun craft pour l'instant. Cherchez un objet ci-dessus pour commencer."}
         </p>
       ) : (
         <>
@@ -208,7 +258,7 @@ export function CraftListPage() {
             />
             {filter.trim() !== "" && (
               <span className="hint">
-                {rows.length} / {entries.length}
+                {rows.length} / {scoped.length}
               </span>
             )}
           </div>
@@ -230,11 +280,15 @@ export function CraftListPage() {
                   key={entry.recipeId}
                   entry={entry}
                   evaluation={evaluation}
+                  quantity={evaluation.quantity}
+                  favourite={entry.favourite ?? false}
                   taxPercent={taxPercent}
                   prices={prices}
                   entries={priceEntries}
                   stock={stock}
                   onPriceChange={onPriceChange}
+                  onQuantityChange={(q) => setEntryQuantity(entry.recipeId, q)}
+                  onToggleFavourite={() => toggleFavourite(entry.recipeId)}
                   onRemove={() => removeCraft(entry.recipeId)}
                 />
               ))}
