@@ -13,6 +13,8 @@ export interface CraftEntry extends ResolvedRecipe {
   addedAt: number;
   /** How many to craft — scales the cost and profit. Defaults to 1. */
   quantity?: number;
+  /** Starred by the user — surfaced on the "Mes crafts" page. */
+  favourite?: boolean;
 }
 
 const CRAFT_LIST_KEY = "dofus-efficiency:craftList:v1";
@@ -54,6 +56,7 @@ function isCraftEntry(x: unknown): x is CraftEntry {
     typeof e.recipeId === "string" &&
     isItem(e.resultItem) &&
     (e.quantity == null || typeof e.quantity === "number") &&
+    (e.favourite == null || typeof e.favourite === "boolean") &&
     Array.isArray(e.ingredients) &&
     e.ingredients.every((i) => isItem(i?.item) && typeof i?.quantity === "number")
   );

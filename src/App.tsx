@@ -23,6 +23,7 @@ export function App() {
             Craft & kamas
           </NavLink>
           <NavLink to="/craft">Craft</NavLink>
+          <NavLink to="/mes-crafts">Mes crafts</NavLink>
           <NavLink to="/metiers">Métiers</NavLink>
           <NavLink to="/eleveur">Éleveur</NavLink>
           <NavLink to="/avis">Avis de recherche</NavLink>
@@ -40,6 +41,7 @@ export function App() {
         <Routes>
         <Route path="/" element={<CraftPage />} />
         <Route path="/craft" element={<CraftListPage />} />
+        <Route path="/mes-crafts" element={<CraftListPage mode="favourites" />} />
         <Route path="/metiers" element={<MetierPage />} />
         <Route path="/eleveur" element={<EleveurPage />} />
         <Route path="/avis" element={<AvisPage />} />
