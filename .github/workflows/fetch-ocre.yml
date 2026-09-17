@@ -1,0 +1,32 @@
+name: Fetch archimonsters (DofusDB)
+
+# Manually-triggered: fetch the archimonster list (and each "Âme de …" soul) from
+# DofusDB on a runner — which has the internet access the app's sandbox lacks —
+# and commit the bundled snapshot + generated list for the Ocre page.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Fetch archimonsters
+        run: node scripts/fetch-archimonsters.mjs
+      - name: Commit snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add catalog-src/Ocre src/data/archimonsters.generated.ts
+          if git diff --cached --quiet; then
+            echo "No archimonster changes."
+          else
+            git commit -m "Fetch archimonsters from DofusDB"
+            git push
+          fi
