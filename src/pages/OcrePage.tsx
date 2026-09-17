@@ -26,17 +26,6 @@ import { CopyName } from "../components/CopyName";
 type StatusFilter = "all" | "missing" | "captured";
 type SortKey = "cost" | "benefit" | "level" | "age" | "name";
 
-/** Compact kamas for the big tiles: 4,82 M / 940 k. */
-function formatKamasShort(value: number): string {
-  if (value >= 1_000_000) {
-    return `${(value / 1_000_000).toLocaleString("fr-FR", { maximumFractionDigits: 2 })} M`;
-  }
-  if (value >= 10_000) {
-    return `${Math.round(value / 1000).toLocaleString("fr-FR")} k`;
-  }
-  return formatKamas(value).replace(/ k$/, " k");
-}
-
 export function OcrePage() {
   const { prices, entries, setPrice, clearPrice } = usePrices();
   const { isCaptured, toggle, capturedCount } = useCaptured();
@@ -141,8 +130,7 @@ export function OcrePage() {
             <div className="tile hero">
               <div className="tile-label">Coût pour compléter</div>
               <div className="tile-value accent">
-                {formatKamasShort(summary.costToComplete)}
-                <i className="coin" />
+                {formatKamas(summary.costToComplete)}
               </div>
               <div className="tile-foot">
                 manquants · chemin le moins cher
@@ -154,8 +142,7 @@ export function OcrePage() {
             <div className="tile">
               <div className="tile-label">Prix du pack HDV</div>
               <div className="tile-value buyc">
-                {formatKamasShort(summary.packHdv)}
-                <i className="coin" />
+                {formatKamas(summary.packHdv)}
               </div>
               <div className="tile-foot">
                 collection complète, tout acheter
@@ -167,8 +154,7 @@ export function OcrePage() {
             <div className="tile">
               <div className="tile-label">Prix du pack capturé</div>
               <div className="tile-value capc">
-                {formatKamasShort(summary.packCaptured)}
-                <i className="coin" />
+                {formatKamas(summary.packCaptured)}
               </div>
               <div className="tile-foot">collection complète, pierres seules</div>
             </div>
@@ -176,8 +162,7 @@ export function OcrePage() {
             <div className="tile">
               <div className="tile-label">Économie en capturant</div>
               <div className="tile-value">
-                {formatKamasShort(summary.saving)}
-                <i className="coin" />
+                {formatKamas(summary.saving)}
               </div>
               <div className="tile-foot pos">vs acheter les manquants à l'HDV</div>
             </div>
