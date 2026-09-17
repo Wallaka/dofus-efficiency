@@ -7,6 +7,8 @@
     "prepare:tesseract": "node scripts/prepare-tesseract.mjs",
     "build:catalog": "node scripts/build-catalog.mjs",
     "fetch:catalog": "node scripts/fetch-catalog.mjs",
+    "build:ocre": "node scripts/build-archimonsters.mjs",
+    "fetch:ocre": "node scripts/fetch-archimonsters.mjs",
     "predev": "npm run prepare:tesseract",
     "dev": "vite",
     "prebuild": "npm run prepare:tesseract",
