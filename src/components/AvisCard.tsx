@@ -60,6 +60,10 @@ interface Props {
   /** Flat fee paid to join this hunt's "spot" (per avis). */
   participationCost?: number;
   onParticipationChange?: (value: number) => void;
+  /** Whether this avis is starred as a favourite (one the user runs often). */
+  favourite?: boolean;
+  /** Toggle this avis's favourite state. */
+  onToggleFavourite?: () => void;
 }
 
 /**
@@ -342,6 +346,8 @@ export function AvisCard({
   avitonValue = 0,
   participationCost = 0,
   onParticipationChange,
+  favourite = false,
+  onToggleFavourite,
 }: Props) {
   const [showCraft, setShowCraft] = useState(false);
 
@@ -385,7 +391,21 @@ export function AvisCard({
       : "—";
 
   return (
-    <li className="avis-card">
+    <li className={`avis-card${favourite ? " avis-card--fav" : ""}`}>
+      {onToggleFavourite && (
+        <button
+          type="button"
+          className={`avis-fav-star${favourite ? " on" : ""}`}
+          aria-pressed={favourite}
+          aria-label={
+            favourite ? "Retirer des favoris" : "Ajouter aux favoris"
+          }
+          title={favourite ? "Retirer des favoris" : "Ajouter aux favoris"}
+          onClick={onToggleFavourite}
+        >
+          {favourite ? "★" : "☆"}
+        </button>
+      )}
       <header className="avis-head">
         <div className="avis-thumb">
           {avis.img ? (

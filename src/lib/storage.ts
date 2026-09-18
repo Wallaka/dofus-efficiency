@@ -27,6 +27,7 @@ const AVIS_AVITON_KEY = "dofus-efficiency:avisAviton:v1";
 const AVIS_CHASSE_ONLY_KEY = "dofus-efficiency:avisChasseOnly:v1";
 const AVIS_LEVEL_RANGE_KEY = "dofus-efficiency:avisLevelRange:v1";
 const AVIS_OVERRIDES_KEY = "dofus-efficiency:avisOverrides:v1";
+const AVIS_FAVOURITES_KEY = "dofus-efficiency:avisFavourites:v1";
 
 /** A DofusDB dataset cached under a key (e.g. a level range), with a timestamp. */
 export interface CachedDataset extends CraftDataset {
@@ -349,6 +350,33 @@ export function loadAvisOverrides(): AvisOverrides {
 export function saveAvisOverrides(map: AvisOverrides): void {
   try {
     localStorage.setItem(AVIS_OVERRIDES_KEY, JSON.stringify(map));
+  } catch {
+    // non-fatal
+  }
+}
+
+/**
+ * Avis the user marked as favourites — the ones they run often. Stored as a set
+ * of avis ids (strings), so a "Favoris" toggle can isolate them. Persisted so the
+ * starred set sticks between visits and survives a catalog refresh.
+ */
+export function loadAvisFavourites(): string[] {
+  try {
+    const raw = localStorage.getItem(AVIS_FAVOURITES_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed)) {
+      return parsed.filter((x): x is string => typeof x === "string");
+    }
+    return [];
+  } catch {
+    return [];
+  }
+}
+
+export function saveAvisFavourites(ids: string[]): void {
+  try {
+    localStorage.setItem(AVIS_FAVOURITES_KEY, JSON.stringify(ids));
   } catch {
     // non-fatal
   }

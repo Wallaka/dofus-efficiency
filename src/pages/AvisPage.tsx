@@ -7,6 +7,7 @@ import {
   loadAvisAviton,
   loadAvisCatalog,
   loadAvisChasseOnly,
+  loadAvisFavourites,
   loadAvisLevelRange,
   loadAvisOverrides,
   loadAvisParticipation,
@@ -14,6 +15,7 @@ import {
   saveAvisAviton,
   saveAvisCatalog,
   saveAvisChasseOnly,
+  saveAvisFavourites,
   saveAvisLevelRange,
   saveAvisOverrides,
   saveAvisParticipation,
@@ -54,6 +56,21 @@ export function AvisPage() {
       }
       const next = { ...prev, [field]: n };
       saveAvisLevelRange(next);
+      return next;
+    });
+  }
+  // Favourites: avis the user runs often, starred to isolate them. Kept as a Set
+  // for O(1) lookups, persisted as an id array. `favOnly` is the "Favoris" toggle.
+  const [favourites, setFavourites] = useState<Set<string>>(
+    () => new Set(loadAvisFavourites()),
+  );
+  const [favOnly, setFavOnly] = useState(false);
+  function toggleFavourite(id: string) {
+    setFavourites((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      saveAvisFavourites([...next]);
       return next;
     });
   }
@@ -226,12 +243,24 @@ export function AvisPage() {
       .toLowerCase();
   const query = norm(filter.trim());
   const filtersActive =
-    query !== "" || levelRange.min != null || levelRange.max != null;
-  const visible = list.filter(
-    (a) =>
-      (query === "" || norm(a.name).includes(query)) &&
-      avisInLevelRange(a.level, levelRange.min, levelRange.max),
-  );
+    query !== "" ||
+    levelRange.min != null ||
+    levelRange.max != null ||
+    favOnly;
+  const visible = list
+    .filter(
+      (a) =>
+        (query === "" || norm(a.name).includes(query)) &&
+        avisInLevelRange(a.level, levelRange.min, levelRange.max) &&
+        (!favOnly || favourites.has(String(a.id))),
+    )
+    // Favourites float to the top of the list; a stable sort keeps each group's
+    // original order (so the rest of the catalog is untouched below them).
+    .sort(
+      (a, b) =>
+        Number(favourites.has(String(b.id))) -
+        Number(favourites.has(String(a.id))),
+    );
 
   return (
     <main className="avis-page">
@@ -344,6 +373,19 @@ export function AvisPage() {
               onChange={(e) => setLevelBound("max", e.target.value)}
             />
           </span>
+          <button
+            type="button"
+            className="avis-fav-toggle"
+            aria-pressed={favOnly}
+            onClick={() => setFavOnly((v) => !v)}
+            title="N'afficher que les avis en favoris"
+          >
+            <span className="avis-fav-toggle-star" aria-hidden>
+              ★
+            </span>
+            Favoris
+            <span className="avis-fav-toggle-count">{favourites.size}</span>
+          </button>
           {filtersActive && (
             <span className="hint">
               {visible.length} / {list.length}
@@ -353,7 +395,11 @@ export function AvisPage() {
       )}
 
       {list.length > 0 && visible.length === 0 && (
-        <p className="hint">Aucun avis ne correspond aux filtres.</p>
+        <p className="hint">
+          {favOnly && favourites.size === 0
+            ? "Aucun favori pour l'instant — cliquez l'étoile d'une carte pour l'ajouter."
+            : "Aucun avis ne correspond aux filtres."}
+        </p>
       )}
 
       <ul className="avis-grid">
@@ -387,6 +433,8 @@ export function AvisPage() {
               avitonValue={avitonUnit * avitons}
               participationCost={participation[avis.id] ?? 0}
               onParticipationChange={(value) => setParticipationFor(id, value)}
+              favourite={favourites.has(id)}
+              onToggleFavourite={() => toggleFavourite(id)}
             />
           );
         })}
