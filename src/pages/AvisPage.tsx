@@ -247,12 +247,20 @@ export function AvisPage() {
     levelRange.min != null ||
     levelRange.max != null ||
     favOnly;
-  const visible = list.filter(
-    (a) =>
-      (query === "" || norm(a.name).includes(query)) &&
-      avisInLevelRange(a.level, levelRange.min, levelRange.max) &&
-      (!favOnly || favourites.has(String(a.id))),
-  );
+  const visible = list
+    .filter(
+      (a) =>
+        (query === "" || norm(a.name).includes(query)) &&
+        avisInLevelRange(a.level, levelRange.min, levelRange.max) &&
+        (!favOnly || favourites.has(String(a.id))),
+    )
+    // Favourites float to the top of the list; a stable sort keeps each group's
+    // original order (so the rest of the catalog is untouched below them).
+    .sort(
+      (a, b) =>
+        Number(favourites.has(String(b.id))) -
+        Number(favourites.has(String(a.id))),
+    );
 
   return (
     <main className="avis-page">
