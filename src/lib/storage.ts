@@ -103,6 +103,40 @@ export function saveFavourites(items: Item[]): void {
   }
 }
 
+/**
+ * Dofus Ocre progress: which archimonsters have been captured. Keyed by DofusDB
+ * monster id (string) → capture timestamp (ms). The archimonster catalog itself
+ * is bundled (generated), so we only persist the ids the user has ticked off.
+ */
+const OCRE_CAPTURED_KEY = "dofus-efficiency:ocreCaptured:v1";
+
+export function loadOcreCaptured(): Record<string, number> {
+  try {
+    const raw = localStorage.getItem(OCRE_CAPTURED_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+      const out: Record<string, number> = {};
+      for (const [id, at] of Object.entries(parsed)) {
+        const n = Number(at);
+        out[id] = Number.isFinite(n) ? n : Date.now();
+      }
+      return out;
+    }
+    return {};
+  } catch {
+    return {};
+  }
+}
+
+export function saveOcreCaptured(map: Record<string, number>): void {
+  try {
+    localStorage.setItem(OCRE_CAPTURED_KEY, JSON.stringify(map));
+  } catch {
+    // non-fatal
+  }
+}
+
 /** Éleveur (brisage-profitability) inputs, persisted between sessions. */
 export function loadEleveur(): EleveurInput | null {
   try {

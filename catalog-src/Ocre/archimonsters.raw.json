@@ -1,0 +1,3038 @@
+[
+  {
+    "monsterId": 928,
+    "name": "Mob l'Éponge",
+    "level": 20,
+    "img": "https://api.dofusdb.fr/img/monsters/513.png",
+    "soulItemId": "31188",
+    "soulName": "Âme enragée de Mob l'Éponge",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 147,
+    "name": "Bouftou Royal",
+    "level": 30,
+    "img": "https://api.dofusdb.fr/img/monsters/74.png",
+    "soulItemId": "31189",
+    "soulName": "Âme enragée du Bouftou Royal",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 799,
+    "name": "Tournesol Affamé",
+    "level": 20,
+    "img": "https://api.dofusdb.fr/img/monsters/445.png",
+    "soulItemId": "31187",
+    "soulName": "Âme enragée du Tournesol Affamé",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 58,
+    "name": "Gelée Royale Bleuet",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/20.png",
+    "soulItemId": "31207",
+    "soulName": "Âme enragée de Gelée Royale",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 457,
+    "name": "Shin Larve",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/248.png",
+    "soulItemId": "31200",
+    "soulName": "Âme enragée du Shin Larve",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 7197,
+    "name": "Rakoopeur",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/2319.png",
+    "soulItemId": "31201",
+    "soulName": "Âme enragée du Rakoopeur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 797,
+    "name": "Scarabosse Doré",
+    "level": 40,
+    "img": "https://api.dofusdb.fr/img/monsters/443.png",
+    "soulItemId": "31191",
+    "soulName": "Âme enragée du Scarabosse Doré",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 792,
+    "name": "Bworkette",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/265.png",
+    "soulItemId": "31196",
+    "soulName": "Âme enragée de la Bworkette",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 113,
+    "name": "Dragon Cochon",
+    "level": 100,
+    "img": "https://api.dofusdb.fr/img/monsters/60.png",
+    "soulItemId": "31222",
+    "soulName": "Âme enragée du Dragon Cochon",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 4860,
+    "name": "Choudini",
+    "level": 90,
+    "img": "https://api.dofusdb.fr/img/monsters/1585.png",
+    "soulItemId": "31220",
+    "soulName": "Âme enragée de Choudini",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 3996,
+    "name": "Reine Nyée",
+    "level": 90,
+    "img": "https://api.dofusdb.fr/img/monsters/1267.png",
+    "soulItemId": "31221",
+    "soulName": "Âme enragée de la Reine Nyée",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 85,
+    "name": "Gelée Royale Menthe",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/38.png",
+    "soulItemId": "33704",
+    "soulName": "Âme capturée : Gelée Royale Menthe",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 382,
+    "name": "Tofu Royal",
+    "level": 120,
+    "img": "https://api.dofusdb.fr/img/monsters/204.png",
+    "soulItemId": "31235",
+    "soulName": "Âme enragée du Tofu Royal",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 1184,
+    "name": "Blop Coco Royal",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/645.png",
+    "soulItemId": "33697",
+    "soulName": "Âme capturée : Blop Coco Royal",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 1185,
+    "name": "Blop Griotte Royal",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/646.png",
+    "soulItemId": "33698",
+    "soulName": "Âme capturée : Blop Griotte Royal",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 1186,
+    "name": "Blop Indigo Royal",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/647.png",
+    "soulItemId": "33699",
+    "soulName": "Âme capturée : Blop Indigo Royal",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 1187,
+    "name": "Blop Reinette Royal",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/648.png",
+    "soulItemId": "33700",
+    "soulName": "Âme capturée : Blop Reinette Royal",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 939,
+    "name": "Rat Noir",
+    "level": 150,
+    "img": "https://api.dofusdb.fr/img/monsters/519.png",
+    "soulItemId": "31231",
+    "soulName": "Âme enragée du Rat Noir",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 940,
+    "name": "Rat Blanc",
+    "level": 150,
+    "img": "https://api.dofusdb.fr/img/monsters/520.png",
+    "soulItemId": "31230",
+    "soulName": "Âme enragée du Rat Blanc",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 121,
+    "name": "Minotoror",
+    "level": 120,
+    "img": "https://api.dofusdb.fr/img/monsters/67.png",
+    "soulItemId": "31237",
+    "soulName": "Âme enragée du Minotoror",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 6693,
+    "name": "Bwariok Pillard",
+    "level": 212,
+    "img": "https://api.dofusdb.fr/img/monsters/2190.png"
+  },
+  {
+    "monsterId": 6218,
+    "name": "Tanukouï San",
+    "level": 130,
+    "img": "https://api.dofusdb.fr/img/monsters/2040.png",
+    "soulItemId": "31246",
+    "soulName": "Âme enragée du Tanukouï San",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 669,
+    "name": "Craqueleur Légendaire",
+    "level": 70,
+    "img": "https://api.dofusdb.fr/img/monsters/183.png",
+    "soulItemId": "31212",
+    "soulName": "Âme enragée du Craqueleur Légendaire",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 6326,
+    "name": "Damadrya",
+    "level": 110,
+    "img": "https://api.dofusdb.fr/img/monsters/2088.png",
+    "soulItemId": "31233",
+    "soulName": "Âme enragée de Damadrya",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 107,
+    "name": "Hell Mina",
+    "level": 150,
+    "img": "https://api.dofusdb.fr/img/monsters/55.png",
+    "soulItemId": "31255",
+    "soulName": "Âme enragée d'Hell Mina",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 86,
+    "name": "Gelée Royale Fraise",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/39.png",
+    "soulItemId": "33703",
+    "soulName": "Âme capturée : Gelée Royale Fraise",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 289,
+    "name": "Maître Corbac",
+    "level": 110,
+    "img": "https://api.dofusdb.fr/img/monsters/177.png",
+    "soulItemId": "31232",
+    "soulName": "Âme enragée du Maître Corbac",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 1188,
+    "name": "Blop Multicolore Royal",
+    "level": 120,
+    "img": "https://api.dofusdb.fr/img/monsters/649.png",
+    "soulItemId": "31239",
+    "soulName": "Âme enragée du Blop Multicolore Royal",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 1027,
+    "name": "Corailleur Magistral",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/563.png",
+    "soulItemId": "31198",
+    "soulName": "Âme enragée du Corailleur Magistral",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 1051,
+    "name": "Gourlo le Terrible",
+    "level": 70,
+    "img": "https://api.dofusdb.fr/img/monsters/575.png",
+    "soulItemId": "31213",
+    "soulName": "Âme enragée de Gourlo le Terrible",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 232,
+    "name": "Meulou",
+    "level": 100,
+    "img": "https://api.dofusdb.fr/img/monsters/128.png",
+    "soulItemId": "31224",
+    "soulName": "Âme enragée du Meulou",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 180,
+    "name": "Wa Wabbit",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/101.png",
+    "soulItemId": "31211",
+    "soulName": "Âme enragée du Wa Wabbit",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 226,
+    "name": "Moon",
+    "level": 100,
+    "img": "https://api.dofusdb.fr/img/monsters/123.png",
+    "soulItemId": "31227",
+    "soulName": "Âme enragée de Moon",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 670,
+    "name": "Koulosse",
+    "level": 100,
+    "img": "https://api.dofusdb.fr/img/monsters/358.png",
+    "soulItemId": "31223",
+    "soulName": "Âme enragée du Koulosse",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 780,
+    "name": "Skeunk",
+    "level": 120,
+    "img": "https://api.dofusdb.fr/img/monsters/431.png",
+    "soulItemId": "31236",
+    "soulName": "Âme enragée du Skeunk",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 173,
+    "name": "Abraknyde Ancestral",
+    "level": 90,
+    "img": "https://api.dofusdb.fr/img/monsters/97.png",
+    "soulItemId": "31219",
+    "soulName": "Âme enragée de l'Abraknyde Ancestral",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 6212,
+    "name": "Hanshi",
+    "level": 140,
+    "img": "https://api.dofusdb.fr/img/monsters/2038.png",
+    "soulItemId": "31250",
+    "soulName": "Âme enragée de Hanshi et Shihan",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 1087,
+    "name": "Tynril Ahuri",
+    "level": 140,
+    "img": "https://api.dofusdb.fr/img/monsters/596.png",
+    "soulItemId": "31248",
+    "soulName": "Âme enragée des Tynrils",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 1072,
+    "name": "Tynril Consterné",
+    "level": 140,
+    "img": "https://api.dofusdb.fr/img/monsters/596.png",
+    "soulItemId": "31248",
+    "soulName": "Âme enragée des Tynrils",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 1085,
+    "name": "Tynril Déconcerté",
+    "level": 140,
+    "img": "https://api.dofusdb.fr/img/monsters/596.png",
+    "soulItemId": "31248",
+    "soulName": "Âme enragée des Tynrils",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 1086,
+    "name": "Tynril Perfide",
+    "level": 140,
+    "img": "https://api.dofusdb.fr/img/monsters/596.png",
+    "soulItemId": "31248",
+    "soulName": "Âme enragée des Tynrils",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 430,
+    "name": "Gelée Royale Citron",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/232.png",
+    "soulItemId": "33702",
+    "soulName": "Âme capturée : Gelée Royale Citron",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 6249,
+    "name": "Founoroshi",
+    "level": 140,
+    "img": "https://api.dofusdb.fr/img/monsters/2052.png",
+    "soulItemId": "31251",
+    "soulName": "Âme enragée de Founoroshi",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 478,
+    "name": "Bworker",
+    "level": 180,
+    "img": "https://api.dofusdb.fr/img/monsters/264.png",
+    "soulItemId": "31266",
+    "soulName": "Âme enragée du Bworker",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 943,
+    "name": "Sphincter Cell",
+    "level": 150,
+    "img": "https://api.dofusdb.fr/img/monsters/523.png",
+    "soulItemId": "31252",
+    "soulName": "Âme enragée du Sphincter Cell",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 827,
+    "name": "Minotot",
+    "level": 160,
+    "img": "https://api.dofusdb.fr/img/monsters/459.png",
+    "soulItemId": "31257",
+    "soulName": "Âme enragée du Minotot",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 1071,
+    "name": "Silf le Rasboul Majeur",
+    "level": 110,
+    "img": "https://api.dofusdb.fr/img/monsters/595.png",
+    "soulItemId": "31229",
+    "soulName": "Âme enragée de Silf le Rasboul Majeur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 854,
+    "name": "Crocabulia",
+    "level": 120,
+    "img": "https://api.dofusdb.fr/img/monsters/479.png",
+    "soulItemId": "31240",
+    "soulName": "Âme enragée de Crocabulia",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 3618,
+    "name": "Haute Truche",
+    "level": 130,
+    "img": "https://api.dofusdb.fr/img/monsters/1096.png",
+    "soulItemId": "31244",
+    "soulName": "Âme enragée de la Haute Truche",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 257,
+    "name": "Chêne Mou",
+    "level": 140,
+    "img": "https://api.dofusdb.fr/img/monsters/147.png",
+    "soulItemId": "31247",
+    "soulName": "Âme enragée du Chêne Mou",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 1159,
+    "name": "Ougah",
+    "level": 180,
+    "img": "https://api.dofusdb.fr/img/monsters/640.png",
+    "soulItemId": "31267",
+    "soulName": "Âme enragée d'Ougah",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 1045,
+    "name": "Kimbo",
+    "level": 160,
+    "img": "https://api.dofusdb.fr/img/monsters/569.png",
+    "soulItemId": "31256",
+    "soulName": "Âme enragée du Kimbo",
+    "soulImg": "https://api.dofusdb.fr/img/items/85004.png"
+  },
+  {
+    "monsterId": 2354,
+    "name": "Sousourizoto le Collant",
+    "level": 1,
+    "img": "https://api.dofusdb.fr/img/monsters/71.png",
+    "soulItemId": "33855",
+    "soulName": "Âme capturée : Sousourizoto le Collant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2310,
+    "name": "Arakule la Revancharde",
+    "level": 20,
+    "img": "https://api.dofusdb.fr/img/monsters/15.png",
+    "soulItemId": "34027",
+    "soulName": "Âme capturée : Arakule la Revancharde",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2315,
+    "name": "Boudalf le Blanc",
+    "level": 30,
+    "img": "https://api.dofusdb.fr/img/monsters/73.png",
+    "soulItemId": "33832",
+    "soulName": "Âme capturée : Boudalf le Blanc",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2316,
+    "name": "Boulgourvil le Lointain",
+    "level": 30,
+    "img": "https://api.dofusdb.fr/img/monsters/76.png",
+    "soulItemId": "33833",
+    "soulName": "Âme capturée : Boulgourvil le Lointain",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2357,
+    "name": "Tofumanchou l'Empereur",
+    "level": 40,
+    "img": "https://api.dofusdb.fr/img/monsters/58.png",
+    "soulItemId": "34038",
+    "soulName": "Âme capturée : Tofumanchou l'Empereur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2336,
+    "name": "Mosketère le Dévoué",
+    "level": 20,
+    "img": "https://api.dofusdb.fr/img/monsters/22.png",
+    "soulItemId": "33842",
+    "soulName": "Âme capturée : Mosketère le Dévoué",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2312,
+    "name": "Arachitik la Souffreteuse",
+    "level": 15,
+    "img": "https://api.dofusdb.fr/img/monsters/261.png",
+    "soulItemId": "34011",
+    "soulName": "Âme capturée : Arachitik la Souffreteuse",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2341,
+    "name": "Pioustone le Problème",
+    "level": 15,
+    "img": "https://api.dofusdb.fr/img/monsters/275.png",
+    "soulItemId": "33847",
+    "soulName": "Âme capturée : Pioustone le Problème",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2342,
+    "name": "Pioulbrineur le Mercenaire",
+    "level": 15,
+    "img": "https://api.dofusdb.fr/img/monsters/277.png",
+    "soulItemId": "33848",
+    "soulName": "Âme capturée : Pioulbrineur le Mercenaire",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2344,
+    "name": "Pioulette la Coquine",
+    "level": 15,
+    "img": "https://api.dofusdb.fr/img/monsters/273.png",
+    "soulItemId": "33850",
+    "soulName": "Âme capturée : Pioulette la Coquine",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2345,
+    "name": "Pioukas la Plante",
+    "level": 15,
+    "img": "https://api.dofusdb.fr/img/monsters/274.png",
+    "soulItemId": "33851",
+    "soulName": "Âme capturée : Pioukas la Plante",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2347,
+    "name": "Pioussokrim le Délétère",
+    "level": 15,
+    "img": "https://api.dofusdb.fr/img/monsters/131.png",
+    "soulItemId": "33852",
+    "soulName": "Âme capturée : Pioussokrim le Délétère",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2327,
+    "name": "Craraboss le Féérique",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/24.png",
+    "soulItemId": "34093",
+    "soulName": "Âme capturée : Craraboss le Féérique",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2574,
+    "name": "Larvonika l'Instrument",
+    "level": 20,
+    "img": "https://api.dofusdb.fr/img/monsters/1.png",
+    "soulItemId": "34114",
+    "soulName": "Âme capturée : Larvonika l'Instrument",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2343,
+    "name": "Pioufe la Maquillée",
+    "level": 15,
+    "img": "https://api.dofusdb.fr/img/monsters/276.png",
+    "soulItemId": "33849",
+    "soulName": "Âme capturée : Pioufe la Maquillée",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2355,
+    "name": "Tofuldebeu l'Explosif",
+    "level": 40,
+    "img": "https://api.dofusdb.fr/img/monsters/9.png",
+    "soulItemId": "34046",
+    "soulName": "Âme capturée : Tofuldebeu l'Explosif",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2356,
+    "name": "Tofurapin le Pétri",
+    "level": 15,
+    "img": "https://api.dofusdb.fr/img/monsters/260.png",
+    "soulItemId": "34037",
+    "soulName": "Âme capturée : Tofurapin le Pétri",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2323,
+    "name": "Chamchie le Difficile",
+    "level": 20,
+    "img": "https://api.dofusdb.fr/img/monsters/21.png",
+    "soulItemId": "33837",
+    "soulName": "Âme capturée : Chamchie le Difficile",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2348,
+    "name": "Pissdane l'Insipide",
+    "level": 20,
+    "img": "https://api.dofusdb.fr/img/monsters/33.png",
+    "soulItemId": "34000",
+    "soulName": "Âme capturée : Pissdane l'Insipide",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2393,
+    "name": "Araknay la Galopante",
+    "level": 30,
+    "img": "https://api.dofusdb.fr/img/monsters/145.png",
+    "soulItemId": "33872",
+    "soulName": "Âme capturée : Araknay la Galopante",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2352,
+    "name": "Roz la Magicienne",
+    "level": 20,
+    "img": "https://api.dofusdb.fr/img/monsters/32.png",
+    "soulItemId": "34045",
+    "soulName": "Âme capturée : Roz la Magicienne",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2487,
+    "name": "Gelanal le Huileux",
+    "level": 62,
+    "img": "https://api.dofusdb.fr/img/monsters/17.png",
+    "soulItemId": "33918",
+    "soulName": "Âme capturée : Gelanal le Huileux",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2522,
+    "name": "Kwoanneur le Frimeur",
+    "level": 40,
+    "img": "https://api.dofusdb.fr/img/monsters/80.png",
+    "soulItemId": "33937",
+    "soulName": "Âme capturée : Kwoanneur le Frimeur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2332,
+    "name": "Larchimaide la Poussée",
+    "level": 20,
+    "img": "https://api.dofusdb.fr/img/monsters/2.png",
+    "soulItemId": "34113",
+    "soulName": "Âme capturée : Larchimaide la Poussée",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2313,
+    "name": "Bandapar l'Exclu",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/255.png",
+    "soulItemId": "34012",
+    "soulName": "Âme capturée : Bandapar l'Exclu",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2317,
+    "name": "Boufdégou le Refoulant",
+    "level": 30,
+    "img": "https://api.dofusdb.fr/img/monsters/3.png",
+    "soulItemId": "33834",
+    "soulName": "Âme capturée : Boufdégou le Refoulant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2520,
+    "name": "Kolforthe l'Indécollable",
+    "level": 70,
+    "img": "https://api.dofusdb.fr/img/monsters/188.png",
+    "soulItemId": "34070",
+    "soulName": "Âme capturée : Kolforthe l'Indécollable",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2371,
+    "name": "Geloliaine l'Aérien",
+    "level": 62,
+    "img": "https://api.dofusdb.fr/img/monsters/18.png",
+    "soulItemId": "33862",
+    "soulName": "Âme capturée : Geloliaine l'Aérien",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2331,
+    "name": "Larvapstrè le Subjectif",
+    "level": 20,
+    "img": "https://api.dofusdb.fr/img/monsters/12.png",
+    "soulItemId": "34033",
+    "soulName": "Âme capturée : Larvapstrè le Subjectif",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2286,
+    "name": "Serpistol l'Illustre",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/176.png",
+    "soulItemId": "33823",
+    "soulName": "Âme capturée : Serpistol l'Illustre",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2402,
+    "name": "Tiwa'Missou le Gateux",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/27.png",
+    "soulItemId": "34010",
+    "soulName": "Âme capturée : Tiwalpé le Dévêtu",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2318,
+    "name": "Boudur le Raide",
+    "level": 47,
+    "img": "https://api.dofusdb.fr/img/monsters/79.png",
+    "soulItemId": "33835",
+    "soulName": "Âme capturée : Boudur le Raide",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2293,
+    "name": "Tiwalpé le Dévêtu",
+    "level": 49,
+    "img": "https://api.dofusdb.fr/img/monsters/48.png",
+    "soulItemId": "34010",
+    "soulName": "Âme capturée : Tiwalpé le Dévêtu",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2294,
+    "name": "Tiwoflan le Lâche",
+    "level": 48,
+    "img": "https://api.dofusdb.fr/img/monsters/28.png",
+    "soulItemId": "34091",
+    "soulName": "Âme capturée : Tiwoflan le Lâche",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2358,
+    "name": "Tour le Vice",
+    "level": 20,
+    "img": "https://api.dofusdb.fr/img/monsters/14.png",
+    "soulItemId": "33856",
+    "soulName": "Âme capturée : Tour le Vice",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2314,
+    "name": "Bandson le Tonitruant",
+    "level": 49,
+    "img": "https://api.dofusdb.fr/img/monsters/661.png",
+    "soulItemId": "33831",
+    "soulName": "Âme capturée : Bandson le Tonitruant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2494,
+    "name": "Gobstiniais le Têtu",
+    "level": 40,
+    "img": "https://api.dofusdb.fr/img/monsters/99.png",
+    "soulItemId": "34116",
+    "soulName": "Âme capturée : Gobstiniais le Têtu",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2541,
+    "name": "Nodkoku le Trahi",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/117.png",
+    "soulItemId": "33945",
+    "soulName": "Âme capturée : Nodkoku le Trahi",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2292,
+    "name": "Tikosto le Mousse",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/108.png",
+    "soulItemId": "33826",
+    "soulName": "Âme capturée : Tikosto le Mousse",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2301,
+    "name": "Trukul le Lent",
+    "level": 100,
+    "img": "https://api.dofusdb.fr/img/monsters/114.png",
+    "soulItemId": "33827",
+    "soulName": "Âme capturée : Trukul le Lent",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2353,
+    "name": "Sangria le Fruité",
+    "level": 30,
+    "img": "https://api.dofusdb.fr/img/monsters/54.png",
+    "soulItemId": "34036",
+    "soulName": "Âme capturée : Sangria le Fruité",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2427,
+    "name": "Champayr le Disjoncté",
+    "level": 43,
+    "img": "https://api.dofusdb.fr/img/monsters/347.png",
+    "soulItemId": "34050",
+    "soulName": "Âme capturée : Champayr le Disjoncté",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2431,
+    "name": "Étoilette la Bouchée",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/512.png",
+    "soulItemId": "33888",
+    "soulName": "Âme capturée : Étoilette la Bouchée",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2302,
+    "name": "Vampunor le Glacial",
+    "level": 40,
+    "img": "https://api.dofusdb.fr/img/monsters/72.png",
+    "soulItemId": "34021",
+    "soulName": "Âme capturée : Vampunor le Glacial",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2399,
+    "name": "Bilvoezé le Bonimenteur",
+    "level": 28,
+    "img": "https://api.dofusdb.fr/img/monsters/167.png",
+    "soulItemId": "34044",
+    "soulName": "Âme capturée : Bilvoezé le Bonimenteur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2400,
+    "name": "Bi le Partageur",
+    "level": 28,
+    "img": "https://api.dofusdb.fr/img/monsters/168.png",
+    "soulItemId": "34120",
+    "soulName": "Âme capturée : Bi le Partageur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2396,
+    "name": "Bistou le Quêteur",
+    "level": 28,
+    "img": "https://api.dofusdb.fr/img/monsters/166.png",
+    "soulItemId": "34043",
+    "soulName": "Âme capturée : Bistou le Quêteur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2401,
+    "name": "Bistou le Rieur",
+    "level": 28,
+    "img": "https://api.dofusdb.fr/img/monsters/169.png",
+    "soulItemId": "33875",
+    "soulName": "Âme capturée : Bistou le Rieur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2430,
+    "name": "Chevaustine le Reconstruit",
+    "level": 40,
+    "img": "https://api.dofusdb.fr/img/monsters/23.png",
+    "soulItemId": "34125",
+    "soulName": "Âme capturée : Chevaustine le Reconstruit",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2334,
+    "name": "Milipussien le Géant",
+    "level": 30,
+    "img": "https://api.dofusdb.fr/img/monsters/239.png",
+    "soulItemId": "34032",
+    "soulName": "Âme capturée : Milipussien le Géant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2549,
+    "name": "Boostif l'Affamé",
+    "level": 29,
+    "img": "https://api.dofusdb.fr/img/monsters/59.png",
+    "soulItemId": "33953",
+    "soulName": "Âme capturée : Boostif l'Affamé",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2349,
+    "name": "Preskapwal le Tendancieux",
+    "level": 30,
+    "img": "https://api.dofusdb.fr/img/monsters/53.png",
+    "soulItemId": "33853",
+    "soulName": "Âme capturée : Preskapwal le Tendancieux",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2325,
+    "name": "Chonstip la Passagère",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/68.png",
+    "soulItemId": "34029",
+    "soulName": "Âme capturée : Chonstip la Passagère",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2298,
+    "name": "Torthur la Lutte",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/121.png",
+    "soulItemId": "34018",
+    "soulName": "Âme capturée : Torthur la Lutte",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2304,
+    "name": "Wabbitud le Constant",
+    "level": 52,
+    "img": "https://api.dofusdb.fr/img/monsters/25.png",
+    "soulItemId": "34092",
+    "soulName": "Âme capturée : Wabbitud le Constant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2397,
+    "name": "Porfavor le Quémandeur",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/192.png",
+    "soulItemId": "33873",
+    "soulName": "Âme capturée : Porfavor le Quémandeur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2411,
+    "name": "Robiolego l'Assemblé",
+    "level": 63,
+    "img": "https://api.dofusdb.fr/img/monsters/668.png",
+    "soulItemId": "33879",
+    "soulName": "Âme capturée : Robiolego l'Assemblé",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2324,
+    "name": "Bouflet le Puéril",
+    "level": 30,
+    "img": "https://api.dofusdb.fr/img/monsters/75.png",
+    "soulItemId": "33838",
+    "soulName": "Âme capturée : Bouflet le Puéril",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2378,
+    "name": "Cromikay le Néophyte",
+    "level": 70,
+    "img": "https://api.dofusdb.fr/img/monsters/187.png",
+    "soulItemId": "34039",
+    "soulName": "Âme capturée : Cromikay le Néophyte",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2295,
+    "name": "Tortenssia la Fleurie",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/119.png",
+    "soulItemId": "34015",
+    "soulName": "Âme capturée : Tortenssia la Fleurie",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2548,
+    "name": "Bambouské le Camouflé",
+    "level": 110,
+    "img": "https://api.dofusdb.fr/img/monsters/695.png",
+    "soulItemId": "33952",
+    "soulName": "Âme capturée : Bambouské le Camouflé",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2437,
+    "name": "Corpat le Vampire",
+    "level": 110,
+    "img": "https://api.dofusdb.fr/img/monsters/170.png",
+    "soulItemId": "34067",
+    "soulName": "Âme capturée : Corpat le Vampire",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2346,
+    "name": "Pichduitre le Totem",
+    "level": 20,
+    "img": "https://api.dofusdb.fr/img/monsters/508.png",
+    "soulItemId": "34034",
+    "soulName": "Âme capturée : Pichduitre le Totem",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2338,
+    "name": "Pichdourse le Puissant",
+    "level": 20,
+    "img": "https://api.dofusdb.fr/img/monsters/507.png",
+    "soulItemId": "33844",
+    "soulName": "Âme capturée : Pichdourse le Puissant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2340,
+    "name": "Pichtoire l'Erudit",
+    "level": 20,
+    "img": "https://api.dofusdb.fr/img/monsters/506.png",
+    "soulItemId": "33846",
+    "soulName": "Âme capturée : Pichtoire l'Erudit",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2272,
+    "name": "Pichakoté le Dégoutant",
+    "level": 20,
+    "img": "https://api.dofusdb.fr/img/monsters/509.png",
+    "soulItemId": "34005",
+    "soulName": "Âme capturée : Pichakoté le Dégoutant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2297,
+    "name": "Tortorak le Cornu",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/118.png",
+    "soulItemId": "34017",
+    "soulName": "Âme capturée : Tortorak le Cornu",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2532,
+    "name": "Maître Amboat le Moqueur",
+    "level": 49,
+    "img": "https://api.dofusdb.fr/img/monsters/69.png",
+    "soulItemId": "34079",
+    "soulName": "Âme capturée : Maître Amboat le Moqueur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2413,
+    "name": "Robocoop l'Échangé",
+    "level": 61,
+    "img": "https://api.dofusdb.fr/img/monsters/237.png",
+    "soulItemId": "34049",
+    "soulName": "Âme capturée : Robocoop l'Échangé",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2484,
+    "name": "Fourapin le Chaud",
+    "level": 100,
+    "img": "https://api.dofusdb.fr/img/monsters/116.png",
+    "soulItemId": "34095",
+    "soulName": "Âme capturée : Fourapin le Chaud",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2333,
+    "name": "Milipatte la Griffe",
+    "level": 30,
+    "img": "https://api.dofusdb.fr/img/monsters/84.png",
+    "soulItemId": "33840",
+    "soulName": "Âme capturée : Milipatte la Griffe",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2533,
+    "name": "Minoskour le Sauveur",
+    "level": 110,
+    "img": "https://api.dofusdb.fr/img/monsters/465.png",
+    "soulItemId": "34080",
+    "soulName": "Âme capturée : Minoskour le Sauveur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2542,
+    "name": "Neufedur le Flottant",
+    "level": 24,
+    "img": "https://api.dofusdb.fr/img/monsters/77.png",
+    "soulItemId": "33946",
+    "soulName": "Âme capturée : Neufedur le Flottant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2296,
+    "name": "Tortilleur le Coulé",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/120.png",
+    "soulItemId": "34016",
+    "soulName": "Âme capturée : Tortilleur le Coulé",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2418,
+    "name": "Bwormage le Respectueux",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/10.png",
+    "soulItemId": "33882",
+    "soulName": "Âme capturée : Bwormage le Respectueux",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2403,
+    "name": "Wagnagnah le Sanglant",
+    "level": 54,
+    "img": "https://api.dofusdb.fr/img/monsters/26.png",
+    "soulItemId": "34061",
+    "soulName": "Âme capturée : Wagnagnah le Sanglant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2440,
+    "name": "Crognan le Barbare",
+    "level": 70,
+    "img": "https://api.dofusdb.fr/img/monsters/673.png",
+    "soulItemId": "33892",
+    "soulName": "Âme capturée : Crognan le Barbare",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2277,
+    "name": "Rostensyl la Cuisinière",
+    "level": 27,
+    "img": "https://api.dofusdb.fr/img/monsters/256.png",
+    "soulItemId": "34112",
+    "soulName": "Âme capturée : Rostensyl la Cuisinière",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2335,
+    "name": "Minsinistre l'Elu",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/65.png",
+    "soulItemId": "33841",
+    "soulName": "Âme capturée : Minsinistre l'Elu",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2417,
+    "name": "Barchwork le Multicolore",
+    "level": 49,
+    "img": "https://api.dofusdb.fr/img/monsters/29.png",
+    "soulItemId": "34063",
+    "soulName": "Âme capturée : Barchwork le Multicolore",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2425,
+    "name": "Chamflay le Ballonné",
+    "level": 43,
+    "img": "https://api.dofusdb.fr/img/monsters/350.png",
+    "soulItemId": "33887",
+    "soulName": "Âme capturée : Chamflay le Ballonné",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2426,
+    "name": "Chamdblé le Cultivé",
+    "level": 43,
+    "img": "https://api.dofusdb.fr/img/monsters/348.png",
+    "soulItemId": "34056",
+    "soulName": "Âme capturée : Chamdblé le Cultivé",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2326,
+    "name": "Craquetuss le Piquant",
+    "level": 70,
+    "img": "https://api.dofusdb.fr/img/monsters/268.png",
+    "soulItemId": "34030",
+    "soulName": "Âme capturée : Craquetuss le Piquant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2424,
+    "name": "Champayt l'Odorant",
+    "level": 43,
+    "img": "https://api.dofusdb.fr/img/monsters/349.png",
+    "soulItemId": "34055",
+    "soulName": "Âme capturée : Champayt l'Odorant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2529,
+    "name": "Mandalo l'Aqueuse",
+    "level": 108,
+    "img": "https://api.dofusdb.fr/img/monsters/466.png",
+    "soulItemId": "34081",
+    "soulName": "Âme capturée : Mandalo l'Aqueuse",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2329,
+    "name": "Mallopiée l'Épineuse",
+    "level": 65,
+    "img": "https://api.dofusdb.fr/img/monsters/662.png",
+    "soulItemId": "33839",
+    "soulName": "Âme capturée : Mallopiée l'Épineuse",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2486,
+    "name": "Garsim le Mort",
+    "level": 40,
+    "img": "https://api.dofusdb.fr/img/monsters/281.png",
+    "soulItemId": "33917",
+    "soulName": "Âme capturée : Garsim le Mort",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2379,
+    "name": "Draglida la Disparue",
+    "level": 67,
+    "img": "https://api.dofusdb.fr/img/monsters/96.png",
+    "soulItemId": "33866",
+    "soulName": "Âme capturée : Draglida la Disparue",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2376,
+    "name": "Gelaviv le Glaçon",
+    "level": 62,
+    "img": "https://api.dofusdb.fr/img/monsters/19.png",
+    "soulItemId": "34047",
+    "soulName": "Âme capturée : Gelaviv le Glaçon",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2305,
+    "name": "Watdogue le Bien Nommé",
+    "level": 56,
+    "img": "https://api.dofusdb.fr/img/monsters/100.png",
+    "soulItemId": "34115",
+    "soulName": "Âme capturée : Watdogue le Bien Nommé",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2321,
+    "name": "Chafalfer l'Optimiste",
+    "level": 37,
+    "img": "https://api.dofusdb.fr/img/monsters/57.png",
+    "soulItemId": "34013",
+    "soulName": "Âme capturée : Chafalfer l'Optimiste",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2436,
+    "name": "Crakmitaine le Faucheur",
+    "level": 70,
+    "img": "https://api.dofusdb.fr/img/monsters/4.png",
+    "soulItemId": "34066",
+    "soulName": "Âme capturée : Crakmitaine le Faucheur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2416,
+    "name": "Bworkasse le Dégoutant",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/489.png",
+    "soulItemId": "34057",
+    "soulName": "Âme capturée : Bworkasse le Dégoutant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2309,
+    "name": "Abrakroc l'édenté",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/13.png",
+    "soulItemId": "34026",
+    "soulName": "Âme capturée : Abrakroc l'édenté",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2521,
+    "name": "Krapahut le Randonneur",
+    "level": 118,
+    "img": "https://api.dofusdb.fr/img/monsters/467.png",
+    "soulItemId": "34071",
+    "soulName": "Âme capturée : Krapahut le Randonneur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2280,
+    "name": "Scapé l'Epée",
+    "level": 42,
+    "img": "https://api.dofusdb.fr/img/monsters/136.png",
+    "soulItemId": "34096",
+    "soulName": "Âme capturée : Scapé l'Epée",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2281,
+    "name": "Scarfayss le Balafré",
+    "level": 42,
+    "img": "https://api.dofusdb.fr/img/monsters/105.png",
+    "soulItemId": "34117",
+    "soulName": "Âme capturée : Scarfayss le Balafré",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2282,
+    "name": "Scarouarze l'Epopée",
+    "level": 42,
+    "img": "https://api.dofusdb.fr/img/monsters/104.png",
+    "soulItemId": "34118",
+    "soulName": "Âme capturée : Scarouarze l'Epopée",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2283,
+    "name": "Scaramel le Fondant",
+    "level": 42,
+    "img": "https://api.dofusdb.fr/img/monsters/135.png",
+    "soulItemId": "34009",
+    "soulName": "Âme capturée : Scaramel le Fondant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2276,
+    "name": "Ribibi le Cher",
+    "level": 42,
+    "img": "https://api.dofusdb.fr/img/monsters/56.png",
+    "soulItemId": "34008",
+    "soulName": "Âme capturée : Ribibi le Cher",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2404,
+    "name": "Blorie l'Assourdissante",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/162.png",
+    "soulItemId": "34126",
+    "soulName": "Âme capturée : Blorie l'Assourdissante",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2405,
+    "name": "Blordur l'Infect",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/164.png",
+    "soulItemId": "33876",
+    "soulName": "Âme capturée : Blordur l'Infect",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2406,
+    "name": "Bloporte le Veule",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/163.png",
+    "soulItemId": "33877",
+    "soulName": "Âme capturée : Bloporte le Veule",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2407,
+    "name": "Blof l'Apathique",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/165.png",
+    "soulItemId": "33878",
+    "soulName": "Âme capturée : Blof l'Apathique",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2408,
+    "name": "Boombata le Garde",
+    "level": 90,
+    "img": "https://api.dofusdb.fr/img/monsters/124.png",
+    "soulItemId": "34048",
+    "soulName": "Âme capturée : Boombata le Garde",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2432,
+    "name": "Farlon l'Enfant",
+    "level": 98,
+    "img": "https://api.dofusdb.fr/img/monsters/334.png",
+    "soulItemId": "34052",
+    "soulName": "Âme capturée : Farlon l'Enfant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2615,
+    "name": "Scaratyn l'Huître",
+    "level": 118,
+    "img": "https://api.dofusdb.fr/img/monsters/462.png",
+    "soulItemId": "33985",
+    "soulName": "Âme capturée : Scaratyn l'Huître",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2421,
+    "name": "Chaffoin le Sournois",
+    "level": 41,
+    "img": "https://api.dofusdb.fr/img/monsters/193.png",
+    "soulItemId": "33884",
+    "soulName": "Âme capturée : Chaffoin le Sournois",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2339,
+    "name": "Larvomatik le Propre",
+    "level": 20,
+    "img": "https://api.dofusdb.fr/img/monsters/663.png",
+    "soulItemId": "33845",
+    "soulName": "Âme capturée : Larvomatik le Propre",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2299,
+    "name": "Tronkoneuz la Tranchante",
+    "level": 45,
+    "img": "https://api.dofusdb.fr/img/monsters/146.png",
+    "soulItemId": "34019",
+    "soulName": "Âme capturée : Tronkoneuz la Tranchante",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2385,
+    "name": "Abrakadnuzar",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/345.png",
+    "soulItemId": "33868",
+    "soulName": "Âme capturée : Abrakadnuzar",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2319,
+    "name": "Chafemal le Bagarreur",
+    "level": 40,
+    "img": "https://api.dofusdb.fr/img/monsters/16.png",
+    "soulItemId": "34090",
+    "soulName": "Âme capturée : Chafemal le Bagarreur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2439,
+    "name": "Crolnareff l'Exilé",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/151.png",
+    "soulItemId": "33891",
+    "soulName": "Âme capturée : Crolnareff l'Exilé",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2350,
+    "name": "Radoutable le Craint",
+    "level": 30,
+    "img": "https://api.dofusdb.fr/img/monsters/254.png",
+    "soulItemId": "33854",
+    "soulName": "Âme capturée : Radoutable le Craint",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2285,
+    "name": "Scorpitène l'Enflammé",
+    "level": 70,
+    "img": "https://api.dofusdb.fr/img/monsters/186.png",
+    "soulItemId": "33822",
+    "soulName": "Âme capturée : Scorpitène l'Enflammé",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2465,
+    "name": "Dragnoute l'Irascible",
+    "level": 72,
+    "img": "https://api.dofusdb.fr/img/monsters/106.png",
+    "soulItemId": "33908",
+    "soulName": "Âme capturée : Dragnoute l'Irascible",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2415,
+    "name": "Bulsavon le Gonflé",
+    "level": 110,
+    "img": "https://api.dofusdb.fr/img/monsters/671.png",
+    "soulItemId": "34062",
+    "soulName": "Âme capturée : Bulsavon le Gonflé",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2557,
+    "name": "Crustterus l'Organique",
+    "level": 48,
+    "img": "https://api.dofusdb.fr/img/monsters/584.png",
+    "soulItemId": "33961",
+    "soulName": "Âme capturée : Crustterus l'Organique",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2558,
+    "name": "Crustensyl le Pragmatique",
+    "level": 48,
+    "img": "https://api.dofusdb.fr/img/monsters/585.png",
+    "soulItemId": "33962",
+    "soulName": "Âme capturée : Crustensyl le Pragmatique",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2559,
+    "name": "Cruskof le Rustre",
+    "level": 48,
+    "img": "https://api.dofusdb.fr/img/monsters/587.png",
+    "soulItemId": "33963",
+    "soulName": "Âme capturée : Cruskof le Rustre",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2328,
+    "name": "Forboyar l'Enigmatique",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/66.png",
+    "soulItemId": "34031",
+    "soulName": "Âme capturée : Forboyar l'Enigmatique",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2392,
+    "name": "Floriste la Cannibale",
+    "level": 110,
+    "img": "https://api.dofusdb.fr/img/monsters/666.png",
+    "soulItemId": "34059",
+    "soulName": "Âme capturée : Floriste la Cannibale",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2560,
+    "name": "Crusmeyer le Pervers",
+    "level": 48,
+    "img": "https://api.dofusdb.fr/img/monsters/586.png",
+    "soulItemId": "33964",
+    "soulName": "Âme capturée : Crusmeyer le Pervers",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2311,
+    "name": "Arabord la Cruche",
+    "level": 48,
+    "img": "https://api.dofusdb.fr/img/monsters/149.png",
+    "soulItemId": "33830",
+    "soulName": "Âme capturée : Arabord la Cruche",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2498,
+    "name": "Grandilok le Clameur",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/50.png",
+    "soulItemId": "33921",
+    "soulName": "Âme capturée : Grandilok le Clameur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2308,
+    "name": "Wokènrôl le Danseur",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/49.png",
+    "soulItemId": "33829",
+    "soulName": "Âme capturée : Wokènrôl le Danseur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2420,
+    "name": "Cavordemal le Sorcier",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/191.png",
+    "soulItemId": "33883",
+    "soulName": "Âme capturée : Cavordemal le Sorcier",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2384,
+    "name": "Aboudbra le Porteur",
+    "level": 47,
+    "img": "https://api.dofusdb.fr/img/monsters/86.png",
+    "soulItemId": "33867",
+    "soulName": "Âme capturée : Aboudbra le Porteur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2391,
+    "name": "Ameur la Laide",
+    "level": 47,
+    "img": "https://api.dofusdb.fr/img/monsters/85.png",
+    "soulItemId": "33871",
+    "soulName": "Âme capturée : Ameur la Laide",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2433,
+    "name": "Codenlgaz le Problème",
+    "level": 47,
+    "img": "https://api.dofusdb.fr/img/monsters/91.png",
+    "soulItemId": "34053",
+    "soulName": "Âme capturée : Codenlgaz le Problème",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2493,
+    "name": "Ginsenk le Stimulant",
+    "level": 47,
+    "img": "https://api.dofusdb.fr/img/monsters/94.png",
+    "soulItemId": "33919",
+    "soulName": "Âme capturée : Ginsenk le Stimulant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2508,
+    "name": "Kiroyal le Sirupeux",
+    "level": 47,
+    "img": "https://api.dofusdb.fr/img/monsters/90.png",
+    "soulItemId": "33927",
+    "soulName": "Âme capturée : Kiroyal le Sirupeux",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2525,
+    "name": "Let le Rond",
+    "level": 47,
+    "img": "https://api.dofusdb.fr/img/monsters/93.png",
+    "soulItemId": "33939",
+    "soulName": "Âme capturée : Let le Rond",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2539,
+    "name": "Nelvin le Boulet",
+    "level": 47,
+    "img": "https://api.dofusdb.fr/img/monsters/89.png",
+    "soulItemId": "33943",
+    "soulName": "Âme capturée : Nelvin le Boulet",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2540,
+    "name": "Nipulnislip l'Exhibitionniste",
+    "level": 47,
+    "img": "https://api.dofusdb.fr/img/monsters/88.png",
+    "soulItemId": "33944",
+    "soulName": "Âme capturée : Nipulnislip l'Exhibitionniste",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2585,
+    "name": "Osuxion le Vampirique",
+    "level": 47,
+    "img": "https://api.dofusdb.fr/img/monsters/87.png",
+    "soulItemId": "33978",
+    "soulName": "Âme capturée : Osuxion le Vampirique",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2289,
+    "name": "Susbewl l'Hypocrite",
+    "level": 47,
+    "img": "https://api.dofusdb.fr/img/monsters/92.png",
+    "soulItemId": "33825",
+    "soulName": "Âme capturée : Susbewl l'Hypocrite",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2573,
+    "name": "Koktèle le Secoué",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/109.png",
+    "soulItemId": "34119",
+    "soulName": "Âme capturée : Koktèle le Secoué",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2320,
+    "name": "Chafmarcel le Fêtard",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/179.png",
+    "soulItemId": "33836",
+    "soulName": "Âme capturée : Chafmarcel le Fêtard",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2322,
+    "name": "Chalan le Commerçant",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/178.png",
+    "soulItemId": "34028",
+    "soulName": "Âme capturée : Chalan le Commerçant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2423,
+    "name": "Ramitant le Dilettante",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/241.png",
+    "soulItemId": "33886",
+    "soulName": "Âme capturée : Ramitant le Dilettante",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2442,
+    "name": "Doktopuss le Maléfique",
+    "level": 78,
+    "img": "https://api.dofusdb.fr/img/monsters/414.png",
+    "soulItemId": "33893",
+    "soulName": "Âme capturée : Doktopuss le Maléfique",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2568,
+    "name": "Germinol l'Indigent",
+    "level": 128,
+    "img": "https://api.dofusdb.fr/img/monsters/357.png",
+    "soulItemId": "34086",
+    "soulName": "Âme capturée : Germinol l'Indigent",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2517,
+    "name": "Koalastrof la Naturelle",
+    "level": 68,
+    "img": "https://api.dofusdb.fr/img/monsters/415.png",
+    "soulItemId": "33934",
+    "soulName": "Âme capturée : Koalastrof la Naturelle",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2616,
+    "name": "Ouature la Mobile",
+    "level": 40,
+    "img": "https://api.dofusdb.fr/img/monsters/279.png",
+    "soulItemId": "33999",
+    "soulName": "Âme capturée : Ouature la Mobile",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2524,
+    "name": "Ouassébo l'Esthète",
+    "level": 40,
+    "img": "https://api.dofusdb.fr/img/monsters/280.png",
+    "soulItemId": "33938",
+    "soulName": "Âme capturée : Ouassébo l'Esthète",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2575,
+    "name": "Ouashouash l'Exubérant",
+    "level": 104,
+    "img": "https://api.dofusdb.fr/img/monsters/279.png",
+    "soulItemId": "34087",
+    "soulName": "Âme capturée : Ouashouash l'Exubérant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2582,
+    "name": "Palmito le Menteur",
+    "level": 49,
+    "img": "https://api.dofusdb.fr/img/monsters/589.png",
+    "soulItemId": "33975",
+    "soulName": "Âme capturée : Palmito le Menteur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2583,
+    "name": "Palmiche le Serein",
+    "level": 49,
+    "img": "https://api.dofusdb.fr/img/monsters/591.png",
+    "soulItemId": "33976",
+    "soulName": "Âme capturée : Palmiche le Serein",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2584,
+    "name": "Palmiflette le Convivial",
+    "level": 49,
+    "img": "https://api.dofusdb.fr/img/monsters/590.png",
+    "soulItemId": "33977",
+    "soulName": "Âme capturée : Palmiflette le Convivial",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2279,
+    "name": "Sampi l'Eternel",
+    "level": 48,
+    "img": "https://api.dofusdb.fr/img/monsters/185.png",
+    "soulItemId": "33821",
+    "soulName": "Âme capturée : Sampi l'Eternel",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2389,
+    "name": "Abrakildas le Vénérable",
+    "level": 86,
+    "img": "https://api.dofusdb.fr/img/monsters/13.png",
+    "soulItemId": "34089",
+    "soulName": "Âme capturée : Abrakildas le Vénérable",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2438,
+    "name": "Cramikaz le Suicidaire",
+    "level": 70,
+    "img": "https://api.dofusdb.fr/img/monsters/181.png",
+    "soulItemId": "33890",
+    "soulName": "Âme capturée : Cramikaz le Suicidaire",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2592,
+    "name": "Koko la Violente",
+    "level": 130,
+    "img": "https://api.dofusdb.fr/img/monsters/700.png",
+    "soulItemId": "33980",
+    "soulName": "Âme capturée : Koko la Violente",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2422,
+    "name": "Chafrit le Barbare",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/180.png",
+    "soulItemId": "33885",
+    "soulName": "Âme capturée : Chafrit le Barbare",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2556,
+    "name": "Craquetou le Fissuré",
+    "level": 105,
+    "img": "https://api.dofusdb.fr/img/monsters/562.png",
+    "soulItemId": "33960",
+    "soulName": "Âme capturée : Craquetou le Fissuré",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2359,
+    "name": "Maître Champeur le Sabreur",
+    "level": 70,
+    "img": "https://api.dofusdb.fr/img/monsters/194.png",
+    "soulItemId": "33857",
+    "soulName": "Âme capturée : Maître Champeur le Sabreur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2593,
+    "name": "Grenuche la Gentille",
+    "level": 110,
+    "img": "https://api.dofusdb.fr/img/monsters/701.png",
+    "soulItemId": "33981",
+    "soulName": "Âme capturée : Grenuche la Gentille",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2502,
+    "name": "Kannibal le Lecteur",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/110.png",
+    "soulItemId": "33922",
+    "soulName": "Âme capturée : Kannibal le Lecteur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2507,
+    "name": "Kapota la Fraise",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/112.png",
+    "soulItemId": "33926",
+    "soulName": "Âme capturée : Kapota la Fraise",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2505,
+    "name": "Kannémik le Maigre",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/113.png",
+    "soulItemId": "33924",
+    "soulName": "Âme capturée : Kannémik le Maigre",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2506,
+    "name": "Kannisterik le Forcené",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/111.png",
+    "soulItemId": "33925",
+    "soulName": "Âme capturée : Kannisterik le Forcené",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2590,
+    "name": "Sarkastik l'Incompris",
+    "level": 130,
+    "img": "https://api.dofusdb.fr/img/monsters/698.png",
+    "soulItemId": "34122",
+    "soulName": "Âme capturée : Sarkastik l'Incompris",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2581,
+    "name": "Palmbytch la Bronzée",
+    "level": 49,
+    "img": "https://api.dofusdb.fr/img/monsters/588.png",
+    "soulItemId": "33974",
+    "soulName": "Âme capturée : Palmbytch la Bronzée",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2273,
+    "name": "Ratlbol l'Aigri",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/239.png",
+    "soulItemId": "34006",
+    "soulName": "Âme capturée : Ratlbol l'Aigri",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2589,
+    "name": "Ougaould le Parasite",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/697.png",
+    "soulItemId": "34121",
+    "soulName": "Âme capturée : Ougaould le Parasite",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2555,
+    "name": "Corboyard l'Enigmatique",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/560.png",
+    "soulItemId": "33959",
+    "soulName": "Âme capturée : Corboyard l'Enigmatique",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2369,
+    "name": "Kwaké le Piraté",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/34.png",
+    "soulItemId": "34025",
+    "soulName": "Âme capturée : Kwaké le Piraté",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2368,
+    "name": "Kwakwatique le Trempé",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/37.png",
+    "soulItemId": "33860",
+    "soulName": "Âme capturée : Kwakwatique le Trempé",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2367,
+    "name": "Kwakamole l'Appétissant",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/130.png",
+    "soulItemId": "34111",
+    "soulName": "Âme capturée : Kwakamole l'Appétissant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2451,
+    "name": "Kwakolak le Chocolaté",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/36.png",
+    "soulItemId": "33896",
+    "soulName": "Âme capturée : Kwakolak le Chocolaté",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2453,
+    "name": "Porsalé le Râleur",
+    "level": 92,
+    "img": "https://api.dofusdb.fr/img/monsters/68.png",
+    "soulItemId": "33898",
+    "soulName": "Âme capturée : Porsalé le Râleur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2459,
+    "name": "Dragioli le Succulent",
+    "level": 120,
+    "img": "https://api.dofusdb.fr/img/monsters/678.png",
+    "soulItemId": "33903",
+    "soulName": "Âme capturée : Dragioli le Succulent",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2455,
+    "name": "Vétaurine l'Énergisé",
+    "level": 74,
+    "img": "https://api.dofusdb.fr/img/monsters/677.png",
+    "soulItemId": "33900",
+    "soulName": "Âme capturée : Vétaurine l'Énergisé",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2457,
+    "name": "Moumoute la Douce",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/529.png",
+    "soulItemId": "34068",
+    "soulName": "Âme capturée : Moumoute la Douce",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2527,
+    "name": "Parapadkouï l'Émasculé",
+    "level": 130,
+    "img": "https://api.dofusdb.fr/img/monsters/693.png",
+    "soulItemId": "33941",
+    "soulName": "Âme capturée : Parapadkouï l'Émasculé",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2287,
+    "name": "Serpistule le Purulent",
+    "level": 128,
+    "img": "https://api.dofusdb.fr/img/monsters/461.png",
+    "soulItemId": "33824",
+    "soulName": "Âme capturée : Serpistule le Purulent",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2510,
+    "name": "Bebetto l'Intellectuel",
+    "level": 130,
+    "img": "https://api.dofusdb.fr/img/monsters/689.png",
+    "soulItemId": "34102",
+    "soulName": "Âme capturée : Bebetto l'Intellectuel",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2591,
+    "name": "Akaka le Souillé",
+    "level": 130,
+    "img": "https://api.dofusdb.fr/img/monsters/699.png",
+    "soulItemId": "34123",
+    "soulName": "Âme capturée : Akaka le Souillé",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2351,
+    "name": "Rauligo le Sale",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/511.png",
+    "soulItemId": "34035",
+    "soulName": "Âme capturée : Rauligo le Sale",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2419,
+    "name": "Caboume l'Artilleur",
+    "level": 90,
+    "img": "https://api.dofusdb.fr/img/monsters/127.png",
+    "soulItemId": "34054",
+    "soulName": "Âme capturée : Caboume l'Artilleur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2434,
+    "name": "Tilolo la Bien Moulée",
+    "level": 130,
+    "img": "https://api.dofusdb.fr/img/monsters/672.png",
+    "soulItemId": "33889",
+    "soulName": "Âme capturée : Tilolo la Bien Moulée",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2538,
+    "name": "Nakuneuye le Borgne",
+    "level": 90,
+    "img": "https://api.dofusdb.fr/img/monsters/125.png",
+    "soulItemId": "34084",
+    "soulName": "Âme capturée : Nakuneuye le Borgne",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2554,
+    "name": "Chiendanlémin l'Illusionniste",
+    "level": 137,
+    "img": "https://api.dofusdb.fr/img/monsters/600.png",
+    "soulItemId": "33958",
+    "soulName": "Âme capturée : Chiendanlémin l'Illusionniste",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2377,
+    "name": "Dragstayr le Fonceur",
+    "level": 70,
+    "img": "https://api.dofusdb.fr/img/monsters/31.png",
+    "soulItemId": "33865",
+    "soulName": "Âme capturée : Dragstayr le Fonceur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2372,
+    "name": "Dragmoclaiss le Fataliste",
+    "level": 70,
+    "img": "https://api.dofusdb.fr/img/monsters/41.png",
+    "soulItemId": "33863",
+    "soulName": "Âme capturée : Dragmoclaiss le Fataliste",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2450,
+    "name": "Dragkouine la Déguisée",
+    "level": 70,
+    "img": "https://api.dofusdb.fr/img/monsters/40.png",
+    "soulItemId": "33895",
+    "soulName": "Âme capturée : Dragkouine la Déguisée",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2449,
+    "name": "Dragnostik le Sceptique",
+    "level": 70,
+    "img": "https://api.dofusdb.fr/img/monsters/42.png",
+    "soulItemId": "33894",
+    "soulName": "Âme capturée : Dragnostik le Sceptique",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2513,
+    "name": "Koamaembair le Coulant",
+    "level": 88,
+    "img": "https://api.dofusdb.fr/img/monsters/418.png",
+    "soulItemId": "33931",
+    "soulName": "Âme capturée : Koamaembair le Coulant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2516,
+    "name": "Koakofrui le Confit",
+    "level": 88,
+    "img": "https://api.dofusdb.fr/img/monsters/419.png",
+    "soulItemId": "34069",
+    "soulName": "Âme capturée : Koakofrui le Confit",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2509,
+    "name": "Koaskette la Chapelière",
+    "level": 88,
+    "img": "https://api.dofusdb.fr/img/monsters/417.png",
+    "soulItemId": "33928",
+    "soulName": "Âme capturée : Koaskette la Chapelière",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2518,
+    "name": "Koarmit la Batracienne",
+    "level": 88,
+    "img": "https://api.dofusdb.fr/img/monsters/420.png",
+    "soulItemId": "33935",
+    "soulName": "Âme capturée : Koarmit la Batracienne",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2275,
+    "name": "Ratéhaifaim le Professeur",
+    "level": 60,
+    "img": "https://api.dofusdb.fr/img/monsters/243.png",
+    "soulItemId": "34007",
+    "soulName": "Âme capturée : Ratéhaifaim le Professeur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2588,
+    "name": "Sparoket le Lanceur",
+    "level": 69,
+    "img": "https://api.dofusdb.fr/img/monsters/572.png",
+    "soulItemId": "33979",
+    "soulName": "Âme capturée : Sparoket le Lanceur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2466,
+    "name": "Fanlabiz le Véloce",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/514.png",
+    "soulItemId": "33909",
+    "soulName": "Âme capturée : Fanlabiz le Véloce",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2467,
+    "name": "Fandanleuil le Précis",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/201.png",
+    "soulItemId": "34064",
+    "soulName": "Âme capturée : Fandanleuil le Précis",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2563,
+    "name": "Fantoch le Pantin",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/203.png",
+    "soulItemId": "33966",
+    "soulName": "Âme capturée : Fantoch le Pantin",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2468,
+    "name": "Fantrask la Rêveuse",
+    "level": 50,
+    "img": "https://api.dofusdb.fr/img/monsters/202.png",
+    "soulItemId": "34065",
+    "soulName": "Âme capturée : Fantrask la Rêveuse",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2545,
+    "name": "Barebourd le Comte",
+    "level": 70,
+    "img": "https://api.dofusdb.fr/img/monsters/573.png",
+    "soulItemId": "33949",
+    "soulName": "Âme capturée : Barebourd le Comte",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2579,
+    "name": "Nerdeubeu le Flagellant",
+    "level": 138,
+    "img": "https://api.dofusdb.fr/img/monsters/598.png",
+    "soulItemId": "33972",
+    "soulName": "Âme capturée : Nerdeubeu le Flagellant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2547,
+    "name": "Toufou le Benêt",
+    "level": 109,
+    "img": "https://api.dofusdb.fr/img/monsters/558.png",
+    "soulItemId": "33951",
+    "soulName": "Âme capturée : Toufou le Benêt",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2561,
+    "name": "Crathdogue le Cruel",
+    "level": 108,
+    "img": "https://api.dofusdb.fr/img/monsters/561.png",
+    "soulItemId": "34085",
+    "soulName": "Âme capturée : Crathdogue le Cruel",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2472,
+    "name": "Alhoui le Répondeur",
+    "level": 160,
+    "img": "https://api.dofusdb.fr/img/monsters/682.png",
+    "soulItemId": "33910",
+    "soulName": "Âme capturée : Alhoui le Répondeur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2428,
+    "name": "Crok le Beau",
+    "level": 77,
+    "img": "https://api.dofusdb.fr/img/monsters/152.png",
+    "soulItemId": "34051",
+    "soulName": "Âme capturée : Crok le Beau",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2474,
+    "name": "Pantacour le Long",
+    "level": 158,
+    "img": "https://api.dofusdb.fr/img/monsters/684.png",
+    "soulItemId": "34109",
+    "soulName": "Âme capturée : Pantacour le Long",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2476,
+    "name": "Orfélyre le Charmeur",
+    "level": 159,
+    "img": "https://api.dofusdb.fr/img/monsters/686.png",
+    "soulItemId": "33913",
+    "soulName": "Âme capturée : Orfélyre le Charmeur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2473,
+    "name": "Félyssion la Gourmande",
+    "level": 158,
+    "img": "https://api.dofusdb.fr/img/monsters/683.png",
+    "soulItemId": "33911",
+    "soulName": "Âme capturée : Félyssion la Gourmande",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2475,
+    "name": "Kanibière l'Encordée",
+    "level": 159,
+    "img": "https://api.dofusdb.fr/img/monsters/685.png",
+    "soulItemId": "33912",
+    "soulName": "Âme capturée : Kanibière l'Encordée",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2503,
+    "name": "Kanasukr le Mielleux",
+    "level": 70,
+    "img": "https://api.dofusdb.fr/img/monsters/175.png",
+    "soulItemId": "33923",
+    "soulName": "Âme capturée : Kanasukr le Mielleux",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2580,
+    "name": "Mufguedin le Suprême",
+    "level": 106,
+    "img": "https://api.dofusdb.fr/img/monsters/592.png",
+    "soulItemId": "33973",
+    "soulName": "Âme capturée : Mufguedin le Suprême",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2337,
+    "name": "Muloufok l'Hilarant",
+    "level": 100,
+    "img": "https://api.dofusdb.fr/img/monsters/52.png",
+    "soulItemId": "33843",
+    "soulName": "Âme capturée : Muloufok l'Hilarant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2598,
+    "name": "Bonpake le Chavireur",
+    "level": 130,
+    "img": "https://api.dofusdb.fr/img/monsters/703.png",
+    "soulItemId": "33983",
+    "soulName": "Âme capturée : Bonpake le Chavireur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2571,
+    "name": "Kido l'Âtre",
+    "level": 107,
+    "img": "https://api.dofusdb.fr/img/monsters/593.png",
+    "soulItemId": "34104",
+    "soulName": "Âme capturée : Kido l'Âtre",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2572,
+    "name": "Kilimanj'haro le Grimpeur",
+    "level": 110,
+    "img": "https://api.dofusdb.fr/img/monsters/594.png",
+    "soulItemId": "34105",
+    "soulName": "Âme capturée : Kilimanj'haro le Grimpeur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2448,
+    "name": "Larvaloeil l'Émue",
+    "level": 64,
+    "img": "https://api.dofusdb.fr/img/monsters/676.png",
+    "soulItemId": "34074",
+    "soulName": "Âme capturée : Larvaloeil l'Émue",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2447,
+    "name": "Souristiti l'Immortalisée",
+    "level": 62,
+    "img": "https://api.dofusdb.fr/img/monsters/182.png",
+    "soulItemId": "34078",
+    "soulName": "Âme capturée : Souristiti l'Immortalisée",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2446,
+    "name": "Bourde le Maladroit",
+    "level": 59,
+    "img": "https://api.dofusdb.fr/img/monsters/675.png",
+    "soulItemId": "34073",
+    "soulName": "Âme capturée : Bourde le Maladroit",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2445,
+    "name": "Fouflay le Retombé",
+    "level": 72,
+    "img": "https://api.dofusdb.fr/img/monsters/674.png",
+    "soulItemId": "34072",
+    "soulName": "Âme capturée : Fouflay le Retombé",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2461,
+    "name": "Dragonienne l'Econome",
+    "level": 120,
+    "img": "https://api.dofusdb.fr/img/monsters/480.png",
+    "soulItemId": "33905",
+    "soulName": "Âme capturée : Dragonienne l'Econome",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2497,
+    "name": "Guerrite le Veilleur",
+    "level": 112,
+    "img": "https://api.dofusdb.fr/img/monsters/416.png",
+    "soulItemId": "34094",
+    "soulName": "Âme capturée : Guerrite le Veilleur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2543,
+    "name": "Craquecrac l'Endurant",
+    "level": 70,
+    "img": "https://api.dofusdb.fr/img/monsters/694.png",
+    "soulItemId": "33947",
+    "soulName": "Âme capturée : Craquecrac l'Endurant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2306,
+    "name": "Warkolad l'Etreinte",
+    "level": 82,
+    "img": "https://api.dofusdb.fr/img/monsters/413.png",
+    "soulItemId": "33828",
+    "soulName": "Âme capturée : Warkolad l'Etreinte",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2511,
+    "name": "Inopenope le Négatif",
+    "level": 140,
+    "img": "https://api.dofusdb.fr/img/monsters/690.png",
+    "soulItemId": "33929",
+    "soulName": "Âme capturée : Inopenope le Négatif",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2388,
+    "name": "Abrakanette l'Encapsulé",
+    "level": 90,
+    "img": "https://api.dofusdb.fr/img/monsters/144.png",
+    "soulItemId": "33870",
+    "soulName": "Âme capturée : Abrakanette l'Encapsulé",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2414,
+    "name": "Tétonée la Plantureuse",
+    "level": 130,
+    "img": "https://api.dofusdb.fr/img/monsters/670.png",
+    "soulItemId": "33881",
+    "soulName": "Âme capturée : Tétonée la Plantureuse",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2412,
+    "name": "Lichangora l'Immaculée",
+    "level": 140,
+    "img": "https://api.dofusdb.fr/img/monsters/669.png",
+    "soulItemId": "33880",
+    "soulName": "Âme capturée : Lichangora l'Immaculée",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2482,
+    "name": "Fossamoel le Juteux",
+    "level": 112,
+    "img": "https://api.dofusdb.fr/img/monsters/426.png",
+    "soulItemId": "33915",
+    "soulName": "Âme capturée : Fossamoel le Juteux",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2495,
+    "name": "Gloubibou le Gars",
+    "level": 100,
+    "img": "https://api.dofusdb.fr/img/monsters/115.png",
+    "soulItemId": "33920",
+    "soulName": "Âme capturée : Gloubibou le Gars",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2515,
+    "name": "Koasossyal le Psychopathe",
+    "level": 88,
+    "img": "https://api.dofusdb.fr/img/monsters/435.png",
+    "soulItemId": "33933",
+    "soulName": "Âme capturée : Koasossyal le Psychopathe",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2271,
+    "name": "Pékeutar le Tireur",
+    "level": 88,
+    "img": "https://api.dofusdb.fr/img/monsters/436.png",
+    "soulItemId": "34097",
+    "soulName": "Âme capturée : Pékeutar le Tireur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2270,
+    "name": "Piradain le Pingre",
+    "level": 88,
+    "img": "https://api.dofusdb.fr/img/monsters/434.png",
+    "soulItemId": "34004",
+    "soulName": "Âme capturée : Piradain le Pingre",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2386,
+    "name": "Abraklette le Fondant",
+    "level": 90,
+    "img": "https://api.dofusdb.fr/img/monsters/346.png",
+    "soulItemId": "33869",
+    "soulName": "Âme capturée : Abraklette le Fondant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2429,
+    "name": "Koamag'oel le Défiguré",
+    "level": 114,
+    "img": "https://api.dofusdb.fr/img/monsters/424.png",
+    "soulItemId": "34058",
+    "soulName": "Âme capturée : Koamag'oel le Défiguré",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2577,
+    "name": "Meuroup le Prêtre",
+    "level": 155,
+    "img": "https://api.dofusdb.fr/img/monsters/570.png",
+    "soulItemId": "34099",
+    "soulName": "Âme capturée : Meuroup le Prêtre",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2398,
+    "name": "Rooroku l'Imposant",
+    "level": 140,
+    "img": "https://api.dofusdb.fr/img/monsters/667.png",
+    "soulItemId": "33874",
+    "soulName": "Âme capturée : Rooroku l'Imposant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2464,
+    "name": "Dragdikal le Décisif",
+    "level": 120,
+    "img": "https://api.dofusdb.fr/img/monsters/478.png",
+    "soulItemId": "33907",
+    "soulName": "Âme capturée : Dragdikal le Décisif",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2452,
+    "name": "Dragobert le Monarque",
+    "level": 120,
+    "img": "https://api.dofusdb.fr/img/monsters/482.png",
+    "soulItemId": "33897",
+    "soulName": "Âme capturée : Dragobert le Monarque",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2562,
+    "name": "Diskord le Belliqueux",
+    "level": 126,
+    "img": "https://api.dofusdb.fr/img/monsters/579.png",
+    "soulItemId": "33965",
+    "soulName": "Âme capturée : Diskord le Belliqueux",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2550,
+    "name": "Brouste l'Humiliant",
+    "level": 139,
+    "img": "https://api.dofusdb.fr/img/monsters/597.png",
+    "soulItemId": "33954",
+    "soulName": "Âme capturée : Brouste l'Humiliant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2546,
+    "name": "Bitoven le Musicien",
+    "level": 142,
+    "img": "https://api.dofusdb.fr/img/monsters/566.png",
+    "soulItemId": "33950",
+    "soulName": "Âme capturée : Bitoven le Musicien",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2360,
+    "name": "Ecorfé la Vive",
+    "level": 140,
+    "img": "https://api.dofusdb.fr/img/monsters/599.png",
+    "soulItemId": "33858",
+    "soulName": "Âme capturée : Ecorfé la Vive",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2565,
+    "name": "Floanna la Blonde",
+    "level": 141,
+    "img": "https://api.dofusdb.fr/img/monsters/564.png",
+    "soulItemId": "33968",
+    "soulName": "Âme capturée : Floanna la Blonde",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2519,
+    "name": "Koalvissie le Chauve",
+    "level": 114,
+    "img": "https://api.dofusdb.fr/img/monsters/411.png",
+    "soulItemId": "33936",
+    "soulName": "Âme capturée : Koalvissie le Chauve",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2514,
+    "name": "Koalaboi le Calorifère",
+    "level": 116,
+    "img": "https://api.dofusdb.fr/img/monsters/422.png",
+    "soulItemId": "33932",
+    "soulName": "Âme capturée : Koalaboi le Calorifère",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2528,
+    "name": "Mamakomou l'Âge",
+    "level": 98,
+    "img": "https://api.dofusdb.fr/img/monsters/421.png",
+    "soulItemId": "33942",
+    "soulName": "Âme capturée : Mamakomou l'Âge",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2534,
+    "name": "Momikonos la Bandelette",
+    "level": 118,
+    "img": "https://api.dofusdb.fr/img/monsters/425.png",
+    "soulItemId": "34083",
+    "soulName": "Âme capturée : Momikonos la Bandelette",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2363,
+    "name": "Bouliver le Géant",
+    "level": 107,
+    "img": "https://api.dofusdb.fr/img/monsters/583.png",
+    "soulItemId": "33859",
+    "soulName": "Âme capturée : Bouliver le Géant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2307,
+    "name": "Wara l'Amer",
+    "level": 118,
+    "img": "https://api.dofusdb.fr/img/monsters/412.png",
+    "soulItemId": "34023",
+    "soulName": "Âme capturée : Wara l'Amer",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2566,
+    "name": "Gastroth la Contagieuse",
+    "level": 129,
+    "img": "https://api.dofusdb.fr/img/monsters/577.png",
+    "soulItemId": "33969",
+    "soulName": "Âme capturée : Gastroth la Contagieuse",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2569,
+    "name": "Guerumoth le Collant",
+    "level": 132,
+    "img": "https://api.dofusdb.fr/img/monsters/578.png",
+    "soulItemId": "34100",
+    "soulName": "Âme capturée : Guerumoth le Collant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2361,
+    "name": "Tourbiket le Virevoletant",
+    "level": 112,
+    "img": "https://api.dofusdb.fr/img/monsters/582.png",
+    "soulItemId": "34101",
+    "soulName": "Âme capturée : Tourbiket le Virevoletant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2544,
+    "name": "Abrakine le Sombre",
+    "level": 143,
+    "img": "https://api.dofusdb.fr/img/monsters/601.png",
+    "soulItemId": "33948",
+    "soulName": "Âme capturée : Abrakine le Sombre",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2454,
+    "name": "Dragminster le Magicien",
+    "level": 100,
+    "img": "https://api.dofusdb.fr/img/monsters/491.png",
+    "soulItemId": "33899",
+    "soulName": "Âme capturée : Dragminster le Magicien",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2460,
+    "name": "Drageaufol la Joyeuse",
+    "level": 100,
+    "img": "https://api.dofusdb.fr/img/monsters/490.png",
+    "soulItemId": "33904",
+    "soulName": "Âme capturée : Drageaufol la Joyeuse",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2456,
+    "name": "Dragtarus le Bellâtre",
+    "level": 100,
+    "img": "https://api.dofusdb.fr/img/monsters/492.png",
+    "soulItemId": "33901",
+    "soulName": "Âme capturée : Dragtarus le Bellâtre",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2458,
+    "name": "Draquetteur le Voleur",
+    "level": 100,
+    "img": "https://api.dofusdb.fr/img/monsters/481.png",
+    "soulItemId": "33902",
+    "soulName": "Âme capturée : Draquetteur le Voleur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2512,
+    "name": "Fangshui la Dysorthographiée",
+    "level": 140,
+    "img": "https://api.dofusdb.fr/img/monsters/691.png",
+    "soulItemId": "33930",
+    "soulName": "Âme capturée : Fangshui la Dysorthographiée",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2278,
+    "name": "Pétarfoutu le Mouillé",
+    "level": 140,
+    "img": "https://api.dofusdb.fr/img/monsters/659.png",
+    "soulItemId": "34014",
+    "soulName": "Âme capturée : Pétarfoutu le Mouillé",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2462,
+    "name": "Drakolage le Tentateur",
+    "level": 98,
+    "img": "https://api.dofusdb.fr/img/monsters/427.png",
+    "soulItemId": "33906",
+    "soulName": "Âme capturée : Drakolage le Tentateur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2567,
+    "name": "Faufoll la Joyeuse",
+    "level": 120,
+    "img": "https://api.dofusdb.fr/img/monsters/433.png",
+    "soulItemId": "33970",
+    "soulName": "Âme capturée : Faufoll la Joyeuse",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2526,
+    "name": "Bigbadaboum l'Élémentaire",
+    "level": 140,
+    "img": "https://api.dofusdb.fr/img/monsters/692.png",
+    "soulItemId": "33940",
+    "soulName": "Âme capturée : Bigbadaboum l'Élémentaire",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2531,
+    "name": "Maître Koantik le Théoricien",
+    "level": 120,
+    "img": "https://api.dofusdb.fr/img/monsters/423.png",
+    "soulItemId": "34082",
+    "soulName": "Âme capturée : Maître Koantik le Théoricien",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2383,
+    "name": "Poolopo la Traditionnelle",
+    "level": 158,
+    "img": "https://api.dofusdb.fr/img/monsters/567.png",
+    "soulItemId": "34042",
+    "soulName": "Âme capturée : Poolopo la Traditionnelle",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2300,
+    "name": "Trooyé l'Oxydé",
+    "level": 120,
+    "img": "https://api.dofusdb.fr/img/monsters/129.png",
+    "soulItemId": "34020",
+    "soulName": "Âme capturée : Trooyé l'Oxydé",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2587,
+    "name": "Seripoth l'Ennemi",
+    "level": 135,
+    "img": "https://api.dofusdb.fr/img/monsters/580.png",
+    "soulItemId": "34103",
+    "soulName": "Âme capturée : Seripoth l'Ennemi",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2570,
+    "name": "Kaskapointhe la Couverte",
+    "level": 160,
+    "img": "https://api.dofusdb.fr/img/monsters/568.png",
+    "soulItemId": "34098",
+    "soulName": "Âme capturée : Kaskapointhe la Couverte",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2382,
+    "name": "Toutouf le Velu",
+    "level": 160,
+    "img": "https://api.dofusdb.fr/img/monsters/559.png",
+    "soulItemId": "34041",
+    "soulName": "Âme capturée : Toutouf le Velu",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2381,
+    "name": "Abrinos le Clair",
+    "level": 160,
+    "img": "https://api.dofusdb.fr/img/monsters/571.png",
+    "soulItemId": "34040",
+    "soulName": "Âme capturée : Abrinos le Clair",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2578,
+    "name": "Don Kizoth l'Obstiné",
+    "level": 138,
+    "img": "https://api.dofusdb.fr/img/monsters/576.png"
+  },
+  {
+    "monsterId": 2553,
+    "name": "Chamilero le Malchanceux",
+    "level": 180,
+    "img": "https://api.dofusdb.fr/img/monsters/635.png",
+    "soulItemId": "33957",
+    "soulName": "Âme capturée : Chamilero le Malchanceux",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2303,
+    "name": "Crachefouxtre le Surpris",
+    "level": 140,
+    "img": "https://api.dofusdb.fr/img/monsters/660.png",
+    "soulItemId": "34022",
+    "soulName": "Âme capturée : Crachefouxtre le Surpris",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2601,
+    "name": "Tromplamor le Survivant",
+    "level": 180,
+    "img": "https://api.dofusdb.fr/img/monsters/634.png",
+    "soulItemId": "34107",
+    "soulName": "Âme capturée : Tromplamor le Survivant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2552,
+    "name": "Chamoute le Duveteux",
+    "level": 180,
+    "img": "https://api.dofusdb.fr/img/monsters/636.png",
+    "soulItemId": "33956",
+    "soulName": "Âme capturée : Chamoute le Duveteux",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2370,
+    "name": "Tsucékoi la Colporteuse",
+    "level": 160,
+    "img": "https://api.dofusdb.fr/img/monsters/664.png",
+    "soulItemId": "33861",
+    "soulName": "Âme capturée : Tsucékoi la Colporteuse",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2469,
+    "name": "Tambouille le Gastronome",
+    "level": 160,
+    "img": "https://api.dofusdb.fr/img/monsters/679.png",
+    "soulItemId": "34075",
+    "soulName": "Âme capturée : Tambouille le Gastronome",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2373,
+    "name": "Champoul l'Illuminé",
+    "level": 180,
+    "img": "https://api.dofusdb.fr/img/monsters/638.png",
+    "soulItemId": "33864",
+    "soulName": "Âme capturée : Champoul l'Illuminé",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2551,
+    "name": "Champolyon le Polyglotte",
+    "level": 180,
+    "img": "https://api.dofusdb.fr/img/monsters/639.png",
+    "soulItemId": "33955",
+    "soulName": "Âme capturée : Champolyon le Polyglotte",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2600,
+    "name": "Champmé le Méchant",
+    "level": 180,
+    "img": "https://api.dofusdb.fr/img/monsters/637.png",
+    "soulItemId": "34108",
+    "soulName": "Âme capturée : Champmé le Méchant",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2471,
+    "name": "Onabuémangé la Rassasiée",
+    "level": 160,
+    "img": "https://api.dofusdb.fr/img/monsters/681.png",
+    "soulItemId": "34077",
+    "soulName": "Âme capturée : Onabuémangé la Rassasiée",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2374,
+    "name": "Jiankor le Radoteur",
+    "level": 160,
+    "img": "https://api.dofusdb.fr/img/monsters/665.png",
+    "soulItemId": "34106",
+    "soulName": "Âme capturée : Jiankor le Radoteur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2597,
+    "name": "Tronquette la Réduite",
+    "level": 140,
+    "img": "https://api.dofusdb.fr/img/monsters/702.png",
+    "soulItemId": "33982",
+    "soulName": "Âme capturée : Tronquette la Réduite",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2614,
+    "name": "Roy le Merlin",
+    "level": 189,
+    "img": "https://api.dofusdb.fr/img/monsters/581.png",
+    "soulItemId": "33984",
+    "soulName": "Âme capturée : Roy le Merlin",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2564,
+    "name": "Madgang le Docteur",
+    "level": 170,
+    "img": "https://api.dofusdb.fr/img/monsters/696.png",
+    "soulItemId": "33967",
+    "soulName": "Âme capturée : Madgang le Docteur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2483,
+    "name": "Bakaglace le Congelé",
+    "level": 170,
+    "img": "https://api.dofusdb.fr/img/monsters/688.png",
+    "soulItemId": "33916",
+    "soulName": "Âme capturée : Bakaglace le Congelé",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2470,
+    "name": "Kaonucléair l'Instable",
+    "level": 170,
+    "img": "https://api.dofusdb.fr/img/monsters/680.png",
+    "soulItemId": "34076",
+    "soulName": "Âme capturée : Kaonucléair l'Instable",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  },
+  {
+    "monsterId": 2477,
+    "name": "Tsumani l'Inondeur",
+    "level": 170,
+    "img": "https://api.dofusdb.fr/img/monsters/687.png",
+    "soulItemId": "33914",
+    "soulName": "Âme capturée : Tsumani l'Inondeur",
+    "soulImg": "https://api.dofusdb.fr/img/items/85003.png"
+  }
+]

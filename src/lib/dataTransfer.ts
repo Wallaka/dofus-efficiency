@@ -21,6 +21,8 @@ import { loadResources, saveResources, type ResourceMap } from "./resources";
 import {
   loadFavourites,
   saveFavourites,
+  loadOcreCaptured,
+  saveOcreCaptured,
   loadEleveur,
   saveEleveur,
   loadAvisParticipation,
@@ -117,6 +119,20 @@ export const SECTIONS: PortableSection[] = [
     valid: (v) => Array.isArray(v),
     size: (v) => (Array.isArray(v) ? v.length : 0),
     present: (v) => Array.isArray(v) && v.length > 0,
+  },
+  {
+    id: "ocreCaptured",
+    label: "Ocre · captures",
+    load: () => loadOcreCaptured(),
+    save: (value) =>
+      saveOcreCaptured(
+        isObject(value) ? (value as Record<string, number>) : {},
+      ),
+    // Union of captured ids; incoming wins on a clash (either timestamp is fine).
+    merge: (current, incoming) => mergeMap(current, incoming),
+    valid: (v) => isObject(v),
+    size: (v) => (isObject(v) ? Object.keys(v).length : 0),
+    present: (v) => isObject(v) && Object.keys(v).length > 0,
   },
   {
     id: "craftList",
