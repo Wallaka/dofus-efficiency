@@ -3,6 +3,7 @@ import { CraftPage } from "./pages/CraftPage";
 import { CraftListPage } from "./pages/CraftListPage";
 import { MetierPage } from "./pages/MetierPage";
 import { EleveurPage } from "./pages/EleveurPage";
+import { FamilierPage } from "./pages/FamilierPage";
 import { AvisPage } from "./pages/AvisPage";
 import { OcrePage } from "./pages/OcrePage";
 import { QuestsPage } from "./pages/QuestsPage";
@@ -26,6 +27,7 @@ export function App() {
           <NavLink to="/mes-crafts">Mes crafts</NavLink>
           <NavLink to="/metiers">Métiers</NavLink>
           <NavLink to="/eleveur">Éleveur</NavLink>
+          <NavLink to="/familier">Familier</NavLink>
           <NavLink to="/avis">Avis de recherche</NavLink>
           <NavLink to="/ocre">Ocre</NavLink>
           <NavLink to="/quetes">Quêtes</NavLink>
@@ -44,6 +46,7 @@ export function App() {
         <Route path="/mes-crafts" element={<CraftListPage mode="favourites" />} />
         <Route path="/metiers" element={<MetierPage />} />
         <Route path="/eleveur" element={<EleveurPage />} />
+        <Route path="/familier" element={<FamilierPage />} />
         <Route path="/avis" element={<AvisPage />} />
         <Route path="/ocre" element={<OcrePage />} />
         <Route path="/quetes" element={<QuestsPage />} />

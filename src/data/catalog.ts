@@ -41,3 +41,45 @@ export function catalogItemCount(): number {
     0,
   );
 }
+
+/** Accent/case-insensitive normalization for name matching. */
+function norm(s: string): string {
+  return s
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase();
+}
+
+/** Every catalog item, flattened and de-duplicated by id (built once, cached). */
+let flatCache: CatalogItem[] | null = null;
+export function catalogItems(): CatalogItem[] {
+  if (flatCache) return flatCache;
+  const byId = new Map<string, CatalogItem>();
+  for (const tab of CATALOG) {
+    for (const cat of tab.categories) {
+      for (const it of cat.items) if (!byId.has(it.id)) byId.set(it.id, it);
+    }
+  }
+  flatCache = [...byId.values()];
+  return flatCache;
+}
+
+/** Offline name search over the bundled catalog (accent/case-insensitive). */
+export function searchCatalog(query: string, limit = 12): CatalogItem[] {
+  const q = norm(query.trim());
+  if (q.length < 2) return [];
+  const out: CatalogItem[] = [];
+  for (const it of catalogItems()) {
+    if (norm(it.name).includes(q)) {
+      out.push(it);
+      if (out.length >= limit) break;
+    }
+  }
+  return out;
+}
+
+/** Find a catalog item by exact (normalized) name — for seeding known items. */
+export function findCatalogItemByName(name: string): CatalogItem | undefined {
+  const target = norm(name);
+  return catalogItems().find((it) => norm(it.name) === target);
+}
