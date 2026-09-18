@@ -183,3 +183,100 @@ export function ocreSummary(rows: OcreRow[]): OcreSummary {
     saving,
   };
 }
+
+/* ---- Metamob import: update capture progress from a Metamob JSON export ---- */
+
+/** Accent/case-insensitive name key, to match Metamob names to our archimonsters. */
+function normName(s: string): string {
+  return s
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+/** One monster line from a Metamob "ocre" quest. `owned` = captured (quantity > 0). */
+export interface MetamobMonster {
+  name: string;
+  owned: boolean;
+}
+
+/** An "ocre" quest from a Metamob export — one per character. */
+export interface MetamobQuest {
+  character: string;
+  server: string;
+  monsters: MetamobMonster[];
+}
+
+function asRecord(x: unknown): Record<string, unknown> {
+  return x && typeof x === "object" ? (x as Record<string, unknown>) : {};
+}
+
+/**
+ * Pull the Ocre quest(s) out of a parsed Metamob export (untrusted input).
+ * Returns one MetamobQuest per character that tracks the "ocre" hunt.
+ */
+export function parseMetamob(data: unknown): MetamobQuest[] {
+  const quests = asRecord(data).quests;
+  if (!Array.isArray(quests)) return [];
+  const out: MetamobQuest[] = [];
+  for (const raw of quests) {
+    const q = asRecord(raw);
+    if (asRecord(q.quest_type).slug !== "ocre") continue;
+    const monstersRaw = Array.isArray(q.monsters) ? q.monsters : [];
+    const monsters: MetamobMonster[] = [];
+    for (const m of monstersRaw) {
+      const mm = asRecord(m);
+      const name = String(asRecord(mm.name).fr ?? mm.name ?? "").trim();
+      if (!name) continue;
+      monsters.push({ name, owned: Number(mm.quantity) > 0 });
+    }
+    out.push({
+      character: String(q.character_name ?? "?"),
+      server: String(q.server ?? ""),
+      monsters,
+    });
+  }
+  return out;
+}
+
+/** Outcome of matching a Metamob quest against our archimonster list. */
+export interface MetamobResult {
+  /** monsterId → captured, for every monster we could match by name. */
+  updates: Record<string, boolean>;
+  matched: number;
+  owned: number;
+  /** Metamob monsters we couldn't match to an archimonster. */
+  unknown: number;
+}
+
+/**
+ * Turn a Metamob quest into capture updates keyed by our monster id — matched by
+ * normalized name. Only capture state is produced; prices are never touched.
+ */
+export function metamobUpdates(
+  quest: MetamobQuest,
+  archimonsters: Archimonster[],
+): MetamobResult {
+  const byName = new Map<string, string>();
+  for (const a of archimonsters) {
+    const k = normName(a.name);
+    if (!byName.has(k)) byName.set(k, String(a.monsterId));
+  }
+  const updates: Record<string, boolean> = {};
+  let matched = 0;
+  let owned = 0;
+  let unknown = 0;
+  for (const m of quest.monsters) {
+    const id = byName.get(normName(m.name));
+    if (!id) {
+      unknown++;
+      continue;
+    }
+    matched++;
+    if (m.owned) owned++;
+    updates[id] = m.owned;
+  }
+  return { updates, matched, owned, unknown };
+}
