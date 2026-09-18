@@ -12,6 +12,7 @@ import { useCaptured } from "../lib/useCaptured";
 import { isStale } from "../lib/priceStore";
 import { formatKamas } from "../lib/format";
 import { CopyName } from "../components/CopyName";
+import { MetamobImport } from "../components/MetamobImport";
 
 /**
  * "Ocre" — the Chasse aux archimonstres tracker. Progress toward the Dofus Ocre
@@ -28,7 +29,7 @@ type SortKey = "cost" | "benefit" | "level" | "age" | "name";
 
 export function OcrePage() {
   const { prices, entries, setPrice, clearPrice } = usePrices();
-  const { isCaptured, toggle, capturedCount } = useCaptured();
+  const { isCaptured, toggle, applyCaptures, capturedCount } = useCaptured();
 
   const [status, setStatus] = useState<StatusFilter>("missing");
   const [sort, setSort] = useState<SortKey>("cost");
@@ -194,6 +195,8 @@ export function OcrePage() {
               </span>
             )}
           </div>
+
+          <MetamobImport onApply={applyCaptures} />
 
           {/* Controls */}
           <div className="ocre-controls">

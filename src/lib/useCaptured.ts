@@ -30,7 +30,27 @@ export function useCaptured() {
     });
   }, []);
 
+  /**
+   * Apply a batch of capture updates (id → captured), e.g. from a Metamob
+   * import. `true` marks captured (keeping any existing timestamp), `false`
+   * clears it. Only touches the ids present in `updates`.
+   */
+  const applyCaptures = useCallback((updates: Record<string, boolean>) => {
+    setCaptured((prev) => {
+      const next = { ...prev };
+      const now = Date.now();
+      for (const [id, owned] of Object.entries(updates)) {
+        if (owned) {
+          if (next[id] == null) next[id] = now;
+        } else {
+          delete next[id];
+        }
+      }
+      return next;
+    });
+  }, []);
+
   const capturedCount = Object.keys(captured).length;
 
-  return { captured, isCaptured, toggle, capturedCount };
+  return { captured, isCaptured, toggle, applyCaptures, capturedCount };
 }

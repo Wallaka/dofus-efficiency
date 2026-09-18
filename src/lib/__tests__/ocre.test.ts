@@ -4,6 +4,8 @@ import {
   ocreRow,
   ocreSummary,
   SOUL_STONES,
+  parseMetamob,
+  metamobUpdates,
   type Archimonster,
 } from "../../data/ocre";
 
@@ -99,5 +101,70 @@ describe("ocreSummary", () => {
     expect(s.packHdvUnpriced).toBe(1);
     expect(s.packCapturedUnpriced).toBe(1);
     expect(s.completeUnpriced).toBe(1);
+  });
+});
+
+describe("parseMetamob", () => {
+  const sample = {
+    quests: [
+      {
+        quest_type: { slug: "turquoise" },
+        character_name: "X",
+        monsters: [{ name: { fr: "Autre" }, quantity: 1 }],
+      },
+      {
+        quest_type: { slug: "ocre" },
+        server: "Draconiros",
+        character_name: "Ning-Yue",
+        monsters: [
+          { name: { fr: "Bouftou Royal" }, quantity: 0 },
+          { name: { fr: "Tofu Royal" }, quantity: 1 },
+          { name: { fr: "" }, quantity: 1 }, // dropped (no name)
+        ],
+      },
+    ],
+  };
+
+  it("keeps only ocre quests and maps quantity>0 → owned", () => {
+    const quests = parseMetamob(sample);
+    expect(quests).toHaveLength(1);
+    expect(quests[0].character).toBe("Ning-Yue");
+    expect(quests[0].monsters).toEqual([
+      { name: "Bouftou Royal", owned: false },
+      { name: "Tofu Royal", owned: true },
+    ]);
+  });
+
+  it("tolerates junk input", () => {
+    expect(parseMetamob(null)).toEqual([]);
+    expect(parseMetamob({})).toEqual([]);
+    expect(parseMetamob({ quests: "nope" })).toEqual([]);
+  });
+});
+
+describe("metamobUpdates", () => {
+  const archimonsters: Archimonster[] = [
+    { monsterId: 147, name: "Bouftou Royal", level: 30 },
+    { monsterId: 58, name: "Tofu Royal", level: 20 },
+    { monsterId: 99, name: "Pas Dans Metamob", level: 50 },
+  ];
+
+  it("matches by normalized name and reports counts", () => {
+    const res = metamobUpdates(
+      {
+        character: "X",
+        server: "",
+        monsters: [
+          { name: "bouftou royal", owned: true }, // case-insensitive match
+          { name: "Tofu Royal", owned: false },
+          { name: "Monstre Inconnu", owned: true }, // unmatched
+        ],
+      },
+      archimonsters,
+    );
+    expect(res.updates).toEqual({ "147": true, "58": false });
+    expect(res.matched).toBe(2);
+    expect(res.owned).toBe(1);
+    expect(res.unknown).toBe(1);
   });
 });
