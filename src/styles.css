@@ -9,6 +9,8 @@
   --positive: #4ccf83;
   --negative: #ef7676;
   --warn: #e0a24e;
+  /* Favourite/star accent — a warm gold, kept distinct from the purple accent. */
+  --gold: #e8b23a;
   --num-bg: #17140f;
   /* The kama coin (DofusDB-style), as a trailing adornment inside price fields. */
   --kama-coin: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2016%2016'%3E%3Ccircle%20cx='8'%20cy='8'%20r='7'%20fill='%23e8b23a'%20stroke='%23a9781f'/%3E%3Ccircle%20cx='8'%20cy='8'%20r='4.4'%20fill='none'%20stroke='%23a9781f'%20stroke-opacity='.5'/%3E%3Ctext%20x='8'%20y='11'%20text-anchor='middle'%20font-size='8'%20font-weight='700'%20font-family='sans-serif'%20fill='%237a5410'%3Ek%3C/text%3E%3C/svg%3E");
@@ -2014,6 +2016,52 @@ input.needs-price {
   font-variant-numeric: tabular-nums;
 }
 
+/* "Favoris" toggle: an amber pill that isolates starred avis when pressed. */
+.avis-fav-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 13px 7px 11px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    color 0.12s ease,
+    background 0.12s ease,
+    border-color 0.12s ease;
+}
+.avis-fav-toggle:hover {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--gold) 50%, var(--border));
+}
+.avis-fav-toggle-star {
+  font-size: 0.95rem;
+  line-height: 1;
+}
+.avis-fav-toggle-count {
+  font-size: 0.72rem;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--gold) 22%, transparent);
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+}
+.avis-fav-toggle[aria-pressed="true"] {
+  color: #211a09;
+  background: var(--gold);
+  border-color: var(--gold);
+  font-weight: 600;
+}
+.avis-fav-toggle[aria-pressed="true"] .avis-fav-toggle-count {
+  background: rgba(0, 0, 0, 0.22);
+  color: #211a09;
+}
+
 .avis-grid {
   list-style: none;
   margin: 0;
@@ -2024,6 +2072,7 @@ input.needs-price {
 }
 
 .avis-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   border: 1px solid var(--border);
@@ -2032,11 +2081,50 @@ input.needs-price {
   padding: 16px 18px;
 }
 
-/* Header: picture on the left, name/level/avitons on the right. */
+/* Favourite: amber edge stripe so starred avis stand out in the normal list. */
+.avis-card--fav {
+  border-color: color-mix(in srgb, var(--gold) 45%, var(--border));
+  box-shadow: inset 3px 0 0 var(--gold);
+}
+
+/* Star button, top-right of the card: toggles this avis's favourite state. */
+.avis-fav-star {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--border);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    color 0.12s ease,
+    transform 0.12s ease,
+    background 0.12s ease;
+}
+.avis-fav-star:hover {
+  color: var(--gold);
+  transform: scale(1.12);
+  background: color-mix(in srgb, var(--gold) 12%, transparent);
+}
+.avis-fav-star.on {
+  color: var(--gold);
+}
+
+/* Header: picture on the left, name/level/avitons on the right.
+   Right padding leaves room for the absolutely-positioned star. */
 .avis-head {
   display: flex;
   align-items: center;
   gap: 14px;
+  padding-right: 34px;
 }
 
 .avis-thumb {
