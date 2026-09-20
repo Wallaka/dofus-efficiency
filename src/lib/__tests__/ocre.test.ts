@@ -92,6 +92,7 @@ describe("ocreSummary", () => {
     expect(s.packHdv).toBe(5000 + 1000 + 5000); // all rows with a known soul price
     expect(s.packCaptured).toBe(2000 * 3); // all rows' stone priced
     expect(s.costToComplete).toBe(2000 + 1000); // missing: min(5000,2000)+min(1000,2000)
+    expect(s.remainingHdv).toBe(5000 + 1000); // missing souls at HDV, not the captured one
     expect(s.saving).toBe(5000 - 2000 + 0); // (buy−bestCost) over missing
   });
 
@@ -101,6 +102,8 @@ describe("ocreSummary", () => {
     expect(s.packHdvUnpriced).toBe(1);
     expect(s.packCapturedUnpriced).toBe(1);
     expect(s.completeUnpriced).toBe(1);
+    expect(s.remainingHdv).toBe(0);
+    expect(s.remainingHdvUnpriced).toBe(1);
   });
 });
 

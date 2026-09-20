@@ -134,6 +134,10 @@ export interface OcreSummary {
   costToComplete: number;
   /** Missing archimonsters with no usable price (excluded from `costToComplete`). */
   completeUnpriced: number;
+  /** Σ of the soul HDV price over the *missing* archimonsters — buy the rest. */
+  remainingHdv: number;
+  /** Missing archimonsters with no soul price (excluded from `remainingHdv`). */
+  remainingHdvUnpriced: number;
   /** Saved vs buying every missing soul at the HDV (over comparable rows). */
   saving: number;
 }
@@ -147,6 +151,8 @@ export function ocreSummary(rows: OcreRow[]): OcreSummary {
   let packCapturedUnpriced = 0;
   let costToComplete = 0;
   let completeUnpriced = 0;
+  let remainingHdv = 0;
+  let remainingHdvUnpriced = 0;
   let saving = 0;
 
   for (const r of rows) {
@@ -161,6 +167,9 @@ export function ocreSummary(rows: OcreRow[]): OcreSummary {
     if (!r.captured) {
       if (r.bestCost != null) costToComplete += r.bestCost;
       else completeUnpriced++;
+      // Buy every remaining soul at the HDV (the ones not yet captured).
+      if (r.buyPrice != null) remainingHdv += r.buyPrice;
+      else remainingHdvUnpriced++;
       // Saving is only meaningful where the soul has a buy price to beat.
       if (r.buyPrice != null && r.bestCost != null) {
         saving += r.buyPrice - r.bestCost;
@@ -180,6 +189,8 @@ export function ocreSummary(rows: OcreRow[]): OcreSummary {
     packCapturedUnpriced,
     costToComplete,
     completeUnpriced,
+    remainingHdv,
+    remainingHdvUnpriced,
     saving,
   };
 }

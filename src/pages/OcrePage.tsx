@@ -141,6 +141,18 @@ export function OcrePage() {
             </div>
 
             <div className="tile">
+              <div className="tile-label">Reste à acheter (HDV)</div>
+              <div className="tile-value buyc">
+                {formatKamas(summary.remainingHdv)}
+              </div>
+              <div className="tile-foot">
+                acheter les âmes manquantes
+                {summary.remainingHdvUnpriced > 0 &&
+                  ` · ${summary.remainingHdvUnpriced} sans prix`}
+              </div>
+            </div>
+
+            <div className="tile">
               <div className="tile-label">Prix du pack HDV</div>
               <div className="tile-value buyc">
                 {formatKamas(summary.packHdv)}
