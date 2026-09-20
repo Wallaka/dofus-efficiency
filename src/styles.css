@@ -5757,12 +5757,32 @@ select.ocre-field { cursor: pointer; }
 .percepteur-star.on {
   color: #e8b23a;
 }
+/* Match the app's standard field look (same as .price-edit input). */
+.percepteur-zone-input,
+.percepteur-min-input {
+  padding: 4px 6px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: var(--num-bg);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.85rem;
+}
 .percepteur-zone-input {
   width: 100%;
+}
+.percepteur-zone-input::placeholder {
+  color: var(--muted);
 }
 .percepteur-min-input {
   width: 66px;
   text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.percepteur-zone-input:focus-visible,
+.percepteur-min-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
 }
 .percepteur-perh {
   color: var(--muted);
