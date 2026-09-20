@@ -5701,13 +5701,16 @@ select.ocre-field { cursor: pointer; }
   letter-spacing: 0.05em;
   color: var(--muted);
 }
-.percepteur-tile.accent .percepteur-tile-value {
-  color: var(--positive);
-}
 .percepteur-tile-value {
   font-size: 1.35rem;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
+}
+.percepteur-tile-value.pos {
+  color: var(--positive);
+}
+.percepteur-tile-value.neg {
+  color: var(--negative);
 }
 .percepteur-tile-sub {
   font-size: 0.72rem;

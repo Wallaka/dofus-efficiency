@@ -70,6 +70,19 @@ export function PercepteurPage() {
   );
   const best = bestByNetPerHour(results);
 
+  // Total net kamas across every zone that has a rendement (potion deducted).
+  const totalNet = useMemo(() => {
+    let sum = 0;
+    let any = false;
+    for (const { net } of results) {
+      if (net != null) {
+        sum += net;
+        any = true;
+      }
+    }
+    return any ? sum : undefined;
+  }, [results]);
+
   return (
     <main className="percepteur-page">
       <section className="panel">
@@ -90,13 +103,28 @@ export function PercepteurPage() {
         </button>
       </section>
 
-      {best && (
+      {input.rows.length > 0 && (
         <div className="percepteur-tiles">
           <div className="percepteur-tile accent">
-            <span className="percepteur-tile-label">Meilleure zone</span>
-            <span className="percepteur-tile-value">{formatKamas(best.netPerHour)}</span>
+            <span className="percepteur-tile-label">Renta totale</span>
+            <span
+              className={`percepteur-tile-value${totalNet != null ? (totalNet < 0 ? " neg" : " pos") : ""}`}
+            >
+              {totalNet != null ? formatKamas(totalNet) : "—"}
+            </span>
             <span className="percepteur-tile-sub">
-              {best.row.zone || "—"} · net / heure
+              net cumulé des {input.rows.length} zone{input.rows.length > 1 ? "s" : ""} (rendement − potion)
+            </span>
+          </div>
+          <div className="percepteur-tile">
+            <span className="percepteur-tile-label">Meilleure zone</span>
+            <span
+              className={`percepteur-tile-value${best ? (best.netPerHour! < 0 ? " neg" : " pos") : ""}`}
+            >
+              {best ? formatKamas(best.netPerHour) : "—"}
+            </span>
+            <span className="percepteur-tile-sub">
+              {best ? `${best.row.zone || "—"} · net / heure` : "net / heure"}
             </span>
           </div>
           <div className="percepteur-tile">
